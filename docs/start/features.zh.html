@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="zh" data-base="/docs/" data-page-lang="zh" data-build="1793956776" data-alt-lang-url="/docs/start/features.html">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>功能 · OpenProgram Docs</title>
+<meta name="description" content="详解 # README 中的 核心特性 表格 指向这里，呈现每项特性背后更完整的来龙去脉。 Agentic Programming 设计理念 一文讲的是 为什么 ；本页讲的是 它在日常使用中如何体现 。 自动上下文 # 每一次 Agent method 调用都会作为一个节点记录进会话的 扁平对话 DAG ——">
+<link rel="canonical" href="https://openprogram.io/docs/start/features.zh.html">
+<link rel="alternate" type="text/markdown" href="https://openprogram.io/docs/start/features.zh.html.md">
+<link rel="describedby" href="https://openprogram.io/llms.txt">
+<link rel="alternate" hreflang="en" href="https://openprogram.io/docs/start/features.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://openprogram.io/docs/start/features.zh.html">
+<link rel="alternate" hreflang="x-default" href="https://openprogram.io/docs/start/features.html">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"OpenProgram Docs","item":"https://openprogram.io/docs/"},{"@type":"ListItem","position":2,"name":"功能"}]}</script>
+<meta property="og:type" content="article">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:site_name" content="OpenProgram">
+<meta property="og:url" content="https://openprogram.io/docs/start/features.zh.html">
+<meta property="og:title" content="功能 · OpenProgram Docs">
+<meta property="og:description" content="详解 # README 中的 核心特性 表格 指向这里，呈现每项特性背后更完整的来龙去脉。 Agentic Programming 设计理念 一文讲的是 为什么 ；本页讲的是 它在日常使用中如何体现 。 自动上下文 # 每一次 Agent method 调用都会作为一个节点记录进会话的 扁平对话 DAG ——">
+<meta property="og:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:secure_url" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="功能 · OpenProgram Docs">
+<meta name="twitter:description" content="详解 # README 中的 核心特性 表格 指向这里，呈现每项特性背后更完整的来龙去脉。 Agentic Programming 设计理念 一文讲的是 为什么 ；本页讲的是 它在日常使用中如何体现 。 自动上下文 # 每一次 Agent method 调用都会作为一个节点记录进会话的 扁平对话 DAG ——">
+<meta name="twitter:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta name="twitter:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/docs/assets/mark.svg">
+<link rel="stylesheet" href="/docs/assets/site.css?v=6520ba46">
+<link rel="stylesheet" href="/docs/assets/pygments-light.css" media="(prefers-color-scheme: light)" id="pyg-light">
+<link rel="stylesheet" href="/docs/assets/pygments-dark.css" media="(prefers-color-scheme: dark)" id="pyg-dark">
+<script src="/docs/assets/theme.js?v=6520ba46"></script>
+
+</head>
+<body>
+<header class="topbar">
+  <button class="icon hamburger" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2.5 4.5h11M2.5 8h11M2.5 11.5h11"/></svg></button>
+  <a class="brand" href="/docs/index.html"><img class="mark" src="/docs/assets/mark.svg" alt="">OpenProgram Docs</a>
+  <div class="spacer"></div>
+  <button class="search-trigger" aria-label="Search">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14"/></svg><span class="label" data-i18n="search">Search docs</span><kbd>⌘K</kbd>
+  </button>
+  <div class="lang-wrap">
+    <button class="icon lang-trigger" id="lang-toggle" aria-haspopup="true" aria-expanded="false" aria-label="Language">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="6.2"/><path d="M1.8 8h12.4" stroke-linecap="round"/><ellipse cx="8" cy="8" rx="2.8" ry="6.2"/></svg><span class="lang-label">EN</span><svg class="chev" width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+    </button>
+    <div class="lang-menu" id="lang-menu" role="menu">
+      <button class="lang-opt" data-lang="en" role="menuitem"><span>English</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="lang-opt" data-lang="zh" role="menuitem"><span>简体中文</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+  <div class="theme-wrap">
+    <button class="icon" id="theme-toggle" aria-label="Theme" aria-haspopup="menu" aria-controls="theme-menu" aria-expanded="false"><svg class="ic-system" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="2.5" width="13" height="9" rx="1.5"/><path d="M8 11.5V14M5.5 14h5"/></svg><svg class="ic-moon" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M13.5 9.5A6 6 0 1 1 6.5 2.5a5 5 0 0 0 7 7z"/></svg><svg class="ic-sun" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="3.2"/><path d="M8 1.2v1.8M8 13v1.8M1.2 8H3M13 8h1.8M3.2 3.2l1.3 1.3M11.5 11.5l1.3 1.3M12.8 3.2l-1.3 1.3M4.5 11.5l-1.3 1.3"/></svg></button>
+    <div class="theme-menu" id="theme-menu" role="menu" aria-labelledby="theme-toggle">
+      <button class="theme-opt" data-theme-choice="system" role="menuitemradio" aria-checked="true"><span>Follow system</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="light" role="menuitemradio" aria-checked="false"><span>Light</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="dark" role="menuitemradio" aria-checked="false"><span>Dark</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+</header>
+<nav class="tabbar"><a class="tablink active" href="/docs/README.html" data-title-zh="开始使用" data-href-en="/docs/README.html" data-href-zh="/docs/README.zh.html">Get started</a><a class="tablink" href="/docs/install/install.html" data-title-zh="安装" data-href-en="/docs/install/install.html" data-href-zh="/docs/install/install.zh.html">Install</a><a class="tablink" href="/docs/capabilities/README.html" data-title-zh="能力" data-href-en="/docs/capabilities/README.html" data-href-zh="/docs/capabilities/README.zh.html">Capabilities</a><a class="tablink" href="/docs/interfaces/README.html" data-title-zh="界面" data-href-en="/docs/interfaces/README.html" data-href-zh="/docs/interfaces/README.zh.html">Interfaces</a><a class="tablink" href="/docs/models/README.html" data-title-zh="模型" data-href-en="/docs/models/README.html" data-href-zh="/docs/models/README.zh.html">Models</a><a class="tablink" href="/docs/integrations/anthropic.html" data-title-zh="集成" data-href-en="/docs/integrations/anthropic.html" data-href-zh="/docs/integrations/anthropic.zh.html">Integrations</a><a class="tablink" href="/docs/server/README.html" data-title-zh="服务与运维" data-href-en="/docs/server/README.html" data-href-zh="/docs/server/README.zh.html">Server &amp; Ops</a><a class="tablink" href="/docs/reference/README.html" data-title-zh="参考" data-href-en="/docs/reference/README.html" data-href-zh="/docs/reference/README.zh.html">Reference</a><a class="tablink" href="/docs/reference/design/README.html" data-title-zh="设计" data-href-en="/docs/reference/design/README.html" data-href-zh="/docs/reference/design/README.zh.html">Design</a></nav>
+
+<div class="scrim"></div>
+<div class="layout">
+  <nav class="sidebar" aria-label="Documentation">
+    <input class="nav-filter" type="text" data-i18n-ph="nav_filter"
+           aria-label="Filter docs" placeholder="Filter docs…" autocomplete="off" spellcheck="false">
+    <div class="nav-tree"><div class="nav-sec"><div class="nav-sec-title" data-title-zh="概览">Overview</div><a class="navlink" href="/docs/README.html" data-title-zh="概览" data-href-en="/docs/README.html" data-href-zh="/docs/README.zh.html">Overview</a>
+<a class="navlink active" href="/docs/start/features.html" data-title-zh="功能" data-href-en="/docs/start/features.html" data-href-zh="/docs/start/features.zh.html">Features</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="第一步">First steps</div><a class="navlink" href="/docs/start/GETTING_STARTED.html" data-title-zh="快速上手" data-href-en="/docs/start/GETTING_STARTED.html" data-href-zh="/docs/start/GETTING_STARTED.zh.html">Getting started</a>
+<a class="navlink" href="/docs/start/daily-use.html" data-title-zh="日常操作" data-href-en="/docs/start/daily-use.html" data-href-zh="/docs/start/daily-use.zh.html">Daily use</a>
+<a class="navlink" href="/docs/start/faq.html" data-title-zh="常见问题" data-href-en="/docs/start/faq.html" data-href-zh="/docs/start/faq.zh.html">FAQ</a></div></div>
+  </nav>
+  <main class="content"><button class="fs-toggle" aria-label="Fullscreen" title="Fullscreen (Esc to exit)"><svg class="ic-expand" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.2 2H2v4.2M9.8 2H14v4.2M6.2 14H2V9.8M9.8 14H14V9.8"/></svg><svg class="ic-collapse" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6.2h4.2V2M14 6.2H9.8V2M2 9.8h4.2V14M14 9.8H9.8V14"/></svg></button><article><nav class="breadcrumb"><span class="bc-seg" data-title-zh="开始使用">Get started</span> <span class='bc-sep'>›</span> <span class="bc-seg" data-title-zh="概览">Overview</span> <span class='bc-sep'>›</span> <span class="bc-seg bc-current" data-title-zh="功能">Features</span></nav><h1 id="功能详解">功能详解<a class="header-anchor" href="#功能详解">#</a></h1>
+<p>README 中的 <a href="/docs/README.zh.html">核心特性</a> 表格
+指向这里，呈现每项特性背后更完整的来龙去脉。
+<a href="/docs/capabilities/agentic-programming/philosophy.zh.html">Agentic Programming 设计理念</a>
+一文讲的是<em>为什么</em>；本页讲的是<em>它在日常使用中如何体现</em>。</p>
+<h2 id="自动上下文">自动上下文<a class="header-anchor" href="#自动上下文">#</a></h2>
+<p>每一次 <code>Agent</code> method 调用都会作为一个节点记录进会话的
+扁平对话 DAG —— 与用户消息、LLM 调用共存于同一个 DAG。
+嵌套调用会自动串接：</p>
+<pre><code>login_flow ✓ 8.8s
+├── observe ✓ 3.1s → &quot;found login form at (200, 300)&quot;
+├── click ✓ 2.5s → &quot;clicked login button&quot;
+└── verify ✓ 3.2s → &quot;dashboard confirmed&quot;
+</code></pre>
+<p>当 <code>verify</code> 调用 LLM 时，它会自动看到
+<code>observe</code> 和 <code>click</code> 返回的内容。无需手动管理上下文：
+你只管编写函数，运行时会把 DAG 串接起来。</p>
+<p>装饰器上有两个开关，控制一次调用向后续 LLM 调用贡献什么：</p>
+<pre><code class="language-python"><span class="kn">from</span><span class="w"> </span><span class="nn">openprogram</span><span class="w"> </span><span class="kn">import</span> <span class="n">Agent</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ExampleAgent</span><span class="p">(</span><span class="n">Agent</span><span class="p">):</span>
+    <span class="n">method_options</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;navigate&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;tool&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;expose&#39;</span><span class="p">:</span> <span class="s1">&#39;full&#39;</span><span class="p">,</span> <span class="s1">&#39;render_range&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;callers&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}},</span>
+    <span class="p">}</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">navigate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span> <span class="o">...</span>
+
+<span class="n">_example_agent</span> <span class="o">=</span> <span class="n">ExampleAgent</span><span class="p">()</span>
+<span class="n">navigate</span> <span class="o">=</span> <span class="n">_example_agent</span><span class="o">.</span><span class="n">navigate</span>
+</code></pre>
+<p><code>expose</code> 决定后续调用能看到这次调用内部的多少 ——
+<code>io</code>（默认：只有输入 / 输出）、<code>llm</code>（只有它的 LLM 往来）、
+<code>full</code>（全部）、<code>hidden</code>（完全不写节点）。
+<code>render_range={&quot;callers&quot;: N}</code> 限制函数自身能看到多少此前的历史
+（<code>0</code> 表示完全隔断）；<code>{&quot;subcalls&quot;: N}</code> 在长循环里约束它自己
+帧内历史的规模。</p>
+<h2 id="编写函数的函数">编写函数的函数<a class="header-anchor" href="#编写函数的函数">#</a></h2>
+<p>编写、修复和搭建 <code>Agent</code> method 本身就是
+agent 的工作，用普通的文件编辑工具并按照
+<a href="/docs/reference/api/agent.zh.html">Agentic function API</a> 完成。
+没有专门的 <code>create()</code> / <code>fix()</code> 框架调用：
+它们无非是包了一次 LLM 调用加一次文件写入，而 agent
+可以直接做这些事。</p>
+<p>这个 skill 就是完整的规范 —— 文件放在哪里、装饰器的元数据、
+docstring 与 <code>content</code> 的拆分、一份基于规则的校验清单，
+以及一个冒烟测试。agent 读它、写出函数、校验、运行它；
+<code>write → run → fail → fix</code> 这个循环依然意味着程序在使用中不断改进。</p>
+<h2 id="对话即-git-dag">对话即 git DAG<a class="header-anchor" href="#对话即-git-dag">#</a></h2>
+<p>会话历史像 git 仓库那样存储，而不是一个扁平列表。
+每一次交流都是一次 commit，分支是一等公民，
+右侧栏暴露了常见的 git 操作：</p>
+<ul>
+<li><strong>Branch off</strong>（从任意过去的交流分叉）以探索另一种走法，
+同时不丢失原有的线索</li>
+<li><strong>Attach</strong>（附加来自另一个会话的上下文，跨会话复用）
+作为一条带标签的用户消息</li>
+<li><strong>Merge</strong>（把两条或多条分支聚合成一条汇总回复）</li>
+</ul>
+<p>涉及文件的分支在底层运行于<strong>独立的 git worktree</strong> 中，
+因此在不同分支上并发的两个 agent 不会争抢同一份源码树。
+其他框架通过复制消息来分叉对话；我们分叉的是底层的仓库。</p>
+<h2 id="自己写自己的记忆">自己写自己的记忆<a class="header-anchor" href="#自己写自己的记忆">#</a></h2>
+<p>个人记忆只在一个地方，<code>~/.openprogram/projects/default/memory/</code>，而且全部是
+可以用任何编辑器打开的 Markdown。每个项目在自己的会话旁边另有一份记忆，
+位于 <code>~/.openprogram/projects/&lt;项目&gt;/memory/</code>，结构相同。</p>
+<table>
+<thead>
+<tr>
+<th>路径</th>
+<th>放什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>MEMORY.md</code></td>
+<td>入口文件，注入每个会话的system prompt：先是一张&quot;什么在哪&quot;的地图，再是从<code>topics/core.md</code>渲染出的一小段常驻核心。和<code>AGENTS.md</code>一样每层各有一份，个人的在前，项目的在后</td>
+</tr>
+<tr>
+<td><code>topics/</code></td>
+<td>一个主题一个文件，比如<code>topics/people/dave.md</code>。每个段落带一个ID，脚注链接这条事实来自的聊天消息<code>/s/&lt;会话&gt;#&lt;消息&gt;</code>；记忆不另存对话副本</td>
+</tr>
+<tr>
+<td><code>timeline/</code></td>
+<td>同一批事实按日期排列，从<code>topics/</code>重建</td>
+</tr>
+<tr>
+<td><code>.scriptorium/</code></td>
+<td>内部状态：每个对话读到哪了，以及避免两个写入者相撞的锁。它不是记忆</td>
+</tr>
+</tbody>
+</table>
+<p>不会每轮都写。说完的对话先攒着，攒到够写一次了才跑一趟，由这一趟
+判断每条事实属于哪个主题、写进那个文件。一条事实在哪儿说的，不决定
+它存在哪儿，所以关于Dave的细节最终都落在<code>topics/people/dave.md</code>，
+无论它是分几次对话学到的。安静超过半小时的对话不管攒了多少都会被
+写掉，短对话不会一直等一个永远凑不齐的批次。</p>
+<p>每次写入要么整体落地，要么完全不落地。引用了聊天里不存在的消息、指向了
+不存在的段落、或者破坏了主题格式的改动会被整体拒绝，工作区一个字节
+都不变。两个写入者不会交错：后台写入发现工作区被占用时，等一秒就
+放弃，不会让你等，下一轮再来。</p>
+<p>写入只会让文件越来越长，所以每天凌晨3点还有第二趟：把已经涵盖多个
+主题的文件拆开，合并说同一件事的段落，修复链接。
+<code>openprogram memory sleep</code>可以现在就跑这一趟，不等到今晚。</p>
+<p>用CLI查看和手动修：</p>
+<pre><code class="language-bash">openprogram<span class="w"> </span>memory<span class="w"> </span>status<span class="w">                        </span><span class="c1"># 在哪、有什么、当前版本号</span>
+openprogram<span class="w"> </span>memory<span class="w"> </span>recall<span class="w"> </span>xelatex<span class="w"> </span>thesis<span class="w">         </span><span class="c1"># 搜索并打印匹配的段落</span>
+openprogram<span class="w"> </span>memory<span class="w"> </span>show<span class="w"> </span>topics/people/dave.md
+openprogram<span class="w"> </span>memory<span class="w"> </span>edit<span class="w"> </span>topics/people/dave.md<span class="w">    </span><span class="c1"># 用$EDITOR打开，校验通过才落地</span>
+openprogram<span class="w"> </span>memory<span class="w"> </span><span class="nb">export</span><span class="w">                        </span><span class="c1"># 把整个工作区打成tar.gz</span>
+</code></pre>
+<p>Web UI的Memory页面读的是同一个工作区。agent通过三个工具访问它：
+<code>memory_search</code>按语义或确切字符串找段落；<code>memory_get</code>列出记忆里有什么、
+读一个文件、章节或段落，传入脚注的聊天链接时读出当时的原话；
+<code>memory_update</code>新增、订正、删除或移动记录。没有「保存这条」这样的工具：
+记录对话本来就在后台发生，<code>memory_update</code>是用来订正已有内容、或者写下
+你当场要求记住的东西的。不指定出处时，它写下的记录引用提出这个要求的那条消息。</p>
+<h2 id="mini-dag-右栏中的执行视图">Mini-DAG — 右栏中的执行视图<a class="header-anchor" href="#mini-dag-右栏中的执行视图">#</a></h2>
+<p>每个对话都有一个右栏 mini-DAG，它画出每个节点
+（用户消息、LLM 调用、代码 Call、attach）以及它们之间的边。
+该视图随聊天一起滚动：点击某个节点会把对话滚动到对应的消息，
+面板会保持当前查看的范围处于高亮。渲染规则的规范在
+<a href="/docs/reference/design/runtime/dag/rendering.zh.html"><code>design/runtime/dag/rendering.md</code></a>，新增节点类型时请参阅它。</p>
+<h2 id="多账户-密钥轮换">多账户 + 密钥轮换<a class="header-anchor" href="#多账户-密钥轮换">#</a></h2>
+<p>同一个 provider、多个账户 —— 每个账户还可有多个密钥 —— 在每个界面上
+以相同的方式管理。一个<strong>账户就是一份 profile</strong>：某个 provider 的
+一套独立凭据。</p>
+<pre><code class="language-bash">openprogram<span class="w"> </span>providers<span class="w"> </span>login<span class="w"> </span>openai<span class="w"> </span>--account<span class="w"> </span>work<span class="w">      </span><span class="c1"># 添加第二个账户</span>
+openprogram<span class="w"> </span>providers<span class="w"> </span>login<span class="w"> </span>openai<span class="w"> </span>--account<span class="w"> </span>personal
+openprogram<span class="w"> </span>providers<span class="w"> </span>use<span class="w"> </span>openai<span class="w"> </span>work<span class="w">                  </span><span class="c1"># 用 &quot;work&quot; 账户运行 openai</span>
+openprogram<span class="w"> </span>providers<span class="w"> </span>use<span class="w"> </span>openai<span class="w">                        </span><span class="c1"># 切回默认账户</span>
+openprogram<span class="w"> </span>providers<span class="w"> </span>list<span class="w">                              </span><span class="c1"># 当前激活的会被标记</span>
+</code></pre>
+<p>同一个面板存在于 <strong>web</strong>（Settings → Providers）和 <strong>TUI</strong>
+（<code>/login &lt;provider&gt;</code>）中：列出 / 添加 / 激活 / 重命名 / 删除。终端里的 <code>/login</code>
+会在那里就地完成整个登录 —— OAuth、设备码、从 CLI 导入，
+或粘贴一个 API key。</p>
+<p><strong>api-key 类型的 provider</strong> 也获得同样的多凭据模型，以一份密钥列表呈现：
+粘贴一个密钥（会先校验）它就加入列表，给每个密钥<strong>命名</strong>，并
+用 <em>Use</em> 选出哪个是<strong>激活的</strong>（即被使用的那个）。这与 OAuth provider 为
+账户提供的「多份凭据、在它们之间切换」是同一个思路 —— 只是把登录换成了密钥。
+<strong>轮换是一个可选开关</strong>，默认关闭：关着时只调用激活的密钥；打开后，
+被限流的密钥会冷却，由下一个接手（<code>429</code> → 冷却 + 轮换，
+<code>402</code> 因计费而冷却更久，<code>5xx</code> 短暂冷却），并配有策略选择器（<code>in order</code> /
+<code>spread evenly</code> / <code>random</code> / <code>least used</code>）以及 ↑ / ↓ 优先级。你以旧方式
+（环境变量 / 配置）已经设置好的密钥会被迁移进列表，因此不会丢失任何东西。
+设计 + 状态：
+<a href="/docs/reference/design/providers/auth/unified-account-management.zh.html"><code>design/providers/auth/unified-account-management.md</code></a>。</p>
+<h2 id="多-agent-多-channel未来走向">多 agent + 多 channel（未来走向）<a class="header-anchor" href="#多-agent-多-channel未来走向">#</a></h2>
+<p>dispatcher 已经支持每个会话有多个 <code>agent_id</code> —— 每一行都标记了
+产生它的 agent，侧边栏可以按作者用颜色区分，channel 层把
+外部传输（Telegram / Discord / Slack / WeChat）映射到按账户区分的身份。
+跨 channel 的消息路由 + 一套声明式的工具可用性系统，
+作为下一批特性在跟踪中。</p>
+<div class="page-updated"><span data-i18n="updated">Last updated</span> · 2026-10-25</div><div class="prevnext"><a class="pn-link pn-prev" href="/docs/README.html" data-href-en="/docs/README.html" data-href-zh="/docs/README.zh.html"><span class="pn-dir" data-i18n="prev">Previous</span><span class="pn-title" data-title-zh="概览">Overview</span></a><a class="pn-link pn-next" href="/docs/start/GETTING_STARTED.html" data-href-en="/docs/start/GETTING_STARTED.html" data-href-zh="/docs/start/GETTING_STARTED.zh.html"><span class="pn-dir" data-i18n="next">Next</span><span class="pn-title" data-title-zh="快速上手">Getting started</span></a></div></article></main>
+  <aside class="toc"><div class="toc-title" data-i18n="on_this_page">On this page</div>
+<ul class="toc-list">
+<li>
+<a class="lvl-2" href="#自动上下文">自动上下文</a>
+</li>
+<li>
+<a class="lvl-2" href="#编写函数的函数">编写函数的函数</a>
+</li>
+<li>
+<a class="lvl-2" href="#对话即-git-dag">对话即 git DAG</a>
+</li>
+<li>
+<a class="lvl-2" href="#自己写自己的记忆">自己写自己的记忆</a>
+</li>
+<li>
+<a class="lvl-2" href="#mini-dag-右栏中的执行视图">Mini-DAG — 右栏中的执行视图</a>
+</li>
+<li>
+<a class="lvl-2" href="#多账户-密钥轮换">多账户 + 密钥轮换</a>
+</li>
+<li>
+<a class="lvl-2" href="#多-agent-多-channel未来走向">多 agent + 多 channel（未来走向）</a>
+</li>
+</ul></aside>
+</div>
+
+<div class="search-overlay">
+  <div class="search-box">
+    <input type="text" data-i18n-ph="search_ph" placeholder="Search titles or text…" autocomplete="off" spellcheck="false">
+    <div class="search-results"></div>
+  </div>
+</div>
+
+<script src="/docs/assets/site.js?v=6520ba46"></script>
+</body>
+</html>

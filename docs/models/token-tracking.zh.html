@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh" data-base="/docs/" data-page-lang="zh" data-build="1793956776" data-alt-lang-url="/docs/models/token-tracking.html">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Token 计量 · OpenProgram Docs</title>
+<meta name="description" content="各厂商上报 token 用量的字段名和口径都不一样（有的把缓存 token 算进输入总数，有的不算）。provider 层把它们统一归一化成每条 assistant 消息一份用量记录，界面和会话记录不接触厂商格式。 统一格式 # 每条 assistant 消息带一个 Usage 记录（定义见">
+<link rel="canonical" href="https://openprogram.io/docs/models/token-tracking.zh.html">
+<link rel="alternate" type="text/markdown" href="https://openprogram.io/docs/models/token-tracking.zh.html.md">
+<link rel="describedby" href="https://openprogram.io/llms.txt">
+<link rel="alternate" hreflang="en" href="https://openprogram.io/docs/models/token-tracking.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://openprogram.io/docs/models/token-tracking.zh.html">
+<link rel="alternate" hreflang="x-default" href="https://openprogram.io/docs/models/token-tracking.html">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"OpenProgram Docs","item":"https://openprogram.io/docs/"},{"@type":"ListItem","position":2,"name":"Token 计量"}]}</script>
+<meta property="og:type" content="article">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:site_name" content="OpenProgram">
+<meta property="og:url" content="https://openprogram.io/docs/models/token-tracking.zh.html">
+<meta property="og:title" content="Token 计量 · OpenProgram Docs">
+<meta property="og:description" content="各厂商上报 token 用量的字段名和口径都不一样（有的把缓存 token 算进输入总数，有的不算）。provider 层把它们统一归一化成每条 assistant 消息一份用量记录，界面和会话记录不接触厂商格式。 统一格式 # 每条 assistant 消息带一个 Usage 记录（定义见">
+<meta property="og:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:secure_url" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Token 计量 · OpenProgram Docs">
+<meta name="twitter:description" content="各厂商上报 token 用量的字段名和口径都不一样（有的把缓存 token 算进输入总数，有的不算）。provider 层把它们统一归一化成每条 assistant 消息一份用量记录，界面和会话记录不接触厂商格式。 统一格式 # 每条 assistant 消息带一个 Usage 记录（定义见">
+<meta name="twitter:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta name="twitter:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/docs/assets/mark.svg">
+<link rel="stylesheet" href="/docs/assets/site.css?v=6520ba46">
+<link rel="stylesheet" href="/docs/assets/pygments-light.css" media="(prefers-color-scheme: light)" id="pyg-light">
+<link rel="stylesheet" href="/docs/assets/pygments-dark.css" media="(prefers-color-scheme: dark)" id="pyg-dark">
+<script src="/docs/assets/theme.js?v=6520ba46"></script>
+
+</head>
+<body>
+<header class="topbar">
+  <button class="icon hamburger" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2.5 4.5h11M2.5 8h11M2.5 11.5h11"/></svg></button>
+  <a class="brand" href="/docs/index.html"><img class="mark" src="/docs/assets/mark.svg" alt="">OpenProgram Docs</a>
+  <div class="spacer"></div>
+  <button class="search-trigger" aria-label="Search">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14"/></svg><span class="label" data-i18n="search">Search docs</span><kbd>⌘K</kbd>
+  </button>
+  <div class="lang-wrap">
+    <button class="icon lang-trigger" id="lang-toggle" aria-haspopup="true" aria-expanded="false" aria-label="Language">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="6.2"/><path d="M1.8 8h12.4" stroke-linecap="round"/><ellipse cx="8" cy="8" rx="2.8" ry="6.2"/></svg><span class="lang-label">EN</span><svg class="chev" width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+    </button>
+    <div class="lang-menu" id="lang-menu" role="menu">
+      <button class="lang-opt" data-lang="en" role="menuitem"><span>English</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="lang-opt" data-lang="zh" role="menuitem"><span>简体中文</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+  <div class="theme-wrap">
+    <button class="icon" id="theme-toggle" aria-label="Theme" aria-haspopup="menu" aria-controls="theme-menu" aria-expanded="false"><svg class="ic-system" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="2.5" width="13" height="9" rx="1.5"/><path d="M8 11.5V14M5.5 14h5"/></svg><svg class="ic-moon" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M13.5 9.5A6 6 0 1 1 6.5 2.5a5 5 0 0 0 7 7z"/></svg><svg class="ic-sun" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="3.2"/><path d="M8 1.2v1.8M8 13v1.8M1.2 8H3M13 8h1.8M3.2 3.2l1.3 1.3M11.5 11.5l1.3 1.3M12.8 3.2l-1.3 1.3M4.5 11.5l-1.3 1.3"/></svg></button>
+    <div class="theme-menu" id="theme-menu" role="menu" aria-labelledby="theme-toggle">
+      <button class="theme-opt" data-theme-choice="system" role="menuitemradio" aria-checked="true"><span>Follow system</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="light" role="menuitemradio" aria-checked="false"><span>Light</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="dark" role="menuitemradio" aria-checked="false"><span>Dark</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+</header>
+<nav class="tabbar"><a class="tablink" href="/docs/README.html" data-title-zh="开始使用" data-href-en="/docs/README.html" data-href-zh="/docs/README.zh.html">Get started</a><a class="tablink" href="/docs/install/install.html" data-title-zh="安装" data-href-en="/docs/install/install.html" data-href-zh="/docs/install/install.zh.html">Install</a><a class="tablink" href="/docs/capabilities/README.html" data-title-zh="能力" data-href-en="/docs/capabilities/README.html" data-href-zh="/docs/capabilities/README.zh.html">Capabilities</a><a class="tablink" href="/docs/interfaces/README.html" data-title-zh="界面" data-href-en="/docs/interfaces/README.html" data-href-zh="/docs/interfaces/README.zh.html">Interfaces</a><a class="tablink active" href="/docs/models/README.html" data-title-zh="模型" data-href-en="/docs/models/README.html" data-href-zh="/docs/models/README.zh.html">Models</a><a class="tablink" href="/docs/integrations/anthropic.html" data-title-zh="集成" data-href-en="/docs/integrations/anthropic.html" data-href-zh="/docs/integrations/anthropic.zh.html">Integrations</a><a class="tablink" href="/docs/server/README.html" data-title-zh="服务与运维" data-href-en="/docs/server/README.html" data-href-zh="/docs/server/README.zh.html">Server &amp; Ops</a><a class="tablink" href="/docs/reference/README.html" data-title-zh="参考" data-href-en="/docs/reference/README.html" data-href-zh="/docs/reference/README.zh.html">Reference</a><a class="tablink" href="/docs/reference/design/README.html" data-title-zh="设计" data-href-en="/docs/reference/design/README.html" data-href-zh="/docs/reference/design/README.zh.html">Design</a></nav>
+
+<div class="scrim"></div>
+<div class="layout">
+  <nav class="sidebar" aria-label="Documentation">
+    <input class="nav-filter" type="text" data-i18n-ph="nav_filter"
+           aria-label="Filter docs" placeholder="Filter docs…" autocomplete="off" spellcheck="false">
+    <div class="nav-tree"><div class="nav-sec"><div class="nav-sec-title" data-title-zh="概览">Overview</div><a class="navlink" href="/docs/models/README.html" data-title-zh="模型配置" data-href-en="/docs/models/README.html" data-href-zh="/docs/models/README.zh.html">Model configuration</a>
+<a class="navlink" href="/docs/models/providers.html" data-title-zh="模型服务" data-href-en="/docs/models/providers.html" data-href-zh="/docs/models/providers.zh.html">Providers</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="配置">Configuration</div><a class="navlink" href="/docs/models/auth.html" data-title-zh="认证" data-href-en="/docs/models/auth.html" data-href-zh="/docs/models/auth.zh.html">Authentication</a>
+<a class="navlink" href="/docs/models/local-models.html" data-title-zh="使用本地部署的模型" data-href-en="/docs/models/local-models.html" data-href-zh="/docs/models/local-models.zh.html">Use locally deployed models</a>
+<a class="navlink" href="/docs/models/fast-tier.html" data-title-zh="高速模式" data-href-en="/docs/models/fast-tier.html" data-href-zh="/docs/models/fast-tier.zh.html">Fast mode</a>
+<a class="navlink" href="/docs/models/thinking-effort.html" data-title-zh="推理强度" data-href-en="/docs/models/thinking-effort.html" data-href-zh="/docs/models/thinking-effort.zh.html">Thinking effort</a>
+<a class="navlink active" href="/docs/models/token-tracking.html" data-title-zh="Token 计量" data-href-en="/docs/models/token-tracking.html" data-href-zh="/docs/models/token-tracking.zh.html">Token accounting</a></div></div>
+  </nav>
+  <main class="content"><button class="fs-toggle" aria-label="Fullscreen" title="Fullscreen (Esc to exit)"><svg class="ic-expand" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.2 2H2v4.2M9.8 2H14v4.2M6.2 14H2V9.8M9.8 14H14V9.8"/></svg><svg class="ic-collapse" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6.2h4.2V2M14 6.2H9.8V2M2 9.8h4.2V14M14 9.8H9.8V14"/></svg></button><article><nav class="breadcrumb"><span class="bc-seg" data-title-zh="模型">Models</span> <span class='bc-sep'>›</span> <span class="bc-seg" data-title-zh="配置">Configuration</span> <span class='bc-sep'>›</span> <span class="bc-seg bc-current" data-title-zh="Token 计量">Token accounting</span></nav><h1 id="token-计量">Token 计量<a class="header-anchor" href="#token-计量">#</a></h1>
+<p>各厂商上报 token 用量的字段名和口径都不一样（有的把缓存 token 算进输入总数，有的不算）。provider 层把它们统一归一化成每条 assistant 消息一份用量记录，界面和会话记录不接触厂商格式。</p>
+<h2 id="统一格式">统一格式<a class="header-anchor" href="#统一格式">#</a></h2>
+<p>每条 assistant 消息带一个 <code>Usage</code> 记录（定义见 <a href="https://github.com/FuzzyKuji/OpenProgram/blob/main/openprogram/models/providers/types.py"><code>openprogram/models/providers/types.py</code></a>）：</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>input</code></td>
+<td>非缓存输入 token（厂商上报的是含缓存总数时，减去缓存部分）</td>
+</tr>
+<tr>
+<td><code>output</code></td>
+<td>输出 token</td>
+</tr>
+<tr>
+<td><code>cache_read</code></td>
+<td>从 prompt 缓存命中的输入 token</td>
+</tr>
+<tr>
+<td><code>cache_write</code></td>
+<td>写入 prompt 缓存的输入 token（仅显式缓存的 provider）</td>
+</tr>
+<tr>
+<td><code>total_tokens</code></td>
+<td>厂商上报的本次调用总数</td>
+</tr>
+<tr>
+<td><code>cost</code></td>
+<td>美元成本，按启用模型的每百万 token 单价计算（input / output / cache read / cache write 四项）</td>
+</tr>
+</tbody>
+</table>
+<p>口径沿用 Anthropic 约定：<code>input</code> 不含缓存 token。输入计数含缓存的厂商（OpenAI 系协议）通过减去缓存数换算。</p>
+<h2 id="各-provider-上报什么">各 provider 上报什么<a class="header-anchor" href="#各-provider-上报什么">#</a></h2>
+<p>各流式实现从厂商的最终事件或最后一个 chunk 里取用量：</p>
+<table>
+<thead>
+<tr>
+<th>协议（provider）</th>
+<th>原始字段</th>
+<th>缓存统计</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Anthropic Messages（<code>anthropic</code>，以及 <code>minimax</code>、<code>kimi_coding</code>、<code>vercel_ai_gateway</code> 等 Anthropic 协议网关）</td>
+<td><code>input_tokens</code>、<code>output_tokens</code>、<code>cache_read_input_tokens</code>、<code>cache_creation_input_tokens</code></td>
+<td>读 + 写</td>
+</tr>
+<tr>
+<td>OpenAI Responses（<code>openai</code>、<code>openai_codex</code>、<code>azure_openai_responses</code>、<code>github_copilot</code>）</td>
+<td><code>input_tokens</code>（含缓存——已减去）、<code>output_tokens</code>、<code>input_tokens_details.cached_tokens</code>、<code>total_tokens</code></td>
+<td>仅读</td>
+</tr>
+<tr>
+<td>OpenAI Completions（<code>deepseek</code>、<code>groq</code>、<code>mistral</code>、<code>openrouter</code> 等兼容端点）</td>
+<td><code>prompt_tokens</code>、<code>completion_tokens</code>（<code>completion_tokens_details</code> 里的推理 token 从输出计数中拆出）、<code>total_tokens</code></td>
+<td>无</td>
+</tr>
+<tr>
+<td>Google Generative AI（<code>google</code>）</td>
+<td><code>prompt_token_count</code>、<code>candidates_token_count</code>、<code>total_token_count</code></td>
+<td>无</td>
+</tr>
+<tr>
+<td>Cloud Code Assist（<code>gemini_subscription</code>、<code>google_gemini_cli</code>）</td>
+<td><code>promptTokenCount</code>、<code>candidatesTokenCount</code> + <code>thoughtsTokenCount</code>、<code>cachedContentTokenCount</code>、<code>totalTokenCount</code></td>
+<td>仅读</td>
+</tr>
+<tr>
+<td>Bedrock Converse Stream（<code>amazon_bedrock</code>）</td>
+<td><code>inputTokens</code>、<code>outputTokens</code>、<code>cacheReadInputTokens</code>、<code>cacheWriteInputTokens</code>、<code>totalTokens</code></td>
+<td>读 + 写</td>
+</tr>
+</tbody>
+</table>
+<p>成本在取到用量后立即按模型行的价格计算。OpenAI Responses 协议上，响应实际返回的 <code>service_tier</code> 会再调整单价，<a href="/docs/models/fast-tier.zh.html">fast tier</a> 请求按 priority 档价格计费。</p>
+<h2 id="用量显示在哪">用量显示在哪<a class="header-anchor" href="#用量显示在哪">#</a></h2>
+<ul>
+<li><strong>按消息</strong>：每条 assistant 消息存自己的用量和成本，随会话持久化。</li>
+<li><strong>聊天角标</strong>：输入框旁的角标显示最近一次调用的用量（<code>11.2k in · 450 out</code>）。不跨调用累加——最近一次调用的输入 token 数就是当前上下文占用量，这才是有意义的数字。悬浮提示拆分输入：Claude 协议 provider 分 base / cache write / cache hit，Codex 分 base / cached，其余显示缓存命中百分比。数字超过一千显示为 <code>1.2k</code>，超过一百万显示为 <code>1.0m</code>。</li>
+<li><strong>上下文条</strong>：每轮结束后服务端通过聊天 WebSocket 推送 <code>context_stats</code> 事件，带聊天用量和模型上下文窗口，界面据此渲染占用百分比。</li>
+<li><strong>上下文面板</strong>：点圆环查看窗口被什么占用：系统提示、工具、记忆和对话。点其中一类，或分段条上对应的一段，进入它的详情：系统提示按组件列出（基础提示词、环境、AGENTS.md、技能索引等），工具分为已加载、按需加载和 MCP，记忆列出每一层的 <code>MEMORY.md</code>，对话按类型拆分并列出最大的几条消息。展开一行可查看实际发送的原文，点一条消息会跳到聊天里那一条。底部的 <strong>压缩对话</strong> 立即压缩；有一轮正在运行时会被拒绝，压缩结束前也不会开始新的一轮。新对话发出第一条消息之前，圆环和面板显示这条消息会带上的内容（Agent 的系统提示、工具和记忆），窗口按当前选中的模型计算。</li>
+<li><strong>函数执行</strong>：每次函数运行用独立 runtime，用量按次显示在函数卡片上，与聊天对话的数字互不影响。</li>
+</ul>
+<p>provider 按次上报用量，所以任何地方都没有按 provider 区分的累加逻辑：最新值永远描述最近一次请求。</p>
+<div class="page-updated"><span data-i18n="updated">Last updated</span> · 2026-11-06</div><div class="prevnext"><a class="pn-link pn-prev" href="/docs/models/thinking-effort.html" data-href-en="/docs/models/thinking-effort.html" data-href-zh="/docs/models/thinking-effort.zh.html"><span class="pn-dir" data-i18n="prev">Previous</span><span class="pn-title" data-title-zh="推理强度">Thinking effort</span></a><a class="pn-link pn-next" href="/docs/integrations/anthropic.html" data-href-en="/docs/integrations/anthropic.html" data-href-zh="/docs/integrations/anthropic.zh.html"><span class="pn-dir" data-i18n="next">Next</span><span class="pn-title" data-title-zh="Anthropic API">Anthropic API</span></a></div></article></main>
+  <aside class="toc"><div class="toc-title" data-i18n="on_this_page">On this page</div>
+<ul class="toc-list">
+<li>
+<a class="lvl-2" href="#统一格式">统一格式</a>
+</li>
+<li>
+<a class="lvl-2" href="#各-provider-上报什么">各 provider 上报什么</a>
+</li>
+<li>
+<a class="lvl-2" href="#用量显示在哪">用量显示在哪</a>
+</li>
+</ul></aside>
+</div>
+
+<div class="search-overlay">
+  <div class="search-box">
+    <input type="text" data-i18n-ph="search_ph" placeholder="Search titles or text…" autocomplete="off" spellcheck="false">
+    <div class="search-results"></div>
+  </div>
+</div>
+
+<script src="/docs/assets/site.js?v=6520ba46"></script>
+</body>
+</html>

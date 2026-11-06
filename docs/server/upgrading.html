@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en" data-base="/docs/" data-page-lang="en" data-build="1793956776" data-alt-lang-url="/docs/server/upgrading.zh.html">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Source upgrades · OpenProgram Docs</title>
+<meta name="description" content="Upgrade source checkouts # openprogram upgrade selects behavior from the installation type. A managed release installs the latest stable GitHub Release and">
+<link rel="canonical" href="https://openprogram.io/docs/server/upgrading.html">
+<link rel="alternate" type="text/markdown" href="https://openprogram.io/docs/server/upgrading.html.md">
+<link rel="describedby" href="https://openprogram.io/llms.txt">
+<link rel="alternate" hreflang="en" href="https://openprogram.io/docs/server/upgrading.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://openprogram.io/docs/server/upgrading.zh.html">
+<link rel="alternate" hreflang="x-default" href="https://openprogram.io/docs/server/upgrading.html">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"OpenProgram Docs","item":"https://openprogram.io/docs/"},{"@type":"ListItem","position":2,"name":"Source upgrades"}]}</script>
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="OpenProgram">
+<meta property="og:url" content="https://openprogram.io/docs/server/upgrading.html">
+<meta property="og:title" content="Source upgrades · OpenProgram Docs">
+<meta property="og:description" content="Upgrade source checkouts # openprogram upgrade selects behavior from the installation type. A managed release installs the latest stable GitHub Release and">
+<meta property="og:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:secure_url" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Source upgrades · OpenProgram Docs">
+<meta name="twitter:description" content="Upgrade source checkouts # openprogram upgrade selects behavior from the installation type. A managed release installs the latest stable GitHub Release and">
+<meta name="twitter:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta name="twitter:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/docs/assets/mark.svg">
+<link rel="stylesheet" href="/docs/assets/site.css?v=6520ba46">
+<link rel="stylesheet" href="/docs/assets/pygments-light.css" media="(prefers-color-scheme: light)" id="pyg-light">
+<link rel="stylesheet" href="/docs/assets/pygments-dark.css" media="(prefers-color-scheme: dark)" id="pyg-dark">
+<script src="/docs/assets/theme.js?v=6520ba46"></script>
+
+</head>
+<body>
+<header class="topbar">
+  <button class="icon hamburger" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2.5 4.5h11M2.5 8h11M2.5 11.5h11"/></svg></button>
+  <a class="brand" href="/docs/index.html"><img class="mark" src="/docs/assets/mark.svg" alt="">OpenProgram Docs</a>
+  <div class="spacer"></div>
+  <button class="search-trigger" aria-label="Search">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14"/></svg><span class="label" data-i18n="search">Search docs</span><kbd>⌘K</kbd>
+  </button>
+  <div class="lang-wrap">
+    <button class="icon lang-trigger" id="lang-toggle" aria-haspopup="true" aria-expanded="false" aria-label="Language">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="6.2"/><path d="M1.8 8h12.4" stroke-linecap="round"/><ellipse cx="8" cy="8" rx="2.8" ry="6.2"/></svg><span class="lang-label">EN</span><svg class="chev" width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+    </button>
+    <div class="lang-menu" id="lang-menu" role="menu">
+      <button class="lang-opt" data-lang="en" role="menuitem"><span>English</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="lang-opt" data-lang="zh" role="menuitem"><span>简体中文</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+  <div class="theme-wrap">
+    <button class="icon" id="theme-toggle" aria-label="Theme" aria-haspopup="menu" aria-controls="theme-menu" aria-expanded="false"><svg class="ic-system" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="2.5" width="13" height="9" rx="1.5"/><path d="M8 11.5V14M5.5 14h5"/></svg><svg class="ic-moon" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M13.5 9.5A6 6 0 1 1 6.5 2.5a5 5 0 0 0 7 7z"/></svg><svg class="ic-sun" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="3.2"/><path d="M8 1.2v1.8M8 13v1.8M1.2 8H3M13 8h1.8M3.2 3.2l1.3 1.3M11.5 11.5l1.3 1.3M12.8 3.2l-1.3 1.3M4.5 11.5l-1.3 1.3"/></svg></button>
+    <div class="theme-menu" id="theme-menu" role="menu" aria-labelledby="theme-toggle">
+      <button class="theme-opt" data-theme-choice="system" role="menuitemradio" aria-checked="true"><span>Follow system</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="light" role="menuitemradio" aria-checked="false"><span>Light</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="dark" role="menuitemradio" aria-checked="false"><span>Dark</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+</header>
+<nav class="tabbar"><a class="tablink" href="/docs/README.html" data-title-zh="开始使用" data-href-en="/docs/README.html" data-href-zh="/docs/README.zh.html">Get started</a><a class="tablink" href="/docs/install/install.html" data-title-zh="安装" data-href-en="/docs/install/install.html" data-href-zh="/docs/install/install.zh.html">Install</a><a class="tablink" href="/docs/capabilities/README.html" data-title-zh="能力" data-href-en="/docs/capabilities/README.html" data-href-zh="/docs/capabilities/README.zh.html">Capabilities</a><a class="tablink" href="/docs/interfaces/README.html" data-title-zh="界面" data-href-en="/docs/interfaces/README.html" data-href-zh="/docs/interfaces/README.zh.html">Interfaces</a><a class="tablink" href="/docs/models/README.html" data-title-zh="模型" data-href-en="/docs/models/README.html" data-href-zh="/docs/models/README.zh.html">Models</a><a class="tablink" href="/docs/integrations/anthropic.html" data-title-zh="集成" data-href-en="/docs/integrations/anthropic.html" data-href-zh="/docs/integrations/anthropic.zh.html">Integrations</a><a class="tablink active" href="/docs/server/README.html" data-title-zh="服务与运维" data-href-en="/docs/server/README.html" data-href-zh="/docs/server/README.zh.html">Server &amp; Ops</a><a class="tablink" href="/docs/reference/README.html" data-title-zh="参考" data-href-en="/docs/reference/README.html" data-href-zh="/docs/reference/README.zh.html">Reference</a><a class="tablink" href="/docs/reference/design/README.html" data-title-zh="设计" data-href-en="/docs/reference/design/README.html" data-href-zh="/docs/reference/design/README.zh.html">Design</a></nav>
+
+<div class="scrim"></div>
+<div class="layout">
+  <nav class="sidebar" aria-label="Documentation">
+    <input class="nav-filter" type="text" data-i18n-ph="nav_filter"
+           aria-label="Filter docs" placeholder="Filter docs…" autocomplete="off" spellcheck="false">
+    <div class="nav-tree"><div class="nav-sec"><div class="nav-sec-title" data-title-zh="概览">Overview</div><a class="navlink" href="/docs/server/README.html" data-title-zh="概览" data-href-en="/docs/server/README.html" data-href-zh="/docs/server/README.zh.html">Overview</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="运维">Operations</div><a class="navlink" href="/docs/server/configuration.html" data-title-zh="服务端配置" data-href-en="/docs/server/configuration.html" data-href-zh="/docs/server/configuration.zh.html">Server configuration</a>
+<a class="navlink active" href="/docs/server/upgrading.html" data-title-zh="源码升级" data-href-en="/docs/server/upgrading.html" data-href-zh="/docs/server/upgrading.zh.html">Source upgrades</a>
+<a class="navlink" href="/docs/server/backup.html" data-title-zh="备份与恢复" data-href-en="/docs/server/backup.html" data-href-zh="/docs/server/backup.zh.html">Backup and restore</a>
+<a class="navlink" href="/docs/server/troubleshooting.html" data-title-zh="故障排查" data-href-en="/docs/server/troubleshooting.html" data-href-zh="/docs/server/troubleshooting.zh.html">Troubleshooting</a></div></div>
+  </nav>
+  <main class="content"><button class="fs-toggle" aria-label="Fullscreen" title="Fullscreen (Esc to exit)"><svg class="ic-expand" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.2 2H2v4.2M9.8 2H14v4.2M6.2 14H2V9.8M9.8 14H14V9.8"/></svg><svg class="ic-collapse" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6.2h4.2V2M14 6.2H9.8V2M2 9.8h4.2V14M14 9.8H9.8V14"/></svg></button><article><nav class="breadcrumb"><span class="bc-seg" data-title-zh="服务与运维">Server &amp; Ops</span> <span class='bc-sep'>›</span> <span class="bc-seg" data-title-zh="运维">Operations</span> <span class='bc-sep'>›</span> <span class="bc-seg bc-current" data-title-zh="源码升级">Source upgrades</span></nav><p><span id="upgrading"></span></p>
+<h1 id="upgrade-source-checkouts">Upgrade source checkouts<a class="header-anchor" href="#upgrade-source-checkouts">#</a></h1>
+<p><code>openprogram upgrade</code> selects behavior from the installation type. A managed
+release installs the latest stable GitHub Release and leaves the running worker
+unchanged until you restart it explicitly. A source checkout uses the gated Git
+pipeline documented on this page: it updates the code and restarts the service
+only after proving the new code boots.</p>
+<p>For Desktop and managed CLI/server releases, including the one-time v0.6.6 to
+v0.7.0 transition, see <a href="/docs/install/upgrade.html">Upgrading a release installation</a>.</p>
+<h2 id="source-checkout-behavior">Source checkout behavior<a class="header-anchor" href="#source-checkout-behavior">#</a></h2>
+<p>For a source checkout, <code>upgrade</code> is the safe replacement for &quot;<code>git pull</code> then
+<code>openprogram restart</code>&quot;.</p>
+<p>The problem it solves: OpenProgram is installed as an editable checkout, so
+the repo it serves from is the repo it develops. A bad commit is invisible
+until the next restart, and by then the tool you would use to fix it is the
+tool that is broken. <code>upgrade</code> moves that failure earlier, to a throwaway
+process that nobody depends on.</p>
+<h2 id="quick-reference">Quick reference<a class="header-anchor" href="#quick-reference">#</a></h2>
+<pre><code class="language-bash">openprogram<span class="w"> </span>upgrade<span class="w"> </span>status<span class="w">          </span><span class="c1"># what would change? read-only</span>
+openprogram<span class="w"> </span>upgrade<span class="w"> </span>--dry-run<span class="w">       </span><span class="c1"># print the plan; do not move code or worker</span>
+openprogram<span class="w"> </span>upgrade<span class="w">                 </span><span class="c1"># do it</span>
+</code></pre>
+<h2 id="what-happens">What happens<a class="header-anchor" href="#what-happens">#</a></h2>
+<p>Seven steps, in order. The first failure stops the chain and prints a
+reason.</p>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>preflight</td>
+<td>Refuses a dirty working tree, resolves the target commit, asks before a downgrade</td>
+</tr>
+<tr>
+<td>checkout</td>
+<td>Fast-forwards the checkout to the target commit</td>
+</tr>
+<tr>
+<td>deps</td>
+<td>Refresh the source checkout's Python environment if <code>pyproject.toml</code> changed; install the frontend workspaces if <code>package-lock.json</code> changed</td>
+</tr>
+<tr>
+<td>build</td>
+<td>Rebuild <code>apps/web</code> and/or <code>apps/cli</code> when that workspace or <code>package-lock.json</code> changed</td>
+</tr>
+<tr>
+<td>probe</td>
+<td>Boots the new code cold on a scratch port under an isolated profile, waits for <code>/healthz</code>, runs the doctor checks, kills it</td>
+</tr>
+<tr>
+<td>restart</td>
+<td>Restarts the real service</td>
+</tr>
+<tr>
+<td>verify</td>
+<td>Polls <code>/healthz</code> until it reports the new commit sha</td>
+</tr>
+</tbody>
+</table>
+<p>Everything before <strong>restart</strong> leaves the running instance untouched. A
+syntax error, a broken config schema, or a failed web build is caught by the
+probe, and your service keeps serving the old code.</p>
+<h2 id="checking-before-committing-to-it">Checking before committing to it<a class="header-anchor" href="#checking-before-committing-to-it">#</a></h2>
+<p><code>status</code> tells you whether there is anything to pick up:</p>
+<pre><code class="language-console"><span class="gp">$ </span>openprogram<span class="w"> </span>upgrade<span class="w"> </span>status
+<span class="go">  channel        stable (origin/main)</span>
+<span class="go">  head           f5671fd25e4c6ae89e6d77f3fcffc4d4a2c0570a</span>
+<span class="go">  target         a2d7f95633527e182ac850e40aca727aa0f6a3e6</span>
+<span class="go">  update         available</span>
+</code></pre>
+<p>Add <code>--json</code> for machine output (<code>head_sha</code>, <code>target_sha</code>,
+<code>update_available</code>).</p>
+<p><code>--dry-run</code> resolves the target and prints the steps it would run without
+moving the checkout, worker, or upgrade state. If it is combined with an
+explicit <code>--channel</code>, that source-channel choice is still persisted:</p>
+<pre><code class="language-console"><span class="gp">$ </span>openprogram<span class="w"> </span>upgrade<span class="w"> </span>--dry-run
+<span class="go">  [OK  ] preflight  stable → origin/main: 80d77d1ed44c → 1a4101433b13</span>
+<span class="go">  [OK  ] checkout   planned (dry run)</span>
+<span class="go">  [OK  ] deps       planned (dry run)</span>
+<span class="go">  [OK  ] build      planned (dry run)</span>
+<span class="go">  [OK  ] probe      planned (dry run)</span>
+<span class="go">  [OK  ] restart    planned (dry run)</span>
+<span class="go">  [OK  ] verify     planned (dry run)</span>
+</code></pre>
+<h2 id="flags">Flags<a class="header-anchor" href="#flags">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--dry-run</code></td>
+<td>Print the planned steps without changing checkout, worker, or upgrade state; an explicit <code>--channel</code> is still persisted</td>
+</tr>
+<tr>
+<td><code>--no-restart</code></td>
+<td>Stop after the probe. The checkout moves and the code is verified, but the running service keeps the old code until you restart it yourself</td>
+</tr>
+<tr>
+<td><code>--yes</code>, <code>-y</code></td>
+<td>Skip the confirmation a downgrade requires</td>
+</tr>
+<tr>
+<td><code>--channel NAME</code></td>
+<td>Follow a different release line, and remember it</td>
+</tr>
+<tr>
+<td><code>--json</code></td>
+<td>Emit a machine-readable result including every step</td>
+</tr>
+</tbody>
+</table>
+<h2 id="source-checkout-channels">Source checkout channels<a class="header-anchor" href="#source-checkout-channels">#</a></h2>
+<p>A source-checkout channel is a name for the ref to track. <code>stable</code> follows
+<code>origin/main</code> and is the only one built in. It is a development ref here, not
+the stable GitHub Release consumed by managed installations. <code>--channel</code>
+persists the choice as the <code>update.channel</code> setting, so later runs need no flag.</p>
+<h2 id="when-a-step-fails">When a step fails<a class="header-anchor" href="#when-a-step-fails">#</a></h2>
+<p>The failure prints a reason code (<code>dirty-worktree</code>, <code>probe-failed</code>,
+<code>build-failed</code>, <code>verify-failed</code>, …) and exits non-zero.</p>
+<ul>
+<li>
+<p><strong><code>dirty-worktree</code></strong> — commit or stash your changes. <code>upgrade</code> will not
+move a checkout that has work in it.</p>
+</li>
+<li>
+<p><strong><code>downgrade-needs-confirmation</code></strong> — the target is older than what you are
+running. Old code may not understand config written by new code; pass
+<code>--yes</code> if you mean it.</p>
+</li>
+<li>
+<p><strong><code>probe-failed</code></strong> — the new code does not boot. Nothing was restarted and
+your service is still fine; the fix belongs upstream.</p>
+</li>
+<li>
+<p><strong><code>verify-failed</code></strong> — the restart happened, but the service is not
+reporting the new sha. Automatic rollback is not implemented yet, so the
+command prints the manual escape hatch:</p>
+<pre><code class="language-bash">git<span class="w"> </span>-C<span class="w"> </span>&lt;repo&gt;<span class="w"> </span>checkout<span class="w"> </span>&lt;previous-sha&gt;<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>openprogram<span class="w"> </span>restart
+</code></pre>
+</li>
+</ul>
+<p>Progress is written to <code>~/.openprogram/upgrade-state.json</code> after every step,
+which is where to look if an upgrade dies partway.</p>
+<h2 id="related">Related<a class="header-anchor" href="#related">#</a></h2>
+<ul>
+<li><a href="/docs/server/troubleshooting.html">Troubleshooting</a> for problems unrelated to updating.</li>
+<li><code>openprogram update</code> is a compatibility alias for <code>openprogram upgrade</code>.
+Managed releases use the stable GitHub Release path; source checkouts use
+the gated Git pipeline described above.</li>
+</ul>
+<div class="page-updated"><span data-i18n="updated">Last updated</span> · 2026-09-27</div><div class="prevnext"><a class="pn-link pn-prev" href="/docs/server/configuration.html" data-href-en="/docs/server/configuration.html" data-href-zh="/docs/server/configuration.zh.html"><span class="pn-dir" data-i18n="prev">Previous</span><span class="pn-title" data-title-zh="服务端配置">Server configuration</span></a><a class="pn-link pn-next" href="/docs/server/backup.html" data-href-en="/docs/server/backup.html" data-href-zh="/docs/server/backup.zh.html"><span class="pn-dir" data-i18n="next">Next</span><span class="pn-title" data-title-zh="备份与恢复">Backup and restore</span></a></div></article></main>
+  <aside class="toc"><div class="toc-title" data-i18n="on_this_page">On this page</div>
+<ul class="toc-list">
+<li>
+<a class="lvl-2" href="#source-checkout-behavior">Source checkout behavior</a>
+</li>
+<li>
+<a class="lvl-2" href="#quick-reference">Quick reference</a>
+</li>
+<li>
+<a class="lvl-2" href="#what-happens">What happens</a>
+</li>
+<li>
+<a class="lvl-2" href="#checking-before-committing-to-it">Checking before committing to it</a>
+</li>
+<li>
+<a class="lvl-2" href="#flags">Flags</a>
+</li>
+<li>
+<a class="lvl-2" href="#source-checkout-channels">Source checkout channels</a>
+</li>
+<li>
+<a class="lvl-2" href="#when-a-step-fails">When a step fails</a>
+</li>
+<li>
+<a class="lvl-2" href="#related">Related</a>
+</li>
+</ul></aside>
+</div>
+
+<div class="search-overlay">
+  <div class="search-box">
+    <input type="text" data-i18n-ph="search_ph" placeholder="Search titles or text…" autocomplete="off" spellcheck="false">
+    <div class="search-results"></div>
+  </div>
+</div>
+
+<script src="/docs/assets/site.js?v=6520ba46"></script>
+</body>
+</html>

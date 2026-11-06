@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh" data-base="/docs/" data-page-lang="zh" data-build="1793956776" data-alt-lang-url="/docs/start/faq.html">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>常见问题 · OpenProgram Docs</title>
+<meta name="description" content="这页收集安装和日常使用中最常见的问题，每条都给出对应的命令解法。 端口 18100 被占用怎么办？ # OpenProgram 只监听一个端口（API、WebSocket 和 web UI 同端口，默认 18100）。先看当前配置的端口，再改成空闲的： openprogram ports # 查看当前端口">
+<link rel="canonical" href="https://openprogram.io/docs/start/faq.zh.html">
+<link rel="alternate" type="text/markdown" href="https://openprogram.io/docs/start/faq.zh.html.md">
+<link rel="describedby" href="https://openprogram.io/llms.txt">
+<link rel="alternate" hreflang="en" href="https://openprogram.io/docs/start/faq.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://openprogram.io/docs/start/faq.zh.html">
+<link rel="alternate" hreflang="x-default" href="https://openprogram.io/docs/start/faq.html">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"OpenProgram Docs","item":"https://openprogram.io/docs/"},{"@type":"ListItem","position":2,"name":"常见问题"}]}</script>
+<meta property="og:type" content="article">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:site_name" content="OpenProgram">
+<meta property="og:url" content="https://openprogram.io/docs/start/faq.zh.html">
+<meta property="og:title" content="常见问题 · OpenProgram Docs">
+<meta property="og:description" content="这页收集安装和日常使用中最常见的问题，每条都给出对应的命令解法。 端口 18100 被占用怎么办？ # OpenProgram 只监听一个端口（API、WebSocket 和 web UI 同端口，默认 18100）。先看当前配置的端口，再改成空闲的： openprogram ports # 查看当前端口">
+<meta property="og:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:secure_url" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="常见问题 · OpenProgram Docs">
+<meta name="twitter:description" content="这页收集安装和日常使用中最常见的问题，每条都给出对应的命令解法。 端口 18100 被占用怎么办？ # OpenProgram 只监听一个端口（API、WebSocket 和 web UI 同端口，默认 18100）。先看当前配置的端口，再改成空闲的： openprogram ports # 查看当前端口">
+<meta name="twitter:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta name="twitter:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/docs/assets/mark.svg">
+<link rel="stylesheet" href="/docs/assets/site.css?v=6520ba46">
+<link rel="stylesheet" href="/docs/assets/pygments-light.css" media="(prefers-color-scheme: light)" id="pyg-light">
+<link rel="stylesheet" href="/docs/assets/pygments-dark.css" media="(prefers-color-scheme: dark)" id="pyg-dark">
+<script src="/docs/assets/theme.js?v=6520ba46"></script>
+
+</head>
+<body>
+<header class="topbar">
+  <button class="icon hamburger" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2.5 4.5h11M2.5 8h11M2.5 11.5h11"/></svg></button>
+  <a class="brand" href="/docs/index.html"><img class="mark" src="/docs/assets/mark.svg" alt="">OpenProgram Docs</a>
+  <div class="spacer"></div>
+  <button class="search-trigger" aria-label="Search">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14"/></svg><span class="label" data-i18n="search">Search docs</span><kbd>⌘K</kbd>
+  </button>
+  <div class="lang-wrap">
+    <button class="icon lang-trigger" id="lang-toggle" aria-haspopup="true" aria-expanded="false" aria-label="Language">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="6.2"/><path d="M1.8 8h12.4" stroke-linecap="round"/><ellipse cx="8" cy="8" rx="2.8" ry="6.2"/></svg><span class="lang-label">EN</span><svg class="chev" width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+    </button>
+    <div class="lang-menu" id="lang-menu" role="menu">
+      <button class="lang-opt" data-lang="en" role="menuitem"><span>English</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="lang-opt" data-lang="zh" role="menuitem"><span>简体中文</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+  <div class="theme-wrap">
+    <button class="icon" id="theme-toggle" aria-label="Theme" aria-haspopup="menu" aria-controls="theme-menu" aria-expanded="false"><svg class="ic-system" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="2.5" width="13" height="9" rx="1.5"/><path d="M8 11.5V14M5.5 14h5"/></svg><svg class="ic-moon" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M13.5 9.5A6 6 0 1 1 6.5 2.5a5 5 0 0 0 7 7z"/></svg><svg class="ic-sun" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="3.2"/><path d="M8 1.2v1.8M8 13v1.8M1.2 8H3M13 8h1.8M3.2 3.2l1.3 1.3M11.5 11.5l1.3 1.3M12.8 3.2l-1.3 1.3M4.5 11.5l-1.3 1.3"/></svg></button>
+    <div class="theme-menu" id="theme-menu" role="menu" aria-labelledby="theme-toggle">
+      <button class="theme-opt" data-theme-choice="system" role="menuitemradio" aria-checked="true"><span>Follow system</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="light" role="menuitemradio" aria-checked="false"><span>Light</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="dark" role="menuitemradio" aria-checked="false"><span>Dark</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+</header>
+<nav class="tabbar"><a class="tablink active" href="/docs/README.html" data-title-zh="开始使用" data-href-en="/docs/README.html" data-href-zh="/docs/README.zh.html">Get started</a><a class="tablink" href="/docs/install/install.html" data-title-zh="安装" data-href-en="/docs/install/install.html" data-href-zh="/docs/install/install.zh.html">Install</a><a class="tablink" href="/docs/capabilities/README.html" data-title-zh="能力" data-href-en="/docs/capabilities/README.html" data-href-zh="/docs/capabilities/README.zh.html">Capabilities</a><a class="tablink" href="/docs/interfaces/README.html" data-title-zh="界面" data-href-en="/docs/interfaces/README.html" data-href-zh="/docs/interfaces/README.zh.html">Interfaces</a><a class="tablink" href="/docs/models/README.html" data-title-zh="模型" data-href-en="/docs/models/README.html" data-href-zh="/docs/models/README.zh.html">Models</a><a class="tablink" href="/docs/integrations/anthropic.html" data-title-zh="集成" data-href-en="/docs/integrations/anthropic.html" data-href-zh="/docs/integrations/anthropic.zh.html">Integrations</a><a class="tablink" href="/docs/server/README.html" data-title-zh="服务与运维" data-href-en="/docs/server/README.html" data-href-zh="/docs/server/README.zh.html">Server &amp; Ops</a><a class="tablink" href="/docs/reference/README.html" data-title-zh="参考" data-href-en="/docs/reference/README.html" data-href-zh="/docs/reference/README.zh.html">Reference</a><a class="tablink" href="/docs/reference/design/README.html" data-title-zh="设计" data-href-en="/docs/reference/design/README.html" data-href-zh="/docs/reference/design/README.zh.html">Design</a></nav>
+
+<div class="scrim"></div>
+<div class="layout">
+  <nav class="sidebar" aria-label="Documentation">
+    <input class="nav-filter" type="text" data-i18n-ph="nav_filter"
+           aria-label="Filter docs" placeholder="Filter docs…" autocomplete="off" spellcheck="false">
+    <div class="nav-tree"><div class="nav-sec"><div class="nav-sec-title" data-title-zh="概览">Overview</div><a class="navlink" href="/docs/README.html" data-title-zh="概览" data-href-en="/docs/README.html" data-href-zh="/docs/README.zh.html">Overview</a>
+<a class="navlink" href="/docs/start/features.html" data-title-zh="功能" data-href-en="/docs/start/features.html" data-href-zh="/docs/start/features.zh.html">Features</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="第一步">First steps</div><a class="navlink" href="/docs/start/GETTING_STARTED.html" data-title-zh="快速上手" data-href-en="/docs/start/GETTING_STARTED.html" data-href-zh="/docs/start/GETTING_STARTED.zh.html">Getting started</a>
+<a class="navlink" href="/docs/start/daily-use.html" data-title-zh="日常操作" data-href-en="/docs/start/daily-use.html" data-href-zh="/docs/start/daily-use.zh.html">Daily use</a>
+<a class="navlink active" href="/docs/start/faq.html" data-title-zh="常见问题" data-href-en="/docs/start/faq.html" data-href-zh="/docs/start/faq.zh.html">FAQ</a></div></div>
+  </nav>
+  <main class="content"><button class="fs-toggle" aria-label="Fullscreen" title="Fullscreen (Esc to exit)"><svg class="ic-expand" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.2 2H2v4.2M9.8 2H14v4.2M6.2 14H2V9.8M9.8 14H14V9.8"/></svg><svg class="ic-collapse" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6.2h4.2V2M14 6.2H9.8V2M2 9.8h4.2V14M14 9.8H9.8V14"/></svg></button><article><nav class="breadcrumb"><span class="bc-seg" data-title-zh="开始使用">Get started</span> <span class='bc-sep'>›</span> <span class="bc-seg" data-title-zh="第一步">First steps</span> <span class='bc-sep'>›</span> <span class="bc-seg bc-current" data-title-zh="常见问题">FAQ</span></nav><h1 id="常见问题">常见问题<a class="header-anchor" href="#常见问题">#</a></h1>
+<p>这页收集安装和日常使用中最常见的问题，每条都给出对应的命令解法。</p>
+<h2 id="端口-18100-被占用怎么办">端口 18100 被占用怎么办？<a class="header-anchor" href="#端口-18100-被占用怎么办">#</a></h2>
+<p>OpenProgram 只监听一个端口（API、WebSocket 和 web UI 同端口，默认 18100）。先看当前配置的端口，再改成空闲的：</p>
+<pre><code class="language-bash">openprogram<span class="w"> </span>ports<span class="w">                    </span><span class="c1"># 查看当前端口</span>
+openprogram<span class="w"> </span>ports<span class="w"> </span>--port<span class="w"> </span><span class="m">18110</span><span class="w">   </span><span class="c1"># 持久修改，下次启动生效</span>
+</code></pre>
+<p>只想改一次运行，用环境变量 <code>OPENPROGRAM_WEB_PORT</code> 覆盖。如果占端口的是残留进程，<code>lsof -ti:18100 | xargs kill</code> 释放后重启。</p>
+<h2 id="provider-没被检测到-no-provider-available">provider 没被检测到 / &quot;No provider available&quot;？<a class="header-anchor" href="#provider-没被检测到-no-provider-available">#</a></h2>
+<pre><code class="language-bash">openprogram<span class="w"> </span>providers<span class="w">            </span><span class="c1"># 列出已检测到的凭据</span>
+openprogram<span class="w"> </span>providers<span class="w"> </span>discover<span class="w">   </span><span class="c1"># 扫描外部来源（Claude Code / Codex / Gemini CLI 等）</span>
+openprogram<span class="w"> </span>providers<span class="w"> </span>doctor<span class="w">     </span><span class="c1"># 诊断凭据：过期、刷新、冷却、冲突</span>
+openprogram<span class="w"> </span>setup<span class="w">                </span><span class="c1"># 重新走一遍配置向导</span>
+</code></pre>
+<p>Provider API key 从 OpenProgram 的凭据库读取。如果 key 已经在环境变量里，先运行
+<code>openprogram providers discover</code>，再用
+<code>openprogram providers adopt env:&lt;变量名&gt;</code> 收编对应的 source。也可以用
+<code>openprogram providers login &lt;provider&gt; --api-key-stdin</code> 从 stdin 导入 key。
+只重启服务不会自动导入 shell 环境变量中的 key。</p>
+<h2 id="我的数据存在哪里">我的数据存在哪里？<a class="header-anchor" href="#我的数据存在哪里">#</a></h2>
+<p>默认全部在 <code>~/.openprogram/</code> 下：<code>config.json</code>（配置）、<code>sessions/</code>（会话）、<code>logs/</code>（日志）、<code>memory/</code>（记忆）、<code>usage.db</code>（token 用量）。使用 <code>--profile &lt;name&gt;</code> 时改存 <code>~/.openprogram-&lt;name&gt;/</code>。</p>
+<h2 id="怎么更新到最新版本">怎么更新到最新版本？<a class="header-anchor" href="#怎么更新到最新版本">#</a></h2>
+<p>stable installation 只变更到明确的已发布版本。0.7.0 是首个启用 updater 的版本，也是从 v0.6.6 进入 updater release 线的一次性过渡：macOS Desktop 用户手动安装 v0.7.0 DMG，原有 macOS/Linux CLI/server 用户重新运行一次公开 installer。当前 managed CLI/server release 还通过 PowerShell installer 支持 Windows x86_64。后续 Desktop release 在 Settings 中发现；managed CLI/server 和 source-checkout 用户都运行 <code>openprogram upgrade</code>，命令根据安装类型选择 release 路径或 Git 门禁路径。详见<a href="/docs/install/upgrade.zh.html">升级</a>。</p>
+<h2 id="openprogram-web-打开的页面加载不出来"><code>openprogram web</code> 打开的页面加载不出来？<a class="header-anchor" href="#openprogram-web-打开的页面加载不出来">#</a></h2>
+<p>打开的是 <strong>http://localhost:18100</strong>，Web UI 和 API 共用该端口。release wheel 已包含 Web export；如果缺失，重新安装同一个 release。在 source checkout 中，运行开发 installer 重新构建。</p>
+<h2 id="服务好像没起来-行为异常怎么排查">服务好像没起来 / 行为异常，怎么排查？<a class="header-anchor" href="#服务好像没起来-行为异常怎么排查">#</a></h2>
+<p>按这个顺序：</p>
+<pre><code class="language-bash">openprogram<span class="w"> </span>status<span class="w">     </span><span class="c1"># 服务是否在跑</span>
+openprogram<span class="w"> </span>restart<span class="w">    </span><span class="c1"># 重启</span>
+openprogram<span class="w"> </span>doctor<span class="w">     </span><span class="c1"># 健康检查</span>
+openprogram<span class="w"> </span>rescue<span class="w">     </span><span class="c1"># 诊断问题并打印修复命令</span>
+</code></pre>
+<h2 id="怎么看日志">怎么看日志？<a class="header-anchor" href="#怎么看日志">#</a></h2>
+<pre><code class="language-bash">openprogram<span class="w"> </span>logs<span class="w"> </span>list<span class="w">            </span><span class="c1"># 所有日志文件（大小、时间）</span>
+openprogram<span class="w"> </span>logs<span class="w"> </span>tail<span class="w">            </span><span class="c1"># 最后 50 行 worker 日志</span>
+openprogram<span class="w"> </span>logs<span class="w"> </span>tail<span class="w"> </span>-f<span class="w">         </span><span class="c1"># 持续跟踪</span>
+openprogram<span class="w"> </span>logs<span class="w"> </span>tail<span class="w"> </span>runtime<span class="w">    </span><span class="c1"># 指定日志：worker / runtime / ink</span>
+</code></pre>
+<h2 id="为什么-release-下载体积较大">为什么 release 下载体积较大？<a class="header-anchor" href="#为什么-release-下载体积较大">#</a></h2>
+<p>完整 release 已包含 managed Python 和 Playwright Chromium。不包含 PyTorch 或 EasyOCR。普通安装不会再单独下载这些产品组件。</p>
+<h2 id="可以安装-chrome-或-edge-浏览器扩展吗">可以安装 Chrome 或 Edge 浏览器扩展吗？<a class="header-anchor" href="#可以安装-chrome-或-edge-浏览器扩展吗">#</a></h2>
+<p>不可以。Chrome Web Store 与 Edge Add-ons 页面可以作为普通网页在内置浏览器中打开，但 OpenProgram 不增加扩展安装按钮，不下载 CRX，不从其他浏览器导入扩展，也不提供扩展管理页。应用使用标准 Electron/Chromium；Electron 只支持部分 Chrome Extensions API，也不以兼容任意 Chrome Web Store 扩展为目标。OpenProgram 不维护定制 Chromium/Electron 分支，也不为扩展兼容增加另一套浏览器运行时。release 内已有的 Playwright Chromium 只用于浏览器自动化后端，不承载 Desktop Browser Pane 或扩展。</p>
+<p>需要扩展 OpenProgram 本身时，使用 <a href="/docs/capabilities/plugins.zh.html">Plugins</a>、Skills、MCP servers、Programs 或 agent tools。这些能力扩展的是 OpenProgram，不是内嵌网页运行时。</p>
+<h2 id="已安装的-agent-program-没出现在界面里">已安装的 agent Program 没出现在界面里？<a class="header-anchor" href="#已安装的-agent-program-没出现在界面里">#</a></h2>
+<p>先用 <code>openprogram programs list</code> 查看注册状态，再重启 OpenProgram 或在 Programs 页面点 Refresh。如果某个 harness 没有列出入口，<code>OPENPROGRAM_DEBUG_REGISTRY=1 openprogram programs list</code> 会显示它没有加载的原因；目录契约见<a href="/docs/capabilities/installing-programs.zh.html">安装程序</a>。</p>
+<h2 id="同一个-provider-有多个账户或多个-key怎么切换">同一个 provider 有多个账户或多个 key，怎么切换？<a class="header-anchor" href="#同一个-provider-有多个账户或多个-key怎么切换">#</a></h2>
+<pre><code class="language-bash">openprogram<span class="w"> </span>providers<span class="w"> </span>login<span class="w"> </span>openai<span class="w"> </span>--account<span class="w"> </span>work<span class="w">   </span><span class="c1"># 添加第二个账户</span>
+openprogram<span class="w"> </span>providers<span class="w"> </span>use<span class="w"> </span>openai<span class="w"> </span>work<span class="w">               </span><span class="c1"># 切到 work 账户</span>
+openprogram<span class="w"> </span>providers<span class="w"> </span>list<span class="w">                          </span><span class="c1"># 查看各账户，激活的有标记</span>
+</code></pre>
+<h2 id="一台机器能同时跑两个-openprogram-吗">一台机器能同时跑两个 OpenProgram 吗？<a class="header-anchor" href="#一台机器能同时跑两个-openprogram-吗">#</a></h2>
+<p>能，用 profile 把状态目录和端口分开，见 <a href="/docs/install/profiles.zh.html">多实例与 profile</a>。</p>
+<h2 id="之前的对话怎么找回来">之前的对话怎么找回来？<a class="header-anchor" href="#之前的对话怎么找回来">#</a></h2>
+<pre><code class="language-bash">openprogram<span class="w"> </span>sessions<span class="w"> </span>list<span class="w">          </span><span class="c1"># 列出所有会话</span>
+openprogram<span class="w"> </span>--resume<span class="w"> </span>&lt;session_id&gt;<span class="w">  </span><span class="c1"># 在终端续上</span>
+</code></pre>
+<p>web 侧栏也能直接点开历史会话。</p>
+<div class="page-updated"><span data-i18n="updated">Last updated</span> · 2026-11-02</div><div class="prevnext"><a class="pn-link pn-prev" href="/docs/start/daily-use.html" data-href-en="/docs/start/daily-use.html" data-href-zh="/docs/start/daily-use.zh.html"><span class="pn-dir" data-i18n="prev">Previous</span><span class="pn-title" data-title-zh="日常操作">Daily use</span></a><a class="pn-link pn-next" href="/docs/install/install.html" data-href-en="/docs/install/install.html" data-href-zh="/docs/install/install.zh.html"><span class="pn-dir" data-i18n="next">Next</span><span class="pn-title" data-title-zh="安装">Installation</span></a></div></article></main>
+  <aside class="toc"><div class="toc-title" data-i18n="on_this_page">On this page</div>
+<ul class="toc-list">
+<li>
+<a class="lvl-2" href="#端口-18100-被占用怎么办">端口 18100 被占用怎么办？</a>
+</li>
+<li>
+<a class="lvl-2" href="#provider-没被检测到-no-provider-available">provider 没被检测到 / "No provider available"？</a>
+</li>
+<li>
+<a class="lvl-2" href="#我的数据存在哪里">我的数据存在哪里？</a>
+</li>
+<li>
+<a class="lvl-2" href="#怎么更新到最新版本">怎么更新到最新版本？</a>
+</li>
+<li>
+<a class="lvl-2" href="#openprogram-web-打开的页面加载不出来">openprogram web 打开的页面加载不出来？</a>
+</li>
+<li>
+<a class="lvl-2" href="#服务好像没起来-行为异常怎么排查">服务好像没起来 / 行为异常，怎么排查？</a>
+</li>
+<li>
+<a class="lvl-2" href="#怎么看日志">怎么看日志？</a>
+</li>
+<li>
+<a class="lvl-2" href="#为什么-release-下载体积较大">为什么 release 下载体积较大？</a>
+</li>
+<li>
+<a class="lvl-2" href="#可以安装-chrome-或-edge-浏览器扩展吗">可以安装 Chrome 或 Edge 浏览器扩展吗？</a>
+</li>
+<li>
+<a class="lvl-2" href="#已安装的-agent-program-没出现在界面里">已安装的 agent Program 没出现在界面里？</a>
+</li>
+<li>
+<a class="lvl-2" href="#同一个-provider-有多个账户或多个-key怎么切换">同一个 provider 有多个账户或多个 key，怎么切换？</a>
+</li>
+<li>
+<a class="lvl-2" href="#一台机器能同时跑两个-openprogram-吗">一台机器能同时跑两个 OpenProgram 吗？</a>
+</li>
+<li>
+<a class="lvl-2" href="#之前的对话怎么找回来">之前的对话怎么找回来？</a>
+</li>
+</ul></aside>
+</div>
+
+<div class="search-overlay">
+  <div class="search-box">
+    <input type="text" data-i18n-ph="search_ph" placeholder="Search titles or text…" autocomplete="off" spellcheck="false">
+    <div class="search-results"></div>
+  </div>
+</div>
+
+<script src="/docs/assets/site.js?v=6520ba46"></script>
+</body>
+</html>

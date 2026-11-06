@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en" data-base="/docs/" data-page-lang="en" data-build="1793956776" data-alt-lang-url="/docs/reference/api/runtime.zh.html">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Runtime API · OpenProgram Docs</title>
+<meta name="description" content="Runtime # Source: openprogram/runtime/agent/runtime.py The LLM runtime. Wraps an LLM provider, automatically computes context from the session DAG, calls the">
+<link rel="canonical" href="https://openprogram.io/docs/reference/api/runtime.html">
+<link rel="alternate" type="text/markdown" href="https://openprogram.io/docs/reference/api/runtime.html.md">
+<link rel="describedby" href="https://openprogram.io/llms.txt">
+<link rel="alternate" hreflang="en" href="https://openprogram.io/docs/reference/api/runtime.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://openprogram.io/docs/reference/api/runtime.zh.html">
+<link rel="alternate" hreflang="x-default" href="https://openprogram.io/docs/reference/api/runtime.html">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"OpenProgram Docs","item":"https://openprogram.io/docs/"},{"@type":"ListItem","position":2,"name":"Runtime API"}]}</script>
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="OpenProgram">
+<meta property="og:url" content="https://openprogram.io/docs/reference/api/runtime.html">
+<meta property="og:title" content="Runtime API · OpenProgram Docs">
+<meta property="og:description" content="Runtime # Source: openprogram/runtime/agent/runtime.py The LLM runtime. Wraps an LLM provider, automatically computes context from the session DAG, calls the">
+<meta property="og:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:secure_url" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Runtime API · OpenProgram Docs">
+<meta name="twitter:description" content="Runtime # Source: openprogram/runtime/agent/runtime.py The LLM runtime. Wraps an LLM provider, automatically computes context from the session DAG, calls the">
+<meta name="twitter:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta name="twitter:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/docs/assets/mark.svg">
+<link rel="stylesheet" href="/docs/assets/site.css?v=6520ba46">
+<link rel="stylesheet" href="/docs/assets/pygments-light.css" media="(prefers-color-scheme: light)" id="pyg-light">
+<link rel="stylesheet" href="/docs/assets/pygments-dark.css" media="(prefers-color-scheme: dark)" id="pyg-dark">
+<script src="/docs/assets/theme.js?v=6520ba46"></script>
+
+</head>
+<body>
+<header class="topbar">
+  <button class="icon hamburger" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2.5 4.5h11M2.5 8h11M2.5 11.5h11"/></svg></button>
+  <a class="brand" href="/docs/index.html"><img class="mark" src="/docs/assets/mark.svg" alt="">OpenProgram Docs</a>
+  <div class="spacer"></div>
+  <button class="search-trigger" aria-label="Search">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14"/></svg><span class="label" data-i18n="search">Search docs</span><kbd>⌘K</kbd>
+  </button>
+  <div class="lang-wrap">
+    <button class="icon lang-trigger" id="lang-toggle" aria-haspopup="true" aria-expanded="false" aria-label="Language">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="6.2"/><path d="M1.8 8h12.4" stroke-linecap="round"/><ellipse cx="8" cy="8" rx="2.8" ry="6.2"/></svg><span class="lang-label">EN</span><svg class="chev" width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+    </button>
+    <div class="lang-menu" id="lang-menu" role="menu">
+      <button class="lang-opt" data-lang="en" role="menuitem"><span>English</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="lang-opt" data-lang="zh" role="menuitem"><span>简体中文</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+  <div class="theme-wrap">
+    <button class="icon" id="theme-toggle" aria-label="Theme" aria-haspopup="menu" aria-controls="theme-menu" aria-expanded="false"><svg class="ic-system" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="2.5" width="13" height="9" rx="1.5"/><path d="M8 11.5V14M5.5 14h5"/></svg><svg class="ic-moon" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M13.5 9.5A6 6 0 1 1 6.5 2.5a5 5 0 0 0 7 7z"/></svg><svg class="ic-sun" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="3.2"/><path d="M8 1.2v1.8M8 13v1.8M1.2 8H3M13 8h1.8M3.2 3.2l1.3 1.3M11.5 11.5l1.3 1.3M12.8 3.2l-1.3 1.3M4.5 11.5l-1.3 1.3"/></svg></button>
+    <div class="theme-menu" id="theme-menu" role="menu" aria-labelledby="theme-toggle">
+      <button class="theme-opt" data-theme-choice="system" role="menuitemradio" aria-checked="true"><span>Follow system</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="light" role="menuitemradio" aria-checked="false"><span>Light</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="dark" role="menuitemradio" aria-checked="false"><span>Dark</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+</header>
+<nav class="tabbar"><a class="tablink" href="/docs/README.html" data-title-zh="开始使用" data-href-en="/docs/README.html" data-href-zh="/docs/README.zh.html">Get started</a><a class="tablink" href="/docs/install/install.html" data-title-zh="安装" data-href-en="/docs/install/install.html" data-href-zh="/docs/install/install.zh.html">Install</a><a class="tablink" href="/docs/capabilities/README.html" data-title-zh="能力" data-href-en="/docs/capabilities/README.html" data-href-zh="/docs/capabilities/README.zh.html">Capabilities</a><a class="tablink" href="/docs/interfaces/README.html" data-title-zh="界面" data-href-en="/docs/interfaces/README.html" data-href-zh="/docs/interfaces/README.zh.html">Interfaces</a><a class="tablink" href="/docs/models/README.html" data-title-zh="模型" data-href-en="/docs/models/README.html" data-href-zh="/docs/models/README.zh.html">Models</a><a class="tablink" href="/docs/integrations/anthropic.html" data-title-zh="集成" data-href-en="/docs/integrations/anthropic.html" data-href-zh="/docs/integrations/anthropic.zh.html">Integrations</a><a class="tablink" href="/docs/server/README.html" data-title-zh="服务与运维" data-href-en="/docs/server/README.html" data-href-zh="/docs/server/README.zh.html">Server &amp; Ops</a><a class="tablink active" href="/docs/reference/README.html" data-title-zh="参考" data-href-en="/docs/reference/README.html" data-href-zh="/docs/reference/README.zh.html">Reference</a><a class="tablink" href="/docs/reference/design/README.html" data-title-zh="设计" data-href-en="/docs/reference/design/README.html" data-href-zh="/docs/reference/design/README.zh.html">Design</a></nav>
+
+<div class="scrim"></div>
+<div class="layout">
+  <nav class="sidebar" aria-label="Documentation">
+    <input class="nav-filter" type="text" data-i18n-ph="nav_filter"
+           aria-label="Filter docs" placeholder="Filter docs…" autocomplete="off" spellcheck="false">
+    <div class="nav-tree"><div class="nav-sec"><div class="nav-sec-title" data-title-zh="概览">Overview</div><a class="navlink" href="/docs/reference/README.html" data-title-zh="概览" data-href-en="/docs/reference/README.html" data-href-zh="/docs/reference/README.zh.html">Overview</a></div>
+<div class="nav-sec"><div class="nav-sec-title">API</div><a class="navlink" href="/docs/reference/API.html" data-title-zh="API 参考" data-href-en="/docs/reference/API.html" data-href-zh="/docs/reference/API.zh.html">API reference</a>
+<a class="navlink active" href="/docs/reference/api/runtime.html" data-title-zh="运行时 API" data-href-en="/docs/reference/api/runtime.html" data-href-zh="/docs/reference/api/runtime.zh.html">Runtime API</a>
+<a class="navlink" href="/docs/reference/api/providers.html" data-title-zh="模型服务 API" data-href-en="/docs/reference/api/providers.html" data-href-zh="/docs/reference/api/providers.zh.html">Provider API</a>
+<a class="navlink" href="/docs/reference/api/agent.html" data-title-zh="函数 API" data-href-en="/docs/reference/api/agent.html" data-href-zh="/docs/reference/api/agent.zh.html">Function API</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="CLI 与配置">CLI and configuration</div><a class="navlink" href="/docs/reference/cli.html" data-title-zh="CLI 参考" data-href-en="/docs/reference/cli.html" data-href-zh="/docs/reference/cli.zh.html">CLI reference</a>
+<a class="navlink" href="/docs/reference/config.html" data-title-zh="配置项参考" data-href-en="/docs/reference/config.html" data-href-zh="/docs/reference/config.zh.html">Configuration reference</a>
+<a class="navlink" href="/docs/reference/diagnostics.html" data-title-zh="诊断" data-href-en="/docs/reference/diagnostics.html" data-href-zh="/docs/reference/diagnostics.zh.html">Diagnostics</a>
+<a class="navlink" href="/docs/reference/session-export.html" data-title-zh="会话导出" data-href-en="/docs/reference/session-export.html" data-href-zh="/docs/reference/session-export.zh.html">Session export</a>
+<a class="navlink" href="/docs/reference/output-styles.html" data-title-zh="输出风格" data-href-en="/docs/reference/output-styles.html" data-href-zh="/docs/reference/output-styles.zh.html">Output styles</a>
+<a class="navlink" href="/docs/reference/config-keys.html" data-title-zh="配置键" data-href-en="/docs/reference/config-keys.html" data-href-zh="/docs/reference/config-keys.zh.html">Config keys</a>
+<a class="navlink" href="/docs/reference/provider-registry.html" data-title-zh="模型服务清单" data-href-en="/docs/reference/provider-registry.html" data-href-zh="/docs/reference/provider-registry.zh.html">Provider registry</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="对比">Comparisons</div><a class="navlink" href="/docs/reference/comparisons/ai-agent-frameworks.html" data-title-zh="框架对比" data-href-en="/docs/reference/comparisons/ai-agent-frameworks.html" data-href-zh="/docs/reference/comparisons/ai-agent-frameworks.zh.html">Framework comparison</a>
+<a class="navlink" href="/docs/reference/comparisons/related-projects.html" data-title-zh="相关项目" data-href-en="/docs/reference/comparisons/related-projects.html" data-href-zh="/docs/reference/comparisons/related-projects.zh.html">Related projects</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="CLI 命令">CLI commands</div><a class="navlink" href="/docs/reference/cli/README.html" data-title-zh="全局参数" data-href-en="/docs/reference/cli/README.html" data-href-zh="/docs/reference/cli/README.zh.html">Global flags</a>
+<a class="navlink" href="/docs/reference/cli/acp.html" data-title-zh="编辑器协议" data-href-en="/docs/reference/cli/acp.html" data-href-zh="/docs/reference/cli/acp.zh.html">acp</a>
+<a class="navlink" href="/docs/reference/cli/agents.html" data-title-zh="Agent 管理" data-href-en="/docs/reference/cli/agents.html" data-href-zh="/docs/reference/cli/agents.zh.html">agents</a>
+<a class="navlink" href="/docs/reference/cli/backup.html" data-title-zh="备份" data-href-en="/docs/reference/cli/backup.html" data-href-zh="/docs/reference/cli/backup.zh.html">backup</a>
+<a class="navlink" href="/docs/reference/cli/browser.html" data-title-zh="浏览器" data-href-en="/docs/reference/cli/browser.html" data-href-zh="/docs/reference/cli/browser.zh.html">browser</a>
+<a class="navlink" href="/docs/reference/cli/channels.html" data-title-zh="渠道" data-href-en="/docs/reference/cli/channels.html" data-href-zh="/docs/reference/cli/channels.zh.html">channels</a>
+<a class="navlink" href="/docs/reference/cli/chat.html" data-title-zh="聊天" data-href-en="/docs/reference/cli/chat.html" data-href-zh="/docs/reference/cli/chat.zh.html">chat</a>
+<a class="navlink" href="/docs/reference/cli/completion.html" data-title-zh="命令补全" data-href-en="/docs/reference/cli/completion.html" data-href-zh="/docs/reference/cli/completion.zh.html">completion</a>
+<a class="navlink" href="/docs/reference/cli/config.html" data-title-zh="设置" data-href-en="/docs/reference/cli/config.html" data-href-zh="/docs/reference/cli/config.zh.html">config</a>
+<a class="navlink" href="/docs/reference/cli/cron-worker.html" data-title-zh="定时任务" data-href-en="/docs/reference/cli/cron-worker.html" data-href-zh="/docs/reference/cli/cron-worker.zh.html">cron-worker</a>
+<a class="navlink" href="/docs/reference/cli/dev.html" data-title-zh="开发版" data-href-en="/docs/reference/cli/dev.html" data-href-zh="/docs/reference/cli/dev.zh.html">dev</a>
+<a class="navlink" href="/docs/reference/cli/diagnostics.html" data-title-zh="诊断包" data-href-en="/docs/reference/cli/diagnostics.html" data-href-zh="/docs/reference/cli/diagnostics.zh.html">diagnostics</a>
+<a class="navlink" href="/docs/reference/cli/doctor.html" data-title-zh="环境诊断" data-href-en="/docs/reference/cli/doctor.html" data-href-zh="/docs/reference/cli/doctor.zh.html">doctor</a>
+<a class="navlink" href="/docs/reference/cli/environments.html" data-title-zh="运行环境" data-href-en="/docs/reference/cli/environments.html" data-href-zh="/docs/reference/cli/environments.zh.html">environments</a>
+<a class="navlink" href="/docs/reference/cli/execution.html" data-title-zh="执行控制" data-href-en="/docs/reference/cli/execution.html" data-href-zh="/docs/reference/cli/execution.zh.html">execution</a>
+<a class="navlink" href="/docs/reference/cli/jobs.html" data-title-zh="后台任务" data-href-en="/docs/reference/cli/jobs.html" data-href-zh="/docs/reference/cli/jobs.zh.html">jobs</a>
+<a class="navlink" href="/docs/reference/cli/logs.html" data-title-zh="日志" data-href-en="/docs/reference/cli/logs.html" data-href-zh="/docs/reference/cli/logs.zh.html">logs</a>
+<a class="navlink" href="/docs/reference/cli/mcp.html" data-title-zh="MCP 服务器" data-href-en="/docs/reference/cli/mcp.html" data-href-zh="/docs/reference/cli/mcp.zh.html">mcp</a>
+<a class="navlink" href="/docs/reference/cli/memory.html" data-title-zh="记忆" data-href-en="/docs/reference/cli/memory.html" data-href-zh="/docs/reference/cli/memory.zh.html">memory</a>
+<a class="navlink" href="/docs/reference/cli/permissions.html" data-title-zh="CLI：权限规则" data-href-en="/docs/reference/cli/permissions.html" data-href-zh="/docs/reference/cli/permissions.zh.html">permissions</a>
+<a class="navlink" href="/docs/reference/cli/plugins.html" data-title-zh="插件" data-href-en="/docs/reference/cli/plugins.html" data-href-zh="/docs/reference/cli/plugins.zh.html">plugins</a>
+<a class="navlink" href="/docs/reference/cli/ports.html" data-title-zh="端口" data-href-en="/docs/reference/cli/ports.html" data-href-zh="/docs/reference/cli/ports.zh.html">ports</a>
+<a class="navlink" href="/docs/reference/cli/programs.html" data-title-zh="程序" data-href-en="/docs/reference/cli/programs.html" data-href-zh="/docs/reference/cli/programs.zh.html">programs</a>
+<a class="navlink" href="/docs/reference/cli/providers.html" data-title-zh="模型服务" data-href-en="/docs/reference/cli/providers.html" data-href-zh="/docs/reference/cli/providers.zh.html">providers</a>
+<a class="navlink" href="/docs/reference/cli/recordings.html" data-title-zh="录制" data-href-en="/docs/reference/cli/recordings.html" data-href-zh="/docs/reference/cli/recordings.zh.html">recordings</a>
+<a class="navlink" href="/docs/reference/cli/rescue.html" data-title-zh="恢复" data-href-en="/docs/reference/cli/rescue.html" data-href-zh="/docs/reference/cli/rescue.zh.html">rescue</a>
+<a class="navlink" href="/docs/reference/cli/restart.html" data-title-zh="重启" data-href-en="/docs/reference/cli/restart.html" data-href-zh="/docs/reference/cli/restart.zh.html">restart</a>
+<a class="navlink" href="/docs/reference/cli/scheduler-worker.html" data-title-zh="任务调度" data-href-en="/docs/reference/cli/scheduler-worker.html" data-href-zh="/docs/reference/cli/scheduler-worker.zh.html">scheduler-worker</a>
+<a class="navlink" href="/docs/reference/cli/secrets.html" data-title-zh="凭据" data-href-en="/docs/reference/cli/secrets.html" data-href-zh="/docs/reference/cli/secrets.zh.html">secrets</a>
+<a class="navlink" href="/docs/reference/cli/self-update.html" data-title-zh="应用更新" data-href-en="/docs/reference/cli/self-update.html" data-href-zh="/docs/reference/cli/self-update.zh.html">self-update</a>
+<a class="navlink" href="/docs/reference/cli/sessions.html" data-title-zh="会话" data-href-en="/docs/reference/cli/sessions.html" data-href-zh="/docs/reference/cli/sessions.zh.html">sessions</a>
+<a class="navlink" href="/docs/reference/cli/setup.html" data-title-zh="初始设置" data-href-en="/docs/reference/cli/setup.html" data-href-zh="/docs/reference/cli/setup.zh.html">setup</a>
+<a class="navlink" href="/docs/reference/cli/skills.html" data-title-zh="技能" data-href-en="/docs/reference/cli/skills.html" data-href-zh="/docs/reference/cli/skills.zh.html">skills</a>
+<a class="navlink" href="/docs/reference/cli/status.html" data-title-zh="运行状态" data-href-en="/docs/reference/cli/status.html" data-href-zh="/docs/reference/cli/status.zh.html">status</a>
+<a class="navlink" href="/docs/reference/cli/stop.html" data-title-zh="停止" data-href-en="/docs/reference/cli/stop.html" data-href-zh="/docs/reference/cli/stop.zh.html">stop</a>
+<a class="navlink" href="/docs/reference/cli/subagent.html" data-title-zh="子 Agent" data-href-en="/docs/reference/cli/subagent.html" data-href-zh="/docs/reference/cli/subagent.zh.html">subagent</a>
+<a class="navlink" href="/docs/reference/cli/trash.html" data-title-zh="删除恢复" data-href-en="/docs/reference/cli/trash.html" data-href-zh="/docs/reference/cli/trash.zh.html">trash</a>
+<a class="navlink" href="/docs/reference/cli/tui.html" data-title-zh="终端界面" data-href-en="/docs/reference/cli/tui.html" data-href-zh="/docs/reference/cli/tui.zh.html">tui</a>
+<a class="navlink" href="/docs/reference/cli/update.html" data-title-zh="更新检查" data-href-en="/docs/reference/cli/update.html" data-href-zh="/docs/reference/cli/update.zh.html">update</a>
+<a class="navlink" href="/docs/reference/cli/upgrade.html" data-title-zh="版本升级" data-href-en="/docs/reference/cli/upgrade.html" data-href-zh="/docs/reference/cli/upgrade.zh.html">upgrade</a>
+<a class="navlink" href="/docs/reference/cli/web.html" data-title-zh="网页界面" data-href-en="/docs/reference/cli/web.html" data-href-zh="/docs/reference/cli/web.zh.html">web</a>
+<a class="navlink" href="/docs/reference/cli/worker.html" data-title-zh="后台服务" data-href-en="/docs/reference/cli/worker.html" data-href-zh="/docs/reference/cli/worker.zh.html">worker</a></div></div>
+  </nav>
+  <main class="content"><button class="fs-toggle" aria-label="Fullscreen" title="Fullscreen (Esc to exit)"><svg class="ic-expand" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.2 2H2v4.2M9.8 2H14v4.2M6.2 14H2V9.8M9.8 14H14V9.8"/></svg><svg class="ic-collapse" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6.2h4.2V2M14 6.2H9.8V2M2 9.8h4.2V14M14 9.8H9.8V14"/></svg></button><article><nav class="breadcrumb"><span class="bc-seg" data-title-zh="参考">Reference</span> <span class='bc-sep'>›</span> <span class="bc-seg">API</span> <span class='bc-sep'>›</span> <span class="bc-seg bc-current" data-title-zh="运行时 API">Runtime API</span></nav><h1 id="runtime">Runtime<a class="header-anchor" href="#runtime">#</a></h1>
+<blockquote>
+<p>Source: <a href="https://github.com/FuzzyKuji/OpenProgram/blob/main/openprogram/runtime/agent/runtime.py"><code>openprogram/runtime/agent/runtime.py</code></a></p>
+</blockquote>
+<p>The LLM runtime. Wraps an LLM provider, automatically computes context from the session DAG, calls the LLM, and writes the reply back to the DAG.</p>
+<hr />
+<h2 id="class-runtime">Class: <code>Runtime</code><a class="header-anchor" href="#class-runtime">#</a></h2>
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">Runtime</span><span class="p">(</span><span class="n">call</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;default&quot;</span><span class="p">,</span> <span class="n">max_retries</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">api_key</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">skills</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</code></pre>
+<h3 id="constructor-parameters">Constructor parameters<a class="header-anchor" href="#constructor-parameters">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>call</code></td>
+<td><code>Callable | None</code></td>
+<td><code>None</code></td>
+<td>A user-supplied LLM function. Signature: <code>fn(content: list[dict], model: str, response_format: dict) -&gt; str</code>. Internally it is wrapped into the standard provider path via a <code>CallableModel</code>, so DAG recording and history rendering work the same as with a real provider. If neither <code>call</code> nor a <code>&quot;provider:model_id&quot;</code> model is given, subclass and override <code>_call()</code></td>
+</tr>
+<tr>
+<td><code>model</code></td>
+<td><code>str</code></td>
+<td><code>&quot;default&quot;</code></td>
+<td>The default model. Two forms: <code>&quot;provider:model_id&quot;</code> (e.g. <code>&quot;anthropic:claude-sonnet-4-6&quot;</code>) resolves through <code>openprogram.models.providers</code> and streams via the provider layer; any other string is only meaningful together with <code>call=</code> or a subclass. Unknown <code>&quot;provider:model_id&quot;</code> values raise <code>ValueError</code></td>
+</tr>
+<tr>
+<td><code>max_retries</code></td>
+<td><code>int | None</code></td>
+<td><code>None</code></td>
+<td>Maximum number of exec() attempts (including the first call, and must be &gt;= 1). <code>None</code> = read the environment variable <code>OPENPROGRAM_MAX_RETRIES</code>, defaulting to <code>6</code> if unset</td>
+</tr>
+<tr>
+<td><code>api_key</code></td>
+<td><code>str | None</code></td>
+<td><code>None</code></td>
+<td>API key for the provider path. <code>None</code> = resolved from the credential store (<code>openprogram providers login</code>)</td>
+</tr>
+<tr>
+<td><code>skills</code></td>
+<td><code>bool | list[str] | None</code></td>
+<td><code>None</code></td>
+<td>Skill discovery for the system prompt. <code>None</code> / <code>False</code> = disabled; <code>True</code> = probe the default skill directories (user + repo); <code>list[str]</code> = explicit directory list. When enabled, an <code>&lt;available_skills&gt;</code> block is appended to the system prompt on every <code>exec()</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="attributes">Attributes<a class="header-anchor" href="#attributes">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>model</code></td>
+<td><code>str</code></td>
+<td>The default model name</td>
+</tr>
+<tr>
+<td><code>max_retries</code></td>
+<td><code>int</code></td>
+<td>The resolved retry budget</td>
+</tr>
+<tr>
+<td><code>system</code></td>
+<td><code>str</code></td>
+<td>Assignable system prompt used by <code>exec()</code> on the provider path (the <code>method_options[&quot;method&quot;][&quot;system&quot;]</code> sets it for the duration of a call)</td>
+</tr>
+<tr>
+<td><code>thinking_level</code></td>
+<td><code>str</code></td>
+<td>Reasoning-effort knob: <code>&quot;off&quot;</code> (default) / <code>&quot;low&quot;</code> / <code>&quot;medium&quot;</code> / <code>&quot;high&quot;</code> / <code>&quot;xhigh&quot;</code>; passed through to the provider</td>
+</tr>
+<tr>
+<td><code>session_id</code></td>
+<td><code>str</code></td>
+<td>Stable id across successive <code>exec()</code> calls (<code>&quot;op-&lt;hex&gt;&quot;</code>); providers use it as the prompt-cache key</td>
+</tr>
+<tr>
+<td><code>on_stream</code></td>
+<td><code>Callable | None</code></td>
+<td>Optional callback <code>fn(event_dict)</code> for streaming events (text / thinking / tool_use / tool_result)</td>
+</tr>
+<tr>
+<td><code>last_usage</code></td>
+<td><code>dict | None</code></td>
+<td>Token usage of the last call: <code>{input_tokens, output_tokens, total_tokens, cache_read, cache_create, ...}</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="methods">Methods<a class="header-anchor" href="#methods">#</a></h2>
+<h3 id="exec"><code>exec()</code><a class="header-anchor" href="#exec">#</a></h3>
+<pre><code class="language-python"><span class="n">Runtime</span><span class="o">.</span><span class="n">exec</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">response_format</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+             <span class="n">tools</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">toolset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tools_source</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tools_allow</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+             <span class="n">tools_deny</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tool_choice</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span> <span class="n">parallel_tool_calls</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+             <span class="n">max_iterations</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout_s</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">on_retry</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+             <span class="n">web_search</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">stream_fn</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span>
+</code></pre>
+<p>Calls the LLM, with context computed automatically from the session DAG.</p>
+<p><strong>Inside an Agent method or managed function scope:</strong></p>
+<ol>
+<li>Starting from the current function's DAG node, <code>render_context</code> uses <code>expose</code> / <code>render_range</code> to determine which historical nodes to read this time</li>
+<li><code>render_dag_messages</code> renders those nodes into messages</li>
+<li><code>_call()</code> is invoked to send the request</li>
+<li>The reply is written into the <code>llm</code> node that <code>exec()</code> opened at the start of the call</li>
+</ol>
+<p><strong>When called with no DAG store installed</strong> (standalone scripts, no dispatcher): <code>content</code> is wrapped into a single user message and sent as a single-turn call; nothing is recorded.</p>
+<p>An Agent method or function scope can call <code>exec()</code> multiple times; each call is a new <code>llm</code> node on the DAG.</p>
+<h4 id="parameters">Parameters<a class="header-anchor" href="#parameters">#</a></h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>content</code></td>
+<td><code>list[dict] | str</code></td>
+<td><em>(required)</em></td>
+<td>List of content blocks (see format below). A plain string is wrapped into one text block</td>
+</tr>
+<tr>
+<td><code>context</code></td>
+<td><code>str | None</code></td>
+<td><code>None</code></td>
+<td>Legacy parameter, ignored — the provider path builds history from the DAG</td>
+</tr>
+<tr>
+<td><code>response_format</code></td>
+<td><code>dict | JsonSchemaOutput | None</code></td>
+<td><code>None</code></td>
+<td>A bare JSON Schema or normalized <code>JsonSchemaOutput</code> envelope. Verified provider/model combinations use their registered native mapping; otherwise <code>fallback=&quot;auto&quot;</code> may use the verified hidden strict-tool path, while prompt fallback requires explicit <code>fallback=&quot;prompt&quot;</code>. Unsupported or lossy combinations fail closed. The terminal value is parsed and validated locally against the original schema and returned as a Python JSON value. <code>max_validation_retries</code> is <code>0</code>, <code>1</code>, or <code>2</code> (default <code>2</code>); validation repair and truncated generation share this allowance. Also forwarded to <code>_call()</code> for subclasses</td>
+</tr>
+<tr>
+<td><code>model</code></td>
+<td><code>str | None</code></td>
+<td><code>None</code></td>
+<td>Override the default model</td>
+</tr>
+<tr>
+<td><code>tools</code></td>
+<td><code>list | None</code></td>
+<td><code>None</code></td>
+<td>The tools available to the LLM for this call. Entries may be explicitly registered Agent methods, <code>{&quot;spec&quot;:..., &quot;execute&quot;:...}</code> dicts, or objects with <code>.spec</code> / <code>.execute</code>. If set, the tool loop runs until the model returns plain text. <strong>Default (<code>None</code>) is not &quot;no tools&quot;</strong>: the call gets the full registered toolset; pass <code>toolset=&quot;none&quot;</code> for a reasoning-only call, or <code>tools=[]</code> for an explicit empty list</td>
+</tr>
+<tr>
+<td><code>toolset</code> / <code>tools_source</code> / <code>tools_allow</code> / <code>tools_deny</code></td>
+<td>—</td>
+<td><code>None</code></td>
+<td>Toolset preset and policy filtering: <code>toolset</code> names a preset (<code>&quot;full&quot;</code> is the implicit default, <code>&quot;none&quot;</code> opts out), <code>tools_source</code> filters per channel source, <code>tools_allow</code> / <code>tools_deny</code> are name allow/deny lists</td>
+</tr>
+<tr>
+<td><code>tool_choice</code></td>
+<td><code>str | dict</code></td>
+<td><code>&quot;auto&quot;</code></td>
+<td><code>&quot;auto&quot;</code> / <code>&quot;required&quot;</code> / <code>&quot;none&quot;</code> / <code>{&quot;type&quot;:&quot;function&quot;,&quot;name&quot;:&quot;X&quot;}</code> to force a specific tool. Passed through to the provider (OpenAI / Anthropic / Gemini / Bedrock each map it to their own protocol form)</td>
+</tr>
+<tr>
+<td><code>parallel_tool_calls</code></td>
+<td><code>bool</code></td>
+<td><code>True</code></td>
+<td>Allow multiple tool calls in a single turn; <code>False</code> is passed through to providers that support the switch</td>
+</tr>
+<tr>
+<td><code>max_iterations</code></td>
+<td><code>int</code></td>
+<td><code>20</code></td>
+<td>Upper bound on tool-loop iterations (one iteration = one model call plus its tool execution). The effective value is <code>max(1, max_iterations)</code>. Chat turns pass no cap. This default of 20 only applies to <code>runtime.exec</code></td>
+</tr>
+<tr>
+<td><code>choices</code></td>
+<td><code>dict | list | None</code></td>
+<td><code>None</code></td>
+<td>If set, constrains the <strong>end</strong> of the turn: after the model finishes the full turn, its final reply must pick one of <code>choices</code>; <code>exec</code> parses and returns the result of that choice. See <a href="/docs/capabilities/agentic-programming/choosing-the-next-step/next-step-decision.html">next-step-decision</a> for details</td>
+</tr>
+<tr>
+<td><code>timeout_s</code></td>
+<td><code>float | None</code></td>
+<td><code>None</code></td>
+<td>The wall-clock time budget for the entire <code>exec()</code> (including all retry sleeps); on timeout, raises <code>LLMError</code> (<code>reason=TIMEOUT</code>, <code>retryable=False</code>). <code>None</code> = fall back to the <code>OPENPROGRAM_EXEC_TIMEOUT_S</code> environment variable (unset or <code>0</code> = unbounded)</td>
+</tr>
+<tr>
+<td><code>on_retry</code></td>
+<td><code>Callable | None</code></td>
+<td><code>None</code></td>
+<td>An observation callback invoked before each backoff sleep (once per failed attempt that has a retry queued), receiving a <code>RetryInfo</code>; not fired for the terminal failure. Exceptions raised inside the callback are swallowed</td>
+</tr>
+<tr>
+<td><code>web_search</code></td>
+<td><code>bool</code></td>
+<td><code>False</code></td>
+<td>Enable the provider's native web-search tool for this call, where supported</td>
+</tr>
+<tr>
+<td><code>stream_fn</code></td>
+<td>—</td>
+<td><code>None</code></td>
+<td>Per-call stream-function override (used by the dispatcher and tests to inject a fake or pre-built stream); <code>None</code> = the real provider</td>
+</tr>
+</tbody>
+</table>
+<h4 id="content-block-format">Content block format<a class="header-anchor" href="#content-block-format">#</a></h4>
+<pre><code class="language-python"><span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span>  <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;Find the login button.&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;image&quot;</span><span class="p">,</span> <span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="s2">&quot;screenshot.png&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;image&quot;</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;base64&gt;&quot;</span><span class="p">,</span> <span class="s2">&quot;mime_type&quot;</span><span class="p">:</span> <span class="s2">&quot;image/png&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;video&quot;</span><span class="p">,</span> <span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="s2">&quot;clip.mp4&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;audio&quot;</span><span class="p">,</span> <span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="s2">&quot;recording.wav&quot;</span><span class="p">}</span>
+</code></pre>
+<p>Media blocks take either a <code>path</code> (read and base64-encoded automatically, mime type guessed from the extension) or inline <code>data</code> + <code>mime_type</code>. A text block may carry <code>&quot;role&quot;: &quot;system&quot;</code> to contribute to the system prompt, and text/image blocks accept <code>cache_control</code> for provider prompt caching. Unknown block types are skipped silently.</p>
+<h4 id="return-value">Return value<a class="header-anchor" href="#return-value">#</a></h4>
+<p>With <code>response_format=None</code>, returns the LLM reply as <code>str</code>. With a structured
+<code>response_format</code>, returns the locally validated Python JSON value (<code>dict</code>,
+<code>list</code>, scalar, or <code>None</code>). With <code>choices</code>, returns the parsed decision result
+(the return value of the selected function, or the selected value itself).</p>
+<h4 id="exceptions">Exceptions<a class="header-anchor" href="#exceptions">#</a></h4>
+<ul>
+<li><code>RuntimeError</code> — the runtime is closed (<code>close()</code> was called)</li>
+<li><code>TypeError</code> / <code>NotImplementedError</code> — raised immediately, never retried (programming errors: wrong call signature, no provider configured)</li>
+<li><code>LLMError</code> — raised when retries are exhausted or a non-retryable error is hit; structured fields include <code>reason</code> / <code>retryable</code> / <code>http_status</code> / <code>retry_after_s</code> / <code>attempts</code> / <code>elapsed_s</code> / <code>provider</code> / <code>model</code>, etc.</li>
+<li><code>StructuredOutputSchemaError</code> — invalid public schema or envelope; stable <code>code=&quot;invalid_schema&quot;</code>.</li>
+<li><code>StructuredOutputUnsupportedError</code> — no verified lossless provider/fallback contract; stable <code>code=&quot;unsupported&quot;</code>.</li>
+<li><code>StructuredOutputValidationError</code> — invalid JSON, schema mismatch, or hidden-submit contract failure; stable codes are <code>invalid_json</code>, <code>validation_failed</code>, <code>missing_submission</code>, and <code>mixed_submission</code>.</li>
+<li><code>StructuredOutputGenerationError</code> — refusal or incomplete provider terminal; stable codes are <code>refusal</code> and <code>incomplete</code>.</li>
+</ul>
+<p>All structured-output errors expose the stable <code>.code</code> and bounded <code>.issues</code>
+fields. Provider candidate text is not part of the public diagnostic contract.</p>
+<hr />
+<h3 id="async_exec"><code>async_exec()</code><a class="header-anchor" href="#async_exec">#</a></h3>
+<pre><code class="language-python"><span class="k">await</span> <span class="n">Runtime</span><span class="o">.</span><span class="n">async_exec</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">response_format</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                         <span class="n">timeout_s</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">on_retry</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tools</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">toolset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                         <span class="n">max_iterations</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span>
+</code></pre>
+<p>The async version of <code>exec()</code>. It has the same <code>response_format=None</code> text
+return and structured Python JSON return/error contract. Internally it calls
+<code>_async_call()</code>; a <code>call=</code> function may be synchronous or asynchronous, and the
+default provider path uses the same AgentSession structured lifecycle. Same
+<code>timeout_s</code> / <code>on_retry</code> semantics as <code>exec()</code>; retries sleep with
+<code>asyncio.sleep</code>, so external cancellation works. It accepts the synchronous tool-loop options, including tools, toolset, max_iterations, and tool authorization filters.</p>
+<hr />
+<h3 id="_call"><code>_call()</code><a class="header-anchor" href="#_call">#</a></h3>
+<pre><code class="language-python"><span class="n">Runtime</span><span class="o">.</span><span class="n">_call</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;default&quot;</span><span class="p">,</span> <span class="n">response_format</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span>
+</code></pre>
+<p>The method that actually calls the LLM once (no retry — <code>exec()</code> wraps it in the retry loop). The default implementation routes through the provider layer (<code>AgentSession</code>) when a provider model or <code>call=</code> function is configured, and raises <code>NotImplementedError</code> otherwise. <strong>Override this method when subclassing.</strong></p>
+<h4 id="parameters-1">Parameters<a class="header-anchor" href="#parameters-1">#</a></h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>content</code></td>
+<td><code>list[dict]</code></td>
+<td>The current turn's content blocks (history is rendered from the DAG by the provider path)</td>
+</tr>
+<tr>
+<td><code>model</code></td>
+<td><code>str</code></td>
+<td>The model name</td>
+</tr>
+<tr>
+<td><code>response_format</code></td>
+<td><code>dict | None</code></td>
+<td>Output format constraint</td>
+</tr>
+</tbody>
+</table>
+<h4 id="return-value-1">Return value<a class="header-anchor" href="#return-value-1">#</a></h4>
+<p>Raw text for ordinary calls; the validated Python JSON value when a structured
+format is active.</p>
+<hr />
+<h3 id="_async_call"><code>_async_call()</code><a class="header-anchor" href="#_async_call">#</a></h3>
+<pre><code class="language-python"><span class="k">await</span> <span class="n">Runtime</span><span class="o">.</span><span class="n">_async_call</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;default&quot;</span><span class="p">,</span> <span class="n">response_format</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span>
+</code></pre>
+<p>The async version of <code>_call()</code>. Override this method when subclassing to support an async provider.</p>
+<hr />
+<h3 id="close"><code>close()</code><a class="header-anchor" href="#close">#</a></h3>
+<p>Releases resources and ends the session; after <code>close()</code>, <code>exec()</code> raises <code>RuntimeError</code>. <code>Runtime</code> is also a context manager (<code>with Runtime(...) as rt:</code> closes on exit). Subclasses override it to clean up provider-specific resources.</p>
+<hr />
+<h3 id="asking-the-user">Asking the user<a class="header-anchor" href="#asking-the-user">#</a></h3>
+<p>When a front-end session is connected, a runtime can block on user input mid-function: <code>runtime.ask(prompt, options=..., multi=..., questions=[...], timeout=300.0, default=None)</code> (one question or several in one card), <code>runtime.confirm(prompt, default=False)</code> (yes/no), and <code>runtime.form(prompt, fields)</code> (multi-field form). <code>runtime.can_ask()</code> reports whether anyone is there to answer (False on headless runs). A declined question raises <code>UserDeclined</code>; a timeout returns <code>default</code> when given, else raises <code>AskTimeout</code>.</p>
+<hr />
+<h2 id="usage">Usage<a class="header-anchor" href="#usage">#</a></h2>
+<p>Supply a host Runtime to Agent. Ordinary methods inherit it automatically. They require no decorator or manual Context management.</p>
+<pre><code class="language-python"><span class="kn">from</span><span class="w"> </span><span class="nn">openprogram</span><span class="w"> </span><span class="kn">import</span> <span class="n">Agent</span><span class="p">,</span> <span class="n">Runtime</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">my_llm</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;host-model&quot;</span><span class="p">,</span> <span class="n">response_format</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">texts</span> <span class="o">=</span> <span class="p">[</span><span class="n">block</span><span class="p">[</span><span class="s2">&quot;text&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">block</span> <span class="ow">in</span> <span class="n">content</span> <span class="k">if</span> <span class="n">block</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;text&quot;</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">call_my_api</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">texts</span><span class="p">),</span> <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
+
+<span class="n">runtime</span> <span class="o">=</span> <span class="n">Runtime</span><span class="p">(</span><span class="n">call</span><span class="o">=</span><span class="n">my_llm</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;host-model&quot;</span><span class="p">)</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Observer</span><span class="p">(</span><span class="n">Agent</span><span class="p">):</span>
+    <span class="n">tools</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">observe</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Identify the requested screen element.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">([</span>
+            <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Find: </span><span class="si">{</span><span class="n">task</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;image&quot;</span><span class="p">,</span> <span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="s2">&quot;screenshot.png&quot;</span><span class="p">},</span>
+        <span class="p">])</span>
+
+<span class="n">observer</span> <span class="o">=</span> <span class="n">Observer</span><span class="p">(</span><span class="n">runtime</span><span class="o">=</span><span class="n">runtime</span><span class="p">)</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">answer</span> <span class="o">=</span> <span class="n">observer</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span><span class="s2">&quot;login button&quot;</span><span class="p">)</span>
+<span class="k">finally</span><span class="p">:</span>
+    <span class="n">runtime</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre>
+<p>The <a href="/docs/reference/api/agent.html">Agent and Context API</a> defines configuration, explicit sessions, and scopes. Method configurations remain compatible.</p>
+<h2 id="retry-mechanism">Retry mechanism<a class="header-anchor" href="#retry-mechanism">#</a></h2>
+<p><code>exec()</code> and <code>async_exec()</code> have built-in automatic retries to handle transient LLM API errors (network timeouts, rate limits, server errors, etc.).</p>
+<h3 id="configuration">Configuration<a class="header-anchor" href="#configuration">#</a></h3>
+<pre><code class="language-python"><span class="c1"># Default: max_retries=None → read env var OPENPROGRAM_MAX_RETRIES, defaulting to 6 if unset</span>
+<span class="n">rt</span> <span class="o">=</span> <span class="n">Runtime</span><span class="p">(</span><span class="n">call</span><span class="o">=</span><span class="n">my_llm</span><span class="p">)</span>
+
+<span class="c1"># No retries (raise an exception on the first failure)</span>
+<span class="n">rt</span> <span class="o">=</span> <span class="n">Runtime</span><span class="p">(</span><span class="n">call</span><span class="o">=</span><span class="n">my_llm</span><span class="p">,</span> <span class="n">max_retries</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Multiple retries (for an unstable API)</span>
+<span class="n">rt</span> <span class="o">=</span> <span class="n">Runtime</span><span class="p">(</span><span class="n">call</span><span class="o">=</span><span class="n">my_llm</span><span class="p">,</span> <span class="n">max_retries</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</code></pre>
+<h3 id="behavior-rules">Behavior rules<a class="header-anchor" href="#behavior-rules">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Situation</th>
+<th>Handling</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>API call succeeds</td>
+<td>Return the result</td>
+</tr>
+<tr>
+<td>API raises a transient exception</td>
+<td>Record the failed attempt, sleep with exponential backoff (base 1.5 s x 2^attempt, +/-25% jitter; a server <code>Retry-After</code> hint is honored as a lower bound; base tunable via <code>OPENPROGRAM_RETRY_BACKOFF_BASE</code>), then retry until <code>max_retries</code> is reached</td>
+</tr>
+<tr>
+<td>Permanent error (bad image data, expired auth, invalid API key, or the provider marked the exception <code>retryable=False</code>)</td>
+<td>Raised immediately as <code>LLMError</code> with <code>retryable=False</code>, no retry</td>
+</tr>
+<tr>
+<td>The provider already exhausted its own transport-retry budget (<code>transport_exhausted</code>)</td>
+<td>Not re-retried — raised as <code>LLMError</code></td>
+</tr>
+<tr>
+<td><code>TypeError</code> or <code>NotImplementedError</code></td>
+<td>Raised immediately, no retry (usually a problem with the provider implementation or the way it's called)</td>
+</tr>
+<tr>
+<td>All retries fail</td>
+<td>Raise a structured <code>LLMError</code> (fields such as <code>reason</code> / <code>retryable</code> / <code>http_status</code> / <code>attempts</code>), with a full attempt report attached</td>
+</tr>
+</tbody>
+</table>
+<h3 id="error-report-format">Error report format<a class="header-anchor" href="#error-report-format">#</a></h3>
+<p>When all retries are exhausted, the <code>LLMError</code> raised contains the error information for each attempt; its structured fields (<code>reason</code> / <code>retryable</code> / <code>http_status</code> / <code>attempts</code> / <code>elapsed_s</code>, etc.) can be read directly:</p>
+<pre><code>LLMError: exec() failed after 3 attempt(s):
+Attempt 1: ConnectionError: timeout
+Attempt 2: RateLimitError: 429 Too Many Requests
+Attempt 3: ConnectionError: timeout
+</code></pre>
+<h3 id="the-boundaries-of-retrying">The boundaries of retrying<a class="header-anchor" href="#the-boundaries-of-retrying">#</a></h3>
+<p>Structured-output repairs and repetitive tool-enabled responses share the invocation's failure-recovery allowance. Transient transport failures draw on a separate transport allowance (<code>OPENPROGRAM_PROVIDER_STREAM_RETRIES</code> minus one), so a dropped connection never spends a repair. A model request that recovers from transport failures returns them to that allowance, so transport recovery is bounded per request rather than per Agent loop. When the retries are spent because the endpoint cannot be reached at all and no output was committed, the request waits for the network for up to <code>OPENPROGRAM_NETWORK_WAIT_MAX_S</code> (default 30 minutes), checking every 5 to 30 seconds, then continues where it was. An explicit recovery limit of 0, a single-attempt request, cancellation, or the caller's deadline ends the wait. A repetitive response is discarded and regenerated in the same Agent context, preserving completed tool results and their Runtime receipts. This recovery does not impose an aggregate token or duration limit. Explicit caller limits, cancellation, permission failures, and exhausted recovery remain authoritative. Repeating a response is not permission to repeat an external write; an uncertain write outcome requires inspection before another attempt. Function logic errors still require a code fix.</p>
+<div class="page-updated"><span data-i18n="updated">Last updated</span> · 2026-11-06</div><div class="prevnext"><a class="pn-link pn-prev" href="/docs/reference/API.html" data-href-en="/docs/reference/API.html" data-href-zh="/docs/reference/API.zh.html"><span class="pn-dir" data-i18n="prev">Previous</span><span class="pn-title" data-title-zh="API 参考">API reference</span></a><a class="pn-link pn-next" href="/docs/reference/api/providers.html" data-href-en="/docs/reference/api/providers.html" data-href-zh="/docs/reference/api/providers.zh.html"><span class="pn-dir" data-i18n="next">Next</span><span class="pn-title" data-title-zh="模型服务 API">Provider API</span></a></div></article></main>
+  <aside class="toc"><div class="toc-title" data-i18n="on_this_page">On this page</div>
+<ul class="toc-list">
+<li>
+<details class="toc-disclosure" open=""><summary>
+<a class="lvl-2" href="#class-runtime">Class: Runtime</a>
+</summary>
+<ul class="toc-list">
+<li>
+<a class="lvl-3" href="#constructor-parameters">Constructor parameters</a>
+</li>
+<li>
+<a class="lvl-3" href="#attributes">Attributes</a>
+</li>
+</ul>
+</details>
+</li>
+<li>
+<details class="toc-disclosure" open=""><summary>
+<a class="lvl-2" href="#methods">Methods</a>
+</summary>
+<ul class="toc-list">
+<li>
+<details class="toc-disclosure" open=""><summary>
+<a class="lvl-3" href="#exec">exec()</a>
+</summary>
+<ul class="toc-list">
+<li>
+<a class="lvl-4" href="#parameters">Parameters</a>
+</li>
+<li>
+<a class="lvl-4" href="#content-block-format">Content block format</a>
+</li>
+<li>
+<a class="lvl-4" href="#return-value">Return value</a>
+</li>
+<li>
+<a class="lvl-4" href="#exceptions">Exceptions</a>
+</li>
+</ul>
+</details>
+</li>
+<li>
+<a class="lvl-3" href="#async_exec">async_exec()</a>
+</li>
+<li>
+<details class="toc-disclosure" open=""><summary>
+<a class="lvl-3" href="#_call">_call()</a>
+</summary>
+<ul class="toc-list">
+<li>
+<a class="lvl-4" href="#parameters-1">Parameters</a>
+</li>
+<li>
+<a class="lvl-4" href="#return-value-1">Return value</a>
+</li>
+</ul>
+</details>
+</li>
+<li>
+<a class="lvl-3" href="#_async_call">_async_call()</a>
+</li>
+<li>
+<a class="lvl-3" href="#close">close()</a>
+</li>
+<li>
+<a class="lvl-3" href="#asking-the-user">Asking the user</a>
+</li>
+</ul>
+</details>
+</li>
+<li>
+<a class="lvl-2" href="#usage">Usage</a>
+</li>
+<li>
+<details class="toc-disclosure" open=""><summary>
+<a class="lvl-2" href="#retry-mechanism">Retry mechanism</a>
+</summary>
+<ul class="toc-list">
+<li>
+<a class="lvl-3" href="#configuration">Configuration</a>
+</li>
+<li>
+<a class="lvl-3" href="#behavior-rules">Behavior rules</a>
+</li>
+<li>
+<a class="lvl-3" href="#error-report-format">Error report format</a>
+</li>
+<li>
+<a class="lvl-3" href="#the-boundaries-of-retrying">The boundaries of retrying</a>
+</li>
+</ul>
+</details>
+</li>
+</ul></aside>
+</div>
+
+<div class="search-overlay">
+  <div class="search-box">
+    <input type="text" data-i18n-ph="search_ph" placeholder="Search titles or text…" autocomplete="off" spellcheck="false">
+    <div class="search-results"></div>
+  </div>
+</div>
+
+<script src="/docs/assets/site.js?v=6520ba46"></script>
+</body>
+</html>

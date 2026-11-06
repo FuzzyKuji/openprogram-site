@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en" data-base="/docs/" data-page-lang="en" data-build="1793956776" data-alt-lang-url="/docs/reference/cli.zh.html">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CLI reference · OpenProgram Docs</title>
+<meta name="description" content="CLI command reference # A quick reference for every openprogram subcommand. Each command has its own help via openprogram &lt;command&gt; -h ; subcommand verbs nest">
+<link rel="canonical" href="https://openprogram.io/docs/reference/cli.html">
+<link rel="alternate" type="text/markdown" href="https://openprogram.io/docs/reference/cli.html.md">
+<link rel="describedby" href="https://openprogram.io/llms.txt">
+<link rel="alternate" hreflang="en" href="https://openprogram.io/docs/reference/cli.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://openprogram.io/docs/reference/cli.zh.html">
+<link rel="alternate" hreflang="x-default" href="https://openprogram.io/docs/reference/cli.html">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"OpenProgram Docs","item":"https://openprogram.io/docs/"},{"@type":"ListItem","position":2,"name":"CLI reference"}]}</script>
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="OpenProgram">
+<meta property="og:url" content="https://openprogram.io/docs/reference/cli.html">
+<meta property="og:title" content="CLI reference · OpenProgram Docs">
+<meta property="og:description" content="CLI command reference # A quick reference for every openprogram subcommand. Each command has its own help via openprogram &lt;command&gt; -h ; subcommand verbs nest">
+<meta property="og:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:secure_url" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="CLI reference · OpenProgram Docs">
+<meta name="twitter:description" content="CLI command reference # A quick reference for every openprogram subcommand. Each command has its own help via openprogram &lt;command&gt; -h ; subcommand verbs nest">
+<meta name="twitter:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta name="twitter:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/docs/assets/mark.svg">
+<link rel="stylesheet" href="/docs/assets/site.css?v=6520ba46">
+<link rel="stylesheet" href="/docs/assets/pygments-light.css" media="(prefers-color-scheme: light)" id="pyg-light">
+<link rel="stylesheet" href="/docs/assets/pygments-dark.css" media="(prefers-color-scheme: dark)" id="pyg-dark">
+<script src="/docs/assets/theme.js?v=6520ba46"></script>
+
+</head>
+<body>
+<header class="topbar">
+  <button class="icon hamburger" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2.5 4.5h11M2.5 8h11M2.5 11.5h11"/></svg></button>
+  <a class="brand" href="/docs/index.html"><img class="mark" src="/docs/assets/mark.svg" alt="">OpenProgram Docs</a>
+  <div class="spacer"></div>
+  <button class="search-trigger" aria-label="Search">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14"/></svg><span class="label" data-i18n="search">Search docs</span><kbd>⌘K</kbd>
+  </button>
+  <div class="lang-wrap">
+    <button class="icon lang-trigger" id="lang-toggle" aria-haspopup="true" aria-expanded="false" aria-label="Language">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="6.2"/><path d="M1.8 8h12.4" stroke-linecap="round"/><ellipse cx="8" cy="8" rx="2.8" ry="6.2"/></svg><span class="lang-label">EN</span><svg class="chev" width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+    </button>
+    <div class="lang-menu" id="lang-menu" role="menu">
+      <button class="lang-opt" data-lang="en" role="menuitem"><span>English</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="lang-opt" data-lang="zh" role="menuitem"><span>简体中文</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+  <div class="theme-wrap">
+    <button class="icon" id="theme-toggle" aria-label="Theme" aria-haspopup="menu" aria-controls="theme-menu" aria-expanded="false"><svg class="ic-system" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="2.5" width="13" height="9" rx="1.5"/><path d="M8 11.5V14M5.5 14h5"/></svg><svg class="ic-moon" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M13.5 9.5A6 6 0 1 1 6.5 2.5a5 5 0 0 0 7 7z"/></svg><svg class="ic-sun" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="3.2"/><path d="M8 1.2v1.8M8 13v1.8M1.2 8H3M13 8h1.8M3.2 3.2l1.3 1.3M11.5 11.5l1.3 1.3M12.8 3.2l-1.3 1.3M4.5 11.5l-1.3 1.3"/></svg></button>
+    <div class="theme-menu" id="theme-menu" role="menu" aria-labelledby="theme-toggle">
+      <button class="theme-opt" data-theme-choice="system" role="menuitemradio" aria-checked="true"><span>Follow system</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="light" role="menuitemradio" aria-checked="false"><span>Light</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="dark" role="menuitemradio" aria-checked="false"><span>Dark</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+</header>
+<nav class="tabbar"><a class="tablink" href="/docs/README.html" data-title-zh="开始使用" data-href-en="/docs/README.html" data-href-zh="/docs/README.zh.html">Get started</a><a class="tablink" href="/docs/install/install.html" data-title-zh="安装" data-href-en="/docs/install/install.html" data-href-zh="/docs/install/install.zh.html">Install</a><a class="tablink" href="/docs/capabilities/README.html" data-title-zh="能力" data-href-en="/docs/capabilities/README.html" data-href-zh="/docs/capabilities/README.zh.html">Capabilities</a><a class="tablink" href="/docs/interfaces/README.html" data-title-zh="界面" data-href-en="/docs/interfaces/README.html" data-href-zh="/docs/interfaces/README.zh.html">Interfaces</a><a class="tablink" href="/docs/models/README.html" data-title-zh="模型" data-href-en="/docs/models/README.html" data-href-zh="/docs/models/README.zh.html">Models</a><a class="tablink" href="/docs/integrations/anthropic.html" data-title-zh="集成" data-href-en="/docs/integrations/anthropic.html" data-href-zh="/docs/integrations/anthropic.zh.html">Integrations</a><a class="tablink" href="/docs/server/README.html" data-title-zh="服务与运维" data-href-en="/docs/server/README.html" data-href-zh="/docs/server/README.zh.html">Server &amp; Ops</a><a class="tablink active" href="/docs/reference/README.html" data-title-zh="参考" data-href-en="/docs/reference/README.html" data-href-zh="/docs/reference/README.zh.html">Reference</a><a class="tablink" href="/docs/reference/design/README.html" data-title-zh="设计" data-href-en="/docs/reference/design/README.html" data-href-zh="/docs/reference/design/README.zh.html">Design</a></nav>
+
+<div class="scrim"></div>
+<div class="layout">
+  <nav class="sidebar" aria-label="Documentation">
+    <input class="nav-filter" type="text" data-i18n-ph="nav_filter"
+           aria-label="Filter docs" placeholder="Filter docs…" autocomplete="off" spellcheck="false">
+    <div class="nav-tree"><div class="nav-sec"><div class="nav-sec-title" data-title-zh="概览">Overview</div><a class="navlink" href="/docs/reference/README.html" data-title-zh="概览" data-href-en="/docs/reference/README.html" data-href-zh="/docs/reference/README.zh.html">Overview</a></div>
+<div class="nav-sec"><div class="nav-sec-title">API</div><a class="navlink" href="/docs/reference/API.html" data-title-zh="API 参考" data-href-en="/docs/reference/API.html" data-href-zh="/docs/reference/API.zh.html">API reference</a>
+<a class="navlink" href="/docs/reference/api/runtime.html" data-title-zh="运行时 API" data-href-en="/docs/reference/api/runtime.html" data-href-zh="/docs/reference/api/runtime.zh.html">Runtime API</a>
+<a class="navlink" href="/docs/reference/api/providers.html" data-title-zh="模型服务 API" data-href-en="/docs/reference/api/providers.html" data-href-zh="/docs/reference/api/providers.zh.html">Provider API</a>
+<a class="navlink" href="/docs/reference/api/agent.html" data-title-zh="函数 API" data-href-en="/docs/reference/api/agent.html" data-href-zh="/docs/reference/api/agent.zh.html">Function API</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="CLI 与配置">CLI and configuration</div><a class="navlink active" href="/docs/reference/cli.html" data-title-zh="CLI 参考" data-href-en="/docs/reference/cli.html" data-href-zh="/docs/reference/cli.zh.html">CLI reference</a>
+<a class="navlink" href="/docs/reference/config.html" data-title-zh="配置项参考" data-href-en="/docs/reference/config.html" data-href-zh="/docs/reference/config.zh.html">Configuration reference</a>
+<a class="navlink" href="/docs/reference/diagnostics.html" data-title-zh="诊断" data-href-en="/docs/reference/diagnostics.html" data-href-zh="/docs/reference/diagnostics.zh.html">Diagnostics</a>
+<a class="navlink" href="/docs/reference/session-export.html" data-title-zh="会话导出" data-href-en="/docs/reference/session-export.html" data-href-zh="/docs/reference/session-export.zh.html">Session export</a>
+<a class="navlink" href="/docs/reference/output-styles.html" data-title-zh="输出风格" data-href-en="/docs/reference/output-styles.html" data-href-zh="/docs/reference/output-styles.zh.html">Output styles</a>
+<a class="navlink" href="/docs/reference/config-keys.html" data-title-zh="配置键" data-href-en="/docs/reference/config-keys.html" data-href-zh="/docs/reference/config-keys.zh.html">Config keys</a>
+<a class="navlink" href="/docs/reference/provider-registry.html" data-title-zh="模型服务清单" data-href-en="/docs/reference/provider-registry.html" data-href-zh="/docs/reference/provider-registry.zh.html">Provider registry</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="对比">Comparisons</div><a class="navlink" href="/docs/reference/comparisons/ai-agent-frameworks.html" data-title-zh="框架对比" data-href-en="/docs/reference/comparisons/ai-agent-frameworks.html" data-href-zh="/docs/reference/comparisons/ai-agent-frameworks.zh.html">Framework comparison</a>
+<a class="navlink" href="/docs/reference/comparisons/related-projects.html" data-title-zh="相关项目" data-href-en="/docs/reference/comparisons/related-projects.html" data-href-zh="/docs/reference/comparisons/related-projects.zh.html">Related projects</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="CLI 命令">CLI commands</div><a class="navlink" href="/docs/reference/cli/README.html" data-title-zh="全局参数" data-href-en="/docs/reference/cli/README.html" data-href-zh="/docs/reference/cli/README.zh.html">Global flags</a>
+<a class="navlink" href="/docs/reference/cli/acp.html" data-title-zh="编辑器协议" data-href-en="/docs/reference/cli/acp.html" data-href-zh="/docs/reference/cli/acp.zh.html">acp</a>
+<a class="navlink" href="/docs/reference/cli/agents.html" data-title-zh="Agent 管理" data-href-en="/docs/reference/cli/agents.html" data-href-zh="/docs/reference/cli/agents.zh.html">agents</a>
+<a class="navlink" href="/docs/reference/cli/backup.html" data-title-zh="备份" data-href-en="/docs/reference/cli/backup.html" data-href-zh="/docs/reference/cli/backup.zh.html">backup</a>
+<a class="navlink" href="/docs/reference/cli/browser.html" data-title-zh="浏览器" data-href-en="/docs/reference/cli/browser.html" data-href-zh="/docs/reference/cli/browser.zh.html">browser</a>
+<a class="navlink" href="/docs/reference/cli/channels.html" data-title-zh="渠道" data-href-en="/docs/reference/cli/channels.html" data-href-zh="/docs/reference/cli/channels.zh.html">channels</a>
+<a class="navlink" href="/docs/reference/cli/chat.html" data-title-zh="聊天" data-href-en="/docs/reference/cli/chat.html" data-href-zh="/docs/reference/cli/chat.zh.html">chat</a>
+<a class="navlink" href="/docs/reference/cli/completion.html" data-title-zh="命令补全" data-href-en="/docs/reference/cli/completion.html" data-href-zh="/docs/reference/cli/completion.zh.html">completion</a>
+<a class="navlink" href="/docs/reference/cli/config.html" data-title-zh="设置" data-href-en="/docs/reference/cli/config.html" data-href-zh="/docs/reference/cli/config.zh.html">config</a>
+<a class="navlink" href="/docs/reference/cli/cron-worker.html" data-title-zh="定时任务" data-href-en="/docs/reference/cli/cron-worker.html" data-href-zh="/docs/reference/cli/cron-worker.zh.html">cron-worker</a>
+<a class="navlink" href="/docs/reference/cli/dev.html" data-title-zh="开发版" data-href-en="/docs/reference/cli/dev.html" data-href-zh="/docs/reference/cli/dev.zh.html">dev</a>
+<a class="navlink" href="/docs/reference/cli/diagnostics.html" data-title-zh="诊断包" data-href-en="/docs/reference/cli/diagnostics.html" data-href-zh="/docs/reference/cli/diagnostics.zh.html">diagnostics</a>
+<a class="navlink" href="/docs/reference/cli/doctor.html" data-title-zh="环境诊断" data-href-en="/docs/reference/cli/doctor.html" data-href-zh="/docs/reference/cli/doctor.zh.html">doctor</a>
+<a class="navlink" href="/docs/reference/cli/environments.html" data-title-zh="运行环境" data-href-en="/docs/reference/cli/environments.html" data-href-zh="/docs/reference/cli/environments.zh.html">environments</a>
+<a class="navlink" href="/docs/reference/cli/execution.html" data-title-zh="执行控制" data-href-en="/docs/reference/cli/execution.html" data-href-zh="/docs/reference/cli/execution.zh.html">execution</a>
+<a class="navlink" href="/docs/reference/cli/jobs.html" data-title-zh="后台任务" data-href-en="/docs/reference/cli/jobs.html" data-href-zh="/docs/reference/cli/jobs.zh.html">jobs</a>
+<a class="navlink" href="/docs/reference/cli/logs.html" data-title-zh="日志" data-href-en="/docs/reference/cli/logs.html" data-href-zh="/docs/reference/cli/logs.zh.html">logs</a>
+<a class="navlink" href="/docs/reference/cli/mcp.html" data-title-zh="MCP 服务器" data-href-en="/docs/reference/cli/mcp.html" data-href-zh="/docs/reference/cli/mcp.zh.html">mcp</a>
+<a class="navlink" href="/docs/reference/cli/memory.html" data-title-zh="记忆" data-href-en="/docs/reference/cli/memory.html" data-href-zh="/docs/reference/cli/memory.zh.html">memory</a>
+<a class="navlink" href="/docs/reference/cli/permissions.html" data-title-zh="CLI：权限规则" data-href-en="/docs/reference/cli/permissions.html" data-href-zh="/docs/reference/cli/permissions.zh.html">permissions</a>
+<a class="navlink" href="/docs/reference/cli/plugins.html" data-title-zh="插件" data-href-en="/docs/reference/cli/plugins.html" data-href-zh="/docs/reference/cli/plugins.zh.html">plugins</a>
+<a class="navlink" href="/docs/reference/cli/ports.html" data-title-zh="端口" data-href-en="/docs/reference/cli/ports.html" data-href-zh="/docs/reference/cli/ports.zh.html">ports</a>
+<a class="navlink" href="/docs/reference/cli/programs.html" data-title-zh="程序" data-href-en="/docs/reference/cli/programs.html" data-href-zh="/docs/reference/cli/programs.zh.html">programs</a>
+<a class="navlink" href="/docs/reference/cli/providers.html" data-title-zh="模型服务" data-href-en="/docs/reference/cli/providers.html" data-href-zh="/docs/reference/cli/providers.zh.html">providers</a>
+<a class="navlink" href="/docs/reference/cli/recordings.html" data-title-zh="录制" data-href-en="/docs/reference/cli/recordings.html" data-href-zh="/docs/reference/cli/recordings.zh.html">recordings</a>
+<a class="navlink" href="/docs/reference/cli/rescue.html" data-title-zh="恢复" data-href-en="/docs/reference/cli/rescue.html" data-href-zh="/docs/reference/cli/rescue.zh.html">rescue</a>
+<a class="navlink" href="/docs/reference/cli/restart.html" data-title-zh="重启" data-href-en="/docs/reference/cli/restart.html" data-href-zh="/docs/reference/cli/restart.zh.html">restart</a>
+<a class="navlink" href="/docs/reference/cli/scheduler-worker.html" data-title-zh="任务调度" data-href-en="/docs/reference/cli/scheduler-worker.html" data-href-zh="/docs/reference/cli/scheduler-worker.zh.html">scheduler-worker</a>
+<a class="navlink" href="/docs/reference/cli/secrets.html" data-title-zh="凭据" data-href-en="/docs/reference/cli/secrets.html" data-href-zh="/docs/reference/cli/secrets.zh.html">secrets</a>
+<a class="navlink" href="/docs/reference/cli/self-update.html" data-title-zh="应用更新" data-href-en="/docs/reference/cli/self-update.html" data-href-zh="/docs/reference/cli/self-update.zh.html">self-update</a>
+<a class="navlink" href="/docs/reference/cli/sessions.html" data-title-zh="会话" data-href-en="/docs/reference/cli/sessions.html" data-href-zh="/docs/reference/cli/sessions.zh.html">sessions</a>
+<a class="navlink" href="/docs/reference/cli/setup.html" data-title-zh="初始设置" data-href-en="/docs/reference/cli/setup.html" data-href-zh="/docs/reference/cli/setup.zh.html">setup</a>
+<a class="navlink" href="/docs/reference/cli/skills.html" data-title-zh="技能" data-href-en="/docs/reference/cli/skills.html" data-href-zh="/docs/reference/cli/skills.zh.html">skills</a>
+<a class="navlink" href="/docs/reference/cli/status.html" data-title-zh="运行状态" data-href-en="/docs/reference/cli/status.html" data-href-zh="/docs/reference/cli/status.zh.html">status</a>
+<a class="navlink" href="/docs/reference/cli/stop.html" data-title-zh="停止" data-href-en="/docs/reference/cli/stop.html" data-href-zh="/docs/reference/cli/stop.zh.html">stop</a>
+<a class="navlink" href="/docs/reference/cli/subagent.html" data-title-zh="子 Agent" data-href-en="/docs/reference/cli/subagent.html" data-href-zh="/docs/reference/cli/subagent.zh.html">subagent</a>
+<a class="navlink" href="/docs/reference/cli/trash.html" data-title-zh="删除恢复" data-href-en="/docs/reference/cli/trash.html" data-href-zh="/docs/reference/cli/trash.zh.html">trash</a>
+<a class="navlink" href="/docs/reference/cli/tui.html" data-title-zh="终端界面" data-href-en="/docs/reference/cli/tui.html" data-href-zh="/docs/reference/cli/tui.zh.html">tui</a>
+<a class="navlink" href="/docs/reference/cli/update.html" data-title-zh="更新检查" data-href-en="/docs/reference/cli/update.html" data-href-zh="/docs/reference/cli/update.zh.html">update</a>
+<a class="navlink" href="/docs/reference/cli/upgrade.html" data-title-zh="版本升级" data-href-en="/docs/reference/cli/upgrade.html" data-href-zh="/docs/reference/cli/upgrade.zh.html">upgrade</a>
+<a class="navlink" href="/docs/reference/cli/web.html" data-title-zh="网页界面" data-href-en="/docs/reference/cli/web.html" data-href-zh="/docs/reference/cli/web.zh.html">web</a>
+<a class="navlink" href="/docs/reference/cli/worker.html" data-title-zh="后台服务" data-href-en="/docs/reference/cli/worker.html" data-href-zh="/docs/reference/cli/worker.zh.html">worker</a></div></div>
+  </nav>
+  <main class="content"><button class="fs-toggle" aria-label="Fullscreen" title="Fullscreen (Esc to exit)"><svg class="ic-expand" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.2 2H2v4.2M9.8 2H14v4.2M6.2 14H2V9.8M9.8 14H14V9.8"/></svg><svg class="ic-collapse" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6.2h4.2V2M14 6.2H9.8V2M2 9.8h4.2V14M14 9.8H9.8V14"/></svg></button><article><nav class="breadcrumb"><span class="bc-seg" data-title-zh="参考">Reference</span> <span class='bc-sep'>›</span> <span class="bc-seg" data-title-zh="CLI 与配置">CLI and configuration</span> <span class='bc-sep'>›</span> <span class="bc-seg bc-current" data-title-zh="CLI 参考">CLI reference</span></nav><p><span id="cli"></span></p>
+<h1 id="cli-command-reference">CLI command reference<a class="header-anchor" href="#cli-command-reference">#</a></h1>
+<p>A quick reference for every <code>openprogram</code> subcommand. Each command has its own help via <code>openprogram &lt;command&gt; -h</code>; subcommand verbs nest one level deeper, e.g. <code>openprogram logs tail -h</code>.</p>
+<div class="callout callout-note"><div class="callout-head"><span class="callout-icon"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6.4"/><path d="M8 7.4V11M8 5.1v.1"/></svg></span><span data-title-zh="提示">Note</span></div><div class="callout-body"><p>The <strong>CLI commands</strong> section in the sidebar holds one generated page per
+command — full flag tables, rebuilt from the argument parser on every
+docs build, so they can never drift from the code. This page is the
+curated overview.</p></div></div>
+<h2 id="global-usage">Global usage<a class="header-anchor" href="#global-usage">#</a></h2>
+<pre><code class="language-bash">openprogram<span class="w">                      </span><span class="c1"># open the terminal chat UI (TUI)</span>
+openprogram<span class="w"> </span>--print<span class="w"> </span><span class="s2">&quot;...&quot;</span><span class="w">        </span><span class="c1"># one-shot prompt: send, print the reply, exit</span>
+openprogram<span class="w"> </span>--resume<span class="w"> </span>&lt;id&gt;<span class="w">        </span><span class="c1"># resume a previous CLI chat session</span>
+openprogram<span class="w"> </span>--profile<span class="w"> </span>&lt;name&gt;<span class="w">     </span><span class="c1"># state-directory profile, reroutes to ~/.openprogram-&lt;name&gt;/</span>
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--print PROMPT</code></td>
+<td>One-shot prompt; prints the reply and exits</td>
+</tr>
+<tr>
+<td><code>--profile PROFILE</code></td>
+<td>State-directory profile, equivalent to the <code>OPENPROGRAM_PROFILE</code> environment variable</td>
+</tr>
+<tr>
+<td><code>--resume SESSION_ID</code></td>
+<td>Resume a session; find ids with <code>openprogram sessions list</code> or the Web UI sidebar</td>
+</tr>
+<tr>
+<td><code>--no-alt-screen</code></td>
+<td>Render the TUI inline and preserve terminal scrollback</td>
+</tr>
+<tr>
+<td><code>--screen-reader</code></td>
+<td>Use the inline assistive-technology mode without mouse tracking</td>
+</tr>
+</tbody>
+</table>
+<h2 id="chat-and-running">Chat and running<a class="header-anchor" href="#chat-and-running">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>What it does</th>
+<th>Key flags</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>openprogram</code></td>
+<td>Open the chat; a bare run first asks terminal UI vs web UI, auto-launches a worker if none is running</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>openprogram tui</code> (alias <code>chat</code>)</td>
+<td>Launch the Ink terminal UI directly on Windows, macOS, or Linux; terminals without raw input fall back to Rich</td>
+<td><code>--print</code>, <code>--resume</code>, <code>--no-alt-screen</code>, and <code>--screen-reader</code> also work after the verb</td>
+</tr>
+<tr>
+<td><code>openprogram web</code></td>
+<td>Start the service and open the browser UI (<code>http://localhost:18100</code>)</td>
+<td><code>--web-port</code> (this run only; default: stored pref, then 18100), <code>--no-browser</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="background-service">Background service<a class="header-anchor" href="#background-service">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>status</code></td>
+<td>Is the background service running (PID, port, uptime)</td>
+</tr>
+<tr>
+<td><code>stop</code></td>
+<td>Stop the background service</td>
+</tr>
+<tr>
+<td><code>restart</code></td>
+<td>Restart (after code / config changes)</td>
+</tr>
+</tbody>
+</table>
+<p>The <code>worker</code> subcommands offer finer control:</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>worker run</code></td>
+<td>Run the worker in the foreground (blocking), for debugging; Ctrl-C to stop</td>
+</tr>
+<tr>
+<td><code>worker start</code></td>
+<td>Start a worker in the background and return</td>
+</tr>
+<tr>
+<td><code>worker stop</code></td>
+<td>Stop; an installed service stays stopped until the next start or login</td>
+</tr>
+<tr>
+<td><code>worker restart</code></td>
+<td>Stop and start a fresh one</td>
+</tr>
+<tr>
+<td><code>worker status</code></td>
+<td>Running or not, PID, port, uptime</td>
+</tr>
+<tr>
+<td><code>worker install</code></td>
+<td>Install as a system service (macOS launchd / Linux systemd --user); starts at login, restarts after a crash</td>
+</tr>
+<tr>
+<td><code>worker uninstall</code></td>
+<td>Remove the system service</td>
+</tr>
+</tbody>
+</table>
+<h2 id="setup-and-configuration">Setup and configuration<a class="header-anchor" href="#setup-and-configuration">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>What it does</th>
+<th>Key flags / verbs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>setup</code></td>
+<td>First-run setup wizard</td>
+<td><code>menu</code> opens the interactive picker; give a section name to jump straight there (model / tools / agent / skills / ui / memory / profile / search / tts / channels / backend)</td>
+</tr>
+<tr>
+<td><code>config</code></td>
+<td>View / change settings</td>
+<td><code>list</code> (every setting: value, group, apply mode), <code>get &lt;key&gt;</code>, <code>set &lt;key&gt; &lt;value&gt;</code></td>
+</tr>
+<tr>
+<td><code>ports</code></td>
+<td>View / persist the single Web UI port</td>
+<td><code>--port PORT</code> (default 18100)</td>
+</tr>
+<tr>
+<td><code>completion</code></td>
+<td>Print a shell completion script</td>
+<td><code>bash</code> / <code>zsh</code> / <code>powershell</code> / <code>pwsh</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="providers-llm-providers-and-credentials">providers — LLM providers and credentials<a class="header-anchor" href="#providers-llm-providers-and-credentials">#</a></h3>
+<p><code>secrets</code> is accepted as an alias for <code>providers</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Verb</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>login &lt;provider&gt;</code></td>
+<td>Log in to a provider; <code>--api-key</code> / <code>--api-key-stdin</code> supply the key non-interactively, <code>--account</code> selects the account, <code>--method</code> forces a specific login method</td>
+</tr>
+<tr>
+<td><code>logout</code></td>
+<td>Remove a provider's credentials</td>
+</tr>
+<tr>
+<td><code>list</code></td>
+<td>List credential pools by account</td>
+</tr>
+<tr>
+<td><code>available</code> (aliases <code>search</code>, <code>catalog</code>)</td>
+<td>List every configurable provider, optionally filtered with QUERY</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td>Check a provider's current credentials</td>
+</tr>
+<tr>
+<td><code>use</code></td>
+<td>Set which account a provider uses</td>
+</tr>
+<tr>
+<td><code>discover</code> / <code>adopt</code></td>
+<td>Scan external credential sources / import them into the credential store</td>
+</tr>
+<tr>
+<td><code>doctor</code></td>
+<td>Diagnose credentials (expiry, refresh, cooldown, conflicts)</td>
+</tr>
+<tr>
+<td><code>setup</code></td>
+<td>Interactive first-time setup</td>
+</tr>
+<tr>
+<td><code>aliases</code></td>
+<td>List provider short-name aliases</td>
+</tr>
+<tr>
+<td><code>accounts</code></td>
+<td>Account management (<code>list</code> / <code>create</code> / <code>delete</code>)</td>
+</tr>
+<tr>
+<td><code>migrate</code></td>
+<td>Migrate stored credentials to the current format</td>
+</tr>
+</tbody>
+</table>
+<p><code>openprogram providers</code> with no verb prints the status table for all current credentials.</p>
+<h3 id="mcp-mcp-servers">mcp — MCP servers<a class="header-anchor" href="#mcp-mcp-servers">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Verb</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>token create</code></td>
+<td>Create and print a token for the authenticated local stdio MCP server</td>
+</tr>
+<tr>
+<td><code>serve</code></td>
+<td>Serve the authenticated MCP server over local stdio</td>
+</tr>
+<tr>
+<td><code>list</code></td>
+<td>List every configured MCP server and its status</td>
+</tr>
+<tr>
+<td><code>show</code></td>
+<td>Show a server's tools and full schemas</td>
+</tr>
+<tr>
+<td><code>add</code></td>
+<td>Add a stdio command server; writes <code>mcp_servers.json</code> and starts it immediately</td>
+</tr>
+<tr>
+<td><code>rm</code></td>
+<td>Remove (stop + delete config)</td>
+</tr>
+<tr>
+<td><code>restart</code> / <code>enable</code> / <code>disable</code></td>
+<td>Restart / enable and start / stop and mark disabled (config kept)</td>
+</tr>
+<tr>
+<td><code>edit</code></td>
+<td>Compatibility command that reports raw config editing was removed; use <code>add</code> / <code>rm</code> or the MCP settings page</td>
+</tr>
+<tr>
+<td><code>test</code></td>
+<td>Start a config temporarily to verify it comes up and returns its tool list, without persisting</td>
+</tr>
+</tbody>
+</table>
+<p><code>token create</code> prints the raw token on one line but does not set
+<code>OPENPROGRAM_MCP_TOKEN</code>. Run it once, copy the printed line, and set the
+variable before <code>serve</code>:</p>
+<pre><code class="language-bash">openprogram<span class="w"> </span>mcp<span class="w"> </span>token<span class="w"> </span>create
+<span class="nb">export</span><span class="w"> </span><span class="nv">OPENPROGRAM_MCP_TOKEN</span><span class="o">=</span><span class="s2">&quot;&lt;paste the token printed above&gt;&quot;</span>
+openprogram<span class="w"> </span>mcp<span class="w"> </span>serve
+</code></pre>
+<p>If a token already exists, reuse the token you previously saved. <code>serve</code>
+requires an exact <code>OPENPROGRAM_MCP_TOKEN</code> match.</p>
+<h3 id="browser-browser-tools">browser — browser tools<a class="header-anchor" href="#browser-browser-tools">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Verb</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>install</code></td>
+<td>Developer command for adding or replacing browser backends (patchright/camoufox). Release installations already contain the default Playwright Chromium backend.</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td>Show install state, whether the sidecar Chrome is running, saved login count</td>
+</tr>
+<tr>
+<td><code>refresh</code></td>
+<td>Re-copy the real Chrome profile into the sidecar (after logging in to a new site in your main Chrome)</td>
+</tr>
+<tr>
+<td><code>reset</code></td>
+<td>Full reset: kill the sidecar, clear the profile + login state + port files</td>
+</tr>
+<tr>
+<td><code>list</code> / <code>rm</code></td>
+<td>List / delete saved logins under <code>~/.openprogram/browser-states/</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="content-management">Content management<a class="header-anchor" href="#content-management">#</a></h2>
+<h3 id="agents">agents<a class="header-anchor" href="#agents">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Verb</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>list</code> / <code>show</code> / <code>add</code> / <code>rm</code></td>
+<td>List / view / create / delete agents (deleting removes all its sessions too)</td>
+</tr>
+<tr>
+<td><code>set-default</code></td>
+<td>Set as the default agent</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sessions">sessions<a class="header-anchor" href="#sessions">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Verb</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>list</code></td>
+<td>List every session across all agents</td>
+</tr>
+<tr>
+<td><code>resume</code></td>
+<td>Answer a waiting session</td>
+</tr>
+<tr>
+<td><code>attach</code> / <code>detach</code></td>
+<td>Route a channel user's messages into a session / remove the alias (<code>--channel</code>, <code>--peer</code> required; <code>--account</code>, <code>--peer-kind</code> optional)</td>
+</tr>
+<tr>
+<td><code>aliases</code></td>
+<td>List all session-to-channel-user aliases</td>
+</tr>
+</tbody>
+</table>
+<h3 id="subagent">subagent<a class="header-anchor" href="#subagent">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Verb</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>spawn</code></td>
+<td>Spawn an agent in a session as a new branch: <code>--session</code> and <code>--prompt</code> required; <code>--parent-msg</code> picks the fork node, <code>--label</code> names the branch, <code>--agent</code> picks the agent profile (default <code>main</code>), <code>--context inherit|clean</code> (or <code>--clean</code>), <code>--no-json</code> for a human-readable summary</td>
+</tr>
+<tr>
+<td><code>merge</code></td>
+<td>Merge subagent sessions into a target with a new turn: <code>--target</code> and repeatable <code>--branch SID</code> required; <code>--message</code> is the merge instruction, <code>--agent</code> the merge agent, <code>--base N</code> marks one branch as the merge base, <code>--no-json</code> for a human-readable summary</td>
+</tr>
+</tbody>
+</table>
+<h3 id="programs">programs<a class="header-anchor" href="#programs">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Verb</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>run &lt;name&gt;</code></td>
+<td>Run a program; <code>--arg key=value</code> (repeatable), <code>--provider</code>, <code>--model</code></td>
+</tr>
+<tr>
+<td><code>list</code></td>
+<td>List saved programs</td>
+</tr>
+<tr>
+<td><code>available</code></td>
+<td>List installable programs and installed third-party harnesses</td>
+</tr>
+<tr>
+<td><code>install</code> / <code>uninstall</code></td>
+<td>Developer-only first-party source overlays (gui/research/all), or install/uninstall an additional third-party harness (git URL / owner/repo); supported releases already include all first-party Programs and reject mutation of their immutable runtime</td>
+</tr>
+</tbody>
+</table>
+<h3 id="skills">skills<a class="header-anchor" href="#skills">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Verb</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>list</code></td>
+<td>List discovered skills</td>
+</tr>
+<tr>
+<td><code>search</code> / <code>install</code></td>
+<td>Search / install skills from the discovery source (ClawHub by default)</td>
+</tr>
+<tr>
+<td><code>update</code></td>
+<td>Re-pull stale skills (compares SKILL.md hashes)</td>
+</tr>
+<tr>
+<td><code>remove</code></td>
+<td>Delete an installed skill</td>
+</tr>
+<tr>
+<td><code>doctor</code></td>
+<td>Scan the skills directory for problems</td>
+</tr>
+</tbody>
+</table>
+<h3 id="plugins">plugins<a class="header-anchor" href="#plugins">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Verb</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>list</code> / <code>search</code></td>
+<td>List installed plugins / search the marketplace</td>
+</tr>
+<tr>
+<td><code>install</code> / <code>uninstall</code> / <code>update</code></td>
+<td>Install from pip / npm / git / a path, uninstall, upgrade</td>
+</tr>
+<tr>
+<td><code>enable</code> / <code>disable</code></td>
+<td>Enable / disable</td>
+</tr>
+</tbody>
+</table>
+<h3 id="channels-chat-channel-bots">channels — chat channel bots<a class="header-anchor" href="#channels-chat-channel-bots">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Verb</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>list</code></td>
+<td>Enable and configuration status per platform</td>
+</tr>
+<tr>
+<td><code>setup</code></td>
+<td>Interactive wizard: pick a channel, log in (QR code / token), bind an agent</td>
+</tr>
+<tr>
+<td><code>accounts</code></td>
+<td>Manage channel bot accounts (WeChat, Telegram, etc.)</td>
+</tr>
+<tr>
+<td><code>bindings</code></td>
+<td>Route inbound channel messages to agents</td>
+</tr>
+<tr>
+<td><code>access</code></td>
+<td>Who reaches the agent: <code>list</code>, <code>approve &lt;code&gt;</code>, <code>allow &lt;user_id&gt;</code>, <code>revoke &lt;user_id&gt;</code>. Unknown senders follow the default pairing flow; the owner can use <code>allow &lt;user_id&gt;</code> to add a known platform user ID directly to the allowlist (<a href="/docs/integrations/channels.html#who-can-talk-to-your-bot">Chat Channels</a>)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="memory-persistent-memory">memory — persistent memory<a class="header-anchor" href="#memory-persistent-memory">#</a></h3>
+<p>One workspace per instance, shared by every agent and every conversation including chat channels.</p>
+<table>
+<thead>
+<tr>
+<th>Verb</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>status</code></td>
+<td>Show workspace contents, revision, writer health, and pending turns</td>
+</tr>
+<tr>
+<td><code>recall QUERY...</code></td>
+<td>Search memory and print matching paragraphs</td>
+</tr>
+<tr>
+<td><code>show PATH</code> / <code>edit PATH</code></td>
+<td>Print / edit one memory file with <code>$EDITOR</code></td>
+</tr>
+<tr>
+<td><code>sleep</code></td>
+<td>Reorganise topic files now; <code>--model MODEL</code> selects the organising model</td>
+</tr>
+<tr>
+<td><code>export</code></td>
+<td>tar+gzip the whole memory directory; <code>--out PATH</code> sets the output file (default <code>./openprogram-memory-&lt;date&gt;.tar.gz</code>)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="maintenance">Maintenance<a class="header-anchor" href="#maintenance">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>What it does</th>
+<th>Key flags / verbs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>doctor</code></td>
+<td>End-to-end health check</td>
+<td><code>--json</code> for JSON output</td>
+</tr>
+<tr>
+<td><code>rescue</code></td>
+<td>Diagnose problems and print the fix commands directly</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>diagnostics</code></td>
+<td>Build a redacted support zip (version, config, logs, probes) to attach to a bug report — see <a href="/docs/reference/diagnostics.html">Diagnostics bundle</a></td>
+<td><code>--output PATH</code> (default <code>./openprogram-diagnostics-&lt;date&gt;.zip</code>)</td>
+</tr>
+<tr>
+<td><code>logs</code></td>
+<td>View logs</td>
+<td><code>list</code>; <code>tail [name]</code> (<code>-n</code> line count, <code>-f</code> follow); <code>path [name]</code>. name is worker / runtime / ink, default worker</td>
+</tr>
+<tr>
+<td><code>update</code></td>
+<td>Check for and apply updates</td>
+<td><code>--check</code> only checks; <code>--force</code> bypasses the 6-hour throttle</td>
+</tr>
+<tr>
+<td><code>scheduler-worker</code> (<code>cron-worker</code> alias)</td>
+<td>Foreground loop that fires one-time, recurring, and monitor Scheduler tasks; an ordinary daemon tick failure writes a warning and traceback to stderr, then evaluation continues at the next minute boundary without replaying a failed initial <code>@reboot</code> tick (the persistent worker's redirected stderr goes to its worker log)</td>
+<td><code>--once</code> evaluates one tick and exits with failures propagated; <code>--list</code> shows current task match state</td>
+</tr>
+</tbody>
+</table>
+<div class="page-updated"><span data-i18n="updated">Last updated</span> · 2026-11-01</div><div class="prevnext"><a class="pn-link pn-prev" href="/docs/reference/api/agent.html" data-href-en="/docs/reference/api/agent.html" data-href-zh="/docs/reference/api/agent.zh.html"><span class="pn-dir" data-i18n="prev">Previous</span><span class="pn-title" data-title-zh="函数 API">Function API</span></a><a class="pn-link pn-next" href="/docs/reference/config.html" data-href-en="/docs/reference/config.html" data-href-zh="/docs/reference/config.zh.html"><span class="pn-dir" data-i18n="next">Next</span><span class="pn-title" data-title-zh="配置项参考">Configuration reference</span></a></div></article></main>
+  <aside class="toc"><div class="toc-title" data-i18n="on_this_page">On this page</div>
+<ul class="toc-list">
+<li>
+<a class="lvl-2" href="#global-usage">Global usage</a>
+</li>
+<li>
+<a class="lvl-2" href="#chat-and-running">Chat and running</a>
+</li>
+<li>
+<a class="lvl-2" href="#background-service">Background service</a>
+</li>
+<li>
+<details class="toc-disclosure" open=""><summary>
+<a class="lvl-2" href="#setup-and-configuration">Setup and configuration</a>
+</summary>
+<ul class="toc-list">
+<li>
+<a class="lvl-3" href="#providers-llm-providers-and-credentials">providers — LLM providers and credentials</a>
+</li>
+<li>
+<a class="lvl-3" href="#mcp-mcp-servers">mcp — MCP servers</a>
+</li>
+<li>
+<a class="lvl-3" href="#browser-browser-tools">browser — browser tools</a>
+</li>
+</ul>
+</details>
+</li>
+<li>
+<details class="toc-disclosure" open=""><summary>
+<a class="lvl-2" href="#content-management">Content management</a>
+</summary>
+<ul class="toc-list">
+<li>
+<a class="lvl-3" href="#agents">agents</a>
+</li>
+<li>
+<a class="lvl-3" href="#sessions">sessions</a>
+</li>
+<li>
+<a class="lvl-3" href="#subagent">subagent</a>
+</li>
+<li>
+<a class="lvl-3" href="#programs">programs</a>
+</li>
+<li>
+<a class="lvl-3" href="#skills">skills</a>
+</li>
+<li>
+<a class="lvl-3" href="#plugins">plugins</a>
+</li>
+<li>
+<a class="lvl-3" href="#channels-chat-channel-bots">channels — chat channel bots</a>
+</li>
+<li>
+<a class="lvl-3" href="#memory-persistent-memory">memory — persistent memory</a>
+</li>
+</ul>
+</details>
+</li>
+<li>
+<a class="lvl-2" href="#maintenance">Maintenance</a>
+</li>
+</ul></aside>
+</div>
+
+<div class="search-overlay">
+  <div class="search-box">
+    <input type="text" data-i18n-ph="search_ph" placeholder="Search titles or text…" autocomplete="off" spellcheck="false">
+    <div class="search-results"></div>
+  </div>
+</div>
+
+<script src="/docs/assets/site.js?v=6520ba46"></script>
+</body>
+</html>

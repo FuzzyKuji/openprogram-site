@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh" data-base="/docs/" data-page-lang="zh" data-build="1793956776" data-alt-lang-url="/docs/models/README.html">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>模型配置 · OpenProgram Docs</title>
+<meta name="description" content="配置模型 # OpenProgram 需要至少一个 LLM provider 才能工作。本页说明首次配置、provider 管理命令和&quot;启用模型&quot;的机制。 首次配置 # openprogram setup 首次运行向导逐节走完模型、工具、agent 等配置； openprogram setup model">
+<link rel="canonical" href="https://openprogram.io/docs/models/README.zh.html">
+<link rel="alternate" type="text/markdown" href="https://openprogram.io/docs/models/README.zh.html.md">
+<link rel="describedby" href="https://openprogram.io/llms.txt">
+<link rel="alternate" hreflang="en" href="https://openprogram.io/docs/models/README.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://openprogram.io/docs/models/README.zh.html">
+<link rel="alternate" hreflang="x-default" href="https://openprogram.io/docs/models/README.html">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"OpenProgram Docs","item":"https://openprogram.io/docs/"},{"@type":"ListItem","position":2,"name":"模型配置"}]}</script>
+<meta property="og:type" content="article">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:site_name" content="OpenProgram">
+<meta property="og:url" content="https://openprogram.io/docs/models/README.zh.html">
+<meta property="og:title" content="模型配置 · OpenProgram Docs">
+<meta property="og:description" content="配置模型 # OpenProgram 需要至少一个 LLM provider 才能工作。本页说明首次配置、provider 管理命令和&quot;启用模型&quot;的机制。 首次配置 # openprogram setup 首次运行向导逐节走完模型、工具、agent 等配置； openprogram setup model">
+<meta property="og:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:secure_url" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="模型配置 · OpenProgram Docs">
+<meta name="twitter:description" content="配置模型 # OpenProgram 需要至少一个 LLM provider 才能工作。本页说明首次配置、provider 管理命令和&quot;启用模型&quot;的机制。 首次配置 # openprogram setup 首次运行向导逐节走完模型、工具、agent 等配置； openprogram setup model">
+<meta name="twitter:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta name="twitter:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/docs/assets/mark.svg">
+<link rel="stylesheet" href="/docs/assets/site.css?v=6520ba46">
+<link rel="stylesheet" href="/docs/assets/pygments-light.css" media="(prefers-color-scheme: light)" id="pyg-light">
+<link rel="stylesheet" href="/docs/assets/pygments-dark.css" media="(prefers-color-scheme: dark)" id="pyg-dark">
+<script src="/docs/assets/theme.js?v=6520ba46"></script>
+
+</head>
+<body>
+<header class="topbar">
+  <button class="icon hamburger" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2.5 4.5h11M2.5 8h11M2.5 11.5h11"/></svg></button>
+  <a class="brand" href="/docs/index.html"><img class="mark" src="/docs/assets/mark.svg" alt="">OpenProgram Docs</a>
+  <div class="spacer"></div>
+  <button class="search-trigger" aria-label="Search">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14"/></svg><span class="label" data-i18n="search">Search docs</span><kbd>⌘K</kbd>
+  </button>
+  <div class="lang-wrap">
+    <button class="icon lang-trigger" id="lang-toggle" aria-haspopup="true" aria-expanded="false" aria-label="Language">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="6.2"/><path d="M1.8 8h12.4" stroke-linecap="round"/><ellipse cx="8" cy="8" rx="2.8" ry="6.2"/></svg><span class="lang-label">EN</span><svg class="chev" width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+    </button>
+    <div class="lang-menu" id="lang-menu" role="menu">
+      <button class="lang-opt" data-lang="en" role="menuitem"><span>English</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="lang-opt" data-lang="zh" role="menuitem"><span>简体中文</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+  <div class="theme-wrap">
+    <button class="icon" id="theme-toggle" aria-label="Theme" aria-haspopup="menu" aria-controls="theme-menu" aria-expanded="false"><svg class="ic-system" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="2.5" width="13" height="9" rx="1.5"/><path d="M8 11.5V14M5.5 14h5"/></svg><svg class="ic-moon" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M13.5 9.5A6 6 0 1 1 6.5 2.5a5 5 0 0 0 7 7z"/></svg><svg class="ic-sun" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="3.2"/><path d="M8 1.2v1.8M8 13v1.8M1.2 8H3M13 8h1.8M3.2 3.2l1.3 1.3M11.5 11.5l1.3 1.3M12.8 3.2l-1.3 1.3M4.5 11.5l-1.3 1.3"/></svg></button>
+    <div class="theme-menu" id="theme-menu" role="menu" aria-labelledby="theme-toggle">
+      <button class="theme-opt" data-theme-choice="system" role="menuitemradio" aria-checked="true"><span>Follow system</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="light" role="menuitemradio" aria-checked="false"><span>Light</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="dark" role="menuitemradio" aria-checked="false"><span>Dark</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+</header>
+<nav class="tabbar"><a class="tablink" href="/docs/README.html" data-title-zh="开始使用" data-href-en="/docs/README.html" data-href-zh="/docs/README.zh.html">Get started</a><a class="tablink" href="/docs/install/install.html" data-title-zh="安装" data-href-en="/docs/install/install.html" data-href-zh="/docs/install/install.zh.html">Install</a><a class="tablink" href="/docs/capabilities/README.html" data-title-zh="能力" data-href-en="/docs/capabilities/README.html" data-href-zh="/docs/capabilities/README.zh.html">Capabilities</a><a class="tablink" href="/docs/interfaces/README.html" data-title-zh="界面" data-href-en="/docs/interfaces/README.html" data-href-zh="/docs/interfaces/README.zh.html">Interfaces</a><a class="tablink active" href="/docs/models/README.html" data-title-zh="模型" data-href-en="/docs/models/README.html" data-href-zh="/docs/models/README.zh.html">Models</a><a class="tablink" href="/docs/integrations/anthropic.html" data-title-zh="集成" data-href-en="/docs/integrations/anthropic.html" data-href-zh="/docs/integrations/anthropic.zh.html">Integrations</a><a class="tablink" href="/docs/server/README.html" data-title-zh="服务与运维" data-href-en="/docs/server/README.html" data-href-zh="/docs/server/README.zh.html">Server &amp; Ops</a><a class="tablink" href="/docs/reference/README.html" data-title-zh="参考" data-href-en="/docs/reference/README.html" data-href-zh="/docs/reference/README.zh.html">Reference</a><a class="tablink" href="/docs/reference/design/README.html" data-title-zh="设计" data-href-en="/docs/reference/design/README.html" data-href-zh="/docs/reference/design/README.zh.html">Design</a></nav>
+
+<div class="scrim"></div>
+<div class="layout">
+  <nav class="sidebar" aria-label="Documentation">
+    <input class="nav-filter" type="text" data-i18n-ph="nav_filter"
+           aria-label="Filter docs" placeholder="Filter docs…" autocomplete="off" spellcheck="false">
+    <div class="nav-tree"><div class="nav-sec"><div class="nav-sec-title" data-title-zh="概览">Overview</div><a class="navlink active" href="/docs/models/README.html" data-title-zh="模型配置" data-href-en="/docs/models/README.html" data-href-zh="/docs/models/README.zh.html">Model configuration</a>
+<a class="navlink" href="/docs/models/providers.html" data-title-zh="模型服务" data-href-en="/docs/models/providers.html" data-href-zh="/docs/models/providers.zh.html">Providers</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="配置">Configuration</div><a class="navlink" href="/docs/models/auth.html" data-title-zh="认证" data-href-en="/docs/models/auth.html" data-href-zh="/docs/models/auth.zh.html">Authentication</a>
+<a class="navlink" href="/docs/models/local-models.html" data-title-zh="使用本地部署的模型" data-href-en="/docs/models/local-models.html" data-href-zh="/docs/models/local-models.zh.html">Use locally deployed models</a>
+<a class="navlink" href="/docs/models/fast-tier.html" data-title-zh="高速模式" data-href-en="/docs/models/fast-tier.html" data-href-zh="/docs/models/fast-tier.zh.html">Fast mode</a>
+<a class="navlink" href="/docs/models/thinking-effort.html" data-title-zh="推理强度" data-href-en="/docs/models/thinking-effort.html" data-href-zh="/docs/models/thinking-effort.zh.html">Thinking effort</a>
+<a class="navlink" href="/docs/models/token-tracking.html" data-title-zh="Token 计量" data-href-en="/docs/models/token-tracking.html" data-href-zh="/docs/models/token-tracking.zh.html">Token accounting</a></div></div>
+  </nav>
+  <main class="content"><button class="fs-toggle" aria-label="Fullscreen" title="Fullscreen (Esc to exit)"><svg class="ic-expand" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.2 2H2v4.2M9.8 2H14v4.2M6.2 14H2V9.8M9.8 14H14V9.8"/></svg><svg class="ic-collapse" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6.2h4.2V2M14 6.2H9.8V2M2 9.8h4.2V14M14 9.8H9.8V14"/></svg></button><article><nav class="breadcrumb"><span class="bc-seg" data-title-zh="模型">Models</span> <span class='bc-sep'>›</span> <span class="bc-seg" data-title-zh="概览">Overview</span> <span class='bc-sep'>›</span> <span class="bc-seg bc-current" data-title-zh="模型配置">Model configuration</span></nav><h1 id="配置模型">配置模型<a class="header-anchor" href="#配置模型">#</a></h1>
+<p>OpenProgram 需要至少一个 LLM provider 才能工作。本页说明首次配置、provider 管理命令和&quot;启用模型&quot;的机制。</p>
+<h2 id="首次配置">首次配置<a class="header-anchor" href="#首次配置">#</a></h2>
+<pre><code class="language-bash">openprogram<span class="w"> </span>setup
+</code></pre>
+<p>首次运行向导逐节走完模型、工具、agent 等配置；<code>openprogram setup model</code> 只跳到模型一节，<code>openprogram setup menu</code> 打开交互式选单。Web UI 首次打开时也会弹同一套向导（Settings → Providers 随时可改）。</p>
+<p>只配 provider 凭据可以用更窄的入口：</p>
+<pre><code class="language-bash">openprogram<span class="w"> </span>providers<span class="w"> </span>setup<span class="w">      </span><span class="c1"># 交互式：扫描现有凭据 → 登录 → 验证</span>
+</code></pre>
+<h2 id="providers-子命令">providers 子命令<a class="header-anchor" href="#providers-子命令">#</a></h2>
+<p><code>openprogram providers -h</code> 列出全部动词，常用：</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>login &lt;provider&gt;</code></td>
+<td>登录一个 provider。自动选择合适的方式（OAuth 或 API key）；脚本里可用 <code>--api-key-stdin</code></td>
+</tr>
+<tr>
+<td><code>logout &lt;provider&gt;</code></td>
+<td>删除该 provider 的凭据</td>
+</tr>
+<tr>
+<td><code>status &lt;provider&gt;</code></td>
+<td>检查当前凭据是否可用</td>
+</tr>
+<tr>
+<td><code>list</code></td>
+<td>按账号列出已配置的凭据池</td>
+</tr>
+<tr>
+<td><code>available [QUERY]</code></td>
+<td>列出全部可配置的 provider 目录（含社区目录），可按关键词过滤</td>
+</tr>
+<tr>
+<td><code>discover</code> / <code>adopt</code></td>
+<td>扫描本机已有凭据（Codex CLI、环境变量等）并导入，见<a href="/docs/models/auth.zh.html">认证与凭据</a></td>
+</tr>
+<tr>
+<td><code>use &lt;provider&gt; [account]</code></td>
+<td>多账号时选择该 provider 当前跑哪个账号</td>
+</tr>
+<tr>
+<td><code>doctor</code></td>
+<td>诊断凭据：过期、刷新、冷却、冲突</td>
+</tr>
+<tr>
+<td><code>aliases</code> / <code>accounts</code> / <code>migrate</code></td>
+<td>短名别名、账号管理、凭据格式迁移</td>
+</tr>
+</tbody>
+</table>
+<h2 id="启用模型enabled-models">启用模型（enabled models）<a class="header-anchor" href="#启用模型enabled-models">#</a></h2>
+<p>配置好凭据不等于模型可选。每个 provider 有一份&quot;已启用模型&quot;清单，只有启用的模型才出现在聊天界面的模型选择器里。</p>
+<ul>
+<li>机制：注册表（<code>openprogram/models/providers/catalog/enabled_models.py</code>）在启动时从配置文件读取每个 provider 下的模型行，构建运行时模型清单；改配置后重载生效。</li>
+<li>配置文件：<code>~/.openprogram/config.json</code>（使用 <code>--profile &lt;name&gt;</code> 时为 <code>~/.openprogram-&lt;name&gt;/config.json</code>）。每个 provider 记在 <code>providers.&lt;id&gt;</code> 下：<code>enabled</code> 开关和 <code>models</code> 下启用的模型行（含上下文窗口、价格等 spec）。手动添加的模型也存在同一清单里，标记 <code>source: &quot;manual&quot;</code>。</li>
+<li>启用途径：setup 向导勾选；Web UI 的 Settings → Providers 里浏览该 provider 的模型列表后勾选（Fetch 按钮重新拉取官方模型目录）；订阅类 provider 登录时自动启用默认模型集。一般不需要手改 config.json。</li>
+<li>新会话的模型：没有默认模型。新会话使用你上一次选择或发送消息时用的模型，记录在顶层配置项 <code>last_used_model</code>。全新安装时没有记录，第一个会话需要先选择模型。禁用该模型会清除记录。没有所属会话的后台任务（命名、记忆写入、MCP sampling、Auto 权限审核）也使用这个模型。</li>
+</ul>
+<h2 id="本节其他页面">本节其他页面<a class="header-anchor" href="#本节其他页面">#</a></h2>
+<ul>
+<li><a href="/docs/models/local-models.zh.html">本地模型</a> — 连接 Ollama、LM Studio、vLLM 或其他本地服务</li>
+<li><a href="/docs/models/providers.zh.html">Provider 一览</a> — 内置 provider 目录、接入方式、库方式使用</li>
+<li><a href="/docs/models/auth.zh.html">认证与凭据</a> — 凭据来源、存放位置、从其他 CLI 导入</li>
+<li><a href="/docs/models/fast-tier.zh.html">fast tier</a> — 把请求路由到更快档位</li>
+<li><a href="/docs/models/thinking-effort.zh.html">thinking effort</a> — 推理深度档位</li>
+<li><a href="/docs/models/token-tracking.zh.html">Token 统计</a> — 各 provider 的用量统计口径</li>
+</ul>
+<p>可以取消一个 provider 的全部模型，包括最后一个已启用模型。空选择会在刷新和重启后保留。</p>
+<p>打开 Provider 设置时先显示已保存的模型和缓存目录，不等待 provider 的远程模型接口。点击“获取模型”更新远程目录。</p>
+<p>Provider 品牌图标随 App 本地提供，不依赖外部图片服务。自定义或没有匹配图标的 provider 显示首字母。</p>
+<div class="page-updated"><span data-i18n="updated">Last updated</span> · 2026-11-02</div><div class="prevnext"><a class="pn-link pn-prev" href="/docs/interfaces/voice-input.html" data-href-en="/docs/interfaces/voice-input.html" data-href-zh="/docs/interfaces/voice-input.zh.html"><span class="pn-dir" data-i18n="prev">Previous</span><span class="pn-title" data-title-zh="语音输入">Voice input</span></a><a class="pn-link pn-next" href="/docs/models/providers.html" data-href-en="/docs/models/providers.html" data-href-zh="/docs/models/providers.zh.html"><span class="pn-dir" data-i18n="next">Next</span><span class="pn-title" data-title-zh="模型服务">Providers</span></a></div></article></main>
+  <aside class="toc"><div class="toc-title" data-i18n="on_this_page">On this page</div>
+<ul class="toc-list">
+<li>
+<a class="lvl-2" href="#首次配置">首次配置</a>
+</li>
+<li>
+<a class="lvl-2" href="#providers-子命令">providers 子命令</a>
+</li>
+<li>
+<a class="lvl-2" href="#启用模型enabled-models">启用模型（enabled models）</a>
+</li>
+<li>
+<a class="lvl-2" href="#本节其他页面">本节其他页面</a>
+</li>
+</ul></aside>
+</div>
+
+<div class="search-overlay">
+  <div class="search-box">
+    <input type="text" data-i18n-ph="search_ph" placeholder="Search titles or text…" autocomplete="off" spellcheck="false">
+    <div class="search-results"></div>
+  </div>
+</div>
+
+<script src="/docs/assets/site.js?v=6520ba46"></script>
+</body>
+</html>

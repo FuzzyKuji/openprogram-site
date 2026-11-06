@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="zh" data-base="/docs/" data-page-lang="zh" data-build="1793956776" data-alt-lang-url="/docs/reference/api/runtime.html">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>运行时 API · OpenProgram Docs</title>
+<meta name="description" content="Source: openprogram/runtime/agent/runtime.py LLM 运行时。封装 LLM provider,自动从 session DAG 算上下文、调用 LLM、把回复写回 DAG。 Runtime 类 # class Runtime ( call = None , model =">
+<link rel="canonical" href="https://openprogram.io/docs/reference/api/runtime.zh.html">
+<link rel="alternate" type="text/markdown" href="https://openprogram.io/docs/reference/api/runtime.zh.html.md">
+<link rel="describedby" href="https://openprogram.io/llms.txt">
+<link rel="alternate" hreflang="en" href="https://openprogram.io/docs/reference/api/runtime.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://openprogram.io/docs/reference/api/runtime.zh.html">
+<link rel="alternate" hreflang="x-default" href="https://openprogram.io/docs/reference/api/runtime.html">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"OpenProgram Docs","item":"https://openprogram.io/docs/"},{"@type":"ListItem","position":2,"name":"运行时 API"}]}</script>
+<meta property="og:type" content="article">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:site_name" content="OpenProgram">
+<meta property="og:url" content="https://openprogram.io/docs/reference/api/runtime.zh.html">
+<meta property="og:title" content="运行时 API · OpenProgram Docs">
+<meta property="og:description" content="Source: openprogram/runtime/agent/runtime.py LLM 运行时。封装 LLM provider,自动从 session DAG 算上下文、调用 LLM、把回复写回 DAG。 Runtime 类 # class Runtime ( call = None , model =">
+<meta property="og:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:secure_url" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="运行时 API · OpenProgram Docs">
+<meta name="twitter:description" content="Source: openprogram/runtime/agent/runtime.py LLM 运行时。封装 LLM provider,自动从 session DAG 算上下文、调用 LLM、把回复写回 DAG。 Runtime 类 # class Runtime ( call = None , model =">
+<meta name="twitter:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta name="twitter:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/docs/assets/mark.svg">
+<link rel="stylesheet" href="/docs/assets/site.css?v=6520ba46">
+<link rel="stylesheet" href="/docs/assets/pygments-light.css" media="(prefers-color-scheme: light)" id="pyg-light">
+<link rel="stylesheet" href="/docs/assets/pygments-dark.css" media="(prefers-color-scheme: dark)" id="pyg-dark">
+<script src="/docs/assets/theme.js?v=6520ba46"></script>
+
+</head>
+<body>
+<header class="topbar">
+  <button class="icon hamburger" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2.5 4.5h11M2.5 8h11M2.5 11.5h11"/></svg></button>
+  <a class="brand" href="/docs/index.html"><img class="mark" src="/docs/assets/mark.svg" alt="">OpenProgram Docs</a>
+  <div class="spacer"></div>
+  <button class="search-trigger" aria-label="Search">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14"/></svg><span class="label" data-i18n="search">Search docs</span><kbd>⌘K</kbd>
+  </button>
+  <div class="lang-wrap">
+    <button class="icon lang-trigger" id="lang-toggle" aria-haspopup="true" aria-expanded="false" aria-label="Language">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="6.2"/><path d="M1.8 8h12.4" stroke-linecap="round"/><ellipse cx="8" cy="8" rx="2.8" ry="6.2"/></svg><span class="lang-label">EN</span><svg class="chev" width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+    </button>
+    <div class="lang-menu" id="lang-menu" role="menu">
+      <button class="lang-opt" data-lang="en" role="menuitem"><span>English</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="lang-opt" data-lang="zh" role="menuitem"><span>简体中文</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+  <div class="theme-wrap">
+    <button class="icon" id="theme-toggle" aria-label="Theme" aria-haspopup="menu" aria-controls="theme-menu" aria-expanded="false"><svg class="ic-system" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="2.5" width="13" height="9" rx="1.5"/><path d="M8 11.5V14M5.5 14h5"/></svg><svg class="ic-moon" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M13.5 9.5A6 6 0 1 1 6.5 2.5a5 5 0 0 0 7 7z"/></svg><svg class="ic-sun" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="3.2"/><path d="M8 1.2v1.8M8 13v1.8M1.2 8H3M13 8h1.8M3.2 3.2l1.3 1.3M11.5 11.5l1.3 1.3M12.8 3.2l-1.3 1.3M4.5 11.5l-1.3 1.3"/></svg></button>
+    <div class="theme-menu" id="theme-menu" role="menu" aria-labelledby="theme-toggle">
+      <button class="theme-opt" data-theme-choice="system" role="menuitemradio" aria-checked="true"><span>Follow system</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="light" role="menuitemradio" aria-checked="false"><span>Light</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="dark" role="menuitemradio" aria-checked="false"><span>Dark</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+</header>
+<nav class="tabbar"><a class="tablink" href="/docs/README.html" data-title-zh="开始使用" data-href-en="/docs/README.html" data-href-zh="/docs/README.zh.html">Get started</a><a class="tablink" href="/docs/install/install.html" data-title-zh="安装" data-href-en="/docs/install/install.html" data-href-zh="/docs/install/install.zh.html">Install</a><a class="tablink" href="/docs/capabilities/README.html" data-title-zh="能力" data-href-en="/docs/capabilities/README.html" data-href-zh="/docs/capabilities/README.zh.html">Capabilities</a><a class="tablink" href="/docs/interfaces/README.html" data-title-zh="界面" data-href-en="/docs/interfaces/README.html" data-href-zh="/docs/interfaces/README.zh.html">Interfaces</a><a class="tablink" href="/docs/models/README.html" data-title-zh="模型" data-href-en="/docs/models/README.html" data-href-zh="/docs/models/README.zh.html">Models</a><a class="tablink" href="/docs/integrations/anthropic.html" data-title-zh="集成" data-href-en="/docs/integrations/anthropic.html" data-href-zh="/docs/integrations/anthropic.zh.html">Integrations</a><a class="tablink" href="/docs/server/README.html" data-title-zh="服务与运维" data-href-en="/docs/server/README.html" data-href-zh="/docs/server/README.zh.html">Server &amp; Ops</a><a class="tablink active" href="/docs/reference/README.html" data-title-zh="参考" data-href-en="/docs/reference/README.html" data-href-zh="/docs/reference/README.zh.html">Reference</a><a class="tablink" href="/docs/reference/design/README.html" data-title-zh="设计" data-href-en="/docs/reference/design/README.html" data-href-zh="/docs/reference/design/README.zh.html">Design</a></nav>
+
+<div class="scrim"></div>
+<div class="layout">
+  <nav class="sidebar" aria-label="Documentation">
+    <input class="nav-filter" type="text" data-i18n-ph="nav_filter"
+           aria-label="Filter docs" placeholder="Filter docs…" autocomplete="off" spellcheck="false">
+    <div class="nav-tree"><div class="nav-sec"><div class="nav-sec-title" data-title-zh="概览">Overview</div><a class="navlink" href="/docs/reference/README.html" data-title-zh="概览" data-href-en="/docs/reference/README.html" data-href-zh="/docs/reference/README.zh.html">Overview</a></div>
+<div class="nav-sec"><div class="nav-sec-title">API</div><a class="navlink" href="/docs/reference/API.html" data-title-zh="API 参考" data-href-en="/docs/reference/API.html" data-href-zh="/docs/reference/API.zh.html">API reference</a>
+<a class="navlink active" href="/docs/reference/api/runtime.html" data-title-zh="运行时 API" data-href-en="/docs/reference/api/runtime.html" data-href-zh="/docs/reference/api/runtime.zh.html">Runtime API</a>
+<a class="navlink" href="/docs/reference/api/providers.html" data-title-zh="模型服务 API" data-href-en="/docs/reference/api/providers.html" data-href-zh="/docs/reference/api/providers.zh.html">Provider API</a>
+<a class="navlink" href="/docs/reference/api/agent.html" data-title-zh="函数 API" data-href-en="/docs/reference/api/agent.html" data-href-zh="/docs/reference/api/agent.zh.html">Function API</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="CLI 与配置">CLI and configuration</div><a class="navlink" href="/docs/reference/cli.html" data-title-zh="CLI 参考" data-href-en="/docs/reference/cli.html" data-href-zh="/docs/reference/cli.zh.html">CLI reference</a>
+<a class="navlink" href="/docs/reference/config.html" data-title-zh="配置项参考" data-href-en="/docs/reference/config.html" data-href-zh="/docs/reference/config.zh.html">Configuration reference</a>
+<a class="navlink" href="/docs/reference/diagnostics.html" data-title-zh="诊断" data-href-en="/docs/reference/diagnostics.html" data-href-zh="/docs/reference/diagnostics.zh.html">Diagnostics</a>
+<a class="navlink" href="/docs/reference/session-export.html" data-title-zh="会话导出" data-href-en="/docs/reference/session-export.html" data-href-zh="/docs/reference/session-export.zh.html">Session export</a>
+<a class="navlink" href="/docs/reference/output-styles.html" data-title-zh="输出风格" data-href-en="/docs/reference/output-styles.html" data-href-zh="/docs/reference/output-styles.zh.html">Output styles</a>
+<a class="navlink" href="/docs/reference/config-keys.html" data-title-zh="配置键" data-href-en="/docs/reference/config-keys.html" data-href-zh="/docs/reference/config-keys.zh.html">Config keys</a>
+<a class="navlink" href="/docs/reference/provider-registry.html" data-title-zh="模型服务清单" data-href-en="/docs/reference/provider-registry.html" data-href-zh="/docs/reference/provider-registry.zh.html">Provider registry</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="对比">Comparisons</div><a class="navlink" href="/docs/reference/comparisons/ai-agent-frameworks.html" data-title-zh="框架对比" data-href-en="/docs/reference/comparisons/ai-agent-frameworks.html" data-href-zh="/docs/reference/comparisons/ai-agent-frameworks.zh.html">Framework comparison</a>
+<a class="navlink" href="/docs/reference/comparisons/related-projects.html" data-title-zh="相关项目" data-href-en="/docs/reference/comparisons/related-projects.html" data-href-zh="/docs/reference/comparisons/related-projects.zh.html">Related projects</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="CLI 命令">CLI commands</div><a class="navlink" href="/docs/reference/cli/README.html" data-title-zh="全局参数" data-href-en="/docs/reference/cli/README.html" data-href-zh="/docs/reference/cli/README.zh.html">Global flags</a>
+<a class="navlink" href="/docs/reference/cli/acp.html" data-title-zh="编辑器协议" data-href-en="/docs/reference/cli/acp.html" data-href-zh="/docs/reference/cli/acp.zh.html">acp</a>
+<a class="navlink" href="/docs/reference/cli/agents.html" data-title-zh="Agent 管理" data-href-en="/docs/reference/cli/agents.html" data-href-zh="/docs/reference/cli/agents.zh.html">agents</a>
+<a class="navlink" href="/docs/reference/cli/backup.html" data-title-zh="备份" data-href-en="/docs/reference/cli/backup.html" data-href-zh="/docs/reference/cli/backup.zh.html">backup</a>
+<a class="navlink" href="/docs/reference/cli/browser.html" data-title-zh="浏览器" data-href-en="/docs/reference/cli/browser.html" data-href-zh="/docs/reference/cli/browser.zh.html">browser</a>
+<a class="navlink" href="/docs/reference/cli/channels.html" data-title-zh="渠道" data-href-en="/docs/reference/cli/channels.html" data-href-zh="/docs/reference/cli/channels.zh.html">channels</a>
+<a class="navlink" href="/docs/reference/cli/chat.html" data-title-zh="聊天" data-href-en="/docs/reference/cli/chat.html" data-href-zh="/docs/reference/cli/chat.zh.html">chat</a>
+<a class="navlink" href="/docs/reference/cli/completion.html" data-title-zh="命令补全" data-href-en="/docs/reference/cli/completion.html" data-href-zh="/docs/reference/cli/completion.zh.html">completion</a>
+<a class="navlink" href="/docs/reference/cli/config.html" data-title-zh="设置" data-href-en="/docs/reference/cli/config.html" data-href-zh="/docs/reference/cli/config.zh.html">config</a>
+<a class="navlink" href="/docs/reference/cli/cron-worker.html" data-title-zh="定时任务" data-href-en="/docs/reference/cli/cron-worker.html" data-href-zh="/docs/reference/cli/cron-worker.zh.html">cron-worker</a>
+<a class="navlink" href="/docs/reference/cli/dev.html" data-title-zh="开发版" data-href-en="/docs/reference/cli/dev.html" data-href-zh="/docs/reference/cli/dev.zh.html">dev</a>
+<a class="navlink" href="/docs/reference/cli/diagnostics.html" data-title-zh="诊断包" data-href-en="/docs/reference/cli/diagnostics.html" data-href-zh="/docs/reference/cli/diagnostics.zh.html">diagnostics</a>
+<a class="navlink" href="/docs/reference/cli/doctor.html" data-title-zh="环境诊断" data-href-en="/docs/reference/cli/doctor.html" data-href-zh="/docs/reference/cli/doctor.zh.html">doctor</a>
+<a class="navlink" href="/docs/reference/cli/environments.html" data-title-zh="运行环境" data-href-en="/docs/reference/cli/environments.html" data-href-zh="/docs/reference/cli/environments.zh.html">environments</a>
+<a class="navlink" href="/docs/reference/cli/execution.html" data-title-zh="执行控制" data-href-en="/docs/reference/cli/execution.html" data-href-zh="/docs/reference/cli/execution.zh.html">execution</a>
+<a class="navlink" href="/docs/reference/cli/jobs.html" data-title-zh="后台任务" data-href-en="/docs/reference/cli/jobs.html" data-href-zh="/docs/reference/cli/jobs.zh.html">jobs</a>
+<a class="navlink" href="/docs/reference/cli/logs.html" data-title-zh="日志" data-href-en="/docs/reference/cli/logs.html" data-href-zh="/docs/reference/cli/logs.zh.html">logs</a>
+<a class="navlink" href="/docs/reference/cli/mcp.html" data-title-zh="MCP 服务器" data-href-en="/docs/reference/cli/mcp.html" data-href-zh="/docs/reference/cli/mcp.zh.html">mcp</a>
+<a class="navlink" href="/docs/reference/cli/memory.html" data-title-zh="记忆" data-href-en="/docs/reference/cli/memory.html" data-href-zh="/docs/reference/cli/memory.zh.html">memory</a>
+<a class="navlink" href="/docs/reference/cli/permissions.html" data-title-zh="CLI：权限规则" data-href-en="/docs/reference/cli/permissions.html" data-href-zh="/docs/reference/cli/permissions.zh.html">permissions</a>
+<a class="navlink" href="/docs/reference/cli/plugins.html" data-title-zh="插件" data-href-en="/docs/reference/cli/plugins.html" data-href-zh="/docs/reference/cli/plugins.zh.html">plugins</a>
+<a class="navlink" href="/docs/reference/cli/ports.html" data-title-zh="端口" data-href-en="/docs/reference/cli/ports.html" data-href-zh="/docs/reference/cli/ports.zh.html">ports</a>
+<a class="navlink" href="/docs/reference/cli/programs.html" data-title-zh="程序" data-href-en="/docs/reference/cli/programs.html" data-href-zh="/docs/reference/cli/programs.zh.html">programs</a>
+<a class="navlink" href="/docs/reference/cli/providers.html" data-title-zh="模型服务" data-href-en="/docs/reference/cli/providers.html" data-href-zh="/docs/reference/cli/providers.zh.html">providers</a>
+<a class="navlink" href="/docs/reference/cli/recordings.html" data-title-zh="录制" data-href-en="/docs/reference/cli/recordings.html" data-href-zh="/docs/reference/cli/recordings.zh.html">recordings</a>
+<a class="navlink" href="/docs/reference/cli/rescue.html" data-title-zh="恢复" data-href-en="/docs/reference/cli/rescue.html" data-href-zh="/docs/reference/cli/rescue.zh.html">rescue</a>
+<a class="navlink" href="/docs/reference/cli/restart.html" data-title-zh="重启" data-href-en="/docs/reference/cli/restart.html" data-href-zh="/docs/reference/cli/restart.zh.html">restart</a>
+<a class="navlink" href="/docs/reference/cli/scheduler-worker.html" data-title-zh="任务调度" data-href-en="/docs/reference/cli/scheduler-worker.html" data-href-zh="/docs/reference/cli/scheduler-worker.zh.html">scheduler-worker</a>
+<a class="navlink" href="/docs/reference/cli/secrets.html" data-title-zh="凭据" data-href-en="/docs/reference/cli/secrets.html" data-href-zh="/docs/reference/cli/secrets.zh.html">secrets</a>
+<a class="navlink" href="/docs/reference/cli/self-update.html" data-title-zh="应用更新" data-href-en="/docs/reference/cli/self-update.html" data-href-zh="/docs/reference/cli/self-update.zh.html">self-update</a>
+<a class="navlink" href="/docs/reference/cli/sessions.html" data-title-zh="会话" data-href-en="/docs/reference/cli/sessions.html" data-href-zh="/docs/reference/cli/sessions.zh.html">sessions</a>
+<a class="navlink" href="/docs/reference/cli/setup.html" data-title-zh="初始设置" data-href-en="/docs/reference/cli/setup.html" data-href-zh="/docs/reference/cli/setup.zh.html">setup</a>
+<a class="navlink" href="/docs/reference/cli/skills.html" data-title-zh="技能" data-href-en="/docs/reference/cli/skills.html" data-href-zh="/docs/reference/cli/skills.zh.html">skills</a>
+<a class="navlink" href="/docs/reference/cli/status.html" data-title-zh="运行状态" data-href-en="/docs/reference/cli/status.html" data-href-zh="/docs/reference/cli/status.zh.html">status</a>
+<a class="navlink" href="/docs/reference/cli/stop.html" data-title-zh="停止" data-href-en="/docs/reference/cli/stop.html" data-href-zh="/docs/reference/cli/stop.zh.html">stop</a>
+<a class="navlink" href="/docs/reference/cli/subagent.html" data-title-zh="子 Agent" data-href-en="/docs/reference/cli/subagent.html" data-href-zh="/docs/reference/cli/subagent.zh.html">subagent</a>
+<a class="navlink" href="/docs/reference/cli/trash.html" data-title-zh="删除恢复" data-href-en="/docs/reference/cli/trash.html" data-href-zh="/docs/reference/cli/trash.zh.html">trash</a>
+<a class="navlink" href="/docs/reference/cli/tui.html" data-title-zh="终端界面" data-href-en="/docs/reference/cli/tui.html" data-href-zh="/docs/reference/cli/tui.zh.html">tui</a>
+<a class="navlink" href="/docs/reference/cli/update.html" data-title-zh="更新检查" data-href-en="/docs/reference/cli/update.html" data-href-zh="/docs/reference/cli/update.zh.html">update</a>
+<a class="navlink" href="/docs/reference/cli/upgrade.html" data-title-zh="版本升级" data-href-en="/docs/reference/cli/upgrade.html" data-href-zh="/docs/reference/cli/upgrade.zh.html">upgrade</a>
+<a class="navlink" href="/docs/reference/cli/web.html" data-title-zh="网页界面" data-href-en="/docs/reference/cli/web.html" data-href-zh="/docs/reference/cli/web.zh.html">web</a>
+<a class="navlink" href="/docs/reference/cli/worker.html" data-title-zh="后台服务" data-href-en="/docs/reference/cli/worker.html" data-href-zh="/docs/reference/cli/worker.zh.html">worker</a></div></div>
+  </nav>
+  <main class="content"><button class="fs-toggle" aria-label="Fullscreen" title="Fullscreen (Esc to exit)"><svg class="ic-expand" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.2 2H2v4.2M9.8 2H14v4.2M6.2 14H2V9.8M9.8 14H14V9.8"/></svg><svg class="ic-collapse" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6.2h4.2V2M14 6.2H9.8V2M2 9.8h4.2V14M14 9.8H9.8V14"/></svg></button><article><nav class="breadcrumb"><span class="bc-seg" data-title-zh="参考">Reference</span> <span class='bc-sep'>›</span> <span class="bc-seg">API</span> <span class='bc-sep'>›</span> <span class="bc-seg bc-current" data-title-zh="运行时 API">Runtime API</span></nav><div id="runtime"></div>
+<h1 id="运行时-api">运行时 API<a class="header-anchor" href="#运行时-api">#</a></h1>
+<blockquote>
+<p>Source: <a href="https://github.com/FuzzyKuji/OpenProgram/blob/main/openprogram/runtime/agent/runtime.py"><code>openprogram/runtime/agent/runtime.py</code></a></p>
+</blockquote>
+<p>LLM 运行时。封装 LLM provider,自动从 session DAG 算上下文、调用 LLM、把回复写回 DAG。</p>
+<hr />
+<div id="class-runtime"></div>
+<h2 id="runtime-类"><code>Runtime</code> 类<a class="header-anchor" href="#runtime-类">#</a></h2>
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">Runtime</span><span class="p">(</span><span class="n">call</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;default&quot;</span><span class="p">,</span> <span class="n">max_retries</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">api_key</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">skills</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</code></pre>
+<h3 id="构造参数">构造参数<a class="header-anchor" href="#构造参数">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>call</code></td>
+<td><code>Callable | None</code></td>
+<td><code>None</code></td>
+<td>用户自带的 LLM 函数。签名:<code>fn(content: list[dict], model: str, response_format: dict) -&gt; str</code>。内部经 <code>CallableModel</code> 包进标准 provider 路径,DAG 记录和历史渲染与真 provider 一致。既没传 <code>call</code> 也没用 <code>&quot;provider:model_id&quot;</code> 形式时,需要子类化并重写 <code>_call()</code></td>
+</tr>
+<tr>
+<td><code>model</code></td>
+<td><code>str</code></td>
+<td><code>&quot;default&quot;</code></td>
+<td>默认模型。两种形式:<code>&quot;provider:model_id&quot;</code>(如 <code>&quot;anthropic:claude-sonnet-4-6&quot;</code>)经 <code>openprogram.models.providers</code> 解析并走 provider 层流式;其它字符串只有配合 <code>call=</code> 或子类才有意义。未知的 <code>&quot;provider:model_id&quot;</code> 抛 <code>ValueError</code></td>
+</tr>
+<tr>
+<td><code>max_retries</code></td>
+<td><code>int | None</code></td>
+<td><code>None</code></td>
+<td>exec() 最大尝试次数(包含首次调用,且必须 &gt;= 1)。<code>None</code> = 读环境变量 <code>OPENPROGRAM_MAX_RETRIES</code>,没设则为 <code>6</code></td>
+</tr>
+<tr>
+<td><code>api_key</code></td>
+<td><code>str | None</code></td>
+<td><code>None</code></td>
+<td>provider 路径的 API key。<code>None</code> = 从凭据库解析(<code>openprogram providers login</code>)</td>
+</tr>
+<tr>
+<td><code>skills</code></td>
+<td><code>bool | list[str] | None</code></td>
+<td><code>None</code></td>
+<td>system prompt 的技能发现。<code>None</code> / <code>False</code> = 关闭;<code>True</code> = 探测默认技能目录(用户 + 仓库);<code>list[str]</code> = 显式目录列表。开启后每次 <code>exec()</code> 的 system prompt 追加 <code>&lt;available_skills&gt;</code> 块</td>
+</tr>
+</tbody>
+</table>
+<h3 id="属性">属性<a class="header-anchor" href="#属性">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>model</code></td>
+<td><code>str</code></td>
+<td>默认模型名称</td>
+</tr>
+<tr>
+<td><code>max_retries</code></td>
+<td><code>int</code></td>
+<td>解析后的重试预算</td>
+</tr>
+<tr>
+<td><code>system</code></td>
+<td><code>str</code></td>
+<td>可赋值的 system prompt,<code>exec()</code> 在 provider 路径上读取(<code>method_options[&quot;method&quot;][&quot;system&quot;]</code> 会在调用期间设置它)</td>
+</tr>
+<tr>
+<td><code>thinking_level</code></td>
+<td><code>str</code></td>
+<td>推理力度旋钮:<code>&quot;off&quot;</code>(默认)/ <code>&quot;low&quot;</code> / <code>&quot;medium&quot;</code> / <code>&quot;high&quot;</code> / <code>&quot;xhigh&quot;</code>,透传给 provider</td>
+</tr>
+<tr>
+<td><code>session_id</code></td>
+<td><code>str</code></td>
+<td>跨多次 <code>exec()</code> 稳定的 id(<code>&quot;op-&lt;hex&gt;&quot;</code>),provider 拿它当 prompt-cache key</td>
+</tr>
+<tr>
+<td><code>on_stream</code></td>
+<td><code>Callable | None</code></td>
+<td>可选回调 <code>fn(event_dict)</code>,接收流式事件(text / thinking / tool_use / tool_result)</td>
+</tr>
+<tr>
+<td><code>last_usage</code></td>
+<td><code>dict | None</code></td>
+<td>上一次调用的 token 用量:<code>{input_tokens, output_tokens, total_tokens, cache_read, cache_create, ...}</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="方法">方法<a class="header-anchor" href="#方法">#</a></h2>
+<h3 id="exec"><code>exec()</code><a class="header-anchor" href="#exec">#</a></h3>
+<pre><code class="language-python"><span class="n">Runtime</span><span class="o">.</span><span class="n">exec</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">response_format</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+             <span class="n">tools</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">toolset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tools_source</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tools_allow</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+             <span class="n">tools_deny</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tool_choice</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span> <span class="n">parallel_tool_calls</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+             <span class="n">max_iterations</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout_s</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">on_retry</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+             <span class="n">web_search</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">stream_fn</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span>
+</code></pre>
+<p>调用 LLM,上下文从 session DAG 自动算出。</p>
+<p><strong>在 Agent 方法或受管函数作用域内调用时：</strong></p>
+<ol>
+<li>从当前函数的 DAG 节点出发,<code>render_context</code> 按 <code>expose</code> / <code>render_range</code> 算出本次要读哪些历史节点</li>
+<li><code>render_dag_messages</code> 把这些节点渲染成 messages</li>
+<li>调用 <code>_call()</code> 发送请求</li>
+<li>回复写进 <code>exec()</code> 开始时打开的那个 <code>llm</code> 节点</li>
+</ol>
+<p><strong>没安装 DAG store 时</strong>(standalone 脚本、无 dispatcher):<code>content</code> 包成单条 user message 作单轮调用发送,不做任何记录。</p>
+<p>Agent 方法或函数作用域可以多次调用 <code>exec()</code>,每次都是 DAG 上的一个新 <code>llm</code> 节点。</p>
+<h4 id="参数">参数<a class="header-anchor" href="#参数">#</a></h4>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>content</code></td>
+<td><code>list[dict] | str</code></td>
+<td><em>(必填)</em></td>
+<td>内容块列表(见下方格式)。纯字符串会包成一个 text 块</td>
+</tr>
+<tr>
+<td><code>context</code></td>
+<td><code>str | None</code></td>
+<td><code>None</code></td>
+<td>遗留参数,已被忽略——provider 路径从 DAG 构建历史</td>
+</tr>
+<tr>
+<td><code>response_format</code></td>
+<td><code>dict | JsonSchemaOutput | None</code></td>
+<td><code>None</code></td>
+<td>裸 JSON Schema 或规范化 <code>JsonSchemaOutput</code> 包络。已验证的 provider/model 组合使用已注册的原生映射；否则 <code>fallback=&quot;auto&quot;</code> 可使用已验证的隐藏 strict-tool 路径，提示词回退必须显式设置 <code>fallback=&quot;prompt&quot;</code>。不支持或有损的组合直接失败。终态按原始 schema 做本地解析与校验，并返回 Python JSON 值；<code>max_validation_retries</code> 可以是 <code>0</code>、<code>1</code> 或 <code>2</code>（默认 <code>2</code>）；校验修复与截断重新生成共享此次数。同时仍转发给 <code>_call()</code> 供子类使用</td>
+</tr>
+<tr>
+<td><code>model</code></td>
+<td><code>str | None</code></td>
+<td><code>None</code></td>
+<td>覆盖默认模型</td>
+</tr>
+<tr>
+<td><code>tools</code></td>
+<td><code>list | None</code></td>
+<td><code>None</code></td>
+<td>本次调用 LLM 可用的工具。每项可以是显式登记的 Agent 方法、<code>{&quot;spec&quot;:..., &quot;execute&quot;:...}</code> 字典、或带 <code>.spec</code> / <code>.execute</code> 的对象。设了就跑工具循环直到模型返回纯文本。<strong>默认(<code>None</code>)不是&quot;无工具&quot;</strong>:调用会拿到完整的注册工具集;纯推理调用传 <code>toolset=&quot;none&quot;</code>,要显式空列表传 <code>tools=[]</code></td>
+</tr>
+<tr>
+<td><code>toolset</code> / <code>tools_source</code> / <code>tools_allow</code> / <code>tools_deny</code></td>
+<td>—</td>
+<td><code>None</code></td>
+<td>工具集预设与策略过滤:<code>toolset</code> 指名预设(<code>&quot;full&quot;</code> 是隐式默认,<code>&quot;none&quot;</code> 表示退出),<code>tools_source</code> 按渠道来源过滤,<code>tools_allow</code> / <code>tools_deny</code> 是名单允许/拒绝列表</td>
+</tr>
+<tr>
+<td><code>tool_choice</code></td>
+<td><code>str | dict</code></td>
+<td><code>&quot;auto&quot;</code></td>
+<td><code>&quot;auto&quot;</code> / <code>&quot;required&quot;</code> / <code>&quot;none&quot;</code> / <code>{&quot;type&quot;:&quot;function&quot;,&quot;name&quot;:&quot;X&quot;}</code> 强制某工具。透传到 provider(OpenAI / Anthropic / Gemini / Bedrock 各自映射协议形态)</td>
+</tr>
+<tr>
+<td><code>parallel_tool_calls</code></td>
+<td><code>bool</code></td>
+<td><code>True</code></td>
+<td>允许一轮多个工具调用;<code>False</code> 透传到支持该开关的 provider</td>
+</tr>
+<tr>
+<td><code>max_iterations</code></td>
+<td><code>int</code></td>
+<td><code>20</code></td>
+<td>工具循环轮数上限(一轮 = 一次模型调用 + 其工具执行)。生效值为 <code>max(1, max_iterations)</code>。聊天轮次不设上限。这个默认 20 只作用于 <code>runtime.exec</code></td>
+</tr>
+<tr>
+<td><code>choices</code></td>
+<td><code>dict | list | None</code></td>
+<td><code>None</code></td>
+<td>设了则约束 turn 的<strong>收尾</strong>:模型跑完整 turn 后,最终回复必须从 <code>choices</code> 里选一个;<code>exec</code> 解析并返回该选择的结果。详见 <a href="/docs/capabilities/agentic-programming/choosing-the-next-step/next-step-decision.zh.html">next-step-decision</a></td>
+</tr>
+<tr>
+<td><code>timeout_s</code></td>
+<td><code>float | None</code></td>
+<td><code>None</code></td>
+<td>整个 <code>exec()</code>(含全部重试休眠)的墙钟时间预算,超时抛 <code>LLMError</code>(<code>reason=TIMEOUT</code>, <code>retryable=False</code>)。<code>None</code> = 回落到环境变量 <code>OPENPROGRAM_EXEC_TIMEOUT_S</code>(没设或为 <code>0</code> = 不限时)</td>
+</tr>
+<tr>
+<td><code>on_retry</code></td>
+<td><code>Callable | None</code></td>
+<td><code>None</code></td>
+<td>每次退避休眠前调用的观测回调(每个后面还排着重试的失败尝试触发一次),入参 <code>RetryInfo</code>;最终失败不触发。回调内抛出的异常被吞掉</td>
+</tr>
+<tr>
+<td><code>web_search</code></td>
+<td><code>bool</code></td>
+<td><code>False</code></td>
+<td>本次调用启用 provider 原生的 web 搜索工具(视 provider 支持)</td>
+</tr>
+<tr>
+<td><code>stream_fn</code></td>
+<td>—</td>
+<td><code>None</code></td>
+<td>逐调用的流函数覆盖(dispatcher 和测试用它注入假的或预构建的流);<code>None</code> = 真 provider</td>
+</tr>
+</tbody>
+</table>
+<h4 id="content-block-格式">Content block 格式<a class="header-anchor" href="#content-block-格式">#</a></h4>
+<pre><code class="language-python"><span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span>  <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;Find the login button.&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;image&quot;</span><span class="p">,</span> <span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="s2">&quot;screenshot.png&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;image&quot;</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;base64&gt;&quot;</span><span class="p">,</span> <span class="s2">&quot;mime_type&quot;</span><span class="p">:</span> <span class="s2">&quot;image/png&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;video&quot;</span><span class="p">,</span> <span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="s2">&quot;clip.mp4&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;audio&quot;</span><span class="p">,</span> <span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="s2">&quot;recording.wav&quot;</span><span class="p">}</span>
+</code></pre>
+<p>媒体块给 <code>path</code>(自动读取并 base64 编码,mime 类型按扩展名猜)或内联 <code>data</code> + <code>mime_type</code> 都行。text 块可带 <code>&quot;role&quot;: &quot;system&quot;</code> 汇入 system prompt;text/image 块接受 <code>cache_control</code> 做 provider prompt caching。未知块类型静默跳过。</p>
+<h4 id="返回值">返回值<a class="header-anchor" href="#返回值">#</a></h4>
+<p><code>response_format=None</code> 时返回 LLM 回复文本 <code>str</code>。传结构化
+<code>response_format</code> 时返回经过本地校验的 Python JSON 值(<code>dict</code>、<code>list</code>、标量或
+<code>None</code>)。带 <code>choices</code> 时返回解析后的决策结果(选中函数的返回值,或选中值本身)。</p>
+<h4 id="异常">异常<a class="header-anchor" href="#异常">#</a></h4>
+<ul>
+<li><code>RuntimeError</code> — runtime 已关闭(调用过 <code>close()</code>)</li>
+<li><code>TypeError</code> / <code>NotImplementedError</code> — 立即抛出,从不重试(编程错误:调用签名不对、没配置 provider)</li>
+<li><code>LLMError</code> — 重试耗尽或遇到不可重试错误时抛出,结构化字段含 <code>reason</code> / <code>retryable</code> / <code>http_status</code> / <code>retry_after_s</code> / <code>attempts</code> / <code>elapsed_s</code> / <code>provider</code> / <code>model</code> 等</li>
+<li><code>StructuredOutputSchemaError</code> — 公共 schema 或包络非法;稳定 <code>code=&quot;invalid_schema&quot;</code></li>
+<li><code>StructuredOutputUnsupportedError</code> — 没有已验证且无损的 provider/fallback 合同;稳定 <code>code=&quot;unsupported&quot;</code></li>
+<li><code>StructuredOutputValidationError</code> — JSON 非法、schema 不匹配或隐藏提交合同失败;稳定 code 为 <code>invalid_json</code>、<code>validation_failed</code>、<code>missing_submission</code>、<code>mixed_submission</code></li>
+<li><code>StructuredOutputGenerationError</code> — provider 拒绝或未完整生成;稳定 code 为 <code>refusal</code>、<code>incomplete</code></li>
+</ul>
+<p>全部 structured-output 异常都提供稳定 <code>.code</code> 和有界 <code>.issues</code> 字段。
+provider 候选正文不属于公共诊断合同。</p>
+<hr />
+<h3 id="async_exec"><code>async_exec()</code><a class="header-anchor" href="#async_exec">#</a></h3>
+<pre><code class="language-python"><span class="k">await</span> <span class="n">Runtime</span><span class="o">.</span><span class="n">async_exec</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">response_format</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                         <span class="n">timeout_s</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">on_retry</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tools</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">toolset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                         <span class="n">max_iterations</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span>
+</code></pre>
+<p><code>exec()</code> 的异步版本,具有相同的 <code>response_format=None</code> 文本返回以及结构化
+Python JSON 返回/异常合同。内部调用 <code>_async_call()</code>;<code>call=</code> 函数可同步或异步,
+默认 provider 路径使用同一 AgentSession structured lifecycle。<code>timeout_s</code> /
+<code>on_retry</code> 语义与 <code>exec()</code> 相同;重试用 <code>asyncio.sleep</code> 休眠,外部取消能生效。
+它接受同步工具循环选项，包括 tools、toolset、max_iterations 和工具授权过滤。</p>
+<hr />
+<h3 id="_call"><code>_call()</code><a class="header-anchor" href="#_call">#</a></h3>
+<pre><code class="language-python"><span class="n">Runtime</span><span class="o">.</span><span class="n">_call</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;default&quot;</span><span class="p">,</span> <span class="n">response_format</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span>
+</code></pre>
+<p>实际调用一次 LLM 的方法(不含重试——重试循环在 <code>exec()</code> 里包着)。默认实现在配置了 provider 模型或 <code>call=</code> 函数时走 provider 层(<code>AgentSession</code>),否则抛 <code>NotImplementedError</code>。<strong>子类化时重写此方法。</strong></p>
+<h4 id="参数-1">参数<a class="header-anchor" href="#参数-1">#</a></h4>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>content</code></td>
+<td><code>list[dict]</code></td>
+<td>当前 turn 的内容块(历史由 provider 路径从 DAG 渲染)</td>
+</tr>
+<tr>
+<td><code>model</code></td>
+<td><code>str</code></td>
+<td>模型名称</td>
+</tr>
+<tr>
+<td><code>response_format</code></td>
+<td><code>dict | None</code></td>
+<td>输出格式约束</td>
+</tr>
+</tbody>
+</table>
+<h4 id="返回值-1">返回值<a class="header-anchor" href="#返回值-1">#</a></h4>
+<p>普通调用返回原始文本;结构化格式激活时返回已校验的 Python JSON 值。</p>
+<hr />
+<h3 id="_async_call"><code>_async_call()</code><a class="header-anchor" href="#_async_call">#</a></h3>
+<pre><code class="language-python"><span class="k">await</span> <span class="n">Runtime</span><span class="o">.</span><span class="n">_async_call</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;default&quot;</span><span class="p">,</span> <span class="n">response_format</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span>
+</code></pre>
+<p><code>_call()</code> 的异步版本。子类化时重写此方法以支持异步 provider。</p>
+<hr />
+<h3 id="close"><code>close()</code><a class="header-anchor" href="#close">#</a></h3>
+<p>释放资源、结束会话;<code>close()</code> 之后 <code>exec()</code> 抛 <code>RuntimeError</code>。<code>Runtime</code> 也是上下文管理器(<code>with Runtime(...) as rt:</code> 退出时自动关闭)。子类重写它清理 provider 专属资源。</p>
+<hr />
+<h3 id="向用户提问">向用户提问<a class="header-anchor" href="#向用户提问">#</a></h3>
+<p>有前端会话连着时,runtime 可以在函数中途阻塞等用户输入:<code>runtime.ask(prompt, options=..., multi=..., questions=[...], timeout=300.0, default=None)</code>(一题或多题一屏),<code>runtime.confirm(prompt, default=False)</code>(是/否),<code>runtime.form(prompt, fields)</code>(多字段表单)。<code>runtime.can_ask()</code> 报告当前有没有人能回答(headless 跑时为 False)。用户拒绝抛 <code>UserDeclined</code>;超时给了 <code>default</code> 就返回它,否则抛 <code>AskTimeout</code>。</p>
+<hr />
+<h2 id="使用方式">使用方式<a class="header-anchor" href="#使用方式">#</a></h2>
+<p>宿主提供 Runtime，Agent 自动继承它。普通方法不需要装饰器或手动 Context 管理。</p>
+<pre><code class="language-python"><span class="kn">from</span><span class="w"> </span><span class="nn">openprogram</span><span class="w"> </span><span class="kn">import</span> <span class="n">Agent</span><span class="p">,</span> <span class="n">Runtime</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">my_llm</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;host-model&quot;</span><span class="p">,</span> <span class="n">response_format</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">texts</span> <span class="o">=</span> <span class="p">[</span><span class="n">block</span><span class="p">[</span><span class="s2">&quot;text&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">block</span> <span class="ow">in</span> <span class="n">content</span> <span class="k">if</span> <span class="n">block</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;text&quot;</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">call_my_api</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">texts</span><span class="p">),</span> <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
+
+<span class="n">runtime</span> <span class="o">=</span> <span class="n">Runtime</span><span class="p">(</span><span class="n">call</span><span class="o">=</span><span class="n">my_llm</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;host-model&quot;</span><span class="p">)</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Observer</span><span class="p">(</span><span class="n">Agent</span><span class="p">):</span>
+    <span class="n">tools</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">observe</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Identify the requested screen element.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">([</span>
+            <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Find: </span><span class="si">{</span><span class="n">task</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;image&quot;</span><span class="p">,</span> <span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="s2">&quot;screenshot.png&quot;</span><span class="p">},</span>
+        <span class="p">])</span>
+
+<span class="n">observer</span> <span class="o">=</span> <span class="n">Observer</span><span class="p">(</span><span class="n">runtime</span><span class="o">=</span><span class="n">runtime</span><span class="p">)</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">answer</span> <span class="o">=</span> <span class="n">observer</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span><span class="s2">&quot;login button&quot;</span><span class="p">)</span>
+<span class="k">finally</span><span class="p">:</span>
+    <span class="n">runtime</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre>
+<p><a href="/docs/reference/api/agent.zh.html">Agent 与 Context API</a> 说明配置、显式会话与作用域。方法配置继续兼容。</p>
+<h2 id="retry-机制">Retry 机制<a class="header-anchor" href="#retry-机制">#</a></h2>
+<p><code>exec()</code> 和 <code>async_exec()</code> 内置自动重试,用于处理 LLM API 的临时性错误(网络超时、速率限制、服务器错误等)。</p>
+<h3 id="配置">配置<a class="header-anchor" href="#配置">#</a></h3>
+<pre><code class="language-python"><span class="c1"># 默认:max_retries=None → 读环境变量 OPENPROGRAM_MAX_RETRIES,没设则为 6</span>
+<span class="n">rt</span> <span class="o">=</span> <span class="n">Runtime</span><span class="p">(</span><span class="n">call</span><span class="o">=</span><span class="n">my_llm</span><span class="p">)</span>
+
+<span class="c1"># 不重试(失败即抛异常)</span>
+<span class="n">rt</span> <span class="o">=</span> <span class="n">Runtime</span><span class="p">(</span><span class="n">call</span><span class="o">=</span><span class="n">my_llm</span><span class="p">,</span> <span class="n">max_retries</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># 多次重试(适用于不稳定的 API)</span>
+<span class="n">rt</span> <span class="o">=</span> <span class="n">Runtime</span><span class="p">(</span><span class="n">call</span><span class="o">=</span><span class="n">my_llm</span><span class="p">,</span> <span class="n">max_retries</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</code></pre>
+<h3 id="行为规则">行为规则<a class="header-anchor" href="#行为规则">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>情况</th>
+<th>处理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>API 调用成功</td>
+<td>返回结果</td>
+</tr>
+<tr>
+<td>API 抛出瞬态异常</td>
+<td>记录失败 attempt,按指数退避休眠(基数 1.5 秒 x 2^attempt,±25% 抖动;服务端 <code>Retry-After</code> 提示作为下限被遵守;基数可用 <code>OPENPROGRAM_RETRY_BACKOFF_BASE</code> 调),然后重试直到达到 <code>max_retries</code></td>
+</tr>
+<tr>
+<td>永久性错误(图片数据损坏、登录过期、无效 API key、或 provider 已把异常标记 <code>retryable=False</code>)</td>
+<td>立即以 <code>retryable=False</code> 的 <code>LLMError</code> 抛出,不重试</td>
+</tr>
+<tr>
+<td>provider 自己的传输层重试预算已耗尽(<code>transport_exhausted</code>)</td>
+<td>不再二次重试——直接抛 <code>LLMError</code></td>
+</tr>
+<tr>
+<td><code>TypeError</code> 或 <code>NotImplementedError</code></td>
+<td>立即抛出,不重试(通常是 provider 实现或调用方式的问题)</td>
+</tr>
+<tr>
+<td>所有重试均失败</td>
+<td>抛出结构化 <code>LLMError</code>(<code>reason</code> / <code>retryable</code> / <code>http_status</code> / <code>attempts</code> 等字段),并附上完整 attempt 报告</td>
+</tr>
+</tbody>
+</table>
+<h3 id="错误报告格式">错误报告格式<a class="header-anchor" href="#错误报告格式">#</a></h3>
+<p>当所有重试耗尽时,抛出的 <code>LLMError</code> 包含每次尝试的错误信息,结构化字段(<code>reason</code> / <code>retryable</code> / <code>http_status</code> / <code>attempts</code> / <code>elapsed_s</code> 等)可直接读取:</p>
+<pre><code>LLMError: exec() failed after 3 attempt(s):
+Attempt 1: ConnectionError: timeout
+Attempt 2: RateLimitError: 429 Too Many Requests
+Attempt 3: ConnectionError: timeout
+</code></pre>
+<h3 id="重试的边界">重试的边界<a class="header-anchor" href="#重试的边界">#</a></h3>
+<p>结构化输出修正，以及启用工具时的异常重复输出，共用本次调用的失败恢复额度。瞬态传输失败使用单独的传输额度（<code>OPENPROGRAM_PROVIDER_STREAM_RETRIES</code> 减一），连接中断不会占用修正额度。一次模型请求在传输失败后重试成功，会归还所用额度，因此传输恢复按单次请求计限，而不是按整个 Agent 循环计限。如果重试用完的原因是根本连不上服务端、且尚未产生输出，请求会等待网络恢复，最长 <code>OPENPROGRAM_NETWORK_WAIT_MAX_S</code>（默认 30 分钟），每 5 到 30 秒再试一次，恢复后从原处继续。恢复额度显式设为 0、只允许一次尝试的请求、取消或调用方截止时间都会结束等待。重复响应在同一 Agent 上下文内重新生成，保留已完成的工具结果及 Runtime 回执，不设置整体 Token 或执行时长上限。显式调用限制、取消、权限失败和恢复额度耗尽仍然有效。重新生成响应不代表可以重复外部写入；写入结果不确定时必须先检查实际记录。函数自身的逻辑错误仍需修改代码。</p>
+<div class="page-updated"><span data-i18n="updated">Last updated</span> · 2026-11-06</div><div class="prevnext"><a class="pn-link pn-prev" href="/docs/reference/API.html" data-href-en="/docs/reference/API.html" data-href-zh="/docs/reference/API.zh.html"><span class="pn-dir" data-i18n="prev">Previous</span><span class="pn-title" data-title-zh="API 参考">API reference</span></a><a class="pn-link pn-next" href="/docs/reference/api/providers.html" data-href-en="/docs/reference/api/providers.html" data-href-zh="/docs/reference/api/providers.zh.html"><span class="pn-dir" data-i18n="next">Next</span><span class="pn-title" data-title-zh="模型服务 API">Provider API</span></a></div></article></main>
+  <aside class="toc"><div class="toc-title" data-i18n="on_this_page">On this page</div>
+<ul class="toc-list">
+<li>
+<details class="toc-disclosure" open=""><summary>
+<a class="lvl-2" href="#runtime-类">Runtime 类</a>
+</summary>
+<ul class="toc-list">
+<li>
+<a class="lvl-3" href="#构造参数">构造参数</a>
+</li>
+<li>
+<a class="lvl-3" href="#属性">属性</a>
+</li>
+</ul>
+</details>
+</li>
+<li>
+<details class="toc-disclosure" open=""><summary>
+<a class="lvl-2" href="#方法">方法</a>
+</summary>
+<ul class="toc-list">
+<li>
+<details class="toc-disclosure" open=""><summary>
+<a class="lvl-3" href="#exec">exec()</a>
+</summary>
+<ul class="toc-list">
+<li>
+<a class="lvl-4" href="#参数">参数</a>
+</li>
+<li>
+<a class="lvl-4" href="#content-block-格式">Content block 格式</a>
+</li>
+<li>
+<a class="lvl-4" href="#返回值">返回值</a>
+</li>
+<li>
+<a class="lvl-4" href="#异常">异常</a>
+</li>
+</ul>
+</details>
+</li>
+<li>
+<a class="lvl-3" href="#async_exec">async_exec()</a>
+</li>
+<li>
+<details class="toc-disclosure" open=""><summary>
+<a class="lvl-3" href="#_call">_call()</a>
+</summary>
+<ul class="toc-list">
+<li>
+<a class="lvl-4" href="#参数-1">参数</a>
+</li>
+<li>
+<a class="lvl-4" href="#返回值-1">返回值</a>
+</li>
+</ul>
+</details>
+</li>
+<li>
+<a class="lvl-3" href="#_async_call">_async_call()</a>
+</li>
+<li>
+<a class="lvl-3" href="#close">close()</a>
+</li>
+<li>
+<a class="lvl-3" href="#向用户提问">向用户提问</a>
+</li>
+</ul>
+</details>
+</li>
+<li>
+<a class="lvl-2" href="#使用方式">使用方式</a>
+</li>
+<li>
+<details class="toc-disclosure" open=""><summary>
+<a class="lvl-2" href="#retry-机制">Retry 机制</a>
+</summary>
+<ul class="toc-list">
+<li>
+<a class="lvl-3" href="#配置">配置</a>
+</li>
+<li>
+<a class="lvl-3" href="#行为规则">行为规则</a>
+</li>
+<li>
+<a class="lvl-3" href="#错误报告格式">错误报告格式</a>
+</li>
+<li>
+<a class="lvl-3" href="#重试的边界">重试的边界</a>
+</li>
+</ul>
+</details>
+</li>
+</ul></aside>
+</div>
+
+<div class="search-overlay">
+  <div class="search-box">
+    <input type="text" data-i18n-ph="search_ph" placeholder="Search titles or text…" autocomplete="off" spellcheck="false">
+    <div class="search-results"></div>
+  </div>
+</div>
+
+<script src="/docs/assets/site.js?v=6520ba46"></script>
+</body>
+</html>

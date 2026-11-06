@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en" data-base="/docs/" data-page-lang="en" data-build="1793956776" data-alt-lang-url="/docs/capabilities/permissions.zh.html">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tool permissions · OpenProgram Docs</title>
+<meta name="description" content="Control tool permissions # Use the permission menu in Web or the installed App, or /permissions in the terminal. Shift+Tab cycles the terminal&#x27;s ordinary">
+<link rel="canonical" href="https://openprogram.io/docs/capabilities/permissions.html">
+<link rel="alternate" type="text/markdown" href="https://openprogram.io/docs/capabilities/permissions.html.md">
+<link rel="describedby" href="https://openprogram.io/llms.txt">
+<link rel="alternate" hreflang="en" href="https://openprogram.io/docs/capabilities/permissions.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://openprogram.io/docs/capabilities/permissions.zh.html">
+<link rel="alternate" hreflang="x-default" href="https://openprogram.io/docs/capabilities/permissions.html">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"OpenProgram Docs","item":"https://openprogram.io/docs/"},{"@type":"ListItem","position":2,"name":"Tool permissions"}]}</script>
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="OpenProgram">
+<meta property="og:url" content="https://openprogram.io/docs/capabilities/permissions.html">
+<meta property="og:title" content="Tool permissions · OpenProgram Docs">
+<meta property="og:description" content="Control tool permissions # Use the permission menu in Web or the installed App, or /permissions in the terminal. Shift+Tab cycles the terminal&#x27;s ordinary">
+<meta property="og:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:secure_url" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Tool permissions · OpenProgram Docs">
+<meta name="twitter:description" content="Control tool permissions # Use the permission menu in Web or the installed App, or /permissions in the terminal. Shift+Tab cycles the terminal&#x27;s ordinary">
+<meta name="twitter:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta name="twitter:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/docs/assets/mark.svg">
+<link rel="stylesheet" href="/docs/assets/site.css?v=6520ba46">
+<link rel="stylesheet" href="/docs/assets/pygments-light.css" media="(prefers-color-scheme: light)" id="pyg-light">
+<link rel="stylesheet" href="/docs/assets/pygments-dark.css" media="(prefers-color-scheme: dark)" id="pyg-dark">
+<script src="/docs/assets/theme.js?v=6520ba46"></script>
+
+</head>
+<body>
+<header class="topbar">
+  <button class="icon hamburger" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2.5 4.5h11M2.5 8h11M2.5 11.5h11"/></svg></button>
+  <a class="brand" href="/docs/index.html"><img class="mark" src="/docs/assets/mark.svg" alt="">OpenProgram Docs</a>
+  <div class="spacer"></div>
+  <button class="search-trigger" aria-label="Search">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14"/></svg><span class="label" data-i18n="search">Search docs</span><kbd>⌘K</kbd>
+  </button>
+  <div class="lang-wrap">
+    <button class="icon lang-trigger" id="lang-toggle" aria-haspopup="true" aria-expanded="false" aria-label="Language">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="6.2"/><path d="M1.8 8h12.4" stroke-linecap="round"/><ellipse cx="8" cy="8" rx="2.8" ry="6.2"/></svg><span class="lang-label">EN</span><svg class="chev" width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+    </button>
+    <div class="lang-menu" id="lang-menu" role="menu">
+      <button class="lang-opt" data-lang="en" role="menuitem"><span>English</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="lang-opt" data-lang="zh" role="menuitem"><span>简体中文</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+  <div class="theme-wrap">
+    <button class="icon" id="theme-toggle" aria-label="Theme" aria-haspopup="menu" aria-controls="theme-menu" aria-expanded="false"><svg class="ic-system" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="2.5" width="13" height="9" rx="1.5"/><path d="M8 11.5V14M5.5 14h5"/></svg><svg class="ic-moon" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M13.5 9.5A6 6 0 1 1 6.5 2.5a5 5 0 0 0 7 7z"/></svg><svg class="ic-sun" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="3.2"/><path d="M8 1.2v1.8M8 13v1.8M1.2 8H3M13 8h1.8M3.2 3.2l1.3 1.3M11.5 11.5l1.3 1.3M12.8 3.2l-1.3 1.3M4.5 11.5l-1.3 1.3"/></svg></button>
+    <div class="theme-menu" id="theme-menu" role="menu" aria-labelledby="theme-toggle">
+      <button class="theme-opt" data-theme-choice="system" role="menuitemradio" aria-checked="true"><span>Follow system</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="light" role="menuitemradio" aria-checked="false"><span>Light</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="dark" role="menuitemradio" aria-checked="false"><span>Dark</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+</header>
+<nav class="tabbar"><a class="tablink" href="/docs/README.html" data-title-zh="开始使用" data-href-en="/docs/README.html" data-href-zh="/docs/README.zh.html">Get started</a><a class="tablink" href="/docs/install/install.html" data-title-zh="安装" data-href-en="/docs/install/install.html" data-href-zh="/docs/install/install.zh.html">Install</a><a class="tablink active" href="/docs/capabilities/README.html" data-title-zh="能力" data-href-en="/docs/capabilities/README.html" data-href-zh="/docs/capabilities/README.zh.html">Capabilities</a><a class="tablink" href="/docs/interfaces/README.html" data-title-zh="界面" data-href-en="/docs/interfaces/README.html" data-href-zh="/docs/interfaces/README.zh.html">Interfaces</a><a class="tablink" href="/docs/models/README.html" data-title-zh="模型" data-href-en="/docs/models/README.html" data-href-zh="/docs/models/README.zh.html">Models</a><a class="tablink" href="/docs/integrations/anthropic.html" data-title-zh="集成" data-href-en="/docs/integrations/anthropic.html" data-href-zh="/docs/integrations/anthropic.zh.html">Integrations</a><a class="tablink" href="/docs/server/README.html" data-title-zh="服务与运维" data-href-en="/docs/server/README.html" data-href-zh="/docs/server/README.zh.html">Server &amp; Ops</a><a class="tablink" href="/docs/reference/README.html" data-title-zh="参考" data-href-en="/docs/reference/README.html" data-href-zh="/docs/reference/README.zh.html">Reference</a><a class="tablink" href="/docs/reference/design/README.html" data-title-zh="设计" data-href-en="/docs/reference/design/README.html" data-href-zh="/docs/reference/design/README.zh.html">Design</a></nav>
+
+<div class="scrim"></div>
+<div class="layout">
+  <nav class="sidebar" aria-label="Documentation">
+    <input class="nav-filter" type="text" data-i18n-ph="nav_filter"
+           aria-label="Filter docs" placeholder="Filter docs…" autocomplete="off" spellcheck="false">
+    <div class="nav-tree"><div class="nav-sec"><div class="nav-sec-title" data-title-zh="概览">Overview</div><a class="navlink" href="/docs/capabilities/README.html" data-title-zh="概览" data-href-en="/docs/capabilities/README.html" data-href-zh="/docs/capabilities/README.zh.html">Overview</a>
+<a class="navlink" href="/docs/capabilities/applications.html" data-title-zh="应用" data-href-en="/docs/capabilities/applications.html" data-href-zh="/docs/capabilities/applications.zh.html">Applications</a>
+<a class="navlink" href="/docs/capabilities/framework-control.html" data-title-zh="框架工具" data-href-en="/docs/capabilities/framework-control.html" data-href-zh="/docs/capabilities/framework-control.zh.html">Framework tools</a></div>
+<div class="nav-sec"><div class="nav-sec-title">Agentic Programming</div><a class="navlink" href="/docs/capabilities/agentic-programming/README.html" data-title-zh="指南" data-href-en="/docs/capabilities/agentic-programming/README.html" data-href-zh="/docs/capabilities/agentic-programming/README.zh.html">Guide</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/philosophy.html" data-title-zh="设计原则" data-href-en="/docs/capabilities/agentic-programming/philosophy.html" data-href-zh="/docs/capabilities/agentic-programming/philosophy.zh.html">Philosophy</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/embedding-in-your-own-stack.html" data-title-zh="框架嵌入" data-href-en="/docs/capabilities/agentic-programming/embedding-in-your-own-stack.html" data-href-zh="/docs/capabilities/agentic-programming/embedding-in-your-own-stack.zh.html">Framework embedding</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="编写函数">Writing functions</div><a class="navlink" href="/docs/capabilities/agentic-programming/writing-functions/pure-python.html" data-title-zh="Python 函数" data-href-en="/docs/capabilities/agentic-programming/writing-functions/pure-python.html" data-href-zh="/docs/capabilities/agentic-programming/writing-functions/pure-python.zh.html">Python functions</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/writing-functions/agent.html" data-title-zh="智能体函数" data-href-en="/docs/capabilities/agentic-programming/writing-functions/agent.html" data-href-zh="/docs/capabilities/agentic-programming/writing-functions/agent.zh.html">Agentic functions</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/writing-functions/function-metadata.html" data-title-zh="函数元数据" data-href-en="/docs/capabilities/agentic-programming/writing-functions/function-metadata.html" data-href-zh="/docs/capabilities/agentic-programming/writing-functions/function-metadata.zh.html">Function metadata</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="选择下一步">Choosing the next step</div><a class="navlink" href="/docs/capabilities/agentic-programming/choosing-the-next-step/tool-calling.html" data-title-zh="工具循环" data-href-en="/docs/capabilities/agentic-programming/choosing-the-next-step/tool-calling.html" data-href-zh="/docs/capabilities/agentic-programming/choosing-the-next-step/tool-calling.zh.html">Tool-call loops</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/choosing-the-next-step/fixed-order-calls.html" data-title-zh="顺序调用" data-href-en="/docs/capabilities/agentic-programming/choosing-the-next-step/fixed-order-calls.html" data-href-zh="/docs/capabilities/agentic-programming/choosing-the-next-step/fixed-order-calls.zh.html">Fixed-order calls</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/choosing-the-next-step/next-step-decision.html" data-title-zh="步骤选择" data-href-en="/docs/capabilities/agentic-programming/choosing-the-next-step/next-step-decision.html" data-href-zh="/docs/capabilities/agentic-programming/choosing-the-next-step/next-step-decision.zh.html">Next-step selection</a></div>
+<div class="nav-sec"><div class="nav-sec-title">Agentic Workflows</div><a class="navlink" href="/docs/capabilities/workflows/README.html" data-title-zh="工作流" data-href-en="/docs/capabilities/workflows/README.html" data-href-zh="/docs/capabilities/workflows/README.zh.html">Workflows</a>
+<a class="navlink" href="/docs/capabilities/workflows/authoring.html" data-title-zh="工作流编写" data-href-en="/docs/capabilities/workflows/authoring.html" data-href-zh="/docs/capabilities/workflows/authoring.zh.html">Workflow authoring</a>
+<a class="navlink" href="/docs/capabilities/workflows/recording.html" data-title-zh="录制 Workflow" data-href-en="/docs/capabilities/workflows/recording.html" data-href-zh="/docs/capabilities/workflows/recording.zh.html">Record a workflow</a>
+<a class="navlink" href="/docs/capabilities/workflows/reports.html" data-title-zh="每周报告" data-href-en="/docs/capabilities/workflows/reports.html" data-href-zh="/docs/capabilities/workflows/reports.zh.html">Weekly reports</a></div>
+<div class="nav-sec"><div class="nav-sec-title">Agents</div><a class="navlink" href="/docs/capabilities/agents.html" data-title-zh="配置 Agent" data-href-en="/docs/capabilities/agents.html" data-href-zh="/docs/capabilities/agents.zh.html">Configure an Agent</a>
+<a class="navlink" href="/docs/capabilities/agents-md.html" data-title-zh="用 AGENTS.md 写指令" data-href-en="/docs/capabilities/agents-md.html" data-href-zh="/docs/capabilities/agents-md.zh.html">Instructions with AGENTS.md</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="常驻 Agent">Always-on Agents</div><a class="navlink" href="/docs/capabilities/always-on-agents.html" data-title-zh="常驻 Agent" data-href-en="/docs/capabilities/always-on-agents.html" data-href-zh="/docs/capabilities/always-on-agents.zh.html">Always-on Agents</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="提醒">Reminders</div><a class="navlink" href="/docs/capabilities/reminders.html" data-title-zh="提醒" data-href-en="/docs/capabilities/reminders.html" data-href-zh="/docs/capabilities/reminders.zh.html">Reminders</a>
+<a class="navlink" href="/docs/capabilities/event-triggers.html" data-title-zh="有事发生时运行任务" data-href-en="/docs/capabilities/event-triggers.html" data-href-zh="/docs/capabilities/event-triggers.zh.html">Run a task when something happens</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="记忆">Memory</div><a class="navlink" href="/docs/capabilities/memory.html" data-title-zh="记忆管理" data-href-en="/docs/capabilities/memory.html" data-href-zh="/docs/capabilities/memory.zh.html">Memory management</a>
+<a class="navlink" href="/docs/capabilities/memory-settings.html" data-title-zh="调整记忆" data-href-en="/docs/capabilities/memory-settings.html" data-href-zh="/docs/capabilities/memory-settings.zh.html">Tune Memory</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="运行环境">Environments</div><a class="navlink" href="/docs/capabilities/environments.html" data-title-zh="在另一台机器上运行会话" data-href-en="/docs/capabilities/environments.html" data-href-zh="/docs/capabilities/environments.zh.html">Run conversations on another machine</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="会话目标">Session goals</div><a class="navlink" href="/docs/capabilities/goal.html" data-title-zh="目标" data-href-en="/docs/capabilities/goal.html" data-href-zh="/docs/capabilities/goal.zh.html">Goals</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="操控电脑">Computer use</div><a class="navlink" href="/docs/capabilities/computer-use.html" data-title-zh="操控电脑" data-href-en="/docs/capabilities/computer-use.html" data-href-zh="/docs/capabilities/computer-use.zh.html">Computer use</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="会议">Meetings</div><a class="navlink" href="/docs/capabilities/meetings.html" data-title-zh="会议" data-href-en="/docs/capabilities/meetings.html" data-href-zh="/docs/capabilities/meetings.zh.html">Meetings</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="扩展">Extending</div><a class="navlink" href="/docs/capabilities/installing-programs.html" data-title-zh="安装程序" data-href-en="/docs/capabilities/installing-programs.html" data-href-zh="/docs/capabilities/installing-programs.zh.html">Installing programs</a>
+<a class="navlink" href="/docs/capabilities/skills.html" data-title-zh="技能" data-href-en="/docs/capabilities/skills.html" data-href-zh="/docs/capabilities/skills.zh.html">Skills</a>
+<a class="navlink" href="/docs/capabilities/plugins.html" data-title-zh="插件" data-href-en="/docs/capabilities/plugins.html" data-href-zh="/docs/capabilities/plugins.zh.html">Plugins</a>
+<a class="navlink" href="/docs/capabilities/mcp.html" data-title-zh="MCP" data-href-en="/docs/capabilities/mcp.html" data-href-zh="/docs/capabilities/mcp.zh.html">MCP</a>
+<a class="navlink" href="/docs/capabilities/tools.html" data-title-zh="内置工具" data-href-en="/docs/capabilities/tools.html" data-href-zh="/docs/capabilities/tools.zh.html">Built-in tools</a>
+<a class="navlink" href="/docs/capabilities/lsp.html" data-title-zh="语言服务器" data-href-en="/docs/capabilities/lsp.html" data-href-zh="/docs/capabilities/lsp.zh.html">Language servers</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="概览">Overview</div><a class="navlink" href="/docs/capabilities/commit-push-pr.html" data-title-zh="提交与拉取请求" data-href-en="/docs/capabilities/commit-push-pr.html" data-href-zh="/docs/capabilities/commit-push-pr.zh.html">Commits and PRs</a>
+<a class="navlink active" href="/docs/capabilities/permissions.html" data-title-zh="工具权限" data-href-en="/docs/capabilities/permissions.html" data-href-zh="/docs/capabilities/permissions.zh.html">Tool permissions</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="指南">Guide</div><a class="navlink" href="/docs/capabilities/agentic-programming/self-programming-ai-agents.html" data-title-zh="自编程智能体" data-href-en="/docs/capabilities/agentic-programming/self-programming-ai-agents.html" data-href-zh="/docs/capabilities/agentic-programming/self-programming-ai-agents.zh.html">Self-programming agents</a></div></div>
+  </nav>
+  <main class="content"><button class="fs-toggle" aria-label="Fullscreen" title="Fullscreen (Esc to exit)"><svg class="ic-expand" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.2 2H2v4.2M9.8 2H14v4.2M6.2 14H2V9.8M9.8 14H14V9.8"/></svg><svg class="ic-collapse" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6.2h4.2V2M14 6.2H9.8V2M2 9.8h4.2V14M14 9.8H9.8V14"/></svg></button><article><nav class="breadcrumb"><span class="bc-seg" data-title-zh="能力">Capabilities</span> <span class='bc-sep'>›</span> <span class="bc-seg" data-title-zh="概览">Overview</span> <span class='bc-sep'>›</span> <span class="bc-seg bc-current" data-title-zh="工具权限">Tool permissions</span></nav><h1 id="control-tool-permissions">Control tool permissions<a class="header-anchor" href="#control-tool-permissions">#</a></h1>
+<p>Use the permission menu in Web or the installed App, or <code>/permissions</code> in the terminal. <code>Shift+Tab</code> cycles the terminal's ordinary modes. Bypass requires its existing explicit enable action.</p>
+<table>
+<thead>
+<tr>
+<th>Mode</th>
+<th>What proceeds automatically</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Auto mode</td>
+<td>Safe tools and operations accepted by the risk classifier.</td>
+</tr>
+<tr>
+<td>Ask permissions</td>
+<td>Safe read tools; other operations ask for approval.</td>
+</tr>
+<tr>
+<td>Accept edits</td>
+<td>Safe reads and supported edits inside working directories. Commands still ask.</td>
+</tr>
+<tr>
+<td>Plan mode</td>
+<td>Operations allowed by the read-only plan tool policy.</td>
+</tr>
+<tr>
+<td>Bypass permissions</td>
+<td>Ordinary operations without approval or risk classification.</td>
+</tr>
+</tbody>
+</table>
+<p>Bypass does not override explicit deny or ask rules, mandatory plan-exit or self-update approval, <a href="#messages-an-agent-sends-for-you">messages an Agent sends for you</a>, plugin restrictions, identity capabilities, or Sandbox.</p>
+<p>Questions and approvals appear as independent cards in the conversation. Each question appears above its answer control. Multiple questions and form fields are listed together; fill them in and click Submit answers once. Submitted answers remain paired with their questions. The main message box remains available for ordinary messages. The card shows the submitted answer, delivery progress and a confirmation or retry state. Confirmed receipts remain visible until the page is reloaded; pending requests are restored on reconnect.</p>
+<p>Tool approvals show the current operation and two actions: Allow once and Deny.
+Clicking either submits that decision directly. The note button beside Deny
+opens <strong>Deny with a note</strong>: write what the agent should do instead and send it
+with Ctrl+Enter. The request closes only after
+server confirmation; an unconfirmed answer can retry the same decision. A
+confirmed approval leaves the conversation; the tool row shows what happened.
+Deny does not end the task: the model receives the refusal as that tool's
+result, the operation does not run, and the model is told to stop and ask you
+how to proceed. With a note, the model receives your note instead and follows
+it. Skipping a question likewise tells the model it went unanswered. Persistent rules remain available in History project settings.</p>
+<p>Human tool approvals have no default time limit. Waiting saves execution progress
+and releases the active execution attempt; reopening the App restores the pending
+request. Resuming uses the context saved for that turn, so later memory or date updates do not invalidate the approval. Tool, permission and working-directory checks still apply. If execution cannot resume, the conversation reports that the pending operation did not run. Cancelling the task withdraws its approval. Expired older requests are not
+reactivated and cannot authorize a new operation.</p>
+<p>For <code>edit</code>, <code>write</code>, and <code>apply_patch</code>, approval records the target files' state.
+Before executing and immediately before writing, the tools check that state.
+A deleted target is not recreated with the old approval. Changed files require
+reading the current contents before proposing another operation. The UI shows
+only the current proposal, without a before/after history. Arbitrary shell
+commands do not declare all their file targets, so this file-specific check does
+not cover arbitrary command side effects.</p>
+<p>Ordinary questions retain their answer controls and Discuss entry. What you write under Discuss goes to the model in place of an answer, and it responds to it within the same turn; the card keeps your text.</p>
+<p>A new owner turn in Auto or Bypass does not inherit approval requirements solely from an unrelated earlier interrupted turn. Nested browser and Program calls use the same scope when their owner origin is verified. Unknown outcomes within the current execution still require exact approval; old operation records remain intact. This does not change macOS access or make a read-only volume writable.</p>
+<h2 id="messages-an-agent-sends-for-you">Messages an Agent sends for you<a class="header-anchor" href="#messages-an-agent-sends-for-you">#</a></h2>
+<p>An Agent holds what it sends for you as a draft. A connected-service tool that sends, posts or replies (for example <code>send_email</code>, <code>chat.postMessage</code> or <code>create_comment</code> from an MCP server) asks for approval in every mode, Bypass included, and even when an allow rule names it. The approval card shows the full message. Allow once sends it; <strong>Deny with a note</strong> returns your changes, and the Agent writes a new draft that asks again. Each message is approved on its own and never becomes an allow rule. A background run, such as a scheduled prompt, has no one to ask, so it cannot send.</p>
+<p>A tool counts as sending when its name starts with or contains a sending verb (send, reply, post, publish, forward, invite, share, comment) or creates a message, email, comment or post, and the server does not mark it read-only. Reads (<code>list_messages</code>, <code>get_posts</code>) and drafts (<code>create_draft</code>) do not ask.</p>
+<p>The hold is on for every Agent. To let an Agent send under its ordinary permission mode, set <code>hold_outbound</code> to <code>false</code> in its configuration (<code>PATCH /api/agents/&lt;id&gt;</code> with <code>{&quot;hold_outbound&quot;: false}</code>).</p>
+<h2 id="change-permissions-during-a-task">Change permissions during a task<a class="header-anchor" href="#change-permissions-during-a-task">#</a></h2>
+<p>An existing session's selection is sent to the server and confirmed before the interface displays it as effective. The interface sends the change immediately when it already knows the confirmed session version. Once the server confirms Bypass, subsequent ordinary tool calls do not ask for approval, even if the model is still reasoning, streaming text or generating tool arguments. This also applies to later tools in the same response. You do not need to stop generation or send another message. The new mode is included in subsequent model requests; text already being generated is not rewritten. A tool already authorized for execution keeps that authorization. Switching into Plan mode prevents pending write calls from being authorized.</p>
+<p>An ordinary approval that is no longer required is automatically resolved through the execution's durable wait and the task continues. Explicit ask rules, mandatory approvals, user questions, forms, and Sandbox escalation are not answered by changing the mode. Repeated answers, cancellation, timeout, and recovery cannot execute an already completed call again.</p>
+<p>Changes are session-specific. Other windows receive the confirmed mode; stale updates are rejected rather than overwriting a newer choice. A failed or disconnected update remains unconfirmed. Reconnect and review the current mode before retrying. An unsent draft stores its mode locally and sends it with the first message.</p>
+<p>The effective default is the session override, then the project default, then Auto mode. A sub-agent created by an authenticated owner Agent inherits the parent’s effective permission mode and explicit rules at creation. For example, a parent using Bypass can create a sub-agent that runs ordinary commands without approval. The sub-agent keeps its own identity and non-interactive restrictions; explicit ask rules and mandatory approvals still prevent operations that require an approver. Later mode changes do not rewrite already admitted sub-agents. Independent scheduled tasks do not acquire owner permissions or Bypass from a local session. A chat channel account acts as the owner by default (setting <code>sender_access</code>, see <a href="/docs/integrations/channels.html">Chat channels</a>): its turns use the chat session's own permission mode and rules, approvals arrive in the chat and are answered with <code>/answer</code>, and group chats run sandboxed.</p>
+<h2 id="manage-project-rules-in-history">Manage project rules in History<a class="header-anchor" href="#manage-project-rules-in-history">#</a></h2>
+<p>Open History → Projects, select the project, and open Settings → Permission Rules. The three lists contain that project's Deny, Ask and Allow rules. Add a rule with <code>ToolName</code> or <code>ToolName(pattern)</code> syntax; remove an existing rule to revoke it. To change a rule, remove the old entry and add its replacement. Deny takes precedence over Ask, which takes precedence over Allow. Session and global rules can still affect the result even when the project list is empty.</p>
+<p>The interface waits for a project-specific server confirmation before clearing a submitted rule. Failed or unconfirmed saves preserve the input and show a status message. Successful changes update other open views of that project. The next operation in an authenticated interactive owner session reads the current rules, including changes made during a running turn. Already authorized operations retain their authorization; existing approval waits still require their own answer. Already admitted sub-agents retain their captured policy.</p>
+<p>Allow once and Deny answer only the current request; they do not create project rules. Removing a saved project rule affects future authorization, not the historical result of an operation that already ran.</p>
+<h2 id="understand-a-refusal">Understand a refusal<a class="header-anchor" href="#understand-a-refusal">#</a></h2>
+<p>For Windows path rules, forward slashes avoid escaping ambiguity: for example,
+<code>read(C:/Users/me/project/**)</code>. Ordinary backslashes in drive paths are preserved;
+the rule syntax still uses <code>\\</code>, <code>\(</code>, and <code>\)</code> to escape its own special characters.
+JSON configuration additionally requires JSON's normal backslash escaping.</p>
+<p>A tool result identifies whether the refusal came from authority, a permission rule, Plan mode, Auto classification, or Sandbox. <code>AUTHORITY_TIER_MISSING</code> means the execution request lacks an authenticated authority tier. It is not resolved by Bypass. New authenticated chat submissions carry that identity; old admitted executions missing identity must be resubmitted through an authenticated interface.</p>
+<p>Sandbox is off by default and is turned on per conversation in the composer Plus menu; <code>sandbox.mode</code> set to <code>auto</code> turns it on in every conversation where its backend is available, and <code>workspace-write</code> requires it. Changing Sandbox affects subsequent turns. A sandboxed command has no network unless <code>sandbox.network</code> is on, and writes only the workspace.</p>
+<p>When a command needs more, such as <code>git push</code>, <code>gh</code>, a package install or a write outside the workspace, the Agent calls <code>bash</code> with <code>sandbox_permissions=&quot;require_escalated&quot;</code> and a one-sentence justification. Before the command runs, an approval card shows the command and the reason. <strong>Allow</strong> runs it once outside the sandbox; protected application paths and credential filtering still apply. <strong>Allow this conversation</strong> lets the same command leave the sandbox again in this conversation without asking. A command that the sandbox blocks after it ran, including a failed name lookup, returns that explanation to the Agent so it can ask this way instead of retrying. Bypass keeps the sandbox and refuses these requests, and an ordinary tool approval never authorizes one.</p>
+<p>See <a href="/docs/capabilities/tools.html">tools</a>, <a href="/docs/interfaces/web.html">Web</a>, <a href="/docs/interfaces/tui.html">terminal</a>, and the <a href="/docs/reference/design/runtime/security/sandbox-architecture.html">engineering contract</a>.</p>
+<h2 id="macos-asks-for-access-again-after-an-update">macOS asks for access again after an update<a class="header-anchor" href="#macos-asks-for-access-again-after-an-update">#</a></h2>
+<p>File-folder access, Photos, screen recording, and Accessibility are macOS permissions. Bypass controls tool approval and cannot grant these permissions. The desktop App and its named backend are signed applications. macOS can maintain separate permission records for them; enabling a similarly named entry does not prove that the executing backend has access.</p>
+<p>Local App refresh, local package installation, and conversational self-update reuse a private signing identity stored under <code>~/Library/Application Support/OpenProgram/local-signing</code>. This keeps subsequent local builds under the same certificate identity instead of changing it with every build. Keep this directory when cleaning build artifacts; it contains the local signing keychain. Missing or damaged signing state stops the build rather than silently creating a replacement identity.</p>
+<p>The first migration from an older ad hoc build may require consent again in macOS. An old permission can still appear enabled while macOS rejects the updated signature. System access checks the current executor rather than trusting the Settings toggle. Use Request authorization to invoke native consent. Opening System Settings is a separate action; Accessibility and previously denied permissions may require that interface. When a recorded successful grant belongs to an older verified signing identity, explicit authorization setup renews only that OpenProgram capability once. Startup and ordinary checks never reset grants or accept system dialogs. Local signing is for this computer's development builds; publicly distributed apps still need Developer ID signing and notarization.</p>
+<p>Auto mode reviews the complete operation before dispatch, including shell commands. Review input is bounded to 64 KiB; oversized input or an unavailable classifier fails closed rather than approving a truncated prefix. Each model candidate has a 30-second timeout. A review is invalidated when its arguments or live permission policy change. Explicit deny rules and mandatory approvals retain precedence.</p>
+<p>Repeated Auto risk refusals use the existing approval flow for an authenticated interactive owner: three consecutive or twenty cumulative refusals offer approval for that exact operation. Explicit deny rules and hard restrictions still apply. Counts belong to the session and permission version; changing the permission version starts a fresh count. An allowed or approved operation resets the consecutive count; approval after the cumulative threshold also resets the total. Classifier outages, invalid responses and cancellation are not risk refusals. Durable operation identities prevent double counting after resume; concurrent updates use the execution database transaction. Noninteractive tasks receive a refusal and may continue other allowed work. Fallback approval is one operation only, with the original arguments, working directory, permission version and file preconditions.</p>
+<p>Automatic risk refusals do not consume the repeated execution-failure limit, so repeating the same refused operation can still reach manual approval. Approval after the cumulative threshold resets that total. Completed and refused operations retain their host-recorded outcome when a checkpoint must be recovered.</p>
+<h2 id="host-capabilities-use-one-setup-path">Host capabilities use one setup path<a class="header-anchor" href="#host-capabilities-use-one-setup-path">#</a></h2>
+<p>The execution host exposes one registry of capabilities. It currently describes screen recording, Accessibility, Automation, Calendar, Reminders, file read/write, microphone, and camera. Each row includes its status, the identity being checked, the operation that needs it, and whether the platform can request it. Settings, the CLI/TUI doctor, GUI preflight, durable system-access waits, and the HTTP endpoint read this same registry.</p>
+<p><code>GET /api/system/access</code> only performs non-prompting checks. In the installed App, open Settings → System access to review the grouped rows. <code>Set up all OpenProgram access</code> is the one explicit first-run action for the registered native runtime capabilities; it returns one consolidated report. <code>Request authorization</code> and <code>Open System Settings</code> remain available for an individual row. These actions require an explicit click from the local owner. Reconnects, polling, history replay, model output, startup checks, and ordinary retries never open a native prompt. A missing capability pauses only the operation that declares it; browser, VM, headless and ordinary chat operations do not inherit the desktop requirement.</p>
+<p>The status values have different meanings: <code>granted</code> is a fresh check by the current named executor; <code>not_granted</code> is a confirmed missing grant; <code>unknown</code> means the host could not prove the state; <code>unavailable</code> means the native dependency is missing; and <code>unsupported</code> means that backend has no implementation. <code>unknown</code> and <code>unavailable</code> are not treated as permission denials.</p>
+<p>Automation is target-specific, and file access is scoped to the selected path. Calendar, Reminders, microphone, and camera can require their own macOS consent. The product cannot pre-authorize an application it has not targeted or a path the user has not selected. Enabling a similarly named <code>python3</code>, <code>node</code>, or cached application entry is not evidence that the managed OpenProgram executor is authorized. All native checks and requests from an installed product use the signed runtime bundle identity <code>ai.openprogram.runtime</code>; the outer App is not a second native executor. Ordinary checks never reset TCC records or modify another application.</p>
+<h2 id="explain-and-test-permission-rules">Explain and test permission rules<a class="header-anchor" href="#explain-and-test-permission-rules">#</a></h2>
+<p><code>openprogram permissions check</code> evaluates a supplied JSON rule file without executing the proposed tool:</p>
+<pre><code class="language-sh">openprogram<span class="w"> </span>permissions<span class="w"> </span>check<span class="w"> </span>--rules<span class="w"> </span>rules.json<span class="w"> </span>--tool<span class="w"> </span>bash<span class="w"> </span>--args<span class="w"> </span><span class="s1">&#39;{&quot;command&quot;:&quot;git status&quot;}&#39;</span><span class="w"> </span>--expect<span class="w"> </span>allow
+openprogram<span class="w"> </span>permissions<span class="w"> </span><span class="nb">test</span><span class="w"> </span>--rules<span class="w"> </span>rules.json<span class="w"> </span>--cases<span class="w"> </span>cases.json
+</code></pre>
+<p>The rule file contains <code>allow</code>, <code>ask</code>, and <code>deny</code> arrays, for example:</p>
+<pre><code class="language-json"><span class="p">{</span><span class="nt">&quot;allow&quot;</span><span class="p">:[</span><span class="s2">&quot;bash(git:*)&quot;</span><span class="p">],</span><span class="nt">&quot;ask&quot;</span><span class="p">:[],</span><span class="nt">&quot;deny&quot;</span><span class="p">:[</span><span class="s2">&quot;bash(rm:*)&quot;</span><span class="p">]}</span>
+</code></pre>
+<p>A cases file is a nonempty array of objects containing <code>tool</code>, <code>args</code>, and <code>expected</code>:</p>
+<pre><code class="language-json"><span class="p">[{</span><span class="nt">&quot;tool&quot;</span><span class="p">:</span><span class="s2">&quot;bash&quot;</span><span class="p">,</span><span class="nt">&quot;args&quot;</span><span class="p">:{</span><span class="nt">&quot;command&quot;</span><span class="p">:</span><span class="s2">&quot;git status&quot;</span><span class="p">},</span><span class="nt">&quot;expected&quot;</span><span class="p">:</span><span class="s2">&quot;allow&quot;</span><span class="p">}]</span>
+</code></pre>
+<p>JSON output lists matching rules in enforcement order: deny, ask, then allow. <code>unmatched</code> means no supplied rule applies. Exit status is 0 for a matching expectation, 1 for a mismatch, and 2 for invalid input. Without <code>--expect</code>, <code>check</code> reports any valid decision with status 0. These commands inspect only the supplied rules: they do not merge live session configuration, run the risk classifier, approve a tool, or bypass hard restrictions and the OS sandbox.</p>
+<h2 id="restrict-sandbox-commands-to-public-network-domains">Restrict sandbox commands to public network domains<a class="header-anchor" href="#restrict-sandbox-commands-to-public-network-domains">#</a></h2>
+<p>On macOS, set <code>sandbox.network</code> to <code>true</code> and <code>sandbox.network_domains</code> to a JSON map:</p>
+<pre><code class="language-json"><span class="p">{</span><span class="nt">&quot;example.com&quot;</span><span class="p">:</span><span class="s2">&quot;allow&quot;</span><span class="p">,</span><span class="nt">&quot;*.example.org&quot;</span><span class="p">:</span><span class="s2">&quot;allow&quot;</span><span class="p">,</span><span class="nt">&quot;blocked.example.org&quot;</span><span class="p">:</span><span class="s2">&quot;deny&quot;</span><span class="p">}</span>
+</code></pre>
+<p>Exact hosts and <code>*.example.org</code> (subdomains at any depth, excluding the root) are supported. Deny wins. An empty map blocks every destination; <code>null</code> preserves the existing network switch. Private, local, multicast, and reserved IP addresses stay blocked, even when a hostname is allowed. All DNS answers are checked, and the connection uses a checked address directly.</p>
+<p>Each command receives an authenticated local proxy. The macOS sandbox prevents direct connections, including clients that ignore proxy settings. HTTP on port 80 and HTTPS CONNECT on port 443 are supported; clients must support ordinary HTTP proxy settings. Domain rules authorize destination connections, not encrypted HTTPS methods or contents. There is no TLS interception, SOCKS/UDP, arbitrary-port forwarding, local-network access, or upstream proxy chaining. Chunked HTTP uploads and plain HTTP Upgrade are unsupported; HTTPS tunnels carry ordinary HTTPS and WSS traffic.</p>
+<p>The proxy and active connections close when the command ends or is cancelled. Linux and Windows/WSL currently reject a configured active domain policy instead of running with unrestricted networking. A missing sandbox also rejects domain-restricted execution even when the ordinary unavailable policy is <code>warn</code>. Turning Sandbox off explicitly still disables its restrictions. These settings affect sandboxed commands, not the host's model-provider requests or every other tool transport.</p>
+<h2 id="interrupted-operations">Interrupted operations<a class="header-anchor" href="#interrupted-operations">#</a></h2>
+<p>A new interactive owner turn uses its selected Auto or Bypass mode even when an older turn has an unknown external result. Old effects remain recorded as unknown and are not replayed. Resuming the same interrupted execution still requires reconciliation or exact approval. Explicit deny/ask rules and mandatory approvals continue to apply.</p>
+<p>When offered, <strong>Always allow</strong> saves the exact supported operation rule in the current project. <strong>Allow this conversation</strong> saves the same rule in the current session only, so later calls in this conversation run without asking while other sessions still ask; today it is offered for <a href="/docs/capabilities/computer-use.html#approval"><code>computer_use_agent</code></a>, where the rule names the application or the virtual machine. One-shot-only requests do not offer persistent approval; a browser <a href="/docs/capabilities/computer-use.html#web-pages"><code>evaluate</code></a> call is one, and it asks in every mode, Bypass included.</p>
+<p>Stop interrupts pending model and asynchronous tool work. Once the producer exits, the turn is stopped even if an external operation has an unknown outcome; that outcome remains visible in Activity. Pause instead waits for the current operation to reach a resumable boundary. The interface reports the pending request; use Stop when an immediate interruption is needed.</p>
+<div class="page-updated"><span data-i18n="updated">Last updated</span> · 2026-11-04</div><div class="prevnext"><a class="pn-link pn-prev" href="/docs/capabilities/commit-push-pr.html" data-href-en="/docs/capabilities/commit-push-pr.html" data-href-zh="/docs/capabilities/commit-push-pr.zh.html"><span class="pn-dir" data-i18n="prev">Previous</span><span class="pn-title" data-title-zh="提交与拉取请求">Commits and PRs</span></a><a class="pn-link pn-next" href="/docs/capabilities/agentic-programming/self-programming-ai-agents.html" data-href-en="/docs/capabilities/agentic-programming/self-programming-ai-agents.html" data-href-zh="/docs/capabilities/agentic-programming/self-programming-ai-agents.zh.html"><span class="pn-dir" data-i18n="next">Next</span><span class="pn-title" data-title-zh="自编程智能体">Self-programming agents</span></a></div></article></main>
+  <aside class="toc"><div class="toc-title" data-i18n="on_this_page">On this page</div>
+<ul class="toc-list">
+<li>
+<a class="lvl-2" href="#messages-an-agent-sends-for-you">Messages an Agent sends for you</a>
+</li>
+<li>
+<a class="lvl-2" href="#change-permissions-during-a-task">Change permissions during a task</a>
+</li>
+<li>
+<a class="lvl-2" href="#manage-project-rules-in-history">Manage project rules in History</a>
+</li>
+<li>
+<a class="lvl-2" href="#understand-a-refusal">Understand a refusal</a>
+</li>
+<li>
+<a class="lvl-2" href="#macos-asks-for-access-again-after-an-update">macOS asks for access again after an update</a>
+</li>
+<li>
+<a class="lvl-2" href="#host-capabilities-use-one-setup-path">Host capabilities use one setup path</a>
+</li>
+<li>
+<a class="lvl-2" href="#explain-and-test-permission-rules">Explain and test permission rules</a>
+</li>
+<li>
+<a class="lvl-2" href="#restrict-sandbox-commands-to-public-network-domains">Restrict sandbox commands to public network domains</a>
+</li>
+<li>
+<a class="lvl-2" href="#interrupted-operations">Interrupted operations</a>
+</li>
+</ul></aside>
+</div>
+
+<div class="search-overlay">
+  <div class="search-box">
+    <input type="text" data-i18n-ph="search_ph" placeholder="Search titles or text…" autocomplete="off" spellcheck="false">
+    <div class="search-results"></div>
+  </div>
+</div>
+
+<script src="/docs/assets/site.js?v=6520ba46"></script>
+</body>
+</html>

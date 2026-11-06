@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh" data-base="/docs/" data-page-lang="zh" data-build="1793956776" data-alt-lang-url="/docs/capabilities/permissions.html">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>工具权限 · OpenProgram Docs</title>
+<meta name="description" content="控制工具权限 # 在 Web 或安装的 App 中使用权限菜单；终端使用 /permissions ，也可以通过 Shift+Tab 循环切换普通模式。Bypass 保留显式启用确认。 模式 自动放行范围 自动判定 安全工具及风险分类器允许的操作。 逐次确认 安全读取；其他操作要求审批。 接受编辑">
+<link rel="canonical" href="https://openprogram.io/docs/capabilities/permissions.zh.html">
+<link rel="alternate" type="text/markdown" href="https://openprogram.io/docs/capabilities/permissions.zh.html.md">
+<link rel="describedby" href="https://openprogram.io/llms.txt">
+<link rel="alternate" hreflang="en" href="https://openprogram.io/docs/capabilities/permissions.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://openprogram.io/docs/capabilities/permissions.zh.html">
+<link rel="alternate" hreflang="x-default" href="https://openprogram.io/docs/capabilities/permissions.html">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"OpenProgram Docs","item":"https://openprogram.io/docs/"},{"@type":"ListItem","position":2,"name":"工具权限"}]}</script>
+<meta property="og:type" content="article">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:site_name" content="OpenProgram">
+<meta property="og:url" content="https://openprogram.io/docs/capabilities/permissions.zh.html">
+<meta property="og:title" content="工具权限 · OpenProgram Docs">
+<meta property="og:description" content="控制工具权限 # 在 Web 或安装的 App 中使用权限菜单；终端使用 /permissions ，也可以通过 Shift+Tab 循环切换普通模式。Bypass 保留显式启用确认。 模式 自动放行范围 自动判定 安全工具及风险分类器允许的操作。 逐次确认 安全读取；其他操作要求审批。 接受编辑">
+<meta property="og:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:secure_url" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="工具权限 · OpenProgram Docs">
+<meta name="twitter:description" content="控制工具权限 # 在 Web 或安装的 App 中使用权限菜单；终端使用 /permissions ，也可以通过 Shift+Tab 循环切换普通模式。Bypass 保留显式启用确认。 模式 自动放行范围 自动判定 安全工具及风险分类器允许的操作。 逐次确认 安全读取；其他操作要求审批。 接受编辑">
+<meta name="twitter:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta name="twitter:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/docs/assets/mark.svg">
+<link rel="stylesheet" href="/docs/assets/site.css?v=6520ba46">
+<link rel="stylesheet" href="/docs/assets/pygments-light.css" media="(prefers-color-scheme: light)" id="pyg-light">
+<link rel="stylesheet" href="/docs/assets/pygments-dark.css" media="(prefers-color-scheme: dark)" id="pyg-dark">
+<script src="/docs/assets/theme.js?v=6520ba46"></script>
+
+</head>
+<body>
+<header class="topbar">
+  <button class="icon hamburger" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2.5 4.5h11M2.5 8h11M2.5 11.5h11"/></svg></button>
+  <a class="brand" href="/docs/index.html"><img class="mark" src="/docs/assets/mark.svg" alt="">OpenProgram Docs</a>
+  <div class="spacer"></div>
+  <button class="search-trigger" aria-label="Search">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14"/></svg><span class="label" data-i18n="search">Search docs</span><kbd>⌘K</kbd>
+  </button>
+  <div class="lang-wrap">
+    <button class="icon lang-trigger" id="lang-toggle" aria-haspopup="true" aria-expanded="false" aria-label="Language">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="6.2"/><path d="M1.8 8h12.4" stroke-linecap="round"/><ellipse cx="8" cy="8" rx="2.8" ry="6.2"/></svg><span class="lang-label">EN</span><svg class="chev" width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+    </button>
+    <div class="lang-menu" id="lang-menu" role="menu">
+      <button class="lang-opt" data-lang="en" role="menuitem"><span>English</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="lang-opt" data-lang="zh" role="menuitem"><span>简体中文</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+  <div class="theme-wrap">
+    <button class="icon" id="theme-toggle" aria-label="Theme" aria-haspopup="menu" aria-controls="theme-menu" aria-expanded="false"><svg class="ic-system" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="2.5" width="13" height="9" rx="1.5"/><path d="M8 11.5V14M5.5 14h5"/></svg><svg class="ic-moon" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M13.5 9.5A6 6 0 1 1 6.5 2.5a5 5 0 0 0 7 7z"/></svg><svg class="ic-sun" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="3.2"/><path d="M8 1.2v1.8M8 13v1.8M1.2 8H3M13 8h1.8M3.2 3.2l1.3 1.3M11.5 11.5l1.3 1.3M12.8 3.2l-1.3 1.3M4.5 11.5l-1.3 1.3"/></svg></button>
+    <div class="theme-menu" id="theme-menu" role="menu" aria-labelledby="theme-toggle">
+      <button class="theme-opt" data-theme-choice="system" role="menuitemradio" aria-checked="true"><span>Follow system</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="light" role="menuitemradio" aria-checked="false"><span>Light</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="dark" role="menuitemradio" aria-checked="false"><span>Dark</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+</header>
+<nav class="tabbar"><a class="tablink" href="/docs/README.html" data-title-zh="开始使用" data-href-en="/docs/README.html" data-href-zh="/docs/README.zh.html">Get started</a><a class="tablink" href="/docs/install/install.html" data-title-zh="安装" data-href-en="/docs/install/install.html" data-href-zh="/docs/install/install.zh.html">Install</a><a class="tablink active" href="/docs/capabilities/README.html" data-title-zh="能力" data-href-en="/docs/capabilities/README.html" data-href-zh="/docs/capabilities/README.zh.html">Capabilities</a><a class="tablink" href="/docs/interfaces/README.html" data-title-zh="界面" data-href-en="/docs/interfaces/README.html" data-href-zh="/docs/interfaces/README.zh.html">Interfaces</a><a class="tablink" href="/docs/models/README.html" data-title-zh="模型" data-href-en="/docs/models/README.html" data-href-zh="/docs/models/README.zh.html">Models</a><a class="tablink" href="/docs/integrations/anthropic.html" data-title-zh="集成" data-href-en="/docs/integrations/anthropic.html" data-href-zh="/docs/integrations/anthropic.zh.html">Integrations</a><a class="tablink" href="/docs/server/README.html" data-title-zh="服务与运维" data-href-en="/docs/server/README.html" data-href-zh="/docs/server/README.zh.html">Server &amp; Ops</a><a class="tablink" href="/docs/reference/README.html" data-title-zh="参考" data-href-en="/docs/reference/README.html" data-href-zh="/docs/reference/README.zh.html">Reference</a><a class="tablink" href="/docs/reference/design/README.html" data-title-zh="设计" data-href-en="/docs/reference/design/README.html" data-href-zh="/docs/reference/design/README.zh.html">Design</a></nav>
+
+<div class="scrim"></div>
+<div class="layout">
+  <nav class="sidebar" aria-label="Documentation">
+    <input class="nav-filter" type="text" data-i18n-ph="nav_filter"
+           aria-label="Filter docs" placeholder="Filter docs…" autocomplete="off" spellcheck="false">
+    <div class="nav-tree"><div class="nav-sec"><div class="nav-sec-title" data-title-zh="概览">Overview</div><a class="navlink" href="/docs/capabilities/README.html" data-title-zh="概览" data-href-en="/docs/capabilities/README.html" data-href-zh="/docs/capabilities/README.zh.html">Overview</a>
+<a class="navlink" href="/docs/capabilities/applications.html" data-title-zh="应用" data-href-en="/docs/capabilities/applications.html" data-href-zh="/docs/capabilities/applications.zh.html">Applications</a>
+<a class="navlink" href="/docs/capabilities/framework-control.html" data-title-zh="框架工具" data-href-en="/docs/capabilities/framework-control.html" data-href-zh="/docs/capabilities/framework-control.zh.html">Framework tools</a></div>
+<div class="nav-sec"><div class="nav-sec-title">Agentic Programming</div><a class="navlink" href="/docs/capabilities/agentic-programming/README.html" data-title-zh="指南" data-href-en="/docs/capabilities/agentic-programming/README.html" data-href-zh="/docs/capabilities/agentic-programming/README.zh.html">Guide</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/philosophy.html" data-title-zh="设计原则" data-href-en="/docs/capabilities/agentic-programming/philosophy.html" data-href-zh="/docs/capabilities/agentic-programming/philosophy.zh.html">Philosophy</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/embedding-in-your-own-stack.html" data-title-zh="框架嵌入" data-href-en="/docs/capabilities/agentic-programming/embedding-in-your-own-stack.html" data-href-zh="/docs/capabilities/agentic-programming/embedding-in-your-own-stack.zh.html">Framework embedding</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="编写函数">Writing functions</div><a class="navlink" href="/docs/capabilities/agentic-programming/writing-functions/pure-python.html" data-title-zh="Python 函数" data-href-en="/docs/capabilities/agentic-programming/writing-functions/pure-python.html" data-href-zh="/docs/capabilities/agentic-programming/writing-functions/pure-python.zh.html">Python functions</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/writing-functions/agent.html" data-title-zh="智能体函数" data-href-en="/docs/capabilities/agentic-programming/writing-functions/agent.html" data-href-zh="/docs/capabilities/agentic-programming/writing-functions/agent.zh.html">Agentic functions</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/writing-functions/function-metadata.html" data-title-zh="函数元数据" data-href-en="/docs/capabilities/agentic-programming/writing-functions/function-metadata.html" data-href-zh="/docs/capabilities/agentic-programming/writing-functions/function-metadata.zh.html">Function metadata</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="选择下一步">Choosing the next step</div><a class="navlink" href="/docs/capabilities/agentic-programming/choosing-the-next-step/tool-calling.html" data-title-zh="工具循环" data-href-en="/docs/capabilities/agentic-programming/choosing-the-next-step/tool-calling.html" data-href-zh="/docs/capabilities/agentic-programming/choosing-the-next-step/tool-calling.zh.html">Tool-call loops</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/choosing-the-next-step/fixed-order-calls.html" data-title-zh="顺序调用" data-href-en="/docs/capabilities/agentic-programming/choosing-the-next-step/fixed-order-calls.html" data-href-zh="/docs/capabilities/agentic-programming/choosing-the-next-step/fixed-order-calls.zh.html">Fixed-order calls</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/choosing-the-next-step/next-step-decision.html" data-title-zh="步骤选择" data-href-en="/docs/capabilities/agentic-programming/choosing-the-next-step/next-step-decision.html" data-href-zh="/docs/capabilities/agentic-programming/choosing-the-next-step/next-step-decision.zh.html">Next-step selection</a></div>
+<div class="nav-sec"><div class="nav-sec-title">Agentic Workflows</div><a class="navlink" href="/docs/capabilities/workflows/README.html" data-title-zh="工作流" data-href-en="/docs/capabilities/workflows/README.html" data-href-zh="/docs/capabilities/workflows/README.zh.html">Workflows</a>
+<a class="navlink" href="/docs/capabilities/workflows/authoring.html" data-title-zh="工作流编写" data-href-en="/docs/capabilities/workflows/authoring.html" data-href-zh="/docs/capabilities/workflows/authoring.zh.html">Workflow authoring</a>
+<a class="navlink" href="/docs/capabilities/workflows/recording.html" data-title-zh="录制 Workflow" data-href-en="/docs/capabilities/workflows/recording.html" data-href-zh="/docs/capabilities/workflows/recording.zh.html">Record a workflow</a>
+<a class="navlink" href="/docs/capabilities/workflows/reports.html" data-title-zh="每周报告" data-href-en="/docs/capabilities/workflows/reports.html" data-href-zh="/docs/capabilities/workflows/reports.zh.html">Weekly reports</a></div>
+<div class="nav-sec"><div class="nav-sec-title">Agents</div><a class="navlink" href="/docs/capabilities/agents.html" data-title-zh="配置 Agent" data-href-en="/docs/capabilities/agents.html" data-href-zh="/docs/capabilities/agents.zh.html">Configure an Agent</a>
+<a class="navlink" href="/docs/capabilities/agents-md.html" data-title-zh="用 AGENTS.md 写指令" data-href-en="/docs/capabilities/agents-md.html" data-href-zh="/docs/capabilities/agents-md.zh.html">Instructions with AGENTS.md</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="常驻 Agent">Always-on Agents</div><a class="navlink" href="/docs/capabilities/always-on-agents.html" data-title-zh="常驻 Agent" data-href-en="/docs/capabilities/always-on-agents.html" data-href-zh="/docs/capabilities/always-on-agents.zh.html">Always-on Agents</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="提醒">Reminders</div><a class="navlink" href="/docs/capabilities/reminders.html" data-title-zh="提醒" data-href-en="/docs/capabilities/reminders.html" data-href-zh="/docs/capabilities/reminders.zh.html">Reminders</a>
+<a class="navlink" href="/docs/capabilities/event-triggers.html" data-title-zh="有事发生时运行任务" data-href-en="/docs/capabilities/event-triggers.html" data-href-zh="/docs/capabilities/event-triggers.zh.html">Run a task when something happens</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="记忆">Memory</div><a class="navlink" href="/docs/capabilities/memory.html" data-title-zh="记忆管理" data-href-en="/docs/capabilities/memory.html" data-href-zh="/docs/capabilities/memory.zh.html">Memory management</a>
+<a class="navlink" href="/docs/capabilities/memory-settings.html" data-title-zh="调整记忆" data-href-en="/docs/capabilities/memory-settings.html" data-href-zh="/docs/capabilities/memory-settings.zh.html">Tune Memory</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="运行环境">Environments</div><a class="navlink" href="/docs/capabilities/environments.html" data-title-zh="在另一台机器上运行会话" data-href-en="/docs/capabilities/environments.html" data-href-zh="/docs/capabilities/environments.zh.html">Run conversations on another machine</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="会话目标">Session goals</div><a class="navlink" href="/docs/capabilities/goal.html" data-title-zh="目标" data-href-en="/docs/capabilities/goal.html" data-href-zh="/docs/capabilities/goal.zh.html">Goals</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="操控电脑">Computer use</div><a class="navlink" href="/docs/capabilities/computer-use.html" data-title-zh="操控电脑" data-href-en="/docs/capabilities/computer-use.html" data-href-zh="/docs/capabilities/computer-use.zh.html">Computer use</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="会议">Meetings</div><a class="navlink" href="/docs/capabilities/meetings.html" data-title-zh="会议" data-href-en="/docs/capabilities/meetings.html" data-href-zh="/docs/capabilities/meetings.zh.html">Meetings</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="扩展">Extending</div><a class="navlink" href="/docs/capabilities/installing-programs.html" data-title-zh="安装程序" data-href-en="/docs/capabilities/installing-programs.html" data-href-zh="/docs/capabilities/installing-programs.zh.html">Installing programs</a>
+<a class="navlink" href="/docs/capabilities/skills.html" data-title-zh="技能" data-href-en="/docs/capabilities/skills.html" data-href-zh="/docs/capabilities/skills.zh.html">Skills</a>
+<a class="navlink" href="/docs/capabilities/plugins.html" data-title-zh="插件" data-href-en="/docs/capabilities/plugins.html" data-href-zh="/docs/capabilities/plugins.zh.html">Plugins</a>
+<a class="navlink" href="/docs/capabilities/mcp.html" data-title-zh="MCP" data-href-en="/docs/capabilities/mcp.html" data-href-zh="/docs/capabilities/mcp.zh.html">MCP</a>
+<a class="navlink" href="/docs/capabilities/tools.html" data-title-zh="内置工具" data-href-en="/docs/capabilities/tools.html" data-href-zh="/docs/capabilities/tools.zh.html">Built-in tools</a>
+<a class="navlink" href="/docs/capabilities/lsp.html" data-title-zh="语言服务器" data-href-en="/docs/capabilities/lsp.html" data-href-zh="/docs/capabilities/lsp.zh.html">Language servers</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="概览">Overview</div><a class="navlink" href="/docs/capabilities/commit-push-pr.html" data-title-zh="提交与拉取请求" data-href-en="/docs/capabilities/commit-push-pr.html" data-href-zh="/docs/capabilities/commit-push-pr.zh.html">Commits and PRs</a>
+<a class="navlink active" href="/docs/capabilities/permissions.html" data-title-zh="工具权限" data-href-en="/docs/capabilities/permissions.html" data-href-zh="/docs/capabilities/permissions.zh.html">Tool permissions</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="指南">Guide</div><a class="navlink" href="/docs/capabilities/agentic-programming/self-programming-ai-agents.html" data-title-zh="自编程智能体" data-href-en="/docs/capabilities/agentic-programming/self-programming-ai-agents.html" data-href-zh="/docs/capabilities/agentic-programming/self-programming-ai-agents.zh.html">Self-programming agents</a></div></div>
+  </nav>
+  <main class="content"><button class="fs-toggle" aria-label="Fullscreen" title="Fullscreen (Esc to exit)"><svg class="ic-expand" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.2 2H2v4.2M9.8 2H14v4.2M6.2 14H2V9.8M9.8 14H14V9.8"/></svg><svg class="ic-collapse" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6.2h4.2V2M14 6.2H9.8V2M2 9.8h4.2V14M14 9.8H9.8V14"/></svg></button><article><nav class="breadcrumb"><span class="bc-seg" data-title-zh="能力">Capabilities</span> <span class='bc-sep'>›</span> <span class="bc-seg" data-title-zh="概览">Overview</span> <span class='bc-sep'>›</span> <span class="bc-seg bc-current" data-title-zh="工具权限">Tool permissions</span></nav><h1 id="控制工具权限">控制工具权限<a class="header-anchor" href="#控制工具权限">#</a></h1>
+<p>在 Web 或安装的 App 中使用权限菜单；终端使用 <code>/permissions</code>，也可以通过 <code>Shift+Tab</code> 循环切换普通模式。Bypass 保留显式启用确认。</p>
+<table>
+<thead>
+<tr>
+<th>模式</th>
+<th>自动放行范围</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>自动判定</td>
+<td>安全工具及风险分类器允许的操作。</td>
+</tr>
+<tr>
+<td>逐次确认</td>
+<td>安全读取；其他操作要求审批。</td>
+</tr>
+<tr>
+<td>接受编辑</td>
+<td>安全读取及工作目录内支持的安全编辑；命令仍需审批。</td>
+</tr>
+<tr>
+<td>计划模式</td>
+<td>既有只读计划工具策略允许的操作。</td>
+</tr>
+<tr>
+<td>跳过审批</td>
+<td>普通操作不经过审批和风险分类。</td>
+</tr>
+</tbody>
+</table>
+<p>Bypass 不覆盖显式 deny 或 ask 规则、计划退出或自更新的强制审批、<a href="#agent-%E6%9B%BF%E4%BD%A0%E5%8F%91%E5%87%BA%E7%9A%84%E6%B6%88%E6%81%AF">Agent 替你发出的消息</a>、插件限制、身份权限上限以及 Sandbox。</p>
+<p>问题和审批显示为对话中的独立卡片。每个问题的下方显示回答控件，多问题和表单字段一起排列；填写后点击一次“提交回答”。提交的答案继续显示在对应问题下方。主输入框仍用于普通消息。卡片显示已提交的答案、提交进度以及确认或重试状态。确认回执保留至页面刷新，仍待回答的请求会在重连后恢复。</p>
+<p>工具审批只显示当前操作，以及“同意”和“拒绝”。点击即提交。“拒绝”左侧的说明按钮打开“拒绝并说明”：写下 agent 应该怎么做，按 Ctrl+Enter 发送。服务端确认后才关闭；结果未确认时可重试同一答复。审批确认后卡片从对话中移除，工具行显示执行结果。拒绝不会结束任务：模型把拒绝当作该工具的结果收到，操作不会执行，并被要求停下来询问你下一步怎么做。附了说明时，模型收到的是你的说明，并按说明继续。跳过问题同样会告诉模型该问题没有回答。长期规则仍可在 History 的项目设置中管理。</p>
+<p>人工工具审批默认没有时间限制。等待时保存执行进度并释放当前执行实例，重新打开 App 后恢复待审批请求。恢复使用本轮已保存的上下文，之后的记忆或日期更新不会使审批失效。工具、权限和工作目录仍会重新检查。如果执行无法恢复，对话会明确说明待执行的操作尚未运行。取消任务会撤销审批。以前已过期的请求不会重新生效，也不能批准新的操作。</p>
+<p><code>edit</code>、<code>write</code> 和 <code>apply_patch</code> 会保存审批时的文件状态，在执行前和写入前检查。文件已删除时不利用旧审批重新创建；内容变化时，需要先读取当前内容再提出新操作。界面只显示当前待批准内容，不显示变更历史。任意命令不能完整声明涉及的文件，所以这项文件检查不覆盖任意命令的所有副作用。</p>
+<p>普通提问保留答题控件和“先讨论”入口。“先讨论”里写的话代替回答直接交给模型，模型在同一轮里回应；卡片保留你写的内容。</p>
+<p>新的 owner 轮次在 Auto 或 Bypass 下，不会仅因之前无关轮次中断而额外要求批准。来源验证通过的嵌套浏览器和 Program 调用使用相同范围。当前执行内结果不确定的操作仍需精确批准，旧操作记录继续保留。这不会改变 macOS 访问权限，也不会使只读磁盘变为可写。</p>
+<h2 id="agent-替你发出的消息">Agent 替你发出的消息<a class="header-anchor" href="#agent-替你发出的消息">#</a></h2>
+<p>Agent 替你发出去的东西会先作为草稿暂存。已连接服务里会发送、发帖或回复的工具（例如 MCP 服务器提供的 <code>send_email</code>、<code>chat.postMessage</code>、<code>create_comment</code>），在任何模式下都要审批，包括 Bypass，即使有允许规则点名它也一样。审批卡片显示完整消息。点&quot;允许一次&quot;就发出；用<strong>拒绝并附言</strong>写下要改的地方，Agent 会重写一份草稿再来请求审批。每条消息单独审批，不会变成允许规则。后台运行（比如定时的提示词任务）没人可问，所以不能发送。</p>
+<p>工具名以发送类动词开头或包含它（send、reply、post、publish、forward、invite、share、comment），或者是创建 message、email、comment、post 的工具，而且服务器没有把它标成只读，就算作发送。读取（<code>list_messages</code>、<code>get_posts</code>）和草稿（<code>create_draft</code>）不需要审批。</p>
+<p>所有 Agent 默认都开着这项暂存。想让某个 Agent 按它平常的权限模式直接发送，把它配置里的 <code>hold_outbound</code> 设为 <code>false</code>（<code>PATCH /api/agents/&lt;id&gt;</code>，内容 <code>{&quot;hold_outbound&quot;: false}</code>）。</p>
+<h2 id="任务运行中修改权限">任务运行中修改权限<a class="header-anchor" href="#任务运行中修改权限">#</a></h2>
+<p>已有会话的选择会发送到后端，获得确认后才显示为有效模式。界面已知后端确认版本时，选择后立即发送修改。后端确认 Bypass 后，后续普通工具调用不再要求审批，即使模型仍在推理、输出文字或生成工具参数；同一条回复中的后续工具也使用新模式。无需停止生成或再发一条消息。新模式会出现在后续模型请求的运行时说明中，已经在生成的文字不会被改写。已经获得执行授权的调用保留该次授权。切换到计划模式会阻止尚未获准的写入。</p>
+<p>普通审批如果不再需要，会通过 execution 的持久化等待自动处理并恢复任务。显式 ask、强制审批、用户问题、表单及 Sandbox 升级不会因为切换模式而自动回答。重复回答、取消、超时和恢复不得重复执行已完成调用。</p>
+<p>修改只影响当前会话。其他窗口接收已确认的模式，旧版本修改会被拒绝，不能覆盖新选择。断线或失败的修改保持未确认；重新连接后检查当前模式再重试。尚未发送的草稿将选择保存在本地，并在首条消息中传入。</p>
+<p>有效默认值按会话 override、项目默认、自动判定的顺序解析。经过身份验证的 owner Agent 创建子 Agent 时，子 Agent 继承父 Agent 当时有效的权限模式和显式规则。例如，使用 Bypass 的父 Agent 创建的子 Agent 可以执行无需普通审批的命令。子 Agent 保留自己的身份和非交互限制；显式 ask 规则和强制审批仍会阻止需要审批者的操作。后续模式变化不会改写已经接纳的子 Agent。独立定时任务不会从本地会话获得 owner 权限或 Bypass。聊天渠道账号默认以 owner 身份运行（设置 <code>sender_access</code>，见<a href="/docs/integrations/channels.zh.html">聊天渠道</a>）：它的轮次使用聊天会话自己的权限模式和规则，审批发到聊天里、用 <code>/answer</code> 回答，群聊在沙盒里运行。</p>
+<h2 id="在-history-中管理项目规则">在 History 中管理项目规则<a class="header-anchor" href="#在-history-中管理项目规则">#</a></h2>
+<p>打开 History → Projects，选择项目，再进入 Settings → Permission Rules。三个列表分别显示该项目的拒绝、询问和允许规则。使用 <code>ToolName</code> 或 <code>ToolName(pattern)</code> 语法添加规则；删除已有规则即可撤销它。修改规则时，先删除旧条目，再添加替代条目。拒绝优先于询问，询问优先于允许。项目列表为空时，会话和全局规则仍可能影响结果。</p>
+<p>界面收到匹配当前项目的服务端确认后才清空已提交的规则。保存失败或结果未确认时保留输入并显示状态；成功修改会同步到该项目其他已打开的视图。经过认证的交互式 owner 会话在下一次操作时读取最新规则，包括当前 turn 运行期间的修改。已经获准的操作保留该次授权；已有审批等待仍需单独答复。已经接纳的子 Agent 保留创建时的策略。</p>
+<p>同意和拒绝只答复当前请求，不创建项目规则。删除项目规则影响后续授权，不会改变已经执行的操作历史。</p>
+<h2 id="理解工具拒绝">理解工具拒绝<a class="header-anchor" href="#理解工具拒绝">#</a></h2>
+<p>Windows 路径规则可使用正斜杠避免转义歧义，例如
+<code>read(C:/Users/me/project/**)</code>。盘符路径中的普通反斜杠会保留；规则语法仍用
+<code>\\</code>、<code>\(</code>、<code>\)</code> 转义自身的特殊字符。写入 JSON 配置时，还需遵守 JSON 的反斜杠转义规则。</p>
+<p>工具结果会区分 Authority、权限规则、计划模式、Auto 分类和 Sandbox 拒绝。<code>AUTHORITY_TIER_MISSING</code> 表示执行请求缺少认证权限级别，Bypass 不能解决。新的认证聊天提交会携带完整身份；缺少身份的旧 admission 必须通过认证界面重新提交。</p>
+<p>Sandbox 默认关闭，在输入框 Plus 菜单里按会话打开；<code>sandbox.mode</code> 设为 <code>auto</code> 则在后端可用的每个会话里都打开，<code>workspace-write</code> 则强制使用。修改 Sandbox 影响后续 turn。沙箱里的命令在 <code>sandbox.network</code> 关闭时没有网络，并且只能写工作区。</p>
+<p>命令需要更多权限时，例如 <code>git push</code>、<code>gh</code>、安装依赖或写工作区以外的文件，Agent 会带上 <code>sandbox_permissions=&quot;require_escalated&quot;</code> 和一句理由调用 <code>bash</code>。命令执行前会出现审批卡片，显示命令和理由。<strong>允许</strong>让它在沙箱外执行一次，保护的应用路径和凭证过滤仍然有效；<strong>允许此对话</strong>让同一条命令在本对话里之后再出沙箱时不再询问。命令执行后被沙箱拦下（包括域名解析失败）时，Agent 会收到说明，改用这种方式申请，而不是原样重试。Bypass 保持沙箱并拒绝这类申请，普通工具审批不能用于沙箱升级。</p>
+<p>参见<a href="/docs/capabilities/tools.zh.html">工具</a>、<a href="/docs/interfaces/web.zh.html">Web</a>、<a href="/docs/interfaces/tui.zh.html">终端</a>和<a href="/docs/reference/design/runtime/security/sandbox-architecture.zh.html">工程合同</a>。</p>
+<h2 id="macos-在更新后再次询问权限">macOS 在更新后再次询问权限<a class="header-anchor" href="#macos-在更新后再次询问权限">#</a></h2>
+<p>文件夹访问、照片、屏幕录制和辅助功能属于 macOS 系统权限。Bypass 控制工具审批，不能授予这些权限。桌面 App 和具名后台服务都是签名应用，macOS 可能分别保存它们的权限记录；开启一个同名条目，不代表当前执行任务的后台已经获得授权。</p>
+<p>本地刷新 App、本地打包安装和对话自更新复用 <code>~/Library/Application Support/OpenProgram/local-signing</code> 中的私有签名身份，使后续构建保持同一证书身份，而不是每次构建都改变。清理构建文件时保留此目录，其中包含本地签名钥匙串。签名状态缺失或损坏时构建会停止，不会自动创建替代身份。</p>
+<p>首次从旧的临时签名迁移时，macOS 可能需要再次确认权限。旧条目可能仍显示已开启，但系统拒绝更新后的签名。系统权限页面检查实际执行程序，不把设置开关当作授权成功的证据。点击“请求授权”触发系统授权；“打开系统设置”是独立操作，辅助功能及之前被拒绝的权限可能需要在该界面确认。如果已记录的成功授权属于旧的已验证签名身份，显式授权操作仅对这项 OpenProgram 权限更新一次。启动及普通状态检查不会重置授权，也不会代替用户接受系统弹窗。本地签名仅用于这台电脑上的开发构建；公开分发仍需 Developer ID 签名和公证。</p>
+<p>Auto 模式在执行前审查完整操作，包括 Shell 命令。审查输入上限为 64 KiB；输入超限或分类器不可用时拒绝执行，不会依据截断内容批准。每个候选模型的超时为 30 秒。参数或实时权限策略变化会使原审查结果失效。显式拒绝规则和强制审批仍优先执行。</p>
+<p>Auto 风险拒绝连续达到 3 次或累计达到 20 次时，已认证的交互式本地用户可以通过现有审批流程批准具体操作。显式禁止规则和硬性限制仍然有效。计数按会话与权限版本保存；改变权限版本开始新的计数周期。允许或批准的操作重置连续次数；累计阈值触发的审批完成也重置累计次数。分类器故障、无效回复和取消不计为风险拒绝。持久化调用身份避免恢复后重复计数，并发更新使用执行数据库事务。非交互任务收到拒绝结果后仍可执行其他允许的操作。回退审批只允许当前操作，绑定原参数、工作目录、权限版本和文件状态。</p>
+<p>自动风险拒绝不计入重复执行失败限制，因此相同操作反复被拒绝时仍可进入人工审批。达到累计阈值后的审批完成会重置累计计数。已完成及被拒绝操作在检查点恢复时保留宿主记录的结果状态。</p>
+<h2 id="主机权限使用统一设置入口">主机权限使用统一设置入口<a class="header-anchor" href="#主机权限使用统一设置入口">#</a></h2>
+<p>执行主机使用一个统一的能力注册表，当前包含屏幕录制、辅助功能、自动化、日历、提醒事项、文件读取与写入、麦克风和摄像头。每行记录当前状态、被检查的执行身份、需要它的操作，以及平台是否支持申请。设置页、CLI/TUI doctor、GUI 前置检查、持久化的系统权限等待和 HTTP 接口都读取同一份注册表。</p>
+<p><code>GET /api/system/access</code> 只做不会弹窗的状态检查。在安装的 App 中打开“设置 → 系统权限”查看按类别分组的能力。“初始化全部 OpenProgram 权限”是首次设置已登记本机能力的统一入口，会返回一份合并后的状态报告；也可以对单行使用“请求授权”和“打开系统设置”。这些操作都必须由本机用户明确点击。重连、轮询、历史回放、模型输出、启动检查和普通重试都不会打开系统权限弹窗。缺少权限时，只暂停声明了这项能力的操作；浏览器、虚拟机、无桌面和普通聊天操作不会自动要求桌面权限。</p>
+<p>状态含义不同：<code>granted</code> 表示当前具名执行程序刚刚检查通过；<code>not_granted</code> 表示系统确认缺少授权；<code>unknown</code> 表示主机无法确认状态；<code>unavailable</code> 表示原生依赖缺失；<code>unsupported</code> 表示当前后端没有实现。<code>unknown</code> 和 <code>unavailable</code> 不会被当作拒绝。</p>
+<p>自动化权限按目标应用分别授权，文件访问按用户选择的路径控制。日历、提醒事项、麦克风和摄像头可能各自触发 macOS 授权。程序不能预先授权尚未指定的应用或尚未选择的路径。系统设置中的 <code>python3</code>、<code>node</code> 或缓存目录应用条目不是具名 OpenProgram 执行程序的授权证据。已安装产品的所有原生检查和授权都使用签名 runtime bundle 身份 <code>ai.openprogram.runtime</code>，外层 App 不再作为第二个原生执行身份。普通检查不会重置 TCC 记录，也不会修改其他应用的权限。</p>
+<h2 id="解释和自测权限规则">解释和自测权限规则<a class="header-anchor" href="#解释和自测权限规则">#</a></h2>
+<p><code>openprogram permissions check</code> 只读判断所提供的 JSON 规则，不执行工具：</p>
+<pre><code class="language-sh">openprogram<span class="w"> </span>permissions<span class="w"> </span>check<span class="w"> </span>--rules<span class="w"> </span>rules.json<span class="w"> </span>--tool<span class="w"> </span>bash<span class="w"> </span>--args<span class="w"> </span><span class="s1">&#39;{&quot;command&quot;:&quot;git status&quot;}&#39;</span><span class="w"> </span>--expect<span class="w"> </span>allow
+openprogram<span class="w"> </span>permissions<span class="w"> </span><span class="nb">test</span><span class="w"> </span>--rules<span class="w"> </span>rules.json<span class="w"> </span>--cases<span class="w"> </span>cases.json
+</code></pre>
+<p>规则文件包含 <code>allow</code>、<code>ask</code>、<code>deny</code> 数组，例如 <code>{&quot;allow&quot;:[&quot;bash(git:*)&quot;],&quot;ask&quot;:[],&quot;deny&quot;:[&quot;bash(rm:*)&quot;]}</code>。样例文件是非空数组，每项必须包含 <code>tool</code>、<code>args</code> 和 <code>expected</code>，例如 <code>[{&quot;tool&quot;:&quot;bash&quot;,&quot;args&quot;:{&quot;command&quot;:&quot;git status&quot;},&quot;expected&quot;:&quot;allow&quot;}]</code>。</p>
+<p>JSON 结果按 deny、ask、allow 的实际执行优先级列出命中规则；<code>unmatched</code> 表示所提供的规则均未命中。期望匹配时退出码为 0，不匹配为 1，输入无效为 2。<code>check</code> 未设置 <code>--expect</code> 时，任何有效判断均返回 0。诊断只检查传入文件，不合并会话配置，不运行风险分类器，不批准工具，也不绕过硬性限制或操作系统沙箱。</p>
+<h2 id="将沙箱命令限制到公网域名">将沙箱命令限制到公网域名<a class="header-anchor" href="#将沙箱命令限制到公网域名">#</a></h2>
+<p>macOS 上设置 <code>sandbox.network=true</code>，再将 <code>sandbox.network_domains</code> 设为映射，例如 <code>{&quot;example.com&quot;:&quot;allow&quot;,&quot;*.example.org&quot;:&quot;allow&quot;,&quot;blocked.example.org&quot;:&quot;deny&quot;}</code>。</p>
+<p>支持精确域名与任意深度子域 <code>*.example.org</code>（不包含根域），deny 优先。空映射拒绝全部目标，<code>null</code> 保留原有网络开关。私有、本地、组播和保留 IP 始终拒绝，即使域名在允许列表中。代理检查全部 DNS 返回地址，并直接连接已检查的地址。</p>
+<p>每条命令使用带临时认证的本地代理，macOS 沙箱阻止绕过代理直连。支持端口 80 的 HTTP 和端口 443 的 HTTPS CONNECT；客户端需要支持常规 HTTP 代理设置。域名规则授权目标连接，不检查加密 HTTPS 的方法或正文。不支持 TLS 拦截、SOCKS/UDP、任意端口、本地网络或上游代理串联。不支持明文 HTTP 的 chunked 上传和 Upgrade；HTTPS 隧道支持普通 HTTPS 与 WSS。</p>
+<p>命令结束或取消时关闭代理和活动连接。Linux/Windows/WSL 暂不支持域名策略，会明确拒绝执行，不会改为无限制网络。沙箱不可用时，即使普通不可用策略设为 <code>warn</code>，域名限制仍拒绝执行。显式关闭 Sandbox 仍会关闭其限制。这些设置作用于沙箱命令，不限制宿主的模型服务请求或所有其他工具传输。</p>
+<h2 id="中断的操作">中断的操作<a class="header-anchor" href="#中断的操作">#</a></h2>
+<p>新的交互式所有者轮次按所选 Auto 或 Bypass 模式执行，即使旧轮次有外部结果未知的记录。旧记录仍保留为未知，不会自动重放。恢复同一个中断执行仍需要核对结果或批准确切操作。显式 deny/ask 规则和强制审批继续生效。</p>
+<p>允许保存规则的请求提供“始终允许”，将支持的确切操作规则保存到当前项目。“允许此对话”把同一条规则只保存到当前会话：本对话里之后的调用不再询问，其他会话照常询问；目前 <a href="/docs/capabilities/computer-use.zh.html#%E5%AE%A1%E6%89%B9"><code>computer_use_agent</code></a> 提供这一档，规则按应用或虚拟机命名。只允许单次审批的请求不提供持久授权；浏览器的 <a href="/docs/capabilities/computer-use.zh.html#%E7%BD%91%E9%A1%B5"><code>evaluate</code></a> 调用就是这类请求，它在任何模式下都会询问，包括 Bypass。</p>
+<p>停止会中断正在等待的模型请求和异步工具操作。执行程序退出后，轮次结束；外部操作结果未知时，Activity 仍保留该记录。暂停则等待当前操作到达可恢复的位置。界面显示请求正在处理；需要立即中断时使用停止。</p>
+<div class="page-updated"><span data-i18n="updated">Last updated</span> · 2026-11-04</div><div class="prevnext"><a class="pn-link pn-prev" href="/docs/capabilities/commit-push-pr.html" data-href-en="/docs/capabilities/commit-push-pr.html" data-href-zh="/docs/capabilities/commit-push-pr.zh.html"><span class="pn-dir" data-i18n="prev">Previous</span><span class="pn-title" data-title-zh="提交与拉取请求">Commits and PRs</span></a><a class="pn-link pn-next" href="/docs/capabilities/agentic-programming/self-programming-ai-agents.html" data-href-en="/docs/capabilities/agentic-programming/self-programming-ai-agents.html" data-href-zh="/docs/capabilities/agentic-programming/self-programming-ai-agents.zh.html"><span class="pn-dir" data-i18n="next">Next</span><span class="pn-title" data-title-zh="自编程智能体">Self-programming agents</span></a></div></article></main>
+  <aside class="toc"><div class="toc-title" data-i18n="on_this_page">On this page</div>
+<ul class="toc-list">
+<li>
+<a class="lvl-2" href="#agent-替你发出的消息">Agent 替你发出的消息</a>
+</li>
+<li>
+<a class="lvl-2" href="#任务运行中修改权限">任务运行中修改权限</a>
+</li>
+<li>
+<a class="lvl-2" href="#在-history-中管理项目规则">在 History 中管理项目规则</a>
+</li>
+<li>
+<a class="lvl-2" href="#理解工具拒绝">理解工具拒绝</a>
+</li>
+<li>
+<a class="lvl-2" href="#macos-在更新后再次询问权限">macOS 在更新后再次询问权限</a>
+</li>
+<li>
+<a class="lvl-2" href="#主机权限使用统一设置入口">主机权限使用统一设置入口</a>
+</li>
+<li>
+<a class="lvl-2" href="#解释和自测权限规则">解释和自测权限规则</a>
+</li>
+<li>
+<a class="lvl-2" href="#将沙箱命令限制到公网域名">将沙箱命令限制到公网域名</a>
+</li>
+<li>
+<a class="lvl-2" href="#中断的操作">中断的操作</a>
+</li>
+</ul></aside>
+</div>
+
+<div class="search-overlay">
+  <div class="search-box">
+    <input type="text" data-i18n-ph="search_ph" placeholder="Search titles or text…" autocomplete="off" spellcheck="false">
+    <div class="search-results"></div>
+  </div>
+</div>
+
+<script src="/docs/assets/site.js?v=6520ba46"></script>
+</body>
+</html>

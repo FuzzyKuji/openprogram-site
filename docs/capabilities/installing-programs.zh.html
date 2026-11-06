@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="zh" data-base="/docs/" data-page-lang="zh" data-build="1793956776" data-alt-lang-url="/docs/capabilities/installing-programs.html">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>安装程序 · OpenProgram Docs</title>
+<meta name="description" content="openprogram programs install 从本地目录、git URL 或 GitHub owner/repo 把一个程序包加入 OpenProgram。已安装的程序显示在 能力 → Programs → Applications 下，是一个以目录名命名的文件夹，里面列出它注册的 Agent 入口。">
+<link rel="canonical" href="https://openprogram.io/docs/capabilities/installing-programs.zh.html">
+<link rel="alternate" type="text/markdown" href="https://openprogram.io/docs/capabilities/installing-programs.zh.html.md">
+<link rel="describedby" href="https://openprogram.io/llms.txt">
+<link rel="alternate" hreflang="en" href="https://openprogram.io/docs/capabilities/installing-programs.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://openprogram.io/docs/capabilities/installing-programs.zh.html">
+<link rel="alternate" hreflang="x-default" href="https://openprogram.io/docs/capabilities/installing-programs.html">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"OpenProgram Docs","item":"https://openprogram.io/docs/"},{"@type":"ListItem","position":2,"name":"安装程序"}]}</script>
+<meta property="og:type" content="article">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:site_name" content="OpenProgram">
+<meta property="og:url" content="https://openprogram.io/docs/capabilities/installing-programs.zh.html">
+<meta property="og:title" content="安装程序 · OpenProgram Docs">
+<meta property="og:description" content="openprogram programs install 从本地目录、git URL 或 GitHub owner/repo 把一个程序包加入 OpenProgram。已安装的程序显示在 能力 → Programs → Applications 下，是一个以目录名命名的文件夹，里面列出它注册的 Agent 入口。">
+<meta property="og:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:secure_url" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="安装程序 · OpenProgram Docs">
+<meta name="twitter:description" content="openprogram programs install 从本地目录、git URL 或 GitHub owner/repo 把一个程序包加入 OpenProgram。已安装的程序显示在 能力 → Programs → Applications 下，是一个以目录名命名的文件夹，里面列出它注册的 Agent 入口。">
+<meta name="twitter:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta name="twitter:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/docs/assets/mark.svg">
+<link rel="stylesheet" href="/docs/assets/site.css?v=6520ba46">
+<link rel="stylesheet" href="/docs/assets/pygments-light.css" media="(prefers-color-scheme: light)" id="pyg-light">
+<link rel="stylesheet" href="/docs/assets/pygments-dark.css" media="(prefers-color-scheme: dark)" id="pyg-dark">
+<script src="/docs/assets/theme.js?v=6520ba46"></script>
+
+</head>
+<body>
+<header class="topbar">
+  <button class="icon hamburger" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2.5 4.5h11M2.5 8h11M2.5 11.5h11"/></svg></button>
+  <a class="brand" href="/docs/index.html"><img class="mark" src="/docs/assets/mark.svg" alt="">OpenProgram Docs</a>
+  <div class="spacer"></div>
+  <button class="search-trigger" aria-label="Search">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14"/></svg><span class="label" data-i18n="search">Search docs</span><kbd>⌘K</kbd>
+  </button>
+  <div class="lang-wrap">
+    <button class="icon lang-trigger" id="lang-toggle" aria-haspopup="true" aria-expanded="false" aria-label="Language">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="6.2"/><path d="M1.8 8h12.4" stroke-linecap="round"/><ellipse cx="8" cy="8" rx="2.8" ry="6.2"/></svg><span class="lang-label">EN</span><svg class="chev" width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+    </button>
+    <div class="lang-menu" id="lang-menu" role="menu">
+      <button class="lang-opt" data-lang="en" role="menuitem"><span>English</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="lang-opt" data-lang="zh" role="menuitem"><span>简体中文</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+  <div class="theme-wrap">
+    <button class="icon" id="theme-toggle" aria-label="Theme" aria-haspopup="menu" aria-controls="theme-menu" aria-expanded="false"><svg class="ic-system" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="2.5" width="13" height="9" rx="1.5"/><path d="M8 11.5V14M5.5 14h5"/></svg><svg class="ic-moon" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M13.5 9.5A6 6 0 1 1 6.5 2.5a5 5 0 0 0 7 7z"/></svg><svg class="ic-sun" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="3.2"/><path d="M8 1.2v1.8M8 13v1.8M1.2 8H3M13 8h1.8M3.2 3.2l1.3 1.3M11.5 11.5l1.3 1.3M12.8 3.2l-1.3 1.3M4.5 11.5l-1.3 1.3"/></svg></button>
+    <div class="theme-menu" id="theme-menu" role="menu" aria-labelledby="theme-toggle">
+      <button class="theme-opt" data-theme-choice="system" role="menuitemradio" aria-checked="true"><span>Follow system</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="light" role="menuitemradio" aria-checked="false"><span>Light</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="dark" role="menuitemradio" aria-checked="false"><span>Dark</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+</header>
+<nav class="tabbar"><a class="tablink" href="/docs/README.html" data-title-zh="开始使用" data-href-en="/docs/README.html" data-href-zh="/docs/README.zh.html">Get started</a><a class="tablink" href="/docs/install/install.html" data-title-zh="安装" data-href-en="/docs/install/install.html" data-href-zh="/docs/install/install.zh.html">Install</a><a class="tablink active" href="/docs/capabilities/README.html" data-title-zh="能力" data-href-en="/docs/capabilities/README.html" data-href-zh="/docs/capabilities/README.zh.html">Capabilities</a><a class="tablink" href="/docs/interfaces/README.html" data-title-zh="界面" data-href-en="/docs/interfaces/README.html" data-href-zh="/docs/interfaces/README.zh.html">Interfaces</a><a class="tablink" href="/docs/models/README.html" data-title-zh="模型" data-href-en="/docs/models/README.html" data-href-zh="/docs/models/README.zh.html">Models</a><a class="tablink" href="/docs/integrations/anthropic.html" data-title-zh="集成" data-href-en="/docs/integrations/anthropic.html" data-href-zh="/docs/integrations/anthropic.zh.html">Integrations</a><a class="tablink" href="/docs/server/README.html" data-title-zh="服务与运维" data-href-en="/docs/server/README.html" data-href-zh="/docs/server/README.zh.html">Server &amp; Ops</a><a class="tablink" href="/docs/reference/README.html" data-title-zh="参考" data-href-en="/docs/reference/README.html" data-href-zh="/docs/reference/README.zh.html">Reference</a><a class="tablink" href="/docs/reference/design/README.html" data-title-zh="设计" data-href-en="/docs/reference/design/README.html" data-href-zh="/docs/reference/design/README.zh.html">Design</a></nav>
+
+<div class="scrim"></div>
+<div class="layout">
+  <nav class="sidebar" aria-label="Documentation">
+    <input class="nav-filter" type="text" data-i18n-ph="nav_filter"
+           aria-label="Filter docs" placeholder="Filter docs…" autocomplete="off" spellcheck="false">
+    <div class="nav-tree"><div class="nav-sec"><div class="nav-sec-title" data-title-zh="概览">Overview</div><a class="navlink" href="/docs/capabilities/README.html" data-title-zh="概览" data-href-en="/docs/capabilities/README.html" data-href-zh="/docs/capabilities/README.zh.html">Overview</a>
+<a class="navlink" href="/docs/capabilities/applications.html" data-title-zh="应用" data-href-en="/docs/capabilities/applications.html" data-href-zh="/docs/capabilities/applications.zh.html">Applications</a>
+<a class="navlink" href="/docs/capabilities/framework-control.html" data-title-zh="框架工具" data-href-en="/docs/capabilities/framework-control.html" data-href-zh="/docs/capabilities/framework-control.zh.html">Framework tools</a></div>
+<div class="nav-sec"><div class="nav-sec-title">Agentic Programming</div><a class="navlink" href="/docs/capabilities/agentic-programming/README.html" data-title-zh="指南" data-href-en="/docs/capabilities/agentic-programming/README.html" data-href-zh="/docs/capabilities/agentic-programming/README.zh.html">Guide</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/philosophy.html" data-title-zh="设计原则" data-href-en="/docs/capabilities/agentic-programming/philosophy.html" data-href-zh="/docs/capabilities/agentic-programming/philosophy.zh.html">Philosophy</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/embedding-in-your-own-stack.html" data-title-zh="框架嵌入" data-href-en="/docs/capabilities/agentic-programming/embedding-in-your-own-stack.html" data-href-zh="/docs/capabilities/agentic-programming/embedding-in-your-own-stack.zh.html">Framework embedding</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="编写函数">Writing functions</div><a class="navlink" href="/docs/capabilities/agentic-programming/writing-functions/pure-python.html" data-title-zh="Python 函数" data-href-en="/docs/capabilities/agentic-programming/writing-functions/pure-python.html" data-href-zh="/docs/capabilities/agentic-programming/writing-functions/pure-python.zh.html">Python functions</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/writing-functions/agent.html" data-title-zh="智能体函数" data-href-en="/docs/capabilities/agentic-programming/writing-functions/agent.html" data-href-zh="/docs/capabilities/agentic-programming/writing-functions/agent.zh.html">Agentic functions</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/writing-functions/function-metadata.html" data-title-zh="函数元数据" data-href-en="/docs/capabilities/agentic-programming/writing-functions/function-metadata.html" data-href-zh="/docs/capabilities/agentic-programming/writing-functions/function-metadata.zh.html">Function metadata</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="选择下一步">Choosing the next step</div><a class="navlink" href="/docs/capabilities/agentic-programming/choosing-the-next-step/tool-calling.html" data-title-zh="工具循环" data-href-en="/docs/capabilities/agentic-programming/choosing-the-next-step/tool-calling.html" data-href-zh="/docs/capabilities/agentic-programming/choosing-the-next-step/tool-calling.zh.html">Tool-call loops</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/choosing-the-next-step/fixed-order-calls.html" data-title-zh="顺序调用" data-href-en="/docs/capabilities/agentic-programming/choosing-the-next-step/fixed-order-calls.html" data-href-zh="/docs/capabilities/agentic-programming/choosing-the-next-step/fixed-order-calls.zh.html">Fixed-order calls</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/choosing-the-next-step/next-step-decision.html" data-title-zh="步骤选择" data-href-en="/docs/capabilities/agentic-programming/choosing-the-next-step/next-step-decision.html" data-href-zh="/docs/capabilities/agentic-programming/choosing-the-next-step/next-step-decision.zh.html">Next-step selection</a></div>
+<div class="nav-sec"><div class="nav-sec-title">Agentic Workflows</div><a class="navlink" href="/docs/capabilities/workflows/README.html" data-title-zh="工作流" data-href-en="/docs/capabilities/workflows/README.html" data-href-zh="/docs/capabilities/workflows/README.zh.html">Workflows</a>
+<a class="navlink" href="/docs/capabilities/workflows/authoring.html" data-title-zh="工作流编写" data-href-en="/docs/capabilities/workflows/authoring.html" data-href-zh="/docs/capabilities/workflows/authoring.zh.html">Workflow authoring</a>
+<a class="navlink" href="/docs/capabilities/workflows/recording.html" data-title-zh="录制 Workflow" data-href-en="/docs/capabilities/workflows/recording.html" data-href-zh="/docs/capabilities/workflows/recording.zh.html">Record a workflow</a>
+<a class="navlink" href="/docs/capabilities/workflows/reports.html" data-title-zh="每周报告" data-href-en="/docs/capabilities/workflows/reports.html" data-href-zh="/docs/capabilities/workflows/reports.zh.html">Weekly reports</a></div>
+<div class="nav-sec"><div class="nav-sec-title">Agents</div><a class="navlink" href="/docs/capabilities/agents.html" data-title-zh="配置 Agent" data-href-en="/docs/capabilities/agents.html" data-href-zh="/docs/capabilities/agents.zh.html">Configure an Agent</a>
+<a class="navlink" href="/docs/capabilities/agents-md.html" data-title-zh="用 AGENTS.md 写指令" data-href-en="/docs/capabilities/agents-md.html" data-href-zh="/docs/capabilities/agents-md.zh.html">Instructions with AGENTS.md</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="常驻 Agent">Always-on Agents</div><a class="navlink" href="/docs/capabilities/always-on-agents.html" data-title-zh="常驻 Agent" data-href-en="/docs/capabilities/always-on-agents.html" data-href-zh="/docs/capabilities/always-on-agents.zh.html">Always-on Agents</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="提醒">Reminders</div><a class="navlink" href="/docs/capabilities/reminders.html" data-title-zh="提醒" data-href-en="/docs/capabilities/reminders.html" data-href-zh="/docs/capabilities/reminders.zh.html">Reminders</a>
+<a class="navlink" href="/docs/capabilities/event-triggers.html" data-title-zh="有事发生时运行任务" data-href-en="/docs/capabilities/event-triggers.html" data-href-zh="/docs/capabilities/event-triggers.zh.html">Run a task when something happens</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="记忆">Memory</div><a class="navlink" href="/docs/capabilities/memory.html" data-title-zh="记忆管理" data-href-en="/docs/capabilities/memory.html" data-href-zh="/docs/capabilities/memory.zh.html">Memory management</a>
+<a class="navlink" href="/docs/capabilities/memory-settings.html" data-title-zh="调整记忆" data-href-en="/docs/capabilities/memory-settings.html" data-href-zh="/docs/capabilities/memory-settings.zh.html">Tune Memory</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="运行环境">Environments</div><a class="navlink" href="/docs/capabilities/environments.html" data-title-zh="在另一台机器上运行会话" data-href-en="/docs/capabilities/environments.html" data-href-zh="/docs/capabilities/environments.zh.html">Run conversations on another machine</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="会话目标">Session goals</div><a class="navlink" href="/docs/capabilities/goal.html" data-title-zh="目标" data-href-en="/docs/capabilities/goal.html" data-href-zh="/docs/capabilities/goal.zh.html">Goals</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="操控电脑">Computer use</div><a class="navlink" href="/docs/capabilities/computer-use.html" data-title-zh="操控电脑" data-href-en="/docs/capabilities/computer-use.html" data-href-zh="/docs/capabilities/computer-use.zh.html">Computer use</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="会议">Meetings</div><a class="navlink" href="/docs/capabilities/meetings.html" data-title-zh="会议" data-href-en="/docs/capabilities/meetings.html" data-href-zh="/docs/capabilities/meetings.zh.html">Meetings</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="扩展">Extending</div><a class="navlink active" href="/docs/capabilities/installing-programs.html" data-title-zh="安装程序" data-href-en="/docs/capabilities/installing-programs.html" data-href-zh="/docs/capabilities/installing-programs.zh.html">Installing programs</a>
+<a class="navlink" href="/docs/capabilities/skills.html" data-title-zh="技能" data-href-en="/docs/capabilities/skills.html" data-href-zh="/docs/capabilities/skills.zh.html">Skills</a>
+<a class="navlink" href="/docs/capabilities/plugins.html" data-title-zh="插件" data-href-en="/docs/capabilities/plugins.html" data-href-zh="/docs/capabilities/plugins.zh.html">Plugins</a>
+<a class="navlink" href="/docs/capabilities/mcp.html" data-title-zh="MCP" data-href-en="/docs/capabilities/mcp.html" data-href-zh="/docs/capabilities/mcp.zh.html">MCP</a>
+<a class="navlink" href="/docs/capabilities/tools.html" data-title-zh="内置工具" data-href-en="/docs/capabilities/tools.html" data-href-zh="/docs/capabilities/tools.zh.html">Built-in tools</a>
+<a class="navlink" href="/docs/capabilities/lsp.html" data-title-zh="语言服务器" data-href-en="/docs/capabilities/lsp.html" data-href-zh="/docs/capabilities/lsp.zh.html">Language servers</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="概览">Overview</div><a class="navlink" href="/docs/capabilities/commit-push-pr.html" data-title-zh="提交与拉取请求" data-href-en="/docs/capabilities/commit-push-pr.html" data-href-zh="/docs/capabilities/commit-push-pr.zh.html">Commits and PRs</a>
+<a class="navlink" href="/docs/capabilities/permissions.html" data-title-zh="工具权限" data-href-en="/docs/capabilities/permissions.html" data-href-zh="/docs/capabilities/permissions.zh.html">Tool permissions</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="指南">Guide</div><a class="navlink" href="/docs/capabilities/agentic-programming/self-programming-ai-agents.html" data-title-zh="自编程智能体" data-href-en="/docs/capabilities/agentic-programming/self-programming-ai-agents.html" data-href-zh="/docs/capabilities/agentic-programming/self-programming-ai-agents.zh.html">Self-programming agents</a></div></div>
+  </nav>
+  <main class="content"><button class="fs-toggle" aria-label="Fullscreen" title="Fullscreen (Esc to exit)"><svg class="ic-expand" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.2 2H2v4.2M9.8 2H14v4.2M6.2 14H2V9.8M9.8 14H14V9.8"/></svg><svg class="ic-collapse" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6.2h4.2V2M14 6.2H9.8V2M2 9.8h4.2V14M14 9.8H9.8V14"/></svg></button><article><nav class="breadcrumb"><span class="bc-seg" data-title-zh="能力">Capabilities</span> <span class='bc-sep'>›</span> <span class="bc-seg" data-title-zh="扩展">Extending</span> <span class='bc-sep'>›</span> <span class="bc-seg bc-current" data-title-zh="安装程序">Installing programs</span></nav><div id="harness"></div>
+<h1 id="安装程序">安装程序<a class="header-anchor" href="#安装程序">#</a></h1>
+<p><code>openprogram programs install</code> 从本地目录、git URL 或 GitHub <code>owner/repo</code>
+把一个程序包加入 OpenProgram。已安装的程序显示在 <strong>能力 → Programs →
+Applications</strong> 下，是一个以目录名命名的文件夹，里面列出它注册的 Agent 入口。
+release 本身不捆绑任何程序：除内置工具和应用外，你使用的每个程序都是用这种方式安装的。</p>
+<p>新克隆放进你的 Programs 目录 <code>~/.openprogram/programs/&lt;name&gt;/</code>
+（命名 profile 下为 <code>~/.openprogram-&lt;profile&gt;/programs/&lt;name&gt;/</code>）。
+早期安装器克隆进源码树（<code>openprogram/programs/packages/</code> 或
+<code>openprogram/programs/applications/</code>）的检出，会在 worker 第一次以新版本启动时
+移进 Programs 目录，名字和登记的来源保持不变。</p>
+<blockquote>
+<p><strong>agent 在哪里读取本文档：</strong> 本文件是规范流程。
+当用户要求安装某个 agent 尚未拥有的程序时，请遵循
+下面的步骤——它们被写成可逐步执行的形式。</p>
+</blockquote>
+<div id="tldr"></div>
+<h2 id="主要行为">主要行为<a class="header-anchor" href="#主要行为">#</a></h2>
+<pre><code class="language-bash">openprogram<span class="w"> </span>programs<span class="w"> </span>install<span class="w"> </span>https://github.com/&lt;owner&gt;/&lt;repo&gt;<span class="w">   </span><span class="c1"># git URL</span>
+openprogram<span class="w"> </span>programs<span class="w"> </span>install<span class="w"> </span>&lt;owner&gt;/&lt;repo&gt;<span class="w">                      </span><span class="c1"># GitHub 简写</span>
+openprogram<span class="w"> </span>programs<span class="w"> </span>install<span class="w"> </span>~/work/my-program<span class="w">                   </span><span class="c1"># 本地目录</span>
+openprogram<span class="w"> </span>programs<span class="w"> </span>install<span class="w"> </span>file:///path/to/checkout<span class="w">            </span><span class="c1"># 本地 git 来源</span>
+
+openprogram<span class="w"> </span>programs<span class="w"> </span>list<span class="w">                          </span><span class="c1"># 每个 Program 及其状态</span>
+openprogram<span class="w"> </span>programs<span class="w"> </span>install<span class="w"> </span>&lt;source&gt;<span class="w"> </span>--upgrade<span class="w">    </span><span class="c1"># 拉取最新提交</span>
+openprogram<span class="w"> </span>programs<span class="w"> </span>uninstall<span class="w"> </span>&lt;name&gt;<span class="w">              </span><span class="c1"># 把克隆移到 .removed/</span>
+
+<span class="c1"># 运行中的 worker 会拾取克隆；新进程在启动时加载它。</span>
+</code></pre>
+<p>这些命令需要可变环境：source-development checkout 或 CLI/server 安装。
+packaged desktop runtime 是 immutable 的，会拒绝 <code>programs install</code> 和
+<code>programs uninstall</code>。</p>
+<hr />
+<h1 id="第一部分-安装程序">第一部分 —— 安装程序<a class="header-anchor" href="#第一部分-安装程序">#</a></h1>
+<h2 id="来源可以是什么">来源可以是什么<a class="header-anchor" href="#来源可以是什么">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>来源</th>
+<th>会发生什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>git URL（<code>https://</code>、<code>ssh://</code>、<code>git@</code>、<code>file://</code>）</td>
+<td>浅克隆到 <code>~/.openprogram/programs/&lt;name&gt;/</code>，然后检查其内容（见下文）。</td>
+</tr>
+<tr>
+<td>GitHub <code>owner/repo</code></td>
+<td>展开为 <code>https://github.com/owner/repo</code>，按同样方式克隆。</td>
+</tr>
+<tr>
+<td>本地应用目录（<code>application.json</code>）</td>
+<td>登记进目录文件，从原处加载，不复制任何文件。</td>
+</tr>
+<tr>
+<td>本地包仓库（<code>__init__.py</code> 和 <code>.git</code>）</td>
+<td>像 git URL 一样克隆进 Programs 目录。需要先提交；不是 Git 仓库的目录会被拒绝。</td>
+</tr>
+<tr>
+<td>已在 <code>~/.openprogram/programs/</code> 中的包</td>
+<td>无需安装；<code>openprogram programs check &lt;directory&gt;</code> 让它可调用。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="克隆会成为什么">克隆会成为什么<a class="header-anchor" href="#克隆会成为什么">#</a></h2>
+<p>克隆之后，OpenProgram 检查检出内容，并按它包含的东西登记。一个仓库可以同时包含其中几种。</p>
+<ol>
+<li><strong>包（package）</strong>——克隆根目录有 <code>__init__.py</code>。克隆按仓库名取一个合法的导入名
+（<code>My-Tools</code> → <code>my_tools</code>）。检出干净且已提交时，它作为你的包加载；
+<code>PROGRAM_ENTRIES</code> 与 <code>openprogram programs check</code> 见<a href="/docs/capabilities/workflows/README.zh.html#self-programming-workflows">自编程工作流</a>。</li>
+<li><strong>应用（application）</strong>——克隆中有 <code>application.json</code>。应用会登记进目录文件
+（见<a href="/docs/capabilities/applications.zh.html">应用</a>）。<code>--trust</code> 授权运行已审查的 Python 后端，
+<code>--replace</code> 接受已登记应用变化后的 digest。</li>
+<li><strong>harness</strong>——克隆中有 <code>&lt;package&gt;/agentics/__init__.py</code>（见第二部分）。
+OpenProgram 从它的 <code>pyproject.toml</code>/<code>setup.py</code>（优先）或 <code>requirements.txt</code>
+安装 harness 自身声明的依赖，然后把该目录登记为 owner 批准的来源。下次扫描时，
+registry 只导入已登记的 <code>&lt;package&gt;.agentics</code>，它们的 <code>PROGRAM_ENTRIES</code> 出现在
+chat、Programs 页面和 <code>openprogram programs run</code> 中。</li>
+</ol>
+<p>三种都不是的克隆会被报告，不会从中加载任何东西；它绝不会破坏其他程序的加载。</p>
+<p>防护机制：对于已存在的同名 <strong>dev symlink</strong>，<code>install</code> 会校验 harness 契约并登记该链接，
+但不修改链接目标；同名且不是 Git 克隆的目录会被拒绝。对 symlink 执行 <code>uninstall</code>
+只把链接移到 <code>.removed/</code>，不动它指向的检出。</p>
+<h2 id="升级与卸载">升级与卸载<a class="header-anchor" href="#升级与卸载">#</a></h2>
+<pre><code class="language-bash">openprogram<span class="w"> </span>programs<span class="w"> </span>install<span class="w"> </span>&lt;source&gt;<span class="w"> </span>--upgrade<span class="w">   </span><span class="c1"># git pull --ff-only，重新解析依赖</span>
+openprogram<span class="w"> </span>programs<span class="w"> </span>uninstall<span class="w"> </span>&lt;name&gt;<span class="w">             </span><span class="c1"># 目录名或应用 id</span>
+</code></pre>
+<p>用目录名执行 <code>uninstall</code> 会把克隆从 <code>~/.openprogram/programs/</code> 移到
+<code>~/.openprogram/programs/.removed/</code>，需要时可以手动移回；它从不删除。用应用 id
+执行时会注销该应用并保留数据，兼容的重新安装会恢复它。</p>
+<details>
+<summary>手动等价方式（镜像 / 无法访问 GitHub）</summary>
+<pre><code class="language-bash">git<span class="w"> </span>clone<span class="w"> </span>&lt;repo-url&gt;<span class="w"> </span>/path/to/Program-Name
+openprogram<span class="w"> </span>programs<span class="w"> </span>install<span class="w"> </span>file:///path/to/Program-Name
+</code></pre>
+<p>安装命令把来源克隆进 Programs 目录并登记；自动发现只加载已登记且满足契约的目录。</p>
+</details>
+<h2 id="开发者配置开发你正在编写的程序">开发者配置（开发你正在编写的程序）<a class="header-anchor" href="#开发者配置开发你正在编写的程序">#</a></h2>
+<p>从你的工作检出安装，再把它设为克隆的远程：</p>
+<pre><code class="language-bash">openprogram<span class="w"> </span>programs<span class="w"> </span>install<span class="w"> </span>file:///path/to/your/Program-Checkout
+<span class="nb">cd</span><span class="w"> </span>~/.openprogram/programs/Program-Checkout<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>git<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>work<span class="w"> </span>/path/to/your/Program-Checkout
+</code></pre>
+<p>安装得到的是你检出的克隆；把提交拉进来（<code>git pull work main</code>），下次重启时生效。</p>
+<h2 id="校验一次安装">校验一次安装<a class="header-anchor" href="#校验一次安装">#</a></h2>
+<pre><code class="language-bash">openprogram<span class="w"> </span>programs<span class="w"> </span>list<span class="w">          </span><span class="c1"># 每个 Program（含 harness）及其状态</span>
+openprogram<span class="w"> </span>programs<span class="w"> </span>list<span class="w"> </span>--json<span class="w">   </span><span class="c1"># 同样的行，JSON 格式</span>
+</code></pre>
+<p>要查看一个存在但损坏的 harness 为何未加载：</p>
+<pre><code class="language-bash"><span class="nv">OPENPROGRAM_DEBUG_REGISTRY</span><span class="o">=</span><span class="m">1</span><span class="w"> </span>openprogram<span class="w"> </span>programs<span class="w"> </span>list
+</code></pre>
+<p>（Windows PowerShell：<code>$env:OPENPROGRAM_DEBUG_REGISTRY=1; openprogram programs list</code>）</p>
+<p>然后就可以使用它——程序的函数像任何内置函数一样可调用
+（在 chat 中，或 <code>openprogram programs run &lt;fn&gt; -a key=value</code>）。</p>
+<h2 id="平台说明">平台说明<a class="header-anchor" href="#平台说明">#</a></h2>
+<ul>
+<li><strong>受支持的 CLI/server release 主机包括 macOS、Linux 和 Windows x86_64/arm64。</strong>
+Windows Desktop 同时支持两种架构；Windows 沙箱命令执行使用可选的 WSL2 与 bubblewrap。</li>
+<li><strong>这些 Program 命令需要可变环境。</strong> source-development checkout 可以使用；
+CLI release 仅在对应 release notes 明确支持 Program mutation 时使用。
+packaged desktop 在 Program 拥有隔离的外部环境前会拒绝这些修改命令。</li>
+<li><strong>受支持的可变环境无需 symlink</strong>——安装器会把真实 checkout 登记到 Programs 目录。</li>
+<li><strong>程序在自身代码中仍可以是平台相关的</strong>（例如，桌面自动化
+harness 可能只实现 macOS / Linux 后端）。
+在受支持主机上能否安装、每个函数能否运行，取决于程序声明的依赖和
+平台支持；需要检查它的 README。</li>
+<li><strong>编码 / 路径：</strong> OpenProgram 自身的工具链全程基于 UTF-8 和
+<code>os.path</code>；一个表现良好的程序也应如此。</li>
+</ul>
+<h2 id="故障排查">故障排查<a class="header-anchor" href="#故障排查">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>现象</th>
+<th>原因 / 修复</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>重启后 harness 函数没有出现</td>
+<td>文件夹不匹配契约——确认 <code>&lt;pkg&gt;/agentics/__init__.py</code> 存在并导出 <code>PROGRAM_ENTRIES</code>。用 <code>OPENPROGRAM_DEBUG_REGISTRY=1</code> 运行。</td>
+</tr>
+<tr>
+<td>安装时出现 <code>[!] … neither a package (__init__.py), an application (application.json) nor a harness</code></td>
+<td>仓库三种形态都不是，不会从中加载任何东西。</td>
+</tr>
+<tr>
+<td>harness 自身依赖出现 <code>ModuleNotFoundError</code></td>
+<td>安装其声明的依赖失败——重新执行 <code>openprogram programs install &lt;source&gt; --upgrade</code> 并检查错误。</td>
+</tr>
+<tr>
+<td>harness 内部的导入失败（<code>from &lt;pkg&gt;.x import y</code>）</td>
+<td>package 目录的命名与导入根不一致，或缺少 <code>__init__.py</code>。package 文件夹名必须等于导入名。</td>
+</tr>
+<tr>
+<td>现有 dev symlink 没有加载</td>
+<td>运行一次 <code>openprogram programs install &lt;Git来源&gt;</code> 完成校验与登记；安装器不会修改链接目标。</td>
+</tr>
+<tr>
+<td>程序在 Windows 上无法安装或运行</td>
+<td>检查程序的 README 与 dependency marker。OpenProgram CLI/server 受支持，但单个程序仍可能只提供 macOS/Linux backend。</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="第二部分-编写你自己的可安装-harness">第二部分 —— 编写你自己的可安装 harness<a class="header-anchor" href="#第二部分-编写你自己的可安装-harness">#</a></h1>
+<p>任何满足某一布局契约的仓库，都会成为每个 OpenProgram 用户的
+一键安装项。</p>
+<h2 id="契约">契约<a class="header-anchor" href="#契约">#</a></h2>
+<pre><code>&lt;Harness-Name&gt;/                      ← 仓库（任意名称）
+├── pyproject.toml                   ← 只声明 harness 自身的依赖
+└── &lt;package&gt;/                       ← 一个可导入的 package（ascii 名称）
+    ├── __init__.py                  ← 保持依赖轻量
+    └── agentics/
+        └── __init__.py              ← 暴露 PROGRAM_ENTRIES = [...]
+</code></pre>
+<p>注册的入口点是 <strong><code>agentics</code> 子 package</strong>——在启动时
+OpenProgram 导入 <code>&lt;package&gt;.agentics</code>，并注册它的 <code>PROGRAM_ENTRIES</code>
+列出的可调用对象。harness 根目录也可以附带（vendor）其他 package——
+发现机制会找到带有 <code>agentics/</code> 子 package 的那一个，并将 harness 根
+放到 <code>sys.path</code> 上，于是 harness 自身的绝对导入
+（<code>from &lt;package&gt;.foo import bar</code>）就能解析。</p>
+<h2 id="最小可用模板">最小可用模板<a class="header-anchor" href="#最小可用模板">#</a></h2>
+<pre><code class="language-python"><span class="c1"># &lt;package&gt;/agentics/__init__.py</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">openprogram</span><span class="w"> </span><span class="kn">import</span> <span class="n">Agent</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ExampleAgent</span><span class="p">(</span><span class="n">Agent</span><span class="p">):</span>
+    <span class="n">method_options</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;my_tool&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;tool&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
+    <span class="p">}</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">my_tool</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="s2">&quot;一行：说明它做什么（会显示在目录中）。&quot;</span>
+        <span class="k">return</span> <span class="n">text</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+
+
+<span class="n">_example_agent</span> <span class="o">=</span> <span class="n">ExampleAgent</span><span class="p">()</span>
+<span class="n">my_tool</span> <span class="o">=</span> <span class="n">_example_agent</span><span class="o">.</span><span class="n">my_tool</span>
+
+<span class="n">PROGRAM_ENTRIES</span> <span class="o">=</span> <span class="p">[</span><span class="n">my_tool</span><span class="p">]</span>
+</code></pre>
+<pre><code class="language-python"><span class="c1"># &lt;package&gt;/__init__.py</span>
+<span class="sd">&quot;&quot;&quot;我的 harness —— 保持本导入轻量（见硬性规则 2）。&quot;&quot;&quot;</span>
+</code></pre>
+<pre><code class="language-toml"><span class="c1"># pyproject.toml</span>
+<span class="k">[project]</span>
+<span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;my-harness&quot;</span>
+<span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span>
+<span class="n">requires-python</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&gt;=3.10&quot;</span>
+<span class="n">dependencies</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[]</span><span class="w">          </span><span class="c1"># harness 自身的依赖——绝不要写 openprogram</span>
+</code></pre>
+<p>这就是一个完整的可安装 harness。</p>
+<h2 id="两条硬性规则">两条硬性规则<a class="header-anchor" href="#两条硬性规则">#</a></h2>
+<ol>
+<li>
+<p><strong>绝不要把 <code>openprogram</code> 声明为依赖</strong>（无论在 <code>pyproject.toml</code>
+<em>还是</em> <code>requirements.txt</code> 中）。harness 在一个已存在的
+OpenProgram 安装内运行；一条声明的 <code>openprogram @ git+…</code> 会让 pip
+从 git 重新安装 host，从而覆盖用户本地的（通常是可编辑的）安装。</p>
+</li>
+<li>
+<p><strong>保持顶层 <code>&lt;package&gt;/__init__.py</code> 依赖轻量，并在
+<code>agentics/__init__.py</code> 中为重量级导入做保护。</strong> 发现机制在每次启动
+时都会导入 <code>&lt;package&gt;.agentics</code>，包括在那些尚未安装你的可选/重量级
+依赖的机器上——顶层导入 cv2/torch/等会破坏整个 registry 的加载。
+把重量级模块在函数体内做惰性导入，并为入口导入做保护：</p>
+<pre><code class="language-python"><span class="c1"># agentics/__init__.py —— 缺少依赖的机器不能破坏加载</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">my_package.main</span><span class="w"> </span><span class="kn">import</span> <span class="n">my_tool</span>
+    <span class="n">PROGRAM_ENTRIES</span> <span class="o">=</span> <span class="p">[</span><span class="n">my_tool</span><span class="p">]</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="n">PROGRAM_ENTRIES</span> <span class="o">=</span> <span class="p">[]</span>
+</code></pre>
+</li>
+</ol>
+<h2 id="发布前在本地测试">发布前在本地测试<a class="header-anchor" href="#发布前在本地测试">#</a></h2>
+<p>安装命令接受 <code>file://</code> 来源，因此可以针对你的本地检出测试完整的
+用户流程：</p>
+<pre><code class="language-bash"><span class="nb">cd</span><span class="w"> </span>/path/to/My-Harness<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>git<span class="w"> </span>add<span class="w"> </span>-A<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span>wip
+openprogram<span class="w"> </span>programs<span class="w"> </span>install<span class="w"> </span>file:///path/to/My-Harness
+openprogram<span class="w"> </span>programs<span class="w"> </span>list<span class="w">             </span><span class="c1"># 应在 Harnesses 下列出 My-Harness</span>
+<span class="nv">OPENPROGRAM_DEBUG_REGISTRY</span><span class="o">=</span><span class="m">1</span><span class="w"> </span>openprogram<span class="w"> </span>programs<span class="w"> </span>list<span class="w">   </span><span class="c1"># 函数是否出现？</span>
+openprogram<span class="w"> </span>programs<span class="w"> </span>run<span class="w"> </span>my_tool<span class="w"> </span>-a<span class="w"> </span><span class="nv">text</span><span class="o">=</span>hello<span class="w">           </span><span class="c1"># 冒烟测试</span>
+openprogram<span class="w"> </span>programs<span class="w"> </span>uninstall<span class="w"> </span>My-Harness<span class="w">                </span><span class="c1"># 移到 .removed/</span>
+</code></pre>
+<p>发布前的检查清单：</p>
+<ul class="contains-task-list">
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"  type="checkbox"> <code>&lt;package&gt;/agentics/__init__.py</code> 暴露了 <code>PROGRAM_ENTRIES</code></li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"  type="checkbox"> pyproject/requirements 中没有 <code>openprogram</code>（硬性规则 1）</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"  type="checkbox"> 在只安装了 OpenProgram 的纯净 venv 中
+<code>python -c &quot;import &lt;package&gt;.agentics&quot;</code> 成功（硬性规则 2）</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"  type="checkbox"> 上面的 <code>file://</code> 安装往返测试通过</li>
+</ul>
+<h2 id="发布">发布<a class="header-anchor" href="#发布">#</a></h2>
+<p>推送到 GitHub。用户用以下命令安装：</p>
+<pre><code class="language-bash">openprogram<span class="w"> </span>programs<span class="w"> </span>install<span class="w"> </span>&lt;owner&gt;/&lt;Harness-Name&gt;
+</code></pre>
+<p>任何地方都无需注册——仓库 URL <em>就是</em>分发形式。</p>
+<div class="page-updated"><span data-i18n="updated">Last updated</span> · 2026-11-02</div><div class="prevnext"><a class="pn-link pn-prev" href="/docs/capabilities/meetings.html" data-href-en="/docs/capabilities/meetings.html" data-href-zh="/docs/capabilities/meetings.zh.html"><span class="pn-dir" data-i18n="prev">Previous</span><span class="pn-title" data-title-zh="会议">Meetings</span></a><a class="pn-link pn-next" href="/docs/capabilities/skills.html" data-href-en="/docs/capabilities/skills.html" data-href-zh="/docs/capabilities/skills.zh.html"><span class="pn-dir" data-i18n="next">Next</span><span class="pn-title" data-title-zh="技能">Skills</span></a></div></article></main>
+  <aside class="toc"><div class="toc-title" data-i18n="on_this_page">On this page</div>
+<ul class="toc-list">
+<li>
+<a class="lvl-2" href="#主要行为">主要行为</a>
+</li>
+<li>
+<a class="lvl-2" href="#来源可以是什么">来源可以是什么</a>
+</li>
+<li>
+<a class="lvl-2" href="#克隆会成为什么">克隆会成为什么</a>
+</li>
+<li>
+<a class="lvl-2" href="#升级与卸载">升级与卸载</a>
+</li>
+<li>
+<a class="lvl-2" href="#开发者配置开发你正在编写的程序">开发者配置（开发你正在编写的程序）</a>
+</li>
+<li>
+<a class="lvl-2" href="#校验一次安装">校验一次安装</a>
+</li>
+<li>
+<a class="lvl-2" href="#平台说明">平台说明</a>
+</li>
+<li>
+<a class="lvl-2" href="#故障排查">故障排查</a>
+</li>
+<li>
+<a class="lvl-2" href="#契约">契约</a>
+</li>
+<li>
+<a class="lvl-2" href="#最小可用模板">最小可用模板</a>
+</li>
+<li>
+<a class="lvl-2" href="#两条硬性规则">两条硬性规则</a>
+</li>
+<li>
+<a class="lvl-2" href="#发布前在本地测试">发布前在本地测试</a>
+</li>
+<li>
+<a class="lvl-2" href="#发布">发布</a>
+</li>
+</ul></aside>
+</div>
+
+<div class="search-overlay">
+  <div class="search-box">
+    <input type="text" data-i18n-ph="search_ph" placeholder="Search titles or text…" autocomplete="off" spellcheck="false">
+    <div class="search-results"></div>
+  </div>
+</div>
+
+<script src="/docs/assets/site.js?v=6520ba46"></script>
+</body>
+</html>

@@ -1,0 +1,1571 @@
+<!DOCTYPE html>
+<html lang="en" data-base="/docs/" data-page-lang="en" data-build="1793956776" data-alt-lang-url="/docs/reference/design/ui/remote-web-access.zh.html">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Remote access · OpenProgram Docs</title>
+<meta name="description" content="Remote Web Access — Owner-Only, Self-Hosted Control # You can use your own OpenProgram instance from another device — a laptop on the same LAN or VPN, a phone">
+<link rel="canonical" href="https://openprogram.io/docs/reference/design/ui/remote-web-access.html">
+<link rel="alternate" type="text/markdown" href="https://openprogram.io/docs/reference/design/ui/remote-web-access.html.md">
+<link rel="describedby" href="https://openprogram.io/llms.txt">
+<link rel="alternate" hreflang="en" href="https://openprogram.io/docs/reference/design/ui/remote-web-access.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://openprogram.io/docs/reference/design/ui/remote-web-access.zh.html">
+<link rel="alternate" hreflang="x-default" href="https://openprogram.io/docs/reference/design/ui/remote-web-access.html">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"OpenProgram Docs","item":"https://openprogram.io/docs/"},{"@type":"ListItem","position":2,"name":"Remote access"}]}</script>
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="OpenProgram">
+<meta property="og:url" content="https://openprogram.io/docs/reference/design/ui/remote-web-access.html">
+<meta property="og:title" content="Remote access · OpenProgram Docs">
+<meta property="og:description" content="Remote Web Access — Owner-Only, Self-Hosted Control # You can use your own OpenProgram instance from another device — a laptop on the same LAN or VPN, a phone">
+<meta property="og:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:secure_url" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Remote access · OpenProgram Docs">
+<meta name="twitter:description" content="Remote Web Access — Owner-Only, Self-Hosted Control # You can use your own OpenProgram instance from another device — a laptop on the same LAN or VPN, a phone">
+<meta name="twitter:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta name="twitter:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/docs/assets/mark.svg">
+<link rel="stylesheet" href="/docs/assets/site.css?v=6520ba46">
+<link rel="stylesheet" href="/docs/assets/pygments-light.css" media="(prefers-color-scheme: light)" id="pyg-light">
+<link rel="stylesheet" href="/docs/assets/pygments-dark.css" media="(prefers-color-scheme: dark)" id="pyg-dark">
+<script src="/docs/assets/theme.js?v=6520ba46"></script>
+
+</head>
+<body>
+<header class="topbar">
+  <button class="icon hamburger" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2.5 4.5h11M2.5 8h11M2.5 11.5h11"/></svg></button>
+  <a class="brand" href="/docs/index.html"><img class="mark" src="/docs/assets/mark.svg" alt="">OpenProgram Docs</a>
+  <div class="spacer"></div>
+  <button class="search-trigger" aria-label="Search">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14"/></svg><span class="label" data-i18n="search">Search docs</span><kbd>⌘K</kbd>
+  </button>
+  <div class="lang-wrap">
+    <button class="icon lang-trigger" id="lang-toggle" aria-haspopup="true" aria-expanded="false" aria-label="Language">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="6.2"/><path d="M1.8 8h12.4" stroke-linecap="round"/><ellipse cx="8" cy="8" rx="2.8" ry="6.2"/></svg><span class="lang-label">EN</span><svg class="chev" width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+    </button>
+    <div class="lang-menu" id="lang-menu" role="menu">
+      <button class="lang-opt" data-lang="en" role="menuitem"><span>English</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="lang-opt" data-lang="zh" role="menuitem"><span>简体中文</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+  <div class="theme-wrap">
+    <button class="icon" id="theme-toggle" aria-label="Theme" aria-haspopup="menu" aria-controls="theme-menu" aria-expanded="false"><svg class="ic-system" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="2.5" width="13" height="9" rx="1.5"/><path d="M8 11.5V14M5.5 14h5"/></svg><svg class="ic-moon" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M13.5 9.5A6 6 0 1 1 6.5 2.5a5 5 0 0 0 7 7z"/></svg><svg class="ic-sun" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="3.2"/><path d="M8 1.2v1.8M8 13v1.8M1.2 8H3M13 8h1.8M3.2 3.2l1.3 1.3M11.5 11.5l1.3 1.3M12.8 3.2l-1.3 1.3M4.5 11.5l-1.3 1.3"/></svg></button>
+    <div class="theme-menu" id="theme-menu" role="menu" aria-labelledby="theme-toggle">
+      <button class="theme-opt" data-theme-choice="system" role="menuitemradio" aria-checked="true"><span>Follow system</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="light" role="menuitemradio" aria-checked="false"><span>Light</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="dark" role="menuitemradio" aria-checked="false"><span>Dark</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+</header>
+<nav class="tabbar"><a class="tablink" href="/docs/README.html" data-title-zh="开始使用" data-href-en="/docs/README.html" data-href-zh="/docs/README.zh.html">Get started</a><a class="tablink" href="/docs/install/install.html" data-title-zh="安装" data-href-en="/docs/install/install.html" data-href-zh="/docs/install/install.zh.html">Install</a><a class="tablink" href="/docs/capabilities/README.html" data-title-zh="能力" data-href-en="/docs/capabilities/README.html" data-href-zh="/docs/capabilities/README.zh.html">Capabilities</a><a class="tablink" href="/docs/interfaces/README.html" data-title-zh="界面" data-href-en="/docs/interfaces/README.html" data-href-zh="/docs/interfaces/README.zh.html">Interfaces</a><a class="tablink" href="/docs/models/README.html" data-title-zh="模型" data-href-en="/docs/models/README.html" data-href-zh="/docs/models/README.zh.html">Models</a><a class="tablink" href="/docs/integrations/anthropic.html" data-title-zh="集成" data-href-en="/docs/integrations/anthropic.html" data-href-zh="/docs/integrations/anthropic.zh.html">Integrations</a><a class="tablink" href="/docs/server/README.html" data-title-zh="服务与运维" data-href-en="/docs/server/README.html" data-href-zh="/docs/server/README.zh.html">Server &amp; Ops</a><a class="tablink" href="/docs/reference/README.html" data-title-zh="参考" data-href-en="/docs/reference/README.html" data-href-zh="/docs/reference/README.zh.html">Reference</a><a class="tablink active" href="/docs/reference/design/README.html" data-title-zh="设计" data-href-en="/docs/reference/design/README.html" data-href-zh="/docs/reference/design/README.zh.html">Design</a></nav>
+
+<div class="scrim"></div>
+<div class="layout">
+  <nav class="sidebar" aria-label="Documentation">
+    <input class="nav-filter" type="text" data-i18n-ph="nav_filter"
+           aria-label="Filter docs" placeholder="Filter docs…" autocomplete="off" spellcheck="false">
+    <div class="nav-tree"><details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="架构总览">Architecture</span><span class="nav-count">6</span></summary><a class="navlink" href="/docs/reference/design/README.html" data-title-zh="设计指南" data-href-en="/docs/reference/design/README.html" data-href-zh="/docs/reference/design/README.zh.html">Design guide</a>
+<a class="navlink" href="/docs/reference/design/framework-overview.html" data-title-zh="框架总览" data-href-en="/docs/reference/design/framework-overview.html" data-href-zh="/docs/reference/design/framework-overview.zh.html">Framework overview</a>
+<a class="navlink" href="/docs/reference/design/repository-structure.html" data-title-zh="仓库结构" data-href-en="/docs/reference/design/repository-structure.html" data-href-zh="/docs/reference/design/repository-structure.zh.html">Repository structure</a>
+<a class="navlink" href="/docs/reference/design/implementation-status.html" data-title-zh="实现索引" data-href-en="/docs/reference/design/implementation-status.html" data-href-zh="/docs/reference/design/implementation-status.zh.html">Implementation index</a>
+<a class="navlink" href="/docs/reference/design/framework-comparison.html" data-title-zh="框架对比" data-href-en="/docs/reference/design/framework-comparison.html" data-href-zh="/docs/reference/design/framework-comparison.zh.html">Framework comparison</a>
+<a class="navlink" href="/docs/reference/design/feature-matrix.html" data-title-zh="功能矩阵" data-href-en="/docs/reference/design/feature-matrix.html" data-href-zh="/docs/reference/design/feature-matrix.zh.html">Feature matrix</a></details>
+<details class="nav-branch nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="Agent 与工作流">Agents and workflows</span><span class="nav-count">88</span></summary>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="执行与控制">Execution</span><span class="nav-count">14</span></summary><a class="navlink" href="/docs/reference/design/runtime/README.html" data-title-zh="运行时" data-href-en="/docs/reference/design/runtime/README.html" data-href-zh="/docs/reference/design/runtime/README.zh.html">Runtime</a>
+<a class="navlink" href="/docs/reference/design/runtime/codex-capability-adoption.html" data-title-zh="Codex 功能核对" data-href-en="/docs/reference/design/runtime/codex-capability-adoption.html" data-href-zh="/docs/reference/design/runtime/codex-capability-adoption.zh.html">Codex capability audit</a>
+<a class="navlink" href="/docs/reference/design/runtime/execution/agent-call-flow.html" data-title-zh="调用流程" data-href-en="/docs/reference/design/runtime/execution/agent-call-flow.html" data-href-zh="/docs/reference/design/runtime/execution/agent-call-flow.zh.html">Call flow</a>
+<a class="navlink" href="/docs/reference/design/runtime/execution/control.html" data-title-zh="执行控制" data-href-en="/docs/reference/design/runtime/execution/control.html" data-href-zh="/docs/reference/design/runtime/execution/control.zh.html">Execution control</a>
+<a class="navlink" href="/docs/reference/design/runtime/execution/agent-action-lifecycle.html" data-title-zh="操作生命周期" data-href-en="/docs/reference/design/runtime/execution/agent-action-lifecycle.html" data-href-zh="/docs/reference/design/runtime/execution/agent-action-lifecycle.zh.html">Action lifecycle</a>
+<a class="navlink" href="/docs/reference/design/runtime/execution/agent-worktree.html" data-title-zh="工作树" data-href-en="/docs/reference/design/runtime/execution/agent-worktree.html" data-href-zh="/docs/reference/design/runtime/execution/agent-worktree.zh.html">Worktrees</a>
+<a class="navlink" href="/docs/reference/design/runtime/execution/command-sessions.html" data-title-zh="命令会话" data-href-en="/docs/reference/design/runtime/execution/command-sessions.html" data-href-zh="/docs/reference/design/runtime/execution/command-sessions.zh.html">Command sessions</a>
+<a class="navlink" href="/docs/reference/design/runtime/execution/agentic-self-recursion.viz.html" data-title-zh="递归图解" data-href-en="/docs/reference/design/runtime/execution/agentic-self-recursion.viz.html" data-href-zh="/docs/reference/design/runtime/execution/agentic-self-recursion.zh.viz.html">Recursion diagram</a>
+<a class="navlink" href="/docs/reference/design/runtime/execution/agentic-self-recursion.html" data-title-zh="递归保护" data-href-en="/docs/reference/design/runtime/execution/agentic-self-recursion.html" data-href-zh="/docs/reference/design/runtime/execution/agentic-self-recursion.zh.html">Recursion guard</a>
+<a class="navlink" href="/docs/reference/design/runtime/execution/async-job-lifecycle.html" data-title-zh="异步任务" data-href-en="/docs/reference/design/runtime/execution/async-job-lifecycle.html" data-href-zh="/docs/reference/design/runtime/execution/async-job-lifecycle.zh.html">Async tasks</a>
+<a class="navlink" href="/docs/reference/design/runtime/execution/agentic-llm-streaming.html" data-title-zh="嵌套 LLM 流式" data-href-en="/docs/reference/design/runtime/execution/agentic-llm-streaming.html" data-href-zh="/docs/reference/design/runtime/execution/agentic-llm-streaming.zh.html">Nested LLM streaming</a>
+<a class="navlink" href="/docs/reference/design/runtime/execution/controllability-and-three-surface-sync.html" data-title-zh="任务可控性" data-href-en="/docs/reference/design/runtime/execution/controllability-and-three-surface-sync.html" data-href-zh="/docs/reference/design/runtime/execution/controllability-and-three-surface-sync.zh.html">Task controllability</a>
+<a class="navlink" href="/docs/reference/design/runtime/execution/dispatcher-split.html" data-title-zh="调度器结构" data-href-en="/docs/reference/design/runtime/execution/dispatcher-split.html" data-href-zh="/docs/reference/design/runtime/execution/dispatcher-split.zh.html">Dispatcher structure</a>
+<a class="navlink" href="/docs/reference/design/runtime/execution/next-step-decision.html" data-title-zh="下一步决策" data-href-en="/docs/reference/design/runtime/execution/next-step-decision.html" data-href-zh="/docs/reference/design/runtime/execution/next-step-decision.zh.html">Next-step decisions</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="会话与存储">Sessions</span><span class="nav-count">9</span></summary><a class="navlink" href="/docs/reference/design/runtime/session/README.html" data-title-zh="阅读指南" data-href-en="/docs/reference/design/runtime/session/README.html" data-href-zh="/docs/reference/design/runtime/session/README.zh.html">Reading guide</a>
+<a class="navlink" href="/docs/reference/design/runtime/session/storage.html" data-title-zh="数据模型" data-href-en="/docs/reference/design/runtime/session/storage.html" data-href-zh="/docs/reference/design/runtime/session/storage.zh.html">Data model</a>
+<a class="navlink" href="/docs/reference/design/runtime/session/operations.html" data-title-zh="操作流程" data-href-en="/docs/reference/design/runtime/session/operations.html" data-href-zh="/docs/reference/design/runtime/session/operations.zh.html">Operations</a>
+<a class="navlink" href="/docs/reference/design/runtime/session/context.html" data-title-zh="上下文" data-href-en="/docs/reference/design/runtime/session/context.html" data-href-zh="/docs/reference/design/runtime/session/context.zh.html">Context</a>
+<a class="navlink" href="/docs/reference/design/runtime/session/unified-session-context.html" data-title-zh="上下文创建" data-href-en="/docs/reference/design/runtime/session/unified-session-context.html" data-href-zh="/docs/reference/design/runtime/session/unified-session-context.zh.html">Context creation</a>
+<a class="navlink" href="/docs/reference/design/runtime/session/additional-working-directories.html" data-title-zh="工作目录" data-href-en="/docs/reference/design/runtime/session/additional-working-directories.html" data-href-zh="/docs/reference/design/runtime/session/additional-working-directories.zh.html">Working directories</a>
+<a class="navlink" href="/docs/reference/design/runtime/session/comparison.html" data-title-zh="管理对比" data-href-en="/docs/reference/design/runtime/session/comparison.html" data-href-zh="/docs/reference/design/runtime/session/comparison.zh.html">Management comparison</a>
+<a class="navlink" href="/docs/reference/design/runtime/session/storage-consistency.html" data-title-zh="存储一致性" data-href-en="/docs/reference/design/runtime/session/storage-consistency.html" data-href-zh="/docs/reference/design/runtime/session/storage-consistency.zh.html">Storage consistency</a>
+<a class="navlink" href="/docs/reference/design/runtime/session/name.html" data-title-zh="标题生成" data-href-en="/docs/reference/design/runtime/session/name.html" data-href-zh="/docs/reference/design/runtime/session/name.zh.html">Title generation</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="DAG 与协作">DAG and collaboration</span><span class="nav-count">14</span></summary><a class="navlink" href="/docs/reference/design/runtime/dag/overview.html" data-title-zh="设计概览" data-href-en="/docs/reference/design/runtime/dag/overview.html" data-href-zh="/docs/reference/design/runtime/dag/overview.zh.html">Design overview</a>
+<a class="navlink" href="/docs/reference/design/runtime/dag/nested-llm-node-content.html" data-title-zh="LLM 节点内容" data-href-en="/docs/reference/design/runtime/dag/nested-llm-node-content.html" data-href-zh="/docs/reference/design/runtime/dag/nested-llm-node-content.zh.html">LLM node content</a>
+<a class="navlink" href="/docs/reference/design/runtime/collaboration/agent-collaboration.html" data-title-zh="智能体通信" data-href-en="/docs/reference/design/runtime/collaboration/agent-collaboration.html" data-href-zh="/docs/reference/design/runtime/collaboration/agent-collaboration.zh.html">Agent communication</a>
+<a class="navlink" href="/docs/reference/design/runtime/collaboration/agent-collab-architecture.html" data-title-zh="协作工具" data-href-en="/docs/reference/design/runtime/collaboration/agent-collab-architecture.html" data-href-zh="/docs/reference/design/runtime/collaboration/agent-collab-architecture.zh.html">Collaboration tools</a>
+<a class="navlink" href="/docs/reference/design/runtime/collaboration/agent-collab-comparison.html" data-title-zh="协作对比" data-href-en="/docs/reference/design/runtime/collaboration/agent-collab-comparison.html" data-href-zh="/docs/reference/design/runtime/collaboration/agent-collab-comparison.zh.html">Collaboration comparison</a>
+<a class="navlink" href="/docs/reference/design/runtime/dag/branch-collaboration.html" data-title-zh="分支协作" data-href-en="/docs/reference/design/runtime/dag/branch-collaboration.html" data-href-zh="/docs/reference/design/runtime/dag/branch-collaboration.zh.html">Branch collaboration</a>
+<a class="navlink" href="/docs/reference/design/runtime/dag/layout.html" data-title-zh="布局规范" data-href-en="/docs/reference/design/runtime/dag/layout.html" data-href-zh="/docs/reference/design/runtime/dag/layout.zh.html">Layout specification</a>
+<a class="navlink" href="/docs/reference/design/runtime/dag/external-program-run-node.html" data-title-zh="程序节点" data-href-en="/docs/reference/design/runtime/dag/external-program-run-node.html" data-href-zh="/docs/reference/design/runtime/dag/external-program-run-node.zh.html">Program nodes</a>
+<a class="navlink" href="/docs/reference/design/runtime/dag/persistence-observability.html" data-title-zh="Agent 图所有权" data-href-en="/docs/reference/design/runtime/dag/persistence-observability.html" data-href-zh="/docs/reference/design/runtime/dag/persistence-observability.zh.html">Agent DAG ownership</a>
+<a class="navlink" href="/docs/reference/design/runtime/dag/rendering.html" data-title-zh="渲染规范" data-href-en="/docs/reference/design/runtime/dag/rendering.html" data-href-zh="/docs/reference/design/runtime/dag/rendering.zh.html">Rendering specification</a>
+<a class="navlink" href="/docs/reference/design/runtime/operations/branch-naming.html" data-title-zh="分支命名" data-href-en="/docs/reference/design/runtime/operations/branch-naming.html" data-href-zh="/docs/reference/design/runtime/operations/branch-naming.zh.html">Branch naming</a>
+<a class="navlink" href="/docs/reference/design/runtime/operations/branch-naming.viz.html" data-title-zh="命名图解" data-href-en="/docs/reference/design/runtime/operations/branch-naming.viz.html" data-href-zh="/docs/reference/design/runtime/operations/branch-naming.zh.viz.html">Naming diagram</a>
+<a class="navlink" href="/docs/reference/design/runtime/operations/edge-field-rename.html" data-title-zh="边字段命名" data-href-en="/docs/reference/design/runtime/operations/edge-field-rename.html" data-href-zh="/docs/reference/design/runtime/operations/edge-field-rename.zh.html">Edge naming</a>
+<a class="navlink" href="/docs/reference/design/runtime/operations/unify-parent-called-by.html" data-title-zh="调用者标识" data-href-en="/docs/reference/design/runtime/operations/unify-parent-called-by.html" data-href-zh="/docs/reference/design/runtime/operations/unify-parent-called-by.zh.html">Caller identity</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="目标与恢复">Goals and recovery</span><span class="nav-count">10</span></summary><a class="navlink" href="/docs/reference/design/runtime/reliability/goal-and-recovery.html" data-title-zh="目标与恢复" data-href-en="/docs/reference/design/runtime/reliability/goal-and-recovery.html" data-href-zh="/docs/reference/design/runtime/reliability/goal-and-recovery.zh.html">Goals and recovery</a>
+<a class="navlink" href="/docs/reference/design/runtime/always-on-agents.html" data-title-zh="常驻 Agent" data-href-en="/docs/reference/design/runtime/always-on-agents.html" data-href-zh="/docs/reference/design/runtime/always-on-agents.zh.html">Always-on Agents</a>
+<a class="navlink" href="/docs/reference/design/runtime/security/outbound-hold.html" data-title-zh="代发暂存" data-href-en="/docs/reference/design/runtime/security/outbound-hold.html" data-href-zh="/docs/reference/design/runtime/security/outbound-hold.zh.html">Outbound Hold</a>
+<a class="navlink" href="/docs/reference/design/runtime/reliability/agent-resource-governance.html" data-title-zh="资源配额" data-href-en="/docs/reference/design/runtime/reliability/agent-resource-governance.html" data-href-zh="/docs/reference/design/runtime/reliability/agent-resource-governance.zh.html">Resource quotas</a>
+<a class="navlink" href="/docs/reference/design/runtime/reliability/structured-generation-recovery.html" data-title-zh="生成恢复" data-href-en="/docs/reference/design/runtime/reliability/structured-generation-recovery.html" data-href-zh="/docs/reference/design/runtime/reliability/structured-generation-recovery.zh.html">Generation recovery</a>
+<a class="navlink" href="/docs/reference/design/runtime/reliability/durable-tool-results.html" data-title-zh="工具结果存储" data-href-en="/docs/reference/design/runtime/reliability/durable-tool-results.html" data-href-zh="/docs/reference/design/runtime/reliability/durable-tool-results.zh.html">Tool result storage</a>
+<a class="navlink" href="/docs/reference/design/runtime/operations/streaming-resume.html" data-title-zh="流式恢复" data-href-en="/docs/reference/design/runtime/operations/streaming-resume.html" data-href-zh="/docs/reference/design/runtime/operations/streaming-resume.zh.html">Stream recovery</a>
+<a class="navlink" href="/docs/reference/design/runtime/operations/chat-progress-recovery.html" data-title-zh="进度恢复" data-href-en="/docs/reference/design/runtime/operations/chat-progress-recovery.html" data-href-zh="/docs/reference/design/runtime/operations/chat-progress-recovery.zh.html">Progress recovery</a>
+<a class="navlink" href="/docs/reference/design/runtime/reliability/web-runtime-reliability.html" data-title-zh="网页可靠性" data-href-en="/docs/reference/design/runtime/reliability/web-runtime-reliability.html" data-href-zh="/docs/reference/design/runtime/reliability/web-runtime-reliability.zh.html">Web reliability</a>
+<a class="navlink" href="/docs/reference/design/runtime/reliability/web-frontend-spawn.html" data-title-zh="前端进程" data-href-en="/docs/reference/design/runtime/reliability/web-frontend-spawn.html" data-href-zh="/docs/reference/design/runtime/reliability/web-frontend-spawn.zh.html">Frontend processes</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="配置与操作">Configuration and operations</span><span class="nav-count">10</span></summary><a class="navlink" href="/docs/reference/design/runtime/agent-configuration/agent-configuration-ui.html" data-title-zh="智能体设置" data-href-en="/docs/reference/design/runtime/agent-configuration/agent-configuration-ui.html" data-href-zh="/docs/reference/design/runtime/agent-configuration/agent-configuration-ui.zh.html">Agent settings</a>
+<a class="navlink" href="/docs/reference/design/runtime/agent-configuration/agent-core-configuration-ui.html" data-title-zh="基础设置" data-href-en="/docs/reference/design/runtime/agent-configuration/agent-core-configuration-ui.html" data-href-zh="/docs/reference/design/runtime/agent-configuration/agent-core-configuration-ui.zh.html">Core settings</a>
+<a class="navlink" href="/docs/reference/design/runtime/agent-configuration/agent-tool-configuration-ui.html" data-title-zh="工具设置" data-href-en="/docs/reference/design/runtime/agent-configuration/agent-tool-configuration-ui.html" data-href-zh="/docs/reference/design/runtime/agent-configuration/agent-tool-configuration-ui.zh.html">Tool settings</a>
+<a class="navlink" href="/docs/reference/design/runtime/agent-configuration/agent-capability-configuration-ui.html" data-title-zh="能力设置" data-href-en="/docs/reference/design/runtime/agent-configuration/agent-capability-configuration-ui.html" data-href-zh="/docs/reference/design/runtime/agent-configuration/agent-capability-configuration-ui.zh.html">Capability settings</a>
+<a class="navlink" href="/docs/reference/design/runtime/agent-configuration/agent-configuration-plan.html" data-title-zh="Agent 实施计划" data-href-en="/docs/reference/design/runtime/agent-configuration/agent-configuration-plan.html" data-href-zh="/docs/reference/design/runtime/agent-configuration/agent-configuration-plan.zh.html">Agent implementation plan</a>
+<a class="navlink" href="/docs/reference/design/runtime/agent-configuration/chat-search-settings.html" data-title-zh="聊天搜索" data-href-en="/docs/reference/design/runtime/agent-configuration/chat-search-settings.html" data-href-zh="/docs/reference/design/runtime/agent-configuration/chat-search-settings.zh.html">Chat search</a>
+<a class="navlink" href="/docs/reference/design/runtime/agent-configuration/tool-toggle-management.html" data-title-zh="工具集" data-href-en="/docs/reference/design/runtime/agent-configuration/tool-toggle-management.html" data-href-zh="/docs/reference/design/runtime/agent-configuration/tool-toggle-management.zh.html">Toolsets</a>
+<a class="navlink" href="/docs/reference/design/runtime/agent-configuration/bot-template-references.html" data-title-zh="Bot 模板参考资料" data-href-en="/docs/reference/design/runtime/agent-configuration/bot-template-references.html" data-href-zh="/docs/reference/design/runtime/agent-configuration/bot-template-references.zh.html">Bot template references</a>
+<a class="navlink" href="/docs/reference/design/runtime/operations/user-input-requests.html" data-title-zh="输入请求" data-href-en="/docs/reference/design/runtime/operations/user-input-requests.html" data-href-zh="/docs/reference/design/runtime/operations/user-input-requests.zh.html">Input requests</a>
+<a class="navlink" href="/docs/reference/design/runtime/operations/file-management.html" data-title-zh="文件与恢复" data-href-en="/docs/reference/design/runtime/operations/file-management.html" data-href-zh="/docs/reference/design/runtime/operations/file-management.zh.html">Files and recovery</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="程序与工作流">Programs and workflows</span><span class="nav-count">14</span></summary><a class="navlink" href="/docs/reference/design/function/README.html" data-title-zh="函数" data-href-en="/docs/reference/design/function/README.html" data-href-zh="/docs/reference/design/function/README.zh.html">Functions</a>
+<a class="navlink" href="/docs/reference/design/function/program-model.html" data-title-zh="Program 模型" data-href-en="/docs/reference/design/function/program-model.html" data-href-zh="/docs/reference/design/function/program-model.zh.html">Program Model</a>
+<a class="navlink" href="/docs/reference/design/function/agentic-program.html" data-title-zh="Agentic Program" data-href-en="/docs/reference/design/function/agentic-program.html" data-href-zh="/docs/reference/design/function/agentic-program.zh.html">Agentic Program</a>
+<a class="navlink" href="/docs/reference/design/function/calling-unification.html" data-title-zh="函数调用" data-href-en="/docs/reference/design/function/calling-unification.html" data-href-zh="/docs/reference/design/function/calling-unification.zh.html">Function calling</a>
+<a class="navlink" href="/docs/reference/design/function/tool-guides.html" data-title-zh="工具指南" data-href-en="/docs/reference/design/function/tool-guides.html" data-href-zh="/docs/reference/design/function/tool-guides.zh.html">Tool guides</a>
+<a class="navlink" href="/docs/reference/design/function/calling/code-call.html" data-title-zh="顺序调用" data-href-en="/docs/reference/design/function/calling/code-call.html" data-href-zh="/docs/reference/design/function/calling/code-call.zh.html">Fixed-order calls</a>
+<a class="navlink" href="/docs/reference/design/runtime/programs/application-runtime.html" data-title-zh="应用运行时" data-href-en="/docs/reference/design/runtime/programs/application-runtime.html" data-href-zh="/docs/reference/design/runtime/programs/application-runtime.zh.html">Application runtime</a>
+<a class="navlink" href="/docs/reference/design/runtime/programs/programs-architecture.html" data-title-zh="程序结构" data-href-en="/docs/reference/design/runtime/programs/programs-architecture.html" data-href-zh="/docs/reference/design/runtime/programs/programs-architecture.zh.html">Program structure</a>
+<a class="navlink" href="/docs/reference/design/runtime/programs/meetings.html" data-title-zh="会议" data-href-en="/docs/reference/design/runtime/programs/meetings.html" data-href-zh="/docs/reference/design/runtime/programs/meetings.zh.html">Meetings</a>
+<a class="navlink" href="/docs/reference/design/runtime/workflows/workflow.html" data-title-zh="Workflow" data-href-en="/docs/reference/design/runtime/workflows/workflow.html" data-href-zh="/docs/reference/design/runtime/workflows/workflow.zh.html">Workflows</a>
+<a class="navlink" href="/docs/reference/design/runtime/workflows/workflow-recording.html" data-title-zh="录制 Workflow" data-href-en="/docs/reference/design/runtime/workflows/workflow-recording.html" data-href-zh="/docs/reference/design/runtime/workflows/workflow-recording.zh.html">Recording a workflow</a>
+<a class="navlink" href="/docs/reference/design/runtime/workflows/self-programming-workflow-ui.html" data-title-zh="程序界面" data-href-en="/docs/reference/design/runtime/workflows/self-programming-workflow-ui.html" data-href-zh="/docs/reference/design/runtime/workflows/self-programming-workflow-ui.zh.html">Program interface</a>
+<a class="navlink" href="/docs/reference/design/runtime/execution/llm-and-agent.html" data-title-zh="执行统一方案" data-href-en="/docs/reference/design/runtime/execution/llm-and-agent.html" data-href-zh="/docs/reference/design/runtime/execution/llm-and-agent.zh.html">Execution unification</a>
+<a class="navlink" href="/docs/reference/design/runtime/self-update.html" data-title-zh="自主更新" data-href-en="/docs/reference/design/runtime/self-update.html" data-href-zh="/docs/reference/design/runtime/self-update.zh.html">Self-updates</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="报告">Reports</span><span class="nav-count">4</span></summary><a class="navlink" href="/docs/reference/design/runtime/workflows/report-suite.html" data-title-zh="报告工作流" data-href-en="/docs/reference/design/runtime/workflows/report-suite.html" data-href-zh="/docs/reference/design/runtime/workflows/report-suite.zh.html">Report workflows</a>
+<a class="navlink" href="/docs/reference/design/runtime/workflows/weekly-report.html" data-title-zh="每周报告" data-href-en="/docs/reference/design/runtime/workflows/weekly-report.html" data-href-zh="/docs/reference/design/runtime/workflows/weekly-report.zh.html">Weekly reports</a>
+<a class="navlink" href="/docs/reference/design/runtime/workflows/group-weekly-report.html" data-title-zh="小组报告" data-href-en="/docs/reference/design/runtime/workflows/group-weekly-report.html" data-href-zh="/docs/reference/design/runtime/workflows/group-weekly-report.zh.html">Group reports</a>
+<a class="navlink" href="/docs/reference/design/runtime/workflows/report-delivery-intent.html" data-title-zh="报告交付" data-href-en="/docs/reference/design/runtime/workflows/report-delivery-intent.html" data-href-zh="/docs/reference/design/runtime/workflows/report-delivery-intent.zh.html">Report delivery</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="事件与调度">Events and scheduling</span><span class="nav-count">13</span></summary><a class="navlink" href="/docs/reference/design/proactive/README.html" data-title-zh="主动执行" data-href-en="/docs/reference/design/proactive/README.html" data-href-zh="/docs/reference/design/proactive/README.zh.html">Proactive execution</a>
+<a class="navlink" href="/docs/reference/design/proactive/event-layer.html" data-title-zh="事件层" data-href-en="/docs/reference/design/proactive/event-layer.html" data-href-zh="/docs/reference/design/proactive/event-layer.zh.html">Event layer</a>
+<a class="navlink" href="/docs/reference/design/proactive/event-layer.viz.html" data-title-zh="事件流程图解" data-href-en="/docs/reference/design/proactive/event-layer.viz.html" data-href-zh="/docs/reference/design/proactive/event-layer.zh.viz.html">Event flow diagram</a>
+<a class="navlink" href="/docs/reference/design/proactive/events-and-state.html" data-title-zh="事件与状态" data-href-en="/docs/reference/design/proactive/events-and-state.html" data-href-zh="/docs/reference/design/proactive/events-and-state.zh.html">Events and state</a>
+<a class="navlink" href="/docs/reference/design/proactive/execution-model.html" data-title-zh="规则执行" data-href-en="/docs/reference/design/proactive/execution-model.html" data-href-zh="/docs/reference/design/proactive/execution-model.zh.html">Rule execution</a>
+<a class="navlink" href="/docs/reference/design/proactive/overview.html" data-title-zh="场景概览" data-href-en="/docs/reference/design/proactive/overview.html" data-href-zh="/docs/reference/design/proactive/overview.zh.html">Scenario overview</a>
+<a class="navlink" href="/docs/reference/design/proactive/policies-mvp.html" data-title-zh="规则模板" data-href-en="/docs/reference/design/proactive/policies-mvp.html" data-href-zh="/docs/reference/design/proactive/policies-mvp.zh.html">Rule templates</a>
+<a class="navlink" href="/docs/reference/design/proactive/invariants.html" data-title-zh="不变量" data-href-en="/docs/reference/design/proactive/invariants.html" data-href-zh="/docs/reference/design/proactive/invariants.zh.html">Invariants</a>
+<a class="navlink" href="/docs/reference/design/proactive/event-reference.html" data-title-zh="事件参考" data-href-en="/docs/reference/design/proactive/event-reference.html" data-href-zh="/docs/reference/design/proactive/event-reference.zh.html">Event reference</a>
+<a class="navlink" href="/docs/reference/design/proactive/framework-evolution.viz.html" data-title-zh="信号路由图解" data-href-en="/docs/reference/design/proactive/framework-evolution.viz.html" data-href-zh="/docs/reference/design/proactive/framework-evolution.zh.viz.html">Signal routing diagram</a>
+<a class="navlink" href="/docs/reference/design/proactive/framework-evolution.html" data-title-zh="信号路由" data-href-en="/docs/reference/design/proactive/framework-evolution.html" data-href-zh="/docs/reference/design/proactive/framework-evolution.zh.html">Signal routing</a>
+<a class="navlink" href="/docs/reference/design/proactive/event-triggers.html" data-title-zh="事件触发" data-href-en="/docs/reference/design/proactive/event-triggers.html" data-href-zh="/docs/reference/design/proactive/event-triggers.zh.html">Event Triggers</a>
+<a class="navlink" href="/docs/reference/design/scheduler/memory-integration.html" data-title-zh="记忆接口" data-href-en="/docs/reference/design/scheduler/memory-integration.html" data-href-zh="/docs/reference/design/scheduler/memory-integration.zh.html">Memory interface</a></details>
+</details>
+<details class="nav-branch nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="上下文与记忆">Context and memory</span><span class="nav-count">24</span></summary>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="上下文">Context</span><span class="nav-count">10</span></summary><a class="navlink" href="/docs/reference/design/context/README.html" data-title-zh="阅读指南" data-href-en="/docs/reference/design/context/README.html" data-href-zh="/docs/reference/design/context/README.zh.html">Reading guide</a>
+<a class="navlink" href="/docs/reference/design/context/overview.html" data-title-zh="概览" data-href-en="/docs/reference/design/context/overview.html" data-href-zh="/docs/reference/design/context/overview.zh.html">Overview</a>
+<a class="navlink" href="/docs/reference/design/context/composition.html" data-title-zh="组成" data-href-en="/docs/reference/design/context/composition.html" data-href-zh="/docs/reference/design/context/composition.zh.html">Composition</a>
+<a class="navlink" href="/docs/reference/design/context/compaction.html" data-title-zh="压缩" data-href-en="/docs/reference/design/context/compaction.html" data-href-zh="/docs/reference/design/context/compaction.zh.html">Compaction</a>
+<a class="navlink" href="/docs/reference/design/context/compaction-diagram.html" data-title-zh="压缩图解" data-href-en="/docs/reference/design/context/compaction-diagram.html" data-href-zh="/docs/reference/design/context/compaction-diagram.zh.html">Compaction diagram</a>
+<a class="navlink" href="/docs/reference/design/context/occupancy-status.html" data-title-zh="占用状态" data-href-en="/docs/reference/design/context/occupancy-status.html" data-href-zh="/docs/reference/design/context/occupancy-status.zh.html">Occupancy</a>
+<a class="navlink" href="/docs/reference/design/context/statistics.html" data-title-zh="统计口径" data-href-en="/docs/reference/design/context/statistics.html" data-href-zh="/docs/reference/design/context/statistics.zh.html">Accounting rules</a>
+<a class="navlink" href="/docs/reference/design/context/memory-introspection.html" data-title-zh="记忆自查" data-href-en="/docs/reference/design/context/memory-introspection.html" data-href-zh="/docs/reference/design/context/memory-introspection.zh.html">Memory introspection</a>
+<a class="navlink" href="/docs/reference/design/context/comparison.html" data-title-zh="方案对比" data-href-en="/docs/reference/design/context/comparison.html" data-href-zh="/docs/reference/design/context/comparison.zh.html">Design comparison</a>
+<a class="navlink" href="/docs/reference/design/context/claude-code-compaction.html" data-title-zh="Claude 压缩" data-href-en="/docs/reference/design/context/claude-code-compaction.html" data-href-zh="/docs/reference/design/context/claude-code-compaction.zh.html">Claude Code compaction</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="记忆">Memory</span><span class="nav-count">14</span></summary><a class="navlink" href="/docs/reference/design/memory/README.html" data-title-zh="阅读指南" data-href-en="/docs/reference/design/memory/README.html" data-href-zh="/docs/reference/design/memory/README.zh.html">Reading guide</a>
+<a class="navlink" href="/docs/reference/design/memory/overview.html" data-title-zh="架构概览" data-href-en="/docs/reference/design/memory/overview.html" data-href-zh="/docs/reference/design/memory/overview.zh.html">Architecture overview</a>
+<a class="navlink" href="/docs/reference/design/memory/architecture.html" data-title-zh="架构图解" data-href-en="/docs/reference/design/memory/architecture.html" data-href-zh="/docs/reference/design/memory/architecture.zh.html">Architecture diagrams</a>
+<a class="navlink" href="/docs/reference/design/memory/entity-memory-proposal.html" data-title-zh="实体记忆提案" data-href-en="/docs/reference/design/memory/entity-memory-proposal.html" data-href-zh="/docs/reference/design/memory/entity-memory-proposal.zh.html">Entity memory proposal</a>
+<a class="navlink" href="/docs/reference/design/memory/virtual-memory.html" data-title-zh="抽象记忆" data-href-en="/docs/reference/design/memory/virtual-memory.html" data-href-zh="/docs/reference/design/memory/virtual-memory.zh.html">Virtual memory</a>
+<a class="navlink" href="/docs/reference/design/memory/authority-handoff.html" data-title-zh="权限与配对" data-href-en="/docs/reference/design/memory/authority-handoff.html" data-href-zh="/docs/reference/design/memory/authority-handoff.zh.html">Authority and pairing</a>
+<a class="navlink" href="/docs/reference/design/memory/authority-landscape.html" data-title-zh="权限对比" data-href-en="/docs/reference/design/memory/authority-landscape.html" data-href-zh="/docs/reference/design/memory/authority-landscape.zh.html">Authority comparison</a>
+<a class="navlink" href="/docs/reference/design/memory/adoption.html" data-title-zh="方案采用" data-href-en="/docs/reference/design/memory/adoption.html" data-href-zh="/docs/reference/design/memory/adoption.zh.html">Design adoption</a>
+<a class="navlink" href="/docs/reference/design/memory/comparison.html" data-title-zh="写入对比" data-href-en="/docs/reference/design/memory/comparison.html" data-href-zh="/docs/reference/design/memory/comparison.zh.html">Write comparison</a>
+<a class="navlink" href="/docs/reference/design/memory/editor.html" data-title-zh="编辑与历史" data-href-en="/docs/reference/design/memory/editor.html" data-href-zh="/docs/reference/design/memory/editor.zh.html">Editor and history</a>
+<a class="navlink" href="/docs/reference/design/memory/settings-ui.html" data-title-zh="设置提案" data-href-en="/docs/reference/design/memory/settings-ui.html" data-href-zh="/docs/reference/design/memory/settings-ui.zh.html">Settings proposal</a>
+<a class="navlink" href="/docs/reference/design/memory/speaker-identity.html" data-title-zh="发言人身份" data-href-en="/docs/reference/design/memory/speaker-identity.html" data-href-zh="/docs/reference/design/memory/speaker-identity.zh.html">Speaker identity</a>
+<a class="navlink" href="/docs/reference/design/memory/written-marker.viz.html" data-title-zh="写入游标图解" data-href-en="/docs/reference/design/memory/written-marker.viz.html" data-href-zh="/docs/reference/design/memory/written-marker.zh.viz.html">Write cursor diagram</a>
+<a class="navlink" href="/docs/reference/design/memory/written-marker.html" data-title-zh="写入游标" data-href-en="/docs/reference/design/memory/written-marker.html" data-href-zh="/docs/reference/design/memory/written-marker.zh.html">Write cursor</a></details>
+</details>
+<details class="nav-branch nav-disclosure" open><summary><span class="nav-sec-title" data-title-zh="界面与交互">Interfaces</span><span class="nav-count">69</span></summary>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="基础">Foundations</span><span class="nav-count">17</span></summary><a class="navlink" href="/docs/reference/design/ui/README.html" data-title-zh="网页界面" data-href-en="/docs/reference/design/ui/README.html" data-href-zh="/docs/reference/design/ui/README.zh.html">Web UI</a>
+<a class="navlink" href="/docs/reference/design/ui/desktop/app-icon.html" data-title-zh="应用图标" data-href-en="/docs/reference/design/ui/desktop/app-icon.html" data-href-zh="/docs/reference/design/ui/desktop/app-icon.zh.html">App icon</a>
+<a class="navlink" href="/docs/reference/design/ui/invariants.html" data-title-zh="界面不变量" data-href-en="/docs/reference/design/ui/invariants.html" data-href-zh="/docs/reference/design/ui/invariants.zh.html">UI invariants</a>
+<a class="navlink" href="/docs/reference/design/ui/visual-system/design-tokens.html" data-title-zh="设计 token" data-href-en="/docs/reference/design/ui/visual-system/design-tokens.html" data-href-zh="/docs/reference/design/ui/visual-system/design-tokens.zh.html">Design tokens</a>
+<a class="navlink" href="/docs/reference/design/ui/visual-system/surface-system.html" data-title-zh="界面层次" data-href-en="/docs/reference/design/ui/visual-system/surface-system.html" data-href-zh="/docs/reference/design/ui/visual-system/surface-system.zh.html">UI surfaces</a>
+<a class="navlink" href="/docs/reference/design/ui/state-layer.html" data-title-zh="状态存储" data-href-en="/docs/reference/design/ui/state-layer.html" data-href-zh="/docs/reference/design/ui/state-layer.zh.html">State stores</a>
+<a class="navlink" href="/docs/reference/design/ui/visual-system/theme-system.html" data-title-zh="主题" data-href-en="/docs/reference/design/ui/visual-system/theme-system.html" data-href-zh="/docs/reference/design/ui/visual-system/theme-system.zh.html">Themes</a>
+<a class="navlink" href="/docs/reference/design/ui/desktop/window-state.html" data-title-zh="窗口状态" data-href-en="/docs/reference/design/ui/desktop/window-state.html" data-href-zh="/docs/reference/design/ui/desktop/window-state.zh.html">Window state</a>
+<a class="navlink" href="/docs/reference/design/ui/workspace/center-canvas-layout.html" data-title-zh="中间画布：任意分屏布局 — 交互原型与规划" data-href-en="/docs/reference/design/ui/workspace/center-canvas-layout.html" data-href-zh="/docs/reference/design/ui/workspace/center-canvas-layout.zh.html">Center canvas layout</a>
+<a class="navlink" href="/docs/reference/design/ui/workspace/session-tab-identity.html" data-title-zh="标签身份" data-href-en="/docs/reference/design/ui/workspace/session-tab-identity.html" data-href-zh="/docs/reference/design/ui/workspace/session-tab-identity.zh.html">Tab identity</a>
+<a class="navlink" href="/docs/reference/design/ui/desktop/window-lifecycle.html" data-title-zh="窗口生命周期" data-href-en="/docs/reference/design/ui/desktop/window-lifecycle.html" data-href-zh="/docs/reference/design/ui/desktop/window-lifecycle.zh.html">Window lifecycle</a>
+<a class="navlink" href="/docs/reference/design/ui/visual-system/web-styles.html" data-title-zh="样式组织" data-href-en="/docs/reference/design/ui/visual-system/web-styles.html" data-href-zh="/docs/reference/design/ui/visual-system/web-styles.zh.html">Style organization</a>
+<a class="navlink" href="/docs/reference/design/ui/interaction-feedback.html" data-title-zh="交互反馈" data-href-en="/docs/reference/design/ui/interaction-feedback.html" data-href-zh="/docs/reference/design/ui/interaction-feedback.zh.html">Interaction feedback</a>
+<a class="navlink" href="/docs/reference/design/ui/page-loading-performance.html" data-title-zh="页面加载性能" data-href-en="/docs/reference/design/ui/page-loading-performance.html" data-href-zh="/docs/reference/design/ui/page-loading-performance.zh.html">Page loading performance</a>
+<a class="navlink" href="/docs/reference/design/ui/visual-system/indicator-dots.html" data-title-zh="状态指示" data-href-en="/docs/reference/design/ui/visual-system/indicator-dots.html" data-href-zh="/docs/reference/design/ui/visual-system/indicator-dots.zh.html">Status indicators</a>
+<a class="navlink" href="/docs/reference/design/ui/visual-system/agent-avatars.html" data-title-zh="Agent 头像" data-href-en="/docs/reference/design/ui/visual-system/agent-avatars.html" data-href-zh="/docs/reference/design/ui/visual-system/agent-avatars.zh.html">Agent avatars</a>
+<a class="navlink" href="/docs/reference/design/ui/sidebar/session-status.html" data-title-zh="会话状态" data-href-en="/docs/reference/design/ui/sidebar/session-status.html" data-href-zh="/docs/reference/design/ui/sidebar/session-status.zh.html">Session status</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="对话与编辑器">Chat and composer</span><span class="nav-count">20</span></summary><a class="navlink" href="/docs/reference/design/ui/chat/attachment-handling.html" data-title-zh="附件方案" data-href-en="/docs/reference/design/ui/chat/attachment-handling.html" data-href-zh="/docs/reference/design/ui/chat/attachment-handling.zh.html">Attachment options</a>
+<a class="navlink" href="/docs/reference/design/ui/chat/chat-attachments.html" data-title-zh="附件传递" data-href-en="/docs/reference/design/ui/chat/chat-attachments.html" data-href-zh="/docs/reference/design/ui/chat/chat-attachments.zh.html">Attachment delivery</a>
+<a class="navlink" href="/docs/reference/design/ui/chat/chat-turn-visual-spec.html" data-title-zh="聊天轮次布局" data-href-en="/docs/reference/design/ui/chat/chat-turn-visual-spec.html" data-href-zh="/docs/reference/design/ui/chat/chat-turn-visual-spec.zh.html">Chat turn layout</a>
+<a class="navlink" href="/docs/reference/design/ui/chat/tool-group-summary.html" data-title-zh="工具组摘要" data-href-en="/docs/reference/design/ui/chat/tool-group-summary.html" data-href-zh="/docs/reference/design/ui/chat/tool-group-summary.zh.html">Tool group summary</a>
+<a class="navlink" href="/docs/reference/design/ui/chat/sub-agent-row.html" data-title-zh="子代理行" data-href-en="/docs/reference/design/ui/chat/sub-agent-row.html" data-href-zh="/docs/reference/design/ui/chat/sub-agent-row.zh.html">Sub-agent row</a>
+<a class="navlink" href="/docs/reference/design/ui/chat/activity-panel.html" data-title-zh="Activity 面板" data-href-en="/docs/reference/design/ui/chat/activity-panel.html" data-href-zh="/docs/reference/design/ui/chat/activity-panel.zh.html">Activity panel</a>
+<a class="navlink" href="/docs/reference/design/ui/chat/chat-transcript-follow.html" data-title-zh="会话记录跟随" data-href-en="/docs/reference/design/ui/chat/chat-transcript-follow.html" data-href-zh="/docs/reference/design/ui/chat/chat-transcript-follow.zh.html">Transcript following</a>
+<a class="navlink" href="/docs/reference/design/ui/composer/composer-interaction-modes.html" data-title-zh="输入框交互" data-href-en="/docs/reference/design/ui/composer/composer-interaction-modes.html" data-href-zh="/docs/reference/design/ui/composer/composer-interaction-modes.zh.html">Composer interaction</a>
+<a class="navlink" href="/docs/reference/design/ui/composer/composer-local-attachment-paths.html" data-title-zh="附件路径" data-href-en="/docs/reference/design/ui/composer/composer-local-attachment-paths.html" data-href-zh="/docs/reference/design/ui/composer/composer-local-attachment-paths.zh.html">Attachment paths</a>
+<a class="navlink" href="/docs/reference/design/ui/composer/composer-responsive-controls.html" data-title-zh="响应式控件" data-href-en="/docs/reference/design/ui/composer/composer-responsive-controls.html" data-href-zh="/docs/reference/design/ui/composer/composer-responsive-controls.zh.html">Responsive controls</a>
+<a class="navlink" href="/docs/reference/design/ui/composer/composer-options-menu.html" data-title-zh="输入框选项菜单" data-href-en="/docs/reference/design/ui/composer/composer-options-menu.html" data-href-zh="/docs/reference/design/ui/composer/composer-options-menu.zh.html">Composer options menu</a>
+<a class="navlink" href="/docs/reference/design/ui/composer/composer-fast-control.html" data-title-zh="速度控制" data-href-en="/docs/reference/design/ui/composer/composer-fast-control.html" data-href-zh="/docs/reference/design/ui/composer/composer-fast-control.zh.html">Speed control</a>
+<a class="navlink" href="/docs/reference/design/ui/browser/agent-control-overlay.html" data-title-zh="Agent 控制提示层" data-href-en="/docs/reference/design/ui/browser/agent-control-overlay.html" data-href-zh="/docs/reference/design/ui/browser/agent-control-overlay.zh.html">Agent control overlay</a>
+<a class="navlink" href="/docs/reference/design/ui/resources/resource-preview.html" data-title-zh="资源与操作预览" data-href-en="/docs/reference/design/ui/resources/resource-preview.html" data-href-zh="/docs/reference/design/ui/resources/resource-preview.zh.html">Resources and operation preview</a>
+<a class="navlink" href="/docs/reference/design/ui/browser/browser-control-surfaces.html" data-title-zh="网页任务控制" data-href-en="/docs/reference/design/ui/browser/browser-control-surfaces.html" data-href-zh="/docs/reference/design/ui/browser/browser-control-surfaces.zh.html">Browser task control</a>
+<a class="navlink" href="/docs/reference/design/ui/turn-lifecycle/send-queue-reliability.html" data-title-zh="队列与执行引导" data-href-en="/docs/reference/design/ui/turn-lifecycle/send-queue-reliability.html" data-href-zh="/docs/reference/design/ui/turn-lifecycle/send-queue-reliability.zh.html">Queue and steering</a>
+<a class="navlink" href="/docs/reference/design/ui/sidebar/session-auto-rename.html" data-title-zh="会话命名" data-href-en="/docs/reference/design/ui/sidebar/session-auto-rename.html" data-href-zh="/docs/reference/design/ui/sidebar/session-auto-rename.zh.html">Session naming</a>
+<a class="navlink" href="/docs/reference/design/ui/composer/slash-and-compact.html" data-title-zh="斜杠命令" data-href-en="/docs/reference/design/ui/composer/slash-and-compact.html" data-href-zh="/docs/reference/design/ui/composer/slash-and-compact.zh.html">Slash commands</a>
+<a class="navlink" href="/docs/reference/design/ui/turn-lifecycle/turn-occupancy.html" data-title-zh="轮次占用" data-href-en="/docs/reference/design/ui/turn-lifecycle/turn-occupancy.html" data-href-zh="/docs/reference/design/ui/turn-lifecycle/turn-occupancy.zh.html">Turn occupancy</a>
+<a class="navlink" href="/docs/reference/design/ui/turn-lifecycle/websocket-command-lifecycle.html" data-title-zh="WebSocket 周期" data-href-en="/docs/reference/design/ui/turn-lifecycle/websocket-command-lifecycle.html" data-href-zh="/docs/reference/design/ui/turn-lifecycle/websocket-command-lifecycle.zh.html">WebSocket lifecycle</a></details>
+<details class="nav-sec nav-disclosure" open><summary><span class="nav-sec-title" data-title-zh="浏览器与标签页">Browser and tabs</span><span class="nav-count">9</span></summary><a class="navlink" href="/docs/reference/design/ui/browser/browser-extensions.html" data-title-zh="浏览器扩展" data-href-en="/docs/reference/design/ui/browser/browser-extensions.html" data-href-zh="/docs/reference/design/ui/browser/browser-extensions.zh.html">Browser extensions</a>
+<a class="navlink" href="/docs/reference/design/ui/browser/built-in-browser.html" data-title-zh="内置浏览器" data-href-en="/docs/reference/design/ui/browser/built-in-browser.html" data-href-zh="/docs/reference/design/ui/browser/built-in-browser.zh.html">Built-in browser</a>
+<a class="navlink" href="/docs/reference/design/ui/resources/session-resources.html" data-title-zh="会话资源" data-href-en="/docs/reference/design/ui/resources/session-resources.html" data-href-zh="/docs/reference/design/ui/resources/session-resources.zh.html">Session resources</a>
+<a class="navlink" href="/docs/reference/design/ui/workspace/center-tabs-and-split-layout.html" data-title-zh="标签布局" data-href-en="/docs/reference/design/ui/workspace/center-tabs-and-split-layout.html" data-href-zh="/docs/reference/design/ui/workspace/center-tabs-and-split-layout.zh.html">Tab placement</a>
+<a class="navlink" href="/docs/reference/design/ui/desktop/window-tab-transfer.html" data-title-zh="在窗口之间移动标签页" data-href-en="/docs/reference/design/ui/desktop/window-tab-transfer.html" data-href-zh="/docs/reference/design/ui/desktop/window-tab-transfer.zh.html">Moving tabs between windows</a>
+<a class="navlink" href="/docs/reference/design/ui/remote-web-access.viz.html" data-title-zh="远程访问图解" data-href-en="/docs/reference/design/ui/remote-web-access.viz.html" data-href-zh="/docs/reference/design/ui/remote-web-access.zh.viz.html">Remote access diagram</a>
+<a class="navlink active" href="/docs/reference/design/ui/remote-web-access.html" data-title-zh="远程访问" data-href-en="/docs/reference/design/ui/remote-web-access.html" data-href-zh="/docs/reference/design/ui/remote-web-access.zh.html">Remote access</a>
+<a class="navlink" href="/docs/reference/design/ui/browser/web-tab-home-button.html" data-title-zh="浏览器主页" data-href-en="/docs/reference/design/ui/browser/web-tab-home-button.html" data-href-zh="/docs/reference/design/ui/browser/web-tab-home-button.zh.html">Browser home</a>
+<a class="navlink" href="/docs/reference/design/ui/browser/web-tab-native-bounds.html" data-title-zh="原生页面边界" data-href-en="/docs/reference/design/ui/browser/web-tab-native-bounds.html" data-href-zh="/docs/reference/design/ui/browser/web-tab-native-bounds.zh.html">Native page bounds</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="设置与目录">Settings and catalog</span><span class="nav-count">4</span></summary><a class="navlink" href="/docs/reference/design/ui/settings/avatar-randomization.html" data-title-zh="头像" data-href-en="/docs/reference/design/ui/settings/avatar-randomization.html" data-href-zh="/docs/reference/design/ui/settings/avatar-randomization.zh.html">Avatars</a>
+<a class="navlink" href="/docs/reference/design/ui/programs/programs-explorer-template.html" data-title-zh="程序浏览器" data-href-en="/docs/reference/design/ui/programs/programs-explorer-template.html" data-href-zh="/docs/reference/design/ui/programs/programs-explorer-template.zh.html">Program explorer</a>
+<a class="navlink" href="/docs/reference/design/ui/programs/programs-source-categories.html" data-title-zh="源码分类" data-href-en="/docs/reference/design/ui/programs/programs-source-categories.html" data-href-zh="/docs/reference/design/ui/programs/programs-source-categories.zh.html">Source categories</a>
+<a class="navlink" href="/docs/reference/design/ui/settings/settings-collapsible-columns.html" data-title-zh="设置导航" data-href-en="/docs/reference/design/ui/settings/settings-collapsible-columns.html" data-href-zh="/docs/reference/design/ui/settings/settings-collapsible-columns.zh.html">Settings navigation</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="工作区与侧栏">Workspace and sidebar</span><span class="nav-count">9</span></summary><a class="navlink" href="/docs/reference/design/ui/workspace/integrated-terminal.html" data-title-zh="内置终端" data-href-en="/docs/reference/design/ui/workspace/integrated-terminal.html" data-href-zh="/docs/reference/design/ui/workspace/integrated-terminal.zh.html">Integrated terminal</a>
+<a class="navlink" href="/docs/reference/design/ui/sidebar/project-order.html" data-title-zh="项目排序" data-href-en="/docs/reference/design/ui/sidebar/project-order.html" data-href-zh="/docs/reference/design/ui/sidebar/project-order.zh.html">Project order</a>
+<a class="navlink" href="/docs/reference/design/ui/workspace/project-location.html" data-title-zh="项目位置" data-href-en="/docs/reference/design/ui/workspace/project-location.html" data-href-zh="/docs/reference/design/ui/workspace/project-location.zh.html">Project location</a>
+<a class="navlink" href="/docs/reference/design/ui/visual-system/file-type-icons.html" data-title-zh="文件图标" data-href-en="/docs/reference/design/ui/visual-system/file-type-icons.html" data-href-zh="/docs/reference/design/ui/visual-system/file-type-icons.zh.html">File icons</a>
+<a class="navlink" href="/docs/reference/design/ui/workspace/project-workspace.html" data-title-zh="项目工作区" data-href-en="/docs/reference/design/ui/workspace/project-workspace.html" data-href-zh="/docs/reference/design/ui/workspace/project-workspace.zh.html">Project workspace</a>
+<a class="navlink" href="/docs/reference/design/ui/sidebar/right-sidebar-files.html" data-title-zh="文件树" data-href-en="/docs/reference/design/ui/sidebar/right-sidebar-files.html" data-href-zh="/docs/reference/design/ui/sidebar/right-sidebar-files.zh.html">File tree</a>
+<a class="navlink" href="/docs/reference/design/ui/sidebar/right-sidebar-typography.html" data-title-zh="右侧边栏文字排版" data-href-en="/docs/reference/design/ui/sidebar/right-sidebar-typography.html" data-href-zh="/docs/reference/design/ui/sidebar/right-sidebar-typography.zh.html">Right sidebar typography</a>
+<a class="navlink" href="/docs/reference/design/ui/sidebar/sidebars-resizing.html" data-title-zh="侧栏宽度" data-href-en="/docs/reference/design/ui/sidebar/sidebars-resizing.html" data-href-zh="/docs/reference/design/ui/sidebar/sidebars-resizing.zh.html">Sidebar sizing</a>
+<a class="navlink" href="/docs/reference/design/ui/sidebar/secondary-rail.html" data-title-zh="二级侧栏" data-href-en="/docs/reference/design/ui/sidebar/secondary-rail.html" data-href-zh="/docs/reference/design/ui/sidebar/secondary-rail.zh.html">Secondary rail</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="命令行与终端界面">CLI and TUI</span><span class="nav-count">10</span></summary><a class="navlink" href="/docs/reference/design/cli/README.html" data-title-zh="命令行与终端" data-href-en="/docs/reference/design/cli/README.html" data-href-zh="/docs/reference/design/cli/README.zh.html">CLI and TUI</a>
+<a class="navlink" href="/docs/reference/design/cli/config-write-safety.html" data-title-zh="配置安全" data-href-en="/docs/reference/design/cli/config-write-safety.html" data-href-zh="/docs/reference/design/cli/config-write-safety.zh.html">Configuration safety</a>
+<a class="navlink" href="/docs/reference/design/cli/drop-run-command.html" data-title-zh="函数执行" data-href-en="/docs/reference/design/cli/drop-run-command.html" data-href-zh="/docs/reference/design/cli/drop-run-command.zh.html">Function execution</a>
+<a class="navlink" href="/docs/reference/design/cli/naming.html" data-title-zh="命名规范" data-href-en="/docs/reference/design/cli/naming.html" data-href-zh="/docs/reference/design/cli/naming.zh.html">Naming conventions</a>
+<a class="navlink" href="/docs/reference/design/cli/ports.html" data-title-zh="端口配置" data-href-en="/docs/reference/design/cli/ports.html" data-href-zh="/docs/reference/design/cli/ports.zh.html">Port configuration</a>
+<a class="navlink" href="/docs/reference/design/cli/redesign.html" data-title-zh="配置界面" data-href-en="/docs/reference/design/cli/redesign.html" data-href-zh="/docs/reference/design/cli/redesign.zh.html">Configuration interface</a>
+<a class="navlink" href="/docs/reference/design/cli/single-port.html" data-title-zh="单端口架构" data-href-en="/docs/reference/design/cli/single-port.html" data-href-zh="/docs/reference/design/cli/single-port.zh.html">Single-port architecture</a>
+<a class="navlink" href="/docs/reference/design/cli/slash-commands-references.html" data-title-zh="命令对比" data-href-en="/docs/reference/design/cli/slash-commands-references.html" data-href-zh="/docs/reference/design/cli/slash-commands-references.zh.html">Command comparison</a>
+<a class="navlink" href="/docs/reference/design/cli/slash-commands.html" data-title-zh="斜杠命令" data-href-en="/docs/reference/design/cli/slash-commands.html" data-href-zh="/docs/reference/design/cli/slash-commands.zh.html">Slash commands</a>
+<a class="navlink" href="/docs/reference/design/cli/tui-upgrade.html" data-title-zh="会话记录渲染" data-href-en="/docs/reference/design/cli/tui-upgrade.html" data-href-zh="/docs/reference/design/cli/tui-upgrade.zh.html">Transcript rendering</a></details>
+</details>
+<details class="nav-branch nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="模型与外部接入">Models and connections</span><span class="nav-count">46</span></summary>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="请求与模型">Requests and models</span><span class="nav-count">14</span></summary><a class="navlink" href="/docs/reference/design/providers/README.html" data-title-zh="模型服务" data-href-en="/docs/reference/design/providers/README.html" data-href-zh="/docs/reference/design/providers/README.zh.html">Providers</a>
+<a class="navlink" href="/docs/reference/design/providers/models/overview.html" data-title-zh="模型目录" data-href-en="/docs/reference/design/providers/models/overview.html" data-href-zh="/docs/reference/design/providers/models/overview.zh.html">Model catalog</a>
+<a class="navlink" href="/docs/reference/design/providers/request-build.html" data-title-zh="请求构建" data-href-en="/docs/reference/design/providers/request-build.html" data-href-zh="/docs/reference/design/providers/request-build.zh.html">Request construction</a>
+<a class="navlink" href="/docs/reference/design/providers/request-redaction.html" data-title-zh="请求脱敏" data-href-en="/docs/reference/design/providers/request-redaction.html" data-href-zh="/docs/reference/design/providers/request-redaction.zh.html">Request redaction</a>
+<a class="navlink" href="/docs/reference/design/providers/web-search.html" data-title-zh="网页搜索：先用提供商自带的，再用本地工具" data-href-en="/docs/reference/design/providers/web-search.html" data-href-zh="/docs/reference/design/providers/web-search.zh.html">Web search: provider-side first, local tool second</a>
+<a class="navlink" href="/docs/reference/design/providers/routing-overview.html" data-title-zh="路由总览" data-href-en="/docs/reference/design/providers/routing-overview.html" data-href-zh="/docs/reference/design/providers/routing-overview.zh.html">Routing overview</a>
+<a class="navlink" href="/docs/reference/design/providers/custom-openai-compatible-provider.html" data-title-zh="OpenAI 兼容" data-href-en="/docs/reference/design/providers/custom-openai-compatible-provider.html" data-href-zh="/docs/reference/design/providers/custom-openai-compatible-provider.zh.html">OpenAI compatibility</a>
+<a class="navlink" href="/docs/reference/design/providers/models/fast-tier.html" data-title-zh="高速档位" data-href-en="/docs/reference/design/providers/models/fast-tier.html" data-href-zh="/docs/reference/design/providers/models/fast-tier.zh.html">Fast tier</a>
+<a class="navlink" href="/docs/reference/design/providers/models/thinking-effort.html" data-title-zh="推理强度" data-href-en="/docs/reference/design/providers/models/thinking-effort.html" data-href-zh="/docs/reference/design/providers/models/thinking-effort.zh.html">Thinking effort</a>
+<a class="navlink" href="/docs/reference/design/providers/json-schema-structured-output.html" data-title-zh="结构化输出" data-href-en="/docs/reference/design/providers/json-schema-structured-output.html" data-href-zh="/docs/reference/design/providers/json-schema-structured-output.zh.html">Structured output</a>
+<a class="navlink" href="/docs/reference/design/providers/network-proxy.html" data-title-zh="网络代理" data-href-en="/docs/reference/design/providers/network-proxy.html" data-href-zh="/docs/reference/design/providers/network-proxy.zh.html">Network proxy</a>
+<a class="navlink" href="/docs/reference/design/providers/metadata-load-diagnostics.html" data-title-zh="元数据诊断" data-href-en="/docs/reference/design/providers/metadata-load-diagnostics.html" data-href-zh="/docs/reference/design/providers/metadata-load-diagnostics.zh.html">Metadata diagnostics</a>
+<a class="navlink" href="/docs/reference/design/providers/bailian-model-catalog.html" data-title-zh="百炼模型目录" data-href-en="/docs/reference/design/providers/bailian-model-catalog.html" data-href-zh="/docs/reference/design/providers/bailian-model-catalog.zh.html">Bailian catalog</a>
+<a class="navlink" href="/docs/reference/design/usage-metering.html" data-title-zh="用量统计" data-href-en="/docs/reference/design/usage-metering.html" data-href-zh="/docs/reference/design/usage-metering.zh.html">Usage metering</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="账号与认证">Authentication</span><span class="nav-count">7</span></summary><a class="navlink" href="/docs/reference/design/providers/auth/api-key-resolution-unification.html" data-title-zh="凭据解析" data-href-en="/docs/reference/design/providers/auth/api-key-resolution-unification.html" data-href-zh="/docs/reference/design/providers/auth/api-key-resolution-unification.zh.html">Credential resolution</a>
+<a class="navlink" href="/docs/reference/design/providers/auth/credential-connection-unification.html" data-title-zh="凭据连接" data-href-en="/docs/reference/design/providers/auth/credential-connection-unification.html" data-href-zh="/docs/reference/design/providers/auth/credential-connection-unification.zh.html">Credential connections</a>
+<a class="navlink" href="/docs/reference/design/providers/auth/credential-file-hardening.html" data-title-zh="文件凭据" data-href-en="/docs/reference/design/providers/auth/credential-file-hardening.html" data-href-zh="/docs/reference/design/providers/auth/credential-file-hardening.zh.html">File credentials</a>
+<a class="navlink" href="/docs/reference/design/providers/auth/credential-status-redesign.html" data-title-zh="凭据状态" data-href-en="/docs/reference/design/providers/auth/credential-status-redesign.html" data-href-zh="/docs/reference/design/providers/auth/credential-status-redesign.zh.html">Credential status</a>
+<a class="navlink" href="/docs/reference/design/providers/auth/credential-validation-unification.html" data-title-zh="凭据校验" data-href-en="/docs/reference/design/providers/auth/credential-validation-unification.html" data-href-zh="/docs/reference/design/providers/auth/credential-validation-unification.zh.html">Credential validation</a>
+<a class="navlink" href="/docs/reference/design/providers/auth/unified-account-management.html" data-title-zh="账号轮换" data-href-en="/docs/reference/design/providers/auth/unified-account-management.html" data-href-zh="/docs/reference/design/providers/auth/unified-account-management.zh.html">Account rotation</a>
+<a class="navlink" href="/docs/reference/design/providers/auth/unified-auth-storage.html" data-title-zh="凭据存储" data-href-en="/docs/reference/design/providers/auth/unified-auth-storage.html" data-href-zh="/docs/reference/design/providers/auth/unified-auth-storage.zh.html">Credential storage</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="可靠性">Reliability</span><span class="nav-count">7</span></summary><a class="navlink" href="/docs/reference/design/providers/reliability/error-and-timeout-mechanism.html" data-title-zh="错误与超时" data-href-en="/docs/reference/design/providers/reliability/error-and-timeout-mechanism.html" data-href-zh="/docs/reference/design/providers/reliability/error-and-timeout-mechanism.zh.html">Errors and timeouts</a>
+<a class="navlink" href="/docs/reference/design/providers/reliability/error-retry.html" data-title-zh="重试决策" data-href-en="/docs/reference/design/providers/reliability/error-retry.html" data-href-zh="/docs/reference/design/providers/reliability/error-retry.zh.html">Retry decisions</a>
+<a class="navlink" href="/docs/reference/design/providers/reliability/error-taxonomy-propagation.html" data-title-zh="错误传播" data-href-en="/docs/reference/design/providers/reliability/error-taxonomy-propagation.html" data-href-zh="/docs/reference/design/providers/reliability/error-taxonomy-propagation.zh.html">Error propagation</a>
+<a class="navlink" href="/docs/reference/design/providers/reliability/llm-fault-tolerance.html" data-title-zh="容错" data-href-en="/docs/reference/design/providers/reliability/llm-fault-tolerance.html" data-href-zh="/docs/reference/design/providers/reliability/llm-fault-tolerance.zh.html">Fault tolerance</a>
+<a class="navlink" href="/docs/reference/design/providers/record-replay.html" data-title-zh="录制与回放" data-href-en="/docs/reference/design/providers/record-replay.html" data-href-zh="/docs/reference/design/providers/record-replay.zh.html">Recording and replay</a>
+<a class="navlink" href="/docs/reference/design/providers/record-replay.viz.html" data-title-zh="回放图解" data-href-en="/docs/reference/design/providers/record-replay.viz.html" data-href-zh="/docs/reference/design/providers/record-replay.zh.viz.html">Replay diagram</a>
+<a class="navlink" href="/docs/reference/design/providers/responses-reasoning-replay.html" data-title-zh="推理记录回放" data-href-en="/docs/reference/design/providers/responses-reasoning-replay.html" data-href-zh="/docs/reference/design/providers/responses-reasoning-replay.zh.html">Reasoning replay</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="扩展与集成">Extensions and integrations</span><span class="nav-count">14</span></summary><a class="navlink" href="/docs/reference/design/integrations/README.html" data-title-zh="集成" data-href-en="/docs/reference/design/integrations/README.html" data-href-zh="/docs/reference/design/integrations/README.zh.html">Integrations</a>
+<a class="navlink" href="/docs/reference/design/integrations/nooa.html" data-title-zh="直接调用、Agent 类与自动 DAG 上下文" data-href-en="/docs/reference/design/integrations/nooa.html" data-href-zh="/docs/reference/design/integrations/nooa.zh.html">Direct calls, Agent classes and automatic DAG context</a>
+<a class="navlink" href="/docs/reference/design/integrations/editor-integration.html" data-title-zh="编辑器集成" data-href-en="/docs/reference/design/integrations/editor-integration.html" data-href-zh="/docs/reference/design/integrations/editor-integration.zh.html">Editor integration</a>
+<a class="navlink" href="/docs/reference/design/integrations/extension-management.html" data-title-zh="扩展管理" data-href-en="/docs/reference/design/integrations/extension-management.html" data-href-zh="/docs/reference/design/integrations/extension-management.zh.html">Extension management</a>
+<a class="navlink" href="/docs/reference/design/integrations/harness-standard.html" data-title-zh="运行环境规范" data-href-en="/docs/reference/design/integrations/harness-standard.html" data-href-zh="/docs/reference/design/integrations/harness-standard.zh.html">Harness standard</a>
+<a class="navlink" href="/docs/reference/design/integrations/mcp-integration.html" data-title-zh="MCP 工具" data-href-en="/docs/reference/design/integrations/mcp-integration.html" data-href-zh="/docs/reference/design/integrations/mcp-integration.zh.html">MCP tools</a>
+<a class="navlink" href="/docs/reference/design/integrations/mcp-server.html" data-title-zh="MCP 服务端" data-href-en="/docs/reference/design/integrations/mcp-server.html" data-href-zh="/docs/reference/design/integrations/mcp-server.zh.html">MCP server</a>
+<a class="navlink" href="/docs/reference/design/integrations/skills-and-plugins.html" data-title-zh="技能与插件" data-href-en="/docs/reference/design/integrations/skills-and-plugins.html" data-href-zh="/docs/reference/design/integrations/skills-and-plugins.zh.html">Skills and plugins</a>
+<a class="navlink" href="/docs/reference/design/integrations/plugin-runtime.html" data-title-zh="插件运行时" data-href-en="/docs/reference/design/integrations/plugin-runtime.html" data-href-zh="/docs/reference/design/integrations/plugin-runtime.zh.html">Plugin Runtime</a>
+<a class="navlink" href="/docs/reference/design/integrations/web-use.html" data-title-zh="网页自动化" data-href-en="/docs/reference/design/integrations/web-use.html" data-href-zh="/docs/reference/design/integrations/web-use.zh.html">Web automation</a>
+<a class="navlink" href="/docs/reference/design/integrations/computer-and-browser-use.html" data-title-zh="操控电脑与浏览器" data-href-en="/docs/reference/design/integrations/computer-and-browser-use.html" data-href-zh="/docs/reference/design/integrations/computer-and-browser-use.zh.html">Computer and browser use</a>
+<a class="navlink" href="/docs/reference/design/extension-gating/README.html" data-title-zh="扩展控制" data-href-en="/docs/reference/design/extension-gating/README.html" data-href-zh="/docs/reference/design/extension-gating/README.zh.html">Extension controls</a>
+<a class="navlink" href="/docs/reference/design/extension-gating/future-work.html" data-title-zh="后续工作" data-href-en="/docs/reference/design/extension-gating/future-work.html" data-href-zh="/docs/reference/design/extension-gating/future-work.zh.html">Future work</a>
+<a class="navlink" href="/docs/reference/design/extension-gating/reference-comparison.html" data-title-zh="参考对比" data-href-en="/docs/reference/design/extension-gating/reference-comparison.html" data-href-zh="/docs/reference/design/extension-gating/reference-comparison.zh.html">Reference comparison</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="消息渠道">Channels</span><span class="nav-count">4</span></summary><a class="navlink" href="/docs/reference/design/channels/README.html" data-title-zh="通信渠道" data-href-en="/docs/reference/design/channels/README.html" data-href-zh="/docs/reference/design/channels/README.zh.html">Channels</a>
+<a class="navlink" href="/docs/reference/design/channels/audit.html" data-title-zh="需求约束" data-href-en="/docs/reference/design/channels/audit.html" data-href-zh="/docs/reference/design/channels/audit.zh.html">Requirements</a>
+<a class="navlink" href="/docs/reference/design/channels/design.html" data-title-zh="架构" data-href-en="/docs/reference/design/channels/design.html" data-href-zh="/docs/reference/design/channels/design.zh.html">Architecture</a>
+<a class="navlink" href="/docs/reference/design/channels/chat-bots.html" data-title-zh="渠道上的聊天机器人行为" data-href-en="/docs/reference/design/channels/chat-bots.html" data-href-zh="/docs/reference/design/channels/chat-bots.zh.html">Chat-Bot Behavior on Channels</a></details>
+</details>
+<details class="nav-branch nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="安全与工程">Security and engineering</span><span class="nav-count">18</span></summary>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="安全与权限">Security and permissions</span><span class="nav-count">4</span></summary><a class="navlink" href="/docs/reference/design/runtime/security/sandbox-architecture.html" data-title-zh="权限与沙箱" data-href-en="/docs/reference/design/runtime/security/sandbox-architecture.html" data-href-zh="/docs/reference/design/runtime/security/sandbox-architecture.zh.html">Authority and sandbox</a>
+<a class="navlink" href="/docs/reference/design/runtime/security/system-access.html" data-title-zh="系统访问" data-href-en="/docs/reference/design/runtime/security/system-access.html" data-href-zh="/docs/reference/design/runtime/security/system-access.zh.html">System access</a>
+<a class="navlink" href="/docs/reference/design/runtime/security/ssrf-protection.html" data-title-zh="SSRF 防护" data-href-en="/docs/reference/design/runtime/security/ssrf-protection.html" data-href-zh="/docs/reference/design/runtime/security/ssrf-protection.zh.html">SSRF protection</a>
+<a class="navlink" href="/docs/reference/design/security/dependency-security.html" data-title-zh="依赖安全" data-href-en="/docs/reference/design/security/dependency-security.html" data-href-zh="/docs/reference/design/security/dependency-security.zh.html">Dependency security</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="安装与分发">Distribution</span><span class="nav-count">6</span></summary><a class="navlink" href="/docs/reference/design/distribution/installation-packaging.html" data-title-zh="打包与发布" data-href-en="/docs/reference/design/distribution/installation-packaging.html" data-href-zh="/docs/reference/design/distribution/installation-packaging.zh.html">Packaging and releases</a>
+<a class="navlink" href="/docs/reference/design/distribution/automatic-updates.html" data-title-zh="自动更新" data-href-en="/docs/reference/design/distribution/automatic-updates.html" data-href-zh="/docs/reference/design/distribution/automatic-updates.zh.html">Automatic updates</a>
+<a class="navlink" href="/docs/reference/design/distribution/dev-instance.html" data-title-zh="稳定版与开发版实例" data-href-en="/docs/reference/design/distribution/dev-instance.html" data-href-zh="/docs/reference/design/distribution/dev-instance.zh.html">Stable and development instances</a>
+<a class="navlink" href="/docs/reference/design/distribution/github-publishing.html" data-title-zh="向 GitHub 发布源码" data-href-en="/docs/reference/design/distribution/github-publishing.html" data-href-zh="/docs/reference/design/distribution/github-publishing.zh.html">Publishing source to GitHub</a>
+<a class="navlink" href="/docs/reference/design/distribution/developer-id.html" data-title-zh="Developer ID" data-href-en="/docs/reference/design/distribution/developer-id.html" data-href-zh="/docs/reference/design/distribution/developer-id.zh.html">Developer ID</a>
+<a class="navlink" href="/docs/reference/design/distribution/windows-support.html" data-title-zh="Windows 支持" data-href-en="/docs/reference/design/distribution/windows-support.html" data-href-zh="/docs/reference/design/distribution/windows-support.zh.html">Windows support</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="测试与错误处理">Testing and errors</span><span class="nav-count">3</span></summary><a class="navlink" href="/docs/reference/design/testing/test-system.html" data-title-zh="测试系统" data-href-en="/docs/reference/design/testing/test-system.html" data-href-zh="/docs/reference/design/testing/test-system.zh.html">Test system</a>
+<a class="navlink" href="/docs/reference/design/testing/windows-ci.html" data-title-zh="Windows CI" data-href-en="/docs/reference/design/testing/windows-ci.html" data-href-zh="/docs/reference/design/testing/windows-ci.zh.html">Windows CI</a>
+<a class="navlink" href="/docs/reference/design/error-handling.html" data-title-zh="错误处理" data-href-en="/docs/reference/design/error-handling.html" data-href-zh="/docs/reference/design/error-handling.zh.html">Error handling</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="文档与网站">Documentation and website</span><span class="nav-count">5</span></summary><a class="navlink" href="/docs/reference/design/docs-site.html" data-title-zh="文档站" data-href-en="/docs/reference/design/docs-site.html" data-href-zh="/docs/reference/design/docs-site.zh.html">Documentation site</a>
+<a class="navlink" href="/docs/reference/design/site-discoverability-performance.html" data-title-zh="站点检索" data-href-en="/docs/reference/design/site-discoverability-performance.html" data-href-zh="/docs/reference/design/site-discoverability-performance.zh.html">Site discovery</a>
+<a class="navlink" href="/docs/reference/design/site-agent-readable-docs.html" data-title-zh="Agent 文档" data-href-en="/docs/reference/design/site-agent-readable-docs.html" data-href-zh="/docs/reference/design/site-agent-readable-docs.zh.html">Agent-readable docs</a>
+<a class="navlink" href="/docs/reference/design/site-indexnow-discovery.html" data-title-zh="IndexNow 检索" data-href-en="/docs/reference/design/site-indexnow-discovery.html" data-href-zh="/docs/reference/design/site-indexnow-discovery.zh.html">IndexNow discovery</a>
+<a class="navlink" href="/docs/reference/design/community-discoverability.html" data-title-zh="社区检索" data-href-en="/docs/reference/design/community-discoverability.html" data-href-zh="/docs/reference/design/community-discoverability.zh.html">Community discovery</a></details>
+</details>
+<details class="nav-branch nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="补充材料">Supporting material</span><span class="nav-count">22</span></summary>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="交互原型">Prototypes</span><span class="nav-count">6</span></summary><a class="navlink" href="/docs/reference/design/ui/visual-system/layout-density-prototype.html" data-title-zh="密度原型" data-href-en="/docs/reference/design/ui/visual-system/layout-density-prototype.html" data-href-zh="/docs/reference/design/ui/visual-system/layout-density-prototype.zh.html">Density prototype</a>
+<a class="navlink" href="/docs/reference/design/ui/composer/composer-interaction-prototype.html" data-title-zh="输入框原型" data-href-en="/docs/reference/design/ui/composer/composer-interaction-prototype.html" data-href-zh="/docs/reference/design/ui/composer/composer-interaction-prototype.zh.html">Composer prototype</a>
+<a class="navlink" href="/docs/reference/design/ui/workspace/project-workspace-prototype.html" data-title-zh="工作区原型" data-href-en="/docs/reference/design/ui/workspace/project-workspace-prototype.html" data-href-zh="/docs/reference/design/ui/workspace/project-workspace-prototype.zh.html">Workspace prototype</a>
+<a class="navlink" href="/docs/reference/design/ui/sidebar/sidebar-hierarchy-prototype.html" data-title-zh="侧栏原型" data-href-en="/docs/reference/design/ui/sidebar/sidebar-hierarchy-prototype.html" data-href-zh="/docs/reference/design/ui/sidebar/sidebar-hierarchy-prototype.zh.html">Sidebar prototype</a>
+<a class="navlink" href="/docs/reference/design/ui/sidebar/sidebar-luma-prototype.html" data-title-zh="Sidebar Luma draft" data-href-en="/docs/reference/design/ui/sidebar/sidebar-luma-prototype.html" data-href-zh="/docs/reference/design/ui/sidebar/sidebar-luma-prototype.zh.html">Sidebar Luma prototype</a>
+<a class="navlink" href="/docs/reference/design/runtime/dag/live-layout.html" data-title-zh="实时布局" data-href-en="/docs/reference/design/runtime/dag/live-layout.html" data-href-zh="/docs/reference/design/runtime/dag/live-layout.zh.html">Live layout</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="实施记录">Implementation records</span><span class="nav-count">13</span></summary><a class="navlink" href="/docs/reference/design/runtime/execution/p3-three-surface-sync.html" data-title-zh="界面同步" data-href-en="/docs/reference/design/runtime/execution/p3-three-surface-sync.html" data-href-zh="/docs/reference/design/runtime/execution/p3-three-surface-sync.zh.html">Interface synchronization</a>
+<a class="navlink" href="/docs/reference/design/repository-structure-implementation.html" data-title-zh="仓库迁移" data-href-en="/docs/reference/design/repository-structure-implementation.html" data-href-zh="/docs/reference/design/repository-structure-implementation.zh.html">Repository migration</a>
+<a class="navlink" href="/docs/reference/design/site-indexnow-implementation.html" data-title-zh="IndexNow 实施" data-href-en="/docs/reference/design/site-indexnow-implementation.html" data-href-zh="/docs/reference/design/site-indexnow-implementation.zh.html">IndexNow delivery</a>
+<a class="navlink" href="/docs/reference/design/documentation-gaps.html" data-title-zh="文档差异" data-href-en="/docs/reference/design/documentation-gaps.html" data-href-zh="/docs/reference/design/documentation-gaps.zh.html">Documentation gaps</a>
+<a class="navlink" href="/docs/reference/design/engineering-backlog.html" data-title-zh="工程待办" data-href-en="/docs/reference/design/engineering-backlog.html" data-href-zh="/docs/reference/design/engineering-backlog.zh.html">Engineering backlog</a>
+<a class="navlink" href="/docs/reference/design/ui/visual-system/unification-work.html" data-title-zh="界面统一" data-href-en="/docs/reference/design/ui/visual-system/unification-work.html" data-href-zh="/docs/reference/design/ui/visual-system/unification-work.zh.html">UI unification</a>
+<a class="navlink" href="/docs/reference/design/ui/resources/resource-panel-preview-plan.html" data-title-zh="资源预览" data-href-en="/docs/reference/design/ui/resources/resource-panel-preview-plan.html" data-href-zh="/docs/reference/design/ui/resources/resource-panel-preview-plan.zh.html">Resource preview</a>
+<a class="navlink" href="/docs/reference/design/distribution/implementation-plan.html" data-title-zh="分发计划" data-href-en="/docs/reference/design/distribution/implementation-plan.html" data-href-zh="/docs/reference/design/distribution/implementation-plan.zh.html">Distribution plan</a>
+<a class="navlink" href="/docs/reference/design/extension-gating/implementation.html" data-title-zh="实现对应关系" data-href-en="/docs/reference/design/extension-gating/implementation.html" data-href-zh="/docs/reference/design/extension-gating/implementation.zh.html">Implementation map</a>
+<a class="navlink" href="/docs/reference/design/plans/credential-connection-unification.html" data-title-zh="凭据迁移" data-href-en="/docs/reference/design/plans/credential-connection-unification.html" data-href-zh="/docs/reference/design/plans/credential-connection-unification.zh.html">Credential migration</a>
+<a class="navlink" href="/docs/reference/design/plans/mcp-server-implementation.html" data-title-zh="MCP 实施计划" data-href-en="/docs/reference/design/plans/mcp-server-implementation.html" data-href-zh="/docs/reference/design/plans/mcp-server-implementation.zh.html">MCP implementation</a>
+<a class="navlink" href="/docs/reference/design/plans/cache-control-passthrough.html" data-title-zh="缓存控制" data-href-en="/docs/reference/design/plans/cache-control-passthrough.html" data-href-zh="/docs/reference/design/plans/cache-control-passthrough.zh.html">Cache control</a>
+<a class="navlink" href="/docs/reference/design/plans/proactive-implementation.html" data-title-zh="主动执行实施计划" data-href-en="/docs/reference/design/plans/proactive-implementation.html" data-href-zh="/docs/reference/design/plans/proactive-implementation.zh.html">Proactive implementation</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="研究材料">Research</span><span class="nav-count">3</span></summary><a class="navlink" href="/docs/reference/design/proactive/_research_archive/evaluation.html" data-title-zh="评估" data-href-en="/docs/reference/design/proactive/_research_archive/evaluation.html" data-href-zh="/docs/reference/design/proactive/_research_archive/evaluation.zh.html">Evaluation</a>
+<a class="navlink" href="/docs/reference/design/proactive/_research_archive/replay.html" data-title-zh="策略回放" data-href-en="/docs/reference/design/proactive/_research_archive/replay.html" data-href-zh="/docs/reference/design/proactive/_research_archive/replay.zh.html">Policy replay</a>
+<a class="navlink" href="/docs/reference/design/proactive/_research_archive/threat-model.html" data-title-zh="威胁模型" data-href-en="/docs/reference/design/proactive/_research_archive/threat-model.html" data-href-zh="/docs/reference/design/proactive/_research_archive/threat-model.zh.html">Threat model</a></details>
+</details>
+<details class="nav-branch nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="待分类">Uncategorized</span><span class="nav-count">13</span></summary>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="概览">Overview</span><span class="nav-count">1</span></summary><a class="navlink" href="/docs/reference/design/repository-integration.html" data-title-zh="仓库分支整合" data-href-en="/docs/reference/design/repository-integration.html" data-href-zh="/docs/reference/design/repository-integration.zh.html">Repository integration</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="模型服务">Providers</span><span class="nav-count">2</span></summary><a class="navlink" href="/docs/reference/design/providers/anthropic-api-auth.html" data-title-zh="Anthropic API 认证" data-href-en="/docs/reference/design/providers/anthropic-api-auth.html" data-href-zh="/docs/reference/design/providers/anthropic-api-auth.zh.html">Anthropic API authentication</a>
+<a class="navlink" href="/docs/reference/design/providers/local-models.html" data-title-zh="本地模型 Provider" data-href-en="/docs/reference/design/providers/local-models.html" data-href-zh="/docs/reference/design/providers/local-models.zh.html">Local model providers</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title">Execution</span><span class="nav-count">2</span></summary><a class="navlink" href="/docs/reference/design/runtime/execution/tool-name-resolution.html" data-title-zh="工具名解析" data-href-en="/docs/reference/design/runtime/execution/tool-name-resolution.html" data-href-zh="/docs/reference/design/runtime/execution/tool-name-resolution.zh.html">Tool name resolution</a>
+<a class="navlink" href="/docs/reference/design/runtime/execution/unified-agent.html" data-title-zh="统一 Agent 执行" data-href-en="/docs/reference/design/runtime/execution/unified-agent.html" data-href-zh="/docs/reference/design/runtime/execution/unified-agent.zh.html">Unified Agent execution</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="阅读指南">Reading guide</span><span class="nav-count">1</span></summary><a class="navlink" href="/docs/reference/design/runtime/session/environments.html" data-title-zh="运行环境" data-href-en="/docs/reference/design/runtime/session/environments.html" data-href-zh="/docs/reference/design/runtime/session/environments.zh.html">Environments</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title">Chat</span><span class="nav-count">2</span></summary><a class="navlink" href="/docs/reference/design/ui/chat/chat-compose.html" data-title-zh="聊天引用与消息编辑" data-href-en="/docs/reference/design/ui/chat/chat-compose.html" data-href-zh="/docs/reference/design/ui/chat/chat-compose.zh.html">Chat quotes and message editing</a>
+<a class="navlink" href="/docs/reference/design/ui/chat/chat-recovery-copy.html" data-title-zh="历史渲染与对话链接" data-href-en="/docs/reference/design/ui/chat/chat-recovery-copy.html" data-href-zh="/docs/reference/design/ui/chat/chat-recovery-copy.zh.html">History rendering and conversation links</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title">Composer</span><span class="nav-count">3</span></summary><a class="navlink" href="/docs/reference/design/ui/composer/effort-picker.html" data-title-zh="思考力度设置" data-href-en="/docs/reference/design/ui/composer/effort-picker.html" data-href-zh="/docs/reference/design/ui/composer/effort-picker.zh.html">Effort picker</a>
+<a class="navlink" href="/docs/reference/design/ui/composer/git-folder-pills.html" data-title-zh="文件夹 Git 胶囊" data-href-en="/docs/reference/design/ui/composer/git-folder-pills.html" data-href-zh="/docs/reference/design/ui/composer/git-folder-pills.zh.html">Git folder pills</a>
+<a class="navlink" href="/docs/reference/design/ui/composer/hover-tips.html" data-title-zh="输入框区域的悬停提示" data-href-en="/docs/reference/design/ui/composer/hover-tips.html" data-href-zh="/docs/reference/design/ui/composer/hover-tips.zh.html">Hover tips in the composer</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title">Turn Lifecycle</span><span class="nav-count">1</span></summary><a class="navlink" href="/docs/reference/design/ui/turn-lifecycle/conversation-lifecycle.html" data-title-zh="对话生命周期与响应性" data-href-en="/docs/reference/design/ui/turn-lifecycle/conversation-lifecycle.html" data-href-zh="/docs/reference/design/ui/turn-lifecycle/conversation-lifecycle.zh.html">Conversation lifecycle and responsiveness</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title">Visual System</span><span class="nav-count">1</span></summary><a class="navlink" href="/docs/reference/design/ui/visual-system/icons.html" data-title-zh="图标体系" data-href-en="/docs/reference/design/ui/visual-system/icons.html" data-href-zh="/docs/reference/design/ui/visual-system/icons.zh.html">Icon system</a></details>
+</details></div>
+  </nav>
+  <main class="content"><button class="fs-toggle" aria-label="Fullscreen" title="Fullscreen (Esc to exit)"><svg class="ic-expand" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.2 2H2v4.2M9.8 2H14v4.2M6.2 14H2V9.8M9.8 14H14V9.8"/></svg><svg class="ic-collapse" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6.2h4.2V2M14 6.2H9.8V2M2 9.8h4.2V14M14 9.8H9.8V14"/></svg></button><article><nav class="breadcrumb"><span class="bc-seg" data-title-zh="设计">Design</span> <span class='bc-sep'>›</span> <span class="bc-seg" data-title-zh="界面与交互">Interfaces</span> <span class='bc-sep'>›</span> <span class="bc-seg" data-title-zh="浏览器与标签页">Browser and tabs</span> <span class='bc-sep'>›</span> <span class="bc-seg bc-current" data-title-zh="远程访问">Remote access</span></nav><h1 id="remote-web-access-owner-only-self-hosted-control">Remote Web Access — Owner-Only, Self-Hosted Control<a class="header-anchor" href="#remote-web-access-owner-only-self-hosted-control">#</a></h1>
+<p>You can use your own OpenProgram instance from another device — a laptop on the same LAN or VPN, a phone through an SSH tunnel, or any browser behind your own HTTPS reverse proxy — without OpenProgram running a relay or becoming a multi-user service. The Web UI listens on <code>127.0.0.1</code> by default. Each running instance generates a random token that only its owner can read; <code>openprogram web auth-url --base-url &lt;url&gt;</code> prints a link that carries the token in the URL fragment, the page exchanges it once for an HttpOnly cookie and removes it from the address bar, and from then on every HTTP and WebSocket request is checked for that credential plus an allowed Host and Origin. The token is required even on loopback, rotates when the process restarts, and never appears in a response, a log or stored provider secrets, which can be replaced but not read back.</p>
+<blockquote>
+<p>This document defines how the owner reaches OpenProgram's existing Web UI
+from the same machine, a trusted LAN or VPN, an SSH tunnel, or an
+owner-operated HTTPS reverse proxy. The English text is normative; the
+Chinese translation and the standalone HTML page present the same design.
+Related code: <code>openprogram/interfaces/server/owner_auth.py</code>,
+<code>openprogram/host/security/backend_endpoint.py</code>,
+<code>openprogram/interfaces/server/server.py</code>, <code>openprogram/interfaces/cli/commands/web.py</code>,
+<code>apps/web/lib/net/auth/owner-auth-bootstrap.ts</code>, and
+<code>openprogram/runtime/permissions/authority.py</code>.
+Related designs: <a href="/docs/reference/design/memory/speaker-identity.html">speaker identity</a>,
+<a href="/docs/reference/design/runtime/security/sandbox-architecture.html">permission model</a>, and
+<a href="/docs/reference/design/integrations/mcp-server.html">MCP server</a>.</p>
+</blockquote>
+<p>OpenProgram keeps one authority model in every deployment mode: a
+process-lifetime instance token authenticates the active profile/state
+instance's single owner, and every authenticated Web request receives that
+owner tier and its fixed capability set.
+OpenProgram does not operate a public relay and does not turn the Web UI into a
+multi-user application.</p>
+<h2 id="1-method-and-scope">1. Method and scope<a class="header-anchor" href="#1-method-and-scope">#</a></h2>
+<h3 id="11-one-active-state-instance-one-owner">1.1 One active state instance, one owner<a class="header-anchor" href="#11-one-active-state-instance-one-owner">#</a></h3>
+<p>The Web UI exposes sessions, files, processes, credentials, settings, tools,
+approvals, and agent actions. These functions are one administrative boundary,
+not separate project roles. The Web authentication question is therefore:
+&quot;does this request possess the current Web process token?&quot; It is not &quot;which
+registered user sent this request?&quot;</p>
+<p>Successful authentication maps a request to the stable principal
+<code>owner/install/&lt;16hex&gt;</code> from <code>openprogram/runtime/permissions/authority.py</code> and to the
+owner tier with its fixed capability set. Despite the principal's retained identifier format,
+its <code>owner.json</code> record lives under the profile-aware state directory. The
+single-owner boundary therefore applies to the active profile/state instance,
+not globally across every OpenProgram profile installed for one OS account.
+Token possession establishes authorization as that singleton owner; it does
+not prove which physical person is operating the browser. OpenProgram stores no
+Web user table, password database, membership, role assignment, or per-project
+ACL.</p>
+<p>Shared human participation remains a channel concern. Telegram, Discord, and
+other channel messages retain speaker attribution and the restricted
+<code>paired</code> authority tier. A channel participant never becomes the Web
+owner because a channel turn exists.</p>
+<h3 id="12-four-supported-access-modes">1.2 Four supported access modes<a class="header-anchor" href="#12-four-supported-access-modes">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Mode</th>
+<th>OpenProgram bind</th>
+<th>Browser path</th>
+<th>Required protection</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Same machine</td>
+<td><code>127.0.0.1</code></td>
+<td>Direct loopback URL</td>
+<td>Instance token, Host/Origin checks</td>
+</tr>
+<tr>
+<td>Trusted LAN or encrypted VPN</td>
+<td>Explicit <code>web.host</code>, often <code>0.0.0.0</code></td>
+<td>Direct address</td>
+<td>Instance token, non-empty exact origins, Host checks, and HTTPS or an encrypted network; direct HTTP is warning-only and limited to the enumerated local/overlay ranges in section 5.5</td>
+</tr>
+<tr>
+<td>SSH tunnel</td>
+<td><code>127.0.0.1</code></td>
+<td>Local forwarded port</td>
+<td>Instance token; SSH supplies transport encryption</td>
+</tr>
+<tr>
+<td>Public owner domain</td>
+<td><code>127.0.0.1</code> behind a same-host proxy</td>
+<td>Owner-managed HTTPS URL</td>
+<td>Instance token, exact origin/Host, trusted loopback proxy, HTTPS</td>
+</tr>
+</tbody>
+</table>
+<p><code>web.host</code> is necessary only for direct LAN or VPN access. It is not necessary
+for an SSH tunnel or a reverse proxy running on the OpenProgram host; both
+connect to the loopback listener.</p>
+<h3 id="13-product-boundaries">1.3 Product boundaries<a class="header-anchor" href="#13-product-boundaries">#</a></h3>
+<p>OpenProgram supplies application authentication and validates the browser
+boundary. It does not:</p>
+<ul>
+<li>issue or renew TLS certificates;</li>
+<li>operate a public relay, hosted tunnel, rendezvous service, or sharing URL;</li>
+<li>create Web accounts, registration, invitations, RBAC, or project
+permissions;</li>
+<li>accept an identity-aware proxy, Tailscale identity, or OAuth provider as a
+substitute for the instance token;</li>
+<li>provide an unauthenticated or <code>--insecure</code> mode.</li>
+</ul>
+<p>SSH, a VPN, nginx, Caddy, and certificate automation remain independently
+operated transport and deployment components. Authentication is still enabled
+when any of them is present.</p>
+<h2 id="2-current-implementation-and-threat-model">2. Current implementation and threat model<a class="header-anchor" href="#2-current-implementation-and-threat-model">#</a></h2>
+<h3 id="21-what-exists-now">2.1 What exists now<a class="header-anchor" href="#21-what-exists-now">#</a></h3>
+<p><code>_web_config()</code> in <code>openprogram/interfaces/server/server.py</code> defaults to <code>127.0.0.1</code> and
+loads <code>web.host</code> plus <code>web.allowed_origins</code>. <code>create_app()</code> uses a FastAPI
+lifespan context and installs <code>OwnerAuthMiddleware</code> from
+<code>openprogram/interfaces/server/owner_auth.py</code> for HTTP and WebSocket ASGI scopes. The
+middleware validates the canonical request origin before route dispatch,
+applies one cookie-or-Bearer authentication policy to protected HTTP, SSE, and
+WebSocket traffic, and attaches the active profile's owner authority only after
+authentication. The WebSocket check occurs before <code>websocket.accept</code>.</p>
+<p><code>OwnerAuthState</code> generates a 32-byte process token, acquires the per-state
+<code>web.lock</code>, writes the owner-only <code>web/token</code> plus the token-free
+<code>web/access.json</code> policy snapshot, derives the profile-specific HttpOnly
+cookie, and removes owned state on close. <code>canonicalize_origin()</code> and
+<code>resolve_effective_origins()</code> validate exact origins, add only the applicable
+loopback defaults, and reject a non-loopback bind with no configured origin.
+Uvicorn starts with <code>proxy_headers=False</code>; only <code>OwnerAuthMiddleware</code> may use a
+single <code>X-Forwarded-Proto</code> supplied by an immediate loopback peer.</p>
+<p>The public <code>POST /api/auth/bootstrap</code> exchanges the fragment token for the
+derived cookie. The frontend coordinator in
+<code>apps/web/lib/net/auth/owner-auth-bootstrap.ts</code> removes the fragment synchronously,
+performs that exchange before mounting the application subtree, and does not
+use Web Storage. <code>openprogram web auth-url --base-url ...</code> first verifies the
+active listener through the nonce/HMAC ownership challenge, then prints a
+fragment URL only for an effective origin. <code>/healthz</code> now returns only
+<code>{&quot;status&quot;:&quot;ok&quot;}</code>; authenticated operational diagnostics are available at
+<code>/api/diagnostics</code>.</p>
+<p>Credential responses are masked by default. Credential reveal is no longer
+supported: the legacy account route returns <code>410</code>, and
+<code>GET /api/config/key/{env_var}?reveal=1</code> returns <code>404</code>; neither route returns a
+secret. The frontend has no credential-reveal control or plaintext response
+field. Project-file reveal is a separate file-navigation action and is not a
+credential retrieval path.</p>
+<p>The remaining implementation gaps are narrower than the final contract.
+Startup reporting and the complete browser, SSE, restart, multi-profile, and
+nginx/Caddy acceptance matrix remain separate verification areas described in
+section 6.3.</p>
+<h3 id="22-why-loopback-still-requires-a-token">2.2 Why loopback still requires a token<a class="header-anchor" href="#22-why-loopback-still-requires-a-token">#</a></h3>
+<p>Loopback limits which network interfaces accept connections; it does not
+authenticate a browser request or another local process.</p>
+<table>
+<thead>
+<tr>
+<th>Caller</th>
+<th>Residual threat</th>
+<th>Required control</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Arbitrary Web page</td>
+<td>It can send some HTTP requests to localhost; WebSocket is not protected by the HTTP same-origin read rule</td>
+<td>Token plus exact Origin/Host checks before any action</td>
+</tr>
+<tr>
+<td>DNS-rebinding page</td>
+<td>It can make a hostile name resolve to a loopback address and present a foreign Host</td>
+<td>Fail-closed Host authority validation</td>
+</tr>
+<tr>
+<td>Local process or another OS account</td>
+<td>It can omit <code>Origin</code>, as <code>curl</code> and native clients do</td>
+<td>Bearer token; missing Origin conveys no trust</td>
+</tr>
+<tr>
+<td>LAN peer after external bind</td>
+<td>It can connect directly to every current route and <code>/ws</code></td>
+<td>Mandatory token, exact origins, Host validation, protected transport</td>
+</tr>
+<tr>
+<td>Reverse-proxy client</td>
+<td>It presents a public Host while the backend remains loopback</td>
+<td>Explicit public origin plus a narrowly trusted loopback proxy</td>
+</tr>
+</tbody>
+</table>
+<p>Jupyter Notebook 4.3 made token authentication the default and generated the
+token used by its automatically opened browser, preserving ordinary zero-input
+startup while authenticating a browser-accessible local execution environment
+(<a href="https://github.com/jupyter/notebook/blob/4.x/docs/source/changelog.rst">4.x changelog</a>).
+Current Jupyter Server documentation retains token/cookie authentication and
+requires HTTPS for public deployment. This is a precedent for the user
+experience, not a claim that both products have identical code or threat sets.</p>
+<h3 id="23-security-invariants">2.3 Security invariants<a class="header-anchor" href="#23-security-invariants">#</a></h3>
+<p>The design and implementation preserve these invariants:</p>
+<ol>
+<li>No protected application state, session data, project or user file bytes,
+secret metadata, SSE event, or WebSocket frame is returned before
+authentication.</li>
+<li>No HTTP, SSE, or WebSocket action executes before authentication.</li>
+<li>A missing <code>Origin</code> never establishes trust; it is allowed only after valid
+Bearer authentication, or for a safe cookie-authenticated request whose
+method does not require an Origin.</li>
+<li>Cookie authentication retains CSRF controls. The token complements Host and
+Origin validation; it does not replace them.</li>
+<li>A non-loopback direct bind with incomplete origin configuration fails before
+the server starts accepting connections.</li>
+<li>No route returns a stored secret or the Web instance token after initial
+entry.</li>
+</ol>
+<h2 id="3-reference-framework-comparison">3. Reference framework comparison<a class="header-anchor" href="#3-reference-framework-comparison">#</a></h2>
+<h3 id="31-survey-boundary">3.1 Survey boundary<a class="header-anchor" href="#31-survey-boundary">#</a></h3>
+<p>The survey covers the open-source systems already used in OpenProgram's design
+corpus and additional systems with directly relevant Web deployment,
+authentication, proxy, or secret-handling behavior. An absent capability is
+recorded explicitly. This is not an exhaustive enumeration of every public
+agent repository.</p>
+<table>
+<thead>
+<tr>
+<th>System</th>
+<th>Verified design</th>
+<th>Remote-access consequence</th>
+<th>Use in OpenProgram</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/openclaw/openclaw">OpenClaw</a></td>
+<td>Loopback-first gateway; authenticated non-loopback operation; explicit Control UI origins; SSH and reverse-proxy guidance; Host/DNS-rebinding and trusted-proxy controls (<a href="https://github.com/openclaw/openclaw/blob/main/docs/gateway/remote.md">remote access</a>, <a href="https://github.com/openclaw/openclaw/blob/main/docs/gateway/security/index.md">security</a>, <a href="https://github.com/openclaw/openclaw/blob/main/docs/web/control-ui.md">Control UI</a>)</td>
+<td>Covers local, tunnel, and owner-operated remote deployment</td>
+<td>Adopt exact origins, fragment bootstrap, SSH/proxy patterns, and proxy trust limits; retain the token even when an external identity layer exists</td>
+</tr>
+<tr>
+<td><a href="https://github.com/jupyter-server/jupyter_server">Jupyter Server</a></td>
+<td>Notebook 4.3 enabled token authentication by default and supplied the generated token to the automatically opened browser; current Server uses token/cookie authentication, requires HTTPS for public deployment, and retains XSRF plus WebSocket Origin checks (<a href="https://github.com/jupyter/notebook/blob/4.x/docs/source/changelog.rst">4.x changelog</a>, <a href="https://github.com/jupyter-server/jupyter_server/blob/main/docs/source/operators/security.rst">security</a>, <a href="https://github.com/jupyter-server/jupyter_server/blob/main/docs/source/operators/public-server.rst">public server</a>)</td>
+<td>Closest established single-owner browser experience</td>
+<td>Adopt automatic token entry and cookie transition; replace query-token entry with a fragment</td>
+</tr>
+<tr>
+<td><a href="https://github.com/NousResearch/Hermes-Agent">Hermes Agent</a></td>
+<td>Dashboard defaults to loopback; a non-loopback bind requires a password or OAuth provider and fails startup without one; <code>--insecure</code> is deprecated and cannot disable that gate; Desktop reuses an authenticated session for WebSocket through a single-use ticket; key listings are redacted, although an authenticated rate-limited <a href="https://github.com/NousResearch/hermes-agent/blob/main/hermes_cli/web_server.py#L7663-L7696">reveal route</a> remains (<a href="https://github.com/NousResearch/hermes-agent/blob/main/website/docs/user-guide/features/web-dashboard.md#when-the-gate-engages">dashboard</a>, <a href="https://github.com/NousResearch/hermes-agent/blob/main/hermes_cli/dashboard_auth/ws_tickets.py">WS tickets</a>)</td>
+<td>Strong fail-closed external-bind, session/WS, and redaction precedent, but with a user-auth provider model and secret retrieval OpenProgram does not need</td>
+<td>Adopt external fail-closed behavior and redacted secret views; use OpenProgram's instance token and same-origin cookie instead of auth-provider accounts or a second WebSocket ticket; reject reveal</td>
+</tr>
+<tr>
+<td><a href="https://github.com/agent0ai/agent-zero">Agent Zero</a></td>
+<td>Local UI, optional single login, session cookie, CSRF and WebSocket Origin checks; supports reverse proxies and built-in third-party tunnels; <a href="https://github.com/agent0ai/agent-zero/blob/main/helpers/settings.py">settings</a> use masked placeholders (<a href="https://github.com/agent0ai/agent-zero/blob/main/docs/setup/installation.md">installation</a>, <a href="https://github.com/agent0ai/agent-zero/blob/main/docs/setup/vps-deployment.md">VPS deployment</a>)</td>
+<td>Useful cookie/CSRF/Origin composition and secret-update behavior</td>
+<td>Adopt the combined checks and masked-only update contract; reject optional authentication and built-in public tunnels</td>
+</tr>
+<tr>
+<td><a href="https://github.com/OpenHands/OpenHands">OpenHands</a></td>
+<td>Agent Canvas uses a session API key across HTTP and WebSocket and documents SSH plus nginx/HTTPS self-hosting (<a href="https://github.com/OpenHands/OpenHands/blob/main/docs/SELF_HOSTING.md">self-hosting</a>); other OpenHands editions add account-oriented controls</td>
+<td>Shows an instance-key deployment without requiring RBAC for the local product</td>
+<td>Adopt the common HTTP/WS key and loopback backend; reject token exposure in public HTML or browser storage and authenticated plaintext-secret retrieval</td>
+</tr>
+<tr>
+<td><a href="https://github.com/sst/opencode">opencode</a></td>
+<td>Server/Web modes default to loopback; Basic authentication is optional; configured CORS origins and a short-lived PTY WebSocket ticket exist (<a href="https://github.com/sst/opencode/blob/dev/packages/web/src/content/docs/server.mdx">server</a>, <a href="https://github.com/sst/opencode/blob/dev/packages/opencode/src/cli/network.ts">network options</a>, <a href="https://github.com/sst/opencode/blob/dev/packages/core/src/pty/ticket.ts">PTY ticket</a>)</td>
+<td>Good local default, insufficient external fail-closed rule when the password is absent</td>
+<td>Adopt loopback default; the HttpOnly cookie already avoids long-lived WebSocket query credentials, so no second ticket system is needed</td>
+</tr>
+<tr>
+<td><a href="https://github.com/open-webui/open-webui">Open WebUI</a></td>
+<td>Multi-user accounts and roles; official nginx/Caddy guidance covers HTTPS, WebSocket Upgrade, and SSE buffering (<a href="https://github.com/open-webui/docs/blob/main/docs/reference/https/nginx.md">nginx</a>, <a href="https://github.com/open-webui/docs/blob/main/docs/reference/https/caddy.md">Caddy</a>)</td>
+<td>Deployment mechanics apply, identity model does not</td>
+<td>Adopt proxy mechanics; reject signup, accounts, JWT user sessions, groups, and RBAC</td>
+</tr>
+<tr>
+<td><a href="https://github.com/langgenius/dify">Dify</a></td>
+<td>Workspace/account roles and reverse-proxy deployment; <a href="https://github.com/langgenius/dify/blob/main/api/core/entities/provider_configuration.py">credential responses</a> use obfuscation and hidden-value update semantics</td>
+<td>Strong secret-response precedent inside a different identity model</td>
+<td>Adopt masked-only secret responses and explicit replacement; reject tenant and role layers</td>
+</tr>
+<tr>
+<td><a href="https://github.com/danny-avila/LibreChat">LibreChat</a></td>
+<td>Registration, administrators, user/group/role access, JWT sessions, and documented nginx HTTPS/WebSocket deployment (<a href="https://github.com/LibreChat-AI/librechat.ai/blob/main/content/docs/features/authentication.mdx">authentication</a>, <a href="https://github.com/LibreChat-AI/librechat.ai/blob/main/content/docs/remote/nginx.mdx">nginx</a>)</td>
+<td>Confirms what a real multi-user design requires</td>
+<td>Use only the proxy configuration details; do not implement its identity data model</td>
+</tr>
+<tr>
+<td><a href="https://github.com/Mintplex-Labs/anything-llm">AnythingLLM</a></td>
+<td>Single-user and multi-user modes are distinct; single-user requests bypass authentication when no password token is configured, while multi-user mode adds role checks (<a href="https://github.com/Mintplex-Labs/anything-llm/blob/master/server/utils/middleware/validatedRequest.js">authentication middleware</a>, <a href="https://github.com/Mintplex-Labs/anything-llm/blob/master/server/utils/middleware/multiUserProtected.js">role middleware</a>)</td>
+<td>A single shared credential is compatible with one owner, but optional authentication is not</td>
+<td>Keep the single-owner concept and make authentication non-optional</td>
+</tr>
+<tr>
+<td><a href="https://github.com/microsoft/autogen/tree/main/python/packages/autogen-studio">AutoGen Studio</a></td>
+<td>Loopback default; <a href="https://github.com/microsoft/autogen/blob/main/python/packages/autogen-studio/autogenstudio/web/auth/manager.py">default authentication type</a> is none; optional OAuth/JWT support; project documentation calls it a research prototype</td>
+<td>Not a production remote-access baseline</td>
+<td>Adopt only loopback default; reject query/localStorage credentials, post-accept WebSocket auth, and optional authentication</td>
+</tr>
+<tr>
+<td><a href="https://github.com/SWE-agent/SWE-agent">SWE-agent</a></td>
+<td>The current repository documents command-line agent execution and does not ship an owner-operated Web control UI (<a href="https://github.com/SWE-agent/SWE-agent/tree/main/docs">documentation tree</a>)</td>
+<td>The target remote-Web capability is absent</td>
+<td>Record as not applicable to this authentication design</td>
+</tr>
+<tr>
+<td><a href="https://github.com/badlogic/pi-mono/tree/main/packages/coding-agent">pi-mono</a></td>
+<td>The coding-agent package documents a TUI, <a href="https://github.com/badlogic/pi-mono/blob/main/packages/coding-agent/docs/sdk.md">SDK</a>, and process-oriented <a href="https://github.com/badlogic/pi-mono/blob/main/packages/coding-agent/docs/rpc.md">RPC mode</a>, but its package documentation does not define an owner-operated remote Web control server authentication contract</td>
+<td>Related transport and UI components exist; the target capability is absent</td>
+<td>Record as not applicable to this authentication design</td>
+</tr>
+<tr>
+<td><a href="https://github.com/badlogic/pi-mono/tree/main/packages/ai">pi-ai</a></td>
+<td>Provider transport library, not an agent control UI</td>
+<td>No remote Web ownership or deployment boundary</td>
+<td>Record as not applicable</td>
+</tr>
+<tr>
+<td><a href="https://github.com/fastclaw-ai/weclaw/blob/main/README.md">WeClaw</a></td>
+<td>Its documented HTTP API defaults to <code>127.0.0.1:18011</code> and permits changing the listen address, but the project does not document an owner Web control UI browser-authentication contract</td>
+<td>External HTTP is present, but the target browser surface is absent</td>
+<td>Do not use it as a remote-Web security precedent</td>
+</tr>
+<tr>
+<td><a href="https://github.com/openai/codex">Codex CLI</a></td>
+<td><code>codex app-server</code> has stdio and experimental WebSocket transports, and its remote-control flow uses enrollment and pairing; it is not an owner-hosted browser UI (<a href="https://github.com/openai/codex/blob/main/codex-rs/app-server/README.md">app-server</a>)</td>
+<td>Protocol and managed remote-control concerns differ from this self-hosted page</td>
+<td>Do not adopt its service-mediated remote-control path because OpenProgram does not operate a relay</td>
+</tr>
+</tbody>
+</table>
+<h3 id="32-patterns-that-remain-separate">3.2 Patterns that remain separate<a class="header-anchor" href="#32-patterns-that-remain-separate">#</a></h3>
+<p>Three recurring designs solve different requirements and must not be combined
+without need:</p>
+<ul>
+<li><strong>Instance credential:</strong> Jupyter, OpenClaw, and OpenHands use a server- or
+session-level credential suitable for one administrative owner.</li>
+<li><strong>Application accounts:</strong> Open WebUI, Dify, LibreChat, and multi-user
+AnythingLLM need registration, durable sessions, roles, and resource policy.</li>
+<li><strong>Managed remote control:</strong> products with pairing, hosted tunnels, or relay
+services manage device enrollment and public connectivity outside the local
+process.</li>
+</ul>
+<p>OpenProgram uses the first design. The second introduces state and policy that
+the product does not need. The third requires a service OpenProgram explicitly
+does not operate.</p>
+<h2 id="4-what-openprogram-adopts-modifies-and-rejects">4. What OpenProgram adopts, modifies, and rejects<a class="header-anchor" href="#4-what-openprogram-adopts-modifies-and-rejects">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Source pattern</th>
+<th>Treatment</th>
+<th>OpenProgram form</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Jupyter's automatic launch-token experience</td>
+<td>Modify</td>
+<td>Put the token in a URL fragment, exchange it once for an HttpOnly cookie, and remove the fragment before any authenticated fetch</td>
+</tr>
+<tr>
+<td>OpenClaw's explicit origins, SSH guidance, and proxy trust boundary</td>
+<td>Adopt</td>
+<td>Exact canonical origins, parsed Host authorities, loopback proxy trust, and no Host fallback</td>
+</tr>
+<tr>
+<td>High-entropy process credential</td>
+<td>Adopt</td>
+<td>Generate 32 random bytes with the standard library for each Web process, store them owner-only, and compare decoded bytes with <code>hmac.compare_digest</code></td>
+</tr>
+<tr>
+<td>Agent Zero's cookie + CSRF + Origin + WebSocket checks</td>
+<td>Adopt</td>
+<td>Require all four where a browser cookie is used; reject unsafe cookie requests without a valid Origin</td>
+</tr>
+<tr>
+<td>Dify and Agent Zero masked secret updates</td>
+<td>Adopt</td>
+<td>Return masks only; omit an unchanged secret; require a new value for explicit replacement</td>
+</tr>
+<tr>
+<td>opencode's optional Basic authentication</td>
+<td>Reject</td>
+<td>There is no authentication-off combination and no warning-only external mode</td>
+</tr>
+<tr>
+<td>Open WebUI/LibreChat account and JWT model</td>
+<td>Reject</td>
+<td>No user database, refresh tokens, roles, groups, or project ACL</td>
+</tr>
+<tr>
+<td>OpenClaw trusted-proxy or Tailscale identity as authentication</td>
+<td>Modify</td>
+<td>A proxy may provide transport or an additional control, but the OpenProgram token remains mandatory</td>
+</tr>
+<tr>
+<td>Agent Zero built-in tunnels and managed remote-control relays</td>
+<td>Reject</td>
+<td>Document SSH and owner-managed HTTPS only; OpenProgram does not create public endpoints</td>
+</tr>
+<tr>
+<td>Plaintext secret reveal after login</td>
+<td>Reject</td>
+<td>Owner authentication authorizes replacement and use, not retrieval through the UI</td>
+</tr>
+</tbody>
+</table>
+<p>The resulting design has one root secret in two transport forms, one browser
+bootstrap, one application authorization mapping, and one set of HTTP/WS/SSE
+checks. The root secret is the per-start instance token; it reaches the server
+either as a <code>Bearer</code> header (native HTTP, SSE, WebSocket, and internal clients)
+or as a profile-scoped HttpOnly cookie the browser receives in exchange for the
+fragment token. Both forms carry the same secret and pass the same checks, so
+there is no second WebSocket ticket, user-session database, or OAuth flow.</p>
+<div id="5-final-remote-access-design"></div>
+<h2 id="5-remote-access-design">5. Remote-access design<a class="header-anchor" href="#5-remote-access-design">#</a></h2>
+<h3 id="51-token-lifecycle">5.1 Token lifecycle<a class="header-anchor" href="#51-token-lifecycle">#</a></h3>
+<p>At each Web server start, OpenProgram generates exactly 32 random bytes with
+<code>secrets.token_bytes(32)</code>. Its external form is unpadded base64url and is
+therefore exactly 43 ASCII characters. Before writing it, the process acquires
+an owner-only exclusive operating-system lock at <code>&lt;state-dir&gt;/web.lock</code>. One active Web
+process is permitted per profile/state directory; a second process fails
+without reading, replacing, or invalidating the first process's token. The
+token:</p>
+<ul>
+<li>exists for one Web process lifetime and changes after restart;</li>
+<li>is atomically written to <code>&lt;state-dir&gt;/web/token</code> before the listener becomes
+ready;</li>
+<li>is accompanied by an owner-only <code>&lt;state-dir&gt;/web/access.json</code> snapshot with
+exactly <code>version</code>, <code>bind_host</code>, <code>port</code>, canonical <code>effective_origins</code>, and
+<code>token_fingerprint</code>; the snapshot contains no token;</li>
+<li>is created with owner-only permissions and passed through
+<code>openprogram.host._platform.filesystem.restrict_to_user()</code> for cross-platform hardening;</li>
+<li>is never accepted from configuration, a command-line argument, or an
+environment variable;</li>
+<li>is decoded to exactly 32 bytes before comparison and compared only with
+<code>hmac.compare_digest</code>;</li>
+<li>is never printed by normal server logs, exception messages, access logs,
+telemetry, or Web responses;</li>
+<li>is represented in logs only as
+<code>sha256:&lt;sha256(raw_token_bytes).hexdigest()[:12]&gt;</code>.</li>
+</ul>
+<p>The file write reuses the atomic temp-file, <code>os.replace</code>, and permission
+patterns already used by <code>openprogram/extensions/mcp/token_storage.py</code>. Startup fails if
+OpenProgram cannot acquire the lock or create and read back the token file
+safely. <code>read_active_web_access()</code> returns <code>ActiveWebAccess</code> only when the
+snapshot schema and origins are valid and its fingerprint matches the live
+token file. If binding
+or later startup fails, the process removes the token only while it still owns
+the lock and the file still contains its token; it removes <code>access.json</code> only
+when the stored fingerprint is its own. Orderly shutdown applies the same
+ownership checks. Unlocked stale files are replaced atomically after the next
+process acquires the lock.</p>
+<h3 id="52-credential-forms">5.2 Credential forms<a class="header-anchor" href="#52-credential-forms">#</a></h3>
+<p>All forms derive from the same process token:</p>
+<table>
+<thead>
+<tr>
+<th>Client</th>
+<th>Credential</th>
+<th>Transport rule</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Browser after bootstrap</td>
+<td><code>openprogram_owner_&lt;owner-id-suffix&gt;</code> HttpOnly cookie containing <code>base64url_no_pad(HMAC-SHA256(key=raw_token_bytes, msg=b&quot;openprogram-web-cookie-v1&quot;))</code></td>
+<td><code>&lt;owner-id-suffix&gt;</code> is the 16-hex suffix of the active profile's principal; <code>SameSite=Strict</code>, <code>Path=/</code>, no <code>Domain</code>; <code>Secure</code> when the trusted effective scheme is HTTPS; session cookie with no persistent expiry</td>
+</tr>
+<tr>
+<td>Native HTTP/SSE</td>
+<td><code>Authorization: Bearer &lt;token&gt;</code></td>
+<td>Header only; query parameters are rejected</td>
+</tr>
+<tr>
+<td>Native WebSocket</td>
+<td><code>Authorization: Bearer &lt;token&gt;</code> during the upgrade</td>
+<td>Header only</td>
+</tr>
+<tr>
+<td>Browser WebSocket</td>
+<td>The same HttpOnly cookie</td>
+<td>Browser supplies the cookie and Origin during the upgrade</td>
+</tr>
+</tbody>
+</table>
+<p>The per-profile name prevents cookies for simultaneous profile servers on
+different ports from overwriting one another; cookies themselves are not
+port-scoped. The cookie value is also exactly 43 base64url characters. It is
+not a user session and has no database row. Its expected value is recomputed
+from the current token, so a server restart invalidates it. Authentication maps
+either valid form to <code>owner_authority(owner_principal_id)</code>, using the principal
+captured for the active profile when <code>OwnerAuthState</code> starts. On protected routes other than
+the bootstrap endpoint, an <code>Authorization</code> header selects only the Bearer path:
+a non-Bearer scheme, malformed value, or incorrect token returns <code>401</code> and
+never falls back to a valid cookie.</p>
+<h3 id="53-fragment-bootstrap">5.3 Fragment bootstrap<a class="header-anchor" href="#53-fragment-bootstrap">#</a></h3>
+<p>The normal local launch remains zero-input:</p>
+<pre><code class="language-text">CLI                     Browser                  Web server
+ | start, read token       |                         |
+ | open /#token=&lt;token&gt; --&gt;|                         |
+ |                         | GET / (fragment absent)|
+ |                         |------------------------&gt;|
+ |                         | public static shell     |
+ |                         |&lt;------------------------|
+ |                         | read token in memory    |
+ |                         | history.replaceState()  |
+ |                         | POST /api/auth/bootstrap|
+ |                         | token in request body -&gt;|
+ |                         | Set-Cookie: HttpOnly    |
+ |                         |&lt;------------------------|
+ |                         | authenticated HTTP/WS/SSE
+</code></pre>
+<p>The frontend reads the fragment into memory and removes <code>#token=...</code> with
+<code>history.replaceState</code> before sending the bootstrap request or any other data
+request. The fragment is not part of the HTTP request, proxy access log,
+Referer header, or server route. The bootstrap endpoint:</p>
+<ol>
+<li>accepts <code>POST</code> only;</li>
+<li>requires a valid exact Origin and valid Host;</li>
+<li>rejects every request containing an <code>Authorization</code> header with the same
+<code>401</code> response used for a missing or incorrect body token;</li>
+<li>requires <code>Content-Type: application/json</code>, a body no larger than 256 bytes,
+and exactly the object <code>{&quot;token&quot;:&quot;&lt;43-character unpadded base64url&gt;&quot;}</code>;
+unknown keys, duplicate keys, malformed base64url, and every other token
+length are rejected;</li>
+<li>decodes the value to 32 bytes and compares it in constant time;</li>
+<li>returns <code>204</code> plus the cookie on success;</li>
+<li>returns the same <code>401</code> body for a missing or incorrect token;</li>
+<li>applies <code>Cache-Control: no-store</code> and never includes the token in a response.</li>
+</ol>
+<p>The public remote command is explicit:</p>
+<pre><code class="language-bash">openprogram<span class="w"> </span>web<span class="w"> </span>auth-url<span class="w"> </span>--base-url<span class="w"> </span>https://agent.example.com
+</code></pre>
+<p>It first verifies that the worker PID/port files, <code>access.json</code>, and listening
+process agree by sending a fresh random nonce to <code>GET /api/auth/challenge</code> and
+checking the returned token-HMAC proof locally. The owner token is never sent
+to the probed port. Only after that check does the command read the live token
+file and write one full fragment URL to the invoking terminal. It does not
+write the URL to application logs. <code>--base-url</code> must be a canonical effective
+origin frozen in <code>access.json</code> and must contain no path, query, fragment, or
+user information. HTTP is accepted only for exact <code>localhost</code> while the actual
+listener is loopback, or for an IP literal in the explicit local/overlay range
+set defined in section 5.5; every other DNS name requires HTTPS.</p>
+<h3 id="54-route-policy">5.4 Route policy<a class="header-anchor" href="#54-route-policy">#</a></h3>
+<p>Only these requests can reach route handling without the normal authentication
+middleware:</p>
+<ul>
+<li>the static application shell and immutable static assets;</li>
+<li><code>POST /api/auth/bootstrap</code>, which performs its own token validation;</li>
+<li><code>GET /api/auth/challenge?nonce=&lt;43-character-base64url&gt;</code> with an optional
+<code>revision=&lt;40-lowercase-hex&gt;</code> constraint, which returns only a versioned
+token-HMAC proof of the supplied nonce after Host validation;</li>
+<li><code>GET /healthz</code>, reduced to a non-identifying liveness response such as
+<code>{&quot;status&quot;:&quot;ok&quot;}</code>.</li>
+</ul>
+<p>Authenticated clients can <code>GET /api/auth/session</code> after the owner cookie is
+established. <code>204</code> means the cookie still matches the live worker. <code>401</code> means
+credentials rotated; the desktop shell exchanges a fresh in-memory token and
+repeats bootstrap instead of reconnecting with a stale cookie.</p>
+<p>The ownership challenge accepts exactly one 32-byte unpadded-base64url nonce
+and at most one revision. When present, the revision must be the 40-character
+lowercase revision currently served by the process. Its successful response is
+exactly <code>200 {&quot;proof&quot;:&quot;&lt;43-character-base64url&gt;&quot;}</code>, where the decoded proof is
+<code>HMAC-SHA256(key=raw_token_bytes, msg=b&quot;openprogram-web-challenge-v1\0&quot; + raw_nonce_bytes + b&quot;\0&quot; + revision_ascii)</code>. The ownership probe sends no credential; the endpoint does
+not use a credential to construct the proof, emits no token or diagnostics,
+and cannot substitute for normal request authentication.</p>
+<p>Every other HTTP route, raw file response, provider route, diagnostic route,
+SSE stream, and WebSocket upgrade requires a valid cookie or Bearer token.
+Detailed health fields move behind authentication. Static HTML contains no
+token, configuration secret, session identifier, user data, or dynamic
+credential material.</p>
+<p>The static shell sends a Content Security Policy containing at least
+<code>object-src 'none'</code>, <code>base-uri 'none'</code>, and <code>frame-ancestors 'none'</code>. Executable
+scripts are limited to same-origin files and build-generated hashes or nonces;
+third-party scripts and <code>unsafe-eval</code> are not permitted. The shell also sends
+<code>X-Frame-Options: DENY</code>, <code>Referrer-Policy: no-referrer</code>, and
+<code>X-Content-Type-Options: nosniff</code>.</p>
+<p>Authentication failures use stable generic responses:</p>
+<ul>
+<li>missing or invalid credential: HTTP <code>401</code> with
+<code>{&quot;error&quot;:&quot;authentication_required&quot;}</code> and
+<code>WWW-Authenticate: Bearer realm=&quot;OpenProgram&quot;</code>;</li>
+<li>invalid Host, Origin, or browser request context: HTTP <code>403</code> with
+<code>{&quot;error&quot;:&quot;request_origin_rejected&quot;}</code>;</li>
+<li>malformed or revision-mismatched ownership challenge: HTTP <code>400</code> with
+<code>{&quot;error&quot;:&quot;invalid_challenge&quot;}</code>;</li>
+<li>invalid non-loopback startup configuration: no listener is started.</li>
+</ul>
+<p>Bootstrap and ownership-challenge responses, authentication failures,
+protected API responses, credential-status responses, and SSE responses send
+<code>Cache-Control: no-store</code>.
+Only content-addressed immutable static assets use long-lived caching.</p>
+<p>WebSocket authentication and Host/Origin validation occur before
+<code>websocket.accept</code>. A missing or invalid credential produces an HTTP <code>401</code>
+upgrade denial, not an accepted socket followed by an application close frame.</p>
+<h3 id="55-host-origin-csrf-and-transport-matrix">5.5 Host, Origin, CSRF, and transport matrix<a class="header-anchor" href="#55-host-origin-csrf-and-transport-matrix">#</a></h3>
+<p>OpenProgram reads Web configuration from the active profile's
+<code>&lt;state-dir&gt;/config.json</code>. <code>allowed_origins</code> entries are full canonical
+origins:</p>
+<pre><code class="language-json"><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;web&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;host&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.0.0.0&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;allowed_origins&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="s2">&quot;https://agent.example.com&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;http://192.168.1.20:18100&quot;</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+<p>Each entry must contain only <code>scheme://host[:port]</code>. Wildcards, paths, query
+strings, fragments, user information, opaque origins, and malformed IPv6 are
+invalid. Only <code>http</code> and <code>https</code> are valid schemes. DNS names are IDNA- and
+case-normalized, IPv6 literals are bracketed, and default ports are removed.
+Unspecified and multicast IP literals are invalid origins, so bind addresses
+such as <code>0.0.0.0</code> and <code>::</code> cannot appear in <code>allowed_origins</code>.</p>
+<p>The server computes <code>effective_origins</code> as the union of validated configured
+origins and a narrow loopback default. When the actual listener is loopback,
+the default contains <code>http://localhost:&lt;actual-port&gt;</code> and the origin formed
+from the actual bound literal, such as <code>http://127.0.0.1:&lt;actual-port&gt;</code> or
+<code>http://[::1]:&lt;actual-port&gt;</code>. A literal is not added unless the server is
+actually listening on it. A non-loopback listener receives no implicit
+origin. An SSH forward using a different local port must add that exact local
+Origin to <code>allowed_origins</code>. No request <code>Host</code> value is ever promoted into the
+set.</p>
+<p>For every request, OpenProgram requires exactly one syntactically valid <code>Host</code>
+authority; duplicate, comma-joined, user-information, unspecified-address,
+and multicast-address forms are rejected. It constructs <code>request_origin</code> from
+the browser-equivalent transport scheme and parsed <code>Host</code>: <code>http</code> and <code>ws</code> map
+to <code>http</code>, while <code>https</code> and <code>wss</code> map to <code>https</code>. Only a loopback peer may
+replace that scheme through a single valid <code>X-Forwarded-Proto</code> value.
+<code>request_origin</code> must be in <code>effective_origins</code>. When an <code>Origin</code> header is
+required or present, it must parse to the same canonical origin as
+<code>request_origin</code>; membership elsewhere
+in the configured set is not sufficient. This single comparison implements
+both exact browser-origin and DNS-rebinding checks.</p>
+<p>The only safe methods are <code>GET</code>, <code>HEAD</code>, and <code>OPTIONS</code>. Every such route must be
+free of state changes; <code>HEAD</code> mirrors <code>GET</code> without a body and <code>OPTIONS</code> only
+reports protocol metadata. Every mutation uses <code>POST</code>, <code>PUT</code>, <code>PATCH</code>, or
+<code>DELETE</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Request form</th>
+<th>Credential</th>
+<th>Origin rule</th>
+<th>Host rule</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cookie, unsafe HTTP method</td>
+<td>Required</td>
+<td>Exact <code>request_origin</code> required; missing Origin rejected</td>
+<td><code>request_origin</code> must be effective</td>
+</tr>
+<tr>
+<td>Cookie, WebSocket</td>
+<td>Required before accept</td>
+<td>Exact <code>request_origin</code> required; missing Origin rejected</td>
+<td><code>request_origin</code> must be effective</td>
+</tr>
+<tr>
+<td>Cookie, safe HTTP/SSE</td>
+<td>Required</td>
+<td>Explicit Origin must equal <code>request_origin</code>; same-origin navigation may omit it</td>
+<td><code>request_origin</code> must be effective</td>
+</tr>
+<tr>
+<td>Bearer HTTP/SSE</td>
+<td>Required</td>
+<td>May omit Origin; if present it must equal <code>request_origin</code></td>
+<td><code>request_origin</code> must be effective</td>
+</tr>
+<tr>
+<td>Bearer WebSocket</td>
+<td>Required before accept</td>
+<td>Native client may omit Origin; if present it must equal <code>request_origin</code></td>
+<td><code>request_origin</code> must be effective</td>
+</tr>
+<tr>
+<td>Listener-ownership challenge</td>
+<td>No credential; bounded nonce and optional revision only</td>
+<td>May omit Origin; if present it must equal <code>request_origin</code></td>
+<td><code>request_origin</code> must be effective</td>
+</tr>
+<tr>
+<td>Fragment bootstrap</td>
+<td>Token in body</td>
+<td>Exact <code>request_origin</code> required</td>
+<td><code>request_origin</code> must be effective</td>
+</tr>
+</tbody>
+</table>
+<p><code>Sec-Fetch-Site: cross-site</code> remains a rejection signal for browser requests.
+CORS headers control which browser code can read a response; they are not used
+as authentication. A same-site value is not sufficient without token, Host,
+and the applicable Origin rule.</p>
+<p>A direct non-loopback bind requires at least one valid configured origin and
+fails closed otherwise. Direct HTTP is accepted only when <code>ipaddress</code> confirms
+membership in one of these explicit networks: IPv4 loopback <code>127.0.0.0/8</code>,
+RFC 1918 <code>10.0.0.0/8</code>, <code>172.16.0.0/12</code>, or <code>192.168.0.0/16</code>, IPv4 link-local
+<code>169.254.0.0/16</code>, RFC 6598 shared space <code>100.64.0.0/10</code>, IPv6 loopback
+<code>::1/128</code>, IPv6 ULA <code>fc00::/7</code>, or IPv6 link-local <code>fe80::/10</code>. IPv6 zone
+identifiers are not accepted in origins. An allowlist rather than <code>is_private</code>
+is used because that property includes unusable or reserved addresses and
+excludes RFC 6598. Unspecified, multicast, documentation, benchmarking,
+reserved, and globally routable addresses are therefore rejected for HTTP.</p>
+<p>Every accepted non-loopback HTTP origin emits a prominent startup warning
+because a network observer can read the bearer credential. RFC 6598 is accepted
+for owner-configured encrypted overlays such as Tailscale, but the address alone
+does not prove encryption; the owner is responsible for using it only over the
+encrypted overlay. HTTPS remains the normal choice for any network whose
+transport protection is uncertain. Exact <code>localhost</code> on an actual loopback
+listener is the only HTTP DNS-name exception; every other DNS origin requires
+HTTPS.</p>
+<h3 id="56-reverse-proxy-trust">5.6 Reverse-proxy trust<a class="header-anchor" href="#56-reverse-proxy-trust">#</a></h3>
+<p>A same-host nginx or Caddy process may terminate HTTPS while OpenProgram stays
+on <code>127.0.0.1</code>. The Web server starts Uvicorn with <code>proxy_headers=False</code>, so
+Uvicorn cannot rewrite the ASGI client or scheme before OpenProgram evaluates
+the raw socket peer. OpenProgram never trusts <code>X-Forwarded-For</code> and trusts
+<code>X-Forwarded-Proto</code> only when that raw immediate peer is loopback. The header
+must contain exactly one <code>http</code> or <code>https</code> value; lists and every other value
+are rejected. Forwarded headers from any non-loopback peer are ignored. The
+proxy preserves the public Host, overwrites the effective scheme, supports
+WebSocket Upgrade, and disables response buffering for SSE. The resulting
+<code>request_origin</code> must still match an effective origin. A bootstrap request for
+a DNS or public-IP origin returns <code>403</code> unless the trusted effective scheme is
+HTTPS, so a missing proxy header cannot create an insecure owner cookie. The
+proxy does not replace the instance token.</p>
+<p>The OpenProgram configuration for a same-host proxy remains loopback:</p>
+<pre><code class="language-json"><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;web&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;host&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;allowed_origins&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;https://agent.example.com&quot;</span><span class="p">]</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+<p>Minimal nginx shape:</p>
+<pre><code class="language-nginx"><span class="k">map</span><span class="w"> </span><span class="nv">$http_upgrade</span><span class="w"> </span><span class="nv">$connection_upgrade</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kn">default</span><span class="w"> </span><span class="s">upgrade</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">&#39;&#39;</span><span class="w">      </span><span class="s">close</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">server</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kn">listen</span><span class="w"> </span><span class="mi">443</span><span class="w"> </span><span class="s">ssl</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">server_name</span><span class="w"> </span><span class="s">agent.example.com</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1"># ssl_certificate and ssl_certificate_key are owner-managed.</span>
+
+<span class="w">    </span><span class="kn">location</span><span class="w"> </span><span class="s">/</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kn">proxy_pass</span><span class="w"> </span><span class="s">http://127.0.0.1:18100</span><span class="p">;</span>
+<span class="w">        </span><span class="kn">proxy_http_version</span><span class="w"> </span><span class="mi">1</span><span class="s">.1</span><span class="p">;</span>
+<span class="w">        </span><span class="kn">proxy_set_header</span><span class="w"> </span><span class="s">Host</span><span class="w"> </span><span class="nv">$http_host</span><span class="p">;</span>
+<span class="w">        </span><span class="kn">proxy_set_header</span><span class="w"> </span><span class="s">X-Forwarded-Proto</span><span class="w"> </span><span class="nv">$scheme</span><span class="p">;</span>
+<span class="w">        </span><span class="kn">proxy_set_header</span><span class="w"> </span><span class="s">Forwarded</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="kn">proxy_set_header</span><span class="w"> </span><span class="s">X-Forwarded-Host</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="kn">proxy_set_header</span><span class="w"> </span><span class="s">X-Forwarded-For</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="kn">proxy_set_header</span><span class="w"> </span><span class="s">Upgrade</span><span class="w"> </span><span class="nv">$http_upgrade</span><span class="p">;</span>
+<span class="w">        </span><span class="kn">proxy_set_header</span><span class="w"> </span><span class="s">Connection</span><span class="w"> </span><span class="nv">$connection_upgrade</span><span class="p">;</span>
+<span class="w">        </span><span class="kn">proxy_buffering</span><span class="w"> </span><span class="no">off</span><span class="p">;</span>
+<span class="w">        </span><span class="kn">proxy_read_timeout</span><span class="w"> </span><span class="s">3600s</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+<p>Minimal Caddy shape:</p>
+<pre><code class="language-caddyfile">agent.example.com {
+    reverse_proxy 127.0.0.1:18100
+}
+</code></pre>
+<p>Caddy manages certificates only because the owner selected Caddy; OpenProgram
+does not call its certificate APIs. In both examples the configured origin is
+<code>https://agent.example.com</code> and the OpenProgram backend remains loopback.</p>
+<h3 id="57-direct-and-tunneled-examples">5.7 Direct and tunneled examples<a class="header-anchor" href="#57-direct-and-tunneled-examples">#</a></h3>
+<p>SSH tunnel:</p>
+<pre><code class="language-bash">ssh<span class="w"> </span>-N<span class="w"> </span>-L<span class="w"> </span><span class="m">18100</span>:127.0.0.1:18100<span class="w"> </span>owner@remote-host
+</code></pre>
+<p>OpenProgram remains bound to <code>127.0.0.1</code>. After the tunnel is active, the owner
+prints a live URL on the remote host with:</p>
+<pre><code class="language-bash">openprogram<span class="w"> </span>web<span class="w"> </span>auth-url<span class="w"> </span>--base-url<span class="w"> </span>http://127.0.0.1:18100
+</code></pre>
+<p>This example keeps the same local and remote port, so the implicit loopback
+origin applies. If the local side uses a different port, that exact
+<code>http://localhost:&lt;local-port&gt;</code> or loopback-literal origin must be added to
+<code>allowed_origins</code> before <code>auth-url</code> will accept it.</p>
+<p>For a direct LAN or VPN address, the owner explicitly configures both bind and
+origin:</p>
+<pre><code class="language-json"><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;web&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;host&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.0.0.0&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;allowed_origins&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;http://192.168.1.20:18100&quot;</span><span class="p">]</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+<p>The browser uses the address present in <code>allowed_origins</code>; <code>0.0.0.0</code> is a bind
+address and is never a browser origin.</p>
+<h3 id="58-secret-handling">5.8 Secret handling<a class="header-anchor" href="#58-secret-handling">#</a></h3>
+<p>Stored provider credentials are entry-only through the Web UI:</p>
+<ul>
+<li><code>GET /api/config/key/{env_var}</code> returns exactly
+<code>{&quot;has_value&quot;:false,&quot;masked&quot;:&quot;&quot;}</code> when unset and, when set, returns
+<code>{&quot;has_value&quot;:true,&quot;masked&quot;:&quot;sk-…abc4&quot;}</code> with the actual mask; <code>env_var</code>
+must be a declared provider or search credential name, and an unknown name
+returns <code>404</code>;</li>
+<li><code>GET /api/providers/{provider}/accounts</code> keeps non-secret account metadata,
+but represents an API-key credential only through <code>has_value</code> and
+<code>masked_key</code>; <code>identity</code>, <code>can_reveal</code>, <code>value</code>, and every full-key field are
+absent.</li>
+</ul>
+<p>The two storage shapes use separate mutation contracts:</p>
+<table>
+<thead>
+<tr>
+<th>Target</th>
+<th>Preserve</th>
+<th>Replace</th>
+<th>Delete</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Config/environment key</td>
+<td>Omit its name from the <code>api_keys</code> map</td>
+<td><code>POST /api/config</code> with exactly <code>{&quot;api_keys&quot;:{&quot;ENV_VAR&quot;:&quot;new printable-ASCII value&quot;}}</code> or a multi-key map; listed values are required and success is <code>200 {&quot;saved&quot;:true}</code></td>
+<td><code>DELETE /api/config/key/{env_var}</code> with no body; idempotently removes the saved entry and current-process environment value, then returns <code>204</code></td>
+</tr>
+<tr>
+<td>API-key account</td>
+<td>Account metadata operations such as use, rename, reorder, and rotation do not accept or change <code>api_key</code></td>
+<td><code>POST /api/providers/{provider}/accounts/{name}/update</code> with exactly <code>{&quot;api_key&quot;:&quot;new printable-ASCII value&quot;,&quot;validate&quot;:true}</code>; <code>validate</code> is the only optional field and defaults to <code>true</code>; success is exactly <code>200 {&quot;ok&quot;:true}</code></td>
+<td><code>POST /api/providers/{provider}/accounts/remove</code> with exactly <code>{&quot;id&quot;:&quot;account-name&quot;}</code> deletes the whole credential pool; success is <code>200 {&quot;removed&quot;:true,&quot;name&quot;:&quot;account-name&quot;,&quot;cleared_active&quot;:&lt;bool&gt;}</code></td>
+</tr>
+</tbody>
+</table>
+<p>Unknown fields, unknown credential names, <code>null</code>, empty strings, non-printable
+or non-ASCII values, and every displayed mask return <code>400</code> without mutation.
+Replacing a key that validation definitively rejects returns <code>400</code>; transient
+or offline <code>unknown</code> validation is non-blocking and the save succeeds. Account
+replacement returns <code>404</code> when
+the provider/account does not exist or is not an API-key account. Account
+deletion returns <code>404</code> for a missing or unknown <code>id</code>. Deleting a config key also
+removes its live-process environment value; a value supplied again by the
+parent environment can reappear only after a later process restart.</p>
+<p>Provider detail, API-key settings, and account manager remove every reveal
+button and reveal request. The backend never interprets a displayed mask as a
+secret value.</p>
+<p>The stable mask is the first three ASCII characters, U+2026, and the last four
+characters only for values of at least twelve characters, which hides at least
+five characters. Values shorter than twelve, and values whose visible
+characters are not ASCII, use the fixed string <code>••••••••</code>.
+The mask therefore does not encode the original length for short credentials.
+It is presentation-only and is never accepted in a write payload.</p>
+<p>The account reveal route is removed and returns <code>410</code>. The masked config-key
+status route remains, but a request containing the <code>reveal</code> query parameter is
+rejected with <code>404</code>; it never changes the response to plaintext. The unrelated
+project-file reveal action remains subject to normal file authorization and Web
+authentication; it is not a credential-retrieval endpoint.</p>
+<h2 id="6-implementation-contract-and-acceptance-tests">6. Implementation contract and acceptance tests<a class="header-anchor" href="#6-implementation-contract-and-acceptance-tests">#</a></h2>
+<h3 id="61-startup-contract">6.1 Startup contract<a class="header-anchor" href="#61-startup-contract">#</a></h3>
+<p>The server validates configuration, generates and secures the token, writes and
+validates the frozen <code>access.json</code> snapshot, computes the token fingerprint,
+and only then starts accepting connections. The startup log states:</p>
+<ul>
+<li>the actual bind address and whether it is loopback;</li>
+<li>the configured public origins;</li>
+<li>whether trusted loopback-proxy scheme handling is active;</li>
+<li>the token fingerprint;</li>
+<li>a warning for direct non-loopback HTTP.</li>
+</ul>
+<p>It never states the token. A malformed origin, non-loopback bind without an
+origin, unsafe public HTTP origin, unsafe token file, or occupied Web-process
+lock is a startup error.
+Uvicorn proxy-header rewriting is disabled in the server configuration before
+the listener starts; only the common OpenProgram ASGI policy interprets the raw
+peer and <code>X-Forwarded-Proto</code>.</p>
+<h3 id="62-request-pipeline">6.2 Request pipeline<a class="header-anchor" href="#62-request-pipeline">#</a></h3>
+<p>The common ASGI order is:</p>
+<pre><code class="language-text">request
+  -&gt; immediate peer, trusted effective scheme, canonical Host/request_origin
+  -&gt; route + method + credential-source classification
+  -&gt; Origin / Sec-Fetch-Site / CSRF policy
+  -&gt; public, ownership-challenge, bootstrap, cookie, or Bearer rule
+  -&gt; owner authority attachment
+  -&gt; HTTP route, SSE generator, or WebSocket accept
+</code></pre>
+<p>Public static routes skip credential authentication but not Host and browser
+context validation. The bootstrap route replaces the common credential check
+with its constant-time body-token exchange. The ownership-challenge route
+performs only its bounded nonce/revision proof contract and grants no
+authority. No application route implements an independent authentication
+interpretation.</p>
+<h3 id="63-required-tests">6.3 Required tests<a class="header-anchor" href="#63-required-tests">#</a></h3>
+<p>The feature is complete only when these behaviors are executable tests:</p>
+<ol>
+<li>Loopback HTTP, SSE, and WebSocket access without a credential fails.</li>
+<li>A correct Bearer token succeeds without <code>Origin</code>; an incorrect token returns
+the same <code>401</code> shape and performs no action.</li>
+<li>Browser bootstrap clears the fragment before other fetches, accepts only the
+exact bounded JSON schema, sends no token in URL/query/Referer, derives the
+specified HMAC cookie, rejects every mixed body-token plus Authorization
+request, and can then open HTTP, SSE, and WS.</li>
+<li>Cookie-authenticated unsafe HTTP and WebSocket requests reject missing,
+opaque, cross-site, and unlisted origins before action or socket acceptance.</li>
+<li>A foreign, duplicate, comma-joined, unspecified, or multicast Host is
+rejected on loopback, direct external bind, and reverse-proxy deployments;
+HTTP/WS and HTTPS/WSS produce the same browser-equivalent origin pairs.</li>
+<li>Default loopback accepts only its implicit <code>localhost</code> and actual-literal
+origins; a different SSH local port is rejected until explicitly configured.</li>
+<li>Non-loopback bind without a non-empty valid origin list refuses startup;
+the explicit local/overlay HTTP ranges are accepted with warnings, while
+unspecified, multicast, documentation, benchmarking, reserved, and global
+literals are rejected for HTTP.</li>
+<li>Uvicorn proxy-header rewriting is disabled; forwarded scheme is honored
+from the raw loopback peer only and ignored from every non-loopback peer;
+forged <code>X-Forwarded-For</code> never changes trust, a public bootstrap with a
+non-HTTPS effective scheme is rejected, and direct WS plus Caddy-proxied WSS
+produce the expected browser-equivalent origin.</li>
+<li>A second Web process for the same state directory cannot modify the live
+token or access snapshot; bind failure removes only the files owned by the
+failing process.</li>
+<li>Restart rotates the token and invalidates the prior Bearer token and cookie.</li>
+<li>An invalid or malformed Authorization header never falls back to a valid
+cookie.</li>
+<li>Static assets and the reduced liveness response contain no process token,
+session data, filesystem data, credential data, or detailed diagnostics.</li>
+<li>Security headers reject framing; protected/auth/credential responses are
+<code>no-store</code>, and <code>401</code> responses advertise the Bearer realm.</li>
+<li>The legacy account reveal route returns <code>410</code>, and the config-key reveal
+query returns <code>404</code>; config-key replace/preserve/DELETE and account
+replace/preserve/remove execute the exact schemas and status codes
+specified above; 8–11-character credentials use the fixed mask, masks are
+never accepted, and frontend builds and types contain no reveal action or
+full-secret response field.</li>
+<li>nginx and Caddy smoke deployments carry authenticated HTTP, SSE, and
+WebSocket traffic over HTTPS while the backend remains loopback.</li>
+<li>Channel messages retain their <code>paired</code> authority tier and do not inherit Web
+owner authority.</li>
+<li>Two profile servers on the same loopback hostname and different ports use
+distinct cookie names, authenticate independently, and ignore each other's
+cookie.</li>
+<li>The listener-ownership probe checks worker PID/port plus the frozen access
+snapshot, sends only a fresh 32-byte nonce, validates the exact versioned
+HMAC proof, optionally binds the proof to the served revision, disables
+ambient HTTP proxies, and never sends or logs the owner token. A foreign
+listener, stale snapshot, mismatched fingerprint, port, proof, or revision
+is not treated as the active owner server.</li>
+</ol>
+<h2 id="7-implementation-status">7. Implementation status<a class="header-anchor" href="#7-implementation-status">#</a></h2>
+<p>Design statements are not implementation evidence. Status is based on current
+production paths and tests.</p>
+<h3 id="implemented">Implemented<a class="header-anchor" href="#implemented">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Default loopback bind</td>
+<td><code>_web_config()</code> in <code>openprogram/interfaces/server/server.py</code> defaults to <code>127.0.0.1</code></td>
+</tr>
+<tr>
+<td>FastAPI lifespan</td>
+<td><code>create_app()</code> uses <code>_lifespan</code>; deprecated <code>@app.on_event</code> handlers are absent</td>
+</tr>
+<tr>
+<td>Stable per-profile owner principal and explicit owner/paired authority tiers</td>
+<td><code>openprogram/runtime/permissions/authority.py</code>; Web, TUI, desktop, runtime, and paired channel entry points attach a tier; <code>tests/unit/providers/auth/test_authority_scope.py</code> and permission tests cover the fixed tier table</td>
+</tr>
+<tr>
+<td>Owner process credential</td>
+<td><code>OwnerAuthState</code> in <code>openprogram/interfaces/server/owner_auth.py</code> generates the 32-byte token, holds <code>&lt;state-dir&gt;/web.lock</code>, atomically writes the owner-only <code>&lt;state-dir&gt;/web/token</code>, derives the profile-specific cookie, compares decoded tokens with <code>hmac.compare_digest</code>, and removes only its owned state; <code>test_process_token_is_owner_only_locked_and_replaced_after_release</code> covers lock, mode, replacement, redacted representation, and rotation after release</td>
+</tr>
+<tr>
+<td>Canonical effective origins</td>
+<td><code>canonicalize_origin()</code> and <code>resolve_effective_origins()</code> validate exact origins, enforce the explicit HTTP network set, add narrow loopback defaults, and fail a non-loopback bind without an origin; parameterized owner-auth tests cover accepted and rejected forms</td>
+</tr>
+<tr>
+<td>Common owner-auth boundary</td>
+<td><code>OwnerAuthMiddleware</code> is installed by <code>create_app()</code> before routing, protects HTTP and WebSocket ASGI scopes, applies cookie/Bearer selection, Host/Origin/CSRF checks, generic <code>401</code>/<code>403</code> responses, no-store headers, and owner-authority attachment; owner-auth tests cover HTTP mutation and pre-accept WebSocket cases</td>
+</tr>
+<tr>
+<td>Fragment bootstrap backend and frontend coordinator</td>
+<td><code>POST /api/auth/bootstrap</code>, <code>apps/web/lib/net/auth/owner-auth-bootstrap.ts</code>, and <code>OwnerAuthBoundary</code> implement body-token exchange, synchronous fragment removal, no Web Storage, and application gating; <code>apps/web/scripts/settings/check-owner-auth-bootstrap.mjs</code>, TypeScript checking, and the production Web build exercise the frontend contract</td>
+</tr>
+<tr>
+<td>Authenticated URL command</td>
+<td><code>openprogram web auth-url --base-url ...</code>, <code>build_owner_auth_url()</code>, and <code>tests/unit/providers/adapters/test_web_auth_url.py</code> cover active-server lookup and effective-origin validation; normal CLI browser launch uses the same fragment URL</td>
+</tr>
+<tr>
+<td>Minimal public liveness</td>
+<td><code>/healthz</code> returns only <code>{&quot;status&quot;:&quot;ok&quot;}</code> with <code>no-store</code>; operational fields are on protected <code>/api/diagnostics</code>; integration and owner-auth tests cover both routes</td>
+</tr>
+<tr>
+<td>Raw-peer proxy boundary</td>
+<td>Uvicorn is configured with <code>proxy_headers=False</code>; <code>OwnerAuthMiddleware</code> accepts a single forwarded scheme only from the immediate loopback peer and tests the HTTPS-origin match</td>
+</tr>
+<tr>
+<td>Secret non-retrievability</td>
+<td>There is no plaintext reveal: no account reveal route exists and <code>GET /api/config/key/{env_var}?reveal=1</code> returns <code>404</code>; <code>credential_secrets</code> supplies the single mask and the declared-name check; <code>/api/config</code>, <code>/api/settings</code>, <code>/api/config/verify</code>, <code>DELETE /api/config/key/{env_var}</code>, and the account routes accept only their exact bounded schemas and never return a full secret; the frontend has no reveal action, control, or response type. MCP server credentials follow the same contract: <code>MCPServerConfig.to_storage_dict()</code> holds full values for the config file while <code>to_response_dict()</code> masks every <code>env</code> and <code>headers</code> value plus the bearer token and OAuth client secret, so <code>/api/mcp/servers</code>, <code>/api/mcp/servers/{name}</code>, <code>/api/mcp/catalog</code>, and <code>/api/mcp/catalog/diff</code> return <code>{has_value, masked}</code> rather than values; <code>PATCH /api/mcp/servers/{name}</code> applies preserve (omitted) / replace (new value) / delete (explicit empty) and persists only after the restart succeeds; <code>mcp_servers.json</code> is written <code>0600</code> through a temp file, <code>fsync</code>, and <code>os.replace</code>; <code>tests/component/programs/mcp/test_mcp_secret_non_retrievability.py</code> and <code>apps/web/scripts/settings/check-secret-non-retrieval.mjs</code> cover the response, permission, preserve, and frontend-display halves</td>
+</tr>
+<tr>
+<td>Internal client authentication</td>
+<td><code>resolve_backend_endpoint()</code> returns a challenge-verified <code>BackendEndpoint</code> (base URL, WebSocket URL, origin, and token) so the credential is read only after the listener proves it holds the same token; <code>cli/ink.py</code> passes it to the TUI environment, <code>cli/commands/mcp.py</code> uses it for the MCP CLI, and the Node client sends the Bearer header only to backend URLs (<code>apps/cli/src/utils/backend.ts</code>, <code>apps/cli/tests/backendAuth.test.ts</code>)</td>
+</tr>
+<tr>
+<td>Startup reporting</td>
+<td><code>start_server()</code> prints the bind address, binding scope, effective origins, forwarded-scheme trust boundary, and token fingerprint, and warns when an effective origin is non-loopback plaintext HTTP; <code>test_startup_logs_warn_about_plaintext_http_for_remote_origins</code> asserts each field</td>
+</tr>
+<tr>
+<td>Real-listener transport acceptance</td>
+<td><code>tests/component/providers/adapters/test_web_owner_auth_listener.py</code> binds a real Uvicorn socket on an ephemeral port and covers authenticated and unauthenticated HTTP, SSE authentication with <code>no-store</code>, the raw WebSocket handshake rejected with <code>401</code> and Bearer-realm/<code>no-store</code> headers before accept, bind-failure cleanup, wire-level token rotation, two-profile cookie isolation, the reverse-proxy origin matrix, and a sweep proving the token appears in no response body, header, log, or rendered page</td>
+</tr>
+</tbody>
+</table>
+<h3 id="partially-implemented">Partially implemented<a class="header-anchor" href="#partially-implemented">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Implemented part</th>
+<th>Missing part</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Browser-level audit</td>
+<td>The shell is served with CSP, framing, referrer, content-type, and cache headers, and server-side tests assert that responses and rendered HTML carry no token</td>
+<td>No browser-driven audit yet walks every exported asset and navigation path to prove none embeds dynamic data</td>
+</tr>
+<tr>
+<td>Deployment operations</td>
+<td>The reverse-proxy contract is covered by a real-listener origin matrix over <code>X-Forwarded-Proto</code> and <code>X-Forwarded-Host</code>, and the raw-peer boundary is enforced</td>
+<td>nginx and Caddy HTTPS/WS/SSE smoke deployments are untested</td>
+</tr>
+</tbody>
+</table>
+<h3 id="explicitly-out-of-scope">Explicitly out of scope<a class="header-anchor" href="#explicitly-out-of-scope">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Boundary</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Web accounts, signup, invitations, and user sessions</td>
+<td>One active profile/state instance has one owner principal</td>
+</tr>
+<tr>
+<td>RBAC, groups, tenant/workspace roles, and project permissions</td>
+<td>The Web UI is one full-capability owner administrative interface</td>
+</tr>
+<tr>
+<td>OAuth/OIDC/SSO and identity-aware proxy authentication</td>
+<td>They do not replace the mandatory instance token</td>
+</tr>
+<tr>
+<td>Built-in TLS, ACME, certificate storage, and renewal</td>
+<td>The owner operates nginx, Caddy, a VPN, or SSH</td>
+</tr>
+<tr>
+<td>Public relay, hosted tunnel, rendezvous, pairing service, and public share URL</td>
+<td>OpenProgram makes no outbound registration for Web reachability</td>
+</tr>
+<tr>
+<td>Authentication-off or <code>--insecure</code> mode</td>
+<td>Token authentication is always enabled, including loopback</td>
+</tr>
+<tr>
+<td>Long-lived token in query parameters, localStorage, or public HTML</td>
+<td>Fragment bootstrap and HttpOnly cookie are the only browser entry path</td>
+</tr>
+<tr>
+<td>Plaintext retrieval of stored provider credentials</td>
+<td>Replacement is supported; reveal is not</td>
+</tr>
+</tbody>
+</table>
+<div class="page-updated"><span data-i18n="updated">Last updated</span> · 2026-11-03</div><div class="prevnext"><a class="pn-link pn-prev" href="/docs/reference/design/ui/remote-web-access.viz.html" data-href-en="/docs/reference/design/ui/remote-web-access.viz.html" data-href-zh="/docs/reference/design/ui/remote-web-access.zh.viz.html"><span class="pn-dir" data-i18n="prev">Previous</span><span class="pn-title" data-title-zh="远程访问图解">Remote access diagram</span></a><a class="pn-link pn-next" href="/docs/reference/design/ui/browser/web-tab-home-button.html" data-href-en="/docs/reference/design/ui/browser/web-tab-home-button.html" data-href-zh="/docs/reference/design/ui/browser/web-tab-home-button.zh.html"><span class="pn-dir" data-i18n="next">Next</span><span class="pn-title" data-title-zh="浏览器主页">Browser home</span></a></div></article></main>
+  <aside class="toc"><div class="toc-title" data-i18n="on_this_page">On this page</div>
+<ul class="toc-list">
+<li>
+<details class="toc-disclosure" open=""><summary>
+<a class="lvl-2" href="#1-method-and-scope">1. Method and scope</a>
+</summary>
+<ul class="toc-list">
+<li>
+<a class="lvl-3" href="#11-one-active-state-instance-one-owner">1.1 One active state instance, one owner</a>
+</li>
+<li>
+<a class="lvl-3" href="#12-four-supported-access-modes">1.2 Four supported access modes</a>
+</li>
+<li>
+<a class="lvl-3" href="#13-product-boundaries">1.3 Product boundaries</a>
+</li>
+</ul>
+</details>
+</li>
+<li>
+<details class="toc-disclosure" open=""><summary>
+<a class="lvl-2" href="#2-current-implementation-and-threat-model">2. Current implementation and threat model</a>
+</summary>
+<ul class="toc-list">
+<li>
+<a class="lvl-3" href="#21-what-exists-now">2.1 What exists now</a>
+</li>
+<li>
+<a class="lvl-3" href="#22-why-loopback-still-requires-a-token">2.2 Why loopback still requires a token</a>
+</li>
+<li>
+<a class="lvl-3" href="#23-security-invariants">2.3 Security invariants</a>
+</li>
+</ul>
+</details>
+</li>
+<li>
+<details class="toc-disclosure" open=""><summary>
+<a class="lvl-2" href="#3-reference-framework-comparison">3. Reference framework comparison</a>
+</summary>
+<ul class="toc-list">
+<li>
+<a class="lvl-3" href="#31-survey-boundary">3.1 Survey boundary</a>
+</li>
+<li>
+<a class="lvl-3" href="#32-patterns-that-remain-separate">3.2 Patterns that remain separate</a>
+</li>
+</ul>
+</details>
+</li>
+<li>
+<a class="lvl-2" href="#4-what-openprogram-adopts-modifies-and-rejects">4. What OpenProgram adopts, modifies, and rejects</a>
+</li>
+<li>
+<details class="toc-disclosure" open=""><summary>
+<a class="lvl-2" href="#5-remote-access-design">5. Remote-access design</a>
+</summary>
+<ul class="toc-list">
+<li>
+<a class="lvl-3" href="#51-token-lifecycle">5.1 Token lifecycle</a>
+</li>
+<li>
+<a class="lvl-3" href="#52-credential-forms">5.2 Credential forms</a>
+</li>
+<li>
+<a class="lvl-3" href="#53-fragment-bootstrap">5.3 Fragment bootstrap</a>
+</li>
+<li>
+<a class="lvl-3" href="#54-route-policy">5.4 Route policy</a>
+</li>
+<li>
+<a class="lvl-3" href="#55-host-origin-csrf-and-transport-matrix">5.5 Host, Origin, CSRF, and transport matrix</a>
+</li>
+<li>
+<a class="lvl-3" href="#56-reverse-proxy-trust">5.6 Reverse-proxy trust</a>
+</li>
+<li>
+<a class="lvl-3" href="#57-direct-and-tunneled-examples">5.7 Direct and tunneled examples</a>
+</li>
+<li>
+<a class="lvl-3" href="#58-secret-handling">5.8 Secret handling</a>
+</li>
+</ul>
+</details>
+</li>
+<li>
+<details class="toc-disclosure" open=""><summary>
+<a class="lvl-2" href="#6-implementation-contract-and-acceptance-tests">6. Implementation contract and acceptance tests</a>
+</summary>
+<ul class="toc-list">
+<li>
+<a class="lvl-3" href="#61-startup-contract">6.1 Startup contract</a>
+</li>
+<li>
+<a class="lvl-3" href="#62-request-pipeline">6.2 Request pipeline</a>
+</li>
+<li>
+<a class="lvl-3" href="#63-required-tests">6.3 Required tests</a>
+</li>
+</ul>
+</details>
+</li>
+<li>
+<details class="toc-disclosure" open=""><summary>
+<a class="lvl-2" href="#7-implementation-status">7. Implementation status</a>
+</summary>
+<ul class="toc-list">
+<li>
+<a class="lvl-3" href="#implemented">Implemented</a>
+</li>
+<li>
+<a class="lvl-3" href="#partially-implemented">Partially implemented</a>
+</li>
+<li>
+<a class="lvl-3" href="#explicitly-out-of-scope">Explicitly out of scope</a>
+</li>
+</ul>
+</details>
+</li>
+</ul></aside>
+</div>
+
+<div class="search-overlay">
+  <div class="search-box">
+    <input type="text" data-i18n-ph="search_ph" placeholder="Search titles or text…" autocomplete="off" spellcheck="false">
+    <div class="search-results"></div>
+  </div>
+</div>
+
+<script src="/docs/assets/site.js?v=6520ba46"></script>
+</body>
+</html>

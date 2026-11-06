@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh" data-base="/docs/" data-page-lang="zh" data-build="1793956776" data-alt-lang-url="/docs/models/auth.html">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>认证 · OpenProgram Docs</title>
+<meta name="description" content="本页说明 provider 凭据从哪来、存在哪、如何从已登录的其他 CLI 导入。 本项目要求安全、合法、合规地使用 Anthropic 服务。Anthropic 集成仅使用官方 API 和合法获取的 API key，按 API 账户计费；所有调用必须遵守 Anthropic 的服务条款与使用政策。 存放位置 #">
+<link rel="canonical" href="https://openprogram.io/docs/models/auth.zh.html">
+<link rel="alternate" type="text/markdown" href="https://openprogram.io/docs/models/auth.zh.html.md">
+<link rel="describedby" href="https://openprogram.io/llms.txt">
+<link rel="alternate" hreflang="en" href="https://openprogram.io/docs/models/auth.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://openprogram.io/docs/models/auth.zh.html">
+<link rel="alternate" hreflang="x-default" href="https://openprogram.io/docs/models/auth.html">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"OpenProgram Docs","item":"https://openprogram.io/docs/"},{"@type":"ListItem","position":2,"name":"认证"}]}</script>
+<meta property="og:type" content="article">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:site_name" content="OpenProgram">
+<meta property="og:url" content="https://openprogram.io/docs/models/auth.zh.html">
+<meta property="og:title" content="认证 · OpenProgram Docs">
+<meta property="og:description" content="本页说明 provider 凭据从哪来、存在哪、如何从已登录的其他 CLI 导入。 本项目要求安全、合法、合规地使用 Anthropic 服务。Anthropic 集成仅使用官方 API 和合法获取的 API key，按 API 账户计费；所有调用必须遵守 Anthropic 的服务条款与使用政策。 存放位置 #">
+<meta property="og:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:secure_url" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="认证 · OpenProgram Docs">
+<meta name="twitter:description" content="本页说明 provider 凭据从哪来、存在哪、如何从已登录的其他 CLI 导入。 本项目要求安全、合法、合规地使用 Anthropic 服务。Anthropic 集成仅使用官方 API 和合法获取的 API key，按 API 账户计费；所有调用必须遵守 Anthropic 的服务条款与使用政策。 存放位置 #">
+<meta name="twitter:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta name="twitter:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/docs/assets/mark.svg">
+<link rel="stylesheet" href="/docs/assets/site.css?v=6520ba46">
+<link rel="stylesheet" href="/docs/assets/pygments-light.css" media="(prefers-color-scheme: light)" id="pyg-light">
+<link rel="stylesheet" href="/docs/assets/pygments-dark.css" media="(prefers-color-scheme: dark)" id="pyg-dark">
+<script src="/docs/assets/theme.js?v=6520ba46"></script>
+
+</head>
+<body>
+<header class="topbar">
+  <button class="icon hamburger" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2.5 4.5h11M2.5 8h11M2.5 11.5h11"/></svg></button>
+  <a class="brand" href="/docs/index.html"><img class="mark" src="/docs/assets/mark.svg" alt="">OpenProgram Docs</a>
+  <div class="spacer"></div>
+  <button class="search-trigger" aria-label="Search">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14"/></svg><span class="label" data-i18n="search">Search docs</span><kbd>⌘K</kbd>
+  </button>
+  <div class="lang-wrap">
+    <button class="icon lang-trigger" id="lang-toggle" aria-haspopup="true" aria-expanded="false" aria-label="Language">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="6.2"/><path d="M1.8 8h12.4" stroke-linecap="round"/><ellipse cx="8" cy="8" rx="2.8" ry="6.2"/></svg><span class="lang-label">EN</span><svg class="chev" width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+    </button>
+    <div class="lang-menu" id="lang-menu" role="menu">
+      <button class="lang-opt" data-lang="en" role="menuitem"><span>English</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="lang-opt" data-lang="zh" role="menuitem"><span>简体中文</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+  <div class="theme-wrap">
+    <button class="icon" id="theme-toggle" aria-label="Theme" aria-haspopup="menu" aria-controls="theme-menu" aria-expanded="false"><svg class="ic-system" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="2.5" width="13" height="9" rx="1.5"/><path d="M8 11.5V14M5.5 14h5"/></svg><svg class="ic-moon" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M13.5 9.5A6 6 0 1 1 6.5 2.5a5 5 0 0 0 7 7z"/></svg><svg class="ic-sun" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="3.2"/><path d="M8 1.2v1.8M8 13v1.8M1.2 8H3M13 8h1.8M3.2 3.2l1.3 1.3M11.5 11.5l1.3 1.3M12.8 3.2l-1.3 1.3M4.5 11.5l-1.3 1.3"/></svg></button>
+    <div class="theme-menu" id="theme-menu" role="menu" aria-labelledby="theme-toggle">
+      <button class="theme-opt" data-theme-choice="system" role="menuitemradio" aria-checked="true"><span>Follow system</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="light" role="menuitemradio" aria-checked="false"><span>Light</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="dark" role="menuitemradio" aria-checked="false"><span>Dark</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+</header>
+<nav class="tabbar"><a class="tablink" href="/docs/README.html" data-title-zh="开始使用" data-href-en="/docs/README.html" data-href-zh="/docs/README.zh.html">Get started</a><a class="tablink" href="/docs/install/install.html" data-title-zh="安装" data-href-en="/docs/install/install.html" data-href-zh="/docs/install/install.zh.html">Install</a><a class="tablink" href="/docs/capabilities/README.html" data-title-zh="能力" data-href-en="/docs/capabilities/README.html" data-href-zh="/docs/capabilities/README.zh.html">Capabilities</a><a class="tablink" href="/docs/interfaces/README.html" data-title-zh="界面" data-href-en="/docs/interfaces/README.html" data-href-zh="/docs/interfaces/README.zh.html">Interfaces</a><a class="tablink active" href="/docs/models/README.html" data-title-zh="模型" data-href-en="/docs/models/README.html" data-href-zh="/docs/models/README.zh.html">Models</a><a class="tablink" href="/docs/integrations/anthropic.html" data-title-zh="集成" data-href-en="/docs/integrations/anthropic.html" data-href-zh="/docs/integrations/anthropic.zh.html">Integrations</a><a class="tablink" href="/docs/server/README.html" data-title-zh="服务与运维" data-href-en="/docs/server/README.html" data-href-zh="/docs/server/README.zh.html">Server &amp; Ops</a><a class="tablink" href="/docs/reference/README.html" data-title-zh="参考" data-href-en="/docs/reference/README.html" data-href-zh="/docs/reference/README.zh.html">Reference</a><a class="tablink" href="/docs/reference/design/README.html" data-title-zh="设计" data-href-en="/docs/reference/design/README.html" data-href-zh="/docs/reference/design/README.zh.html">Design</a></nav>
+
+<div class="scrim"></div>
+<div class="layout">
+  <nav class="sidebar" aria-label="Documentation">
+    <input class="nav-filter" type="text" data-i18n-ph="nav_filter"
+           aria-label="Filter docs" placeholder="Filter docs…" autocomplete="off" spellcheck="false">
+    <div class="nav-tree"><div class="nav-sec"><div class="nav-sec-title" data-title-zh="概览">Overview</div><a class="navlink" href="/docs/models/README.html" data-title-zh="模型配置" data-href-en="/docs/models/README.html" data-href-zh="/docs/models/README.zh.html">Model configuration</a>
+<a class="navlink" href="/docs/models/providers.html" data-title-zh="模型服务" data-href-en="/docs/models/providers.html" data-href-zh="/docs/models/providers.zh.html">Providers</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="配置">Configuration</div><a class="navlink active" href="/docs/models/auth.html" data-title-zh="认证" data-href-en="/docs/models/auth.html" data-href-zh="/docs/models/auth.zh.html">Authentication</a>
+<a class="navlink" href="/docs/models/local-models.html" data-title-zh="使用本地部署的模型" data-href-en="/docs/models/local-models.html" data-href-zh="/docs/models/local-models.zh.html">Use locally deployed models</a>
+<a class="navlink" href="/docs/models/fast-tier.html" data-title-zh="高速模式" data-href-en="/docs/models/fast-tier.html" data-href-zh="/docs/models/fast-tier.zh.html">Fast mode</a>
+<a class="navlink" href="/docs/models/thinking-effort.html" data-title-zh="推理强度" data-href-en="/docs/models/thinking-effort.html" data-href-zh="/docs/models/thinking-effort.zh.html">Thinking effort</a>
+<a class="navlink" href="/docs/models/token-tracking.html" data-title-zh="Token 计量" data-href-en="/docs/models/token-tracking.html" data-href-zh="/docs/models/token-tracking.zh.html">Token accounting</a></div></div>
+  </nav>
+  <main class="content"><button class="fs-toggle" aria-label="Fullscreen" title="Fullscreen (Esc to exit)"><svg class="ic-expand" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.2 2H2v4.2M9.8 2H14v4.2M6.2 14H2V9.8M9.8 14H14V9.8"/></svg><svg class="ic-collapse" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6.2h4.2V2M14 6.2H9.8V2M2 9.8h4.2V14M14 9.8H9.8V14"/></svg></button><article><nav class="breadcrumb"><span class="bc-seg" data-title-zh="模型">Models</span> <span class='bc-sep'>›</span> <span class="bc-seg" data-title-zh="配置">Configuration</span> <span class='bc-sep'>›</span> <span class="bc-seg bc-current" data-title-zh="认证">Authentication</span></nav><h1 id="认证">认证<a class="header-anchor" href="#认证">#</a></h1>
+<p>本页说明 provider 凭据从哪来、存在哪、如何从已登录的其他 CLI 导入。</p>
+<p>本项目要求安全、合法、合规地使用 Anthropic 服务。Anthropic 集成仅使用官方 API 和合法获取的 API key，按 API 账户计费；所有调用必须遵守 Anthropic 的服务条款与使用政策。</p>
+<h2 id="存放位置">存放位置<a class="header-anchor" href="#存放位置">#</a></h2>
+<p>所有凭据统一存在凭据库：<code>~/.openprogram/auth/&lt;provider&gt;/&lt;account&gt;.json</code>（权限 0600；使用 <code>--profile &lt;name&gt;</code> 时工作区根目录换成 <code>~/.openprogram-&lt;name&gt;/</code>）。</p>
+<p>运行时<strong>只从凭据库取密钥，不直接读环境变量</strong>。环境变量里的 key（如 <code>OPENAI_API_KEY</code>）需要先导入（见下文 discover），之后改环境变量不影响已导入的凭据。两个例外是云凭据链：Amazon Bedrock（<code>AWS_PROFILE</code> / access key / bearer token 等）和 Google Vertex（ADC），它们在运行时自动识别。</p>
+<h2 id="凭据的几种来源">凭据的几种来源<a class="header-anchor" href="#凭据的几种来源">#</a></h2>
+<h3 id="api-key-登录">API key 登录<a class="header-anchor" href="#api-key-登录">#</a></h3>
+<pre><code class="language-bash">openprogram<span class="w"> </span>providers<span class="w"> </span>login<span class="w"> </span>deepseek<span class="w">                       </span><span class="c1"># 交互式输入</span>
+<span class="nb">printf</span><span class="w"> </span>%s<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$KEY</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>openprogram<span class="w"> </span>providers<span class="w"> </span>login<span class="w"> </span>deepseek<span class="w"> </span>--api-key-stdin<span class="w">   </span><span class="c1"># 脚本</span>
+</code></pre>
+<p><code>--api-key</code> 也可以直接传值，但会留在 shell 历史里，脚本优先用 <code>--api-key-stdin</code>。</p>
+<p>Anthropic 使用 <code>openprogram providers login anthropic</code>，输入 Anthropic API key 即可。</p>
+<h3 id="oauth-登录">OAuth 登录<a class="header-anchor" href="#oauth-登录">#</a></h3>
+<p>订阅类 provider 用浏览器 / 设备码登录，<code>login</code> 自动选择方式（<code>--method</code> 可强制指定）：</p>
+<ul>
+<li><code>openai-codex</code>：ChatGPT 订阅浏览器 PKCE 登录；已有的 <code>codex</code> CLI 登录态可改用下文的 <code>discover</code> / <code>adopt</code> 导入</li>
+<li><code>gemini-subscription</code>：导入 <code>~/.gemini/oauth_creds.json</code>——先用 Gemini CLI 登录</li>
+<li><code>github-copilot</code>：GitHub 浏览器设备码登录（或导入 <code>COPILOT_GITHUB_TOKEN</code> / <code>GH_TOKEN</code> / <code>GITHUB_TOKEN</code> 环境变量）；Copilot 短期 token 按需换取、不落盘</li>
+</ul>
+<h3 id="从本机已有凭据导入">从本机已有凭据导入<a class="header-anchor" href="#从本机已有凭据导入">#</a></h3>
+<pre><code class="language-bash">openprogram<span class="w"> </span>providers<span class="w"> </span>discover<span class="w">        </span><span class="c1"># 只扫描列出，不写入</span>
+openprogram<span class="w"> </span>providers<span class="w"> </span>adopt<span class="w"> </span>codex_cli<span class="w"> </span><span class="c1"># 导入某一项；--all 全部导入</span>
+</code></pre>
+<p>扫描的来源：</p>
+<table>
+<thead>
+<tr>
+<th>来源</th>
+<th>位置</th>
+<th>导入到</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Codex CLI</td>
+<td><code>~/.codex/auth.json</code></td>
+<td><code>openai-codex</code></td>
+</tr>
+<tr>
+<td>Qwen CLI</td>
+<td><code>~/.qwen/oauth_creds.json</code></td>
+<td><code>qwen</code></td>
+</tr>
+<tr>
+<td>gh CLI</td>
+<td><code>~/.config/gh/hosts.yml</code></td>
+<td><code>github</code></td>
+</tr>
+<tr>
+<td>环境变量</td>
+<td>进程环境里的 <code>OPENAI_API_KEY</code>、<code>ANTHROPIC_API_KEY</code> 等</td>
+<td>对应 provider</td>
+</tr>
+</tbody>
+</table>
+<p>导入有两种形态：外部 CLI 还在机器上时记指针（每次调用现读外部文件，外部 CLI 自己刷新的 token 自动生效）；否则拷贝 token 进凭据库、由 OpenProgram 负责刷新。</p>
+<p>Gemini CLI 的登录态不走 discover：<code>google-gemini-cli</code> provider 直接读 <code>~/.gemini/oauth_creds.json</code>，装好 Gemini CLI 并登录即可用。</p>
+<h3 id="辅助命令外部进程">辅助命令（外部进程）<a class="header-anchor" href="#辅助命令外部进程">#</a></h3>
+<p>有些企业环境的 token 由厂商或自研 CLI 签发（<code>aws</code>、<code>sso-helper</code>、<code>token-fetcher</code>），拿不到可以直接粘贴的 API key。这类 provider 在 Settings → Providers 里按 <code>credential_process</code> 类型添加：填命令 argv、stdout 的解析方式、缓存窗口。</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>含义</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>command</code></td>
+<td>辅助命令的 argv 列表。直接执行不过 shell，无需转义</td>
+<td>必填</td>
+</tr>
+<tr>
+<td><code>parses</code></td>
+<td><code>json</code> 表示按 JSON 解析 stdout，<code>text</code> 表示 stdout 去空白后即 token</td>
+<td><code>json</code></td>
+</tr>
+<tr>
+<td><code>json_key_path</code></td>
+<td>在 JSON 里下钻的键路径，例如 <code>[&quot;creds&quot;, &quot;token&quot;]</code>。留空则文档本身必须是字符串</td>
+<td><code>[]</code></td>
+</tr>
+<tr>
+<td><code>cache_seconds</code></td>
+<td>一个 token 复用多久后重新执行命令。<code>0</code> 表示每次调用都执行</td>
+<td><code>300</code></td>
+</tr>
+<tr>
+<td><code>timeout_seconds</code></td>
+<td>单次执行的墙钟上限</td>
+<td><code>60</code></td>
+</tr>
+</tbody>
+</table>
+<p>每次 API 调用只要 token 不在缓存窗口内就会执行该命令；登录冒烟测试也会执行一次，命令有问题在配置阶段就能发现。</p>
+<p>命令执行失败（非零退出、超时、输出无法解析、键路径不存在）会让请求直接报错，错误信息里带上命令和它的 stderr，不会回落到其他凭据。这是刻意配置的取值方式，悄悄换成别处的 token 只会掩盖故障。修好命令，或者删掉该凭据改用别的来源。</p>
+<p>企业 SSO（<code>sso</code>）尚未实现。该凭据类型是预留的，API 和 resolver 都会明确拒绝，不接受一份永远不会生效的配置。</p>
+<h2 id="管理与排障">管理与排障<a class="header-anchor" href="#管理与排障">#</a></h2>
+<pre><code class="language-bash">openprogram<span class="w"> </span>providers<span class="w"> </span>status<span class="w"> </span>&lt;provider&gt;<span class="w">    </span><span class="c1"># 当前凭据是否可用</span>
+openprogram<span class="w"> </span>providers<span class="w"> </span>doctor<span class="w">               </span><span class="c1"># 过期、刷新失败、冷却、冲突</span>
+openprogram<span class="w"> </span>providers<span class="w"> </span><span class="nb">logout</span><span class="w"> </span>&lt;provider&gt;<span class="w">    </span><span class="c1"># 删除凭据</span>
+openprogram<span class="w"> </span>providers<span class="w"> </span>use<span class="w"> </span>&lt;provider&gt;<span class="w"> </span><span class="o">[</span>account<span class="o">]</span><span class="w">   </span><span class="c1"># 多账号切换</span>
+openprogram<span class="w"> </span>providers<span class="w"> </span>list<span class="w">                 </span><span class="c1"># 按账号列出凭据池</span>
+</code></pre>
+<p>每个 provider 支持多个命名账号，一个账号的凭据池可以放多个 API key。某个 key 返回 401 / 402 / 429 / 503 时进入冷却，凭据池自动把下一把健康的 key 交给后续请求，策略可选（默认 <code>fill_first</code>，即&quot;备用 key&quot;语义；另有 <code>round_robin</code>、<code>random</code>、<code>least_used</code>）。跨账号轮换（而不是只用当前激活账号）是每个 provider 单独的开关，默认关闭。</p>
+<h3 id="codex-浏览器登录">Codex 浏览器登录<a class="header-anchor" href="#codex-浏览器登录">#</a></h3>
+<p>Program 内部的 Codex 模型调用使用该 provider 的活动账户，包括通过 <code>openprogram providers use openai-codex &lt;account&gt;</code> 选择的账户。脚本可以用 <code>create_runtime(provider=&quot;openai-codex&quot;, profile=&quot;&lt;account&gt;&quot;)</code> 固定其他账户。终止认证错误及 provider 明确标记为不可重试的其他错误只发出一次请求；错误分类在 Program runtime 中保留。没有显式重试判定的普通回调异常保留 Program 原有的有界重试。</p>
+<p>本地回调监听启动后才打开授权页面。请保持服务商面板打开，直到显示登录成功。页面未打开时点击“打开登录页面”。回调无法到达 App 时，可以在登录面板粘贴本次登录的回调 URL。</p>
+<p>兑换凭据返回 HTTP 403 表示 OpenAI 拒绝请求，仅凭状态码无法确定是账号权限还是网络原因。面板会区分已识别的授权错误，并显示连接重试。授权码过期或已使用时应重新登录。取消或离开面板会结束本次登录。</p>
+<div class="page-updated"><span data-i18n="updated">Last updated</span> · 2026-10-03</div><div class="prevnext"><a class="pn-link pn-prev" href="/docs/models/providers.html" data-href-en="/docs/models/providers.html" data-href-zh="/docs/models/providers.zh.html"><span class="pn-dir" data-i18n="prev">Previous</span><span class="pn-title" data-title-zh="模型服务">Providers</span></a><a class="pn-link pn-next" href="/docs/models/local-models.html" data-href-en="/docs/models/local-models.html" data-href-zh="/docs/models/local-models.zh.html"><span class="pn-dir" data-i18n="next">Next</span><span class="pn-title" data-title-zh="使用本地部署的模型">Use locally deployed models</span></a></div></article></main>
+  <aside class="toc"><div class="toc-title" data-i18n="on_this_page">On this page</div>
+<ul class="toc-list">
+<li>
+<a class="lvl-2" href="#存放位置">存放位置</a>
+</li>
+<li>
+<details class="toc-disclosure" open=""><summary>
+<a class="lvl-2" href="#凭据的几种来源">凭据的几种来源</a>
+</summary>
+<ul class="toc-list">
+<li>
+<a class="lvl-3" href="#api-key-登录">API key 登录</a>
+</li>
+<li>
+<a class="lvl-3" href="#oauth-登录">OAuth 登录</a>
+</li>
+<li>
+<a class="lvl-3" href="#从本机已有凭据导入">从本机已有凭据导入</a>
+</li>
+<li>
+<a class="lvl-3" href="#辅助命令外部进程">辅助命令（外部进程）</a>
+</li>
+</ul>
+</details>
+</li>
+<li>
+<details class="toc-disclosure" open=""><summary>
+<a class="lvl-2" href="#管理与排障">管理与排障</a>
+</summary>
+<ul class="toc-list">
+<li>
+<a class="lvl-3" href="#codex-浏览器登录">Codex 浏览器登录</a>
+</li>
+</ul>
+</details>
+</li>
+</ul></aside>
+</div>
+
+<div class="search-overlay">
+  <div class="search-box">
+    <input type="text" data-i18n-ph="search_ph" placeholder="Search titles or text…" autocomplete="off" spellcheck="false">
+    <div class="search-results"></div>
+  </div>
+</div>
+
+<script src="/docs/assets/site.js?v=6520ba46"></script>
+</body>
+</html>

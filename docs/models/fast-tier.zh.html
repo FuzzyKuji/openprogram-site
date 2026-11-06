@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh" data-base="/docs/" data-page-lang="zh" data-build="1793956776" data-alt-lang-url="/docs/models/fast-tier.html">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>高速模式 · OpenProgram Docs</title>
+<meta name="description" content="点击模型旁的思考强度控件，再点击弹窗右上角的仪表图标。开启后指针保持转动后的状态，不增加边框或底色；悬停时有指针动画。高速模式不改变思考强度滑块。 设置按会话和 provider/model 保存，新选择的模型默认使用标准档。标准档显式覆盖 agent 的高速默认值。修改只影响下一次提交，不改变正在执行的请求。">
+<link rel="canonical" href="https://openprogram.io/docs/models/fast-tier.zh.html">
+<link rel="alternate" type="text/markdown" href="https://openprogram.io/docs/models/fast-tier.zh.html.md">
+<link rel="describedby" href="https://openprogram.io/llms.txt">
+<link rel="alternate" hreflang="en" href="https://openprogram.io/docs/models/fast-tier.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://openprogram.io/docs/models/fast-tier.zh.html">
+<link rel="alternate" hreflang="x-default" href="https://openprogram.io/docs/models/fast-tier.html">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"OpenProgram Docs","item":"https://openprogram.io/docs/"},{"@type":"ListItem","position":2,"name":"高速模式"}]}</script>
+<meta property="og:type" content="article">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:site_name" content="OpenProgram">
+<meta property="og:url" content="https://openprogram.io/docs/models/fast-tier.zh.html">
+<meta property="og:title" content="高速模式 · OpenProgram Docs">
+<meta property="og:description" content="点击模型旁的思考强度控件，再点击弹窗右上角的仪表图标。开启后指针保持转动后的状态，不增加边框或底色；悬停时有指针动画。高速模式不改变思考强度滑块。 设置按会话和 provider/model 保存，新选择的模型默认使用标准档。标准档显式覆盖 agent 的高速默认值。修改只影响下一次提交，不改变正在执行的请求。">
+<meta property="og:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:secure_url" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="高速模式 · OpenProgram Docs">
+<meta name="twitter:description" content="点击模型旁的思考强度控件，再点击弹窗右上角的仪表图标。开启后指针保持转动后的状态，不增加边框或底色；悬停时有指针动画。高速模式不改变思考强度滑块。 设置按会话和 provider/model 保存，新选择的模型默认使用标准档。标准档显式覆盖 agent 的高速默认值。修改只影响下一次提交，不改变正在执行的请求。">
+<meta name="twitter:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta name="twitter:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/docs/assets/mark.svg">
+<link rel="stylesheet" href="/docs/assets/site.css?v=6520ba46">
+<link rel="stylesheet" href="/docs/assets/pygments-light.css" media="(prefers-color-scheme: light)" id="pyg-light">
+<link rel="stylesheet" href="/docs/assets/pygments-dark.css" media="(prefers-color-scheme: dark)" id="pyg-dark">
+<script src="/docs/assets/theme.js?v=6520ba46"></script>
+
+</head>
+<body>
+<header class="topbar">
+  <button class="icon hamburger" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2.5 4.5h11M2.5 8h11M2.5 11.5h11"/></svg></button>
+  <a class="brand" href="/docs/index.html"><img class="mark" src="/docs/assets/mark.svg" alt="">OpenProgram Docs</a>
+  <div class="spacer"></div>
+  <button class="search-trigger" aria-label="Search">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14"/></svg><span class="label" data-i18n="search">Search docs</span><kbd>⌘K</kbd>
+  </button>
+  <div class="lang-wrap">
+    <button class="icon lang-trigger" id="lang-toggle" aria-haspopup="true" aria-expanded="false" aria-label="Language">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="6.2"/><path d="M1.8 8h12.4" stroke-linecap="round"/><ellipse cx="8" cy="8" rx="2.8" ry="6.2"/></svg><span class="lang-label">EN</span><svg class="chev" width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+    </button>
+    <div class="lang-menu" id="lang-menu" role="menu">
+      <button class="lang-opt" data-lang="en" role="menuitem"><span>English</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="lang-opt" data-lang="zh" role="menuitem"><span>简体中文</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+  <div class="theme-wrap">
+    <button class="icon" id="theme-toggle" aria-label="Theme" aria-haspopup="menu" aria-controls="theme-menu" aria-expanded="false"><svg class="ic-system" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="2.5" width="13" height="9" rx="1.5"/><path d="M8 11.5V14M5.5 14h5"/></svg><svg class="ic-moon" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M13.5 9.5A6 6 0 1 1 6.5 2.5a5 5 0 0 0 7 7z"/></svg><svg class="ic-sun" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="3.2"/><path d="M8 1.2v1.8M8 13v1.8M1.2 8H3M13 8h1.8M3.2 3.2l1.3 1.3M11.5 11.5l1.3 1.3M12.8 3.2l-1.3 1.3M4.5 11.5l-1.3 1.3"/></svg></button>
+    <div class="theme-menu" id="theme-menu" role="menu" aria-labelledby="theme-toggle">
+      <button class="theme-opt" data-theme-choice="system" role="menuitemradio" aria-checked="true"><span>Follow system</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="light" role="menuitemradio" aria-checked="false"><span>Light</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="dark" role="menuitemradio" aria-checked="false"><span>Dark</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+</header>
+<nav class="tabbar"><a class="tablink" href="/docs/README.html" data-title-zh="开始使用" data-href-en="/docs/README.html" data-href-zh="/docs/README.zh.html">Get started</a><a class="tablink" href="/docs/install/install.html" data-title-zh="安装" data-href-en="/docs/install/install.html" data-href-zh="/docs/install/install.zh.html">Install</a><a class="tablink" href="/docs/capabilities/README.html" data-title-zh="能力" data-href-en="/docs/capabilities/README.html" data-href-zh="/docs/capabilities/README.zh.html">Capabilities</a><a class="tablink" href="/docs/interfaces/README.html" data-title-zh="界面" data-href-en="/docs/interfaces/README.html" data-href-zh="/docs/interfaces/README.zh.html">Interfaces</a><a class="tablink active" href="/docs/models/README.html" data-title-zh="模型" data-href-en="/docs/models/README.html" data-href-zh="/docs/models/README.zh.html">Models</a><a class="tablink" href="/docs/integrations/anthropic.html" data-title-zh="集成" data-href-en="/docs/integrations/anthropic.html" data-href-zh="/docs/integrations/anthropic.zh.html">Integrations</a><a class="tablink" href="/docs/server/README.html" data-title-zh="服务与运维" data-href-en="/docs/server/README.html" data-href-zh="/docs/server/README.zh.html">Server &amp; Ops</a><a class="tablink" href="/docs/reference/README.html" data-title-zh="参考" data-href-en="/docs/reference/README.html" data-href-zh="/docs/reference/README.zh.html">Reference</a><a class="tablink" href="/docs/reference/design/README.html" data-title-zh="设计" data-href-en="/docs/reference/design/README.html" data-href-zh="/docs/reference/design/README.zh.html">Design</a></nav>
+
+<div class="scrim"></div>
+<div class="layout">
+  <nav class="sidebar" aria-label="Documentation">
+    <input class="nav-filter" type="text" data-i18n-ph="nav_filter"
+           aria-label="Filter docs" placeholder="Filter docs…" autocomplete="off" spellcheck="false">
+    <div class="nav-tree"><div class="nav-sec"><div class="nav-sec-title" data-title-zh="概览">Overview</div><a class="navlink" href="/docs/models/README.html" data-title-zh="模型配置" data-href-en="/docs/models/README.html" data-href-zh="/docs/models/README.zh.html">Model configuration</a>
+<a class="navlink" href="/docs/models/providers.html" data-title-zh="模型服务" data-href-en="/docs/models/providers.html" data-href-zh="/docs/models/providers.zh.html">Providers</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="配置">Configuration</div><a class="navlink" href="/docs/models/auth.html" data-title-zh="认证" data-href-en="/docs/models/auth.html" data-href-zh="/docs/models/auth.zh.html">Authentication</a>
+<a class="navlink" href="/docs/models/local-models.html" data-title-zh="使用本地部署的模型" data-href-en="/docs/models/local-models.html" data-href-zh="/docs/models/local-models.zh.html">Use locally deployed models</a>
+<a class="navlink active" href="/docs/models/fast-tier.html" data-title-zh="高速模式" data-href-en="/docs/models/fast-tier.html" data-href-zh="/docs/models/fast-tier.zh.html">Fast mode</a>
+<a class="navlink" href="/docs/models/thinking-effort.html" data-title-zh="推理强度" data-href-en="/docs/models/thinking-effort.html" data-href-zh="/docs/models/thinking-effort.zh.html">Thinking effort</a>
+<a class="navlink" href="/docs/models/token-tracking.html" data-title-zh="Token 计量" data-href-en="/docs/models/token-tracking.html" data-href-zh="/docs/models/token-tracking.zh.html">Token accounting</a></div></div>
+  </nav>
+  <main class="content"><button class="fs-toggle" aria-label="Fullscreen" title="Fullscreen (Esc to exit)"><svg class="ic-expand" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.2 2H2v4.2M9.8 2H14v4.2M6.2 14H2V9.8M9.8 14H14V9.8"/></svg><svg class="ic-collapse" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6.2h4.2V2M14 6.2H9.8V2M2 9.8h4.2V14M14 9.8H9.8V14"/></svg></button><article><nav class="breadcrumb"><span class="bc-seg" data-title-zh="模型">Models</span> <span class='bc-sep'>›</span> <span class="bc-seg" data-title-zh="配置">Configuration</span> <span class='bc-sep'>›</span> <span class="bc-seg bc-current" data-title-zh="高速模式">Fast mode</span></nav><h1 id="高速模式">高速模式<a class="header-anchor" href="#高速模式">#</a></h1>
+<p>点击模型旁的思考强度控件，再点击弹窗右上角的仪表图标。开启后指针保持转动后的状态，不增加边框或底色；悬停时有指针动画。高速模式不改变思考强度滑块。</p>
+<p>设置按会话和 provider/model 保存，新选择的模型默认使用标准档。标准档显式覆盖 agent 的高速默认值。修改只影响下一次提交，不改变正在执行的请求。</p>
+<h2 id="支持的线路">支持的线路<a class="header-anchor" href="#支持的线路">#</a></h2>
+<ul>
+<li>Codex 根据账号模型目录判断。</li>
+<li>Claude 保留已有的高速模型及原生 speed 参数。</li>
+<li>官方 xAI API 的 Grok 4.6 支持 Priority Processing，开启发送 <code>service_tier: &quot;priority&quot;</code>，标准档发送 <code>&quot;default&quot;</code>。</li>
+<li>Grok 订阅线路的 Grok 4.6 走 CLI chat proxy，同样支持 <code>service_tier: &quot;priority&quot;</code> / <code>&quot;default&quot;</code>。其他 Grok 订阅模型及未知网关保持“尚未确认”，除非线路配置显式声明支持。图标保持可见，并提示原因。</li>
+</ul>
+<p>高速可能增加用量或费用。xAI 优先处理的 token 单价为标准档的 2 倍，见 <a href="https://docs.x.ai/developers/pricing">xAI 定价</a>。图标表示请求偏好，不保证实际速度。Completions 和 Responses 在响应 usage 中保留实际返回的档位；缺少元数据时不推定成功提速。xAI 返回的请求费用也单独保留。</p>
+<p>模型配置可用 <code>fast: false</code> 显式禁用，或用 <code>fast: true</code> 声明线路支持。不根据模型名称推定订阅或网关支持；每次调用按实际选择的线路验证。</p>
+<div class="page-updated"><span data-i18n="updated">Last updated</span> · 2026-09-27</div><div class="prevnext"><a class="pn-link pn-prev" href="/docs/models/local-models.html" data-href-en="/docs/models/local-models.html" data-href-zh="/docs/models/local-models.zh.html"><span class="pn-dir" data-i18n="prev">Previous</span><span class="pn-title" data-title-zh="使用本地部署的模型">Use locally deployed models</span></a><a class="pn-link pn-next" href="/docs/models/thinking-effort.html" data-href-en="/docs/models/thinking-effort.html" data-href-zh="/docs/models/thinking-effort.zh.html"><span class="pn-dir" data-i18n="next">Next</span><span class="pn-title" data-title-zh="推理强度">Thinking effort</span></a></div></article></main>
+  <aside class="toc"><div class="toc-title" data-i18n="on_this_page">On this page</div>
+<ul class="toc-list">
+<li>
+<a class="lvl-2" href="#支持的线路">支持的线路</a>
+</li>
+</ul></aside>
+</div>
+
+<div class="search-overlay">
+  <div class="search-box">
+    <input type="text" data-i18n-ph="search_ph" placeholder="Search titles or text…" autocomplete="off" spellcheck="false">
+    <div class="search-results"></div>
+  </div>
+</div>
+
+<script src="/docs/assets/site.js?v=6520ba46"></script>
+</body>
+</html>

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="zh" data-base="/docs/" data-page-lang="zh" data-build="1793956776" data-alt-lang-url="/docs/capabilities/memory-settings.html">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>调整记忆 · OpenProgram Docs</title>
+<meta name="description" content="打开 设置 → 记忆 。每项修改立即保存，下一轮生效；只有 启用 Memory 需要重启。这些设置也是配置键，列在 配置键 的 memory.* 下。 后台写入 # 设置 作用 写入模型 写入和整理 Memory 用的模型。 自动 ：用默认 Agent 的模型；该 Agent 没有设模型时，用上次使用的模型。">
+<link rel="canonical" href="https://openprogram.io/docs/capabilities/memory-settings.zh.html">
+<link rel="alternate" type="text/markdown" href="https://openprogram.io/docs/capabilities/memory-settings.zh.html.md">
+<link rel="describedby" href="https://openprogram.io/llms.txt">
+<link rel="alternate" hreflang="en" href="https://openprogram.io/docs/capabilities/memory-settings.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://openprogram.io/docs/capabilities/memory-settings.zh.html">
+<link rel="alternate" hreflang="x-default" href="https://openprogram.io/docs/capabilities/memory-settings.html">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"OpenProgram Docs","item":"https://openprogram.io/docs/"},{"@type":"ListItem","position":2,"name":"调整记忆"}]}</script>
+<meta property="og:type" content="article">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:site_name" content="OpenProgram">
+<meta property="og:url" content="https://openprogram.io/docs/capabilities/memory-settings.zh.html">
+<meta property="og:title" content="调整记忆 · OpenProgram Docs">
+<meta property="og:description" content="打开 设置 → 记忆 。每项修改立即保存，下一轮生效；只有 启用 Memory 需要重启。这些设置也是配置键，列在 配置键 的 memory.* 下。 后台写入 # 设置 作用 写入模型 写入和整理 Memory 用的模型。 自动 ：用默认 Agent 的模型；该 Agent 没有设模型时，用上次使用的模型。">
+<meta property="og:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:secure_url" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="调整记忆 · OpenProgram Docs">
+<meta name="twitter:description" content="打开 设置 → 记忆 。每项修改立即保存，下一轮生效；只有 启用 Memory 需要重启。这些设置也是配置键，列在 配置键 的 memory.* 下。 后台写入 # 设置 作用 写入模型 写入和整理 Memory 用的模型。 自动 ：用默认 Agent 的模型；该 Agent 没有设模型时，用上次使用的模型。">
+<meta name="twitter:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta name="twitter:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/docs/assets/mark.svg">
+<link rel="stylesheet" href="/docs/assets/site.css?v=6520ba46">
+<link rel="stylesheet" href="/docs/assets/pygments-light.css" media="(prefers-color-scheme: light)" id="pyg-light">
+<link rel="stylesheet" href="/docs/assets/pygments-dark.css" media="(prefers-color-scheme: dark)" id="pyg-dark">
+<script src="/docs/assets/theme.js?v=6520ba46"></script>
+
+</head>
+<body>
+<header class="topbar">
+  <button class="icon hamburger" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2.5 4.5h11M2.5 8h11M2.5 11.5h11"/></svg></button>
+  <a class="brand" href="/docs/index.html"><img class="mark" src="/docs/assets/mark.svg" alt="">OpenProgram Docs</a>
+  <div class="spacer"></div>
+  <button class="search-trigger" aria-label="Search">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14"/></svg><span class="label" data-i18n="search">Search docs</span><kbd>⌘K</kbd>
+  </button>
+  <div class="lang-wrap">
+    <button class="icon lang-trigger" id="lang-toggle" aria-haspopup="true" aria-expanded="false" aria-label="Language">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="6.2"/><path d="M1.8 8h12.4" stroke-linecap="round"/><ellipse cx="8" cy="8" rx="2.8" ry="6.2"/></svg><span class="lang-label">EN</span><svg class="chev" width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+    </button>
+    <div class="lang-menu" id="lang-menu" role="menu">
+      <button class="lang-opt" data-lang="en" role="menuitem"><span>English</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="lang-opt" data-lang="zh" role="menuitem"><span>简体中文</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+  <div class="theme-wrap">
+    <button class="icon" id="theme-toggle" aria-label="Theme" aria-haspopup="menu" aria-controls="theme-menu" aria-expanded="false"><svg class="ic-system" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="2.5" width="13" height="9" rx="1.5"/><path d="M8 11.5V14M5.5 14h5"/></svg><svg class="ic-moon" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M13.5 9.5A6 6 0 1 1 6.5 2.5a5 5 0 0 0 7 7z"/></svg><svg class="ic-sun" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="3.2"/><path d="M8 1.2v1.8M8 13v1.8M1.2 8H3M13 8h1.8M3.2 3.2l1.3 1.3M11.5 11.5l1.3 1.3M12.8 3.2l-1.3 1.3M4.5 11.5l-1.3 1.3"/></svg></button>
+    <div class="theme-menu" id="theme-menu" role="menu" aria-labelledby="theme-toggle">
+      <button class="theme-opt" data-theme-choice="system" role="menuitemradio" aria-checked="true"><span>Follow system</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="light" role="menuitemradio" aria-checked="false"><span>Light</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="dark" role="menuitemradio" aria-checked="false"><span>Dark</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+</header>
+<nav class="tabbar"><a class="tablink" href="/docs/README.html" data-title-zh="开始使用" data-href-en="/docs/README.html" data-href-zh="/docs/README.zh.html">Get started</a><a class="tablink" href="/docs/install/install.html" data-title-zh="安装" data-href-en="/docs/install/install.html" data-href-zh="/docs/install/install.zh.html">Install</a><a class="tablink active" href="/docs/capabilities/README.html" data-title-zh="能力" data-href-en="/docs/capabilities/README.html" data-href-zh="/docs/capabilities/README.zh.html">Capabilities</a><a class="tablink" href="/docs/interfaces/README.html" data-title-zh="界面" data-href-en="/docs/interfaces/README.html" data-href-zh="/docs/interfaces/README.zh.html">Interfaces</a><a class="tablink" href="/docs/models/README.html" data-title-zh="模型" data-href-en="/docs/models/README.html" data-href-zh="/docs/models/README.zh.html">Models</a><a class="tablink" href="/docs/integrations/anthropic.html" data-title-zh="集成" data-href-en="/docs/integrations/anthropic.html" data-href-zh="/docs/integrations/anthropic.zh.html">Integrations</a><a class="tablink" href="/docs/server/README.html" data-title-zh="服务与运维" data-href-en="/docs/server/README.html" data-href-zh="/docs/server/README.zh.html">Server &amp; Ops</a><a class="tablink" href="/docs/reference/README.html" data-title-zh="参考" data-href-en="/docs/reference/README.html" data-href-zh="/docs/reference/README.zh.html">Reference</a><a class="tablink" href="/docs/reference/design/README.html" data-title-zh="设计" data-href-en="/docs/reference/design/README.html" data-href-zh="/docs/reference/design/README.zh.html">Design</a></nav>
+
+<div class="scrim"></div>
+<div class="layout">
+  <nav class="sidebar" aria-label="Documentation">
+    <input class="nav-filter" type="text" data-i18n-ph="nav_filter"
+           aria-label="Filter docs" placeholder="Filter docs…" autocomplete="off" spellcheck="false">
+    <div class="nav-tree"><div class="nav-sec"><div class="nav-sec-title" data-title-zh="概览">Overview</div><a class="navlink" href="/docs/capabilities/README.html" data-title-zh="概览" data-href-en="/docs/capabilities/README.html" data-href-zh="/docs/capabilities/README.zh.html">Overview</a>
+<a class="navlink" href="/docs/capabilities/applications.html" data-title-zh="应用" data-href-en="/docs/capabilities/applications.html" data-href-zh="/docs/capabilities/applications.zh.html">Applications</a>
+<a class="navlink" href="/docs/capabilities/framework-control.html" data-title-zh="框架工具" data-href-en="/docs/capabilities/framework-control.html" data-href-zh="/docs/capabilities/framework-control.zh.html">Framework tools</a></div>
+<div class="nav-sec"><div class="nav-sec-title">Agentic Programming</div><a class="navlink" href="/docs/capabilities/agentic-programming/README.html" data-title-zh="指南" data-href-en="/docs/capabilities/agentic-programming/README.html" data-href-zh="/docs/capabilities/agentic-programming/README.zh.html">Guide</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/philosophy.html" data-title-zh="设计原则" data-href-en="/docs/capabilities/agentic-programming/philosophy.html" data-href-zh="/docs/capabilities/agentic-programming/philosophy.zh.html">Philosophy</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/embedding-in-your-own-stack.html" data-title-zh="框架嵌入" data-href-en="/docs/capabilities/agentic-programming/embedding-in-your-own-stack.html" data-href-zh="/docs/capabilities/agentic-programming/embedding-in-your-own-stack.zh.html">Framework embedding</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="编写函数">Writing functions</div><a class="navlink" href="/docs/capabilities/agentic-programming/writing-functions/pure-python.html" data-title-zh="Python 函数" data-href-en="/docs/capabilities/agentic-programming/writing-functions/pure-python.html" data-href-zh="/docs/capabilities/agentic-programming/writing-functions/pure-python.zh.html">Python functions</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/writing-functions/agent.html" data-title-zh="智能体函数" data-href-en="/docs/capabilities/agentic-programming/writing-functions/agent.html" data-href-zh="/docs/capabilities/agentic-programming/writing-functions/agent.zh.html">Agentic functions</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/writing-functions/function-metadata.html" data-title-zh="函数元数据" data-href-en="/docs/capabilities/agentic-programming/writing-functions/function-metadata.html" data-href-zh="/docs/capabilities/agentic-programming/writing-functions/function-metadata.zh.html">Function metadata</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="选择下一步">Choosing the next step</div><a class="navlink" href="/docs/capabilities/agentic-programming/choosing-the-next-step/tool-calling.html" data-title-zh="工具循环" data-href-en="/docs/capabilities/agentic-programming/choosing-the-next-step/tool-calling.html" data-href-zh="/docs/capabilities/agentic-programming/choosing-the-next-step/tool-calling.zh.html">Tool-call loops</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/choosing-the-next-step/fixed-order-calls.html" data-title-zh="顺序调用" data-href-en="/docs/capabilities/agentic-programming/choosing-the-next-step/fixed-order-calls.html" data-href-zh="/docs/capabilities/agentic-programming/choosing-the-next-step/fixed-order-calls.zh.html">Fixed-order calls</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/choosing-the-next-step/next-step-decision.html" data-title-zh="步骤选择" data-href-en="/docs/capabilities/agentic-programming/choosing-the-next-step/next-step-decision.html" data-href-zh="/docs/capabilities/agentic-programming/choosing-the-next-step/next-step-decision.zh.html">Next-step selection</a></div>
+<div class="nav-sec"><div class="nav-sec-title">Agentic Workflows</div><a class="navlink" href="/docs/capabilities/workflows/README.html" data-title-zh="工作流" data-href-en="/docs/capabilities/workflows/README.html" data-href-zh="/docs/capabilities/workflows/README.zh.html">Workflows</a>
+<a class="navlink" href="/docs/capabilities/workflows/authoring.html" data-title-zh="工作流编写" data-href-en="/docs/capabilities/workflows/authoring.html" data-href-zh="/docs/capabilities/workflows/authoring.zh.html">Workflow authoring</a>
+<a class="navlink" href="/docs/capabilities/workflows/recording.html" data-title-zh="录制 Workflow" data-href-en="/docs/capabilities/workflows/recording.html" data-href-zh="/docs/capabilities/workflows/recording.zh.html">Record a workflow</a>
+<a class="navlink" href="/docs/capabilities/workflows/reports.html" data-title-zh="每周报告" data-href-en="/docs/capabilities/workflows/reports.html" data-href-zh="/docs/capabilities/workflows/reports.zh.html">Weekly reports</a></div>
+<div class="nav-sec"><div class="nav-sec-title">Agents</div><a class="navlink" href="/docs/capabilities/agents.html" data-title-zh="配置 Agent" data-href-en="/docs/capabilities/agents.html" data-href-zh="/docs/capabilities/agents.zh.html">Configure an Agent</a>
+<a class="navlink" href="/docs/capabilities/agents-md.html" data-title-zh="用 AGENTS.md 写指令" data-href-en="/docs/capabilities/agents-md.html" data-href-zh="/docs/capabilities/agents-md.zh.html">Instructions with AGENTS.md</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="常驻 Agent">Always-on Agents</div><a class="navlink" href="/docs/capabilities/always-on-agents.html" data-title-zh="常驻 Agent" data-href-en="/docs/capabilities/always-on-agents.html" data-href-zh="/docs/capabilities/always-on-agents.zh.html">Always-on Agents</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="提醒">Reminders</div><a class="navlink" href="/docs/capabilities/reminders.html" data-title-zh="提醒" data-href-en="/docs/capabilities/reminders.html" data-href-zh="/docs/capabilities/reminders.zh.html">Reminders</a>
+<a class="navlink" href="/docs/capabilities/event-triggers.html" data-title-zh="有事发生时运行任务" data-href-en="/docs/capabilities/event-triggers.html" data-href-zh="/docs/capabilities/event-triggers.zh.html">Run a task when something happens</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="记忆">Memory</div><a class="navlink" href="/docs/capabilities/memory.html" data-title-zh="记忆管理" data-href-en="/docs/capabilities/memory.html" data-href-zh="/docs/capabilities/memory.zh.html">Memory management</a>
+<a class="navlink active" href="/docs/capabilities/memory-settings.html" data-title-zh="调整记忆" data-href-en="/docs/capabilities/memory-settings.html" data-href-zh="/docs/capabilities/memory-settings.zh.html">Tune Memory</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="运行环境">Environments</div><a class="navlink" href="/docs/capabilities/environments.html" data-title-zh="在另一台机器上运行会话" data-href-en="/docs/capabilities/environments.html" data-href-zh="/docs/capabilities/environments.zh.html">Run conversations on another machine</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="会话目标">Session goals</div><a class="navlink" href="/docs/capabilities/goal.html" data-title-zh="目标" data-href-en="/docs/capabilities/goal.html" data-href-zh="/docs/capabilities/goal.zh.html">Goals</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="操控电脑">Computer use</div><a class="navlink" href="/docs/capabilities/computer-use.html" data-title-zh="操控电脑" data-href-en="/docs/capabilities/computer-use.html" data-href-zh="/docs/capabilities/computer-use.zh.html">Computer use</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="会议">Meetings</div><a class="navlink" href="/docs/capabilities/meetings.html" data-title-zh="会议" data-href-en="/docs/capabilities/meetings.html" data-href-zh="/docs/capabilities/meetings.zh.html">Meetings</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="扩展">Extending</div><a class="navlink" href="/docs/capabilities/installing-programs.html" data-title-zh="安装程序" data-href-en="/docs/capabilities/installing-programs.html" data-href-zh="/docs/capabilities/installing-programs.zh.html">Installing programs</a>
+<a class="navlink" href="/docs/capabilities/skills.html" data-title-zh="技能" data-href-en="/docs/capabilities/skills.html" data-href-zh="/docs/capabilities/skills.zh.html">Skills</a>
+<a class="navlink" href="/docs/capabilities/plugins.html" data-title-zh="插件" data-href-en="/docs/capabilities/plugins.html" data-href-zh="/docs/capabilities/plugins.zh.html">Plugins</a>
+<a class="navlink" href="/docs/capabilities/mcp.html" data-title-zh="MCP" data-href-en="/docs/capabilities/mcp.html" data-href-zh="/docs/capabilities/mcp.zh.html">MCP</a>
+<a class="navlink" href="/docs/capabilities/tools.html" data-title-zh="内置工具" data-href-en="/docs/capabilities/tools.html" data-href-zh="/docs/capabilities/tools.zh.html">Built-in tools</a>
+<a class="navlink" href="/docs/capabilities/lsp.html" data-title-zh="语言服务器" data-href-en="/docs/capabilities/lsp.html" data-href-zh="/docs/capabilities/lsp.zh.html">Language servers</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="概览">Overview</div><a class="navlink" href="/docs/capabilities/commit-push-pr.html" data-title-zh="提交与拉取请求" data-href-en="/docs/capabilities/commit-push-pr.html" data-href-zh="/docs/capabilities/commit-push-pr.zh.html">Commits and PRs</a>
+<a class="navlink" href="/docs/capabilities/permissions.html" data-title-zh="工具权限" data-href-en="/docs/capabilities/permissions.html" data-href-zh="/docs/capabilities/permissions.zh.html">Tool permissions</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="指南">Guide</div><a class="navlink" href="/docs/capabilities/agentic-programming/self-programming-ai-agents.html" data-title-zh="自编程智能体" data-href-en="/docs/capabilities/agentic-programming/self-programming-ai-agents.html" data-href-zh="/docs/capabilities/agentic-programming/self-programming-ai-agents.zh.html">Self-programming agents</a></div></div>
+  </nav>
+  <main class="content"><button class="fs-toggle" aria-label="Fullscreen" title="Fullscreen (Esc to exit)"><svg class="ic-expand" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.2 2H2v4.2M9.8 2H14v4.2M6.2 14H2V9.8M9.8 14H14V9.8"/></svg><svg class="ic-collapse" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6.2h4.2V2M14 6.2H9.8V2M2 9.8h4.2V14M14 9.8H9.8V14"/></svg></button><article><nav class="breadcrumb"><span class="bc-seg" data-title-zh="能力">Capabilities</span> <span class='bc-sep'>›</span> <span class="bc-seg" data-title-zh="记忆">Memory</span> <span class='bc-sep'>›</span> <span class="bc-seg bc-current" data-title-zh="调整记忆">Tune Memory</span></nav><h1 id="调整记忆">调整记忆<a class="header-anchor" href="#调整记忆">#</a></h1>
+<p>打开 <strong>设置 → 记忆</strong>。每项修改立即保存，下一轮生效；只有 <strong>启用 Memory</strong>
+需要重启。这些设置也是配置键，列在<a href="/docs/reference/config-keys.zh.html">配置键</a>的
+<code>memory.*</code> 下。</p>
+<h2 id="后台写入">后台写入<a class="header-anchor" href="#后台写入">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>设置</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>写入模型</strong></td>
+<td>写入和整理 Memory 用的模型。<strong>自动</strong>：用默认 Agent 的模型；该 Agent 没有设模型时，用上次使用的模型。</td>
+</tr>
+<tr>
+<td><strong>自动写入</strong></td>
+<td>在后台把已完成的对话整理成 Topic 记录。</td>
+</tr>
+<tr>
+<td><strong>写入频率</strong></td>
+<td>累积多少对话（约 8K、16K 或 32K Token）后写一次。</td>
+</tr>
+<tr>
+<td><strong>写入后校验</strong></td>
+<td>每次写入后，就刚记下的一条事实提一个问题，在 Memory 副本里查答案；查不到时修复 Topic。默认关闭：每次写入至少多三次模型调用，修复再多三次。</td>
+</tr>
+</tbody>
+</table>
+<p><code>openprogram memory status</code> 的 <code>verification</code> 一项显示校验结果：通过、修复
+成功、修复后仍失败、出错各多少次，以及最近一次的结果。</p>
+<h2 id="检索">检索<a class="header-anchor" href="#检索">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>设置</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>检索方法</strong></td>
+<td><strong>Agent</strong>：不自动加入，由模型用工具自己查看 Memory。<strong>关键词</strong>：按 BM25 排序。<strong>语义</strong>：按 Embedding 排序。<strong>混合</strong>：两者都跑再合并。语义和混合需要 Embedding 模型。</td>
+</tr>
+<tr>
+<td><strong>混合权重</strong></td>
+<td>混合检索中关键词与语义的比重：<strong>关键词优先</strong>（70 / 30）、<strong>均衡</strong>（50 / 50）或 <strong>语义优先</strong>（30 / 70）。<strong>自动</strong>：消息含日期、引号短语或人名时偏向关键词，否则两者均衡。</td>
+</tr>
+<tr>
+<td><strong>同主题加权</strong></td>
+<td>混合检索时，一个 Topic 有多段匹配就提高它的排名。默认开启。</td>
+</tr>
+<tr>
+<td><strong>检索数量</strong></td>
+<td>每轮最多加入的记录数：3、5、8 或 10。</td>
+</tr>
+</tbody>
+</table>
+<p>混合权重和同主题加权只在检索方法为混合时生效。</p>
+<p>语义和混合检索需要 Embedding 模型，以及运行它的 sentence-transformers 和
+PyTorch。App 不自带这两个包，所以 <strong>Embedding 模型</strong> 旁边的 <strong>安装</strong> 会连同
+模型一起下载它们。这两个包约占 1 GB 磁盘，模型约 90 MB。包装在
+<code>~/.openprogram/extras/embedding/</code>，不在 App 里，App 更新后仍然保留。</p>
+<h2 id="项目记忆">项目记忆<a class="header-anchor" href="#项目记忆">#</a></h2>
+<p>项目里的对话可以把只属于这个项目的内容，和到哪儿都适用的内容分开存放。</p>
+<table>
+<thead>
+<tr>
+<th>设置</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>项目记忆</strong></td>
+<td>项目中的对话同时读取该项目自己的 Memory，存放在 <code>~/.openprogram/projects/&lt;项目&gt;/memory</code>。检索、Memory 工具和核心记忆随之覆盖两层，项目在前。默认打开。</td>
+</tr>
+<tr>
+<td><strong>写入项目记忆</strong></td>
+<td>把项目对话要记下的内容写入该项目的 Memory，而不是个人 Memory。需要先打开项目记忆。默认打开。</td>
+</tr>
+</tbody>
+</table>
+<p>项目之外的对话属于主目录项目，只读个人 Memory；个人 Memory 就是主目录项目的
+Memory，位于 <code>~/.openprogram/projects/default/memory</code>。项目的 Memory 在第一次
+写入内容后才生效，不会往项目自己的文件夹里写任何东西。在 History 里，
+每个项目的 Memory 显示在它的 Memory 标签页下。两层同时生效时，Memory 工具
+给每个路径标出所在层，例如 <code>project:topics/api.md</code>。一轮对话只写进一层，
+所以打开或关闭项目写入都不会把对话复制到另一层；把聊天移到另一个项目后，
+只有之后的轮次写进那个项目的 Memory，旧项目 Memory 里已有的内容留在原处。</p>
+<h2 id="上下文与历史">上下文与历史<a class="header-anchor" href="#上下文与历史">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>设置</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>每次聊天注入核心记忆</strong></td>
+<td>把精简的核心视图加入每次系统提示词。</td>
+</tr>
+<tr>
+<td><strong>Recent 视图大小</strong></td>
+<td>Recent 视图保留的最新记录数。</td>
+</tr>
+</tbody>
+</table>
+<p>查看和编辑 Memory 的内容，见<a href="/docs/capabilities/memory.zh.html">查看和编辑 Memory</a>。</p>
+<div class="page-updated"><span data-i18n="updated">Last updated</span> · 2026-10-25</div><div class="prevnext"><a class="pn-link pn-prev" href="/docs/capabilities/memory.html" data-href-en="/docs/capabilities/memory.html" data-href-zh="/docs/capabilities/memory.zh.html"><span class="pn-dir" data-i18n="prev">Previous</span><span class="pn-title" data-title-zh="记忆管理">Memory management</span></a><a class="pn-link pn-next" href="/docs/capabilities/environments.html" data-href-en="/docs/capabilities/environments.html" data-href-zh="/docs/capabilities/environments.zh.html"><span class="pn-dir" data-i18n="next">Next</span><span class="pn-title" data-title-zh="在另一台机器上运行会话">Run conversations on another machine</span></a></div></article></main>
+  <aside class="toc"><div class="toc-title" data-i18n="on_this_page">On this page</div>
+<ul class="toc-list">
+<li>
+<a class="lvl-2" href="#后台写入">后台写入</a>
+</li>
+<li>
+<a class="lvl-2" href="#检索">检索</a>
+</li>
+<li>
+<a class="lvl-2" href="#项目记忆">项目记忆</a>
+</li>
+<li>
+<a class="lvl-2" href="#上下文与历史">上下文与历史</a>
+</li>
+</ul></aside>
+</div>
+
+<div class="search-overlay">
+  <div class="search-box">
+    <input type="text" data-i18n-ph="search_ph" placeholder="Search titles or text…" autocomplete="off" spellcheck="false">
+    <div class="search-results"></div>
+  </div>
+</div>
+
+<script src="/docs/assets/site.js?v=6520ba46"></script>
+</body>
+</html>

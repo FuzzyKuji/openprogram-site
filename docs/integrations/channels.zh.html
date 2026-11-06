@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="zh" data-base="/docs/" data-page-lang="zh" data-build="1793956776" data-alt-lang-url="/docs/integrations/channels.html">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>聊天渠道 · OpenProgram Docs</title>
+<meta name="description" content="这是什么？ # Channels 把聊天平台—— Telegram、Discord、Slack、微信 ——接到你的 agent 上。给机器人发一条消息就会跑一轮 agent turn，回复回到同一个聊天里。渠道 worker 跑在后台服务内，同一通对话也会实时出现在 Web UI 和 TUI 里。 平台 消息如何到达">
+<link rel="canonical" href="https://openprogram.io/docs/integrations/channels.zh.html">
+<link rel="alternate" type="text/markdown" href="https://openprogram.io/docs/integrations/channels.zh.html.md">
+<link rel="describedby" href="https://openprogram.io/llms.txt">
+<link rel="alternate" hreflang="en" href="https://openprogram.io/docs/integrations/channels.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://openprogram.io/docs/integrations/channels.zh.html">
+<link rel="alternate" hreflang="x-default" href="https://openprogram.io/docs/integrations/channels.html">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"OpenProgram Docs","item":"https://openprogram.io/docs/"},{"@type":"ListItem","position":2,"name":"聊天渠道"}]}</script>
+<meta property="og:type" content="article">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:site_name" content="OpenProgram">
+<meta property="og:url" content="https://openprogram.io/docs/integrations/channels.zh.html">
+<meta property="og:title" content="聊天渠道 · OpenProgram Docs">
+<meta property="og:description" content="这是什么？ # Channels 把聊天平台—— Telegram、Discord、Slack、微信 ——接到你的 agent 上。给机器人发一条消息就会跑一轮 agent turn，回复回到同一个聊天里。渠道 worker 跑在后台服务内，同一通对话也会实时出现在 Web UI 和 TUI 里。 平台 消息如何到达">
+<meta property="og:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:secure_url" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="聊天渠道 · OpenProgram Docs">
+<meta name="twitter:description" content="这是什么？ # Channels 把聊天平台—— Telegram、Discord、Slack、微信 ——接到你的 agent 上。给机器人发一条消息就会跑一轮 agent turn，回复回到同一个聊天里。渠道 worker 跑在后台服务内，同一通对话也会实时出现在 Web UI 和 TUI 里。 平台 消息如何到达">
+<meta name="twitter:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta name="twitter:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/docs/assets/mark.svg">
+<link rel="stylesheet" href="/docs/assets/site.css?v=6520ba46">
+<link rel="stylesheet" href="/docs/assets/pygments-light.css" media="(prefers-color-scheme: light)" id="pyg-light">
+<link rel="stylesheet" href="/docs/assets/pygments-dark.css" media="(prefers-color-scheme: dark)" id="pyg-dark">
+<script src="/docs/assets/theme.js?v=6520ba46"></script>
+
+</head>
+<body>
+<header class="topbar">
+  <button class="icon hamburger" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2.5 4.5h11M2.5 8h11M2.5 11.5h11"/></svg></button>
+  <a class="brand" href="/docs/index.html"><img class="mark" src="/docs/assets/mark.svg" alt="">OpenProgram Docs</a>
+  <div class="spacer"></div>
+  <button class="search-trigger" aria-label="Search">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14"/></svg><span class="label" data-i18n="search">Search docs</span><kbd>⌘K</kbd>
+  </button>
+  <div class="lang-wrap">
+    <button class="icon lang-trigger" id="lang-toggle" aria-haspopup="true" aria-expanded="false" aria-label="Language">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="6.2"/><path d="M1.8 8h12.4" stroke-linecap="round"/><ellipse cx="8" cy="8" rx="2.8" ry="6.2"/></svg><span class="lang-label">EN</span><svg class="chev" width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+    </button>
+    <div class="lang-menu" id="lang-menu" role="menu">
+      <button class="lang-opt" data-lang="en" role="menuitem"><span>English</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="lang-opt" data-lang="zh" role="menuitem"><span>简体中文</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+  <div class="theme-wrap">
+    <button class="icon" id="theme-toggle" aria-label="Theme" aria-haspopup="menu" aria-controls="theme-menu" aria-expanded="false"><svg class="ic-system" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="2.5" width="13" height="9" rx="1.5"/><path d="M8 11.5V14M5.5 14h5"/></svg><svg class="ic-moon" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M13.5 9.5A6 6 0 1 1 6.5 2.5a5 5 0 0 0 7 7z"/></svg><svg class="ic-sun" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="3.2"/><path d="M8 1.2v1.8M8 13v1.8M1.2 8H3M13 8h1.8M3.2 3.2l1.3 1.3M11.5 11.5l1.3 1.3M12.8 3.2l-1.3 1.3M4.5 11.5l-1.3 1.3"/></svg></button>
+    <div class="theme-menu" id="theme-menu" role="menu" aria-labelledby="theme-toggle">
+      <button class="theme-opt" data-theme-choice="system" role="menuitemradio" aria-checked="true"><span>Follow system</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="light" role="menuitemradio" aria-checked="false"><span>Light</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="dark" role="menuitemradio" aria-checked="false"><span>Dark</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+</header>
+<nav class="tabbar"><a class="tablink" href="/docs/README.html" data-title-zh="开始使用" data-href-en="/docs/README.html" data-href-zh="/docs/README.zh.html">Get started</a><a class="tablink" href="/docs/install/install.html" data-title-zh="安装" data-href-en="/docs/install/install.html" data-href-zh="/docs/install/install.zh.html">Install</a><a class="tablink" href="/docs/capabilities/README.html" data-title-zh="能力" data-href-en="/docs/capabilities/README.html" data-href-zh="/docs/capabilities/README.zh.html">Capabilities</a><a class="tablink" href="/docs/interfaces/README.html" data-title-zh="界面" data-href-en="/docs/interfaces/README.html" data-href-zh="/docs/interfaces/README.zh.html">Interfaces</a><a class="tablink" href="/docs/models/README.html" data-title-zh="模型" data-href-en="/docs/models/README.html" data-href-zh="/docs/models/README.zh.html">Models</a><a class="tablink active" href="/docs/integrations/anthropic.html" data-title-zh="集成" data-href-en="/docs/integrations/anthropic.html" data-href-zh="/docs/integrations/anthropic.zh.html">Integrations</a><a class="tablink" href="/docs/server/README.html" data-title-zh="服务与运维" data-href-en="/docs/server/README.html" data-href-zh="/docs/server/README.zh.html">Server &amp; Ops</a><a class="tablink" href="/docs/reference/README.html" data-title-zh="参考" data-href-en="/docs/reference/README.html" data-href-zh="/docs/reference/README.zh.html">Reference</a><a class="tablink" href="/docs/reference/design/README.html" data-title-zh="设计" data-href-en="/docs/reference/design/README.html" data-href-zh="/docs/reference/design/README.zh.html">Design</a></nav>
+
+<div class="scrim"></div>
+<div class="layout">
+  <nav class="sidebar" aria-label="Documentation">
+    <input class="nav-filter" type="text" data-i18n-ph="nav_filter"
+           aria-label="Filter docs" placeholder="Filter docs…" autocomplete="off" spellcheck="false">
+    <div class="nav-tree"><div class="nav-sec"><div class="nav-sec-title" data-title-zh="集成">Integrations</div><a class="navlink" href="/docs/integrations/anthropic.html" data-title-zh="Anthropic API" data-href-en="/docs/integrations/anthropic.html" data-href-zh="/docs/integrations/anthropic.zh.html">Anthropic API</a>
+<a class="navlink" href="/docs/integrations/openclaw.html" data-title-zh="OpenClaw" data-href-en="/docs/integrations/openclaw.html" data-href-zh="/docs/integrations/openclaw.zh.html">OpenClaw</a>
+<a class="navlink active" href="/docs/integrations/channels.html" data-title-zh="聊天渠道" data-href-en="/docs/integrations/channels.html" data-href-zh="/docs/integrations/channels.zh.html">Chat channels</a></div></div>
+  </nav>
+  <main class="content"><button class="fs-toggle" aria-label="Fullscreen" title="Fullscreen (Esc to exit)"><svg class="ic-expand" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.2 2H2v4.2M9.8 2H14v4.2M6.2 14H2V9.8M9.8 14H14V9.8"/></svg><svg class="ic-collapse" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6.2h4.2V2M14 6.2H9.8V2M2 9.8h4.2V14M14 9.8H9.8V14"/></svg></button><article><nav class="breadcrumb"><span class="bc-seg" data-title-zh="集成">Integrations</span> <span class='bc-sep'>›</span> <span class="bc-seg" data-title-zh="集成">Integrations</span> <span class='bc-sep'>›</span> <span class="bc-seg bc-current" data-title-zh="聊天渠道">Chat channels</span></nav><h1 id="聊天渠道">聊天渠道<a class="header-anchor" href="#聊天渠道">#</a></h1>
+<h2 id="这是什么">这是什么？<a class="header-anchor" href="#这是什么">#</a></h2>
+<p>Channels 把聊天平台——<strong>Telegram、Discord、Slack、微信</strong>——接到你的 agent 上。给机器人发一条消息就会跑一轮 agent turn，回复回到同一个聊天里。渠道 worker 跑在后台服务内，同一通对话也会实时出现在 Web UI 和 TUI 里。</p>
+<table>
+<thead>
+<tr>
+<th>平台</th>
+<th>消息如何到达</th>
+<th>登录凭据</th>
+<th>实时进度更新</th>
+<th>附件接收</th>
+<th>文件发送</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Telegram</td>
+<td>Bot API 长轮询</td>
+<td>bot token（BotFather 发放）</td>
+<td>支持</td>
+<td>图片 + 文档</td>
+<td>支持（photo/document）</td>
+</tr>
+<tr>
+<td>Discord</td>
+<td>discord.py Gateway</td>
+<td>bot token</td>
+<td>支持</td>
+<td>支持</td>
+<td>支持</td>
+</tr>
+<tr>
+<td>Slack</td>
+<td>Socket Mode（<code>slack_sdk</code>）</td>
+<td>bot token（<code>xoxb-</code>）<strong>加</strong> app-level token（<code>xapp-</code>）</td>
+<td>支持</td>
+<td>支持（需 <code>files:read</code> scope）</td>
+<td>支持（需 <code>files:write</code> scope）</td>
+</tr>
+<tr>
+<td>微信</td>
+<td>iLink 长轮询</td>
+<td>用个人微信扫码</td>
+<td>不支持（微信消息发出后不能编辑）</td>
+<td>图片、语音、文件、视频</td>
+<td>支持（图片/视频/文件）</td>
+</tr>
+</tbody>
+</table>
+<p>受支持的 release 已包含 Discord 与 Slack 依赖。开发者从源码安装时，也会通过完整开发安装获得相同的 channel 依赖。</p>
+<h2 id="快速开始">快速开始<a class="header-anchor" href="#快速开始">#</a></h2>
+<p>向导一条命令跑完全部注册——选平台、登录、绑定 agent、启动 worker：</p>
+<pre><code class="language-bash">openprogram<span class="w"> </span>channels<span class="w"> </span>setup
+</code></pre>
+<p>然后在平台上给机器人发消息。第一条消息返回的是<strong>配对码</strong>而不是 agent 回复——未知发信人不会驱动 agent（见<a href="#%E8%B0%81%E8%83%BD%E5%92%8C%E4%BD%A0%E7%9A%84%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%AF%B4%E8%AF%9D">谁能和你的机器人说话</a>）。批准一次自己即可：</p>
+<pre><code class="language-bash">openprogram<span class="w"> </span>channels<span class="w"> </span>access<span class="w"> </span>approve<span class="w"> </span>&lt;channel&gt;<span class="w"> </span>&lt;code&gt;
+</code></pre>
+<p>之后对话会出现在会话列表里，也可以在 TUI 或 Web UI 实时围观。</p>
+<p>前提是至少配置了一个 agent（<code>openprogram agents add main</code>）和一个可用的模型 provider。</p>
+<h2 id="各平台前置步骤">各平台前置步骤<a class="header-anchor" href="#各平台前置步骤">#</a></h2>
+<h3 id="telegram">Telegram<a class="header-anchor" href="#telegram">#</a></h3>
+<ol>
+<li>在 Telegram 打开 <a href="https://t.me/BotFather">@BotFather</a>，运行 <code>/newbot</code>，复制 token。</li>
+<li>向导（或 <code>openprogram channels accounts login telegram</code>）询问时粘贴 token。</li>
+</ol>
+<p>不需要 webhook 或公网 IP——OpenProgram 长轮询 Bot API。</p>
+<h3 id="discord">Discord<a class="header-anchor" href="#discord">#</a></h3>
+<ol>
+<li>在 <a href="https://discord.com/developers/applications">Discord Developer Portal</a> 创建 application 和 bot。</li>
+<li>在 <strong>Bot</strong> 页启用 <strong>Message Content Intent</strong>——adapter 订阅消息内容（<code>intents.message_content</code>），门户里不开这个特权 intent，gateway 会拒绝连接。</li>
+<li>把 bot 邀请进你的服务器，配置时粘贴 bot token。</li>
+</ol>
+<h3 id="slack">Slack<a class="header-anchor" href="#slack">#</a></h3>
+<p>Slack 需要<strong>两个 token</strong>——只有其中一个渠道起不来：</p>
+<ol>
+<li>在 <a href="https://api.slack.com/apps">api.slack.com/apps</a> 创建 app 并安装到工作区。</li>
+<li>启用 <strong>Socket Mode</strong>（不需要公网 URL）。</li>
+<li><strong>Bot token</strong>（<code>xoxb-…</code>）：授予 OAuth scope——发回复要 <code>chat:write</code>，@提及要 <code>app_mentions:read</code>，另加你订阅的消息事件所要求的 history scope（例如私信要 <code>im:history</code>）。</li>
+<li><strong>App-level token</strong>（<code>xapp-…</code>）：在 <em>Basic Information → App-Level Tokens</em> 生成，scope 选 <code>connections:write</code>——Socket Mode 用它建立长连接。</li>
+<li>给 app 订阅 <code>message</code> 和 <code>app_mention</code> 两个事件。adapter 正好处理这两种。</li>
+</ol>
+<h3 id="微信">微信<a class="header-anchor" href="#微信">#</a></h3>
+<p>个人微信即可，不需要公众号或企业认证：</p>
+<ol>
+<li>运行向导（或 <code>openprogram channels accounts login wechat</code>）。</li>
+<li>终端里渲染出二维码——用手机微信扫码并在手机上确认。</li>
+<li>凭据会持久保存；只有 token 过期时才需要重新登录（worker 日志会提示 <code>bot token invalid — relogin required</code>）。</li>
+</ol>
+<p>微信走腾讯 iLink bot 后端，其条款仅限个人使用。</p>
+<h2 id="两条配置路径">两条配置路径<a class="header-anchor" href="#两条配置路径">#</a></h2>
+<p><strong>向导</strong>（推荐）——一个交互流程：</p>
+<pre><code class="language-bash">openprogram<span class="w"> </span>channels<span class="w"> </span>setup
+</code></pre>
+<p><strong>CLI</strong>——同样的步骤拆成单条命令：</p>
+<pre><code class="language-bash">openprogram<span class="w"> </span>channels<span class="w"> </span>list<span class="w">                              </span><span class="c1"># 每个账号的状态</span>
+openprogram<span class="w"> </span>channels<span class="w"> </span>accounts<span class="w"> </span>add<span class="w"> </span>telegram<span class="w"> </span>--id<span class="w"> </span>work<span class="w">   </span><span class="c1"># 建一个账号槽位</span>
+openprogram<span class="w"> </span>channels<span class="w"> </span>accounts<span class="w"> </span>login<span class="w"> </span>telegram<span class="w"> </span>--id<span class="w"> </span>work<span class="w"> </span><span class="c1"># 录入凭据（wechat 走扫码）</span>
+openprogram<span class="w"> </span>channels<span class="w"> </span>accounts<span class="w"> </span>rm<span class="w"> </span>telegram<span class="w"> </span>work<span class="w">         </span><span class="c1"># 删账号 + 其绑定</span>
+
+openprogram<span class="w"> </span>channels<span class="w"> </span>bindings<span class="w"> </span>add<span class="w"> </span>main<span class="w"> </span>--channel<span class="w"> </span>telegram<span class="w">            </span><span class="c1"># 兜底路由 → agent &quot;main&quot;</span>
+openprogram<span class="w"> </span>channels<span class="w"> </span>bindings<span class="w"> </span>add<span class="w"> </span>main<span class="w"> </span>--channel<span class="w"> </span>telegram<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--account<span class="w"> </span>work<span class="w"> </span>--peer<span class="w"> </span><span class="m">123456</span><span class="w"> </span>--peer-kind<span class="w"> </span>direct<span class="w">                  </span><span class="c1"># 只路由一个 peer</span>
+openprogram<span class="w"> </span>channels<span class="w"> </span>bindings<span class="w"> </span>list
+openprogram<span class="w"> </span>channels<span class="w"> </span>bindings<span class="w"> </span>rm<span class="w"> </span>&lt;binding_id&gt;
+</code></pre>
+<p>账号是多租户的：每个 <code>--id</code> 是该平台的一个 bot 登录，各有各的凭据和绑定。</p>
+<p>TUI 里有等价的斜杠命令：<code>/login &lt;channel&gt;</code>（注册并接到当前 agent）、<code>/attach &lt;channel&gt; &lt;peer&gt;</code>（把某个 peer 的消息路由进当前会话）、<code>/detach</code>、<code>/connections</code>。</p>
+<p>渠道跑在后台服务内——启动 TUI（<code>openprogram</code>）就会启动它，向导也会询问是否代为启动。</p>
+<h2 id="谁能和你的机器人说话">谁能和你的机器人说话<a class="header-anchor" href="#谁能和你的机器人说话">#</a></h2>
+<p>每个渠道账号都有入站访问策略。默认是<strong>配对（pairing）</strong>：不在账号 allowlist 里的发信人，消息在到达任何 agent 之前就被丢弃，发信人收到一个八位配对码和说明。批准动作在你自己的机器上完成：</p>
+<pre><code class="language-bash">openprogram<span class="w"> </span>channels<span class="w"> </span>access<span class="w"> </span>list<span class="w">                       </span><span class="c1"># 策略 + allowlist + 待批配对码</span>
+openprogram<span class="w"> </span>channels<span class="w"> </span>access<span class="w"> </span>approve<span class="w"> </span>telegram<span class="w"> </span>K7XQ2MVR<span class="w">  </span><span class="c1"># 按配对码批准</span>
+openprogram<span class="w"> </span>channels<span class="w"> </span>access<span class="w"> </span>allow<span class="w"> </span>telegram<span class="w"> </span><span class="m">123456789</span><span class="w">   </span><span class="c1"># 直接按 user id 加入 allowlist</span>
+openprogram<span class="w"> </span>channels<span class="w"> </span>access<span class="w"> </span>revoke<span class="w"> </span>telegram<span class="w"> </span><span class="m">123456789</span><span class="w">  </span><span class="c1"># 移除一个发信人</span>
+</code></pre>
+<p>allowlist 想放多少人就放多少人。上面的每个人接的都是同一个 agent，而这个实例只有一份记忆工作区，所以一个人告诉它的东西，其他人也能用上。群机器人要的就是这个效果：把整个团队批准进来，他们拿到的是一个已经熟悉项目的助手。allowlist 里只放你愿意给这份访问权的人。</p>
+<p>配对码一小时过期；被拦的发信人继续发消息会拿到同一个码（每分钟至多回执一次）。批准动作只存在于本机 CLI/API——发信人在聊天里输入任何内容都无法批准任何人，&quot;把我加进 allowlist&quot; 这类注入消息不起作用。群聊里门禁按发信人个人的 user id 判定，不看群。</p>
+<p>对于未知发信人，配对是默认路径：他们会被拦截并收到配对码。owner 也可以通过本机 CLI/API 的 <code>access allow</code>，把已知的平台 user ID 直接加入 allowlist；对这个发信人不需要配对码。没有任何设置能关掉某个账号的门禁。</p>
+<h3 id="通过准入的发信人能做什么">通过准入的发信人能做什么<a class="header-anchor" href="#通过准入的发信人能做什么">#</a></h3>
+<p>默认情况下，通过准入的发信人就是你这个 owner：聊天里的一轮能用的工具和你在网页里打字的一轮一样，遵循这个聊天会话的权限模式和规则。工具需要批准时，请求以问题的形式发到聊天里，用 <code>/answer</code> 回答（见<a href="#%E5%9B%9E%E5%A4%8D%E8%BF%9B%E5%BA%A6%E4%B8%8E%E9%95%BF%E6%B6%88%E6%81%AF">回复、进度与长消息</a>）。群聊一开始就开着沙盒，那里的 shell 命令只能写工作目录；你可以在网页里这个会话的设置中切换，渠道不会再把它改回来。</p>
+<p>想让某个账号的发信人只能回复和用记忆、碰不到文件、shell 和网络，就设置：</p>
+<pre><code class="language-bash">openprogram<span class="w"> </span>channels<span class="w"> </span>accounts<span class="w"> </span><span class="nb">set</span><span class="w"> </span>wechat<span class="w"> </span>sender_access<span class="w"> </span>paired<span class="w">   </span><span class="c1"># 或 owner（所有渠道）</span>
+</code></pre>
+<p>allowlist 里的每个人拿到的都是同样的权限，所以 <code>owner</code> 只留给只有你自己、或你完全信任的人能联系到的账号。</p>
+<p>想要一个记忆互不相干的 agent，就跑自己的实例，各有各的状态目录和端口：</p>
+<pre><code class="language-bash">openprogram<span class="w"> </span>--profile<span class="w"> </span>alice
+</code></pre>
+<p>第二个实例怎么建，见 <a href="/docs/install/profiles.zh.html">多实例配置</a>。</p>
+<h2 id="渠道与运行环境">渠道与运行环境<a class="header-anchor" href="#渠道与运行环境">#</a></h2>
+<p>渠道决定会话的消息同步到哪里，不决定 agent 的工具在哪里运行；后者是会话的<a href="/docs/capabilities/environments.zh.html">运行环境</a>。从渠道进来的会话使用默认环境。</p>
+<p>在 Web 和 App 里，输入框上方环境 chip 旁边的渠道 chip 显示会话的渠道，没绑定时显示 <strong>未接渠道</strong>。点开后账号按聊天软件分组：选一个账号即绑定或切换，<strong>断开</strong> 停止同步，<strong>管理渠道</strong> 去添加账号。</p>
+<h2 id="聊天如何映射到会话">聊天如何映射到会话<a class="header-anchor" href="#聊天如何映射到会话">#</a></h2>
+<p>路由先决定哪个 <strong>agent</strong> 处理消息（bindings），再由 <strong>session key</strong> 决定落进哪通对话：</p>
+<ul>
+<li><strong>Telegram</strong>：默认每个聊天一个会话。群聊行为是显式的账号配置（见下）。</li>
+<li><strong>Discord 和 Slack</strong>：每个 <em>(channel, user)</em> 组合一个会话。同一个频道里的两个发信人各有各的对话，也看不到、答不了对方的待答问题。对话是分开的，背后的记忆工作区是整个实例共用的一份（见<a href="#%E8%B0%81%E8%83%BD%E5%92%8C%E4%BD%A0%E7%9A%84%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%AF%B4%E8%AF%9D">谁能和你的机器人说话</a>）。</li>
+<li><strong>微信</strong>：每个 peer 一个会话（私聊）。</li>
+</ul>
+<p>默认还按账号隔离（<code>session_scope: per-account-channel-peer</code>）。agent 可以放宽（<code>per-channel-peer</code>、<code>per-peer</code> 或单一 <code>main</code> 会话；每个 agent 的会话各自独立，两个都用 <code>main</code> 的 agent 不会共用一通），也可以按天轮换会话（<code>session_daily_reset: &quot;HH:MM&quot;</code>）或按空闲时间轮换（<code>session_idle_minutes</code>）。在聊天里发 <code>/new</code>（或 <code>/reset</code>）会立刻为这个聊天开一通新对话；之前那通留在网页侧栏里。</p>
+<h3 id="谁说的">谁说的<a class="header-anchor" href="#谁说的">#</a></h3>
+<p>好几个人共用一通对话时（Telegram 群聊默认的 <code>shared</code>，或者 agent 配成 <code>session_scope: main</code>），每条进来的消息都在正文旁边带着发信人：</p>
+<pre><code>{&quot;speaker_kind&quot;:&quot;human&quot;,&quot;speaker_id&quot;:&quot;7391&quot;,&quot;speaker_display&quot;:&quot;Ada&quot;,&quot;content&quot;:&quot;预算定 5 万&quot;}
+{&quot;speaker_kind&quot;:&quot;human&quot;,&quot;speaker_id&quot;:&quot;8022&quot;,&quot;speaker_display&quot;:&quot;Bo&quot;,&quot;content&quot;:&quot;改成 8 万&quot;}
+</code></pre>
+<p>显示名是平台上看到的那个名字，id 是发信人的平台 id：id 在改名之后不变，也能把两个取了同一个名字的人分开。agent 两个都读，所以它回的是对的那个人，记忆也把每条事实记在说这话的人名下，而不是统统记成一个匿名&quot;用户&quot;。显示名是它的主人在平台上随手填的任何东西，所以会压成一行、截到 64 字符、方括号换成圆括号。消息正文原样保留；发信人在正文里打一个带方括号的名字，也不会被当成那个人。</p>
+<p>聊天渠道的每条消息都带发信人，私聊也带，因为 <code>session_scope: main</code> 会把私聊 peer 也放进同一通会话。网页、命令行、TUI 的对话没有发信人字段。网页记录里，渠道消息在气泡上方用一行小字标出平台和发信人，例如 <code>微信 · Ada</code>；微信发信人没有昵称可显示，这一行把 id 缩成首尾各四个字符。</p>
+<h3 id="群聊行为">群聊行为<a class="header-anchor" href="#群聊行为">#</a></h3>
+<p>群里（Telegram 群、Discord 服务器频道、Slack 频道）大多数消息是人和人在聊。每个群处在三种模式之一：</p>
+<ul>
+<li><code>always</code>：每条消息都开启一轮。</li>
+<li><code>mention</code>：只有 @机器人 或回复机器人消息的那条才开启一轮，提及在进 agent 前被剥掉。其余消息会留着，下一轮把最近 50 条连同发信人放在触发消息上方一起交给 agent，让它知道问题之前聊了什么。网页记录里，它们收在这一轮气泡顶部一个&quot;群里之前的消息&quot;小开关后面。</li>
+<li><code>ambient</code>：agent 看每一条消息，自己决定要不要开口。没点名机器人的消息也开启一轮，标记为房间事件；agent 对它的回复只留在网页记录里（标着&quot;旁听&quot;），不发进群。agent 有值得说的话时，用 <code>chat_send</code> 工具发到群里。这类轮次不显示&quot;正在输入&quot;，也不加确认表情。点名机器人的消息照常回复。这个模式下每条消息都要调用一次模型。</li>
+</ul>
+<p>账号设置 <code>require_mention</code> 决定它下面各群的默认模式（<code>on</code> 即 <code>mention</code>，默认的 <code>off</code> 即 <code>always</code>）；群里任何人都可以用 <code>/activation mention</code>、<code>/activation always</code> 或 <code>/activation ambient</code> 切换这个群，单发 <code>/activation</code> 查看当前模式。私聊永远不设门槛。</p>
+<pre><code class="language-bash">openprogram<span class="w"> </span>channels<span class="w"> </span>accounts<span class="w"> </span><span class="nb">set</span><span class="w"> </span>telegram<span class="w"> </span>require_mention<span class="w"> </span>on<span class="w">       </span><span class="c1"># 或 off（discord、slack 同样可用）</span>
+openprogram<span class="w"> </span>channels<span class="w"> </span>accounts<span class="w"> </span><span class="nb">set</span><span class="w"> </span>telegram<span class="w"> </span>group_sessions<span class="w"> </span>per-user<span class="w">  </span><span class="c1"># 或 shared（仅 telegram）</span>
+</code></pre>
+<p>群成员能接触到 agent 的记忆：agent 会调出记得的内容来回答他们，也会记下他们说的话。<code>/memory read</code> 让这个群不写入记忆，<code>/memory off</code> 让记忆完全不进这个群，<code>/memory on</code>（默认）沿用 agent 自己的记忆设置。私聊总是沿用 agent 的设置。</p>
+<p><code>group_sessions</code>（Telegram，改完重启 worker 生效）——<code>shared</code>（默认）：全群对着同一通对话说话。<code>per-user</code>：群里每个成员各占一个会话，行为与 Discord/Slack 一致。</p>
+<p>其他机器人发的消息会被忽略，所以同一个群里的两个机器人不会没完没了地互相回复；平台把同一条消息投递两次，也只开启一轮。一个群每分钟最多开启 10 轮，超出的消息作为&quot;之前的消息&quot;等下一轮。</p>
+<h3 id="聊天命令">聊天命令<a class="header-anchor" href="#聊天命令">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/new</code>、<code>/reset</code></td>
+<td>为这个聊天开一通新对话</td>
+</tr>
+<tr>
+<td><code>/activation [mention|always|ambient]</code></td>
+<td>查看或切换这个群的模式</td>
+</tr>
+<tr>
+<td><code>/memory [on|read|off]</code></td>
+<td>查看或收窄这个群对 agent 记忆的访问</td>
+</tr>
+<tr>
+<td><code>/answer &lt;question_id&gt; &lt;选项&gt;</code></td>
+<td>回答函数提出的问题（见下）</td>
+</tr>
+<tr>
+<td><code>/decline &lt;question_id&gt;</code></td>
+<td>拒绝这个问题</td>
+</tr>
+</tbody>
+</table>
+<p>在群里用命令不需要 @机器人。Telegram 群里写成 <code>/new@你的机器人</code> 也可以。</p>
+<h2 id="回复进度与长消息">回复、进度与长消息<a class="header-anchor" href="#回复进度与长消息">#</a></h2>
+<p>agent 工作期间，聊天里会显示机器人&quot;正在输入&quot;（Telegram、Discord、微信；Slack 没有给机器人用的输入提示）。在 Telegram、Discord、Slack 上，机器人还会先发一条 <code>⏳ working...</code> 占位消息，随工具执行实时编辑（<code>⚙ bash</code> → <code>✓ bash</code> → …），最终替换成完整回复。回复一条放不下时，占位放第一段，余下接着发新消息；占位改不了（被删了，或平台一直拒绝编辑）时，回复改成一条新消息发出。在 Slack thread 或 Telegram 论坛话题里发的消息，占位、回复和文件都回到同一个 thread 或话题里。微信不能编辑消息，所以回复边写边按段落发出：一段攒到约 200 字就发，agent 调用工具之前写的那句话（&quot;我查一下……&quot;）会在工具运行前先发出去。</p>
+<p>账号设置 <code>ack_reaction on</code>（Telegram、Discord、Slack）打开后，机器人一接手消息就给它加一个 👀。Slack 需要 <code>reactions:write</code> 权限。</p>
+<p>agent 输出是 markdown，发送时按平台渲染：Telegram 收到 HTML（<code>**bold**</code> → 粗体，代码围栏 → <code>&lt;pre&gt;</code> 块），Slack 收到 mrkdwn，Discord 原生渲染 markdown，微信拿到剥掉记号的纯文本。超长回复按各平台上限自动切分：Telegram 4,000 字符、Discord 1,800、Slack 39,000、微信 1,800。</p>
+<p>出站发送遇到平台限流会自动退避重试——平台给了 <code>Retry-After</code> 就按它等，至多尝试三次——最终仍失败会落一条结构化错误日志。adapter 连接循环崩溃（断网、gateway 掉线）时自动指数退避重连（5 秒起翻倍，封顶 5 分钟）；因凭据失效而自行停止的 adapter 不会被重启，worker 日志会说明。</p>
+<p>函数停在提问（<code>runtime.ask</code>）时，问题会推送到聊天里，用文本命令回答：</p>
+<pre><code>/answer &lt;question_id&gt; &lt;选项或自由文本&gt;
+/decline &lt;question_id&gt;
+</code></pre>
+<p>只有属于该聊天会话的问题才能在这里回答。在群里，只有发起这一轮的人能回答它停下来问的问题。工具审批也这样发过来，标着需要批准。</p>
+<h2 id="附件">附件<a class="header-anchor" href="#附件">#</a></h2>
+<p>入站的图片和文件下载到 <code>&lt;state&gt;/channels/&lt;channel&gt;/accounts/&lt;account&gt;/attachments/</code>（单文件上限 20 MB）。4 MB 以内的图片还会作为图像输入直达模型；每个落盘文件都以 <code>[attachment: &lt;路径&gt; (&lt;类型&gt;, &lt;大小&gt;)]</code> 的形式列在消息里，agent 用文件工具打开。</p>
+<p>微信的媒体从腾讯 CDN 加密下发，下载时解密。语音消息带有微信自己的转写时，agent 收到的就是这段文字；没有转写的语音存成 <code>.silk</code> 文件，这种音频格式模型没法直接听。</p>
+<p>有人回复早先的消息时（Telegram/Discord 回复、Slack thread），被引用的文本会以 <code>&gt; 引用</code> 块的形式附在新消息上方。</p>
+<p>从代码或 agent 里发文件走 outbound API：</p>
+<pre><code class="language-python"><span class="kn">from</span><span class="w"> </span><span class="nn">openprogram.interfaces.channels.outbound</span><span class="w"> </span><span class="kn">import</span> <span class="n">send_file</span>
+<span class="n">send_file</span><span class="p">(</span><span class="s2">&quot;telegram&quot;</span><span class="p">,</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span> <span class="s2">&quot;123456&quot;</span><span class="p">,</span> <span class="s2">&quot;/path/to/report.pdf&quot;</span><span class="p">,</span> <span class="n">caption</span><span class="o">=</span><span class="s2">&quot;周报&quot;</span><span class="p">)</span>
+</code></pre>
+<p>Telegram 图片走 photo、其余走 document；Discord 把文件连同 caption 一起上传；Slack 走 external-upload 流程（需 <code>files:write</code>）。微信把文件加密后上传到腾讯 CDN，按类型发成图片、视频或文件消息（上限 100 MB）；caption 随后作为一条单独的文字消息发出。</p>
+<h2 id="常见错误">常见错误<a class="header-anchor" href="#常见错误">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>现象</th>
+<th>原因 / 处理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>机器人回了配对码而不是答案</td>
+<td>发信人不在 allowlist。用 <code>openprogram channels access approve &lt;channel&gt; &lt;code&gt;</code> 批准，或用 <code>access allow &lt;channel&gt; &lt;user-id&gt;</code> 直接把 id 加进 allowlist。</td>
+</tr>
+<tr>
+<td>回复 <code>[no agent configured]</code></td>
+<td>没有绑定路由这条消息。先 <code>openprogram agents add main</code>，再跑 <code>openprogram channels setup</code> 或 <code>channels bindings add</code>。</td>
+</tr>
+<tr>
+<td>worker 退出：<code>account … has no bot_token</code></td>
+<td>凭据没存过。<code>openprogram channels accounts login &lt;channel&gt; --id &lt;account&gt;</code>。</td>
+</tr>
+<tr>
+<td>worker 退出：<code>Slack account … needs both bot_token (xoxb-...) and app_token (xapp-...)</code></td>
+<td>Slack 只存了一个 token。重跑 login，两个都粘贴。</td>
+</tr>
+<tr>
+<td><code>Discord channel requires discord.py</code> / <code>Slack channel requires slack_sdk</code></td>
+<td>runtime 不完整。重新安装受支持的 release，或重新执行完整的源码开发安装。</td>
+</tr>
+<tr>
+<td>Discord bot 连上了但收不到消息</td>
+<td>Developer Portal 里没开 Message Content Intent。</td>
+</tr>
+<tr>
+<td>微信日志：<code>bot token invalid — relogin required</code></td>
+<td>iLink 会话过期。<code>openprogram channels accounts login wechat --id &lt;account&gt;</code> 重新扫码。</td>
+</tr>
+<tr>
+<td>worker 日志：<code>adapter crashed … reconnecting in Ns</code></td>
+<td>瞬态网络/gateway 故障——adapter 自动退避重连。只有 <code>adapter exited on its own</code> 需要处理（通常是重新登录）。</td>
+</tr>
+<tr>
+<td>日志里发送失败带 <code>auth</code> / <code>rate_limit</code> / <code>bad_target</code></td>
+<td>结构化发送错误：token 失效、平台限流（已自动退避重试过）、chat/channel id 不对。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="另请参阅">另请参阅<a class="header-anchor" href="#另请参阅">#</a></h2>
+<ul>
+<li><a href="/docs/reference/design/channels/design.zh.html">设计笔记：channel 子系统</a>——架构与消息流</li>
+<li><a href="/docs/interfaces/README.zh.html">界面总览</a>——渠道对话同样出现在 Web UI / TUI</li>
+<li><a href="/docs/capabilities/always-on-agents.zh.html">常驻 Agent</a>——把常驻 Agent 的报告发到渠道会话</li>
+</ul>
+<div class="page-updated"><span data-i18n="updated">Last updated</span> · 2026-11-04</div><div class="prevnext"><a class="pn-link pn-prev" href="/docs/integrations/openclaw.html" data-href-en="/docs/integrations/openclaw.html" data-href-zh="/docs/integrations/openclaw.zh.html"><span class="pn-dir" data-i18n="prev">Previous</span><span class="pn-title" data-title-zh="OpenClaw">OpenClaw</span></a><a class="pn-link pn-next" href="/docs/server/README.html" data-href-en="/docs/server/README.html" data-href-zh="/docs/server/README.zh.html"><span class="pn-dir" data-i18n="next">Next</span><span class="pn-title" data-title-zh="概览">Overview</span></a></div></article></main>
+  <aside class="toc"><div class="toc-title" data-i18n="on_this_page">On this page</div>
+<ul class="toc-list">
+<li>
+<a class="lvl-2" href="#这是什么">这是什么？</a>
+</li>
+<li>
+<a class="lvl-2" href="#快速开始">快速开始</a>
+</li>
+<li>
+<details class="toc-disclosure" open=""><summary>
+<a class="lvl-2" href="#各平台前置步骤">各平台前置步骤</a>
+</summary>
+<ul class="toc-list">
+<li>
+<a class="lvl-3" href="#telegram">Telegram</a>
+</li>
+<li>
+<a class="lvl-3" href="#discord">Discord</a>
+</li>
+<li>
+<a class="lvl-3" href="#slack">Slack</a>
+</li>
+<li>
+<a class="lvl-3" href="#微信">微信</a>
+</li>
+</ul>
+</details>
+</li>
+<li>
+<a class="lvl-2" href="#两条配置路径">两条配置路径</a>
+</li>
+<li>
+<details class="toc-disclosure" open=""><summary>
+<a class="lvl-2" href="#谁能和你的机器人说话">谁能和你的机器人说话</a>
+</summary>
+<ul class="toc-list">
+<li>
+<a class="lvl-3" href="#通过准入的发信人能做什么">通过准入的发信人能做什么</a>
+</li>
+</ul>
+</details>
+</li>
+<li>
+<a class="lvl-2" href="#渠道与运行环境">渠道与运行环境</a>
+</li>
+<li>
+<details class="toc-disclosure" open=""><summary>
+<a class="lvl-2" href="#聊天如何映射到会话">聊天如何映射到会话</a>
+</summary>
+<ul class="toc-list">
+<li>
+<a class="lvl-3" href="#谁说的">谁说的</a>
+</li>
+<li>
+<a class="lvl-3" href="#群聊行为">群聊行为</a>
+</li>
+<li>
+<a class="lvl-3" href="#聊天命令">聊天命令</a>
+</li>
+</ul>
+</details>
+</li>
+<li>
+<a class="lvl-2" href="#回复进度与长消息">回复、进度与长消息</a>
+</li>
+<li>
+<a class="lvl-2" href="#附件">附件</a>
+</li>
+<li>
+<a class="lvl-2" href="#常见错误">常见错误</a>
+</li>
+<li>
+<a class="lvl-2" href="#另请参阅">另请参阅</a>
+</li>
+</ul></aside>
+</div>
+
+<div class="search-overlay">
+  <div class="search-box">
+    <input type="text" data-i18n-ph="search_ph" placeholder="Search titles or text…" autocomplete="off" spellcheck="false">
+    <div class="search-results"></div>
+  </div>
+</div>
+
+<script src="/docs/assets/site.js?v=6520ba46"></script>
+</body>
+</html>

@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en" data-base="/docs/" data-page-lang="en" data-build="1793956776" data-alt-lang-url="/docs/capabilities/computer-use.zh.html">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Computer use · OpenProgram Docs</title>
+<meta name="description" content="One tool, computer_use_agent , lets the model operate a screen: the windows of a desktop application, a web browser (the App&#x27;s built-in one, or your own Chrome">
+<link rel="canonical" href="https://openprogram.io/docs/capabilities/computer-use.html">
+<link rel="alternate" type="text/markdown" href="https://openprogram.io/docs/capabilities/computer-use.html.md">
+<link rel="describedby" href="https://openprogram.io/llms.txt">
+<link rel="alternate" hreflang="en" href="https://openprogram.io/docs/capabilities/computer-use.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://openprogram.io/docs/capabilities/computer-use.zh.html">
+<link rel="alternate" hreflang="x-default" href="https://openprogram.io/docs/capabilities/computer-use.html">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"OpenProgram Docs","item":"https://openprogram.io/docs/"},{"@type":"ListItem","position":2,"name":"Computer use"}]}</script>
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="OpenProgram">
+<meta property="og:url" content="https://openprogram.io/docs/capabilities/computer-use.html">
+<meta property="og:title" content="Computer use · OpenProgram Docs">
+<meta property="og:description" content="One tool, computer_use_agent , lets the model operate a screen: the windows of a desktop application, a web browser (the App&#x27;s built-in one, or your own Chrome">
+<meta property="og:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:secure_url" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Computer use · OpenProgram Docs">
+<meta name="twitter:description" content="One tool, computer_use_agent , lets the model operate a screen: the windows of a desktop application, a web browser (the App&#x27;s built-in one, or your own Chrome">
+<meta name="twitter:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta name="twitter:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/docs/assets/mark.svg">
+<link rel="stylesheet" href="/docs/assets/site.css?v=6520ba46">
+<link rel="stylesheet" href="/docs/assets/pygments-light.css" media="(prefers-color-scheme: light)" id="pyg-light">
+<link rel="stylesheet" href="/docs/assets/pygments-dark.css" media="(prefers-color-scheme: dark)" id="pyg-dark">
+<script src="/docs/assets/theme.js?v=6520ba46"></script>
+
+</head>
+<body>
+<header class="topbar">
+  <button class="icon hamburger" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2.5 4.5h11M2.5 8h11M2.5 11.5h11"/></svg></button>
+  <a class="brand" href="/docs/index.html"><img class="mark" src="/docs/assets/mark.svg" alt="">OpenProgram Docs</a>
+  <div class="spacer"></div>
+  <button class="search-trigger" aria-label="Search">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14"/></svg><span class="label" data-i18n="search">Search docs</span><kbd>⌘K</kbd>
+  </button>
+  <div class="lang-wrap">
+    <button class="icon lang-trigger" id="lang-toggle" aria-haspopup="true" aria-expanded="false" aria-label="Language">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="6.2"/><path d="M1.8 8h12.4" stroke-linecap="round"/><ellipse cx="8" cy="8" rx="2.8" ry="6.2"/></svg><span class="lang-label">EN</span><svg class="chev" width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+    </button>
+    <div class="lang-menu" id="lang-menu" role="menu">
+      <button class="lang-opt" data-lang="en" role="menuitem"><span>English</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="lang-opt" data-lang="zh" role="menuitem"><span>简体中文</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+  <div class="theme-wrap">
+    <button class="icon" id="theme-toggle" aria-label="Theme" aria-haspopup="menu" aria-controls="theme-menu" aria-expanded="false"><svg class="ic-system" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="2.5" width="13" height="9" rx="1.5"/><path d="M8 11.5V14M5.5 14h5"/></svg><svg class="ic-moon" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M13.5 9.5A6 6 0 1 1 6.5 2.5a5 5 0 0 0 7 7z"/></svg><svg class="ic-sun" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="3.2"/><path d="M8 1.2v1.8M8 13v1.8M1.2 8H3M13 8h1.8M3.2 3.2l1.3 1.3M11.5 11.5l1.3 1.3M12.8 3.2l-1.3 1.3M4.5 11.5l-1.3 1.3"/></svg></button>
+    <div class="theme-menu" id="theme-menu" role="menu" aria-labelledby="theme-toggle">
+      <button class="theme-opt" data-theme-choice="system" role="menuitemradio" aria-checked="true"><span>Follow system</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="light" role="menuitemradio" aria-checked="false"><span>Light</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="dark" role="menuitemradio" aria-checked="false"><span>Dark</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+</header>
+<nav class="tabbar"><a class="tablink" href="/docs/README.html" data-title-zh="开始使用" data-href-en="/docs/README.html" data-href-zh="/docs/README.zh.html">Get started</a><a class="tablink" href="/docs/install/install.html" data-title-zh="安装" data-href-en="/docs/install/install.html" data-href-zh="/docs/install/install.zh.html">Install</a><a class="tablink active" href="/docs/capabilities/README.html" data-title-zh="能力" data-href-en="/docs/capabilities/README.html" data-href-zh="/docs/capabilities/README.zh.html">Capabilities</a><a class="tablink" href="/docs/interfaces/README.html" data-title-zh="界面" data-href-en="/docs/interfaces/README.html" data-href-zh="/docs/interfaces/README.zh.html">Interfaces</a><a class="tablink" href="/docs/models/README.html" data-title-zh="模型" data-href-en="/docs/models/README.html" data-href-zh="/docs/models/README.zh.html">Models</a><a class="tablink" href="/docs/integrations/anthropic.html" data-title-zh="集成" data-href-en="/docs/integrations/anthropic.html" data-href-zh="/docs/integrations/anthropic.zh.html">Integrations</a><a class="tablink" href="/docs/server/README.html" data-title-zh="服务与运维" data-href-en="/docs/server/README.html" data-href-zh="/docs/server/README.zh.html">Server &amp; Ops</a><a class="tablink" href="/docs/reference/README.html" data-title-zh="参考" data-href-en="/docs/reference/README.html" data-href-zh="/docs/reference/README.zh.html">Reference</a><a class="tablink" href="/docs/reference/design/README.html" data-title-zh="设计" data-href-en="/docs/reference/design/README.html" data-href-zh="/docs/reference/design/README.zh.html">Design</a></nav>
+
+<div class="scrim"></div>
+<div class="layout">
+  <nav class="sidebar" aria-label="Documentation">
+    <input class="nav-filter" type="text" data-i18n-ph="nav_filter"
+           aria-label="Filter docs" placeholder="Filter docs…" autocomplete="off" spellcheck="false">
+    <div class="nav-tree"><div class="nav-sec"><div class="nav-sec-title" data-title-zh="概览">Overview</div><a class="navlink" href="/docs/capabilities/README.html" data-title-zh="概览" data-href-en="/docs/capabilities/README.html" data-href-zh="/docs/capabilities/README.zh.html">Overview</a>
+<a class="navlink" href="/docs/capabilities/applications.html" data-title-zh="应用" data-href-en="/docs/capabilities/applications.html" data-href-zh="/docs/capabilities/applications.zh.html">Applications</a>
+<a class="navlink" href="/docs/capabilities/framework-control.html" data-title-zh="框架工具" data-href-en="/docs/capabilities/framework-control.html" data-href-zh="/docs/capabilities/framework-control.zh.html">Framework tools</a></div>
+<div class="nav-sec"><div class="nav-sec-title">Agentic Programming</div><a class="navlink" href="/docs/capabilities/agentic-programming/README.html" data-title-zh="指南" data-href-en="/docs/capabilities/agentic-programming/README.html" data-href-zh="/docs/capabilities/agentic-programming/README.zh.html">Guide</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/philosophy.html" data-title-zh="设计原则" data-href-en="/docs/capabilities/agentic-programming/philosophy.html" data-href-zh="/docs/capabilities/agentic-programming/philosophy.zh.html">Philosophy</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/embedding-in-your-own-stack.html" data-title-zh="框架嵌入" data-href-en="/docs/capabilities/agentic-programming/embedding-in-your-own-stack.html" data-href-zh="/docs/capabilities/agentic-programming/embedding-in-your-own-stack.zh.html">Framework embedding</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="编写函数">Writing functions</div><a class="navlink" href="/docs/capabilities/agentic-programming/writing-functions/pure-python.html" data-title-zh="Python 函数" data-href-en="/docs/capabilities/agentic-programming/writing-functions/pure-python.html" data-href-zh="/docs/capabilities/agentic-programming/writing-functions/pure-python.zh.html">Python functions</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/writing-functions/agent.html" data-title-zh="智能体函数" data-href-en="/docs/capabilities/agentic-programming/writing-functions/agent.html" data-href-zh="/docs/capabilities/agentic-programming/writing-functions/agent.zh.html">Agentic functions</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/writing-functions/function-metadata.html" data-title-zh="函数元数据" data-href-en="/docs/capabilities/agentic-programming/writing-functions/function-metadata.html" data-href-zh="/docs/capabilities/agentic-programming/writing-functions/function-metadata.zh.html">Function metadata</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="选择下一步">Choosing the next step</div><a class="navlink" href="/docs/capabilities/agentic-programming/choosing-the-next-step/tool-calling.html" data-title-zh="工具循环" data-href-en="/docs/capabilities/agentic-programming/choosing-the-next-step/tool-calling.html" data-href-zh="/docs/capabilities/agentic-programming/choosing-the-next-step/tool-calling.zh.html">Tool-call loops</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/choosing-the-next-step/fixed-order-calls.html" data-title-zh="顺序调用" data-href-en="/docs/capabilities/agentic-programming/choosing-the-next-step/fixed-order-calls.html" data-href-zh="/docs/capabilities/agentic-programming/choosing-the-next-step/fixed-order-calls.zh.html">Fixed-order calls</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/choosing-the-next-step/next-step-decision.html" data-title-zh="步骤选择" data-href-en="/docs/capabilities/agentic-programming/choosing-the-next-step/next-step-decision.html" data-href-zh="/docs/capabilities/agentic-programming/choosing-the-next-step/next-step-decision.zh.html">Next-step selection</a></div>
+<div class="nav-sec"><div class="nav-sec-title">Agentic Workflows</div><a class="navlink" href="/docs/capabilities/workflows/README.html" data-title-zh="工作流" data-href-en="/docs/capabilities/workflows/README.html" data-href-zh="/docs/capabilities/workflows/README.zh.html">Workflows</a>
+<a class="navlink" href="/docs/capabilities/workflows/authoring.html" data-title-zh="工作流编写" data-href-en="/docs/capabilities/workflows/authoring.html" data-href-zh="/docs/capabilities/workflows/authoring.zh.html">Workflow authoring</a>
+<a class="navlink" href="/docs/capabilities/workflows/recording.html" data-title-zh="录制 Workflow" data-href-en="/docs/capabilities/workflows/recording.html" data-href-zh="/docs/capabilities/workflows/recording.zh.html">Record a workflow</a>
+<a class="navlink" href="/docs/capabilities/workflows/reports.html" data-title-zh="每周报告" data-href-en="/docs/capabilities/workflows/reports.html" data-href-zh="/docs/capabilities/workflows/reports.zh.html">Weekly reports</a></div>
+<div class="nav-sec"><div class="nav-sec-title">Agents</div><a class="navlink" href="/docs/capabilities/agents.html" data-title-zh="配置 Agent" data-href-en="/docs/capabilities/agents.html" data-href-zh="/docs/capabilities/agents.zh.html">Configure an Agent</a>
+<a class="navlink" href="/docs/capabilities/agents-md.html" data-title-zh="用 AGENTS.md 写指令" data-href-en="/docs/capabilities/agents-md.html" data-href-zh="/docs/capabilities/agents-md.zh.html">Instructions with AGENTS.md</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="常驻 Agent">Always-on Agents</div><a class="navlink" href="/docs/capabilities/always-on-agents.html" data-title-zh="常驻 Agent" data-href-en="/docs/capabilities/always-on-agents.html" data-href-zh="/docs/capabilities/always-on-agents.zh.html">Always-on Agents</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="提醒">Reminders</div><a class="navlink" href="/docs/capabilities/reminders.html" data-title-zh="提醒" data-href-en="/docs/capabilities/reminders.html" data-href-zh="/docs/capabilities/reminders.zh.html">Reminders</a>
+<a class="navlink" href="/docs/capabilities/event-triggers.html" data-title-zh="有事发生时运行任务" data-href-en="/docs/capabilities/event-triggers.html" data-href-zh="/docs/capabilities/event-triggers.zh.html">Run a task when something happens</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="记忆">Memory</div><a class="navlink" href="/docs/capabilities/memory.html" data-title-zh="记忆管理" data-href-en="/docs/capabilities/memory.html" data-href-zh="/docs/capabilities/memory.zh.html">Memory management</a>
+<a class="navlink" href="/docs/capabilities/memory-settings.html" data-title-zh="调整记忆" data-href-en="/docs/capabilities/memory-settings.html" data-href-zh="/docs/capabilities/memory-settings.zh.html">Tune Memory</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="运行环境">Environments</div><a class="navlink" href="/docs/capabilities/environments.html" data-title-zh="在另一台机器上运行会话" data-href-en="/docs/capabilities/environments.html" data-href-zh="/docs/capabilities/environments.zh.html">Run conversations on another machine</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="会话目标">Session goals</div><a class="navlink" href="/docs/capabilities/goal.html" data-title-zh="目标" data-href-en="/docs/capabilities/goal.html" data-href-zh="/docs/capabilities/goal.zh.html">Goals</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="操控电脑">Computer use</div><a class="navlink active" href="/docs/capabilities/computer-use.html" data-title-zh="操控电脑" data-href-en="/docs/capabilities/computer-use.html" data-href-zh="/docs/capabilities/computer-use.zh.html">Computer use</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="会议">Meetings</div><a class="navlink" href="/docs/capabilities/meetings.html" data-title-zh="会议" data-href-en="/docs/capabilities/meetings.html" data-href-zh="/docs/capabilities/meetings.zh.html">Meetings</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="扩展">Extending</div><a class="navlink" href="/docs/capabilities/installing-programs.html" data-title-zh="安装程序" data-href-en="/docs/capabilities/installing-programs.html" data-href-zh="/docs/capabilities/installing-programs.zh.html">Installing programs</a>
+<a class="navlink" href="/docs/capabilities/skills.html" data-title-zh="技能" data-href-en="/docs/capabilities/skills.html" data-href-zh="/docs/capabilities/skills.zh.html">Skills</a>
+<a class="navlink" href="/docs/capabilities/plugins.html" data-title-zh="插件" data-href-en="/docs/capabilities/plugins.html" data-href-zh="/docs/capabilities/plugins.zh.html">Plugins</a>
+<a class="navlink" href="/docs/capabilities/mcp.html" data-title-zh="MCP" data-href-en="/docs/capabilities/mcp.html" data-href-zh="/docs/capabilities/mcp.zh.html">MCP</a>
+<a class="navlink" href="/docs/capabilities/tools.html" data-title-zh="内置工具" data-href-en="/docs/capabilities/tools.html" data-href-zh="/docs/capabilities/tools.zh.html">Built-in tools</a>
+<a class="navlink" href="/docs/capabilities/lsp.html" data-title-zh="语言服务器" data-href-en="/docs/capabilities/lsp.html" data-href-zh="/docs/capabilities/lsp.zh.html">Language servers</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="概览">Overview</div><a class="navlink" href="/docs/capabilities/commit-push-pr.html" data-title-zh="提交与拉取请求" data-href-en="/docs/capabilities/commit-push-pr.html" data-href-zh="/docs/capabilities/commit-push-pr.zh.html">Commits and PRs</a>
+<a class="navlink" href="/docs/capabilities/permissions.html" data-title-zh="工具权限" data-href-en="/docs/capabilities/permissions.html" data-href-zh="/docs/capabilities/permissions.zh.html">Tool permissions</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="指南">Guide</div><a class="navlink" href="/docs/capabilities/agentic-programming/self-programming-ai-agents.html" data-title-zh="自编程智能体" data-href-en="/docs/capabilities/agentic-programming/self-programming-ai-agents.html" data-href-zh="/docs/capabilities/agentic-programming/self-programming-ai-agents.zh.html">Self-programming agents</a></div></div>
+  </nav>
+  <main class="content"><button class="fs-toggle" aria-label="Fullscreen" title="Fullscreen (Esc to exit)"><svg class="ic-expand" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.2 2H2v4.2M9.8 2H14v4.2M6.2 14H2V9.8M9.8 14H14V9.8"/></svg><svg class="ic-collapse" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6.2h4.2V2M14 6.2H9.8V2M2 9.8h4.2V14M14 9.8H9.8V14"/></svg></button><article><nav class="breadcrumb"><span class="bc-seg" data-title-zh="能力">Capabilities</span> <span class='bc-sep'>›</span> <span class="bc-seg" data-title-zh="操控电脑">Computer use</span> <span class='bc-sep'>›</span> <span class="bc-seg bc-current" data-title-zh="操控电脑">Computer use</span></nav><h1 id="computer-use">Computer use<a class="header-anchor" href="#computer-use">#</a></h1>
+<p>One tool, <code>computer_use_agent</code>, lets the model operate a screen: the windows of a desktop application, a web browser (the App's built-in one, or your own Chrome or Edge), or a virtual machine. Application windows are read and operated while you keep working: the application stays in the background, the keyboard and mouse remain yours, and nothing is brought to the front. The model sees a screenshot of the window together with its Accessibility tree, acts on a numbered element, and gets back only the lines that changed. Applications are supported on macOS, on Linux under X11 and on Windows, with the differences listed in <a href="#on-linux">On Linux</a> and <a href="#on-windows">On Windows</a>.</p>
+<h2 id="targets-and-guides">Targets and guides<a class="header-anchor" href="#targets-and-guides">#</a></h2>
+<p>Every call names a <code>target</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Target</th>
+<th>What it operates</th>
+<th>Needs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>app</code></td>
+<td>Application windows on this computer, named by <code>args.app</code>: Finder, Notes, Calculator, Xcode, a chat client, a game launcher</td>
+<td>The desktop grants below</td>
+</tr>
+<tr>
+<td><code>browser</code></td>
+<td>Web pages, in the browser named by <code>args.browser</code>: the App's built-in browser by default (tabs in the App's windows and tabs it opens in the background), or your own Chrome or Edge</td>
+<td>The App; for Chrome or Edge, see <a href="#your-own-chrome-or-edge">Your own Chrome or Edge</a></td>
+</tr>
+<tr>
+<td><code>vm</code></td>
+<td>A remote machine behind an OSWorld-compatible server</td>
+<td><code>computer_use.vm_url</code>, see <a href="#virtual-machine">Virtual machine</a></td>
+</tr>
+</tbody>
+</table>
+<p>The tool's description is only this list. The first call to a target in a conversation returns that target's guide, its actions and their arguments, together with the target's current state, so the model learns the actions of the screen it is about to use and nothing else. Code has a guide of its own, <code>computer_use_agent.code</code>: the first call that uses it is refused with that guide attached, and the next call runs. A guide counts as read only while it is still in the model's context; after the conversation is compacted, the next call that needs it delivers it again. <code>action=&quot;guide&quot;</code> or <code>help(&quot;computer_use_agent.app&quot;)</code> shows a guide on request. Every call is checked against the guide before anything runs: an unknown action or argument fails at once and the error spells out that action's arguments, so nothing is silently dropped. A few names carried over from Playwright are accepted as ours, such as <code>select_option</code> for <code>select</code>, <code>values</code> for <code>value</code> and <code>expression</code> for <code>script</code>.</p>
+<h2 id="what-a-step-looks-like">What a step looks like<a class="header-anchor" href="#what-a-step-looks-like">#</a></h2>
+<pre><code>computer_use_agent(target=&quot;app&quot;, args={&quot;app&quot;: &quot;Calculator&quot;})
+</code></pre>
+<p>returns the guide, the window screenshot and a tree such as</p>
+<pre><code>0 window &quot;Calculator&quot; actions: AXRaise
+  12 static text value=&quot;0&quot;
+  18 button &quot;7&quot;
+  23 button &quot;All Clear&quot;
+</code></pre>
+<p>Each line is one element: its index, its role, its label, its current value, state flags such as <code>[focused]</code> or <code>[checked]</code>, and any secondary actions it offers. The model then acts on an index:</p>
+<pre><code>computer_use_agent(target=&quot;app&quot;, action=&quot;click&quot;, args={&quot;app&quot;: &quot;Calculator&quot;, &quot;element_index&quot;: 18})
+</code></pre>
+<p>Every action returns <code>Done: …</code> followed by a diff of the tree: lines prefixed <code>-</code> disappeared, lines prefixed <code>+</code> are new or changed. Indices are stable: an element keeps its index while it stays in the window, even when something is inserted above it, and a new element gets a number not used before, so an index read earlier never silently points at something else. Pass <code>full=true</code> to <code>get_app_state</code> to receive the whole tree again. Trees are capped at 1500 elements and screenshots at 1568 pixels on the long side.</p>
+<p>Some applications draw their content without describing it to Accessibility: games, canvas editors, remote desktops, some Electron apps. When a window's tree has fewer than 12 elements, the state also lists the text macOS reads off the screenshot, one line each with the pixel position of its centre, such as <code>&quot;New Game&quot; at (160, 215), 120x30</code>; the model clicks it with <code>x</code>,<code>y</code>. Recognition runs on the Mac, uses your preferred languages first and detects the language per screenshot. The same state lists icons and controls that carry no text, such as a gear or a trash can, as outlines with their centre and size, like <code>(112, 169), 55x56</code>; the model looks at the screenshot to tell what each one is before clicking it.</p>
+<p>After an action the tool waits for the window to settle instead of a fixed pause: at least 0.3 seconds, until the tree stops changing, at most 1.5 seconds — or 5 seconds while a spinner or progress bar is showing.</p>
+<h2 id="application-actions">Application actions<a class="header-anchor" href="#application-actions">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Arguments</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>list_apps</code></td>
+<td>—</td>
+<td>Running and installed applications, with bundle ids</td>
+</tr>
+<tr>
+<td><code>list_windows</code></td>
+<td><code>app</code></td>
+<td>The app's windows with their <code>window_id</code>, title, size, and whether each is main, focused, minimised or on another Space</td>
+</tr>
+<tr>
+<td><code>get_app_state</code></td>
+<td><code>app</code>, <code>window?</code> or <code>window_id?</code>, <code>full?</code>, <code>include?</code></td>
+<td>Screenshot and tree. A closed app is launched in the background. <code>window</code> picks one by title substring or index; the window read last stays selected. <code>include</code> is <code>all</code>, <code>tree</code> or <code>screenshot</code></td>
+</tr>
+<tr>
+<td><code>zoom</code></td>
+<td><code>app</code>, <code>x</code>, <code>y</code>, <code>width</code>, <code>height</code></td>
+<td>A region of the last screenshot at the display's full pixel density, for small text. Action coordinates still refer to the screenshot</td>
+</tr>
+<tr>
+<td><code>find</code></td>
+<td><code>app</code>, <code>text?</code>, <code>role?</code></td>
+<td>Elements of the last tree whose label, value or placeholder contains <code>text</code>, optionally of one role (<code>button</code>, <code>text field</code> …). When no element matches, the lines of the screenshot that show <code>text</code>, with their position</td>
+</tr>
+<tr>
+<td><code>click</code></td>
+<td><code>app</code>, <code>element_index</code> or <code>x</code>,<code>y</code>, <code>mouse_button?</code>, <code>click_count?</code>, <code>key?</code>, <code>duration?</code></td>
+<td>Press an element, or click a point of the last screenshot. <code>key</code> holds modifiers such as <code>cmd</code> or <code>shift+alt</code>; <code>duration</code> holds the button down, up to 10 seconds</td>
+</tr>
+<tr>
+<td><code>type_text</code></td>
+<td><code>app</code>, <code>text</code>, <code>element_index?</code></td>
+<td>Type into the focused element, focusing <code>element_index</code> first when given. Refused when the element is a button or another control that cannot take text</td>
+</tr>
+<tr>
+<td><code>press_key</code></td>
+<td><code>app</code>, <code>key</code>, <code>element_index?</code>, <code>duration?</code></td>
+<td>One chord in xdotool spelling: <code>Return</code>, <code>Escape</code>, <code>super+c</code>, <code>ctrl+shift+Tab</code>, <code>KP_0</code>, <code>F5</code>. <code>super</code> and <code>cmd</code> are the Command key</td>
+</tr>
+<tr>
+<td><code>set_value</code></td>
+<td><code>app</code>, <code>element_index</code>, <code>value</code></td>
+<td>Replace a field's value, move a slider, toggle a checkbox</td>
+</tr>
+<tr>
+<td><code>scroll</code></td>
+<td><code>app</code>, <code>element_index</code> or <code>x</code>,<code>y</code>, <code>direction?</code>, <code>pages?</code> or <code>pixels?</code></td>
+<td>Scroll by pages (fractions allowed) or by a distance in points</td>
+</tr>
+<tr>
+<td><code>drag</code></td>
+<td><code>app</code>, <code>x</code>,<code>y</code>, <code>to_x</code>,<code>to_y</code></td>
+<td>Drag between two points of the last screenshot</td>
+</tr>
+<tr>
+<td><code>perform_secondary_action</code></td>
+<td><code>app</code>, <code>element_index</code>, <code>action_name</code></td>
+<td>One of the element's listed actions, e.g. <code>AXShowMenu</code>, <code>AXIncrement</code></td>
+</tr>
+<tr>
+<td><code>select_text</code></td>
+<td><code>app</code>, <code>element_index</code>, <code>text</code>, <code>prefix?</code>, <code>suffix?</code>, <code>selection_type?</code></td>
+<td>Select a phrase inside a text element, or place the cursor before or after it</td>
+</tr>
+<tr>
+<td><code>paste</code></td>
+<td><code>app</code>, <code>text</code>, <code>format?</code>, <code>element_index?</code></td>
+<td>Insert through the clipboard as <code>text</code>, <code>md</code> or <code>html</code>; the clipboard is restored afterwards</td>
+</tr>
+<tr>
+<td><code>copy</code></td>
+<td><code>app</code>, <code>element_index?</code></td>
+<td>Run the app's own Copy on the current selection and return the copied text; the clipboard is restored afterwards</td>
+</tr>
+<tr>
+<td><code>focus</code></td>
+<td><code>app</code>, <code>element_index</code></td>
+<td>Move keyboard focus to an element without clicking it</td>
+</tr>
+<tr>
+<td><code>menu</code></td>
+<td><code>app</code>, <code>menu_path?</code></td>
+<td>Without a path, list the menu bar. With a path such as <code>[&quot;View&quot;, &quot;Scientific&quot;]</code>, list that menu (with shortcuts, checked and disabled items) or choose a leaf item. Titles match without regard to case or a trailing <code>…</code>; no menu opens on screen</td>
+</tr>
+<tr>
+<td><code>show_window</code></td>
+<td><code>app</code>, <code>window?</code> or <code>window_id?</code></td>
+<td>Restore a minimised window or unhide the app, without bringing it to the front</td>
+</tr>
+<tr>
+<td><code>open_file</code></td>
+<td><code>app</code>, <code>path</code></td>
+<td>Open a document (absolute path) in that app the way Open With does, without bringing the app to the front; the state that comes back is of the document's window. Programs, scripts and executable files are refused, and so is any file for a terminal app (macOS only)</td>
+</tr>
+<tr>
+<td><code>hover</code></td>
+<td><code>app</code>, <code>element_index</code> or <code>x</code>,<code>y</code>, <code>duration?</code></td>
+<td>Rest the pointer over an element for <code>duration</code> seconds (default 0.8) so tooltips and hover menus open; your cursor does not move. Apps that ignore the pointer while in the background show nothing</td>
+</tr>
+<tr>
+<td><code>wait</code></td>
+<td><code>app</code>, <code>duration?</code></td>
+<td>Let up to 10 seconds pass (default 1), then return what changed: a page loading, playback, a reply arriving</td>
+</tr>
+<tr>
+<td><code>start_audio_recording</code></td>
+<td><code>app</code>, <code>max_duration?</code></td>
+<td>Record the sound that app plays, for up to <code>max_duration</code> seconds (default 60, at most 300). Only that app is recorded and you keep hearing it; other actions run meanwhile</td>
+</tr>
+<tr>
+<td><code>stop_audio_recording</code></td>
+<td><code>app</code>, <code>transcribe?</code></td>
+<td>Stop, save a 16 kHz WAV and return its path; with a speech engine set up in Settings → Voice, also the transcript</td>
+</tr>
+</tbody>
+</table>
+<p><code>app</code> is a name, bundle id or <code>.app</code> path as <code>list_apps</code> prints it. <code>x</code> and <code>y</code> are pixels of that app's most recent screenshot, not screen coordinates.</p>
+<p>Element actions reach windows that are hidden, minimised or covered by another window. Coordinate clicks, drags and wheel scrolls also run in the background: the pointer does not move and the front application does not change. Coordinates exist for canvases and custom controls that the tree does not describe; prefer an index whenever one is listed.</p>
+<p>On macOS the desktop App shows which window the agent is using and where each step lands. While the agent holds a window, a soft glow in your theme's accent colour runs along the inside of its edge, its close, minimize and zoom buttons turn the accent colour and pulse in turn, and the agent cursor stays in the window: it glides to each element or point the agent acts on and, where it clicks, presses and leaves a small dot, while your own pointer stays put. The overlay sits just above that window, not above your other apps: a window you bring in front of it covers the glow and the cursor too, and the overlay never takes your clicks. It fades about 20 seconds after the last step. <strong>Show actions</strong> in the browser toolbar turns the cursor and the overlay off for Pages and applications alike. macOS also shows its screen-sharing icon in the menu bar while the window is in use.</p>
+<h2 id="several-steps-code-and-a-new-agent">Several steps, code and a new agent<a class="header-anchor" href="#several-steps-code-and-a-new-agent">#</a></h2>
+<p>Several steps go in <code>actions</code>, up to 20, run in order on one app. They stop at the first error and return the state once, at the end; every step uses the indices and coordinates of the state read before them:</p>
+<pre><code>computer_use_agent(target=&quot;app&quot;, args={&quot;app&quot;: &quot;Calculator&quot;}, actions=[
+  {&quot;action&quot;: &quot;click&quot;, &quot;args&quot;: {&quot;element_index&quot;: 18}},
+  {&quot;action&quot;: &quot;press_key&quot;, &quot;args&quot;: {&quot;key&quot;: &quot;KP_Multiply&quot;}},
+  {&quot;action&quot;: &quot;click&quot;, &quot;args&quot;: {&quot;element_index&quot;: 18}},
+  {&quot;action&quot;: &quot;press_key&quot;, &quot;args&quot;: {&quot;key&quot;: &quot;KP_Enter&quot;}}
+])
+</code></pre>
+<p>For loops, conditions and data handling the model sends <code>code</code> instead: Python with top-level <code>await</code>, run in an isolated interpreter without files, network or processes, whose variables last for the turn. Each target is an object whose methods are its actions: <code>await cu.app.click(app=&quot;Numbers&quot;, element_index=3)</code>, <code>await cu.browser.read()</code>, <code>await cu.vm.screenshot()</code>. Inside the code, <code>dir(cu.app)</code> lists a target's actions and <code>help(cu.app.click)</code> shows one action's arguments. Code acts only on the app the call names, cannot run page scripts, upload files or open a new website, and runs at most 120 seconds and 100 actions per call. Code runs on macOS only.</p>
+<p><code>context</code> says who does the work. <code>inherit</code>, the default, means the model operates the screen itself in this conversation and sees every result. <code>fresh</code> hands the task to a new agent of the same model and settings: it starts from a <code>brief</code> (the task, what is already known, what to report back) and the target's guide, does the work with its own <code>computer_use_agent</code> calls, and only its final reply comes back. Use it for long operations whose intermediate screens the conversation does not need. A fresh agent cannot start another one.</p>
+<h2 id="web-pages">Web pages<a class="header-anchor" href="#web-pages">#</a></h2>
+<p>The <code>browser</code> target drives the tabs of the App's built-in browser. Each tab has a short id such as <code>tk3fa</code>, derived from the App's window and tab, so it is the same in every turn, in sub-agents and in workflow programs. <code>tabs</code> lists them, <code>open(url)</code> opens a new one, and every other action goes to the tab used last unless it names another with <code>tab</code>.</p>
+<p><code>read</code> returns the page as Playwright's accessibility outline: one line per element with its role, name, state and a ref, such as <code>- button &quot;Next&quot; [ref=e12]</code>. A ref keeps working as long as its element is on the page, through any number of actions and turns. An element can also be named by <code>role</code> and <code>name</code> instead of a ref. Every action returns what it changed: changed lines are marked <code>&lt;changed&gt;</code>, and <code>[unchanged]</code> stands for parts already seen. When the action moved the tab to another address, the whole new page comes back instead. A whole form can therefore be filled in one list of actions. If a ref's element was rendered again, it is found again by its role and name; if it is gone, the error carries the page as it is now.</p>
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Arguments</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tabs</code> / <code>open</code> / <code>close</code></td>
+<td>— / <code>url</code>, <code>visible?</code> / <code>tab?</code></td>
+<td>List tabs; open a tab (in the background unless <code>visible: true</code>); close one</td>
+</tr>
+<tr>
+<td><code>read</code></td>
+<td><code>changes_only?</code></td>
+<td>The whole page, or only what changed since the last result</td>
+</tr>
+<tr>
+<td><code>click</code></td>
+<td><code>ref</code> or <code>role</code>,<code>name</code> or <code>x</code>,<code>y</code>, <code>mouse_button?</code>, <code>click_count?</code>, <code>modifiers?</code></td>
+<td>Right, middle, double and modifier clicks, e.g. <code>modifiers=&quot;cmd&quot;</code>; <code>x</code>,<code>y</code> are pixels of the agent's last screenshot, and stop working once the page was acted on, navigated or scrolled since</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>ref?</code>, <code>text</code>, <code>clear?</code>, <code>submit?</code></td>
+<td>Replaces the field's text; <code>clear: false</code> inserts at the caret; <code>submit: true</code> presses Enter after; without <code>ref</code> it types into the focused element</td>
+</tr>
+<tr>
+<td><code>paste</code></td>
+<td><code>text</code>, <code>format?</code>, <code>ref?</code></td>
+<td>Offers the text to the page as a paste: <code>md</code> and <code>html</code> insert formatted text in rich editors, and a page that handles paste itself receives it</td>
+</tr>
+<tr>
+<td><code>select</code></td>
+<td><code>ref</code>, <code>value</code></td>
+<td>Chooses options of a select box by value or label</td>
+</tr>
+<tr>
+<td><code>press</code></td>
+<td><code>key</code>, <code>ref?</code></td>
+<td>Without <code>ref</code> the key goes to the page's focus</td>
+</tr>
+<tr>
+<td><code>hover</code> / <code>drag</code> / <code>scroll</code></td>
+<td><code>ref</code> / <code>ref</code>, <code>to_ref</code> / <code>ref?</code>, <code>direction?</code>, <code>amount?</code></td>
+<td>With <code>ref</code>, <code>scroll</code> moves the nearest scrollable container of that element; <code>amount</code> is in pixels</td>
+</tr>
+<tr>
+<td><code>navigate</code> / <code>back</code> / <code>forward</code> / <code>reload</code> / <code>wait</code></td>
+<td><code>url</code> / — / <code>text?</code>, <code>seconds?</code></td>
+<td>History navigation; <code>wait</code> waits until a text appears, or for some seconds</td>
+</tr>
+<tr>
+<td><code>upload</code></td>
+<td><code>path</code>, <code>ref</code>?</td>
+<td>Gives the page a local file of at most 50 MiB. The agent clicks the page's upload button as you would; the file window that click would open is held for the agent instead of appearing on your screen, and <code>upload</code> without <code>ref</code> answers it. With <code>ref</code> (the button or the file field) it does both at once</td>
+</tr>
+<tr>
+<td><code>screenshot</code></td>
+<td>—</td>
+<td>The tab as an image, captured without bringing it forward</td>
+</tr>
+<tr>
+<td><code>console</code> / <code>network</code></td>
+<td><code>pattern?</code>, <code>only_errors?</code>, <code>limit?</code></td>
+<td>The page's console output and requests since the agent first used the tab</td>
+</tr>
+<tr>
+<td><code>evaluate</code></td>
+<td><code>script</code></td>
+<td>Runs a JavaScript expression or function such as <code>() =&gt; document.title</code> in the page and returns its result as JSON, at most 20,000 characters; password field values in the result are redacted</td>
+</tr>
+</tbody>
+</table>
+<p>Several agents can use the browser at the same time, sub-agents of one conversation included. An action holds its tab until its result is read, and a list of actions holds the tabs it touches until it ends, so another agent's input never lands in the middle of a form being filled; a tab held for a minute fails with <code>tab_busy</code>. Each agent has its own current tab, and each sees everything that changed since it last looked, whoever changed it; when another agent acted on the same tab in between, the result says so. One agent waiting for a page does not hold up the others.</p>
+<p>No action is ever sent twice. When an action fails after its input may already have reached the page, such as a timeout, the error says so and carries the page as it is, and the tab is not tried again. When an action opens a new tab, such as a link to a new window, the result names that tab; the agent keeps its current tab until it passes the new one. In a workflow program, the browser is confined to the window the program started from, and the tabs it opened close when it ends. When you turned off agent access to the page of a conversation, the browser refuses every action there.</p>
+<p>A tab in the App's browser stays in the background throughout: input reaches it without activating it, and <code>open</code> puts its tab behind your work; <code>visible: true</code> brings it to the front instead, for when you asked to watch. A <code>file://</code> URL opens a local file the same way, when the sandbox lets the agent read that file. Password field values never appear in what the model reads.</p>
+<p>The App's built-in tabs need no approval. Opening a website outside your computer, and uploading a file, ask first. A script can read and change everything a signed-in page holds, so outside bypass mode an <code>evaluate</code> call asks you first and shows the whole script, even when a rule allows <code>computer_use_agent</code>. You can allow it once or for the rest of the conversation; there is no &quot;always allow&quot; across conversations. In bypass mode it runs without asking, like every other call. Scheduled or channel turns that cannot ask are refused, in bypass mode too. The approved script runs on the tab it was written for.</p>
+<h2 id="watching-and-taking-over-pages">Watching and taking over Pages<a class="header-anchor" href="#watching-and-taking-over-pages">#</a></h2>
+<p>In the desktop App, Agent-opened Pages remain in the background. Open <strong>Resources</strong> in the right sidebar to see the current conversation's Pages grouped by branch, including Pages used by its child agents. Continuing a branch keeps its resource group. Distinct Pages stay distinct even when they have the same URL; pages without established branch ownership appear under <strong>Unassigned</strong>.</p>
+<p>A popup or new window opened by an Agent's Page loads in the background as a Page of its own and joins the same conversation and branch in <strong>Resources</strong>; it does not take over your view. The Agent's next result for the opening Page names the popup, so the Agent continues there instead of starting the same flow again. A popup from a Page you opened yourself opens in front as an ordinary tab.</p>
+<p>Select a resource to inspect its image preview in chat. <strong>Preview in conversation</strong> is the explicit control for the same existing Page: it does not add a top tab and if a webpage currently occupies center, returns to the owning session so the chat preview is visible. The chat preview chrome has a persistent <strong>Pin preview</strong> / <strong>Unpin preview</strong> control: pin holds the current page as Fixed preview; unpin returns to Auto preview of the Page most recently operated on by that branch. Selecting a resource shows it without pinning and does not steal tab focus; in Auto preview, the next Page the Agent reads or operates on replaces it. Opening, reading and acting on a Page all count, not only clicks and typing. These pin controls exist only on the chat preview; Session resources has no pin control. <strong>Hide</strong> stops preview capture and keeps the Page available. Restore a hidden preview with the resource row or <strong>Preview in conversation</strong>; there is no separate Show preview control. <strong>Expand</strong> enlarges the image preview without changing Auto or Fixed preview. <strong>Open page</strong> opens the existing Page as an ordinary top tab and hides the chat preview. Returning to the conversation restores the preview unless it was hidden. These controls keep their selection per conversation and branch. A pin lasts until the app reloads; afterwards the preview is in Auto preview again.</p>
+<p>A webpage tab and its preview never display together. The actual webpage remains usable in its own tab. There is no dimming mask. Its toolbar provides <strong>Show actions</strong> and <strong>Operation history</strong>, and <strong>Review request</strong> while the Agent waits for your confirmation. In the page itself these sit behind a small draggable Agent button in the bottom-right corner; the button appears once the Agent operates the page and stays there after the Agent lets it go, so the history and the action-cue switch remain at hand for the next turn, and leaves only when the page closes. While the Agent operates a page, in its tab or in the chat preview, the page's edge glows inward in the accent colour and the Agent's cursor glides to each step, the same as over a desktop app window it operates; the glow fades when the Agent lets the page go. The chat preview uses a single compact chrome row and shows a status only when the Agent needs you or the state cannot be confirmed. While anything in the App is fullscreen, such as a video, the preview's page is hidden and returns when fullscreen ends. The default overlay is 300×198.75. Drag the header to move it, or resize from any edge or corner; the image aspect stays linked and the page itself is not resized. Action markers are brief and do not intercept input; history contains operation types and results rather than the text entered into a webpage.</p>
+<p>Using the real webpage does not pause the Agent: you can read, scroll and use the page while it works. To stop the Agent, stop its run in the conversation; the glow stays until the run has stopped, then fades.</p>
+<p>Closing a Page affects every branch reference to that same Page. An active Page first requests stopping; it stays available until stopping is confirmed. Closing is separate from hiding the preview. Disconnection or an unavailable target shows the last image as stale. Saved resource metadata does not restore an Agent input lease or recreate a closed Page.</p>
+<p>If the App or worker restarts, pages you had not closed come back in the background without extra top tabs. The retained tab, session, and branch stay; the last confirmed title and URL stay. The App creates a new live page for that retained tab. Previous live handles are invalid. Explicitly closed pages stay under <strong>Closed pages</strong>. A hidden preview stays hidden until you select the resource or use <strong>Preview in conversation</strong>. Rows that are restoring, failed to restore, or need a reconnect stay in the original branch and show <strong>Restoring page…</strong>, <strong>Could not restore page</strong>, or <strong>Reconnect</strong>. They do not move to a generic Unavailable group. Restoring a page does not require <strong>Continue Agent</strong>. New task actions still use a fresh observation and current permission on the new page. Restore reloads the last confirmed URL with existing site persistent storage; unsaved DOM and form values from the old process are not restored. An older resource record with no retained tab descriptor cannot be recreated automatically and reports <strong>Could not restore page</strong> in its original group. This bounded restart recovery is implemented.</p>
+<p>The chat preview also follows the other things the Agent works on. When it acts on a desktop app window, the preview shows that app with the latest screenshot the Agent took of the window, refreshed after every step. When it takes or types into a Desktop Terminal, the preview shows that terminal's live output, read-only. The same Auto preview, pin and close rules apply; the next Page the Agent works on takes the preview back. Screenshots stay in memory and are not kept after the worker restarts.</p>
+<p>These controls operate on exact OpenProgram Pages. Application windows and VM displays keep their own approvals described above.</p>
+<h2 id="your-own-chrome-or-edge">Your own Chrome or Edge<a class="header-anchor" href="#your-own-chrome-or-edge">#</a></h2>
+<p>The <code>browser</code> target works in the browser you browse with when a call sets <code>args.browser</code> to <code>chrome</code> or <code>edge</code>, so pages open with your sign-ins and cookies. The actions are the same as in the built-in browser: <code>tabs</code> lists your tabs by index, <code>read</code> with <code>tab=&lt;index&gt;</code> switches to one and <code>open(url)</code> opens a new tab, and <code>click</code>, <code>type</code>, <code>press</code>, <code>scroll</code>, <code>screenshot</code> and the rest act on refs from the latest snapshot. The model is told to use your browser only when you name it or the task needs your signed-in state, and to stay in the browser you named.</p>
+<p>It runs Microsoft's Playwright MCP server in extension mode (<code>@playwright/mcp --extension</code>), and the <a href="https://chromewebstore.google.com/detail/playwright-extension/mmlmfjhmonkocbjadbfplnigmagldckm">Playwright Extension</a> in your browser connects to it; Edge installs the same extension from the Chrome Web Store. Install it once; the server itself is fetched with <code>npx</code>, so Node.js must be installed. On the first action the extension asks which tab to share. To connect without that prompt, copy the token the extension shows and set it:</p>
+<pre><code class="language-bash">openprogram<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>computer_use.chrome_extension_token<span class="w"> </span>&lt;token&gt;
+</code></pre>
+<p>One approval covers your Chrome (or Edge) for the conversation; <code>evaluate</code> (page JavaScript) asks separately outside bypass mode, and <code>upload</code> names the upload. Code mode does not reach your browser.</p>
+<h2 id="virtual-machine">Virtual machine<a class="header-anchor" href="#virtual-machine">#</a></h2>
+<p>The <code>vm</code> target drives a machine behind an <a href="https://os-world.github.io/">OSWorld</a>-compatible server: the tool takes screenshots with <code>GET /screenshot</code> and runs pointer and keyboard input through <code>POST /execute</code> with pyautogui on that machine. Set the server's address once:</p>
+<pre><code class="language-bash">openprogram<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>computer_use.vm_url<span class="w"> </span>http://192.168.64.2:5000
+</code></pre>
+<p>The VM has no element tree: its actions are <code>screenshot</code>, <code>click</code>, <code>move</code>, <code>drag</code>, <code>scroll</code>, <code>type_text</code>, <code>press_key</code> and <code>wait</code>, pointed by pixels of the last screenshot. Every acting call returns a new screenshot. The first use of a VM in a conversation asks for approval, which names the endpoint.</p>
+<h2 id="approval">Approval<a class="header-anchor" href="#approval">#</a></h2>
+<p>The first time a conversation touches an application, an approval card shows that application with its own icon, name and bundle id, says what this step does (&quot;Click element #7&quot;, &quot;Type 12 characters&quot;, &quot;Run code that operates it&quot;), and states that it runs in the background. The raw arguments sit under &quot;Execution details&quot;. The card offers:</p>
+<ul>
+<li><strong>Allow once</strong> — this one call.</li>
+<li><strong>Allow this conversation</strong> — every later <code>computer_use_agent</code> call on the same application in this session, saved as a session rule.</li>
+<li><strong>Always allow</strong> — saved as the project rule <code>computer_use_agent(&lt;app&gt;)</code>, so future sessions in the project do not ask again. Rules saved under the tool's earlier name, <code>computer_use(&lt;app&gt;)</code>, keep working.</li>
+<li><strong>Deny</strong>.</li>
+</ul>
+<p>The card appears in the modes that ask (Default and Accept edits) until a saved rule names that application. Bypass operates applications without asking, and Auto reviews each operation like any other tool call. Scheduled and other unattended runs cannot answer a card, so outside Bypass they can only operate applications already allowed for the project. <code>list_apps</code> never asks. Each application is approved separately: allowing Notes says nothing about Mail. A <code>fresh</code> agent runs on the approval its call received: for as long as it works, that application is allowed in the conversation. The project's Settings tab lists the always-allowed applications under <strong>Computer use</strong>, one row per application with its icon; removing a row removes its rule, and the next use of that application asks again. Grants for one conversation end with it and are not listed. See <a href="/docs/capabilities/permissions.html">Permissions</a> for rules in general.</p>
+<p>Allowing an application lets the model operate it; it does not let the model take consequential steps on its own. The tool instructs the model to confirm with you before sending a message, submitting a form, buying, deleting, or following instructions that appear on screen. CAPTCHAs, passwords and security prompts are handed to you. Text the model reads on screen is never treated as your permission.</p>
+<h2 id="system-access">System access<a class="header-anchor" href="#system-access">#</a></h2>
+<p>System settings shows live optional desktop access on the execution computer.
+Opening this page or running <code>openprogram doctor</code> does not request permission.
+The TUI <code>/doctor</code> command and <code>GET /api/system/access</code> expose the same checks.
+Missing optional desktop access does not prevent ordinary chat or upgrades.</p>
+<p>On macOS, managed installations run the worker and its Python children through
+<strong>OpenProgram</strong>, an embedded application with the OpenProgram icon and
+a stable bundle identifier. This is the name to look for in System Settings;
+the installer does not grant its permissions. Screen recording and Accessibility
+are checked separately in a fresh process of the executable used for desktop tasks. In local System settings, <strong>Set up access</strong> explicitly requests
+only a missing permission; an existing grant is left untouched. Complete the
+system confirmation, then return to the page for automatic verification.
+Remote clients must arrange authorization on the execution computer. A grant
+for another application is not evidence that the worker is authorized.</p>
+<p>Linux headless sessions and unsupported Wayland desktop capture are reported
+separately from missing dependencies. An X11 display alone does not prove access.
+Windows desktop access depends on the active session and target; ordinary
+applications cannot assume access to secure desktops or elevated targets.
+Neither platform is instructed to disable security or run the entire application
+as administrator. Native Linux and Windows desktop acceptance remains unverified.</p>
+<p>The current macOS development build is not production-signed. Permission
+persistence across signed release upgrades, first-run capability onboarding,
+and automatic task recovery after authorization remain unverified. System
+access setup never retries a declined operation.</p>
+<h3 id="authorization">Authorization<a class="header-anchor" href="#authorization">#</a></h3>
+<p>An application call pauses before it acts when system access is missing. OpenProgram requests the missing permission through the native authorization flow and opens the corresponding System Settings page when necessary. The conversation shows a brief paused waiting status and an Open System Settings text action, without a permission form, Continue button, null result, Retry, or Edit action on the paused runtime card. Genuine failed and cancelled runs keep their own terminal statuses.</p>
+<p>The background worker saves the waiting task and checks permission through a fresh OpenProgram process, using the same executable as the desktop task. This avoids reusing a permission result retained before the system setting changed. These checks do not request permission. Once access is available, it continues the same task once. Closing the page does not stop this check. If an application restart is needed, the saved task is checked again after startup. Cancelling the task prevents later continuation. A failed check keeps the task waiting; it is never treated as permission granted. Viewing an old conversation does not itself start an operation or reopen system prompts. System access does not replace operation approval.</p>
+<p>On local ad-hoc macOS builds, an update can invalidate a previously granted recording permission while the system switch remains enabled. OpenProgram remembers successful recording checks for its installed application. If a later application identity changes and recording is denied, the next local authorization action renews only OpenProgram’s obsolete recording registration before opening the native permission flow. This recovery runs at most once per changed identity; status checks and reconnects never reset permissions. Stable Developer ID releases use the normal system authorization flow.</p>
+<p>Repeated delivery of the same waiting task does not reopen native authorization when you switch conversations. You can still open System Settings explicitly.</p>
+<h3 id="automation-errors-on-macos">Automation errors on macOS<a class="header-anchor" href="#automation-errors-on-macos">#</a></h3>
+<p>Some desktop commands send Apple Events to System Events or a target application. macOS controls Automation separately for each target; screen recording and Accessibility access do not imply Automation access. If an operation reports an Automation denial, open <strong>System Settings → Privacy &amp; Security → Automation</strong> on the execution Mac and inspect the requesting application's access to the named target. The failed operation remains failed; changing the system setting does not approve or repeat it. Other native command failures retain their actual error instead of being reported as success.</p>
+<h2 id="windows-on-other-spaces">Windows on other Spaces<a class="header-anchor" href="#windows-on-other-spaces">#</a></h2>
+<p>A window on another desktop Space is read and operated where it is: <code>list_windows</code> marks it, and screenshots, clicks, scrolls, drags and element actions reach it without switching Spaces. macOS does not deliver key presses to it, so there <code>type_text</code> and <code>paste</code> insert plain text into the focused text field instead, and <code>press_key</code> reports that the key cannot be sent. The tool cannot move the window to your current Space; only you (or the Dock) can.</p>
+<h2 id="new-windows-and-file-dialogs">New windows and file dialogs<a class="header-anchor" href="#new-windows-and-file-dialogs">#</a></h2>
+<p>When a step opens a window in front of the one the agent was using, such as a dialog or a document, the state that comes back is of the new window and says which window it opened over; the agent's next steps act on it. <code>get_app_state</code> with <code>window</code> goes back to another window.</p>
+<p>The system Open and Save dialog on macOS runs in a separate process. Clicks and <code>set_value</code> reach it in the background, but key presses and typed text do not, so with such a dialog in front <code>press_key</code>, <code>type_text</code> and <code>paste</code> report that instead of sending keys that would be lost. Its file list is not exposed to Accessibility, so the state lists the text read off its screenshot with coordinates. To open a file, the agent uses <code>open_file</code> rather than the dialog.</p>
+<h2 id="requirements">Requirements<a class="header-anchor" href="#requirements">#</a></h2>
+<ul>
+<li>macOS, Linux with an X11 (Xorg) session, or Windows 10 or 11.</li>
+<li>On macOS, the signed runtime (<code>ai.openprogram.runtime</code>) must hold <strong>Accessibility</strong> and <strong>Screen Recording</strong>. The tool reports which grant is missing, and Settings → System access requests it. <a href="/docs/capabilities/permissions.html">Permissions</a> describes how macOS grants work for the runtime.</li>
+</ul>
+<h2 id="on-linux">On Linux<a class="header-anchor" href="#on-linux">#</a></h2>
+<p>On Linux the tool reads the window's accessibility tree over AT-SPI, which GTK 3, GTK 4 and (with <code>QT_LINUX_ACCESSIBILITY_ALWAYS_ON=1</code>) Qt applications expose, and acts with <code>xdotool</code>. It needs:</p>
+<ul>
+<li>an X11 session: Wayland does not let one application read or drive another's windows, so the tool reports itself unavailable there;</li>
+<li><code>python3-gi</code> with <code>gir1.2-atspi-2.0</code> and <code>gir1.2-gtk-3.0</code>, and <code>xdotool</code>;</li>
+<li>optionally <code>x11-utils</code> (<code>xprop</code>, to tell real windows from helper windows), <code>tesseract-ocr</code> (text on screenshots of apps without a tree) and <code>pulseaudio-utils</code> (recording).</li>
+</ul>
+<p>What is the same: the tree format, stable indices and diffs, screenshots, <code>zoom</code>, <code>find</code>, several steps in <code>actions</code>, <code>menu</code> (for apps with a menu bar), <code>select_text</code>, <code>set_value</code>, scroll bars moved by element, and approvals. Applications are named by their desktop entry id (<code>org.gnome.Calculator</code>), their name or their process name, as <code>list_apps</code> prints them; an installed application is launched through its desktop entry.</p>
+<p>What differs:</p>
+<ul>
+<li>Element actions (press, toggle, set a value, insert and select text, choose a menu item, Return in a field) run in the background. Pointer input at <code>x</code>,<code>y</code> (click, drag, wheel scroll), <code>hover</code>, and key presses other than Return reach a GTK or Qt window only while it is focused, so for that step the window comes to the front, receives the input, and then focus and your pointer go back to where they were. <code>hover</code> leaves the pointer over the window. The approval card says so for those steps.</li>
+<li><code>paste</code> inserts plain text straight into the focused field and does not use the clipboard; <code>format=md</code> and <code>html</code> are not available. <code>copy</code> returns the selected text without touching the clipboard.</li>
+<li>An application that does not join the accessibility bus is listed with &quot;no accessibility tree&quot;: the model reads its screenshot (with OCR when tesseract is installed) and acts by coordinates.</li>
+<li>Recording reads only the application's own streams (and those of its child processes) from PipeWire or PulseAudio. With PipeWire it starts within a quarter second; on PulseAudio without PipeWire the first second or so of a stream that was already playing can be missed.</li>
+<li>Refused: password fields, Seahorse and KWallet, polkit and gcr authentication prompts, and OpenProgram itself.</li>
+</ul>
+<h2 id="on-windows">On Windows<a class="header-anchor" href="#on-windows">#</a></h2>
+<p>On Windows the tool reads the window's UI Automation tree, which Win32, WPF, WinForms, Store (UWP and WinUI) and Chromium-based applications expose, and takes screenshots of the window even while it is covered. It needs the <code>comtypes</code> package, which the Windows install includes; <code>tesseract</code> on <code>PATH</code> adds text read off screenshots of apps without a tree. Windows support is new and has not yet been run on a Windows machine by the project; report problems with the step that failed.</p>
+<p>What is the same: the tree format, stable indices and diffs, screenshots, <code>zoom</code>, <code>find</code>, several steps in <code>actions</code>, <code>select_text</code>, <code>set_value</code>, <code>copy</code>, <code>paste</code> (text, markdown and HTML), scrolling by element, recording and approvals. Applications are named as <code>list_apps</code> prints them: the Start menu name (<code>Calculator</code>), the executable name (<code>notepad</code>) or the process id; an installed application is launched from its Start menu entry.</p>
+<p>What differs:</p>
+<ul>
+<li>Element actions run in the background through UI Automation. Clicks, scrolls and plain keys at a window are posted to that window without raising it, and <code>hover</code> does not move your pointer.</li>
+<li>A key with modifiers (<code>ctrl+s</code>) needs the real keyboard state, and <code>paste</code> presses <code>ctrl+v</code> in most apps, so for that step the window comes to the front and then focus and your pointer go back. Windows that read only real input (Store app frames, Chromium, Firefox) are handled the same way for pointer input. Use the Windows shortcuts: <code>ctrl+c</code>, not <code>cmd+c</code>.</li>
+<li><code>menu</code> works for classic menu bars and for menus exposed through UI Automation; apps with a ribbon keep their commands in the window's tree.</li>
+<li><code>copy</code> returns the selected text without touching the clipboard. <code>paste</code> restores the clipboard's text afterwards, not other formats it held.</li>
+<li>Recording captures the application's own process tree through Windows' process loopback (Windows 10 version 2004 or later).</li>
+<li>Refused: password fields, the credential and elevation (UAC) prompts, the lock screen, and OpenProgram itself.</li>
+</ul>
+<h2 id="recording-sound">Recording sound<a class="header-anchor" href="#recording-sound">#</a></h2>
+<p>Recording uses the Screen Recording grant the screenshots already need and captures the named application's own output: other apps, the microphone and the system alert sounds are not in it. The recordings are kept in <code>~/.openprogram/computer-use/audio/</code>, the newest 20. <code>stop_audio_recording</code> transcribes with the engine chosen in Settings → Voice: whisper.cpp keeps the sound on the Mac, while the OpenAI and Groq engines send it to that provider. Pass <code>transcribe=false</code> to keep only the file. A silent recording is reported as such and not transcribed. When the chat model accepts audio input, as Gemini and OpenAI's gpt-audio models do, it also receives the recording itself and can hear music, tone and other sounds a transcript leaves out.</p>
+<h2 id="what-the-tool-refuses">What the tool refuses<a class="header-anchor" href="#what-the-tool-refuses">#</a></h2>
+<p>The tool does not type into secure text fields or while macOS reports secure keyboard input, and it never operates the Keychain Access and Passwords apps, system login and authorisation prompts, or OpenProgram itself. When a task needs one of those steps, the model asks you to do it.</p>
+<p>The tool's description asks the model to check with you before deleting data, sending messages, submitting forms, spending money, changing accounts, permissions or system settings, and installing software, and to hand CAPTCHAs, password entry and security prompts to you. Text shown in a window is never treated as your permission.</p>
+<p>The tool is not offered in WeChat and Telegram channels, nor in plan mode.</p>
+<div class="page-updated"><span data-i18n="updated">Last updated</span> · 2026-11-06</div><div class="prevnext"><a class="pn-link pn-prev" href="/docs/capabilities/goal.html" data-href-en="/docs/capabilities/goal.html" data-href-zh="/docs/capabilities/goal.zh.html"><span class="pn-dir" data-i18n="prev">Previous</span><span class="pn-title" data-title-zh="目标">Goals</span></a><a class="pn-link pn-next" href="/docs/capabilities/meetings.html" data-href-en="/docs/capabilities/meetings.html" data-href-zh="/docs/capabilities/meetings.zh.html"><span class="pn-dir" data-i18n="next">Next</span><span class="pn-title" data-title-zh="会议">Meetings</span></a></div></article></main>
+  <aside class="toc"><div class="toc-title" data-i18n="on_this_page">On this page</div>
+<ul class="toc-list">
+<li>
+<a class="lvl-2" href="#targets-and-guides">Targets and guides</a>
+</li>
+<li>
+<a class="lvl-2" href="#what-a-step-looks-like">What a step looks like</a>
+</li>
+<li>
+<a class="lvl-2" href="#application-actions">Application actions</a>
+</li>
+<li>
+<a class="lvl-2" href="#several-steps-code-and-a-new-agent">Several steps, code and a new agent</a>
+</li>
+<li>
+<a class="lvl-2" href="#web-pages">Web pages</a>
+</li>
+<li>
+<a class="lvl-2" href="#watching-and-taking-over-pages">Watching and taking over Pages</a>
+</li>
+<li>
+<a class="lvl-2" href="#your-own-chrome-or-edge">Your own Chrome or Edge</a>
+</li>
+<li>
+<a class="lvl-2" href="#virtual-machine">Virtual machine</a>
+</li>
+<li>
+<a class="lvl-2" href="#approval">Approval</a>
+</li>
+<li>
+<details class="toc-disclosure" open=""><summary>
+<a class="lvl-2" href="#system-access">System access</a>
+</summary>
+<ul class="toc-list">
+<li>
+<a class="lvl-3" href="#authorization">Authorization</a>
+</li>
+<li>
+<a class="lvl-3" href="#automation-errors-on-macos">Automation errors on macOS</a>
+</li>
+</ul>
+</details>
+</li>
+<li>
+<a class="lvl-2" href="#windows-on-other-spaces">Windows on other Spaces</a>
+</li>
+<li>
+<a class="lvl-2" href="#new-windows-and-file-dialogs">New windows and file dialogs</a>
+</li>
+<li>
+<a class="lvl-2" href="#requirements">Requirements</a>
+</li>
+<li>
+<a class="lvl-2" href="#on-linux">On Linux</a>
+</li>
+<li>
+<a class="lvl-2" href="#on-windows">On Windows</a>
+</li>
+<li>
+<a class="lvl-2" href="#recording-sound">Recording sound</a>
+</li>
+<li>
+<a class="lvl-2" href="#what-the-tool-refuses">What the tool refuses</a>
+</li>
+</ul></aside>
+</div>
+
+<div class="search-overlay">
+  <div class="search-box">
+    <input type="text" data-i18n-ph="search_ph" placeholder="Search titles or text…" autocomplete="off" spellcheck="false">
+    <div class="search-results"></div>
+  </div>
+</div>
+
+<script src="/docs/assets/site.js?v=6520ba46"></script>
+</body>
+</html>

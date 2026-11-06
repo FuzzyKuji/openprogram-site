@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh" data-base="/docs/" data-page-lang="zh" data-build="1793956776" data-alt-lang-url="/docs/install/profiles.html">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>配置实例 · OpenProgram Docs</title>
+<meta name="description" content="多实例与 Profile # 这页说明如何在同一台机器上并行运行多个互不干扰的 OpenProgram 实例——常见场景是一个稳定实例日常用，一个开发实例改代码。 profile：隔离状态目录 # 默认所有状态（config / sessions / logs / memory）都在 ~/.openprogram/">
+<link rel="canonical" href="https://openprogram.io/docs/install/profiles.zh.html">
+<link rel="alternate" type="text/markdown" href="https://openprogram.io/docs/install/profiles.zh.html.md">
+<link rel="describedby" href="https://openprogram.io/llms.txt">
+<link rel="alternate" hreflang="en" href="https://openprogram.io/docs/install/profiles.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://openprogram.io/docs/install/profiles.zh.html">
+<link rel="alternate" hreflang="x-default" href="https://openprogram.io/docs/install/profiles.html">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"OpenProgram Docs","item":"https://openprogram.io/docs/"},{"@type":"ListItem","position":2,"name":"配置实例"}]}</script>
+<meta property="og:type" content="article">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:site_name" content="OpenProgram">
+<meta property="og:url" content="https://openprogram.io/docs/install/profiles.zh.html">
+<meta property="og:title" content="配置实例 · OpenProgram Docs">
+<meta property="og:description" content="多实例与 Profile # 这页说明如何在同一台机器上并行运行多个互不干扰的 OpenProgram 实例——常见场景是一个稳定实例日常用，一个开发实例改代码。 profile：隔离状态目录 # 默认所有状态（config / sessions / logs / memory）都在 ~/.openprogram/">
+<meta property="og:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:secure_url" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="配置实例 · OpenProgram Docs">
+<meta name="twitter:description" content="多实例与 Profile # 这页说明如何在同一台机器上并行运行多个互不干扰的 OpenProgram 实例——常见场景是一个稳定实例日常用，一个开发实例改代码。 profile：隔离状态目录 # 默认所有状态（config / sessions / logs / memory）都在 ~/.openprogram/">
+<meta name="twitter:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta name="twitter:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/docs/assets/mark.svg">
+<link rel="stylesheet" href="/docs/assets/site.css?v=6520ba46">
+<link rel="stylesheet" href="/docs/assets/pygments-light.css" media="(prefers-color-scheme: light)" id="pyg-light">
+<link rel="stylesheet" href="/docs/assets/pygments-dark.css" media="(prefers-color-scheme: dark)" id="pyg-dark">
+<script src="/docs/assets/theme.js?v=6520ba46"></script>
+
+</head>
+<body>
+<header class="topbar">
+  <button class="icon hamburger" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2.5 4.5h11M2.5 8h11M2.5 11.5h11"/></svg></button>
+  <a class="brand" href="/docs/index.html"><img class="mark" src="/docs/assets/mark.svg" alt="">OpenProgram Docs</a>
+  <div class="spacer"></div>
+  <button class="search-trigger" aria-label="Search">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14"/></svg><span class="label" data-i18n="search">Search docs</span><kbd>⌘K</kbd>
+  </button>
+  <div class="lang-wrap">
+    <button class="icon lang-trigger" id="lang-toggle" aria-haspopup="true" aria-expanded="false" aria-label="Language">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="6.2"/><path d="M1.8 8h12.4" stroke-linecap="round"/><ellipse cx="8" cy="8" rx="2.8" ry="6.2"/></svg><span class="lang-label">EN</span><svg class="chev" width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+    </button>
+    <div class="lang-menu" id="lang-menu" role="menu">
+      <button class="lang-opt" data-lang="en" role="menuitem"><span>English</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="lang-opt" data-lang="zh" role="menuitem"><span>简体中文</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+  <div class="theme-wrap">
+    <button class="icon" id="theme-toggle" aria-label="Theme" aria-haspopup="menu" aria-controls="theme-menu" aria-expanded="false"><svg class="ic-system" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="2.5" width="13" height="9" rx="1.5"/><path d="M8 11.5V14M5.5 14h5"/></svg><svg class="ic-moon" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M13.5 9.5A6 6 0 1 1 6.5 2.5a5 5 0 0 0 7 7z"/></svg><svg class="ic-sun" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="3.2"/><path d="M8 1.2v1.8M8 13v1.8M1.2 8H3M13 8h1.8M3.2 3.2l1.3 1.3M11.5 11.5l1.3 1.3M12.8 3.2l-1.3 1.3M4.5 11.5l-1.3 1.3"/></svg></button>
+    <div class="theme-menu" id="theme-menu" role="menu" aria-labelledby="theme-toggle">
+      <button class="theme-opt" data-theme-choice="system" role="menuitemradio" aria-checked="true"><span>Follow system</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="light" role="menuitemradio" aria-checked="false"><span>Light</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="dark" role="menuitemradio" aria-checked="false"><span>Dark</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+</header>
+<nav class="tabbar"><a class="tablink" href="/docs/README.html" data-title-zh="开始使用" data-href-en="/docs/README.html" data-href-zh="/docs/README.zh.html">Get started</a><a class="tablink active" href="/docs/install/install.html" data-title-zh="安装" data-href-en="/docs/install/install.html" data-href-zh="/docs/install/install.zh.html">Install</a><a class="tablink" href="/docs/capabilities/README.html" data-title-zh="能力" data-href-en="/docs/capabilities/README.html" data-href-zh="/docs/capabilities/README.zh.html">Capabilities</a><a class="tablink" href="/docs/interfaces/README.html" data-title-zh="界面" data-href-en="/docs/interfaces/README.html" data-href-zh="/docs/interfaces/README.zh.html">Interfaces</a><a class="tablink" href="/docs/models/README.html" data-title-zh="模型" data-href-en="/docs/models/README.html" data-href-zh="/docs/models/README.zh.html">Models</a><a class="tablink" href="/docs/integrations/anthropic.html" data-title-zh="集成" data-href-en="/docs/integrations/anthropic.html" data-href-zh="/docs/integrations/anthropic.zh.html">Integrations</a><a class="tablink" href="/docs/server/README.html" data-title-zh="服务与运维" data-href-en="/docs/server/README.html" data-href-zh="/docs/server/README.zh.html">Server &amp; Ops</a><a class="tablink" href="/docs/reference/README.html" data-title-zh="参考" data-href-en="/docs/reference/README.html" data-href-zh="/docs/reference/README.zh.html">Reference</a><a class="tablink" href="/docs/reference/design/README.html" data-title-zh="设计" data-href-en="/docs/reference/design/README.html" data-href-zh="/docs/reference/design/README.zh.html">Design</a></nav>
+
+<div class="scrim"></div>
+<div class="layout">
+  <nav class="sidebar" aria-label="Documentation">
+    <input class="nav-filter" type="text" data-i18n-ph="nav_filter"
+           aria-label="Filter docs" placeholder="Filter docs…" autocomplete="off" spellcheck="false">
+    <div class="nav-tree"><div class="nav-sec"><div class="nav-sec-title" data-title-zh="安装">Install</div><a class="navlink" href="/docs/install/install.html" data-title-zh="安装" data-href-en="/docs/install/install.html" data-href-zh="/docs/install/install.zh.html">Installation</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="维护">Maintenance</div><a class="navlink" href="/docs/install/upgrade.html" data-title-zh="版本升级" data-href-en="/docs/install/upgrade.html" data-href-zh="/docs/install/upgrade.zh.html">Release upgrades</a>
+<a class="navlink active" href="/docs/install/profiles.html" data-title-zh="配置实例" data-href-en="/docs/install/profiles.html" data-href-zh="/docs/install/profiles.zh.html">Profiles</a></div></div>
+  </nav>
+  <main class="content"><button class="fs-toggle" aria-label="Fullscreen" title="Fullscreen (Esc to exit)"><svg class="ic-expand" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.2 2H2v4.2M9.8 2H14v4.2M6.2 14H2V9.8M9.8 14H14V9.8"/></svg><svg class="ic-collapse" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6.2h4.2V2M14 6.2H9.8V2M2 9.8h4.2V14M14 9.8H9.8V14"/></svg></button><article><nav class="breadcrumb"><span class="bc-seg" data-title-zh="安装">Install</span> <span class='bc-sep'>›</span> <span class="bc-seg" data-title-zh="维护">Maintenance</span> <span class='bc-sep'>›</span> <span class="bc-seg bc-current" data-title-zh="配置实例">Profiles</span></nav><h1 id="多实例与-profile">多实例与 Profile<a class="header-anchor" href="#多实例与-profile">#</a></h1>
+<p>这页说明如何在同一台机器上并行运行多个互不干扰的 OpenProgram 实例——常见场景是一个稳定实例日常用，一个开发实例改代码。</p>
+<h2 id="profile隔离状态目录">profile：隔离状态目录<a class="header-anchor" href="#profile隔离状态目录">#</a></h2>
+<p>默认所有状态（config / sessions / logs / memory）都在 <code>~/.openprogram/</code>。指定 profile 后改存 <code>~/.openprogram-&lt;name&gt;/</code>，两个实例互不共享任何数据：</p>
+<pre><code class="language-bash">openprogram<span class="w"> </span>--profile<span class="w"> </span>dev<span class="w">            </span><span class="c1"># CLI 全局参数</span>
+<span class="nv">OPENPROGRAM_PROFILE</span><span class="o">=</span>dev<span class="w"> </span>openprogram<span class="w">  </span><span class="c1"># 或环境变量，二者等价（两者都设时以参数为准）</span>
+</code></pre>
+<p><code>--profile</code> 是全局参数，放在子命令前，对所有子命令生效：<code>openprogram --profile dev sessions list</code>、<code>openprogram --profile dev restart</code> 等。</p>
+<h2 id="端口每个实例一个">端口：每个实例一个<a class="header-anchor" href="#端口每个实例一个">#</a></h2>
+<p>每个实例只监听一个端口（API、WebSocket 和 web UI 同端口），默认 18100。改端口有三种方式：</p>
+<pre><code class="language-bash"><span class="c1"># 1. 持久化到该 profile 的配置（推荐，之后启动不用再带参数）</span>
+openprogram<span class="w"> </span>--profile<span class="w"> </span>dev<span class="w"> </span>ports<span class="w"> </span>--port<span class="w"> </span><span class="m">18200</span>
+
+<span class="c1"># 2. 环境变量，覆盖本次运行</span>
+<span class="nv">OPENPROGRAM_WEB_PORT</span><span class="o">=</span><span class="m">18200</span><span class="w"> </span>openprogram<span class="w"> </span>web
+
+<span class="c1"># 3. 命令行参数，只对这一次 `openprogram web` 生效</span>
+openprogram<span class="w"> </span>web<span class="w"> </span>--web-port<span class="w"> </span><span class="m">18200</span>
+</code></pre>
+<p><code>ports</code> 的设置写进当前 profile 的 config，所以每个 profile 记住自己的端口。</p>
+<h2 id="示例稳定-开发双实例">示例：稳定 + 开发双实例<a class="header-anchor" href="#示例稳定-开发双实例">#</a></h2>
+<p>稳定实例用默认 profile 和默认端口，开发实例用 <code>dev</code> profile 和 18200：</p>
+<pre><code class="language-bash"><span class="c1"># 稳定实例（日常使用）</span>
+openprogram<span class="w"> </span>web<span class="w">                        </span><span class="c1"># http://localhost:18100</span>
+
+<span class="c1"># 开发实例：先把端口写进 dev profile（一次性）</span>
+openprogram<span class="w"> </span>--profile<span class="w"> </span>dev<span class="w"> </span>ports<span class="w"> </span>--port<span class="w"> </span><span class="m">18200</span>
+
+<span class="c1"># 之后每次这样启动</span>
+openprogram<span class="w"> </span>--profile<span class="w"> </span>dev<span class="w"> </span>web<span class="w">          </span><span class="c1"># http://localhost:18200</span>
+</code></pre>
+<p>两个实例各有自己的会话、配置、日志和后台 worker；<code>openprogram status</code> 看的是默认实例，<code>openprogram --profile dev status</code> 看开发实例。</p>
+<p>Linux 上的常驻 worker 也按 profile 隔离。分别在各自的命令上下文安装，
+OpenProgram 会创建两个独立的 systemd 用户服务：</p>
+<pre><code class="language-bash">openprogram<span class="w"> </span>worker<span class="w"> </span>install
+openprogram<span class="w"> </span>--profile<span class="w"> </span>dev<span class="w"> </span>worker<span class="w"> </span>install
+</code></pre>
+<p>此后 <code>worker start</code>、<code>stop</code>、<code>restart</code>、<code>status</code> 和 <code>uninstall</code> 都只操作
+当前 profile 的服务；停止或升级 <code>dev</code> worker 不会替换或停止默认 worker。</p>
+<div class="page-updated"><span data-i18n="updated">Last updated</span> · 2026-09-27</div><div class="prevnext"><a class="pn-link pn-prev" href="/docs/install/upgrade.html" data-href-en="/docs/install/upgrade.html" data-href-zh="/docs/install/upgrade.zh.html"><span class="pn-dir" data-i18n="prev">Previous</span><span class="pn-title" data-title-zh="版本升级">Release upgrades</span></a><a class="pn-link pn-next" href="/docs/capabilities/README.html" data-href-en="/docs/capabilities/README.html" data-href-zh="/docs/capabilities/README.zh.html"><span class="pn-dir" data-i18n="next">Next</span><span class="pn-title" data-title-zh="概览">Overview</span></a></div></article></main>
+  <aside class="toc"><div class="toc-title" data-i18n="on_this_page">On this page</div>
+<ul class="toc-list">
+<li>
+<a class="lvl-2" href="#profile隔离状态目录">profile：隔离状态目录</a>
+</li>
+<li>
+<a class="lvl-2" href="#端口每个实例一个">端口：每个实例一个</a>
+</li>
+<li>
+<a class="lvl-2" href="#示例稳定-开发双实例">示例：稳定 + 开发双实例</a>
+</li>
+</ul></aside>
+</div>
+
+<div class="search-overlay">
+  <div class="search-box">
+    <input type="text" data-i18n-ph="search_ph" placeholder="Search titles or text…" autocomplete="off" spellcheck="false">
+    <div class="search-results"></div>
+  </div>
+</div>
+
+<script src="/docs/assets/site.js?v=6520ba46"></script>
+</body>
+</html>

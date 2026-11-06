@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en" data-base="/docs/" data-page-lang="en" data-build="1793956776" data-alt-lang-url="/docs/reference/api/providers.zh.html">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Provider API · OpenProgram Docs</title>
+<meta name="description" content="Providers # Source: openprogram/models/providers/ create_runtime is the one construction path for every provider. All providers speak the raw HTTP APIs through">
+<link rel="canonical" href="https://openprogram.io/docs/reference/api/providers.html">
+<link rel="alternate" type="text/markdown" href="https://openprogram.io/docs/reference/api/providers.html.md">
+<link rel="describedby" href="https://openprogram.io/llms.txt">
+<link rel="alternate" hreflang="en" href="https://openprogram.io/docs/reference/api/providers.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://openprogram.io/docs/reference/api/providers.zh.html">
+<link rel="alternate" hreflang="x-default" href="https://openprogram.io/docs/reference/api/providers.html">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"OpenProgram Docs","item":"https://openprogram.io/docs/"},{"@type":"ListItem","position":2,"name":"Provider API"}]}</script>
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="OpenProgram">
+<meta property="og:url" content="https://openprogram.io/docs/reference/api/providers.html">
+<meta property="og:title" content="Provider API · OpenProgram Docs">
+<meta property="og:description" content="Providers # Source: openprogram/models/providers/ create_runtime is the one construction path for every provider. All providers speak the raw HTTP APIs through">
+<meta property="og:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:secure_url" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Provider API · OpenProgram Docs">
+<meta name="twitter:description" content="Providers # Source: openprogram/models/providers/ create_runtime is the one construction path for every provider. All providers speak the raw HTTP APIs through">
+<meta name="twitter:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta name="twitter:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/docs/assets/mark.svg">
+<link rel="stylesheet" href="/docs/assets/site.css?v=6520ba46">
+<link rel="stylesheet" href="/docs/assets/pygments-light.css" media="(prefers-color-scheme: light)" id="pyg-light">
+<link rel="stylesheet" href="/docs/assets/pygments-dark.css" media="(prefers-color-scheme: dark)" id="pyg-dark">
+<script src="/docs/assets/theme.js?v=6520ba46"></script>
+
+</head>
+<body>
+<header class="topbar">
+  <button class="icon hamburger" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2.5 4.5h11M2.5 8h11M2.5 11.5h11"/></svg></button>
+  <a class="brand" href="/docs/index.html"><img class="mark" src="/docs/assets/mark.svg" alt="">OpenProgram Docs</a>
+  <div class="spacer"></div>
+  <button class="search-trigger" aria-label="Search">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14"/></svg><span class="label" data-i18n="search">Search docs</span><kbd>⌘K</kbd>
+  </button>
+  <div class="lang-wrap">
+    <button class="icon lang-trigger" id="lang-toggle" aria-haspopup="true" aria-expanded="false" aria-label="Language">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="6.2"/><path d="M1.8 8h12.4" stroke-linecap="round"/><ellipse cx="8" cy="8" rx="2.8" ry="6.2"/></svg><span class="lang-label">EN</span><svg class="chev" width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+    </button>
+    <div class="lang-menu" id="lang-menu" role="menu">
+      <button class="lang-opt" data-lang="en" role="menuitem"><span>English</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="lang-opt" data-lang="zh" role="menuitem"><span>简体中文</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+  <div class="theme-wrap">
+    <button class="icon" id="theme-toggle" aria-label="Theme" aria-haspopup="menu" aria-controls="theme-menu" aria-expanded="false"><svg class="ic-system" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="2.5" width="13" height="9" rx="1.5"/><path d="M8 11.5V14M5.5 14h5"/></svg><svg class="ic-moon" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M13.5 9.5A6 6 0 1 1 6.5 2.5a5 5 0 0 0 7 7z"/></svg><svg class="ic-sun" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="3.2"/><path d="M8 1.2v1.8M8 13v1.8M1.2 8H3M13 8h1.8M3.2 3.2l1.3 1.3M11.5 11.5l1.3 1.3M12.8 3.2l-1.3 1.3M4.5 11.5l-1.3 1.3"/></svg></button>
+    <div class="theme-menu" id="theme-menu" role="menu" aria-labelledby="theme-toggle">
+      <button class="theme-opt" data-theme-choice="system" role="menuitemradio" aria-checked="true"><span>Follow system</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="light" role="menuitemradio" aria-checked="false"><span>Light</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="dark" role="menuitemradio" aria-checked="false"><span>Dark</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+</header>
+<nav class="tabbar"><a class="tablink" href="/docs/README.html" data-title-zh="开始使用" data-href-en="/docs/README.html" data-href-zh="/docs/README.zh.html">Get started</a><a class="tablink" href="/docs/install/install.html" data-title-zh="安装" data-href-en="/docs/install/install.html" data-href-zh="/docs/install/install.zh.html">Install</a><a class="tablink" href="/docs/capabilities/README.html" data-title-zh="能力" data-href-en="/docs/capabilities/README.html" data-href-zh="/docs/capabilities/README.zh.html">Capabilities</a><a class="tablink" href="/docs/interfaces/README.html" data-title-zh="界面" data-href-en="/docs/interfaces/README.html" data-href-zh="/docs/interfaces/README.zh.html">Interfaces</a><a class="tablink" href="/docs/models/README.html" data-title-zh="模型" data-href-en="/docs/models/README.html" data-href-zh="/docs/models/README.zh.html">Models</a><a class="tablink" href="/docs/integrations/anthropic.html" data-title-zh="集成" data-href-en="/docs/integrations/anthropic.html" data-href-zh="/docs/integrations/anthropic.zh.html">Integrations</a><a class="tablink" href="/docs/server/README.html" data-title-zh="服务与运维" data-href-en="/docs/server/README.html" data-href-zh="/docs/server/README.zh.html">Server &amp; Ops</a><a class="tablink active" href="/docs/reference/README.html" data-title-zh="参考" data-href-en="/docs/reference/README.html" data-href-zh="/docs/reference/README.zh.html">Reference</a><a class="tablink" href="/docs/reference/design/README.html" data-title-zh="设计" data-href-en="/docs/reference/design/README.html" data-href-zh="/docs/reference/design/README.zh.html">Design</a></nav>
+
+<div class="scrim"></div>
+<div class="layout">
+  <nav class="sidebar" aria-label="Documentation">
+    <input class="nav-filter" type="text" data-i18n-ph="nav_filter"
+           aria-label="Filter docs" placeholder="Filter docs…" autocomplete="off" spellcheck="false">
+    <div class="nav-tree"><div class="nav-sec"><div class="nav-sec-title" data-title-zh="概览">Overview</div><a class="navlink" href="/docs/reference/README.html" data-title-zh="概览" data-href-en="/docs/reference/README.html" data-href-zh="/docs/reference/README.zh.html">Overview</a></div>
+<div class="nav-sec"><div class="nav-sec-title">API</div><a class="navlink" href="/docs/reference/API.html" data-title-zh="API 参考" data-href-en="/docs/reference/API.html" data-href-zh="/docs/reference/API.zh.html">API reference</a>
+<a class="navlink" href="/docs/reference/api/runtime.html" data-title-zh="运行时 API" data-href-en="/docs/reference/api/runtime.html" data-href-zh="/docs/reference/api/runtime.zh.html">Runtime API</a>
+<a class="navlink active" href="/docs/reference/api/providers.html" data-title-zh="模型服务 API" data-href-en="/docs/reference/api/providers.html" data-href-zh="/docs/reference/api/providers.zh.html">Provider API</a>
+<a class="navlink" href="/docs/reference/api/agent.html" data-title-zh="函数 API" data-href-en="/docs/reference/api/agent.html" data-href-zh="/docs/reference/api/agent.zh.html">Function API</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="CLI 与配置">CLI and configuration</div><a class="navlink" href="/docs/reference/cli.html" data-title-zh="CLI 参考" data-href-en="/docs/reference/cli.html" data-href-zh="/docs/reference/cli.zh.html">CLI reference</a>
+<a class="navlink" href="/docs/reference/config.html" data-title-zh="配置项参考" data-href-en="/docs/reference/config.html" data-href-zh="/docs/reference/config.zh.html">Configuration reference</a>
+<a class="navlink" href="/docs/reference/diagnostics.html" data-title-zh="诊断" data-href-en="/docs/reference/diagnostics.html" data-href-zh="/docs/reference/diagnostics.zh.html">Diagnostics</a>
+<a class="navlink" href="/docs/reference/session-export.html" data-title-zh="会话导出" data-href-en="/docs/reference/session-export.html" data-href-zh="/docs/reference/session-export.zh.html">Session export</a>
+<a class="navlink" href="/docs/reference/output-styles.html" data-title-zh="输出风格" data-href-en="/docs/reference/output-styles.html" data-href-zh="/docs/reference/output-styles.zh.html">Output styles</a>
+<a class="navlink" href="/docs/reference/config-keys.html" data-title-zh="配置键" data-href-en="/docs/reference/config-keys.html" data-href-zh="/docs/reference/config-keys.zh.html">Config keys</a>
+<a class="navlink" href="/docs/reference/provider-registry.html" data-title-zh="模型服务清单" data-href-en="/docs/reference/provider-registry.html" data-href-zh="/docs/reference/provider-registry.zh.html">Provider registry</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="对比">Comparisons</div><a class="navlink" href="/docs/reference/comparisons/ai-agent-frameworks.html" data-title-zh="框架对比" data-href-en="/docs/reference/comparisons/ai-agent-frameworks.html" data-href-zh="/docs/reference/comparisons/ai-agent-frameworks.zh.html">Framework comparison</a>
+<a class="navlink" href="/docs/reference/comparisons/related-projects.html" data-title-zh="相关项目" data-href-en="/docs/reference/comparisons/related-projects.html" data-href-zh="/docs/reference/comparisons/related-projects.zh.html">Related projects</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="CLI 命令">CLI commands</div><a class="navlink" href="/docs/reference/cli/README.html" data-title-zh="全局参数" data-href-en="/docs/reference/cli/README.html" data-href-zh="/docs/reference/cli/README.zh.html">Global flags</a>
+<a class="navlink" href="/docs/reference/cli/acp.html" data-title-zh="编辑器协议" data-href-en="/docs/reference/cli/acp.html" data-href-zh="/docs/reference/cli/acp.zh.html">acp</a>
+<a class="navlink" href="/docs/reference/cli/agents.html" data-title-zh="Agent 管理" data-href-en="/docs/reference/cli/agents.html" data-href-zh="/docs/reference/cli/agents.zh.html">agents</a>
+<a class="navlink" href="/docs/reference/cli/backup.html" data-title-zh="备份" data-href-en="/docs/reference/cli/backup.html" data-href-zh="/docs/reference/cli/backup.zh.html">backup</a>
+<a class="navlink" href="/docs/reference/cli/browser.html" data-title-zh="浏览器" data-href-en="/docs/reference/cli/browser.html" data-href-zh="/docs/reference/cli/browser.zh.html">browser</a>
+<a class="navlink" href="/docs/reference/cli/channels.html" data-title-zh="渠道" data-href-en="/docs/reference/cli/channels.html" data-href-zh="/docs/reference/cli/channels.zh.html">channels</a>
+<a class="navlink" href="/docs/reference/cli/chat.html" data-title-zh="聊天" data-href-en="/docs/reference/cli/chat.html" data-href-zh="/docs/reference/cli/chat.zh.html">chat</a>
+<a class="navlink" href="/docs/reference/cli/completion.html" data-title-zh="命令补全" data-href-en="/docs/reference/cli/completion.html" data-href-zh="/docs/reference/cli/completion.zh.html">completion</a>
+<a class="navlink" href="/docs/reference/cli/config.html" data-title-zh="设置" data-href-en="/docs/reference/cli/config.html" data-href-zh="/docs/reference/cli/config.zh.html">config</a>
+<a class="navlink" href="/docs/reference/cli/cron-worker.html" data-title-zh="定时任务" data-href-en="/docs/reference/cli/cron-worker.html" data-href-zh="/docs/reference/cli/cron-worker.zh.html">cron-worker</a>
+<a class="navlink" href="/docs/reference/cli/dev.html" data-title-zh="开发版" data-href-en="/docs/reference/cli/dev.html" data-href-zh="/docs/reference/cli/dev.zh.html">dev</a>
+<a class="navlink" href="/docs/reference/cli/diagnostics.html" data-title-zh="诊断包" data-href-en="/docs/reference/cli/diagnostics.html" data-href-zh="/docs/reference/cli/diagnostics.zh.html">diagnostics</a>
+<a class="navlink" href="/docs/reference/cli/doctor.html" data-title-zh="环境诊断" data-href-en="/docs/reference/cli/doctor.html" data-href-zh="/docs/reference/cli/doctor.zh.html">doctor</a>
+<a class="navlink" href="/docs/reference/cli/environments.html" data-title-zh="运行环境" data-href-en="/docs/reference/cli/environments.html" data-href-zh="/docs/reference/cli/environments.zh.html">environments</a>
+<a class="navlink" href="/docs/reference/cli/execution.html" data-title-zh="执行控制" data-href-en="/docs/reference/cli/execution.html" data-href-zh="/docs/reference/cli/execution.zh.html">execution</a>
+<a class="navlink" href="/docs/reference/cli/jobs.html" data-title-zh="后台任务" data-href-en="/docs/reference/cli/jobs.html" data-href-zh="/docs/reference/cli/jobs.zh.html">jobs</a>
+<a class="navlink" href="/docs/reference/cli/logs.html" data-title-zh="日志" data-href-en="/docs/reference/cli/logs.html" data-href-zh="/docs/reference/cli/logs.zh.html">logs</a>
+<a class="navlink" href="/docs/reference/cli/mcp.html" data-title-zh="MCP 服务器" data-href-en="/docs/reference/cli/mcp.html" data-href-zh="/docs/reference/cli/mcp.zh.html">mcp</a>
+<a class="navlink" href="/docs/reference/cli/memory.html" data-title-zh="记忆" data-href-en="/docs/reference/cli/memory.html" data-href-zh="/docs/reference/cli/memory.zh.html">memory</a>
+<a class="navlink" href="/docs/reference/cli/permissions.html" data-title-zh="CLI：权限规则" data-href-en="/docs/reference/cli/permissions.html" data-href-zh="/docs/reference/cli/permissions.zh.html">permissions</a>
+<a class="navlink" href="/docs/reference/cli/plugins.html" data-title-zh="插件" data-href-en="/docs/reference/cli/plugins.html" data-href-zh="/docs/reference/cli/plugins.zh.html">plugins</a>
+<a class="navlink" href="/docs/reference/cli/ports.html" data-title-zh="端口" data-href-en="/docs/reference/cli/ports.html" data-href-zh="/docs/reference/cli/ports.zh.html">ports</a>
+<a class="navlink" href="/docs/reference/cli/programs.html" data-title-zh="程序" data-href-en="/docs/reference/cli/programs.html" data-href-zh="/docs/reference/cli/programs.zh.html">programs</a>
+<a class="navlink" href="/docs/reference/cli/providers.html" data-title-zh="模型服务" data-href-en="/docs/reference/cli/providers.html" data-href-zh="/docs/reference/cli/providers.zh.html">providers</a>
+<a class="navlink" href="/docs/reference/cli/recordings.html" data-title-zh="录制" data-href-en="/docs/reference/cli/recordings.html" data-href-zh="/docs/reference/cli/recordings.zh.html">recordings</a>
+<a class="navlink" href="/docs/reference/cli/rescue.html" data-title-zh="恢复" data-href-en="/docs/reference/cli/rescue.html" data-href-zh="/docs/reference/cli/rescue.zh.html">rescue</a>
+<a class="navlink" href="/docs/reference/cli/restart.html" data-title-zh="重启" data-href-en="/docs/reference/cli/restart.html" data-href-zh="/docs/reference/cli/restart.zh.html">restart</a>
+<a class="navlink" href="/docs/reference/cli/scheduler-worker.html" data-title-zh="任务调度" data-href-en="/docs/reference/cli/scheduler-worker.html" data-href-zh="/docs/reference/cli/scheduler-worker.zh.html">scheduler-worker</a>
+<a class="navlink" href="/docs/reference/cli/secrets.html" data-title-zh="凭据" data-href-en="/docs/reference/cli/secrets.html" data-href-zh="/docs/reference/cli/secrets.zh.html">secrets</a>
+<a class="navlink" href="/docs/reference/cli/self-update.html" data-title-zh="应用更新" data-href-en="/docs/reference/cli/self-update.html" data-href-zh="/docs/reference/cli/self-update.zh.html">self-update</a>
+<a class="navlink" href="/docs/reference/cli/sessions.html" data-title-zh="会话" data-href-en="/docs/reference/cli/sessions.html" data-href-zh="/docs/reference/cli/sessions.zh.html">sessions</a>
+<a class="navlink" href="/docs/reference/cli/setup.html" data-title-zh="初始设置" data-href-en="/docs/reference/cli/setup.html" data-href-zh="/docs/reference/cli/setup.zh.html">setup</a>
+<a class="navlink" href="/docs/reference/cli/skills.html" data-title-zh="技能" data-href-en="/docs/reference/cli/skills.html" data-href-zh="/docs/reference/cli/skills.zh.html">skills</a>
+<a class="navlink" href="/docs/reference/cli/status.html" data-title-zh="运行状态" data-href-en="/docs/reference/cli/status.html" data-href-zh="/docs/reference/cli/status.zh.html">status</a>
+<a class="navlink" href="/docs/reference/cli/stop.html" data-title-zh="停止" data-href-en="/docs/reference/cli/stop.html" data-href-zh="/docs/reference/cli/stop.zh.html">stop</a>
+<a class="navlink" href="/docs/reference/cli/subagent.html" data-title-zh="子 Agent" data-href-en="/docs/reference/cli/subagent.html" data-href-zh="/docs/reference/cli/subagent.zh.html">subagent</a>
+<a class="navlink" href="/docs/reference/cli/trash.html" data-title-zh="删除恢复" data-href-en="/docs/reference/cli/trash.html" data-href-zh="/docs/reference/cli/trash.zh.html">trash</a>
+<a class="navlink" href="/docs/reference/cli/tui.html" data-title-zh="终端界面" data-href-en="/docs/reference/cli/tui.html" data-href-zh="/docs/reference/cli/tui.zh.html">tui</a>
+<a class="navlink" href="/docs/reference/cli/update.html" data-title-zh="更新检查" data-href-en="/docs/reference/cli/update.html" data-href-zh="/docs/reference/cli/update.zh.html">update</a>
+<a class="navlink" href="/docs/reference/cli/upgrade.html" data-title-zh="版本升级" data-href-en="/docs/reference/cli/upgrade.html" data-href-zh="/docs/reference/cli/upgrade.zh.html">upgrade</a>
+<a class="navlink" href="/docs/reference/cli/web.html" data-title-zh="网页界面" data-href-en="/docs/reference/cli/web.html" data-href-zh="/docs/reference/cli/web.zh.html">web</a>
+<a class="navlink" href="/docs/reference/cli/worker.html" data-title-zh="后台服务" data-href-en="/docs/reference/cli/worker.html" data-href-zh="/docs/reference/cli/worker.zh.html">worker</a></div></div>
+  </nav>
+  <main class="content"><button class="fs-toggle" aria-label="Fullscreen" title="Fullscreen (Esc to exit)"><svg class="ic-expand" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.2 2H2v4.2M9.8 2H14v4.2M6.2 14H2V9.8M9.8 14H14V9.8"/></svg><svg class="ic-collapse" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6.2h4.2V2M14 6.2H9.8V2M2 9.8h4.2V14M14 9.8H9.8V14"/></svg></button><article><nav class="breadcrumb"><span class="bc-seg" data-title-zh="参考">Reference</span> <span class='bc-sep'>›</span> <span class="bc-seg">API</span> <span class='bc-sep'>›</span> <span class="bc-seg bc-current" data-title-zh="模型服务 API">Provider API</span></nav><h1 id="providers">Providers<a class="header-anchor" href="#providers">#</a></h1>
+<blockquote>
+<p>Source: <a href="https://github.com/FuzzyKuji/OpenProgram/blob/main/openprogram/models/providers/"><code>openprogram/models/providers/</code></a></p>
+</blockquote>
+<p><code>create_runtime</code> is the one construction path for every provider. All providers speak the raw HTTP APIs through OpenProgram's provider layer — <strong>no vendor SDK needs to be installed</strong>. The CLI/subscription providers reuse the OAuth credentials of the corresponding CLI tool, so those CLIs must be installed and logged in once.</p>
+<pre><code class="language-bash"><span class="c1"># Codex CLI (for the openai-codex provider)</span>
+npm<span class="w"> </span>install<span class="w"> </span>-g<span class="w"> </span>@openai/codex<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>codex<span class="w"> </span>login
+
+<span class="c1"># Gemini CLI (for the gemini-cli provider)</span>
+npm<span class="w"> </span>install<span class="w"> </span>-g<span class="w"> </span>@google/gemini-cli<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>gemini
+
+</code></pre>
+<p>API keys for the API providers are stored in the credential store: <strong>Settings → Providers</strong> in the Web UI, or <code>openprogram providers login &lt;provider&gt; --api-key</code>.</p>
+<hr />
+<h2 id="create_runtime-detect_provider">create_runtime / detect_provider<a class="header-anchor" href="#create_runtime-detect_provider">#</a></h2>
+<pre><code class="language-python"><span class="kn">from</span><span class="w"> </span><span class="nn">openprogram.runtime.agent.runtime.factory</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_runtime</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">openprogram.models.providers.catalog.registry</span><span class="w"> </span><span class="kn">import</span> <span class="n">detect_provider</span><span class="p">,</span> <span class="n">check_providers</span>
+
+<span class="n">rt</span> <span class="o">=</span> <span class="n">create_runtime</span><span class="p">()</span>                                   <span class="c1"># auto-detect the best available provider</span>
+<span class="n">rt</span> <span class="o">=</span> <span class="n">create_runtime</span><span class="p">(</span><span class="n">provider</span><span class="o">=</span><span class="s2">&quot;anthropic&quot;</span><span class="p">)</span>               <span class="c1"># explicit provider, its default model</span>
+<span class="n">rt</span> <span class="o">=</span> <span class="n">create_runtime</span><span class="p">(</span><span class="n">provider</span><span class="o">=</span><span class="s2">&quot;openai-codex&quot;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;gpt-5.5&quot;</span><span class="p">)</span>
+</code></pre>
+<h3 id="create_runtimeprovidernone-modelnone-kwargs"><code>create_runtime(provider=None, model=None, **kwargs)</code><a class="header-anchor" href="#create_runtimeprovidernone-modelnone-kwargs">#</a></h3>
+<p>Returns a ready-to-use <code>Runtime</code>. <code>provider=None</code> (or <code>&quot;auto&quot;</code>) runs <code>detect_provider()</code>. Of the five providers below, the two subscription/CLI-credential ones are backed by a dedicated <code>Runtime</code> subclass (an implementation detail of <code>create_runtime</code>); the three API-key ones are the base <code>Runtime</code> itself — <code>create_runtime</code> resolves the key from the credential store and builds <code>Runtime(&quot;&lt;namespace&gt;:&lt;model&gt;&quot;, api_key=...)</code>. <strong>Any other provider name</strong> (deepseek, groq, openrouter, minimax, kimi, and the rest of the community list) is routed through the base <code>Runtime(&quot;provider:model&quot;, ...)</code> via the model registry — the same path the chat dispatcher uses. Every runtime carries an authoritative <code>provider_id</code> attribute (derived from its model namespace, or set by the subscription classes). <code>**kwargs</code> are forwarded to the runtime constructor.</p>
+<h3 id="detect_provider---provider_name-default_model"><code>detect_provider() -&gt; (provider_name, default_model)</code><a class="header-anchor" href="#detect_provider---provider_name-default_model">#</a></h3>
+<p>Detection priority:</p>
+<ol>
+<li>Environment variables <code>AGENTIC_PROVIDER</code> / <code>AGENTIC_MODEL</code></li>
+<li>Config file (<code>~/.openprogram/config.json</code> → <code>last_used_model</code>, the model last picked or sent with)</li>
+<li>Caller environment (running inside Codex CLI → use it)</li>
+<li>Available CLI binaries (<code>codex</code> → <code>openai-codex</code>, <code>gemini</code> → <code>gemini-cli</code>)</li>
+<li>Stored API keys (anthropic → openai → google)</li>
+</ol>
+<p>Raises <code>RuntimeError</code> with setup guidance when nothing is found.</p>
+<h3 id="check_providers---dict"><code>check_providers() -&gt; dict</code><a class="header-anchor" href="#check_providers---dict">#</a></h3>
+<p>Availability report for the five dedicated providers: <code>{name: {&quot;available&quot;: bool, &quot;method&quot;: &quot;CLI&quot;|&quot;API&quot;, &quot;model&quot;: default}}</code>, with <code>&quot;default&quot;: True</code> on the one <code>detect_provider()</code> would pick.</p>
+<h3 id="the-providers-table">The <code>PROVIDERS</code> table<a class="header-anchor" href="#the-providers-table">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Provider name</th>
+<th>Construction</th>
+<th>Default model</th>
+<th>Credential</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>openai-codex</code></td>
+<td><code>OpenAICodexRuntime</code></td>
+<td><code>gpt-5.5</code></td>
+<td>ChatGPT subscription OAuth (<code>~/.codex/auth.json</code>)</td>
+</tr>
+<tr>
+<td><code>gemini-cli</code></td>
+<td><code>GeminiCLIRuntime</code></td>
+<td><code>gemini-2.5-flash</code></td>
+<td>Google account OAuth (<code>~/.gemini/oauth_creds.json</code>)</td>
+</tr>
+<tr>
+<td><code>anthropic</code></td>
+<td>base <code>Runtime(&quot;anthropic:&lt;id&gt;&quot;)</code></td>
+<td><code>claude-sonnet-4-6</code></td>
+<td>Anthropic API key</td>
+</tr>
+<tr>
+<td><code>openai</code></td>
+<td>base <code>Runtime(&quot;openai:&lt;id&gt;&quot;)</code></td>
+<td><code>gpt-4.1</code></td>
+<td>OpenAI API key</td>
+</tr>
+<tr>
+<td><code>gemini</code></td>
+<td>base <code>Runtime(&quot;google:&lt;id&gt;&quot;)</code></td>
+<td><code>gemini-2.5-flash</code></td>
+<td>Google API key</td>
+</tr>
+</tbody>
+</table>
+<p>The two subscription classes live in their provider packages; the API-key providers have no class at all. Construct every provider through <code>create_runtime(provider=...)</code>.</p>
+<hr />
+<h2 id="anthropic">anthropic<a class="header-anchor" href="#anthropic">#</a></h2>
+<p>Anthropic Messages API, via the provider layer (streaming, tool loop, DAG recording all included). <code>create_runtime</code> resolves the credential and returns the base <code>Runtime(&quot;anthropic:&lt;model&gt;&quot;)</code> with <code>provider_id=&quot;anthropic&quot;</code> — there is no dedicated class.</p>
+<pre><code class="language-python"><span class="kn">from</span><span class="w"> </span><span class="nn">openprogram.runtime.agent.runtime.factory</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_runtime</span>
+
+<span class="n">rt</span> <span class="o">=</span> <span class="n">create_runtime</span><span class="p">(</span><span class="n">provider</span><span class="o">=</span><span class="s2">&quot;anthropic&quot;</span><span class="p">,</span> <span class="n">api_key</span><span class="o">=</span><span class="s2">&quot;sk-ant-...&quot;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;claude-sonnet-4-6&quot;</span><span class="p">)</span>
+</code></pre>
+<h3 id="options">Options<a class="header-anchor" href="#options">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>api_key</code></td>
+<td><code>str | None</code></td>
+<td><code>None</code></td>
+<td>Anthropic API key; resolved from the credential store when omitted</td>
+</tr>
+<tr>
+<td><code>model</code></td>
+<td><code>str</code></td>
+<td><code>&quot;claude-sonnet-4-6&quot;</code></td>
+<td>Model id under the <code>anthropic</code> provider namespace</td>
+</tr>
+<tr>
+<td><code>max_retries</code></td>
+<td><code>int</code></td>
+<td><code>OPENPROGRAM_MAX_RETRIES</code> env, else 6</td>
+<td>Retry budget forwarded to the base <code>Runtime</code></td>
+</tr>
+</tbody>
+</table>
+<p>Raises <code>ValueError</code> when no credential can be resolved. <code>list_models()</code> returns the enabled Anthropic model ids.</p>
+<hr />
+<h2 id="openai">openai<a class="header-anchor" href="#openai">#</a></h2>
+<p>OpenAI Responses API, via the provider layer. <code>create_runtime</code> resolves the API key and returns the base <code>Runtime(&quot;openai:&lt;model&gt;&quot;)</code> with <code>provider_id=&quot;openai&quot;</code> — there is no dedicated class.</p>
+<pre><code class="language-python"><span class="n">rt</span> <span class="o">=</span> <span class="n">create_runtime</span><span class="p">(</span><span class="n">provider</span><span class="o">=</span><span class="s2">&quot;openai&quot;</span><span class="p">,</span> <span class="n">api_key</span><span class="o">=</span><span class="s2">&quot;sk-...&quot;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;gpt-4.1&quot;</span><span class="p">)</span>
+</code></pre>
+<h3 id="options-1">Options<a class="header-anchor" href="#options-1">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>api_key</code></td>
+<td><code>str | None</code></td>
+<td><code>None</code></td>
+<td>API key. <code>None</code> = resolved from the credential store (<code>openprogram providers login openai --api-key</code>)</td>
+</tr>
+<tr>
+<td><code>model</code></td>
+<td><code>str</code></td>
+<td><code>&quot;gpt-4.1&quot;</code></td>
+<td>Model id under the <code>openai</code> provider namespace</td>
+</tr>
+<tr>
+<td><code>max_retries</code></td>
+<td><code>int</code></td>
+<td><code>OPENPROGRAM_MAX_RETRIES</code> env, else 6</td>
+<td>Retry budget forwarded to the base <code>Runtime</code></td>
+</tr>
+</tbody>
+</table>
+<p>For Azure or a local OpenAI-compatible server, add a custom provider (Settings → Providers → Add custom provider, name + base URL) and use <code>Runtime(model=&quot;&lt;provider&gt;:&lt;model&gt;&quot;)</code> or <code>create_runtime(provider=&quot;&lt;provider&gt;&quot;)</code>. A host-only base URL resolves to <code>/v1</code>; an explicit API path is preserved.</p>
+<hr />
+<h2 id="gemini">gemini<a class="header-anchor" href="#gemini">#</a></h2>
+<p>Google Gemini Generative Language API, via the provider layer. <code>create_runtime</code> resolves the API key and returns the base <code>Runtime(&quot;google:&lt;model&gt;&quot;)</code> with <code>provider_id=&quot;google&quot;</code> — there is no dedicated class; the <code>gemini</code> provider streams models under the <code>google</code> registry namespace.</p>
+<pre><code class="language-python"><span class="n">rt</span> <span class="o">=</span> <span class="n">create_runtime</span><span class="p">(</span><span class="n">provider</span><span class="o">=</span><span class="s2">&quot;gemini&quot;</span><span class="p">,</span> <span class="n">api_key</span><span class="o">=</span><span class="s2">&quot;...&quot;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;gemini-2.5-flash&quot;</span><span class="p">)</span>
+</code></pre>
+<h3 id="options-2">Options<a class="header-anchor" href="#options-2">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>api_key</code></td>
+<td><code>str | None</code></td>
+<td><code>None</code></td>
+<td>API key. <code>None</code> = resolved from the credential store (accepted env-var names when adding one: <code>GEMINI_API_KEY</code> / <code>GOOGLE_API_KEY</code> / <code>GOOGLE_GENERATIVE_AI_API_KEY</code>)</td>
+</tr>
+<tr>
+<td><code>model</code></td>
+<td><code>str</code></td>
+<td><code>&quot;gemini-2.5-flash&quot;</code></td>
+<td>Model id under the <code>google</code> provider namespace</td>
+</tr>
+<tr>
+<td><code>max_retries</code></td>
+<td><code>int</code></td>
+<td><code>OPENPROGRAM_MAX_RETRIES</code> env, else 6</td>
+<td>Retry budget forwarded to the base <code>Runtime</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="openai-codex">openai-codex<a class="header-anchor" href="#openai-codex">#</a></h2>
+<p>ChatGPT / Codex <strong>subscription</strong> runtime. Reads OAuth credentials adopted from the Codex CLI's <code>~/.codex/auth.json</code> and talks to the ChatGPT Responses backend. Refreshed tokens are mirrored back so the Codex CLI stays in sync. Backed by <code>OpenAICodexRuntime</code>.</p>
+<pre><code class="language-python"><span class="n">rt</span> <span class="o">=</span> <span class="n">create_runtime</span><span class="p">(</span><span class="n">provider</span><span class="o">=</span><span class="s2">&quot;openai-codex&quot;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;gpt-5.5&quot;</span><span class="p">)</span>
+</code></pre>
+<p>Setup:</p>
+<pre><code class="language-bash">npm<span class="w"> </span>install<span class="w"> </span>-g<span class="w"> </span>@openai/codex
+codex<span class="w"> </span>login<span class="w">          </span><span class="c1"># OAuth login — do not pick the API-key option</span>
+</code></pre>
+<h3 id="options-forwarded-to-the-runtime">Options (forwarded to the runtime)<a class="header-anchor" href="#options-forwarded-to-the-runtime">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>model</code></td>
+<td><code>str</code></td>
+<td><code>&quot;gpt-5.5&quot;</code></td>
+<td>Codex model id (a <code>openai-codex:</code> prefix, if present, is stripped)</td>
+</tr>
+<tr>
+<td><code>system</code></td>
+<td><code>str | None</code></td>
+<td><code>None</code></td>
+<td>Optional system prompt</td>
+</tr>
+<tr>
+<td><code>profile</code></td>
+<td><code>str | None</code></td>
+<td>active profile</td>
+<td>OpenProgram auth profile to use (keyword-only)</td>
+</tr>
+</tbody>
+</table>
+<p>Extra keyword arguments are accepted and ignored. Requires an OAuth credential — a bare OpenAI API key raises <code>AuthConfigError</code> (use the <code>openai</code> provider instead).</p>
+<hr />
+<h2 id="gemini-cli">gemini-cli<a class="header-anchor" href="#gemini-cli">#</a></h2>
+<p>Gemini via a <strong>Google account</strong> (Gemini CLI OAuth). Reuses <code>~/.gemini/oauth_creds.json</code> and talks to the Cloud Code Assist backend over HTTP — no subprocess. Backed by <code>GeminiCLIRuntime</code>.</p>
+<pre><code class="language-python"><span class="n">rt</span> <span class="o">=</span> <span class="n">create_runtime</span><span class="p">(</span><span class="n">provider</span><span class="o">=</span><span class="s2">&quot;gemini-cli&quot;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;gemini-2.5-flash&quot;</span><span class="p">)</span>
+</code></pre>
+<p>Setup:</p>
+<pre><code class="language-bash">npm<span class="w"> </span>install<span class="w"> </span>-g<span class="w"> </span>@google/gemini-cli
+gemini<span class="w">               </span><span class="c1"># first run performs the OAuth login</span>
+</code></pre>
+<h3 id="options-forwarded-to-the-runtime-1">Options (forwarded to the runtime)<a class="header-anchor" href="#options-forwarded-to-the-runtime-1">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>model</code></td>
+<td><code>str</code></td>
+<td><code>&quot;gemini-2.5-flash&quot;</code></td>
+<td>Model id; must match a <code>gemini-subscription/&lt;id&gt;</code> registry entry</td>
+</tr>
+<tr>
+<td><code>system</code></td>
+<td><code>str | None</code></td>
+<td><code>None</code></td>
+<td>Optional system prompt</td>
+</tr>
+<tr>
+<td><code>profile</code></td>
+<td><code>str | None</code></td>
+<td>active profile</td>
+<td>OpenProgram auth profile to use (keyword-only)</td>
+</tr>
+</tbody>
+</table>
+<p>Extra keyword arguments are accepted and ignored. If you only have a Google API key, use the <code>gemini</code> provider instead.</p>
+<hr />
+<h2 id="every-other-provider">Every other provider<a class="header-anchor" href="#every-other-provider">#</a></h2>
+<p>Providers without a dedicated class — deepseek, groq, openrouter, minimax, kimi, and the rest of the catalogue — work through the model registry:</p>
+<pre><code class="language-python"><span class="kn">from</span><span class="w"> </span><span class="nn">openprogram.runtime.agent.runtime</span><span class="w"> </span><span class="kn">import</span> <span class="n">Runtime</span>
+<span class="n">rt</span> <span class="o">=</span> <span class="n">Runtime</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s2">&quot;deepseek:deepseek-chat&quot;</span><span class="p">)</span>
+
+<span class="c1"># or, equivalently:</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">openprogram.runtime.agent.runtime.factory</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_runtime</span>
+<span class="n">rt</span> <span class="o">=</span> <span class="n">create_runtime</span><span class="p">(</span><span class="n">provider</span><span class="o">=</span><span class="s2">&quot;deepseek&quot;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;deepseek-chat&quot;</span><span class="p">)</span>
+</code></pre>
+<p><code>create_runtime(provider=...)</code> without a model picks the provider's first enabled model, and raises <code>ValueError</code> if the provider has no registered models yet (enable some via Settings → Providers or <code>openprogram providers available &lt;provider&gt;</code>).</p>
+<hr />
+<h2 id="custom-providers">Custom Providers<a class="header-anchor" href="#custom-providers">#</a></h2>
+<p>All built-in providers are subclasses of <code>Runtime</code>. You can create your own in the same way:</p>
+<pre><code class="language-python"><span class="kn">from</span><span class="w"> </span><span class="nn">openprogram.runtime.agent.runtime</span><span class="w"> </span><span class="kn">import</span> <span class="n">Runtime</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">MyRuntime</span><span class="p">(</span><span class="n">Runtime</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">api_key</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;my-model&quot;</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">api_key</span> <span class="o">=</span> <span class="n">api_key</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;default&quot;</span><span class="p">,</span> <span class="n">response_format</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="c1"># 1. convert the content blocks into your API&#39;s format</span>
+        <span class="c1"># 2. call the API</span>
+        <span class="c1"># 3. return a str</span>
+        <span class="n">texts</span> <span class="o">=</span> <span class="p">[</span><span class="n">b</span><span class="p">[</span><span class="s2">&quot;text&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">content</span> <span class="k">if</span> <span class="n">b</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;text&quot;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">my_api_call</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">texts</span><span class="p">),</span> <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
+</code></pre>
+<p>The key point: <code>_call()</code> receives <code>content: list[dict]</code> and returns a <code>str</code>. It's that simple. (Passing <code>call=fn</code> to the base <code>Runtime</code> achieves the same without a subclass.)</p>
+<div class="page-updated"><span data-i18n="updated">Last updated</span> · 2026-11-06</div><div class="prevnext"><a class="pn-link pn-prev" href="/docs/reference/api/runtime.html" data-href-en="/docs/reference/api/runtime.html" data-href-zh="/docs/reference/api/runtime.zh.html"><span class="pn-dir" data-i18n="prev">Previous</span><span class="pn-title" data-title-zh="运行时 API">Runtime API</span></a><a class="pn-link pn-next" href="/docs/reference/api/agent.html" data-href-en="/docs/reference/api/agent.html" data-href-zh="/docs/reference/api/agent.zh.html"><span class="pn-dir" data-i18n="next">Next</span><span class="pn-title" data-title-zh="函数 API">Function API</span></a></div></article></main>
+  <aside class="toc"><div class="toc-title" data-i18n="on_this_page">On this page</div>
+<ul class="toc-list">
+<li>
+<details class="toc-disclosure" open=""><summary>
+<a class="lvl-2" href="#create_runtime-detect_provider">create_runtime / detect_provider</a>
+</summary>
+<ul class="toc-list">
+<li>
+<a class="lvl-3" href="#create_runtimeprovidernone-modelnone-kwargs">create_runtime(provider=None, model=None, **kwargs)</a>
+</li>
+<li>
+<a class="lvl-3" href="#detect_provider---provider_name-default_model">detect_provider() -&gt; (provider_name, default_model)</a>
+</li>
+<li>
+<a class="lvl-3" href="#check_providers---dict">check_providers() -&gt; dict</a>
+</li>
+<li>
+<a class="lvl-3" href="#the-providers-table">The PROVIDERS table</a>
+</li>
+</ul>
+</details>
+</li>
+<li>
+<details class="toc-disclosure" open=""><summary>
+<a class="lvl-2" href="#anthropic">anthropic</a>
+</summary>
+<ul class="toc-list">
+<li>
+<a class="lvl-3" href="#options">Options</a>
+</li>
+</ul>
+</details>
+</li>
+<li>
+<details class="toc-disclosure" open=""><summary>
+<a class="lvl-2" href="#openai">openai</a>
+</summary>
+<ul class="toc-list">
+<li>
+<a class="lvl-3" href="#options-1">Options</a>
+</li>
+</ul>
+</details>
+</li>
+<li>
+<details class="toc-disclosure" open=""><summary>
+<a class="lvl-2" href="#gemini">gemini</a>
+</summary>
+<ul class="toc-list">
+<li>
+<a class="lvl-3" href="#options-2">Options</a>
+</li>
+</ul>
+</details>
+</li>
+<li>
+<details class="toc-disclosure" open=""><summary>
+<a class="lvl-2" href="#openai-codex">openai-codex</a>
+</summary>
+<ul class="toc-list">
+<li>
+<a class="lvl-3" href="#options-forwarded-to-the-runtime">Options (forwarded to the runtime)</a>
+</li>
+</ul>
+</details>
+</li>
+<li>
+<details class="toc-disclosure" open=""><summary>
+<a class="lvl-2" href="#gemini-cli">gemini-cli</a>
+</summary>
+<ul class="toc-list">
+<li>
+<a class="lvl-3" href="#options-forwarded-to-the-runtime-1">Options (forwarded to the runtime)</a>
+</li>
+</ul>
+</details>
+</li>
+<li>
+<a class="lvl-2" href="#every-other-provider">Every other provider</a>
+</li>
+<li>
+<a class="lvl-2" href="#custom-providers">Custom Providers</a>
+</li>
+</ul></aside>
+</div>
+
+<div class="search-overlay">
+  <div class="search-box">
+    <input type="text" data-i18n-ph="search_ph" placeholder="Search titles or text…" autocomplete="off" spellcheck="false">
+    <div class="search-results"></div>
+  </div>
+</div>
+
+<script src="/docs/assets/site.js?v=6520ba46"></script>
+</body>
+</html>

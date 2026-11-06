@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="en" data-base="/docs/" data-page-lang="en" data-build="1793956776" data-alt-lang-url="/docs/reference/design/memory/written-marker.zh.html">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Write cursor · OpenProgram Docs</title>
+<meta name="description" content="Knowing which turns memory has written # A session is a DAG, not a line. Re-asking an earlier message, retrying a reply and spawning a sub-agent all fork the">
+<link rel="canonical" href="https://openprogram.io/docs/reference/design/memory/written-marker.html">
+<link rel="alternate" type="text/markdown" href="https://openprogram.io/docs/reference/design/memory/written-marker.html.md">
+<link rel="describedby" href="https://openprogram.io/llms.txt">
+<link rel="alternate" hreflang="en" href="https://openprogram.io/docs/reference/design/memory/written-marker.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://openprogram.io/docs/reference/design/memory/written-marker.zh.html">
+<link rel="alternate" hreflang="x-default" href="https://openprogram.io/docs/reference/design/memory/written-marker.html">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"OpenProgram Docs","item":"https://openprogram.io/docs/"},{"@type":"ListItem","position":2,"name":"Write cursor"}]}</script>
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="OpenProgram">
+<meta property="og:url" content="https://openprogram.io/docs/reference/design/memory/written-marker.html">
+<meta property="og:title" content="Write cursor · OpenProgram Docs">
+<meta property="og:description" content="Knowing which turns memory has written # A session is a DAG, not a line. Re-asking an earlier message, retrying a reply and spawning a sub-agent all fork the">
+<meta property="og:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:secure_url" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Write cursor · OpenProgram Docs">
+<meta name="twitter:description" content="Knowing which turns memory has written # A session is a DAG, not a line. Re-asking an earlier message, retrying a reply and spawning a sub-agent all fork the">
+<meta name="twitter:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta name="twitter:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/docs/assets/mark.svg">
+<link rel="stylesheet" href="/docs/assets/site.css?v=6520ba46">
+<link rel="stylesheet" href="/docs/assets/pygments-light.css" media="(prefers-color-scheme: light)" id="pyg-light">
+<link rel="stylesheet" href="/docs/assets/pygments-dark.css" media="(prefers-color-scheme: dark)" id="pyg-dark">
+<script src="/docs/assets/theme.js?v=6520ba46"></script>
+
+</head>
+<body>
+<header class="topbar">
+  <button class="icon hamburger" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2.5 4.5h11M2.5 8h11M2.5 11.5h11"/></svg></button>
+  <a class="brand" href="/docs/index.html"><img class="mark" src="/docs/assets/mark.svg" alt="">OpenProgram Docs</a>
+  <div class="spacer"></div>
+  <button class="search-trigger" aria-label="Search">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14"/></svg><span class="label" data-i18n="search">Search docs</span><kbd>⌘K</kbd>
+  </button>
+  <div class="lang-wrap">
+    <button class="icon lang-trigger" id="lang-toggle" aria-haspopup="true" aria-expanded="false" aria-label="Language">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="6.2"/><path d="M1.8 8h12.4" stroke-linecap="round"/><ellipse cx="8" cy="8" rx="2.8" ry="6.2"/></svg><span class="lang-label">EN</span><svg class="chev" width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+    </button>
+    <div class="lang-menu" id="lang-menu" role="menu">
+      <button class="lang-opt" data-lang="en" role="menuitem"><span>English</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="lang-opt" data-lang="zh" role="menuitem"><span>简体中文</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+  <div class="theme-wrap">
+    <button class="icon" id="theme-toggle" aria-label="Theme" aria-haspopup="menu" aria-controls="theme-menu" aria-expanded="false"><svg class="ic-system" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="2.5" width="13" height="9" rx="1.5"/><path d="M8 11.5V14M5.5 14h5"/></svg><svg class="ic-moon" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M13.5 9.5A6 6 0 1 1 6.5 2.5a5 5 0 0 0 7 7z"/></svg><svg class="ic-sun" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="3.2"/><path d="M8 1.2v1.8M8 13v1.8M1.2 8H3M13 8h1.8M3.2 3.2l1.3 1.3M11.5 11.5l1.3 1.3M12.8 3.2l-1.3 1.3M4.5 11.5l-1.3 1.3"/></svg></button>
+    <div class="theme-menu" id="theme-menu" role="menu" aria-labelledby="theme-toggle">
+      <button class="theme-opt" data-theme-choice="system" role="menuitemradio" aria-checked="true"><span>Follow system</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="light" role="menuitemradio" aria-checked="false"><span>Light</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="dark" role="menuitemradio" aria-checked="false"><span>Dark</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+</header>
+<nav class="tabbar"><a class="tablink" href="/docs/README.html" data-title-zh="开始使用" data-href-en="/docs/README.html" data-href-zh="/docs/README.zh.html">Get started</a><a class="tablink" href="/docs/install/install.html" data-title-zh="安装" data-href-en="/docs/install/install.html" data-href-zh="/docs/install/install.zh.html">Install</a><a class="tablink" href="/docs/capabilities/README.html" data-title-zh="能力" data-href-en="/docs/capabilities/README.html" data-href-zh="/docs/capabilities/README.zh.html">Capabilities</a><a class="tablink" href="/docs/interfaces/README.html" data-title-zh="界面" data-href-en="/docs/interfaces/README.html" data-href-zh="/docs/interfaces/README.zh.html">Interfaces</a><a class="tablink" href="/docs/models/README.html" data-title-zh="模型" data-href-en="/docs/models/README.html" data-href-zh="/docs/models/README.zh.html">Models</a><a class="tablink" href="/docs/integrations/anthropic.html" data-title-zh="集成" data-href-en="/docs/integrations/anthropic.html" data-href-zh="/docs/integrations/anthropic.zh.html">Integrations</a><a class="tablink" href="/docs/server/README.html" data-title-zh="服务与运维" data-href-en="/docs/server/README.html" data-href-zh="/docs/server/README.zh.html">Server &amp; Ops</a><a class="tablink" href="/docs/reference/README.html" data-title-zh="参考" data-href-en="/docs/reference/README.html" data-href-zh="/docs/reference/README.zh.html">Reference</a><a class="tablink active" href="/docs/reference/design/README.html" data-title-zh="设计" data-href-en="/docs/reference/design/README.html" data-href-zh="/docs/reference/design/README.zh.html">Design</a></nav>
+
+<div class="scrim"></div>
+<div class="layout">
+  <nav class="sidebar" aria-label="Documentation">
+    <input class="nav-filter" type="text" data-i18n-ph="nav_filter"
+           aria-label="Filter docs" placeholder="Filter docs…" autocomplete="off" spellcheck="false">
+    <div class="nav-tree"><details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="架构总览">Architecture</span><span class="nav-count">6</span></summary><a class="navlink" href="/docs/reference/design/README.html" data-title-zh="设计指南" data-href-en="/docs/reference/design/README.html" data-href-zh="/docs/reference/design/README.zh.html">Design guide</a>
+<a class="navlink" href="/docs/reference/design/framework-overview.html" data-title-zh="框架总览" data-href-en="/docs/reference/design/framework-overview.html" data-href-zh="/docs/reference/design/framework-overview.zh.html">Framework overview</a>
+<a class="navlink" href="/docs/reference/design/repository-structure.html" data-title-zh="仓库结构" data-href-en="/docs/reference/design/repository-structure.html" data-href-zh="/docs/reference/design/repository-structure.zh.html">Repository structure</a>
+<a class="navlink" href="/docs/reference/design/implementation-status.html" data-title-zh="实现索引" data-href-en="/docs/reference/design/implementation-status.html" data-href-zh="/docs/reference/design/implementation-status.zh.html">Implementation index</a>
+<a class="navlink" href="/docs/reference/design/framework-comparison.html" data-title-zh="框架对比" data-href-en="/docs/reference/design/framework-comparison.html" data-href-zh="/docs/reference/design/framework-comparison.zh.html">Framework comparison</a>
+<a class="navlink" href="/docs/reference/design/feature-matrix.html" data-title-zh="功能矩阵" data-href-en="/docs/reference/design/feature-matrix.html" data-href-zh="/docs/reference/design/feature-matrix.zh.html">Feature matrix</a></details>
+<details class="nav-branch nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="Agent 与工作流">Agents and workflows</span><span class="nav-count">88</span></summary>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="执行与控制">Execution</span><span class="nav-count">14</span></summary><a class="navlink" href="/docs/reference/design/runtime/README.html" data-title-zh="运行时" data-href-en="/docs/reference/design/runtime/README.html" data-href-zh="/docs/reference/design/runtime/README.zh.html">Runtime</a>
+<a class="navlink" href="/docs/reference/design/runtime/codex-capability-adoption.html" data-title-zh="Codex 功能核对" data-href-en="/docs/reference/design/runtime/codex-capability-adoption.html" data-href-zh="/docs/reference/design/runtime/codex-capability-adoption.zh.html">Codex capability audit</a>
+<a class="navlink" href="/docs/reference/design/runtime/execution/agent-call-flow.html" data-title-zh="调用流程" data-href-en="/docs/reference/design/runtime/execution/agent-call-flow.html" data-href-zh="/docs/reference/design/runtime/execution/agent-call-flow.zh.html">Call flow</a>
+<a class="navlink" href="/docs/reference/design/runtime/execution/control.html" data-title-zh="执行控制" data-href-en="/docs/reference/design/runtime/execution/control.html" data-href-zh="/docs/reference/design/runtime/execution/control.zh.html">Execution control</a>
+<a class="navlink" href="/docs/reference/design/runtime/execution/agent-action-lifecycle.html" data-title-zh="操作生命周期" data-href-en="/docs/reference/design/runtime/execution/agent-action-lifecycle.html" data-href-zh="/docs/reference/design/runtime/execution/agent-action-lifecycle.zh.html">Action lifecycle</a>
+<a class="navlink" href="/docs/reference/design/runtime/execution/agent-worktree.html" data-title-zh="工作树" data-href-en="/docs/reference/design/runtime/execution/agent-worktree.html" data-href-zh="/docs/reference/design/runtime/execution/agent-worktree.zh.html">Worktrees</a>
+<a class="navlink" href="/docs/reference/design/runtime/execution/command-sessions.html" data-title-zh="命令会话" data-href-en="/docs/reference/design/runtime/execution/command-sessions.html" data-href-zh="/docs/reference/design/runtime/execution/command-sessions.zh.html">Command sessions</a>
+<a class="navlink" href="/docs/reference/design/runtime/execution/agentic-self-recursion.viz.html" data-title-zh="递归图解" data-href-en="/docs/reference/design/runtime/execution/agentic-self-recursion.viz.html" data-href-zh="/docs/reference/design/runtime/execution/agentic-self-recursion.zh.viz.html">Recursion diagram</a>
+<a class="navlink" href="/docs/reference/design/runtime/execution/agentic-self-recursion.html" data-title-zh="递归保护" data-href-en="/docs/reference/design/runtime/execution/agentic-self-recursion.html" data-href-zh="/docs/reference/design/runtime/execution/agentic-self-recursion.zh.html">Recursion guard</a>
+<a class="navlink" href="/docs/reference/design/runtime/execution/async-job-lifecycle.html" data-title-zh="异步任务" data-href-en="/docs/reference/design/runtime/execution/async-job-lifecycle.html" data-href-zh="/docs/reference/design/runtime/execution/async-job-lifecycle.zh.html">Async tasks</a>
+<a class="navlink" href="/docs/reference/design/runtime/execution/agentic-llm-streaming.html" data-title-zh="嵌套 LLM 流式" data-href-en="/docs/reference/design/runtime/execution/agentic-llm-streaming.html" data-href-zh="/docs/reference/design/runtime/execution/agentic-llm-streaming.zh.html">Nested LLM streaming</a>
+<a class="navlink" href="/docs/reference/design/runtime/execution/controllability-and-three-surface-sync.html" data-title-zh="任务可控性" data-href-en="/docs/reference/design/runtime/execution/controllability-and-three-surface-sync.html" data-href-zh="/docs/reference/design/runtime/execution/controllability-and-three-surface-sync.zh.html">Task controllability</a>
+<a class="navlink" href="/docs/reference/design/runtime/execution/dispatcher-split.html" data-title-zh="调度器结构" data-href-en="/docs/reference/design/runtime/execution/dispatcher-split.html" data-href-zh="/docs/reference/design/runtime/execution/dispatcher-split.zh.html">Dispatcher structure</a>
+<a class="navlink" href="/docs/reference/design/runtime/execution/next-step-decision.html" data-title-zh="下一步决策" data-href-en="/docs/reference/design/runtime/execution/next-step-decision.html" data-href-zh="/docs/reference/design/runtime/execution/next-step-decision.zh.html">Next-step decisions</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="会话与存储">Sessions</span><span class="nav-count">9</span></summary><a class="navlink" href="/docs/reference/design/runtime/session/README.html" data-title-zh="阅读指南" data-href-en="/docs/reference/design/runtime/session/README.html" data-href-zh="/docs/reference/design/runtime/session/README.zh.html">Reading guide</a>
+<a class="navlink" href="/docs/reference/design/runtime/session/storage.html" data-title-zh="数据模型" data-href-en="/docs/reference/design/runtime/session/storage.html" data-href-zh="/docs/reference/design/runtime/session/storage.zh.html">Data model</a>
+<a class="navlink" href="/docs/reference/design/runtime/session/operations.html" data-title-zh="操作流程" data-href-en="/docs/reference/design/runtime/session/operations.html" data-href-zh="/docs/reference/design/runtime/session/operations.zh.html">Operations</a>
+<a class="navlink" href="/docs/reference/design/runtime/session/context.html" data-title-zh="上下文" data-href-en="/docs/reference/design/runtime/session/context.html" data-href-zh="/docs/reference/design/runtime/session/context.zh.html">Context</a>
+<a class="navlink" href="/docs/reference/design/runtime/session/unified-session-context.html" data-title-zh="上下文创建" data-href-en="/docs/reference/design/runtime/session/unified-session-context.html" data-href-zh="/docs/reference/design/runtime/session/unified-session-context.zh.html">Context creation</a>
+<a class="navlink" href="/docs/reference/design/runtime/session/additional-working-directories.html" data-title-zh="工作目录" data-href-en="/docs/reference/design/runtime/session/additional-working-directories.html" data-href-zh="/docs/reference/design/runtime/session/additional-working-directories.zh.html">Working directories</a>
+<a class="navlink" href="/docs/reference/design/runtime/session/comparison.html" data-title-zh="管理对比" data-href-en="/docs/reference/design/runtime/session/comparison.html" data-href-zh="/docs/reference/design/runtime/session/comparison.zh.html">Management comparison</a>
+<a class="navlink" href="/docs/reference/design/runtime/session/storage-consistency.html" data-title-zh="存储一致性" data-href-en="/docs/reference/design/runtime/session/storage-consistency.html" data-href-zh="/docs/reference/design/runtime/session/storage-consistency.zh.html">Storage consistency</a>
+<a class="navlink" href="/docs/reference/design/runtime/session/name.html" data-title-zh="标题生成" data-href-en="/docs/reference/design/runtime/session/name.html" data-href-zh="/docs/reference/design/runtime/session/name.zh.html">Title generation</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="DAG 与协作">DAG and collaboration</span><span class="nav-count">14</span></summary><a class="navlink" href="/docs/reference/design/runtime/dag/overview.html" data-title-zh="设计概览" data-href-en="/docs/reference/design/runtime/dag/overview.html" data-href-zh="/docs/reference/design/runtime/dag/overview.zh.html">Design overview</a>
+<a class="navlink" href="/docs/reference/design/runtime/dag/nested-llm-node-content.html" data-title-zh="LLM 节点内容" data-href-en="/docs/reference/design/runtime/dag/nested-llm-node-content.html" data-href-zh="/docs/reference/design/runtime/dag/nested-llm-node-content.zh.html">LLM node content</a>
+<a class="navlink" href="/docs/reference/design/runtime/collaboration/agent-collaboration.html" data-title-zh="智能体通信" data-href-en="/docs/reference/design/runtime/collaboration/agent-collaboration.html" data-href-zh="/docs/reference/design/runtime/collaboration/agent-collaboration.zh.html">Agent communication</a>
+<a class="navlink" href="/docs/reference/design/runtime/collaboration/agent-collab-architecture.html" data-title-zh="协作工具" data-href-en="/docs/reference/design/runtime/collaboration/agent-collab-architecture.html" data-href-zh="/docs/reference/design/runtime/collaboration/agent-collab-architecture.zh.html">Collaboration tools</a>
+<a class="navlink" href="/docs/reference/design/runtime/collaboration/agent-collab-comparison.html" data-title-zh="协作对比" data-href-en="/docs/reference/design/runtime/collaboration/agent-collab-comparison.html" data-href-zh="/docs/reference/design/runtime/collaboration/agent-collab-comparison.zh.html">Collaboration comparison</a>
+<a class="navlink" href="/docs/reference/design/runtime/dag/branch-collaboration.html" data-title-zh="分支协作" data-href-en="/docs/reference/design/runtime/dag/branch-collaboration.html" data-href-zh="/docs/reference/design/runtime/dag/branch-collaboration.zh.html">Branch collaboration</a>
+<a class="navlink" href="/docs/reference/design/runtime/dag/layout.html" data-title-zh="布局规范" data-href-en="/docs/reference/design/runtime/dag/layout.html" data-href-zh="/docs/reference/design/runtime/dag/layout.zh.html">Layout specification</a>
+<a class="navlink" href="/docs/reference/design/runtime/dag/external-program-run-node.html" data-title-zh="程序节点" data-href-en="/docs/reference/design/runtime/dag/external-program-run-node.html" data-href-zh="/docs/reference/design/runtime/dag/external-program-run-node.zh.html">Program nodes</a>
+<a class="navlink" href="/docs/reference/design/runtime/dag/persistence-observability.html" data-title-zh="Agent 图所有权" data-href-en="/docs/reference/design/runtime/dag/persistence-observability.html" data-href-zh="/docs/reference/design/runtime/dag/persistence-observability.zh.html">Agent DAG ownership</a>
+<a class="navlink" href="/docs/reference/design/runtime/dag/rendering.html" data-title-zh="渲染规范" data-href-en="/docs/reference/design/runtime/dag/rendering.html" data-href-zh="/docs/reference/design/runtime/dag/rendering.zh.html">Rendering specification</a>
+<a class="navlink" href="/docs/reference/design/runtime/operations/branch-naming.html" data-title-zh="分支命名" data-href-en="/docs/reference/design/runtime/operations/branch-naming.html" data-href-zh="/docs/reference/design/runtime/operations/branch-naming.zh.html">Branch naming</a>
+<a class="navlink" href="/docs/reference/design/runtime/operations/branch-naming.viz.html" data-title-zh="命名图解" data-href-en="/docs/reference/design/runtime/operations/branch-naming.viz.html" data-href-zh="/docs/reference/design/runtime/operations/branch-naming.zh.viz.html">Naming diagram</a>
+<a class="navlink" href="/docs/reference/design/runtime/operations/edge-field-rename.html" data-title-zh="边字段命名" data-href-en="/docs/reference/design/runtime/operations/edge-field-rename.html" data-href-zh="/docs/reference/design/runtime/operations/edge-field-rename.zh.html">Edge naming</a>
+<a class="navlink" href="/docs/reference/design/runtime/operations/unify-parent-called-by.html" data-title-zh="调用者标识" data-href-en="/docs/reference/design/runtime/operations/unify-parent-called-by.html" data-href-zh="/docs/reference/design/runtime/operations/unify-parent-called-by.zh.html">Caller identity</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="目标与恢复">Goals and recovery</span><span class="nav-count">10</span></summary><a class="navlink" href="/docs/reference/design/runtime/reliability/goal-and-recovery.html" data-title-zh="目标与恢复" data-href-en="/docs/reference/design/runtime/reliability/goal-and-recovery.html" data-href-zh="/docs/reference/design/runtime/reliability/goal-and-recovery.zh.html">Goals and recovery</a>
+<a class="navlink" href="/docs/reference/design/runtime/always-on-agents.html" data-title-zh="常驻 Agent" data-href-en="/docs/reference/design/runtime/always-on-agents.html" data-href-zh="/docs/reference/design/runtime/always-on-agents.zh.html">Always-on Agents</a>
+<a class="navlink" href="/docs/reference/design/runtime/security/outbound-hold.html" data-title-zh="代发暂存" data-href-en="/docs/reference/design/runtime/security/outbound-hold.html" data-href-zh="/docs/reference/design/runtime/security/outbound-hold.zh.html">Outbound Hold</a>
+<a class="navlink" href="/docs/reference/design/runtime/reliability/agent-resource-governance.html" data-title-zh="资源配额" data-href-en="/docs/reference/design/runtime/reliability/agent-resource-governance.html" data-href-zh="/docs/reference/design/runtime/reliability/agent-resource-governance.zh.html">Resource quotas</a>
+<a class="navlink" href="/docs/reference/design/runtime/reliability/structured-generation-recovery.html" data-title-zh="生成恢复" data-href-en="/docs/reference/design/runtime/reliability/structured-generation-recovery.html" data-href-zh="/docs/reference/design/runtime/reliability/structured-generation-recovery.zh.html">Generation recovery</a>
+<a class="navlink" href="/docs/reference/design/runtime/reliability/durable-tool-results.html" data-title-zh="工具结果存储" data-href-en="/docs/reference/design/runtime/reliability/durable-tool-results.html" data-href-zh="/docs/reference/design/runtime/reliability/durable-tool-results.zh.html">Tool result storage</a>
+<a class="navlink" href="/docs/reference/design/runtime/operations/streaming-resume.html" data-title-zh="流式恢复" data-href-en="/docs/reference/design/runtime/operations/streaming-resume.html" data-href-zh="/docs/reference/design/runtime/operations/streaming-resume.zh.html">Stream recovery</a>
+<a class="navlink" href="/docs/reference/design/runtime/operations/chat-progress-recovery.html" data-title-zh="进度恢复" data-href-en="/docs/reference/design/runtime/operations/chat-progress-recovery.html" data-href-zh="/docs/reference/design/runtime/operations/chat-progress-recovery.zh.html">Progress recovery</a>
+<a class="navlink" href="/docs/reference/design/runtime/reliability/web-runtime-reliability.html" data-title-zh="网页可靠性" data-href-en="/docs/reference/design/runtime/reliability/web-runtime-reliability.html" data-href-zh="/docs/reference/design/runtime/reliability/web-runtime-reliability.zh.html">Web reliability</a>
+<a class="navlink" href="/docs/reference/design/runtime/reliability/web-frontend-spawn.html" data-title-zh="前端进程" data-href-en="/docs/reference/design/runtime/reliability/web-frontend-spawn.html" data-href-zh="/docs/reference/design/runtime/reliability/web-frontend-spawn.zh.html">Frontend processes</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="配置与操作">Configuration and operations</span><span class="nav-count">10</span></summary><a class="navlink" href="/docs/reference/design/runtime/agent-configuration/agent-configuration-ui.html" data-title-zh="智能体设置" data-href-en="/docs/reference/design/runtime/agent-configuration/agent-configuration-ui.html" data-href-zh="/docs/reference/design/runtime/agent-configuration/agent-configuration-ui.zh.html">Agent settings</a>
+<a class="navlink" href="/docs/reference/design/runtime/agent-configuration/agent-core-configuration-ui.html" data-title-zh="基础设置" data-href-en="/docs/reference/design/runtime/agent-configuration/agent-core-configuration-ui.html" data-href-zh="/docs/reference/design/runtime/agent-configuration/agent-core-configuration-ui.zh.html">Core settings</a>
+<a class="navlink" href="/docs/reference/design/runtime/agent-configuration/agent-tool-configuration-ui.html" data-title-zh="工具设置" data-href-en="/docs/reference/design/runtime/agent-configuration/agent-tool-configuration-ui.html" data-href-zh="/docs/reference/design/runtime/agent-configuration/agent-tool-configuration-ui.zh.html">Tool settings</a>
+<a class="navlink" href="/docs/reference/design/runtime/agent-configuration/agent-capability-configuration-ui.html" data-title-zh="能力设置" data-href-en="/docs/reference/design/runtime/agent-configuration/agent-capability-configuration-ui.html" data-href-zh="/docs/reference/design/runtime/agent-configuration/agent-capability-configuration-ui.zh.html">Capability settings</a>
+<a class="navlink" href="/docs/reference/design/runtime/agent-configuration/agent-configuration-plan.html" data-title-zh="Agent 实施计划" data-href-en="/docs/reference/design/runtime/agent-configuration/agent-configuration-plan.html" data-href-zh="/docs/reference/design/runtime/agent-configuration/agent-configuration-plan.zh.html">Agent implementation plan</a>
+<a class="navlink" href="/docs/reference/design/runtime/agent-configuration/chat-search-settings.html" data-title-zh="聊天搜索" data-href-en="/docs/reference/design/runtime/agent-configuration/chat-search-settings.html" data-href-zh="/docs/reference/design/runtime/agent-configuration/chat-search-settings.zh.html">Chat search</a>
+<a class="navlink" href="/docs/reference/design/runtime/agent-configuration/tool-toggle-management.html" data-title-zh="工具集" data-href-en="/docs/reference/design/runtime/agent-configuration/tool-toggle-management.html" data-href-zh="/docs/reference/design/runtime/agent-configuration/tool-toggle-management.zh.html">Toolsets</a>
+<a class="navlink" href="/docs/reference/design/runtime/agent-configuration/bot-template-references.html" data-title-zh="Bot 模板参考资料" data-href-en="/docs/reference/design/runtime/agent-configuration/bot-template-references.html" data-href-zh="/docs/reference/design/runtime/agent-configuration/bot-template-references.zh.html">Bot template references</a>
+<a class="navlink" href="/docs/reference/design/runtime/operations/user-input-requests.html" data-title-zh="输入请求" data-href-en="/docs/reference/design/runtime/operations/user-input-requests.html" data-href-zh="/docs/reference/design/runtime/operations/user-input-requests.zh.html">Input requests</a>
+<a class="navlink" href="/docs/reference/design/runtime/operations/file-management.html" data-title-zh="文件与恢复" data-href-en="/docs/reference/design/runtime/operations/file-management.html" data-href-zh="/docs/reference/design/runtime/operations/file-management.zh.html">Files and recovery</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="程序与工作流">Programs and workflows</span><span class="nav-count">14</span></summary><a class="navlink" href="/docs/reference/design/function/README.html" data-title-zh="函数" data-href-en="/docs/reference/design/function/README.html" data-href-zh="/docs/reference/design/function/README.zh.html">Functions</a>
+<a class="navlink" href="/docs/reference/design/function/program-model.html" data-title-zh="Program 模型" data-href-en="/docs/reference/design/function/program-model.html" data-href-zh="/docs/reference/design/function/program-model.zh.html">Program Model</a>
+<a class="navlink" href="/docs/reference/design/function/agentic-program.html" data-title-zh="Agentic Program" data-href-en="/docs/reference/design/function/agentic-program.html" data-href-zh="/docs/reference/design/function/agentic-program.zh.html">Agentic Program</a>
+<a class="navlink" href="/docs/reference/design/function/calling-unification.html" data-title-zh="函数调用" data-href-en="/docs/reference/design/function/calling-unification.html" data-href-zh="/docs/reference/design/function/calling-unification.zh.html">Function calling</a>
+<a class="navlink" href="/docs/reference/design/function/tool-guides.html" data-title-zh="工具指南" data-href-en="/docs/reference/design/function/tool-guides.html" data-href-zh="/docs/reference/design/function/tool-guides.zh.html">Tool guides</a>
+<a class="navlink" href="/docs/reference/design/function/calling/code-call.html" data-title-zh="顺序调用" data-href-en="/docs/reference/design/function/calling/code-call.html" data-href-zh="/docs/reference/design/function/calling/code-call.zh.html">Fixed-order calls</a>
+<a class="navlink" href="/docs/reference/design/runtime/programs/application-runtime.html" data-title-zh="应用运行时" data-href-en="/docs/reference/design/runtime/programs/application-runtime.html" data-href-zh="/docs/reference/design/runtime/programs/application-runtime.zh.html">Application runtime</a>
+<a class="navlink" href="/docs/reference/design/runtime/programs/programs-architecture.html" data-title-zh="程序结构" data-href-en="/docs/reference/design/runtime/programs/programs-architecture.html" data-href-zh="/docs/reference/design/runtime/programs/programs-architecture.zh.html">Program structure</a>
+<a class="navlink" href="/docs/reference/design/runtime/programs/meetings.html" data-title-zh="会议" data-href-en="/docs/reference/design/runtime/programs/meetings.html" data-href-zh="/docs/reference/design/runtime/programs/meetings.zh.html">Meetings</a>
+<a class="navlink" href="/docs/reference/design/runtime/workflows/workflow.html" data-title-zh="Workflow" data-href-en="/docs/reference/design/runtime/workflows/workflow.html" data-href-zh="/docs/reference/design/runtime/workflows/workflow.zh.html">Workflows</a>
+<a class="navlink" href="/docs/reference/design/runtime/workflows/workflow-recording.html" data-title-zh="录制 Workflow" data-href-en="/docs/reference/design/runtime/workflows/workflow-recording.html" data-href-zh="/docs/reference/design/runtime/workflows/workflow-recording.zh.html">Recording a workflow</a>
+<a class="navlink" href="/docs/reference/design/runtime/workflows/self-programming-workflow-ui.html" data-title-zh="程序界面" data-href-en="/docs/reference/design/runtime/workflows/self-programming-workflow-ui.html" data-href-zh="/docs/reference/design/runtime/workflows/self-programming-workflow-ui.zh.html">Program interface</a>
+<a class="navlink" href="/docs/reference/design/runtime/execution/llm-and-agent.html" data-title-zh="执行统一方案" data-href-en="/docs/reference/design/runtime/execution/llm-and-agent.html" data-href-zh="/docs/reference/design/runtime/execution/llm-and-agent.zh.html">Execution unification</a>
+<a class="navlink" href="/docs/reference/design/runtime/self-update.html" data-title-zh="自主更新" data-href-en="/docs/reference/design/runtime/self-update.html" data-href-zh="/docs/reference/design/runtime/self-update.zh.html">Self-updates</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="报告">Reports</span><span class="nav-count">4</span></summary><a class="navlink" href="/docs/reference/design/runtime/workflows/report-suite.html" data-title-zh="报告工作流" data-href-en="/docs/reference/design/runtime/workflows/report-suite.html" data-href-zh="/docs/reference/design/runtime/workflows/report-suite.zh.html">Report workflows</a>
+<a class="navlink" href="/docs/reference/design/runtime/workflows/weekly-report.html" data-title-zh="每周报告" data-href-en="/docs/reference/design/runtime/workflows/weekly-report.html" data-href-zh="/docs/reference/design/runtime/workflows/weekly-report.zh.html">Weekly reports</a>
+<a class="navlink" href="/docs/reference/design/runtime/workflows/group-weekly-report.html" data-title-zh="小组报告" data-href-en="/docs/reference/design/runtime/workflows/group-weekly-report.html" data-href-zh="/docs/reference/design/runtime/workflows/group-weekly-report.zh.html">Group reports</a>
+<a class="navlink" href="/docs/reference/design/runtime/workflows/report-delivery-intent.html" data-title-zh="报告交付" data-href-en="/docs/reference/design/runtime/workflows/report-delivery-intent.html" data-href-zh="/docs/reference/design/runtime/workflows/report-delivery-intent.zh.html">Report delivery</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="事件与调度">Events and scheduling</span><span class="nav-count">13</span></summary><a class="navlink" href="/docs/reference/design/proactive/README.html" data-title-zh="主动执行" data-href-en="/docs/reference/design/proactive/README.html" data-href-zh="/docs/reference/design/proactive/README.zh.html">Proactive execution</a>
+<a class="navlink" href="/docs/reference/design/proactive/event-layer.html" data-title-zh="事件层" data-href-en="/docs/reference/design/proactive/event-layer.html" data-href-zh="/docs/reference/design/proactive/event-layer.zh.html">Event layer</a>
+<a class="navlink" href="/docs/reference/design/proactive/event-layer.viz.html" data-title-zh="事件流程图解" data-href-en="/docs/reference/design/proactive/event-layer.viz.html" data-href-zh="/docs/reference/design/proactive/event-layer.zh.viz.html">Event flow diagram</a>
+<a class="navlink" href="/docs/reference/design/proactive/events-and-state.html" data-title-zh="事件与状态" data-href-en="/docs/reference/design/proactive/events-and-state.html" data-href-zh="/docs/reference/design/proactive/events-and-state.zh.html">Events and state</a>
+<a class="navlink" href="/docs/reference/design/proactive/execution-model.html" data-title-zh="规则执行" data-href-en="/docs/reference/design/proactive/execution-model.html" data-href-zh="/docs/reference/design/proactive/execution-model.zh.html">Rule execution</a>
+<a class="navlink" href="/docs/reference/design/proactive/overview.html" data-title-zh="场景概览" data-href-en="/docs/reference/design/proactive/overview.html" data-href-zh="/docs/reference/design/proactive/overview.zh.html">Scenario overview</a>
+<a class="navlink" href="/docs/reference/design/proactive/policies-mvp.html" data-title-zh="规则模板" data-href-en="/docs/reference/design/proactive/policies-mvp.html" data-href-zh="/docs/reference/design/proactive/policies-mvp.zh.html">Rule templates</a>
+<a class="navlink" href="/docs/reference/design/proactive/invariants.html" data-title-zh="不变量" data-href-en="/docs/reference/design/proactive/invariants.html" data-href-zh="/docs/reference/design/proactive/invariants.zh.html">Invariants</a>
+<a class="navlink" href="/docs/reference/design/proactive/event-reference.html" data-title-zh="事件参考" data-href-en="/docs/reference/design/proactive/event-reference.html" data-href-zh="/docs/reference/design/proactive/event-reference.zh.html">Event reference</a>
+<a class="navlink" href="/docs/reference/design/proactive/framework-evolution.viz.html" data-title-zh="信号路由图解" data-href-en="/docs/reference/design/proactive/framework-evolution.viz.html" data-href-zh="/docs/reference/design/proactive/framework-evolution.zh.viz.html">Signal routing diagram</a>
+<a class="navlink" href="/docs/reference/design/proactive/framework-evolution.html" data-title-zh="信号路由" data-href-en="/docs/reference/design/proactive/framework-evolution.html" data-href-zh="/docs/reference/design/proactive/framework-evolution.zh.html">Signal routing</a>
+<a class="navlink" href="/docs/reference/design/proactive/event-triggers.html" data-title-zh="事件触发" data-href-en="/docs/reference/design/proactive/event-triggers.html" data-href-zh="/docs/reference/design/proactive/event-triggers.zh.html">Event Triggers</a>
+<a class="navlink" href="/docs/reference/design/scheduler/memory-integration.html" data-title-zh="记忆接口" data-href-en="/docs/reference/design/scheduler/memory-integration.html" data-href-zh="/docs/reference/design/scheduler/memory-integration.zh.html">Memory interface</a></details>
+</details>
+<details class="nav-branch nav-disclosure" open><summary><span class="nav-sec-title" data-title-zh="上下文与记忆">Context and memory</span><span class="nav-count">24</span></summary>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="上下文">Context</span><span class="nav-count">10</span></summary><a class="navlink" href="/docs/reference/design/context/README.html" data-title-zh="阅读指南" data-href-en="/docs/reference/design/context/README.html" data-href-zh="/docs/reference/design/context/README.zh.html">Reading guide</a>
+<a class="navlink" href="/docs/reference/design/context/overview.html" data-title-zh="概览" data-href-en="/docs/reference/design/context/overview.html" data-href-zh="/docs/reference/design/context/overview.zh.html">Overview</a>
+<a class="navlink" href="/docs/reference/design/context/composition.html" data-title-zh="组成" data-href-en="/docs/reference/design/context/composition.html" data-href-zh="/docs/reference/design/context/composition.zh.html">Composition</a>
+<a class="navlink" href="/docs/reference/design/context/compaction.html" data-title-zh="压缩" data-href-en="/docs/reference/design/context/compaction.html" data-href-zh="/docs/reference/design/context/compaction.zh.html">Compaction</a>
+<a class="navlink" href="/docs/reference/design/context/compaction-diagram.html" data-title-zh="压缩图解" data-href-en="/docs/reference/design/context/compaction-diagram.html" data-href-zh="/docs/reference/design/context/compaction-diagram.zh.html">Compaction diagram</a>
+<a class="navlink" href="/docs/reference/design/context/occupancy-status.html" data-title-zh="占用状态" data-href-en="/docs/reference/design/context/occupancy-status.html" data-href-zh="/docs/reference/design/context/occupancy-status.zh.html">Occupancy</a>
+<a class="navlink" href="/docs/reference/design/context/statistics.html" data-title-zh="统计口径" data-href-en="/docs/reference/design/context/statistics.html" data-href-zh="/docs/reference/design/context/statistics.zh.html">Accounting rules</a>
+<a class="navlink" href="/docs/reference/design/context/memory-introspection.html" data-title-zh="记忆自查" data-href-en="/docs/reference/design/context/memory-introspection.html" data-href-zh="/docs/reference/design/context/memory-introspection.zh.html">Memory introspection</a>
+<a class="navlink" href="/docs/reference/design/context/comparison.html" data-title-zh="方案对比" data-href-en="/docs/reference/design/context/comparison.html" data-href-zh="/docs/reference/design/context/comparison.zh.html">Design comparison</a>
+<a class="navlink" href="/docs/reference/design/context/claude-code-compaction.html" data-title-zh="Claude 压缩" data-href-en="/docs/reference/design/context/claude-code-compaction.html" data-href-zh="/docs/reference/design/context/claude-code-compaction.zh.html">Claude Code compaction</a></details>
+<details class="nav-sec nav-disclosure" open><summary><span class="nav-sec-title" data-title-zh="记忆">Memory</span><span class="nav-count">14</span></summary><a class="navlink" href="/docs/reference/design/memory/README.html" data-title-zh="阅读指南" data-href-en="/docs/reference/design/memory/README.html" data-href-zh="/docs/reference/design/memory/README.zh.html">Reading guide</a>
+<a class="navlink" href="/docs/reference/design/memory/overview.html" data-title-zh="架构概览" data-href-en="/docs/reference/design/memory/overview.html" data-href-zh="/docs/reference/design/memory/overview.zh.html">Architecture overview</a>
+<a class="navlink" href="/docs/reference/design/memory/architecture.html" data-title-zh="架构图解" data-href-en="/docs/reference/design/memory/architecture.html" data-href-zh="/docs/reference/design/memory/architecture.zh.html">Architecture diagrams</a>
+<a class="navlink" href="/docs/reference/design/memory/entity-memory-proposal.html" data-title-zh="实体记忆提案" data-href-en="/docs/reference/design/memory/entity-memory-proposal.html" data-href-zh="/docs/reference/design/memory/entity-memory-proposal.zh.html">Entity memory proposal</a>
+<a class="navlink" href="/docs/reference/design/memory/virtual-memory.html" data-title-zh="抽象记忆" data-href-en="/docs/reference/design/memory/virtual-memory.html" data-href-zh="/docs/reference/design/memory/virtual-memory.zh.html">Virtual memory</a>
+<a class="navlink" href="/docs/reference/design/memory/authority-handoff.html" data-title-zh="权限与配对" data-href-en="/docs/reference/design/memory/authority-handoff.html" data-href-zh="/docs/reference/design/memory/authority-handoff.zh.html">Authority and pairing</a>
+<a class="navlink" href="/docs/reference/design/memory/authority-landscape.html" data-title-zh="权限对比" data-href-en="/docs/reference/design/memory/authority-landscape.html" data-href-zh="/docs/reference/design/memory/authority-landscape.zh.html">Authority comparison</a>
+<a class="navlink" href="/docs/reference/design/memory/adoption.html" data-title-zh="方案采用" data-href-en="/docs/reference/design/memory/adoption.html" data-href-zh="/docs/reference/design/memory/adoption.zh.html">Design adoption</a>
+<a class="navlink" href="/docs/reference/design/memory/comparison.html" data-title-zh="写入对比" data-href-en="/docs/reference/design/memory/comparison.html" data-href-zh="/docs/reference/design/memory/comparison.zh.html">Write comparison</a>
+<a class="navlink" href="/docs/reference/design/memory/editor.html" data-title-zh="编辑与历史" data-href-en="/docs/reference/design/memory/editor.html" data-href-zh="/docs/reference/design/memory/editor.zh.html">Editor and history</a>
+<a class="navlink" href="/docs/reference/design/memory/settings-ui.html" data-title-zh="设置提案" data-href-en="/docs/reference/design/memory/settings-ui.html" data-href-zh="/docs/reference/design/memory/settings-ui.zh.html">Settings proposal</a>
+<a class="navlink" href="/docs/reference/design/memory/speaker-identity.html" data-title-zh="发言人身份" data-href-en="/docs/reference/design/memory/speaker-identity.html" data-href-zh="/docs/reference/design/memory/speaker-identity.zh.html">Speaker identity</a>
+<a class="navlink" href="/docs/reference/design/memory/written-marker.viz.html" data-title-zh="写入游标图解" data-href-en="/docs/reference/design/memory/written-marker.viz.html" data-href-zh="/docs/reference/design/memory/written-marker.zh.viz.html">Write cursor diagram</a>
+<a class="navlink active" href="/docs/reference/design/memory/written-marker.html" data-title-zh="写入游标" data-href-en="/docs/reference/design/memory/written-marker.html" data-href-zh="/docs/reference/design/memory/written-marker.zh.html">Write cursor</a></details>
+</details>
+<details class="nav-branch nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="界面与交互">Interfaces</span><span class="nav-count">69</span></summary>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="基础">Foundations</span><span class="nav-count">17</span></summary><a class="navlink" href="/docs/reference/design/ui/README.html" data-title-zh="网页界面" data-href-en="/docs/reference/design/ui/README.html" data-href-zh="/docs/reference/design/ui/README.zh.html">Web UI</a>
+<a class="navlink" href="/docs/reference/design/ui/desktop/app-icon.html" data-title-zh="应用图标" data-href-en="/docs/reference/design/ui/desktop/app-icon.html" data-href-zh="/docs/reference/design/ui/desktop/app-icon.zh.html">App icon</a>
+<a class="navlink" href="/docs/reference/design/ui/invariants.html" data-title-zh="界面不变量" data-href-en="/docs/reference/design/ui/invariants.html" data-href-zh="/docs/reference/design/ui/invariants.zh.html">UI invariants</a>
+<a class="navlink" href="/docs/reference/design/ui/visual-system/design-tokens.html" data-title-zh="设计 token" data-href-en="/docs/reference/design/ui/visual-system/design-tokens.html" data-href-zh="/docs/reference/design/ui/visual-system/design-tokens.zh.html">Design tokens</a>
+<a class="navlink" href="/docs/reference/design/ui/visual-system/surface-system.html" data-title-zh="界面层次" data-href-en="/docs/reference/design/ui/visual-system/surface-system.html" data-href-zh="/docs/reference/design/ui/visual-system/surface-system.zh.html">UI surfaces</a>
+<a class="navlink" href="/docs/reference/design/ui/state-layer.html" data-title-zh="状态存储" data-href-en="/docs/reference/design/ui/state-layer.html" data-href-zh="/docs/reference/design/ui/state-layer.zh.html">State stores</a>
+<a class="navlink" href="/docs/reference/design/ui/visual-system/theme-system.html" data-title-zh="主题" data-href-en="/docs/reference/design/ui/visual-system/theme-system.html" data-href-zh="/docs/reference/design/ui/visual-system/theme-system.zh.html">Themes</a>
+<a class="navlink" href="/docs/reference/design/ui/desktop/window-state.html" data-title-zh="窗口状态" data-href-en="/docs/reference/design/ui/desktop/window-state.html" data-href-zh="/docs/reference/design/ui/desktop/window-state.zh.html">Window state</a>
+<a class="navlink" href="/docs/reference/design/ui/workspace/center-canvas-layout.html" data-title-zh="中间画布：任意分屏布局 — 交互原型与规划" data-href-en="/docs/reference/design/ui/workspace/center-canvas-layout.html" data-href-zh="/docs/reference/design/ui/workspace/center-canvas-layout.zh.html">Center canvas layout</a>
+<a class="navlink" href="/docs/reference/design/ui/workspace/session-tab-identity.html" data-title-zh="标签身份" data-href-en="/docs/reference/design/ui/workspace/session-tab-identity.html" data-href-zh="/docs/reference/design/ui/workspace/session-tab-identity.zh.html">Tab identity</a>
+<a class="navlink" href="/docs/reference/design/ui/desktop/window-lifecycle.html" data-title-zh="窗口生命周期" data-href-en="/docs/reference/design/ui/desktop/window-lifecycle.html" data-href-zh="/docs/reference/design/ui/desktop/window-lifecycle.zh.html">Window lifecycle</a>
+<a class="navlink" href="/docs/reference/design/ui/visual-system/web-styles.html" data-title-zh="样式组织" data-href-en="/docs/reference/design/ui/visual-system/web-styles.html" data-href-zh="/docs/reference/design/ui/visual-system/web-styles.zh.html">Style organization</a>
+<a class="navlink" href="/docs/reference/design/ui/interaction-feedback.html" data-title-zh="交互反馈" data-href-en="/docs/reference/design/ui/interaction-feedback.html" data-href-zh="/docs/reference/design/ui/interaction-feedback.zh.html">Interaction feedback</a>
+<a class="navlink" href="/docs/reference/design/ui/page-loading-performance.html" data-title-zh="页面加载性能" data-href-en="/docs/reference/design/ui/page-loading-performance.html" data-href-zh="/docs/reference/design/ui/page-loading-performance.zh.html">Page loading performance</a>
+<a class="navlink" href="/docs/reference/design/ui/visual-system/indicator-dots.html" data-title-zh="状态指示" data-href-en="/docs/reference/design/ui/visual-system/indicator-dots.html" data-href-zh="/docs/reference/design/ui/visual-system/indicator-dots.zh.html">Status indicators</a>
+<a class="navlink" href="/docs/reference/design/ui/visual-system/agent-avatars.html" data-title-zh="Agent 头像" data-href-en="/docs/reference/design/ui/visual-system/agent-avatars.html" data-href-zh="/docs/reference/design/ui/visual-system/agent-avatars.zh.html">Agent avatars</a>
+<a class="navlink" href="/docs/reference/design/ui/sidebar/session-status.html" data-title-zh="会话状态" data-href-en="/docs/reference/design/ui/sidebar/session-status.html" data-href-zh="/docs/reference/design/ui/sidebar/session-status.zh.html">Session status</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="对话与编辑器">Chat and composer</span><span class="nav-count">20</span></summary><a class="navlink" href="/docs/reference/design/ui/chat/attachment-handling.html" data-title-zh="附件方案" data-href-en="/docs/reference/design/ui/chat/attachment-handling.html" data-href-zh="/docs/reference/design/ui/chat/attachment-handling.zh.html">Attachment options</a>
+<a class="navlink" href="/docs/reference/design/ui/chat/chat-attachments.html" data-title-zh="附件传递" data-href-en="/docs/reference/design/ui/chat/chat-attachments.html" data-href-zh="/docs/reference/design/ui/chat/chat-attachments.zh.html">Attachment delivery</a>
+<a class="navlink" href="/docs/reference/design/ui/chat/chat-turn-visual-spec.html" data-title-zh="聊天轮次布局" data-href-en="/docs/reference/design/ui/chat/chat-turn-visual-spec.html" data-href-zh="/docs/reference/design/ui/chat/chat-turn-visual-spec.zh.html">Chat turn layout</a>
+<a class="navlink" href="/docs/reference/design/ui/chat/tool-group-summary.html" data-title-zh="工具组摘要" data-href-en="/docs/reference/design/ui/chat/tool-group-summary.html" data-href-zh="/docs/reference/design/ui/chat/tool-group-summary.zh.html">Tool group summary</a>
+<a class="navlink" href="/docs/reference/design/ui/chat/sub-agent-row.html" data-title-zh="子代理行" data-href-en="/docs/reference/design/ui/chat/sub-agent-row.html" data-href-zh="/docs/reference/design/ui/chat/sub-agent-row.zh.html">Sub-agent row</a>
+<a class="navlink" href="/docs/reference/design/ui/chat/activity-panel.html" data-title-zh="Activity 面板" data-href-en="/docs/reference/design/ui/chat/activity-panel.html" data-href-zh="/docs/reference/design/ui/chat/activity-panel.zh.html">Activity panel</a>
+<a class="navlink" href="/docs/reference/design/ui/chat/chat-transcript-follow.html" data-title-zh="会话记录跟随" data-href-en="/docs/reference/design/ui/chat/chat-transcript-follow.html" data-href-zh="/docs/reference/design/ui/chat/chat-transcript-follow.zh.html">Transcript following</a>
+<a class="navlink" href="/docs/reference/design/ui/composer/composer-interaction-modes.html" data-title-zh="输入框交互" data-href-en="/docs/reference/design/ui/composer/composer-interaction-modes.html" data-href-zh="/docs/reference/design/ui/composer/composer-interaction-modes.zh.html">Composer interaction</a>
+<a class="navlink" href="/docs/reference/design/ui/composer/composer-local-attachment-paths.html" data-title-zh="附件路径" data-href-en="/docs/reference/design/ui/composer/composer-local-attachment-paths.html" data-href-zh="/docs/reference/design/ui/composer/composer-local-attachment-paths.zh.html">Attachment paths</a>
+<a class="navlink" href="/docs/reference/design/ui/composer/composer-responsive-controls.html" data-title-zh="响应式控件" data-href-en="/docs/reference/design/ui/composer/composer-responsive-controls.html" data-href-zh="/docs/reference/design/ui/composer/composer-responsive-controls.zh.html">Responsive controls</a>
+<a class="navlink" href="/docs/reference/design/ui/composer/composer-options-menu.html" data-title-zh="输入框选项菜单" data-href-en="/docs/reference/design/ui/composer/composer-options-menu.html" data-href-zh="/docs/reference/design/ui/composer/composer-options-menu.zh.html">Composer options menu</a>
+<a class="navlink" href="/docs/reference/design/ui/composer/composer-fast-control.html" data-title-zh="速度控制" data-href-en="/docs/reference/design/ui/composer/composer-fast-control.html" data-href-zh="/docs/reference/design/ui/composer/composer-fast-control.zh.html">Speed control</a>
+<a class="navlink" href="/docs/reference/design/ui/browser/agent-control-overlay.html" data-title-zh="Agent 控制提示层" data-href-en="/docs/reference/design/ui/browser/agent-control-overlay.html" data-href-zh="/docs/reference/design/ui/browser/agent-control-overlay.zh.html">Agent control overlay</a>
+<a class="navlink" href="/docs/reference/design/ui/resources/resource-preview.html" data-title-zh="资源与操作预览" data-href-en="/docs/reference/design/ui/resources/resource-preview.html" data-href-zh="/docs/reference/design/ui/resources/resource-preview.zh.html">Resources and operation preview</a>
+<a class="navlink" href="/docs/reference/design/ui/browser/browser-control-surfaces.html" data-title-zh="网页任务控制" data-href-en="/docs/reference/design/ui/browser/browser-control-surfaces.html" data-href-zh="/docs/reference/design/ui/browser/browser-control-surfaces.zh.html">Browser task control</a>
+<a class="navlink" href="/docs/reference/design/ui/turn-lifecycle/send-queue-reliability.html" data-title-zh="队列与执行引导" data-href-en="/docs/reference/design/ui/turn-lifecycle/send-queue-reliability.html" data-href-zh="/docs/reference/design/ui/turn-lifecycle/send-queue-reliability.zh.html">Queue and steering</a>
+<a class="navlink" href="/docs/reference/design/ui/sidebar/session-auto-rename.html" data-title-zh="会话命名" data-href-en="/docs/reference/design/ui/sidebar/session-auto-rename.html" data-href-zh="/docs/reference/design/ui/sidebar/session-auto-rename.zh.html">Session naming</a>
+<a class="navlink" href="/docs/reference/design/ui/composer/slash-and-compact.html" data-title-zh="斜杠命令" data-href-en="/docs/reference/design/ui/composer/slash-and-compact.html" data-href-zh="/docs/reference/design/ui/composer/slash-and-compact.zh.html">Slash commands</a>
+<a class="navlink" href="/docs/reference/design/ui/turn-lifecycle/turn-occupancy.html" data-title-zh="轮次占用" data-href-en="/docs/reference/design/ui/turn-lifecycle/turn-occupancy.html" data-href-zh="/docs/reference/design/ui/turn-lifecycle/turn-occupancy.zh.html">Turn occupancy</a>
+<a class="navlink" href="/docs/reference/design/ui/turn-lifecycle/websocket-command-lifecycle.html" data-title-zh="WebSocket 周期" data-href-en="/docs/reference/design/ui/turn-lifecycle/websocket-command-lifecycle.html" data-href-zh="/docs/reference/design/ui/turn-lifecycle/websocket-command-lifecycle.zh.html">WebSocket lifecycle</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="浏览器与标签页">Browser and tabs</span><span class="nav-count">9</span></summary><a class="navlink" href="/docs/reference/design/ui/browser/browser-extensions.html" data-title-zh="浏览器扩展" data-href-en="/docs/reference/design/ui/browser/browser-extensions.html" data-href-zh="/docs/reference/design/ui/browser/browser-extensions.zh.html">Browser extensions</a>
+<a class="navlink" href="/docs/reference/design/ui/browser/built-in-browser.html" data-title-zh="内置浏览器" data-href-en="/docs/reference/design/ui/browser/built-in-browser.html" data-href-zh="/docs/reference/design/ui/browser/built-in-browser.zh.html">Built-in browser</a>
+<a class="navlink" href="/docs/reference/design/ui/resources/session-resources.html" data-title-zh="会话资源" data-href-en="/docs/reference/design/ui/resources/session-resources.html" data-href-zh="/docs/reference/design/ui/resources/session-resources.zh.html">Session resources</a>
+<a class="navlink" href="/docs/reference/design/ui/workspace/center-tabs-and-split-layout.html" data-title-zh="标签布局" data-href-en="/docs/reference/design/ui/workspace/center-tabs-and-split-layout.html" data-href-zh="/docs/reference/design/ui/workspace/center-tabs-and-split-layout.zh.html">Tab placement</a>
+<a class="navlink" href="/docs/reference/design/ui/desktop/window-tab-transfer.html" data-title-zh="在窗口之间移动标签页" data-href-en="/docs/reference/design/ui/desktop/window-tab-transfer.html" data-href-zh="/docs/reference/design/ui/desktop/window-tab-transfer.zh.html">Moving tabs between windows</a>
+<a class="navlink" href="/docs/reference/design/ui/remote-web-access.viz.html" data-title-zh="远程访问图解" data-href-en="/docs/reference/design/ui/remote-web-access.viz.html" data-href-zh="/docs/reference/design/ui/remote-web-access.zh.viz.html">Remote access diagram</a>
+<a class="navlink" href="/docs/reference/design/ui/remote-web-access.html" data-title-zh="远程访问" data-href-en="/docs/reference/design/ui/remote-web-access.html" data-href-zh="/docs/reference/design/ui/remote-web-access.zh.html">Remote access</a>
+<a class="navlink" href="/docs/reference/design/ui/browser/web-tab-home-button.html" data-title-zh="浏览器主页" data-href-en="/docs/reference/design/ui/browser/web-tab-home-button.html" data-href-zh="/docs/reference/design/ui/browser/web-tab-home-button.zh.html">Browser home</a>
+<a class="navlink" href="/docs/reference/design/ui/browser/web-tab-native-bounds.html" data-title-zh="原生页面边界" data-href-en="/docs/reference/design/ui/browser/web-tab-native-bounds.html" data-href-zh="/docs/reference/design/ui/browser/web-tab-native-bounds.zh.html">Native page bounds</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="设置与目录">Settings and catalog</span><span class="nav-count">4</span></summary><a class="navlink" href="/docs/reference/design/ui/settings/avatar-randomization.html" data-title-zh="头像" data-href-en="/docs/reference/design/ui/settings/avatar-randomization.html" data-href-zh="/docs/reference/design/ui/settings/avatar-randomization.zh.html">Avatars</a>
+<a class="navlink" href="/docs/reference/design/ui/programs/programs-explorer-template.html" data-title-zh="程序浏览器" data-href-en="/docs/reference/design/ui/programs/programs-explorer-template.html" data-href-zh="/docs/reference/design/ui/programs/programs-explorer-template.zh.html">Program explorer</a>
+<a class="navlink" href="/docs/reference/design/ui/programs/programs-source-categories.html" data-title-zh="源码分类" data-href-en="/docs/reference/design/ui/programs/programs-source-categories.html" data-href-zh="/docs/reference/design/ui/programs/programs-source-categories.zh.html">Source categories</a>
+<a class="navlink" href="/docs/reference/design/ui/settings/settings-collapsible-columns.html" data-title-zh="设置导航" data-href-en="/docs/reference/design/ui/settings/settings-collapsible-columns.html" data-href-zh="/docs/reference/design/ui/settings/settings-collapsible-columns.zh.html">Settings navigation</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="工作区与侧栏">Workspace and sidebar</span><span class="nav-count">9</span></summary><a class="navlink" href="/docs/reference/design/ui/workspace/integrated-terminal.html" data-title-zh="内置终端" data-href-en="/docs/reference/design/ui/workspace/integrated-terminal.html" data-href-zh="/docs/reference/design/ui/workspace/integrated-terminal.zh.html">Integrated terminal</a>
+<a class="navlink" href="/docs/reference/design/ui/sidebar/project-order.html" data-title-zh="项目排序" data-href-en="/docs/reference/design/ui/sidebar/project-order.html" data-href-zh="/docs/reference/design/ui/sidebar/project-order.zh.html">Project order</a>
+<a class="navlink" href="/docs/reference/design/ui/workspace/project-location.html" data-title-zh="项目位置" data-href-en="/docs/reference/design/ui/workspace/project-location.html" data-href-zh="/docs/reference/design/ui/workspace/project-location.zh.html">Project location</a>
+<a class="navlink" href="/docs/reference/design/ui/visual-system/file-type-icons.html" data-title-zh="文件图标" data-href-en="/docs/reference/design/ui/visual-system/file-type-icons.html" data-href-zh="/docs/reference/design/ui/visual-system/file-type-icons.zh.html">File icons</a>
+<a class="navlink" href="/docs/reference/design/ui/workspace/project-workspace.html" data-title-zh="项目工作区" data-href-en="/docs/reference/design/ui/workspace/project-workspace.html" data-href-zh="/docs/reference/design/ui/workspace/project-workspace.zh.html">Project workspace</a>
+<a class="navlink" href="/docs/reference/design/ui/sidebar/right-sidebar-files.html" data-title-zh="文件树" data-href-en="/docs/reference/design/ui/sidebar/right-sidebar-files.html" data-href-zh="/docs/reference/design/ui/sidebar/right-sidebar-files.zh.html">File tree</a>
+<a class="navlink" href="/docs/reference/design/ui/sidebar/right-sidebar-typography.html" data-title-zh="右侧边栏文字排版" data-href-en="/docs/reference/design/ui/sidebar/right-sidebar-typography.html" data-href-zh="/docs/reference/design/ui/sidebar/right-sidebar-typography.zh.html">Right sidebar typography</a>
+<a class="navlink" href="/docs/reference/design/ui/sidebar/sidebars-resizing.html" data-title-zh="侧栏宽度" data-href-en="/docs/reference/design/ui/sidebar/sidebars-resizing.html" data-href-zh="/docs/reference/design/ui/sidebar/sidebars-resizing.zh.html">Sidebar sizing</a>
+<a class="navlink" href="/docs/reference/design/ui/sidebar/secondary-rail.html" data-title-zh="二级侧栏" data-href-en="/docs/reference/design/ui/sidebar/secondary-rail.html" data-href-zh="/docs/reference/design/ui/sidebar/secondary-rail.zh.html">Secondary rail</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="命令行与终端界面">CLI and TUI</span><span class="nav-count">10</span></summary><a class="navlink" href="/docs/reference/design/cli/README.html" data-title-zh="命令行与终端" data-href-en="/docs/reference/design/cli/README.html" data-href-zh="/docs/reference/design/cli/README.zh.html">CLI and TUI</a>
+<a class="navlink" href="/docs/reference/design/cli/config-write-safety.html" data-title-zh="配置安全" data-href-en="/docs/reference/design/cli/config-write-safety.html" data-href-zh="/docs/reference/design/cli/config-write-safety.zh.html">Configuration safety</a>
+<a class="navlink" href="/docs/reference/design/cli/drop-run-command.html" data-title-zh="函数执行" data-href-en="/docs/reference/design/cli/drop-run-command.html" data-href-zh="/docs/reference/design/cli/drop-run-command.zh.html">Function execution</a>
+<a class="navlink" href="/docs/reference/design/cli/naming.html" data-title-zh="命名规范" data-href-en="/docs/reference/design/cli/naming.html" data-href-zh="/docs/reference/design/cli/naming.zh.html">Naming conventions</a>
+<a class="navlink" href="/docs/reference/design/cli/ports.html" data-title-zh="端口配置" data-href-en="/docs/reference/design/cli/ports.html" data-href-zh="/docs/reference/design/cli/ports.zh.html">Port configuration</a>
+<a class="navlink" href="/docs/reference/design/cli/redesign.html" data-title-zh="配置界面" data-href-en="/docs/reference/design/cli/redesign.html" data-href-zh="/docs/reference/design/cli/redesign.zh.html">Configuration interface</a>
+<a class="navlink" href="/docs/reference/design/cli/single-port.html" data-title-zh="单端口架构" data-href-en="/docs/reference/design/cli/single-port.html" data-href-zh="/docs/reference/design/cli/single-port.zh.html">Single-port architecture</a>
+<a class="navlink" href="/docs/reference/design/cli/slash-commands-references.html" data-title-zh="命令对比" data-href-en="/docs/reference/design/cli/slash-commands-references.html" data-href-zh="/docs/reference/design/cli/slash-commands-references.zh.html">Command comparison</a>
+<a class="navlink" href="/docs/reference/design/cli/slash-commands.html" data-title-zh="斜杠命令" data-href-en="/docs/reference/design/cli/slash-commands.html" data-href-zh="/docs/reference/design/cli/slash-commands.zh.html">Slash commands</a>
+<a class="navlink" href="/docs/reference/design/cli/tui-upgrade.html" data-title-zh="会话记录渲染" data-href-en="/docs/reference/design/cli/tui-upgrade.html" data-href-zh="/docs/reference/design/cli/tui-upgrade.zh.html">Transcript rendering</a></details>
+</details>
+<details class="nav-branch nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="模型与外部接入">Models and connections</span><span class="nav-count">46</span></summary>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="请求与模型">Requests and models</span><span class="nav-count">14</span></summary><a class="navlink" href="/docs/reference/design/providers/README.html" data-title-zh="模型服务" data-href-en="/docs/reference/design/providers/README.html" data-href-zh="/docs/reference/design/providers/README.zh.html">Providers</a>
+<a class="navlink" href="/docs/reference/design/providers/models/overview.html" data-title-zh="模型目录" data-href-en="/docs/reference/design/providers/models/overview.html" data-href-zh="/docs/reference/design/providers/models/overview.zh.html">Model catalog</a>
+<a class="navlink" href="/docs/reference/design/providers/request-build.html" data-title-zh="请求构建" data-href-en="/docs/reference/design/providers/request-build.html" data-href-zh="/docs/reference/design/providers/request-build.zh.html">Request construction</a>
+<a class="navlink" href="/docs/reference/design/providers/request-redaction.html" data-title-zh="请求脱敏" data-href-en="/docs/reference/design/providers/request-redaction.html" data-href-zh="/docs/reference/design/providers/request-redaction.zh.html">Request redaction</a>
+<a class="navlink" href="/docs/reference/design/providers/web-search.html" data-title-zh="网页搜索：先用提供商自带的，再用本地工具" data-href-en="/docs/reference/design/providers/web-search.html" data-href-zh="/docs/reference/design/providers/web-search.zh.html">Web search: provider-side first, local tool second</a>
+<a class="navlink" href="/docs/reference/design/providers/routing-overview.html" data-title-zh="路由总览" data-href-en="/docs/reference/design/providers/routing-overview.html" data-href-zh="/docs/reference/design/providers/routing-overview.zh.html">Routing overview</a>
+<a class="navlink" href="/docs/reference/design/providers/custom-openai-compatible-provider.html" data-title-zh="OpenAI 兼容" data-href-en="/docs/reference/design/providers/custom-openai-compatible-provider.html" data-href-zh="/docs/reference/design/providers/custom-openai-compatible-provider.zh.html">OpenAI compatibility</a>
+<a class="navlink" href="/docs/reference/design/providers/models/fast-tier.html" data-title-zh="高速档位" data-href-en="/docs/reference/design/providers/models/fast-tier.html" data-href-zh="/docs/reference/design/providers/models/fast-tier.zh.html">Fast tier</a>
+<a class="navlink" href="/docs/reference/design/providers/models/thinking-effort.html" data-title-zh="推理强度" data-href-en="/docs/reference/design/providers/models/thinking-effort.html" data-href-zh="/docs/reference/design/providers/models/thinking-effort.zh.html">Thinking effort</a>
+<a class="navlink" href="/docs/reference/design/providers/json-schema-structured-output.html" data-title-zh="结构化输出" data-href-en="/docs/reference/design/providers/json-schema-structured-output.html" data-href-zh="/docs/reference/design/providers/json-schema-structured-output.zh.html">Structured output</a>
+<a class="navlink" href="/docs/reference/design/providers/network-proxy.html" data-title-zh="网络代理" data-href-en="/docs/reference/design/providers/network-proxy.html" data-href-zh="/docs/reference/design/providers/network-proxy.zh.html">Network proxy</a>
+<a class="navlink" href="/docs/reference/design/providers/metadata-load-diagnostics.html" data-title-zh="元数据诊断" data-href-en="/docs/reference/design/providers/metadata-load-diagnostics.html" data-href-zh="/docs/reference/design/providers/metadata-load-diagnostics.zh.html">Metadata diagnostics</a>
+<a class="navlink" href="/docs/reference/design/providers/bailian-model-catalog.html" data-title-zh="百炼模型目录" data-href-en="/docs/reference/design/providers/bailian-model-catalog.html" data-href-zh="/docs/reference/design/providers/bailian-model-catalog.zh.html">Bailian catalog</a>
+<a class="navlink" href="/docs/reference/design/usage-metering.html" data-title-zh="用量统计" data-href-en="/docs/reference/design/usage-metering.html" data-href-zh="/docs/reference/design/usage-metering.zh.html">Usage metering</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="账号与认证">Authentication</span><span class="nav-count">7</span></summary><a class="navlink" href="/docs/reference/design/providers/auth/api-key-resolution-unification.html" data-title-zh="凭据解析" data-href-en="/docs/reference/design/providers/auth/api-key-resolution-unification.html" data-href-zh="/docs/reference/design/providers/auth/api-key-resolution-unification.zh.html">Credential resolution</a>
+<a class="navlink" href="/docs/reference/design/providers/auth/credential-connection-unification.html" data-title-zh="凭据连接" data-href-en="/docs/reference/design/providers/auth/credential-connection-unification.html" data-href-zh="/docs/reference/design/providers/auth/credential-connection-unification.zh.html">Credential connections</a>
+<a class="navlink" href="/docs/reference/design/providers/auth/credential-file-hardening.html" data-title-zh="文件凭据" data-href-en="/docs/reference/design/providers/auth/credential-file-hardening.html" data-href-zh="/docs/reference/design/providers/auth/credential-file-hardening.zh.html">File credentials</a>
+<a class="navlink" href="/docs/reference/design/providers/auth/credential-status-redesign.html" data-title-zh="凭据状态" data-href-en="/docs/reference/design/providers/auth/credential-status-redesign.html" data-href-zh="/docs/reference/design/providers/auth/credential-status-redesign.zh.html">Credential status</a>
+<a class="navlink" href="/docs/reference/design/providers/auth/credential-validation-unification.html" data-title-zh="凭据校验" data-href-en="/docs/reference/design/providers/auth/credential-validation-unification.html" data-href-zh="/docs/reference/design/providers/auth/credential-validation-unification.zh.html">Credential validation</a>
+<a class="navlink" href="/docs/reference/design/providers/auth/unified-account-management.html" data-title-zh="账号轮换" data-href-en="/docs/reference/design/providers/auth/unified-account-management.html" data-href-zh="/docs/reference/design/providers/auth/unified-account-management.zh.html">Account rotation</a>
+<a class="navlink" href="/docs/reference/design/providers/auth/unified-auth-storage.html" data-title-zh="凭据存储" data-href-en="/docs/reference/design/providers/auth/unified-auth-storage.html" data-href-zh="/docs/reference/design/providers/auth/unified-auth-storage.zh.html">Credential storage</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="可靠性">Reliability</span><span class="nav-count">7</span></summary><a class="navlink" href="/docs/reference/design/providers/reliability/error-and-timeout-mechanism.html" data-title-zh="错误与超时" data-href-en="/docs/reference/design/providers/reliability/error-and-timeout-mechanism.html" data-href-zh="/docs/reference/design/providers/reliability/error-and-timeout-mechanism.zh.html">Errors and timeouts</a>
+<a class="navlink" href="/docs/reference/design/providers/reliability/error-retry.html" data-title-zh="重试决策" data-href-en="/docs/reference/design/providers/reliability/error-retry.html" data-href-zh="/docs/reference/design/providers/reliability/error-retry.zh.html">Retry decisions</a>
+<a class="navlink" href="/docs/reference/design/providers/reliability/error-taxonomy-propagation.html" data-title-zh="错误传播" data-href-en="/docs/reference/design/providers/reliability/error-taxonomy-propagation.html" data-href-zh="/docs/reference/design/providers/reliability/error-taxonomy-propagation.zh.html">Error propagation</a>
+<a class="navlink" href="/docs/reference/design/providers/reliability/llm-fault-tolerance.html" data-title-zh="容错" data-href-en="/docs/reference/design/providers/reliability/llm-fault-tolerance.html" data-href-zh="/docs/reference/design/providers/reliability/llm-fault-tolerance.zh.html">Fault tolerance</a>
+<a class="navlink" href="/docs/reference/design/providers/record-replay.html" data-title-zh="录制与回放" data-href-en="/docs/reference/design/providers/record-replay.html" data-href-zh="/docs/reference/design/providers/record-replay.zh.html">Recording and replay</a>
+<a class="navlink" href="/docs/reference/design/providers/record-replay.viz.html" data-title-zh="回放图解" data-href-en="/docs/reference/design/providers/record-replay.viz.html" data-href-zh="/docs/reference/design/providers/record-replay.zh.viz.html">Replay diagram</a>
+<a class="navlink" href="/docs/reference/design/providers/responses-reasoning-replay.html" data-title-zh="推理记录回放" data-href-en="/docs/reference/design/providers/responses-reasoning-replay.html" data-href-zh="/docs/reference/design/providers/responses-reasoning-replay.zh.html">Reasoning replay</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="扩展与集成">Extensions and integrations</span><span class="nav-count">14</span></summary><a class="navlink" href="/docs/reference/design/integrations/README.html" data-title-zh="集成" data-href-en="/docs/reference/design/integrations/README.html" data-href-zh="/docs/reference/design/integrations/README.zh.html">Integrations</a>
+<a class="navlink" href="/docs/reference/design/integrations/nooa.html" data-title-zh="直接调用、Agent 类与自动 DAG 上下文" data-href-en="/docs/reference/design/integrations/nooa.html" data-href-zh="/docs/reference/design/integrations/nooa.zh.html">Direct calls, Agent classes and automatic DAG context</a>
+<a class="navlink" href="/docs/reference/design/integrations/editor-integration.html" data-title-zh="编辑器集成" data-href-en="/docs/reference/design/integrations/editor-integration.html" data-href-zh="/docs/reference/design/integrations/editor-integration.zh.html">Editor integration</a>
+<a class="navlink" href="/docs/reference/design/integrations/extension-management.html" data-title-zh="扩展管理" data-href-en="/docs/reference/design/integrations/extension-management.html" data-href-zh="/docs/reference/design/integrations/extension-management.zh.html">Extension management</a>
+<a class="navlink" href="/docs/reference/design/integrations/harness-standard.html" data-title-zh="运行环境规范" data-href-en="/docs/reference/design/integrations/harness-standard.html" data-href-zh="/docs/reference/design/integrations/harness-standard.zh.html">Harness standard</a>
+<a class="navlink" href="/docs/reference/design/integrations/mcp-integration.html" data-title-zh="MCP 工具" data-href-en="/docs/reference/design/integrations/mcp-integration.html" data-href-zh="/docs/reference/design/integrations/mcp-integration.zh.html">MCP tools</a>
+<a class="navlink" href="/docs/reference/design/integrations/mcp-server.html" data-title-zh="MCP 服务端" data-href-en="/docs/reference/design/integrations/mcp-server.html" data-href-zh="/docs/reference/design/integrations/mcp-server.zh.html">MCP server</a>
+<a class="navlink" href="/docs/reference/design/integrations/skills-and-plugins.html" data-title-zh="技能与插件" data-href-en="/docs/reference/design/integrations/skills-and-plugins.html" data-href-zh="/docs/reference/design/integrations/skills-and-plugins.zh.html">Skills and plugins</a>
+<a class="navlink" href="/docs/reference/design/integrations/plugin-runtime.html" data-title-zh="插件运行时" data-href-en="/docs/reference/design/integrations/plugin-runtime.html" data-href-zh="/docs/reference/design/integrations/plugin-runtime.zh.html">Plugin Runtime</a>
+<a class="navlink" href="/docs/reference/design/integrations/web-use.html" data-title-zh="网页自动化" data-href-en="/docs/reference/design/integrations/web-use.html" data-href-zh="/docs/reference/design/integrations/web-use.zh.html">Web automation</a>
+<a class="navlink" href="/docs/reference/design/integrations/computer-and-browser-use.html" data-title-zh="操控电脑与浏览器" data-href-en="/docs/reference/design/integrations/computer-and-browser-use.html" data-href-zh="/docs/reference/design/integrations/computer-and-browser-use.zh.html">Computer and browser use</a>
+<a class="navlink" href="/docs/reference/design/extension-gating/README.html" data-title-zh="扩展控制" data-href-en="/docs/reference/design/extension-gating/README.html" data-href-zh="/docs/reference/design/extension-gating/README.zh.html">Extension controls</a>
+<a class="navlink" href="/docs/reference/design/extension-gating/future-work.html" data-title-zh="后续工作" data-href-en="/docs/reference/design/extension-gating/future-work.html" data-href-zh="/docs/reference/design/extension-gating/future-work.zh.html">Future work</a>
+<a class="navlink" href="/docs/reference/design/extension-gating/reference-comparison.html" data-title-zh="参考对比" data-href-en="/docs/reference/design/extension-gating/reference-comparison.html" data-href-zh="/docs/reference/design/extension-gating/reference-comparison.zh.html">Reference comparison</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="消息渠道">Channels</span><span class="nav-count">4</span></summary><a class="navlink" href="/docs/reference/design/channels/README.html" data-title-zh="通信渠道" data-href-en="/docs/reference/design/channels/README.html" data-href-zh="/docs/reference/design/channels/README.zh.html">Channels</a>
+<a class="navlink" href="/docs/reference/design/channels/audit.html" data-title-zh="需求约束" data-href-en="/docs/reference/design/channels/audit.html" data-href-zh="/docs/reference/design/channels/audit.zh.html">Requirements</a>
+<a class="navlink" href="/docs/reference/design/channels/design.html" data-title-zh="架构" data-href-en="/docs/reference/design/channels/design.html" data-href-zh="/docs/reference/design/channels/design.zh.html">Architecture</a>
+<a class="navlink" href="/docs/reference/design/channels/chat-bots.html" data-title-zh="渠道上的聊天机器人行为" data-href-en="/docs/reference/design/channels/chat-bots.html" data-href-zh="/docs/reference/design/channels/chat-bots.zh.html">Chat-Bot Behavior on Channels</a></details>
+</details>
+<details class="nav-branch nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="安全与工程">Security and engineering</span><span class="nav-count">18</span></summary>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="安全与权限">Security and permissions</span><span class="nav-count">4</span></summary><a class="navlink" href="/docs/reference/design/runtime/security/sandbox-architecture.html" data-title-zh="权限与沙箱" data-href-en="/docs/reference/design/runtime/security/sandbox-architecture.html" data-href-zh="/docs/reference/design/runtime/security/sandbox-architecture.zh.html">Authority and sandbox</a>
+<a class="navlink" href="/docs/reference/design/runtime/security/system-access.html" data-title-zh="系统访问" data-href-en="/docs/reference/design/runtime/security/system-access.html" data-href-zh="/docs/reference/design/runtime/security/system-access.zh.html">System access</a>
+<a class="navlink" href="/docs/reference/design/runtime/security/ssrf-protection.html" data-title-zh="SSRF 防护" data-href-en="/docs/reference/design/runtime/security/ssrf-protection.html" data-href-zh="/docs/reference/design/runtime/security/ssrf-protection.zh.html">SSRF protection</a>
+<a class="navlink" href="/docs/reference/design/security/dependency-security.html" data-title-zh="依赖安全" data-href-en="/docs/reference/design/security/dependency-security.html" data-href-zh="/docs/reference/design/security/dependency-security.zh.html">Dependency security</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="安装与分发">Distribution</span><span class="nav-count">6</span></summary><a class="navlink" href="/docs/reference/design/distribution/installation-packaging.html" data-title-zh="打包与发布" data-href-en="/docs/reference/design/distribution/installation-packaging.html" data-href-zh="/docs/reference/design/distribution/installation-packaging.zh.html">Packaging and releases</a>
+<a class="navlink" href="/docs/reference/design/distribution/automatic-updates.html" data-title-zh="自动更新" data-href-en="/docs/reference/design/distribution/automatic-updates.html" data-href-zh="/docs/reference/design/distribution/automatic-updates.zh.html">Automatic updates</a>
+<a class="navlink" href="/docs/reference/design/distribution/dev-instance.html" data-title-zh="稳定版与开发版实例" data-href-en="/docs/reference/design/distribution/dev-instance.html" data-href-zh="/docs/reference/design/distribution/dev-instance.zh.html">Stable and development instances</a>
+<a class="navlink" href="/docs/reference/design/distribution/github-publishing.html" data-title-zh="向 GitHub 发布源码" data-href-en="/docs/reference/design/distribution/github-publishing.html" data-href-zh="/docs/reference/design/distribution/github-publishing.zh.html">Publishing source to GitHub</a>
+<a class="navlink" href="/docs/reference/design/distribution/developer-id.html" data-title-zh="Developer ID" data-href-en="/docs/reference/design/distribution/developer-id.html" data-href-zh="/docs/reference/design/distribution/developer-id.zh.html">Developer ID</a>
+<a class="navlink" href="/docs/reference/design/distribution/windows-support.html" data-title-zh="Windows 支持" data-href-en="/docs/reference/design/distribution/windows-support.html" data-href-zh="/docs/reference/design/distribution/windows-support.zh.html">Windows support</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="测试与错误处理">Testing and errors</span><span class="nav-count">3</span></summary><a class="navlink" href="/docs/reference/design/testing/test-system.html" data-title-zh="测试系统" data-href-en="/docs/reference/design/testing/test-system.html" data-href-zh="/docs/reference/design/testing/test-system.zh.html">Test system</a>
+<a class="navlink" href="/docs/reference/design/testing/windows-ci.html" data-title-zh="Windows CI" data-href-en="/docs/reference/design/testing/windows-ci.html" data-href-zh="/docs/reference/design/testing/windows-ci.zh.html">Windows CI</a>
+<a class="navlink" href="/docs/reference/design/error-handling.html" data-title-zh="错误处理" data-href-en="/docs/reference/design/error-handling.html" data-href-zh="/docs/reference/design/error-handling.zh.html">Error handling</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="文档与网站">Documentation and website</span><span class="nav-count">5</span></summary><a class="navlink" href="/docs/reference/design/docs-site.html" data-title-zh="文档站" data-href-en="/docs/reference/design/docs-site.html" data-href-zh="/docs/reference/design/docs-site.zh.html">Documentation site</a>
+<a class="navlink" href="/docs/reference/design/site-discoverability-performance.html" data-title-zh="站点检索" data-href-en="/docs/reference/design/site-discoverability-performance.html" data-href-zh="/docs/reference/design/site-discoverability-performance.zh.html">Site discovery</a>
+<a class="navlink" href="/docs/reference/design/site-agent-readable-docs.html" data-title-zh="Agent 文档" data-href-en="/docs/reference/design/site-agent-readable-docs.html" data-href-zh="/docs/reference/design/site-agent-readable-docs.zh.html">Agent-readable docs</a>
+<a class="navlink" href="/docs/reference/design/site-indexnow-discovery.html" data-title-zh="IndexNow 检索" data-href-en="/docs/reference/design/site-indexnow-discovery.html" data-href-zh="/docs/reference/design/site-indexnow-discovery.zh.html">IndexNow discovery</a>
+<a class="navlink" href="/docs/reference/design/community-discoverability.html" data-title-zh="社区检索" data-href-en="/docs/reference/design/community-discoverability.html" data-href-zh="/docs/reference/design/community-discoverability.zh.html">Community discovery</a></details>
+</details>
+<details class="nav-branch nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="补充材料">Supporting material</span><span class="nav-count">22</span></summary>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="交互原型">Prototypes</span><span class="nav-count">6</span></summary><a class="navlink" href="/docs/reference/design/ui/visual-system/layout-density-prototype.html" data-title-zh="密度原型" data-href-en="/docs/reference/design/ui/visual-system/layout-density-prototype.html" data-href-zh="/docs/reference/design/ui/visual-system/layout-density-prototype.zh.html">Density prototype</a>
+<a class="navlink" href="/docs/reference/design/ui/composer/composer-interaction-prototype.html" data-title-zh="输入框原型" data-href-en="/docs/reference/design/ui/composer/composer-interaction-prototype.html" data-href-zh="/docs/reference/design/ui/composer/composer-interaction-prototype.zh.html">Composer prototype</a>
+<a class="navlink" href="/docs/reference/design/ui/workspace/project-workspace-prototype.html" data-title-zh="工作区原型" data-href-en="/docs/reference/design/ui/workspace/project-workspace-prototype.html" data-href-zh="/docs/reference/design/ui/workspace/project-workspace-prototype.zh.html">Workspace prototype</a>
+<a class="navlink" href="/docs/reference/design/ui/sidebar/sidebar-hierarchy-prototype.html" data-title-zh="侧栏原型" data-href-en="/docs/reference/design/ui/sidebar/sidebar-hierarchy-prototype.html" data-href-zh="/docs/reference/design/ui/sidebar/sidebar-hierarchy-prototype.zh.html">Sidebar prototype</a>
+<a class="navlink" href="/docs/reference/design/ui/sidebar/sidebar-luma-prototype.html" data-title-zh="Sidebar Luma draft" data-href-en="/docs/reference/design/ui/sidebar/sidebar-luma-prototype.html" data-href-zh="/docs/reference/design/ui/sidebar/sidebar-luma-prototype.zh.html">Sidebar Luma prototype</a>
+<a class="navlink" href="/docs/reference/design/runtime/dag/live-layout.html" data-title-zh="实时布局" data-href-en="/docs/reference/design/runtime/dag/live-layout.html" data-href-zh="/docs/reference/design/runtime/dag/live-layout.zh.html">Live layout</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="实施记录">Implementation records</span><span class="nav-count">13</span></summary><a class="navlink" href="/docs/reference/design/runtime/execution/p3-three-surface-sync.html" data-title-zh="界面同步" data-href-en="/docs/reference/design/runtime/execution/p3-three-surface-sync.html" data-href-zh="/docs/reference/design/runtime/execution/p3-three-surface-sync.zh.html">Interface synchronization</a>
+<a class="navlink" href="/docs/reference/design/repository-structure-implementation.html" data-title-zh="仓库迁移" data-href-en="/docs/reference/design/repository-structure-implementation.html" data-href-zh="/docs/reference/design/repository-structure-implementation.zh.html">Repository migration</a>
+<a class="navlink" href="/docs/reference/design/site-indexnow-implementation.html" data-title-zh="IndexNow 实施" data-href-en="/docs/reference/design/site-indexnow-implementation.html" data-href-zh="/docs/reference/design/site-indexnow-implementation.zh.html">IndexNow delivery</a>
+<a class="navlink" href="/docs/reference/design/documentation-gaps.html" data-title-zh="文档差异" data-href-en="/docs/reference/design/documentation-gaps.html" data-href-zh="/docs/reference/design/documentation-gaps.zh.html">Documentation gaps</a>
+<a class="navlink" href="/docs/reference/design/engineering-backlog.html" data-title-zh="工程待办" data-href-en="/docs/reference/design/engineering-backlog.html" data-href-zh="/docs/reference/design/engineering-backlog.zh.html">Engineering backlog</a>
+<a class="navlink" href="/docs/reference/design/ui/visual-system/unification-work.html" data-title-zh="界面统一" data-href-en="/docs/reference/design/ui/visual-system/unification-work.html" data-href-zh="/docs/reference/design/ui/visual-system/unification-work.zh.html">UI unification</a>
+<a class="navlink" href="/docs/reference/design/ui/resources/resource-panel-preview-plan.html" data-title-zh="资源预览" data-href-en="/docs/reference/design/ui/resources/resource-panel-preview-plan.html" data-href-zh="/docs/reference/design/ui/resources/resource-panel-preview-plan.zh.html">Resource preview</a>
+<a class="navlink" href="/docs/reference/design/distribution/implementation-plan.html" data-title-zh="分发计划" data-href-en="/docs/reference/design/distribution/implementation-plan.html" data-href-zh="/docs/reference/design/distribution/implementation-plan.zh.html">Distribution plan</a>
+<a class="navlink" href="/docs/reference/design/extension-gating/implementation.html" data-title-zh="实现对应关系" data-href-en="/docs/reference/design/extension-gating/implementation.html" data-href-zh="/docs/reference/design/extension-gating/implementation.zh.html">Implementation map</a>
+<a class="navlink" href="/docs/reference/design/plans/credential-connection-unification.html" data-title-zh="凭据迁移" data-href-en="/docs/reference/design/plans/credential-connection-unification.html" data-href-zh="/docs/reference/design/plans/credential-connection-unification.zh.html">Credential migration</a>
+<a class="navlink" href="/docs/reference/design/plans/mcp-server-implementation.html" data-title-zh="MCP 实施计划" data-href-en="/docs/reference/design/plans/mcp-server-implementation.html" data-href-zh="/docs/reference/design/plans/mcp-server-implementation.zh.html">MCP implementation</a>
+<a class="navlink" href="/docs/reference/design/plans/cache-control-passthrough.html" data-title-zh="缓存控制" data-href-en="/docs/reference/design/plans/cache-control-passthrough.html" data-href-zh="/docs/reference/design/plans/cache-control-passthrough.zh.html">Cache control</a>
+<a class="navlink" href="/docs/reference/design/plans/proactive-implementation.html" data-title-zh="主动执行实施计划" data-href-en="/docs/reference/design/plans/proactive-implementation.html" data-href-zh="/docs/reference/design/plans/proactive-implementation.zh.html">Proactive implementation</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="研究材料">Research</span><span class="nav-count">3</span></summary><a class="navlink" href="/docs/reference/design/proactive/_research_archive/evaluation.html" data-title-zh="评估" data-href-en="/docs/reference/design/proactive/_research_archive/evaluation.html" data-href-zh="/docs/reference/design/proactive/_research_archive/evaluation.zh.html">Evaluation</a>
+<a class="navlink" href="/docs/reference/design/proactive/_research_archive/replay.html" data-title-zh="策略回放" data-href-en="/docs/reference/design/proactive/_research_archive/replay.html" data-href-zh="/docs/reference/design/proactive/_research_archive/replay.zh.html">Policy replay</a>
+<a class="navlink" href="/docs/reference/design/proactive/_research_archive/threat-model.html" data-title-zh="威胁模型" data-href-en="/docs/reference/design/proactive/_research_archive/threat-model.html" data-href-zh="/docs/reference/design/proactive/_research_archive/threat-model.zh.html">Threat model</a></details>
+</details>
+<details class="nav-branch nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="待分类">Uncategorized</span><span class="nav-count">13</span></summary>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="概览">Overview</span><span class="nav-count">1</span></summary><a class="navlink" href="/docs/reference/design/repository-integration.html" data-title-zh="仓库分支整合" data-href-en="/docs/reference/design/repository-integration.html" data-href-zh="/docs/reference/design/repository-integration.zh.html">Repository integration</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="模型服务">Providers</span><span class="nav-count">2</span></summary><a class="navlink" href="/docs/reference/design/providers/anthropic-api-auth.html" data-title-zh="Anthropic API 认证" data-href-en="/docs/reference/design/providers/anthropic-api-auth.html" data-href-zh="/docs/reference/design/providers/anthropic-api-auth.zh.html">Anthropic API authentication</a>
+<a class="navlink" href="/docs/reference/design/providers/local-models.html" data-title-zh="本地模型 Provider" data-href-en="/docs/reference/design/providers/local-models.html" data-href-zh="/docs/reference/design/providers/local-models.zh.html">Local model providers</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title">Execution</span><span class="nav-count">2</span></summary><a class="navlink" href="/docs/reference/design/runtime/execution/tool-name-resolution.html" data-title-zh="工具名解析" data-href-en="/docs/reference/design/runtime/execution/tool-name-resolution.html" data-href-zh="/docs/reference/design/runtime/execution/tool-name-resolution.zh.html">Tool name resolution</a>
+<a class="navlink" href="/docs/reference/design/runtime/execution/unified-agent.html" data-title-zh="统一 Agent 执行" data-href-en="/docs/reference/design/runtime/execution/unified-agent.html" data-href-zh="/docs/reference/design/runtime/execution/unified-agent.zh.html">Unified Agent execution</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="阅读指南">Reading guide</span><span class="nav-count">1</span></summary><a class="navlink" href="/docs/reference/design/runtime/session/environments.html" data-title-zh="运行环境" data-href-en="/docs/reference/design/runtime/session/environments.html" data-href-zh="/docs/reference/design/runtime/session/environments.zh.html">Environments</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title">Chat</span><span class="nav-count">2</span></summary><a class="navlink" href="/docs/reference/design/ui/chat/chat-compose.html" data-title-zh="聊天引用与消息编辑" data-href-en="/docs/reference/design/ui/chat/chat-compose.html" data-href-zh="/docs/reference/design/ui/chat/chat-compose.zh.html">Chat quotes and message editing</a>
+<a class="navlink" href="/docs/reference/design/ui/chat/chat-recovery-copy.html" data-title-zh="历史渲染与对话链接" data-href-en="/docs/reference/design/ui/chat/chat-recovery-copy.html" data-href-zh="/docs/reference/design/ui/chat/chat-recovery-copy.zh.html">History rendering and conversation links</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title">Composer</span><span class="nav-count">3</span></summary><a class="navlink" href="/docs/reference/design/ui/composer/effort-picker.html" data-title-zh="思考力度设置" data-href-en="/docs/reference/design/ui/composer/effort-picker.html" data-href-zh="/docs/reference/design/ui/composer/effort-picker.zh.html">Effort picker</a>
+<a class="navlink" href="/docs/reference/design/ui/composer/git-folder-pills.html" data-title-zh="文件夹 Git 胶囊" data-href-en="/docs/reference/design/ui/composer/git-folder-pills.html" data-href-zh="/docs/reference/design/ui/composer/git-folder-pills.zh.html">Git folder pills</a>
+<a class="navlink" href="/docs/reference/design/ui/composer/hover-tips.html" data-title-zh="输入框区域的悬停提示" data-href-en="/docs/reference/design/ui/composer/hover-tips.html" data-href-zh="/docs/reference/design/ui/composer/hover-tips.zh.html">Hover tips in the composer</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title">Turn Lifecycle</span><span class="nav-count">1</span></summary><a class="navlink" href="/docs/reference/design/ui/turn-lifecycle/conversation-lifecycle.html" data-title-zh="对话生命周期与响应性" data-href-en="/docs/reference/design/ui/turn-lifecycle/conversation-lifecycle.html" data-href-zh="/docs/reference/design/ui/turn-lifecycle/conversation-lifecycle.zh.html">Conversation lifecycle and responsiveness</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title">Visual System</span><span class="nav-count">1</span></summary><a class="navlink" href="/docs/reference/design/ui/visual-system/icons.html" data-title-zh="图标体系" data-href-en="/docs/reference/design/ui/visual-system/icons.html" data-href-zh="/docs/reference/design/ui/visual-system/icons.zh.html">Icon system</a></details>
+</details></div>
+  </nav>
+  <main class="content"><button class="fs-toggle" aria-label="Fullscreen" title="Fullscreen (Esc to exit)"><svg class="ic-expand" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.2 2H2v4.2M9.8 2H14v4.2M6.2 14H2V9.8M9.8 14H14V9.8"/></svg><svg class="ic-collapse" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6.2h4.2V2M14 6.2H9.8V2M2 9.8h4.2V14M14 9.8H9.8V14"/></svg></button><article><nav class="breadcrumb"><span class="bc-seg" data-title-zh="设计">Design</span> <span class='bc-sep'>›</span> <span class="bc-seg" data-title-zh="上下文与记忆">Context and memory</span> <span class='bc-sep'>›</span> <span class="bc-seg" data-title-zh="记忆">Memory</span> <span class='bc-sep'>›</span> <span class="bc-seg bc-current" data-title-zh="写入游标">Write cursor</span></nav><h1 id="knowing-which-turns-memory-has-written">Knowing which turns memory has written<a class="header-anchor" href="#knowing-which-turns-memory-has-written">#</a></h1>
+<p>A session is a DAG, not a line. Re-asking an earlier message, retrying a
+reply and spawning a sub-agent all fork the chain, so one session holds
+several branches that share a prefix and diverge after it
+(<a href="/docs/reference/design/runtime/dag/overview.html"><code>../runtime/dag/overview.md</code></a> §4).
+Everything said on a branch belongs in memory, and nothing said on the
+shared prefix belongs in memory twice. This note is about the one fact
+that decides both: which turns memory has already written.</p>
+<p>Four layers, answering four different questions. Layer 1 records the
+pre-migration implementation and why it was wrong. Layer 2 is what the reference frameworks
+under <code>references/</code> do, including the ones that do nothing. Layer 3 is
+the change to make next, down to the files and the size of the diff.
+Layer 4 is the shape this would have if the current implementation were
+not in the way, and why none of it is next.</p>
+<p>The visual companion is <a href="/docs/reference/design/memory/written-marker.viz.html"><code>written-marker.html</code></a>;
+the memory subsystem around it is <a href="/docs/reference/design/memory/overview.html"><code>overview.md</code></a>.</p>
+<hr />
+<h2 id="layer-1-what-the-migration-replaced">Layer 1 — What the migration replaced<a class="header-anchor" href="#layer-1-what-the-migration-replaced">#</a></h2>
+<p>This layer is retained as the problem statement. The appendix records the
+current implementation.</p>
+<h3 id="one-number-per-session">One number per session<a class="header-anchor" href="#one-number-per-session">#</a></h3>
+<p>The record of what has been written is a position cursor, kept outside
+the session store, in the memory workspace's runtime file:</p>
+<pre><code>&lt;state&gt;/memory/.scriptorium/runtime.json
+    {&quot;cursors&quot;: {&quot;&lt;session-id&gt;&quot;: {&quot;message_id&quot;: &quot;a3f1c2&quot;, &quot;ordinal&quot;: 9}}}
+</code></pre>
+<p><code>RuntimeState.cursors</code> in
+<code>openprogram/state/memory/runtime/state.py</code> holds it. The key is
+<code>thread_id</code>, which <code>memory/writing.py</code> fills with the session id, so
+a session with six branches has one cursor between them.</p>
+<p>Three functions are the whole mechanism:</p>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>File</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>_records</code></td>
+<td><code>memory/writing.py</code></td>
+<td>Turns the branch into <code>SourceRecord</code>s. <code>ordinal=index</code>, the row's position in the list it was handed, skipped rows included</td>
+</tr>
+<tr>
+<td><code>OnlineMemoryRuntime.pending</code></td>
+<td><code>memory/runtime/online.py</code></td>
+<td>Keeps a record only when <code>record.ordinal &gt; stored ordinal</code></td>
+</tr>
+<tr>
+<td><code>RuntimeState.advance_cursor</code></td>
+<td><code>memory/runtime/state.py</code></td>
+<td>Stores the batch's last ordinal, after the write transaction installs</td>
+</tr>
+</tbody>
+</table>
+<p>The per-turn call reaches them through
+<code>dispatcher/__init__.py:_memory_write</code> → <code>LocalMemoryBackend.write</code>
+→ <code>writing.write</code> → <code>write_session</code>. The session-boundary call reaches
+them through <code>memory/session_watcher.py:_process_session</code>. Both ask
+<code>SessionStore.get_branch(session_id)</code> for one branch: the one ending at
+the session's head.</p>
+<h3 id="where-the-number-comes-from">Where the number comes from<a class="header-anchor" href="#where-the-number-comes-from">#</a></h3>
+<p>An ordinal is not a property of a message. <code>get_branch</code> walks
+<code>predecessor</code> edges back from a head and hands back a list; the ordinal
+is what counting the rows of that list produces
+(<code>_records</code> does <code>for index, message in enumerate(messages)</code>). It comes
+into existence at the moment the chain is flattened, it describes the
+flattening, and it is gone again when the list is. Before the walk there
+is no number. After it, the number and the message's own id have nothing
+to do with each other.</p>
+<p>Two things follow. The same message reached along two lines gets two
+numbers, and two different messages at the same depth on two lines get
+the same one: the trunk's fourth message and a branch's fourth message
+are not the same message and are both &quot;four&quot;. And one line's numbering
+is not stable between two reads either, because <code>get_branch</code> filters out
+the turns <code>rewind</code> marked (<code>session_store.py</code> drops any node whose
+metadata carries <code>rewound</code>) and compaction splices a summary node in at
+the position of the first turn it covers, and either shifts every row
+after it.</p>
+<h3 id="what-that-costs-measured">What that costs, measured<a class="header-anchor" href="#what-that-costs-measured">#</a></h3>
+<p>A cursor holding &quot;written through nine&quot; reads a branch forked at the
+third message, whose turns number from zero, as entirely written and
+offers none of it. A branch that runs past nine gives up only its tail.
+Measured on a session whose stored ordinal was nine:</p>
+<table>
+<thead>
+<tr>
+<th>Branch forked at m3</th>
+<th>Turns the branch holds</th>
+<th>Turns offered to the writer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>short</td>
+<td>5</td>
+<td><strong>0</strong></td>
+</tr>
+<tr>
+<td>long</td>
+<td>11</td>
+<td><strong>2</strong> (the last two)</td>
+</tr>
+</tbody>
+</table>
+<p>The second row is the worse one. It writes a fragment starting in the
+middle of a conversation, records the whole branch as written, and
+returns success.</p>
+<p>The two counts are measurements, not arithmetic. The ordinal axis counts
+every row in the branch, tool rows and runtime-scheduled turns included,
+because <code>_records</code> enumerates the list before it filters it. So how many
+rows cross the stored ordinal, and how many recorded turns that leaves,
+are two different numbers.</p>
+<h3 id="the-shape-refuses-the-correction">The shape refuses the correction<a class="header-anchor" href="#the-shape-refuses-the-correction">#</a></h3>
+<p><code>advance_cursor</code> raises <code>cursor cannot move backwards</code> when a new
+ordinal is below the stored one, on the reasoning that a cursor only
+ever moves forward. Moving backwards is exactly what a branch forked
+from an earlier message needs, so a caller that worked out the right
+answer could not record it. That is not a missing check. A monotonic
+counter and a branching conversation are different shapes, and one
+cannot be repaired into the other.</p>
+<h3 id="the-quieter-failure-is-the-worse-one">The quieter failure is the worse one<a class="header-anchor" href="#the-quieter-failure-is-the-worse-one">#</a></h3>
+<p>A branch read as entirely written produces nothing, and nothing at least
+looks like nothing. A branch that gives up only its tail produces a
+write that succeeds: memory gains a fragment beginning mid-conversation,
+the whole branch is recorded as done, and no code path reports anything.
+Where the bookkeeping moves last, a failure defaults to doing the work
+again. Here it defaults to skipping the work quietly and keeping a
+decapitated record of it.</p>
+<hr />
+<h2 id="layer-2-what-the-reference-frameworks-do">Layer 2 — What the reference frameworks do<a class="header-anchor" href="#layer-2-what-the-reference-frameworks-do">#</a></h2>
+<p>Nine directories sit under <code>references/</code>. <code>claude-code/</code> holds five files
+of one tool implementation and no session code, so eight frameworks carry
+an answer. Four of the eight have long-term memory at all; the other four
+are recorded here because not having it is a design choice too, and
+because their conversation shape is what makes the question easy or hard.</p>
+<table>
+<thead>
+<tr>
+<th>Framework</th>
+<th>Conversation shape</th>
+<th>Long-term memory</th>
+<th>What decides which turns</th>
+<th>Where that record lives</th>
+<th>What a fork does to it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>claude-code-leaked</strong></td>
+<td>DAG. <code>parentUuid</code> per entry, one append-only JSONL per session</td>
+<td>Yes. <code>extractMemories</code> per query loop, <code>autoDream</code> across sessions, <code>memdir</code> for retrieval</td>
+<td>A message-UUID cursor, <code>lastMemoryMessageUuid</code></td>
+<td>In process only. A closure variable, never written to disk</td>
+<td><code>/branch</code> copies to a new file keeping the original UUIDs, so the cursor still resolves. <code>/rewind</code> can slice the cursor's message away, and the counter then counts every message rather than returning zero</td>
+</tr>
+<tr>
+<td><strong>codex-cli</strong></td>
+<td>Straight line per rollout <code>.jsonl</code>. A fork is always a new thread and a new file, linked by a <code>history_base</code> pointer</td>
+<td>Yes. Two phases in <code>codex-rs/memories</code>: per-rollout extraction, then global consolidation</td>
+<td>A thread-keyed row: <code>jobs.input_watermark</code> and <code>last_success_watermark</code>, with <code>ownership_token</code> and <code>lease_until</code></td>
+<td>A separate SQLite file, <code>memories_1.sqlite</code>, keyed by <code>thread_id</code></td>
+<td>A fork is a new <code>thread_id</code>, so there is no row, so the thread is extracted from scratch. Nothing joins against the lineage, so the shared prefix is extracted a second time</td>
+</tr>
+<tr>
+<td><strong>openclaw</strong></td>
+<td>DAG. <code>id</code>/<code>parentId</code> per entry, one JSONL per session, with a <code>readBranch</code> walk available</td>
+<td>Yes. <code>dreaming-phases</code> ingests, <code>short-term-promotion</code> promotes into <code>MEMORY.md</code></td>
+<td>A line-offset cursor, <code>lastContentLine</code>, per session file, plus a <code>seenMessages</code> hash set</td>
+<td><code>memory/.dreams/session-ingestion.json</code>. <code>promotedAt</code> exists, on the derived candidate in <code>short-term-recall.json</code></td>
+<td>A fork writes a new file, which starts at line 0, so the copied prefix is ingested again. An in-place retry changes the file's hash and forces a rescan from line 0</td>
+</tr>
+<tr>
+<td><strong>hermes-agent</strong></td>
+<td>Straight line per session in SQLite. Branching is at session granularity through <code>parent_session_id</code>, and <code>/branch</code> copies every message into a new session row</td>
+<td>Yes. A built-in <code>MEMORY.md</code>/<code>USER.md</code> tool, plus eight pluggable providers behind <code>MemoryProvider</code></td>
+<td>Nothing, for memory: <code>sync_all</code> fires once per completed turn, so program order is the cursor. The SQLite flush keeps its own index, <code>_last_flushed_db_idx</code></td>
+<td>Outside the transcript, in process. One plugin keeps a <code>_synced</code> flag per message in its own cache</td>
+<td>Every fork site re-baselines <code>_last_flushed_db_idx</code> by hand. <code>on_session_switch</code> is offered to the providers, and seven of the eight do not implement it</td>
+</tr>
+<tr>
+<td><strong>pi-mono</strong></td>
+<td>DAG. <code>id</code>/<code>parentId</code> per entry, one JSONL per session. The storage interface has no way to change an entry: annotating appends a <code>label</code> entry pointing at the target, moving the active leaf appends a <code>leaf</code> entry pointing at it</td>
+<td>No</td>
+<td>Not applicable. Its branch summaries walk the tree instead, at navigation time, storing nothing</td>
+<td>Not applicable</td>
+<td>Nothing can go stale, because the walk is recomputed on every navigation</td>
+</tr>
+<tr>
+<td><strong>opencode</strong></td>
+<td>Straight line. SQLite, one <code>seq</code> per session</td>
+<td>No</td>
+<td>Not applicable</td>
+<td>Not applicable</td>
+<td><code>revert</code> marks a point, and the next prompt hard-deletes every message at or after it. No older branch survives</td>
+</tr>
+<tr>
+<td><strong>pi-ai</strong></td>
+<td>None. A stateless streaming client; the caller supplies the whole message array on every call</td>
+<td>No</td>
+<td>Not applicable</td>
+<td>Not applicable</td>
+<td>No branch concept</td>
+</tr>
+<tr>
+<td><strong>weclaw</strong></td>
+<td>None of its own. The CLI and ACP backends cache a downstream session id; the HTTP backend keeps the last twenty turns in process</td>
+<td>No</td>
+<td>Not applicable</td>
+<td>Not applicable</td>
+<td>No fork concept</td>
+</tr>
+</tbody>
+</table>
+<h3 id="nobody-puts-the-record-on-the-turn">Nobody puts the record on the turn<a class="header-anchor" href="#nobody-puts-the-record-on-the-turn">#</a></h3>
+<p>Of the four with memory, none writes &quot;memory has taken this&quot; onto a
+conversation entry. openclaw comes closest and stops short: <code>promotedAt</code>
+is a real processed-flag, but it lives on a derived candidate record in
+<code>short-term-recall.json</code>, not on the transcript line the candidate came
+from. The other three keep the record in a closure variable, in a
+separate SQLite file, and in program order respectively.</p>
+<p>Three of the eight store a conversation that branches per message
+(claude-code-leaked, openclaw, pi-mono). Three keep it in a straight
+line, branching only by starting a new thread, session or file
+(codex-cli, hermes-agent, opencode). Two hold no conversation of their
+own (pi-ai, weclaw). A straight line makes a position an identity,
+because there is only ever one list, so most of them never meet this
+question — and of the three that do store a DAG, the one with the most
+developed memory pipeline reads its transcript file flat, top to bottom,
+with no parent walk at all.</p>
+<h3 id="the-two-shapes-that-are-actually-in-use">The two shapes that are actually in use<a class="header-anchor" href="#the-two-shapes-that-are-actually-in-use">#</a></h3>
+<p><strong>Coarsen the unit until branching stops mattering.</strong> codex-cli keys its
+extraction jobs by thread, so a fork is simply a new key with no row.
+openclaw keys ingestion by session file, so a fork is a new file starting
+at line 0. hermes-agent fires once per completed turn and keeps no cursor
+for memory at all, which is the same move taken to its limit: the unit is
+one turn and the bookkeeping is program order.</p>
+<p><strong>Derive the delta from the tree.</strong> pi-mono computes what a branch
+summary covers at navigation time: walk from the leaf being abandoned up
+to its common ancestor with the new leaf, collect what lies between,
+store nothing. Its storage supports this because it is strictly
+append-only — there is no call that changes a stored entry, so a cursor
+move is itself an appended <code>leaf</code> entry and an annotation is an appended
+<code>label</code> entry.</p>
+<h3 id="everyone-elses-fork-failure-is-duplication-ours-is-omission">Everyone else's fork failure is duplication. Ours is omission<a class="header-anchor" href="#everyone-elses-fork-failure-is-duplication-ours-is-omission">#</a></h3>
+<p>The two file-keyed designs both pay at a fork, and both pay the same way.
+codex-cli extracts a forked thread from scratch, with no join against
+<code>history_base</code>, so the prefix it inherited is extracted twice. openclaw's
+fork copies the active branch into a new file whose cursor starts at
+line 0, so the copied prefix is ingested twice; its in-place retry path
+changes the file hash and rescans the whole file from line 0 as well.
+Neither loses a turn. Both re-read turns they have already read.</p>
+<p>Our position cursor makes the opposite error, and it is the worse one.
+Duplication is recoverable: the nightly reorganize merges paragraphs that
+say the same thing, so a turn written twice costs a model call and
+corrects itself. Omission is not recoverable, because nothing ever comes
+back for those turns.</p>
+<h3 id="what-is-worth-taking">What is worth taking<a class="header-anchor" href="#what-is-worth-taking">#</a></h3>
+<p><strong>Reprocess rather than go silent.</strong> claude-code-leaked's cursor counter
+carries the comment that returning zero <em>&quot;would permanently disable
+extraction for the rest of the session&quot;</em>, and falls back to counting
+every message when the cursor's UUID is gone. That it is a decision
+rather than a default is visible in the same codebase: the sibling
+counter beside it has no such fallback and silently stays at zero. Layer
+3 applies this in two places, to a lost mark and to an unreadable
+<code>runtime.json</code>.</p>
+<p><strong>Appending a marker that points at the node is a real alternative to
+changing the node.</strong> pi-mono demonstrates that a whole session store can
+work this way. Layer 3 turns it down for a stated reason, not for lack of
+a precedent.</p>
+<p>Nothing else transfers. Both working shapes above depend on the unit
+being a whole file or a whole thread, and adopting either means giving up
+writing memory from a live session as it runs.</p>
+<hr />
+<h2 id="layer-3-current-implementation-a-mark-on-the-node">Layer 3 — Current implementation: a mark on the node<a class="header-anchor" href="#layer-3-current-implementation-a-mark-on-the-node">#</a></h2>
+<p>The boundary is keyed on what identifies a message: its node. The record
+of &quot;memory has written this turn&quot; is stored on that turn.</p>
+<h3 id="where-the-mark-goes">Where the mark goes<a class="header-anchor" href="#where-the-mark-goes">#</a></h3>
+<p>On the node, in <code>metadata</code>, under a key naming the memory provider that
+wrote it, with the memory workspace's identity as the value:</p>
+<pre><code class="language-json"><span class="p">{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;a3f1c2&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;role&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;user&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;predecessor&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;9d0e77&quot;</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;metadata&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;memory_written_scriptorium&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;w-4f21c8e0&quot;</span><span class="p">}}</span>
+</code></pre>
+<p>The key names the provider because the memory interface is pluggable and
+two providers would each want their own answer; one boolean shared
+between them would be wrong the day a second one exists. The value names
+the workspace because a mark travels with the node. There is no session
+export format, a session directory is self-describing JSON, so copying
+the directory is how a session moves and the copy carries every mark
+with it. Arriving on a machine whose memory workspace is empty, it would
+arrive with every turn already claiming to have been written; naming the
+provider does not separate the two, because the other machine runs the
+same provider. The workspace does. A walk stops only on a mark naming
+the workspace it is walking for, so a restored backup keeps its marks
+and a session copied in from elsewhere is written from the start.</p>
+<p>Nothing has to be taught to carry the field. <code>metadata</code> is a free-form
+dict on both paths: <code>_msg_adapter._msg_to_node</code> puts every field it does
+not recognise into it, and <code>_node_to_msg</code> spreads every metadata key back
+onto the top level of the dict <code>get_branch</code> hands out. That last detail
+is why the key has to be a name no message field uses — <code>id</code>,
+<code>session_id</code>, <code>role</code>, <code>content</code>, <code>predecessor</code>, <code>caller</code>, <code>timestamp</code>,
+<code>token_model</code>, <code>function</code>, <code>extra</code>, <code>status</code> are taken;
+<code>memory_written_scriptorium</code> collides with none of them.</p>
+<p>Nor is writing to a stored node new. <code>_rewind.py</code> stamps <code>rewound</code> on
+the turns it retires and rewrites their history files;
+<code>internals/_revert.py</code> does the same with <code>reverted</code>;
+<code>dispatcher/finalize.py</code> rewrites a node file in place to stamp its
+shadow-git checkpoint. And <code>SessionNodeWriter.update</code> already does exactly
+the operation the mark needs — merge a metadata patch into a node,
+rewrite that node's history file, touch nothing else.</p>
+<p>The append invariants are not in the way. <code>_check_append_invariant</code> runs
+when a node is appended; a mutation never reaches it. What it reads is
+<code>predecessor</code>, <code>caller</code>, <code>role</code>, <code>input</code> and three metadata keys
+(<code>display</code>, <code>spawn_branch_root</code> with <code>source</code>, <code>covers_ids</code>). The
+read-side walk in <code>get_branch</code> reads the same set plus <code>rewound</code>.</p>
+<h3 id="how-a-read-uses-it">How a read uses it<a class="header-anchor" href="#how-a-read-uses-it">#</a></h3>
+<p><code>_records</code> already reduces a branch to the rows memory records: user and
+assistant roles, non-empty text, runtime-scheduled turns dropped. The
+walk runs on that filtered list, from the end:</p>
+<pre><code class="language-python"><span class="k">def</span><span class="w"> </span><span class="nf">unwritten_turns</span><span class="p">(</span><span class="n">records</span><span class="p">,</span> <span class="n">marked_ids</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The trailing run of records nothing has marked, oldest first.&quot;&quot;&quot;</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">record</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">records</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">record</span><span class="o">.</span><span class="n">message_id</span> <span class="ow">in</span> <span class="n">marked_ids</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">record</span><span class="p">)</span>
+    <span class="n">out</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">out</span>
+</code></pre>
+<p>Turns memory never records — a sub-agent's completion notice, a merge
+prompt — are stepped over for free, because they were never in
+<code>records</code>. That is the whole read. It replaces
+<code>OnlineMemoryRuntime.pending</code> and the ordinal comparison inside it.</p>
+<p>The batch handed to the writer stays what it is today: <code>_first_batch</code>
+takes the leading turns that together reach the threshold, so a day-long
+backlog is still written in several passes.</p>
+<h3 id="when-the-mark-goes-on">When the mark goes on<a class="header-anchor" href="#when-the-mark-goes-on">#</a></h3>
+<p>A batch is marked when the writer handled it: the write transaction
+installed and changed a file, <strong>or</strong> the writer judged the batch not
+worth keeping. Either way there is evidence; the absence of an error is
+not enough.</p>
+<p>A writer that spends every one of its turns on the same rejected edit
+finishes without raising anything and without touching a file, and a run
+judged by its exit alone reads that as a batch written. Measured on this
+same writer: twenty turns spent on one rejected edit, a successful
+return, and a topic file one byte long. The audit already answers the
+question — <code>writing._changed_files(audit)</code> collects the topic paths of
+every <code>commit</code> entry with <code>status == &quot;ok&quot;</code> — so the writer closure
+returns that list when it is not empty.</p>
+<p>An empty list has a second honest source. The writer prompt tells the
+writer to record only what will help later, and a batch of &quot;ok, thanks&quot;
+holds nothing: the writer reads it, writes nothing, and ends. Leaving
+that batch unmarked sends it back on every pass, forever, and the
+session reads as a failing writer (<code>WRITER_NO_PROGRESS</code>) while hundreds
+of turns pile up as pending. The audit separates the two cases as well:
+<code>writing._declined(audit)</code> holds when the run ended normally (the
+closing <code>agent</code> entry is present) and no <code>Write</code>, <code>Edit</code>, <code>shell</code> or
+<code>commit</code> entry failed. The closure returns <code>[]</code> then, which marks the
+batch, and <code>None</code> otherwise, which marks nothing. <code>OnlineMemoryRuntime.process</code>
+treats only <code>None</code> as unhandled.</p>
+<p>That rule is not special to the mark. Any state that says a thing is
+done has to be checkable against something the work produced, which is
+also why the nightly pass reports the files it changed rather than the
+files it looked at. The absence of an error is not a product.</p>
+<p>The order of the two steps follows from which of them can be replayed:</p>
+<ol>
+<li><strong>Write the topic files.</strong> They carry block IDs and footnotes that a
+half-write would corrupt, so they go in through a transaction that
+installs whole or not at all. The footnotes link the chat messages
+themselves, so there is no evidence to copy first.</li>
+<li><strong>Mark the turns.</strong></li>
+</ol>
+<p>A writer that dies between 1 and 2 leaves no marks and the same batch
+unwritten next time, which is a redo. Marking
+first would turn the same crash into losing those turns silently, and
+nothing recovers from that.</p>
+<h3 id="at-a-fork">At a fork<a class="header-anchor" href="#at-a-fork">#</a></h3>
+<p>The turn that opens a branch carries the predecessor of the turn it
+replaces, and nothing else about it is special. Walking back from the
+branch's tip reaches the shared prefix, whose turns are marked already,
+and stops there. The trunk and the branch need no ordering between them
+and no knowledge of each other. Whichever is written first marks the
+shared turns, and the other one stops at them.</p>
+<p>The measured cases from Layer 1, under this rule: the five-turn branch
+is offered as five turns, the eleven-turn branch as eleven. In the
+figures the same case is drawn against a stored ordinal of nine, where
+the branch forked at m3 has two and eight turns of its own to give.</p>
+<h3 id="every-branch-at-the-session-boundary">Every branch, at the session boundary<a class="header-anchor" href="#every-branch-at-the-session-boundary">#</a></h3>
+<p>Per turn, memory asks for the branch ending at the session's head,
+because that is the branch the turn happened on. At the boundary it asks
+for all of them: <code>SessionStore.list_branches</code> gives every live tip and
+one <code>get_branch</code> per tip gives the line behind it. Walking a shared
+prefix several times costs nothing, since the walk stops at its first
+marked turn.</p>
+<p>The branch under the head is written however little it holds, because
+nothing comes back for it afterwards. The others are written once what
+they hold unwritten reaches the threshold. A branch of one turn is a
+retry, and a retry is a reply somebody rejected; a branch long enough to
+reach a batch is a line of conversation somebody went down and came back
+from, and what was said there belongs in memory like anything else. The
+idle allowance in <code>should_incremental_write</code> that lets a short head
+branch through does not apply to them, because an abandoned branch's
+last message is old by definition and the allowance would let every
+retry in.</p>
+<p>Turns the user rolled back are gone before memory sees them. <code>rewind</code>
+marks them and <code>get_branch</code> filters them out, so &quot;abandoned on purpose&quot;
+is the session store's judgment and not one memory makes again.</p>
+<h3 id="when-a-mark-is-lost">When a mark is lost<a class="header-anchor" href="#when-a-mark-is-lost">#</a></h3>
+<p>A node file is written without a lock, so marking a node while something
+else rewrites the same node loses one of the two writes whole rather
+than merging them. Memory marks turns that are already finished, and the
+per-turn write runs on the turn's own thread after the turn has been
+persisted, which leaves the idle watcher meeting a session that has just
+woken up as the window.</p>
+<p>A lost mark strands everything older than it: the walk stops early. The
+rule that follows is the one claude-code already applies to its own
+cursor — when the bookkeeping cannot be trusted, reprocess rather than
+go silent. Two places carry it:</p>
+<ul>
+<li><code>RuntimeStateStore.load</code> reads <code>runtime.json</code> with a bare
+<code>json.loads</code>, so an unparseable file raises and that workspace never
+writes again. It returns an empty state instead.</li>
+<li>A walk that reaches the start of a branch without meeting a mark
+offers the whole branch. That is already what the code above does, and
+it is the behaviour to keep rather than guard against.</li>
+</ul>
+<h3 id="migrating-off-the-position-cursor">Migrating off the position cursor<a class="header-anchor" href="#migrating-off-the-position-cursor">#</a></h3>
+<p>An installation upgrading from the position cursor has
+<code>cursors: {thread: {message_id, ordinal}}</code> in <code>runtime.json</code> and no
+marks on any node, so a walk back from a head collects the whole
+session. Nothing seeds marks from the old cursor: its ordinal is the
+value the fork bug corrupted, so a mark derived from it would carry the
+same omission into the new design. The first pass over such a session
+offers every eligible turn again. The writer sees the existing Topic
+files beside the batch, so a fact already recorded is left as it is or
+merged rather than added twice, and the cost is one larger write per
+old session instead of turns that are never written.</p>
+<p><code>cursors</code> is ignored when <code>runtime.json</code> is read. The counters stay:
+<code>creation_order</code>, the local batch and token counts, and the time of the
+last global pass.</p>
+<h3 id="what-it-costs-the-session-store">What it costs the session store<a class="header-anchor" href="#what-it-costs-the-session-store">#</a></h3>
+<p><strong>Nothing there hashes a whole tree.</strong> The one full-byte tree hash in
+this system is the memory workspace's revision — <code>workspace_revision</code>
+in <code>memory/management/transaction.py</code>, rooted at the directory
+<code>memory/store.py:root()</code> returns, <code>&lt;state&gt;/projects/&lt;project_id&gt;/memory</code>.
+Sessions live beside it under <code>&lt;state&gt;/projects/&lt;project_id&gt;/chats</code>. The two are disjoint, so a marked node cannot read
+as a concurrent memory write.</p>
+<p><strong>The session index cache does rebuild once.</strong> Staleness is
+<code>GitSession.stat_fingerprint</code>, which is the <code>history/</code> directory's
+mtime plus <code>meta.json</code>'s mtime and size, and a rewrite bumps the
+directory mtime exactly as an append does. Another process holding that
+session rebuilds its index once on next <code>_open</code>: measured at <strong>14 to 50
+milliseconds for a 289-node session of 4.2 MB</strong>, and self-limiting,
+because <code>mark_synced</code> records the new fingerprint rather than repeating
+per read.</p>
+<p><strong>The cost that grows is git.</strong> A session directory is committed with
+<code>git add -A</code> once per turn (<code>GitSession.commit_all</code>), so every node
+whose bytes changed becomes a new blob. Marking the batch a write
+ingested is a few dozen nodes per write, and the repository grows by
+what the batch weighs. Marking every node in the session on every write
+would add the session's whole weight per turn, which is quadratic over
+its life. <strong>So the mark goes on the batch and never on a full pass over
+the session.</strong></p>
+<p><strong>Two things must not happen.</strong></p>
+<ul>
+<li>The mark must not move the session's <code>updated_at</code>. The idle watcher
+decides a session is already handled by comparing that exact value
+(<code>session_watcher._scan</code>: <code>if processed.get(sid) == updated_at</code>), so
+moving it hands the session straight back to a forced write and the
+model call inside it. <code>SessionStore.append_message</code> and
+<code>SessionNodeWriter.append</code> both bump it; the marking path must not go
+through either.</li>
+<li>The mark must not go through the path that records the session as
+synced. <code>GitSession.write_history</code> calls <code>mark_synced()</code> as a side
+effect, and that fingerprint would cover writes the marking process
+never read, so an index that skipped them would never rebuild. The
+marking path opens through <code>SessionStore._open</code> — which rebuilds a
+stale index before handing back <code>(git, idx)</code> — and then rewrites the
+node file with <code>atomic_write_text</code> directly, which is what
+<code>SessionNodeWriter.update</code> and <code>dispatcher/finalize.py</code> already do.</li>
+</ul>
+<h3 id="the-case-against-the-mark-and-why-it-still-wins">The case against the mark, and why it still wins<a class="header-anchor" href="#the-case-against-the-mark-and-why-it-still-wins">#</a></h3>
+<p>The honest argument for keeping the books outside the session store:</p>
+<blockquote>
+<p>The position cursor is an O(1) read of one small file, and it sits
+outside the session tree entirely. A mark on the node writes the same
+fact into a second place — a place whose directory mtime is the
+change detector everything else relies on. And an external set is
+exact where a walk is not: with a set, a lost entry offers that turn
+again; with a mark, a lost mark strands every turn older than it.</p>
+</blockquote>
+<p>Both halves of that are true, and the second half is the real price. The
+walk assumes the marks form a prefix of the branch. That holds because a
+batch is always the leading unwritten turns, so marking fills in from the
+oldest end — but it is an assumption, not a checked invariant. An
+external set needs no such assumption.</p>
+<p>What decides it is the first half. &quot;Outside&quot; is only cheap while the
+books are a single number. Once they have to stay right across a fork,
+outside means a <strong>set</strong> of message ids, and a set brings a file layout,
+a migration, a rule that an id is never removed (a fork can start from
+any message, so every message must stay recognisable for as long as the
+session exists), and a read whose cost grows with the session rather
+than with the backlog:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>A mark on the node</th>
+<th>A set of ids beside memory</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Working out what is unwritten</td>
+<td>Walk back from the tip, stop at the first marked turn</td>
+<td>Walk the whole branch, subtract the set</td>
+</tr>
+<tr>
+<td>At a fork</td>
+<td>The walk reaches the shared prefix, finds it marked, stops</td>
+<td>The prefix's ids are in the set, so they are skipped</td>
+</tr>
+<tr>
+<td>What is stored</td>
+<td>One field on a node that already exists</td>
+<td>One file per thread holding every id ever written</td>
+</tr>
+<tr>
+<td>How it grows</td>
+<td>Not at all</td>
+<td>One entry per message, kept as long as the session</td>
+</tr>
+<tr>
+<td>What one read costs</td>
+<td>A few steps back from the tip</td>
+<td>The thread's whole list</td>
+</tr>
+<tr>
+<td>Migration</td>
+<td>None: an old session is offered whole once</td>
+<td>None: the set starts empty</td>
+</tr>
+<tr>
+<td>A mark or an entry lost</td>
+<td>The walk stops early, everything older is stranded</td>
+<td>The turn is offered again</td>
+</tr>
+<tr>
+<td>Coupling</td>
+<td>Memory writes one field into the session store</td>
+<td>Memory keeps its own books</td>
+</tr>
+</tbody>
+</table>
+<p>The session store already keeps, per node, where the turn came from,
+whether it is the runtime talking to itself, which branch it roots, and
+whether <code>rewind</code> retired it. One more field saying memory has written
+this turn is the same kind of thing. And the index rebuild the mark
+triggers is bounded and measured, above.</p>
+<p>Appending a marker node that points at the turn — pi-mono's shape — is
+the third option, and it is worse here: it would put a node in the
+conversation graph for every batch written, and every reader of the
+graph would then have to know to skip them.</p>
+<h3 id="files-to-change-and-how-much">Files to change, and how much<a class="header-anchor" href="#files-to-change-and-how-much">#</a></h3>
+<p>Ordered by dependency. Nothing here needs a new file.</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>File</th>
+<th>Change</th>
+<th>Size</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code>openprogram/state/store/session/session_store.py</code></td>
+<td>New <code>merge_node_metadata(session_id, node_id, patch)</code>: <code>_open</code>, merge into <code>node.metadata</code>, rewrite the history file with <code>atomic_write_text</code>. No <code>_persist_meta</code>, no <code>updated_at</code>, no <code>write_history</code></td>
+<td>~20 new</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>openprogram/state/store/session/session_node_writer.py</code></td>
+<td><code>update</code> delegates its metadata rewrite to #1 instead of repeating it</td>
+<td>~12 removed</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>openprogram/state/memory/store.py</code></td>
+<td>New <code>workspace_id()</code>: read or generate a hex id in <code>state_dir()</code></td>
+<td>~12 new</td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>openprogram/state/memory/runtime/state.py</code></td>
+<td>Drop <code>RuntimeState.cursors</code> and <code>advance_cursor</code>; keep the counters; <code>RuntimeStateStore.load</code> returns an empty state on an unreadable file</td>
+<td>~10 removed, ~4 changed</td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>openprogram/state/memory/runtime/online.py</code></td>
+<td><code>pending</code> becomes <code>unwritten_turns(records, marked_ids)</code>; <code>process</code> takes a <code>mark</code> callback and calls it only when the writer reported changed files</td>
+<td>~25 changed</td>
+</tr>
+<tr>
+<td>6</td>
+<td><code>openprogram/state/memory/writing.py</code></td>
+<td><code>_records</code> drops the positional-id fallback; <code>write_session</code>'s writer closure returns <code>_changed_files(audit)</code> and supplies the <code>mark</code> callback; <code>_pending</code> reads marks</td>
+<td>~40 changed</td>
+</tr>
+<tr>
+<td>7</td>
+<td><code>openprogram/state/memory/writing.py</code></td>
+<td><code>write(force=True)</code> asks <code>list_branches</code> and runs one pass per tip, head's branch first</td>
+<td>~30 new</td>
+</tr>
+</tbody>
+</table>
+<p>Tests, all in <code>tests/unit/</code>:</p>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>What it has to prove</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>test_memory_writing.py</code> (existing, 515 lines)</td>
+<td><code>_pending</code> assertions currently read the cursor; they move to marks. Existing behaviour otherwise unchanged</td>
+</tr>
+<tr>
+<td><code>test_memory_write_timing.py</code> (existing)</td>
+<td>Threshold and idle behaviour, unchanged</td>
+</tr>
+<tr>
+<td>new: <code>test_memory_written_marker.py</code></td>
+<td>The two measured cases: a branch forked at m3 with 2 and with 8 unwritten turns, both offered whole. A shared prefix written once. A rejected batch marking nothing. A mark from another workspace ignored</td>
+</tr>
+</tbody>
+</table>
+<p>Roughly <strong>200 lines changed and 80 new across seven files</strong>, plus one
+new test file. Steps 1–6 are one coherent change and can land together;
+7 is separable and can follow. The measured index rebuild (14–50 ms) is
+the only runtime cost worth re-measuring after the change.</p>
+<h3 id="what-this-still-does-not-settle">What this still does not settle<a class="header-anchor" href="#what-this-still-does-not-settle">#</a></h3>
+<ul>
+<li><strong>Online writes have no general prefix check.</strong> The one-time migration
+explicitly validates a continuous prefix on each real DAG path; normal
+writes still preserve the invariant by taking the oldest pending records
+in every batch. The walk stops at the first marked turn it meets and trusts
+that every earlier eligible turn is marked too.</li>
+<li><strong>A branch is only revisited at the session boundary.</strong> Between
+boundaries the per-turn path offers the head's branch alone, so a
+branch left an hour ago waits for the session to go idle. Nothing is
+lost by waiting, and nothing could be gained by trying earlier: the
+head is written in five places, the one function all of them pass
+through discards the previous value, and no event announces the move.</li>
+<li><strong>Two branches, one set of topic files.</strong> Records from different
+branches are folded into the same files, and the topic format has no
+way to say that two claims are alternatives from mutually exclusive
+branches. Retrieval returns both.</li>
+<li><strong>Cross-session spawn.</strong> A spawn branch inside the same session is an
+ordinary part of that session's graph. A cross-session spawn's branch
+root points into another session's graph and terminates the walk
+there, so the two halves are written under two sessions and neither
+walk crosses into the other. Nothing is written twice and nothing is
+skipped; what is missing is the link saying that the sub-agent's
+branch continues the caller's conversation.</li>
+<li><strong>Compaction summaries.</strong> A summary node takes the predecessor of the
+first turn it covers, which makes it a sibling of the line the head is
+on rather than a member of it, so the ordinary walk sees the raw turns
+and writes those. A head that moves onto the summary's own line makes
+the summary an unwritten assistant turn whose text restates turns
+already in memory.</li>
+<li><strong>A mark means handed to the writer, not cited.</strong> A batch the writer
+folds into one paragraph citing one of its five turns marks all five.
+That is intended, but a mark is not evidence that a particular turn's content
+reached a file.</li>
+</ul>
+<hr />
+<h2 id="layer-4-the-shape-with-nothing-in-the-way">Layer 4 — The shape with nothing in the way<a class="header-anchor" href="#layer-4-the-shape-with-nothing-in-the-way">#</a></h2>
+<p>Layer 3 answers &quot;what do we build next&quot;. This answers &quot;what would this
+be if it were designed from scratch&quot;. The three below are not staged
+versions of the mark; they are a different arrangement of the same
+problem.</p>
+<h3 id="memorys-own-content-is-the-record">Memory's own content is the record<a class="header-anchor" href="#memorys-own-content-is-the-record">#</a></h3>
+<p>The mark and the position cursor are both a second copy of a fact memory
+already holds. Every Topic footnote names the chat message it rests on,
+<code>/s/&lt;session&gt;#&lt;message&gt;</code>, so the set of cited messages is readable from
+memory's own files, and the retrieval index already parses every
+footnote to build it.</p>
+<p>Designed from scratch, nothing would be stored anywhere else. Unwritten
+turns would be a query: reachable from any live tip, not cited by any
+memory record. That has properties neither the cursor nor the mark has.</p>
+<ul>
+<li>It cannot disagree with memory, because it is memory. Delete a topic
+file's paragraph and its turns become unwritten again, which is the
+correct answer and one that no external record and no node field can
+give.</li>
+<li>It survives a session being copied to another machine with no
+workspace identity, no import path, and no migration.</li>
+<li>It has no lost-mark case, because there is nothing to lose that is not
+also the loss of the memory itself.</li>
+</ul>
+<p>Two things stop it being Layer 3. &quot;Cited&quot; is not &quot;read&quot;: the writer
+reads a batch and cites only the turns that carried something worth
+keeping, so a greeting, a correction it merged into an existing
+paragraph without a new footnote, or a turn it judged worthless is cited
+by nothing and would be offered again on every pass. Telling those apart
+needs a record of what was read, which is the mark again. And the query
+is a read of every footnote in the workspace on each pass, so the index
+that answers it cheaply becomes something the writer depends on for
+correctness rather than for speed.</p>
+<h3 id="a-record-knows-which-branch-it-came-from">A record knows which branch it came from<a class="header-anchor" href="#a-record-knows-which-branch-it-came-from">#</a></h3>
+<p>Today two branches fold into the same topic files and the format has no
+way to say that two claims are alternatives. The nightly pass merges
+paragraphs that say the same thing whether or not they came from the
+same line of conversation, and retrieval returns both to a reader who is
+on one line only.</p>
+<p>Designed from scratch, a written record would carry the branch it came
+from, retrieval on a branch would prefer that branch's records, and a
+claim contradicted on another line would be visible as a fork rather
+than as a contradiction. The gap is in three places at once: the topic
+format has no field for it, <code>retrieval/</code> has no branch filter, and the
+nightly reorganize prompt has no notion of two records being
+alternatives. It is not next because none of those is a small change and
+the current behaviour is wrong only when two branches actually disagree.</p>
+<h3 id="memory-is-told-not-polled">Memory is told, not polled<a class="header-anchor" href="#memory-is-told-not-polled">#</a></h3>
+<p>Two paths write memory, and both poll. <code>_memory_write</code> runs after every
+turn and asks a threshold question; the idle watcher wakes every five
+minutes and compares <code>updated_at</code> against a 30-minute cutoff. A branch
+somebody left an hour ago is not written until the whole session goes
+idle, because nothing announces that a tip stopped moving.</p>
+<p>Designed from scratch, the session store would say when a branch tip
+stops moving and memory would react. What is in the way is stated in
+Layer 3: the head is written in five places, the one function all of
+them pass through discards the previous value, and no event carries the
+move. Adding the event is small; making all five paths go through it is
+not, and nothing is currently lost by waiting.</p>
+<hr />
+<h2 id="appendix-implementation-status">Appendix: Implementation status<a class="header-anchor" href="#appendix-implementation-status">#</a></h2>
+<p>As of 2026-08-11, Layer 1 describes the implementation that was replaced,
+Layer 2 remains the open-source framework audit, and Layer 3 is implemented.
+Session nodes carry <code>metadata.memory_written_scriptorium = &lt;workspace-id&gt;</code>;
+pending work is the unmarked suffix of each branch; a write that changed a
+file, or a clean run that found nothing to keep, marks exactly its source
+batch; and forced session-boundary writing handles the current head before
+other live branch tips.</p>
+<p><code>RuntimeState.cursors</code> and <code>advance_cursor</code> have been removed, and a
+legacy <code>cursors</code> field is ignored: an old session's first pass offers
+its eligible turns again. Layer 4 remains unimplemented
+and unscheduled.</p>
+<div class="page-updated"><span data-i18n="updated">Last updated</span> · 2026-11-02</div><div class="prevnext"><a class="pn-link pn-prev" href="/docs/reference/design/memory/written-marker.viz.html" data-href-en="/docs/reference/design/memory/written-marker.viz.html" data-href-zh="/docs/reference/design/memory/written-marker.zh.viz.html"><span class="pn-dir" data-i18n="prev">Previous</span><span class="pn-title" data-title-zh="写入游标图解">Write cursor diagram</span></a><a class="pn-link pn-next" href="/docs/reference/design/ui/README.html" data-href-en="/docs/reference/design/ui/README.html" data-href-zh="/docs/reference/design/ui/README.zh.html"><span class="pn-dir" data-i18n="next">Next</span><span class="pn-title" data-title-zh="网页界面">Web UI</span></a></div></article></main>
+  <aside class="toc"><div class="toc-title" data-i18n="on_this_page">On this page</div>
+<ul class="toc-list">
+<li>
+<details class="toc-disclosure" open=""><summary>
+<a class="lvl-2" href="#layer-1-what-the-migration-replaced">Layer 1 — What the migration replaced</a>
+</summary>
+<ul class="toc-list">
+<li>
+<a class="lvl-3" href="#one-number-per-session">One number per session</a>
+</li>
+<li>
+<a class="lvl-3" href="#where-the-number-comes-from">Where the number comes from</a>
+</li>
+<li>
+<a class="lvl-3" href="#what-that-costs-measured">What that costs, measured</a>
+</li>
+<li>
+<a class="lvl-3" href="#the-shape-refuses-the-correction">The shape refuses the correction</a>
+</li>
+<li>
+<a class="lvl-3" href="#the-quieter-failure-is-the-worse-one">The quieter failure is the worse one</a>
+</li>
+</ul>
+</details>
+</li>
+<li>
+<details class="toc-disclosure" open=""><summary>
+<a class="lvl-2" href="#layer-2-what-the-reference-frameworks-do">Layer 2 — What the reference frameworks do</a>
+</summary>
+<ul class="toc-list">
+<li>
+<a class="lvl-3" href="#nobody-puts-the-record-on-the-turn">Nobody puts the record on the turn</a>
+</li>
+<li>
+<a class="lvl-3" href="#the-two-shapes-that-are-actually-in-use">The two shapes that are actually in use</a>
+</li>
+<li>
+<a class="lvl-3" href="#everyone-elses-fork-failure-is-duplication-ours-is-omission">Everyone else's fork failure is duplication. Ours is omission</a>
+</li>
+<li>
+<a class="lvl-3" href="#what-is-worth-taking">What is worth taking</a>
+</li>
+</ul>
+</details>
+</li>
+<li>
+<details class="toc-disclosure" open=""><summary>
+<a class="lvl-2" href="#layer-3-current-implementation-a-mark-on-the-node">Layer 3 — Current implementation: a mark on the node</a>
+</summary>
+<ul class="toc-list">
+<li>
+<a class="lvl-3" href="#where-the-mark-goes">Where the mark goes</a>
+</li>
+<li>
+<a class="lvl-3" href="#how-a-read-uses-it">How a read uses it</a>
+</li>
+<li>
+<a class="lvl-3" href="#when-the-mark-goes-on">When the mark goes on</a>
+</li>
+<li>
+<a class="lvl-3" href="#at-a-fork">At a fork</a>
+</li>
+<li>
+<a class="lvl-3" href="#every-branch-at-the-session-boundary">Every branch, at the session boundary</a>
+</li>
+<li>
+<a class="lvl-3" href="#when-a-mark-is-lost">When a mark is lost</a>
+</li>
+<li>
+<a class="lvl-3" href="#migrating-off-the-position-cursor">Migrating off the position cursor</a>
+</li>
+<li>
+<a class="lvl-3" href="#what-it-costs-the-session-store">What it costs the session store</a>
+</li>
+<li>
+<a class="lvl-3" href="#the-case-against-the-mark-and-why-it-still-wins">The case against the mark, and why it still wins</a>
+</li>
+<li>
+<a class="lvl-3" href="#files-to-change-and-how-much">Files to change, and how much</a>
+</li>
+<li>
+<a class="lvl-3" href="#what-this-still-does-not-settle">What this still does not settle</a>
+</li>
+</ul>
+</details>
+</li>
+<li>
+<details class="toc-disclosure" open=""><summary>
+<a class="lvl-2" href="#layer-4-the-shape-with-nothing-in-the-way">Layer 4 — The shape with nothing in the way</a>
+</summary>
+<ul class="toc-list">
+<li>
+<a class="lvl-3" href="#memorys-own-content-is-the-record">Memory's own content is the record</a>
+</li>
+<li>
+<a class="lvl-3" href="#a-record-knows-which-branch-it-came-from">A record knows which branch it came from</a>
+</li>
+<li>
+<a class="lvl-3" href="#memory-is-told-not-polled">Memory is told, not polled</a>
+</li>
+</ul>
+</details>
+</li>
+<li>
+<a class="lvl-2" href="#appendix-implementation-status">Appendix: Implementation status</a>
+</li>
+</ul></aside>
+</div>
+
+<div class="search-overlay">
+  <div class="search-box">
+    <input type="text" data-i18n-ph="search_ph" placeholder="Search titles or text…" autocomplete="off" spellcheck="false">
+    <div class="search-results"></div>
+  </div>
+</div>
+
+<script src="/docs/assets/site.js?v=6520ba46"></script>
+</body>
+</html>

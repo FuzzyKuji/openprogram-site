@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en" data-base="/docs/" data-page-lang="en" data-build="1793956776" data-alt-lang-url="/docs/capabilities/workflows/reports.zh.html">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Weekly reports · OpenProgram Docs</title>
+<meta name="description" content="Prepare weekly reports # Personal-chat and Feishu draft requests return the full Markdown body by default. They do not need a successful local file write. An">
+<link rel="canonical" href="https://openprogram.io/docs/capabilities/workflows/reports.html">
+<link rel="alternate" type="text/markdown" href="https://openprogram.io/docs/capabilities/workflows/reports.html.md">
+<link rel="describedby" href="https://openprogram.io/llms.txt">
+<link rel="alternate" hreflang="en" href="https://openprogram.io/docs/capabilities/workflows/reports.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://openprogram.io/docs/capabilities/workflows/reports.zh.html">
+<link rel="alternate" hreflang="x-default" href="https://openprogram.io/docs/capabilities/workflows/reports.html">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"OpenProgram Docs","item":"https://openprogram.io/docs/"},{"@type":"ListItem","position":2,"name":"Weekly reports"}]}</script>
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="OpenProgram">
+<meta property="og:url" content="https://openprogram.io/docs/capabilities/workflows/reports.html">
+<meta property="og:title" content="Weekly reports · OpenProgram Docs">
+<meta property="og:description" content="Prepare weekly reports # Personal-chat and Feishu draft requests return the full Markdown body by default. They do not need a successful local file write. An">
+<meta property="og:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:secure_url" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Weekly reports · OpenProgram Docs">
+<meta name="twitter:description" content="Prepare weekly reports # Personal-chat and Feishu draft requests return the full Markdown body by default. They do not need a successful local file write. An">
+<meta name="twitter:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta name="twitter:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/docs/assets/mark.svg">
+<link rel="stylesheet" href="/docs/assets/site.css?v=6520ba46">
+<link rel="stylesheet" href="/docs/assets/pygments-light.css" media="(prefers-color-scheme: light)" id="pyg-light">
+<link rel="stylesheet" href="/docs/assets/pygments-dark.css" media="(prefers-color-scheme: dark)" id="pyg-dark">
+<script src="/docs/assets/theme.js?v=6520ba46"></script>
+
+</head>
+<body>
+<header class="topbar">
+  <button class="icon hamburger" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2.5 4.5h11M2.5 8h11M2.5 11.5h11"/></svg></button>
+  <a class="brand" href="/docs/index.html"><img class="mark" src="/docs/assets/mark.svg" alt="">OpenProgram Docs</a>
+  <div class="spacer"></div>
+  <button class="search-trigger" aria-label="Search">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14"/></svg><span class="label" data-i18n="search">Search docs</span><kbd>⌘K</kbd>
+  </button>
+  <div class="lang-wrap">
+    <button class="icon lang-trigger" id="lang-toggle" aria-haspopup="true" aria-expanded="false" aria-label="Language">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="6.2"/><path d="M1.8 8h12.4" stroke-linecap="round"/><ellipse cx="8" cy="8" rx="2.8" ry="6.2"/></svg><span class="lang-label">EN</span><svg class="chev" width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+    </button>
+    <div class="lang-menu" id="lang-menu" role="menu">
+      <button class="lang-opt" data-lang="en" role="menuitem"><span>English</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="lang-opt" data-lang="zh" role="menuitem"><span>简体中文</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+  <div class="theme-wrap">
+    <button class="icon" id="theme-toggle" aria-label="Theme" aria-haspopup="menu" aria-controls="theme-menu" aria-expanded="false"><svg class="ic-system" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="2.5" width="13" height="9" rx="1.5"/><path d="M8 11.5V14M5.5 14h5"/></svg><svg class="ic-moon" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M13.5 9.5A6 6 0 1 1 6.5 2.5a5 5 0 0 0 7 7z"/></svg><svg class="ic-sun" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="3.2"/><path d="M8 1.2v1.8M8 13v1.8M1.2 8H3M13 8h1.8M3.2 3.2l1.3 1.3M11.5 11.5l1.3 1.3M12.8 3.2l-1.3 1.3M4.5 11.5l-1.3 1.3"/></svg></button>
+    <div class="theme-menu" id="theme-menu" role="menu" aria-labelledby="theme-toggle">
+      <button class="theme-opt" data-theme-choice="system" role="menuitemradio" aria-checked="true"><span>Follow system</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="light" role="menuitemradio" aria-checked="false"><span>Light</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="dark" role="menuitemradio" aria-checked="false"><span>Dark</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+</header>
+<nav class="tabbar"><a class="tablink" href="/docs/README.html" data-title-zh="开始使用" data-href-en="/docs/README.html" data-href-zh="/docs/README.zh.html">Get started</a><a class="tablink" href="/docs/install/install.html" data-title-zh="安装" data-href-en="/docs/install/install.html" data-href-zh="/docs/install/install.zh.html">Install</a><a class="tablink active" href="/docs/capabilities/README.html" data-title-zh="能力" data-href-en="/docs/capabilities/README.html" data-href-zh="/docs/capabilities/README.zh.html">Capabilities</a><a class="tablink" href="/docs/interfaces/README.html" data-title-zh="界面" data-href-en="/docs/interfaces/README.html" data-href-zh="/docs/interfaces/README.zh.html">Interfaces</a><a class="tablink" href="/docs/models/README.html" data-title-zh="模型" data-href-en="/docs/models/README.html" data-href-zh="/docs/models/README.zh.html">Models</a><a class="tablink" href="/docs/integrations/anthropic.html" data-title-zh="集成" data-href-en="/docs/integrations/anthropic.html" data-href-zh="/docs/integrations/anthropic.zh.html">Integrations</a><a class="tablink" href="/docs/server/README.html" data-title-zh="服务与运维" data-href-en="/docs/server/README.html" data-href-zh="/docs/server/README.zh.html">Server &amp; Ops</a><a class="tablink" href="/docs/reference/README.html" data-title-zh="参考" data-href-en="/docs/reference/README.html" data-href-zh="/docs/reference/README.zh.html">Reference</a><a class="tablink" href="/docs/reference/design/README.html" data-title-zh="设计" data-href-en="/docs/reference/design/README.html" data-href-zh="/docs/reference/design/README.zh.html">Design</a></nav>
+
+<div class="scrim"></div>
+<div class="layout">
+  <nav class="sidebar" aria-label="Documentation">
+    <input class="nav-filter" type="text" data-i18n-ph="nav_filter"
+           aria-label="Filter docs" placeholder="Filter docs…" autocomplete="off" spellcheck="false">
+    <div class="nav-tree"><div class="nav-sec"><div class="nav-sec-title" data-title-zh="概览">Overview</div><a class="navlink" href="/docs/capabilities/README.html" data-title-zh="概览" data-href-en="/docs/capabilities/README.html" data-href-zh="/docs/capabilities/README.zh.html">Overview</a>
+<a class="navlink" href="/docs/capabilities/applications.html" data-title-zh="应用" data-href-en="/docs/capabilities/applications.html" data-href-zh="/docs/capabilities/applications.zh.html">Applications</a>
+<a class="navlink" href="/docs/capabilities/framework-control.html" data-title-zh="框架工具" data-href-en="/docs/capabilities/framework-control.html" data-href-zh="/docs/capabilities/framework-control.zh.html">Framework tools</a></div>
+<div class="nav-sec"><div class="nav-sec-title">Agentic Programming</div><a class="navlink" href="/docs/capabilities/agentic-programming/README.html" data-title-zh="指南" data-href-en="/docs/capabilities/agentic-programming/README.html" data-href-zh="/docs/capabilities/agentic-programming/README.zh.html">Guide</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/philosophy.html" data-title-zh="设计原则" data-href-en="/docs/capabilities/agentic-programming/philosophy.html" data-href-zh="/docs/capabilities/agentic-programming/philosophy.zh.html">Philosophy</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/embedding-in-your-own-stack.html" data-title-zh="框架嵌入" data-href-en="/docs/capabilities/agentic-programming/embedding-in-your-own-stack.html" data-href-zh="/docs/capabilities/agentic-programming/embedding-in-your-own-stack.zh.html">Framework embedding</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="编写函数">Writing functions</div><a class="navlink" href="/docs/capabilities/agentic-programming/writing-functions/pure-python.html" data-title-zh="Python 函数" data-href-en="/docs/capabilities/agentic-programming/writing-functions/pure-python.html" data-href-zh="/docs/capabilities/agentic-programming/writing-functions/pure-python.zh.html">Python functions</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/writing-functions/agent.html" data-title-zh="智能体函数" data-href-en="/docs/capabilities/agentic-programming/writing-functions/agent.html" data-href-zh="/docs/capabilities/agentic-programming/writing-functions/agent.zh.html">Agentic functions</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/writing-functions/function-metadata.html" data-title-zh="函数元数据" data-href-en="/docs/capabilities/agentic-programming/writing-functions/function-metadata.html" data-href-zh="/docs/capabilities/agentic-programming/writing-functions/function-metadata.zh.html">Function metadata</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="选择下一步">Choosing the next step</div><a class="navlink" href="/docs/capabilities/agentic-programming/choosing-the-next-step/tool-calling.html" data-title-zh="工具循环" data-href-en="/docs/capabilities/agentic-programming/choosing-the-next-step/tool-calling.html" data-href-zh="/docs/capabilities/agentic-programming/choosing-the-next-step/tool-calling.zh.html">Tool-call loops</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/choosing-the-next-step/fixed-order-calls.html" data-title-zh="顺序调用" data-href-en="/docs/capabilities/agentic-programming/choosing-the-next-step/fixed-order-calls.html" data-href-zh="/docs/capabilities/agentic-programming/choosing-the-next-step/fixed-order-calls.zh.html">Fixed-order calls</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/choosing-the-next-step/next-step-decision.html" data-title-zh="步骤选择" data-href-en="/docs/capabilities/agentic-programming/choosing-the-next-step/next-step-decision.html" data-href-zh="/docs/capabilities/agentic-programming/choosing-the-next-step/next-step-decision.zh.html">Next-step selection</a></div>
+<div class="nav-sec"><div class="nav-sec-title">Agentic Workflows</div><a class="navlink" href="/docs/capabilities/workflows/README.html" data-title-zh="工作流" data-href-en="/docs/capabilities/workflows/README.html" data-href-zh="/docs/capabilities/workflows/README.zh.html">Workflows</a>
+<a class="navlink" href="/docs/capabilities/workflows/authoring.html" data-title-zh="工作流编写" data-href-en="/docs/capabilities/workflows/authoring.html" data-href-zh="/docs/capabilities/workflows/authoring.zh.html">Workflow authoring</a>
+<a class="navlink" href="/docs/capabilities/workflows/recording.html" data-title-zh="录制 Workflow" data-href-en="/docs/capabilities/workflows/recording.html" data-href-zh="/docs/capabilities/workflows/recording.zh.html">Record a workflow</a>
+<a class="navlink active" href="/docs/capabilities/workflows/reports.html" data-title-zh="每周报告" data-href-en="/docs/capabilities/workflows/reports.html" data-href-zh="/docs/capabilities/workflows/reports.zh.html">Weekly reports</a></div>
+<div class="nav-sec"><div class="nav-sec-title">Agents</div><a class="navlink" href="/docs/capabilities/agents.html" data-title-zh="配置 Agent" data-href-en="/docs/capabilities/agents.html" data-href-zh="/docs/capabilities/agents.zh.html">Configure an Agent</a>
+<a class="navlink" href="/docs/capabilities/agents-md.html" data-title-zh="用 AGENTS.md 写指令" data-href-en="/docs/capabilities/agents-md.html" data-href-zh="/docs/capabilities/agents-md.zh.html">Instructions with AGENTS.md</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="常驻 Agent">Always-on Agents</div><a class="navlink" href="/docs/capabilities/always-on-agents.html" data-title-zh="常驻 Agent" data-href-en="/docs/capabilities/always-on-agents.html" data-href-zh="/docs/capabilities/always-on-agents.zh.html">Always-on Agents</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="提醒">Reminders</div><a class="navlink" href="/docs/capabilities/reminders.html" data-title-zh="提醒" data-href-en="/docs/capabilities/reminders.html" data-href-zh="/docs/capabilities/reminders.zh.html">Reminders</a>
+<a class="navlink" href="/docs/capabilities/event-triggers.html" data-title-zh="有事发生时运行任务" data-href-en="/docs/capabilities/event-triggers.html" data-href-zh="/docs/capabilities/event-triggers.zh.html">Run a task when something happens</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="记忆">Memory</div><a class="navlink" href="/docs/capabilities/memory.html" data-title-zh="记忆管理" data-href-en="/docs/capabilities/memory.html" data-href-zh="/docs/capabilities/memory.zh.html">Memory management</a>
+<a class="navlink" href="/docs/capabilities/memory-settings.html" data-title-zh="调整记忆" data-href-en="/docs/capabilities/memory-settings.html" data-href-zh="/docs/capabilities/memory-settings.zh.html">Tune Memory</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="运行环境">Environments</div><a class="navlink" href="/docs/capabilities/environments.html" data-title-zh="在另一台机器上运行会话" data-href-en="/docs/capabilities/environments.html" data-href-zh="/docs/capabilities/environments.zh.html">Run conversations on another machine</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="会话目标">Session goals</div><a class="navlink" href="/docs/capabilities/goal.html" data-title-zh="目标" data-href-en="/docs/capabilities/goal.html" data-href-zh="/docs/capabilities/goal.zh.html">Goals</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="操控电脑">Computer use</div><a class="navlink" href="/docs/capabilities/computer-use.html" data-title-zh="操控电脑" data-href-en="/docs/capabilities/computer-use.html" data-href-zh="/docs/capabilities/computer-use.zh.html">Computer use</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="会议">Meetings</div><a class="navlink" href="/docs/capabilities/meetings.html" data-title-zh="会议" data-href-en="/docs/capabilities/meetings.html" data-href-zh="/docs/capabilities/meetings.zh.html">Meetings</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="扩展">Extending</div><a class="navlink" href="/docs/capabilities/installing-programs.html" data-title-zh="安装程序" data-href-en="/docs/capabilities/installing-programs.html" data-href-zh="/docs/capabilities/installing-programs.zh.html">Installing programs</a>
+<a class="navlink" href="/docs/capabilities/skills.html" data-title-zh="技能" data-href-en="/docs/capabilities/skills.html" data-href-zh="/docs/capabilities/skills.zh.html">Skills</a>
+<a class="navlink" href="/docs/capabilities/plugins.html" data-title-zh="插件" data-href-en="/docs/capabilities/plugins.html" data-href-zh="/docs/capabilities/plugins.zh.html">Plugins</a>
+<a class="navlink" href="/docs/capabilities/mcp.html" data-title-zh="MCP" data-href-en="/docs/capabilities/mcp.html" data-href-zh="/docs/capabilities/mcp.zh.html">MCP</a>
+<a class="navlink" href="/docs/capabilities/tools.html" data-title-zh="内置工具" data-href-en="/docs/capabilities/tools.html" data-href-zh="/docs/capabilities/tools.zh.html">Built-in tools</a>
+<a class="navlink" href="/docs/capabilities/lsp.html" data-title-zh="语言服务器" data-href-en="/docs/capabilities/lsp.html" data-href-zh="/docs/capabilities/lsp.zh.html">Language servers</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="概览">Overview</div><a class="navlink" href="/docs/capabilities/commit-push-pr.html" data-title-zh="提交与拉取请求" data-href-en="/docs/capabilities/commit-push-pr.html" data-href-zh="/docs/capabilities/commit-push-pr.zh.html">Commits and PRs</a>
+<a class="navlink" href="/docs/capabilities/permissions.html" data-title-zh="工具权限" data-href-en="/docs/capabilities/permissions.html" data-href-zh="/docs/capabilities/permissions.zh.html">Tool permissions</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="指南">Guide</div><a class="navlink" href="/docs/capabilities/agentic-programming/self-programming-ai-agents.html" data-title-zh="自编程智能体" data-href-en="/docs/capabilities/agentic-programming/self-programming-ai-agents.html" data-href-zh="/docs/capabilities/agentic-programming/self-programming-ai-agents.zh.html">Self-programming agents</a></div></div>
+  </nav>
+  <main class="content"><button class="fs-toggle" aria-label="Fullscreen" title="Fullscreen (Esc to exit)"><svg class="ic-expand" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.2 2H2v4.2M9.8 2H14v4.2M6.2 14H2V9.8M9.8 14H14V9.8"/></svg><svg class="ic-collapse" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6.2h4.2V2M14 6.2H9.8V2M2 9.8h4.2V14M14 9.8H9.8V14"/></svg></button><article><nav class="breadcrumb"><span class="bc-seg" data-title-zh="能力">Capabilities</span> <span class='bc-sep'>›</span> <span class="bc-seg">Agentic Workflows</span> <span class='bc-sep'>›</span> <span class="bc-seg bc-current" data-title-zh="每周报告">Weekly reports</span></nav><h1 id="prepare-weekly-reports">Prepare weekly reports<a class="header-anchor" href="#prepare-weekly-reports">#</a></h1>
+<p>Personal-chat and Feishu draft requests return the full Markdown body by default. They do not need a successful local file write. An explicitly requested Markdown output path retains file delivery; existing file-delivery resume requests remain supported. Returning text does not submit or send anything externally.</p>
+<p>The report suite consists of four independently versioned Workflow packages and
+one coordinating <code>weekly_report</code> package. They live in <code>~/.openprogram/programs</code>;
+this source checkout does not include them. The suite supports independent execution and composition through the <code>weekly_report</code> entry.
+Native WeChat collection depends on accessible search and conversation controls;
+the group Workflow records unavailable controls and continues with local evidence, producing an explicitly partial draft.</p>
+<table>
+<thead>
+<tr>
+<th>Entry</th>
+<th>Purpose</th>
+<th>External writes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>personal_weekly_report(task)</code></td>
+<td>Personal Feishu drafts, inspection, filling, submission and record updates</td>
+<td>Filling changes form fields without saving; submission/update requires an explicit request</td>
+</tr>
+<tr>
+<td><code>personal_chat_weekly_report(task)</code></td>
+<td>Owner's three-section WeChat-group copy (weekly progress, discussion topics, and next-week plans; rendered in Chinese)</td>
+<td>Local draft only; never sends WeChat</td>
+</tr>
+<tr>
+<td><code>group_weekly_report(task)</code></td>
+<td>Collect group reports, track missing members, and prepare a local summary</td>
+<td>Never sends WeChat messages</td>
+</tr>
+<tr>
+<td><code>tencent_weekly_report(task)</code></td>
+<td>Approximately 100 Chinese characters of Tencent progress for a leader, intended for Friday afternoon</td>
+<td>Local draft only</td>
+</tr>
+<tr>
+<td><code>weekly_report(task)</code></td>
+<td>An agent selects the requested report Workflows and forwards the complete request</td>
+<td>Preserves the requested operation; child write restrictions apply</td>
+</tr>
+</tbody>
+</table>
+<h2 id="prepare-a-tencent-report-from-existing-records">Prepare a Tencent report from existing records<a class="header-anchor" href="#prepare-a-tencent-report-from-existing-records">#</a></h2>
+<p>Select <code>tencent_weekly_report</code> in Abilities and enter <code>Prepare this week's Tencent weekly_report</code>. The Workflow uses the current ISO week in Asia/Shanghai. It first reuses
+original current-week Tencent evidence in the workspace's <code>reports</code> directory,
+then considers other report sources, original owner messages from recent OpenProgram
+sessions and dated OpenProgram memory. Conversation candidates retain their actual
+message date and session/message reference; assistant drafts and unattributed
+messages are excluded. A dated request or plan remains a candidate, not proof of
+completed work. Explicit
+materials take precedence. Records from other weeks, uncertain month/year-only
+dates, pending memory records, untrusted raw memory sources and explicit test records are excluded. Generated memory notes can remain lookup candidates; they are not independently verified owner facts. Other audiences
+require source selection with exact quotes; they are not automatically treated
+as Tencent work. Conversation discovery reads at most 20 recent sessions and the last 200 messages per session; combined candidate context is limited to 30 records and 18,000 UTF-8 bytes. Unavailable or insufficient sources require clarification within that inspected scope; this does not establish that no relevant work exists elsewhere. Optional <code>report_roots</code> selects up to five source
+directories.</p>
+<p>Successful Tencent and <code>weekly_report</code> calls return the report body directly. Sources,
+character count and model-call information remain in local draft files. For
+programmatic composition, pass <code>&quot;result_format&quot;: &quot;structured&quot;</code> in the JSON task;
+this returns the status, artifact paths and recovery object. The router forwards explicitly supplied child options unchanged. Generation and verification use low reasoning effort,
+a 180-second per-call limit and preserved retry budgets. Model failures do not
+produce a success draft.</p>
+<h2 id="prepare-several-reports">Prepare several reports<a class="header-anchor" href="#prepare-several-reports">#</a></h2>
+<p>Select <code>weekly_report</code> in Abilities and supply a JSON string as <code>task</code>:</p>
+<pre><code class="language-json"><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;requests&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;personal&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;week&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-W37&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;materials&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;p1&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;week&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-W37&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Experiments remain in progress; next week we will check the results.&quot;</span><span class="p">}]</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;tencent&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;week&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-W37&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;materials&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;t1&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;week&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-W37&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Tencent evaluation is still in progress. No final performance conclusion is available.&quot;</span><span class="p">}]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+<p>Materials are separate by audience. Personal and Tencent structured inputs require
+matching ISO weeks and unique source IDs. Insufficient evidence returns a request
+for input or review instead of inventing progress. Model-assisted semantic checks
+can detect unsupported claims but are not a guarantee of factual correctness.</p>
+<p>For a group report, a request such as <code>Prepare the group report</code> is enough to start discovery. The Workflow retrieves missing group identity, roster, current materials and author evidence from memory, relevant local records and the identified WeChat group. It preserves supplied report bodies and does not ask for missing fields. With no reporting period specified, it uses the current ISO week and records that assumption. Unresolved authors remain visibly unverified; unavailable or insufficient evidence produces a partial draft with source diagnostics, never invented progress.</p>
+<p>The default source is <code>auto</code>. Explicit <code>source: &quot;supplied&quot;</code> restricts the run to supplied materials. Native collection verifies the group and retains source evidence; historical coverage remains partial. It cannot send messages or change system permissions. If WeChat access fails, relevant local sources remain available. Model and provider failures retain their actual execution errors rather than being classified as missing user input.</p>
+<p>Routing, group request parsing, and personal report model calls inherit the
+Runtime timeout (<code>OPENPROGRAM_EXEC_TIMEOUT_S</code>); they impose no separate 90-second
+limit. External record updates are not automatically repeated after an uncertain
+failure.</p>
+<p>Natural-language requests are interpreted by a routing agent. It selects one,
+two, three, or all four destinations according to meaning and negation, then code
+passes the entire original request unchanged to each selected Workflow. It does
+not split on punctuation, extract materials, force drafts, or assign a common
+week. A generic personal progress draft without Feishu language is
+<code>personal_chat</code>, not the Feishu form. An unspecified audience defaults to the unsent personal-chat draft; routing does not ask for clarification.
+Single results are returned verbatim; multiple results are labeled by audience.</p>
+<h2 id="continue-incomplete-work">Continue incomplete work<a class="header-anchor" href="#continue-incomplete-work">#</a></h2>
+<p>The router owns no shared checkpoint. Continue through the relevant child using
+that child's recovery instructions. Old coordinator resume payloads are rejected
+with guidance to use the child entry. Explicit <code>requests</code> JSON addresses children
+directly and preserves their options without routing-model inference.</p>
+<p>Local delivery failures retain prepared content for retry. Tencent model failures
+retain generation and verification budgets across resumes. Checkpoints and retry
+payloads contain private report content and should remain local.</p>
+<h2 id="friday-afternoon-tencent-report">Friday afternoon Tencent report<a class="header-anchor" href="#friday-afternoon-tencent-report">#</a></h2>
+<p>The Tencent Workflow targets 80–120 non-whitespace characters, aiming for 100.
+Its intended reporting window is Friday afternoon in <code>Asia/Shanghai</code>. It does not
+create a recurring schedule or send to the leader. An exact execution time and
+material source must be configured separately before enabling a scheduled run.</p>
+<h2 id="source-organization">Source organization<a class="header-anchor" href="#source-organization">#</a></h2>
+<p>The five independent report Workflow packages live side by side in <code>~/.openprogram/programs/</code>: <code>personal_weekly_report</code> (Feishu), <code>personal_chat_weekly_report</code> (owner's WeChat-group copy), <code>group_weekly_report</code> (group collection), <code>tencent_weekly_report</code> (Tencent), and <code>weekly_report</code> (routing). Shared helpers come from <code>openprogram.programs._authoring.reports</code>. The coordinator <code>weekly_report</code> imports the other four packages directly. Configured output paths are unchanged.</p>
+<p>Personal field generation uses a read-only Agent with <code>list_agents(scope=&quot;all&quot;)</code> and
+<code>read_conversation</code> to retrieve work from other sessions, alongside memory and
+original local notes. Conversation turns expose original UTC timestamps; the
+default reporting period is the current ISO week in <code>Asia/Shanghai</code> when no
+period is supplied. Recent session activity does not make older turns current-week
+evidence. Requests, plans, generated drafts and README descriptions do not prove
+completed work. The Agent must preserve failed or incomplete work and state
+missing evidence rather than invent results. A JSON Schema validates complete fields or sparse edits, with prompt fallback and the existing format-repair attempt before any write. The Feishu Workflow propagates unresolved model failures as errors. An uncertain remote write is a non-retryable failure; inspect the actual record before another attempt.</p>
+<p>Natural personal and personal-chat composition binds each retained report item to an actual original owner statement or operational tool result, with an exact source ID and visible quote. Memory, local files and assistant summaries provide search leads; their narrative alone cannot establish completed work. Current supplied owner facts must match the actual owner input. They may explicitly describe a previous period after independent temporal verification; their actual input date remains unchanged. Each audience resolves its own reporting week from the complete request, so another report's period does not override it. Structured personal-report inputs use the same original-source binding before their material-specific verification. A unique explicit ISO week in the complete request is retained; requests assigning different periods to different audiences are resolved separately. Automatic original-source discovery lists up to 100 recent sessions and reads up to 10 branches, preferring project titles mentioned in the request. The sources retain the original message date, tool operation, arguments, status and error flag. Missing originals return <code>NEEDS_INPUT</code>; unsupported references or semantic claims return <code>NEEDS_REVIEW</code> before draft delivery or form writing. Independent semantic verification checks every item and the requested reporting week; it does not guarantee factual correctness. Identity defaults, explicit clearing and absent optional content do not create research claims.</p>
+<p>Structured Agents count normal tool rounds against <code>max_iterations</code>, not the failed-request allowance. A completed tool round preserves the remaining retry allowance; format repairs and failed requests still share it. Reaching the iteration limit stops execution without replaying completed tools.</p>
+<p>Read-only memory search, grep, get and browse use the normal safe-tool policy; explicit deny/ask rules and <code>memory.read</code> authority still apply. Personal operation selection and evidence verification, plus every Tencent JSON-producing stage, declare output schemas and reuse Runtime format repair. Personal Feishu format failures propagate as errors; Tencent preserves the typed model failure and its resume task. Neither is treated as missing user input. Tencent request interpretation inherits the deployment timeout.</p>
+<h2 id="fill-the-personal-feishu-form-without-submitting">Fill the personal Feishu form without submitting<a class="header-anchor" href="#fill-the-personal-feishu-form-without-submitting">#</a></h2>
+<p>Select <code>personal_weekly_report</code> and request <code>Fill the personal Feishu weekly report without submitting</code>. The Workflow checks the current records, prepares the six fields, fills them and obtains a fresh field-by-field readback. <code>FILLED</code> means the fields were checked and no submission or save was performed. <code>SUBMITTED</code> is a separate result that requires an explicit submission request.</p>
+<p>Fill-only mode supports a new form only after inspection establishes that no record exists. Existing records and capped forms return <code>BLOCKED</code>; they are not duplicated. This mode permits the observed records navigation and the exact requested textbox values, and rejects submission/save clicks, keypresses, coordinates and stale observations before browser execution. Missing or ambiguous field identities, truncated or redacted values, failed actions and uncertain write outcomes cannot produce <code>FILLED</code>; uncertain writes are not automatically repeated.</p>
+<p>Readback requires complete actual field values and compares them exactly, including line breaks and repeated spaces. ARIA text alone cannot establish successful filling; browser schemas without actual values cannot return <code>FILLED</code>. The native browser backend supports ordinary form labels and unique visible labels around contenteditable fields. Missing or ambiguous labels stop filling before a field write. Browser access and discoverable field labels remain prerequisites for filling.</p>
+<h2 id="feishu-browser-failures">Feishu browser failures<a class="header-anchor" href="#feishu-browser-failures">#</a></h2>
+<p>Feishu inspection and writing expose only <code>web_use</code>, using its current <code>command</code> schema. They require real tool receipts before accepting an observation or reporting a write. Quoted tool calls in model text are not browser actions. These stages have no hard-coded aggregate timeout or tool-round limit; explicit Runtime deployment limits still apply. Browser access failures propagate through the coordinator instead of being returned as successful text. If a later child fails, the original exception retains earlier completed child results; the coordinator does not automatically rerun them.</p>
+<p>Submission and update use the same exact field binding and fresh field readback as filling. A submit request encountering an existing record returns its inspection result; modifying it requires an explicit update request. The final submission/save attempt is recorded before dispatch, so an uncertain result cannot automatically repeat that click. Empty five-dimension placeholders are not report progress.</p>
+<div class="page-updated"><span data-i18n="updated">Last updated</span> · 2026-11-01</div><div class="prevnext"><a class="pn-link pn-prev" href="/docs/capabilities/workflows/recording.html" data-href-en="/docs/capabilities/workflows/recording.html" data-href-zh="/docs/capabilities/workflows/recording.zh.html"><span class="pn-dir" data-i18n="prev">Previous</span><span class="pn-title" data-title-zh="录制 Workflow">Record a workflow</span></a><a class="pn-link pn-next" href="/docs/capabilities/agents.html" data-href-en="/docs/capabilities/agents.html" data-href-zh="/docs/capabilities/agents.zh.html"><span class="pn-dir" data-i18n="next">Next</span><span class="pn-title" data-title-zh="配置 Agent">Configure an Agent</span></a></div></article></main>
+  <aside class="toc"><div class="toc-title" data-i18n="on_this_page">On this page</div>
+<ul class="toc-list">
+<li>
+<a class="lvl-2" href="#prepare-a-tencent-report-from-existing-records">Prepare a Tencent report from existing records</a>
+</li>
+<li>
+<a class="lvl-2" href="#prepare-several-reports">Prepare several reports</a>
+</li>
+<li>
+<a class="lvl-2" href="#continue-incomplete-work">Continue incomplete work</a>
+</li>
+<li>
+<a class="lvl-2" href="#friday-afternoon-tencent-report">Friday afternoon Tencent report</a>
+</li>
+<li>
+<a class="lvl-2" href="#source-organization">Source organization</a>
+</li>
+<li>
+<a class="lvl-2" href="#fill-the-personal-feishu-form-without-submitting">Fill the personal Feishu form without submitting</a>
+</li>
+<li>
+<a class="lvl-2" href="#feishu-browser-failures">Feishu browser failures</a>
+</li>
+</ul></aside>
+</div>
+
+<div class="search-overlay">
+  <div class="search-box">
+    <input type="text" data-i18n-ph="search_ph" placeholder="Search titles or text…" autocomplete="off" spellcheck="false">
+    <div class="search-results"></div>
+  </div>
+</div>
+
+<script src="/docs/assets/site.js?v=6520ba46"></script>
+</body>
+</html>

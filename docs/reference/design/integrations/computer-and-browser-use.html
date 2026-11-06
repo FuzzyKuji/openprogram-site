@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="en" data-base="/docs/" data-page-lang="en" data-build="1793956776" data-alt-lang-url="/docs/reference/design/integrations/computer-and-browser-use.zh.html">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Computer and browser use · OpenProgram Docs</title>
+<meta name="description" content="OpenProgram gives the model one tool for everything that happens on a screen: computer_use_agent . It operates applications on macOS, Linux and Windows, pages">
+<link rel="canonical" href="https://openprogram.io/docs/reference/design/integrations/computer-and-browser-use.html">
+<link rel="alternate" type="text/markdown" href="https://openprogram.io/docs/reference/design/integrations/computer-and-browser-use.html.md">
+<link rel="describedby" href="https://openprogram.io/llms.txt">
+<link rel="alternate" hreflang="en" href="https://openprogram.io/docs/reference/design/integrations/computer-and-browser-use.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://openprogram.io/docs/reference/design/integrations/computer-and-browser-use.zh.html">
+<link rel="alternate" hreflang="x-default" href="https://openprogram.io/docs/reference/design/integrations/computer-and-browser-use.html">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"OpenProgram Docs","item":"https://openprogram.io/docs/"},{"@type":"ListItem","position":2,"name":"Computer and browser use"}]}</script>
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="OpenProgram">
+<meta property="og:url" content="https://openprogram.io/docs/reference/design/integrations/computer-and-browser-use.html">
+<meta property="og:title" content="Computer and browser use · OpenProgram Docs">
+<meta property="og:description" content="OpenProgram gives the model one tool for everything that happens on a screen: computer_use_agent . It operates applications on macOS, Linux and Windows, pages">
+<meta property="og:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:secure_url" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Computer and browser use · OpenProgram Docs">
+<meta name="twitter:description" content="OpenProgram gives the model one tool for everything that happens on a screen: computer_use_agent . It operates applications on macOS, Linux and Windows, pages">
+<meta name="twitter:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta name="twitter:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/docs/assets/mark.svg">
+<link rel="stylesheet" href="/docs/assets/site.css?v=6520ba46">
+<link rel="stylesheet" href="/docs/assets/pygments-light.css" media="(prefers-color-scheme: light)" id="pyg-light">
+<link rel="stylesheet" href="/docs/assets/pygments-dark.css" media="(prefers-color-scheme: dark)" id="pyg-dark">
+<script src="/docs/assets/theme.js?v=6520ba46"></script>
+
+</head>
+<body>
+<header class="topbar">
+  <button class="icon hamburger" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2.5 4.5h11M2.5 8h11M2.5 11.5h11"/></svg></button>
+  <a class="brand" href="/docs/index.html"><img class="mark" src="/docs/assets/mark.svg" alt="">OpenProgram Docs</a>
+  <div class="spacer"></div>
+  <button class="search-trigger" aria-label="Search">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14"/></svg><span class="label" data-i18n="search">Search docs</span><kbd>⌘K</kbd>
+  </button>
+  <div class="lang-wrap">
+    <button class="icon lang-trigger" id="lang-toggle" aria-haspopup="true" aria-expanded="false" aria-label="Language">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="6.2"/><path d="M1.8 8h12.4" stroke-linecap="round"/><ellipse cx="8" cy="8" rx="2.8" ry="6.2"/></svg><span class="lang-label">EN</span><svg class="chev" width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+    </button>
+    <div class="lang-menu" id="lang-menu" role="menu">
+      <button class="lang-opt" data-lang="en" role="menuitem"><span>English</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="lang-opt" data-lang="zh" role="menuitem"><span>简体中文</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+  <div class="theme-wrap">
+    <button class="icon" id="theme-toggle" aria-label="Theme" aria-haspopup="menu" aria-controls="theme-menu" aria-expanded="false"><svg class="ic-system" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="2.5" width="13" height="9" rx="1.5"/><path d="M8 11.5V14M5.5 14h5"/></svg><svg class="ic-moon" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M13.5 9.5A6 6 0 1 1 6.5 2.5a5 5 0 0 0 7 7z"/></svg><svg class="ic-sun" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="3.2"/><path d="M8 1.2v1.8M8 13v1.8M1.2 8H3M13 8h1.8M3.2 3.2l1.3 1.3M11.5 11.5l1.3 1.3M12.8 3.2l-1.3 1.3M4.5 11.5l-1.3 1.3"/></svg></button>
+    <div class="theme-menu" id="theme-menu" role="menu" aria-labelledby="theme-toggle">
+      <button class="theme-opt" data-theme-choice="system" role="menuitemradio" aria-checked="true"><span>Follow system</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="light" role="menuitemradio" aria-checked="false"><span>Light</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="dark" role="menuitemradio" aria-checked="false"><span>Dark</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+</header>
+<nav class="tabbar"><a class="tablink" href="/docs/README.html" data-title-zh="开始使用" data-href-en="/docs/README.html" data-href-zh="/docs/README.zh.html">Get started</a><a class="tablink" href="/docs/install/install.html" data-title-zh="安装" data-href-en="/docs/install/install.html" data-href-zh="/docs/install/install.zh.html">Install</a><a class="tablink" href="/docs/capabilities/README.html" data-title-zh="能力" data-href-en="/docs/capabilities/README.html" data-href-zh="/docs/capabilities/README.zh.html">Capabilities</a><a class="tablink" href="/docs/interfaces/README.html" data-title-zh="界面" data-href-en="/docs/interfaces/README.html" data-href-zh="/docs/interfaces/README.zh.html">Interfaces</a><a class="tablink" href="/docs/models/README.html" data-title-zh="模型" data-href-en="/docs/models/README.html" data-href-zh="/docs/models/README.zh.html">Models</a><a class="tablink" href="/docs/integrations/anthropic.html" data-title-zh="集成" data-href-en="/docs/integrations/anthropic.html" data-href-zh="/docs/integrations/anthropic.zh.html">Integrations</a><a class="tablink" href="/docs/server/README.html" data-title-zh="服务与运维" data-href-en="/docs/server/README.html" data-href-zh="/docs/server/README.zh.html">Server &amp; Ops</a><a class="tablink" href="/docs/reference/README.html" data-title-zh="参考" data-href-en="/docs/reference/README.html" data-href-zh="/docs/reference/README.zh.html">Reference</a><a class="tablink active" href="/docs/reference/design/README.html" data-title-zh="设计" data-href-en="/docs/reference/design/README.html" data-href-zh="/docs/reference/design/README.zh.html">Design</a></nav>
+
+<div class="scrim"></div>
+<div class="layout">
+  <nav class="sidebar" aria-label="Documentation">
+    <input class="nav-filter" type="text" data-i18n-ph="nav_filter"
+           aria-label="Filter docs" placeholder="Filter docs…" autocomplete="off" spellcheck="false">
+    <div class="nav-tree"><details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="架构总览">Architecture</span><span class="nav-count">6</span></summary><a class="navlink" href="/docs/reference/design/README.html" data-title-zh="设计指南" data-href-en="/docs/reference/design/README.html" data-href-zh="/docs/reference/design/README.zh.html">Design guide</a>
+<a class="navlink" href="/docs/reference/design/framework-overview.html" data-title-zh="框架总览" data-href-en="/docs/reference/design/framework-overview.html" data-href-zh="/docs/reference/design/framework-overview.zh.html">Framework overview</a>
+<a class="navlink" href="/docs/reference/design/repository-structure.html" data-title-zh="仓库结构" data-href-en="/docs/reference/design/repository-structure.html" data-href-zh="/docs/reference/design/repository-structure.zh.html">Repository structure</a>
+<a class="navlink" href="/docs/reference/design/implementation-status.html" data-title-zh="实现索引" data-href-en="/docs/reference/design/implementation-status.html" data-href-zh="/docs/reference/design/implementation-status.zh.html">Implementation index</a>
+<a class="navlink" href="/docs/reference/design/framework-comparison.html" data-title-zh="框架对比" data-href-en="/docs/reference/design/framework-comparison.html" data-href-zh="/docs/reference/design/framework-comparison.zh.html">Framework comparison</a>
+<a class="navlink" href="/docs/reference/design/feature-matrix.html" data-title-zh="功能矩阵" data-href-en="/docs/reference/design/feature-matrix.html" data-href-zh="/docs/reference/design/feature-matrix.zh.html">Feature matrix</a></details>
+<details class="nav-branch nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="Agent 与工作流">Agents and workflows</span><span class="nav-count">88</span></summary>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="执行与控制">Execution</span><span class="nav-count">14</span></summary><a class="navlink" href="/docs/reference/design/runtime/README.html" data-title-zh="运行时" data-href-en="/docs/reference/design/runtime/README.html" data-href-zh="/docs/reference/design/runtime/README.zh.html">Runtime</a>
+<a class="navlink" href="/docs/reference/design/runtime/codex-capability-adoption.html" data-title-zh="Codex 功能核对" data-href-en="/docs/reference/design/runtime/codex-capability-adoption.html" data-href-zh="/docs/reference/design/runtime/codex-capability-adoption.zh.html">Codex capability audit</a>
+<a class="navlink" href="/docs/reference/design/runtime/execution/agent-call-flow.html" data-title-zh="调用流程" data-href-en="/docs/reference/design/runtime/execution/agent-call-flow.html" data-href-zh="/docs/reference/design/runtime/execution/agent-call-flow.zh.html">Call flow</a>
+<a class="navlink" href="/docs/reference/design/runtime/execution/control.html" data-title-zh="执行控制" data-href-en="/docs/reference/design/runtime/execution/control.html" data-href-zh="/docs/reference/design/runtime/execution/control.zh.html">Execution control</a>
+<a class="navlink" href="/docs/reference/design/runtime/execution/agent-action-lifecycle.html" data-title-zh="操作生命周期" data-href-en="/docs/reference/design/runtime/execution/agent-action-lifecycle.html" data-href-zh="/docs/reference/design/runtime/execution/agent-action-lifecycle.zh.html">Action lifecycle</a>
+<a class="navlink" href="/docs/reference/design/runtime/execution/agent-worktree.html" data-title-zh="工作树" data-href-en="/docs/reference/design/runtime/execution/agent-worktree.html" data-href-zh="/docs/reference/design/runtime/execution/agent-worktree.zh.html">Worktrees</a>
+<a class="navlink" href="/docs/reference/design/runtime/execution/command-sessions.html" data-title-zh="命令会话" data-href-en="/docs/reference/design/runtime/execution/command-sessions.html" data-href-zh="/docs/reference/design/runtime/execution/command-sessions.zh.html">Command sessions</a>
+<a class="navlink" href="/docs/reference/design/runtime/execution/agentic-self-recursion.viz.html" data-title-zh="递归图解" data-href-en="/docs/reference/design/runtime/execution/agentic-self-recursion.viz.html" data-href-zh="/docs/reference/design/runtime/execution/agentic-self-recursion.zh.viz.html">Recursion diagram</a>
+<a class="navlink" href="/docs/reference/design/runtime/execution/agentic-self-recursion.html" data-title-zh="递归保护" data-href-en="/docs/reference/design/runtime/execution/agentic-self-recursion.html" data-href-zh="/docs/reference/design/runtime/execution/agentic-self-recursion.zh.html">Recursion guard</a>
+<a class="navlink" href="/docs/reference/design/runtime/execution/async-job-lifecycle.html" data-title-zh="异步任务" data-href-en="/docs/reference/design/runtime/execution/async-job-lifecycle.html" data-href-zh="/docs/reference/design/runtime/execution/async-job-lifecycle.zh.html">Async tasks</a>
+<a class="navlink" href="/docs/reference/design/runtime/execution/agentic-llm-streaming.html" data-title-zh="嵌套 LLM 流式" data-href-en="/docs/reference/design/runtime/execution/agentic-llm-streaming.html" data-href-zh="/docs/reference/design/runtime/execution/agentic-llm-streaming.zh.html">Nested LLM streaming</a>
+<a class="navlink" href="/docs/reference/design/runtime/execution/controllability-and-three-surface-sync.html" data-title-zh="任务可控性" data-href-en="/docs/reference/design/runtime/execution/controllability-and-three-surface-sync.html" data-href-zh="/docs/reference/design/runtime/execution/controllability-and-three-surface-sync.zh.html">Task controllability</a>
+<a class="navlink" href="/docs/reference/design/runtime/execution/dispatcher-split.html" data-title-zh="调度器结构" data-href-en="/docs/reference/design/runtime/execution/dispatcher-split.html" data-href-zh="/docs/reference/design/runtime/execution/dispatcher-split.zh.html">Dispatcher structure</a>
+<a class="navlink" href="/docs/reference/design/runtime/execution/next-step-decision.html" data-title-zh="下一步决策" data-href-en="/docs/reference/design/runtime/execution/next-step-decision.html" data-href-zh="/docs/reference/design/runtime/execution/next-step-decision.zh.html">Next-step decisions</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="会话与存储">Sessions</span><span class="nav-count">9</span></summary><a class="navlink" href="/docs/reference/design/runtime/session/README.html" data-title-zh="阅读指南" data-href-en="/docs/reference/design/runtime/session/README.html" data-href-zh="/docs/reference/design/runtime/session/README.zh.html">Reading guide</a>
+<a class="navlink" href="/docs/reference/design/runtime/session/storage.html" data-title-zh="数据模型" data-href-en="/docs/reference/design/runtime/session/storage.html" data-href-zh="/docs/reference/design/runtime/session/storage.zh.html">Data model</a>
+<a class="navlink" href="/docs/reference/design/runtime/session/operations.html" data-title-zh="操作流程" data-href-en="/docs/reference/design/runtime/session/operations.html" data-href-zh="/docs/reference/design/runtime/session/operations.zh.html">Operations</a>
+<a class="navlink" href="/docs/reference/design/runtime/session/context.html" data-title-zh="上下文" data-href-en="/docs/reference/design/runtime/session/context.html" data-href-zh="/docs/reference/design/runtime/session/context.zh.html">Context</a>
+<a class="navlink" href="/docs/reference/design/runtime/session/unified-session-context.html" data-title-zh="上下文创建" data-href-en="/docs/reference/design/runtime/session/unified-session-context.html" data-href-zh="/docs/reference/design/runtime/session/unified-session-context.zh.html">Context creation</a>
+<a class="navlink" href="/docs/reference/design/runtime/session/additional-working-directories.html" data-title-zh="工作目录" data-href-en="/docs/reference/design/runtime/session/additional-working-directories.html" data-href-zh="/docs/reference/design/runtime/session/additional-working-directories.zh.html">Working directories</a>
+<a class="navlink" href="/docs/reference/design/runtime/session/comparison.html" data-title-zh="管理对比" data-href-en="/docs/reference/design/runtime/session/comparison.html" data-href-zh="/docs/reference/design/runtime/session/comparison.zh.html">Management comparison</a>
+<a class="navlink" href="/docs/reference/design/runtime/session/storage-consistency.html" data-title-zh="存储一致性" data-href-en="/docs/reference/design/runtime/session/storage-consistency.html" data-href-zh="/docs/reference/design/runtime/session/storage-consistency.zh.html">Storage consistency</a>
+<a class="navlink" href="/docs/reference/design/runtime/session/name.html" data-title-zh="标题生成" data-href-en="/docs/reference/design/runtime/session/name.html" data-href-zh="/docs/reference/design/runtime/session/name.zh.html">Title generation</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="DAG 与协作">DAG and collaboration</span><span class="nav-count">14</span></summary><a class="navlink" href="/docs/reference/design/runtime/dag/overview.html" data-title-zh="设计概览" data-href-en="/docs/reference/design/runtime/dag/overview.html" data-href-zh="/docs/reference/design/runtime/dag/overview.zh.html">Design overview</a>
+<a class="navlink" href="/docs/reference/design/runtime/dag/nested-llm-node-content.html" data-title-zh="LLM 节点内容" data-href-en="/docs/reference/design/runtime/dag/nested-llm-node-content.html" data-href-zh="/docs/reference/design/runtime/dag/nested-llm-node-content.zh.html">LLM node content</a>
+<a class="navlink" href="/docs/reference/design/runtime/collaboration/agent-collaboration.html" data-title-zh="智能体通信" data-href-en="/docs/reference/design/runtime/collaboration/agent-collaboration.html" data-href-zh="/docs/reference/design/runtime/collaboration/agent-collaboration.zh.html">Agent communication</a>
+<a class="navlink" href="/docs/reference/design/runtime/collaboration/agent-collab-architecture.html" data-title-zh="协作工具" data-href-en="/docs/reference/design/runtime/collaboration/agent-collab-architecture.html" data-href-zh="/docs/reference/design/runtime/collaboration/agent-collab-architecture.zh.html">Collaboration tools</a>
+<a class="navlink" href="/docs/reference/design/runtime/collaboration/agent-collab-comparison.html" data-title-zh="协作对比" data-href-en="/docs/reference/design/runtime/collaboration/agent-collab-comparison.html" data-href-zh="/docs/reference/design/runtime/collaboration/agent-collab-comparison.zh.html">Collaboration comparison</a>
+<a class="navlink" href="/docs/reference/design/runtime/dag/branch-collaboration.html" data-title-zh="分支协作" data-href-en="/docs/reference/design/runtime/dag/branch-collaboration.html" data-href-zh="/docs/reference/design/runtime/dag/branch-collaboration.zh.html">Branch collaboration</a>
+<a class="navlink" href="/docs/reference/design/runtime/dag/layout.html" data-title-zh="布局规范" data-href-en="/docs/reference/design/runtime/dag/layout.html" data-href-zh="/docs/reference/design/runtime/dag/layout.zh.html">Layout specification</a>
+<a class="navlink" href="/docs/reference/design/runtime/dag/external-program-run-node.html" data-title-zh="程序节点" data-href-en="/docs/reference/design/runtime/dag/external-program-run-node.html" data-href-zh="/docs/reference/design/runtime/dag/external-program-run-node.zh.html">Program nodes</a>
+<a class="navlink" href="/docs/reference/design/runtime/dag/persistence-observability.html" data-title-zh="Agent 图所有权" data-href-en="/docs/reference/design/runtime/dag/persistence-observability.html" data-href-zh="/docs/reference/design/runtime/dag/persistence-observability.zh.html">Agent DAG ownership</a>
+<a class="navlink" href="/docs/reference/design/runtime/dag/rendering.html" data-title-zh="渲染规范" data-href-en="/docs/reference/design/runtime/dag/rendering.html" data-href-zh="/docs/reference/design/runtime/dag/rendering.zh.html">Rendering specification</a>
+<a class="navlink" href="/docs/reference/design/runtime/operations/branch-naming.html" data-title-zh="分支命名" data-href-en="/docs/reference/design/runtime/operations/branch-naming.html" data-href-zh="/docs/reference/design/runtime/operations/branch-naming.zh.html">Branch naming</a>
+<a class="navlink" href="/docs/reference/design/runtime/operations/branch-naming.viz.html" data-title-zh="命名图解" data-href-en="/docs/reference/design/runtime/operations/branch-naming.viz.html" data-href-zh="/docs/reference/design/runtime/operations/branch-naming.zh.viz.html">Naming diagram</a>
+<a class="navlink" href="/docs/reference/design/runtime/operations/edge-field-rename.html" data-title-zh="边字段命名" data-href-en="/docs/reference/design/runtime/operations/edge-field-rename.html" data-href-zh="/docs/reference/design/runtime/operations/edge-field-rename.zh.html">Edge naming</a>
+<a class="navlink" href="/docs/reference/design/runtime/operations/unify-parent-called-by.html" data-title-zh="调用者标识" data-href-en="/docs/reference/design/runtime/operations/unify-parent-called-by.html" data-href-zh="/docs/reference/design/runtime/operations/unify-parent-called-by.zh.html">Caller identity</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="目标与恢复">Goals and recovery</span><span class="nav-count">10</span></summary><a class="navlink" href="/docs/reference/design/runtime/reliability/goal-and-recovery.html" data-title-zh="目标与恢复" data-href-en="/docs/reference/design/runtime/reliability/goal-and-recovery.html" data-href-zh="/docs/reference/design/runtime/reliability/goal-and-recovery.zh.html">Goals and recovery</a>
+<a class="navlink" href="/docs/reference/design/runtime/always-on-agents.html" data-title-zh="常驻 Agent" data-href-en="/docs/reference/design/runtime/always-on-agents.html" data-href-zh="/docs/reference/design/runtime/always-on-agents.zh.html">Always-on Agents</a>
+<a class="navlink" href="/docs/reference/design/runtime/security/outbound-hold.html" data-title-zh="代发暂存" data-href-en="/docs/reference/design/runtime/security/outbound-hold.html" data-href-zh="/docs/reference/design/runtime/security/outbound-hold.zh.html">Outbound Hold</a>
+<a class="navlink" href="/docs/reference/design/runtime/reliability/agent-resource-governance.html" data-title-zh="资源配额" data-href-en="/docs/reference/design/runtime/reliability/agent-resource-governance.html" data-href-zh="/docs/reference/design/runtime/reliability/agent-resource-governance.zh.html">Resource quotas</a>
+<a class="navlink" href="/docs/reference/design/runtime/reliability/structured-generation-recovery.html" data-title-zh="生成恢复" data-href-en="/docs/reference/design/runtime/reliability/structured-generation-recovery.html" data-href-zh="/docs/reference/design/runtime/reliability/structured-generation-recovery.zh.html">Generation recovery</a>
+<a class="navlink" href="/docs/reference/design/runtime/reliability/durable-tool-results.html" data-title-zh="工具结果存储" data-href-en="/docs/reference/design/runtime/reliability/durable-tool-results.html" data-href-zh="/docs/reference/design/runtime/reliability/durable-tool-results.zh.html">Tool result storage</a>
+<a class="navlink" href="/docs/reference/design/runtime/operations/streaming-resume.html" data-title-zh="流式恢复" data-href-en="/docs/reference/design/runtime/operations/streaming-resume.html" data-href-zh="/docs/reference/design/runtime/operations/streaming-resume.zh.html">Stream recovery</a>
+<a class="navlink" href="/docs/reference/design/runtime/operations/chat-progress-recovery.html" data-title-zh="进度恢复" data-href-en="/docs/reference/design/runtime/operations/chat-progress-recovery.html" data-href-zh="/docs/reference/design/runtime/operations/chat-progress-recovery.zh.html">Progress recovery</a>
+<a class="navlink" href="/docs/reference/design/runtime/reliability/web-runtime-reliability.html" data-title-zh="网页可靠性" data-href-en="/docs/reference/design/runtime/reliability/web-runtime-reliability.html" data-href-zh="/docs/reference/design/runtime/reliability/web-runtime-reliability.zh.html">Web reliability</a>
+<a class="navlink" href="/docs/reference/design/runtime/reliability/web-frontend-spawn.html" data-title-zh="前端进程" data-href-en="/docs/reference/design/runtime/reliability/web-frontend-spawn.html" data-href-zh="/docs/reference/design/runtime/reliability/web-frontend-spawn.zh.html">Frontend processes</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="配置与操作">Configuration and operations</span><span class="nav-count">10</span></summary><a class="navlink" href="/docs/reference/design/runtime/agent-configuration/agent-configuration-ui.html" data-title-zh="智能体设置" data-href-en="/docs/reference/design/runtime/agent-configuration/agent-configuration-ui.html" data-href-zh="/docs/reference/design/runtime/agent-configuration/agent-configuration-ui.zh.html">Agent settings</a>
+<a class="navlink" href="/docs/reference/design/runtime/agent-configuration/agent-core-configuration-ui.html" data-title-zh="基础设置" data-href-en="/docs/reference/design/runtime/agent-configuration/agent-core-configuration-ui.html" data-href-zh="/docs/reference/design/runtime/agent-configuration/agent-core-configuration-ui.zh.html">Core settings</a>
+<a class="navlink" href="/docs/reference/design/runtime/agent-configuration/agent-tool-configuration-ui.html" data-title-zh="工具设置" data-href-en="/docs/reference/design/runtime/agent-configuration/agent-tool-configuration-ui.html" data-href-zh="/docs/reference/design/runtime/agent-configuration/agent-tool-configuration-ui.zh.html">Tool settings</a>
+<a class="navlink" href="/docs/reference/design/runtime/agent-configuration/agent-capability-configuration-ui.html" data-title-zh="能力设置" data-href-en="/docs/reference/design/runtime/agent-configuration/agent-capability-configuration-ui.html" data-href-zh="/docs/reference/design/runtime/agent-configuration/agent-capability-configuration-ui.zh.html">Capability settings</a>
+<a class="navlink" href="/docs/reference/design/runtime/agent-configuration/agent-configuration-plan.html" data-title-zh="Agent 实施计划" data-href-en="/docs/reference/design/runtime/agent-configuration/agent-configuration-plan.html" data-href-zh="/docs/reference/design/runtime/agent-configuration/agent-configuration-plan.zh.html">Agent implementation plan</a>
+<a class="navlink" href="/docs/reference/design/runtime/agent-configuration/chat-search-settings.html" data-title-zh="聊天搜索" data-href-en="/docs/reference/design/runtime/agent-configuration/chat-search-settings.html" data-href-zh="/docs/reference/design/runtime/agent-configuration/chat-search-settings.zh.html">Chat search</a>
+<a class="navlink" href="/docs/reference/design/runtime/agent-configuration/tool-toggle-management.html" data-title-zh="工具集" data-href-en="/docs/reference/design/runtime/agent-configuration/tool-toggle-management.html" data-href-zh="/docs/reference/design/runtime/agent-configuration/tool-toggle-management.zh.html">Toolsets</a>
+<a class="navlink" href="/docs/reference/design/runtime/agent-configuration/bot-template-references.html" data-title-zh="Bot 模板参考资料" data-href-en="/docs/reference/design/runtime/agent-configuration/bot-template-references.html" data-href-zh="/docs/reference/design/runtime/agent-configuration/bot-template-references.zh.html">Bot template references</a>
+<a class="navlink" href="/docs/reference/design/runtime/operations/user-input-requests.html" data-title-zh="输入请求" data-href-en="/docs/reference/design/runtime/operations/user-input-requests.html" data-href-zh="/docs/reference/design/runtime/operations/user-input-requests.zh.html">Input requests</a>
+<a class="navlink" href="/docs/reference/design/runtime/operations/file-management.html" data-title-zh="文件与恢复" data-href-en="/docs/reference/design/runtime/operations/file-management.html" data-href-zh="/docs/reference/design/runtime/operations/file-management.zh.html">Files and recovery</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="程序与工作流">Programs and workflows</span><span class="nav-count">14</span></summary><a class="navlink" href="/docs/reference/design/function/README.html" data-title-zh="函数" data-href-en="/docs/reference/design/function/README.html" data-href-zh="/docs/reference/design/function/README.zh.html">Functions</a>
+<a class="navlink" href="/docs/reference/design/function/program-model.html" data-title-zh="Program 模型" data-href-en="/docs/reference/design/function/program-model.html" data-href-zh="/docs/reference/design/function/program-model.zh.html">Program Model</a>
+<a class="navlink" href="/docs/reference/design/function/agentic-program.html" data-title-zh="Agentic Program" data-href-en="/docs/reference/design/function/agentic-program.html" data-href-zh="/docs/reference/design/function/agentic-program.zh.html">Agentic Program</a>
+<a class="navlink" href="/docs/reference/design/function/calling-unification.html" data-title-zh="函数调用" data-href-en="/docs/reference/design/function/calling-unification.html" data-href-zh="/docs/reference/design/function/calling-unification.zh.html">Function calling</a>
+<a class="navlink" href="/docs/reference/design/function/tool-guides.html" data-title-zh="工具指南" data-href-en="/docs/reference/design/function/tool-guides.html" data-href-zh="/docs/reference/design/function/tool-guides.zh.html">Tool guides</a>
+<a class="navlink" href="/docs/reference/design/function/calling/code-call.html" data-title-zh="顺序调用" data-href-en="/docs/reference/design/function/calling/code-call.html" data-href-zh="/docs/reference/design/function/calling/code-call.zh.html">Fixed-order calls</a>
+<a class="navlink" href="/docs/reference/design/runtime/programs/application-runtime.html" data-title-zh="应用运行时" data-href-en="/docs/reference/design/runtime/programs/application-runtime.html" data-href-zh="/docs/reference/design/runtime/programs/application-runtime.zh.html">Application runtime</a>
+<a class="navlink" href="/docs/reference/design/runtime/programs/programs-architecture.html" data-title-zh="程序结构" data-href-en="/docs/reference/design/runtime/programs/programs-architecture.html" data-href-zh="/docs/reference/design/runtime/programs/programs-architecture.zh.html">Program structure</a>
+<a class="navlink" href="/docs/reference/design/runtime/programs/meetings.html" data-title-zh="会议" data-href-en="/docs/reference/design/runtime/programs/meetings.html" data-href-zh="/docs/reference/design/runtime/programs/meetings.zh.html">Meetings</a>
+<a class="navlink" href="/docs/reference/design/runtime/workflows/workflow.html" data-title-zh="Workflow" data-href-en="/docs/reference/design/runtime/workflows/workflow.html" data-href-zh="/docs/reference/design/runtime/workflows/workflow.zh.html">Workflows</a>
+<a class="navlink" href="/docs/reference/design/runtime/workflows/workflow-recording.html" data-title-zh="录制 Workflow" data-href-en="/docs/reference/design/runtime/workflows/workflow-recording.html" data-href-zh="/docs/reference/design/runtime/workflows/workflow-recording.zh.html">Recording a workflow</a>
+<a class="navlink" href="/docs/reference/design/runtime/workflows/self-programming-workflow-ui.html" data-title-zh="程序界面" data-href-en="/docs/reference/design/runtime/workflows/self-programming-workflow-ui.html" data-href-zh="/docs/reference/design/runtime/workflows/self-programming-workflow-ui.zh.html">Program interface</a>
+<a class="navlink" href="/docs/reference/design/runtime/execution/llm-and-agent.html" data-title-zh="执行统一方案" data-href-en="/docs/reference/design/runtime/execution/llm-and-agent.html" data-href-zh="/docs/reference/design/runtime/execution/llm-and-agent.zh.html">Execution unification</a>
+<a class="navlink" href="/docs/reference/design/runtime/self-update.html" data-title-zh="自主更新" data-href-en="/docs/reference/design/runtime/self-update.html" data-href-zh="/docs/reference/design/runtime/self-update.zh.html">Self-updates</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="报告">Reports</span><span class="nav-count">4</span></summary><a class="navlink" href="/docs/reference/design/runtime/workflows/report-suite.html" data-title-zh="报告工作流" data-href-en="/docs/reference/design/runtime/workflows/report-suite.html" data-href-zh="/docs/reference/design/runtime/workflows/report-suite.zh.html">Report workflows</a>
+<a class="navlink" href="/docs/reference/design/runtime/workflows/weekly-report.html" data-title-zh="每周报告" data-href-en="/docs/reference/design/runtime/workflows/weekly-report.html" data-href-zh="/docs/reference/design/runtime/workflows/weekly-report.zh.html">Weekly reports</a>
+<a class="navlink" href="/docs/reference/design/runtime/workflows/group-weekly-report.html" data-title-zh="小组报告" data-href-en="/docs/reference/design/runtime/workflows/group-weekly-report.html" data-href-zh="/docs/reference/design/runtime/workflows/group-weekly-report.zh.html">Group reports</a>
+<a class="navlink" href="/docs/reference/design/runtime/workflows/report-delivery-intent.html" data-title-zh="报告交付" data-href-en="/docs/reference/design/runtime/workflows/report-delivery-intent.html" data-href-zh="/docs/reference/design/runtime/workflows/report-delivery-intent.zh.html">Report delivery</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="事件与调度">Events and scheduling</span><span class="nav-count">13</span></summary><a class="navlink" href="/docs/reference/design/proactive/README.html" data-title-zh="主动执行" data-href-en="/docs/reference/design/proactive/README.html" data-href-zh="/docs/reference/design/proactive/README.zh.html">Proactive execution</a>
+<a class="navlink" href="/docs/reference/design/proactive/event-layer.html" data-title-zh="事件层" data-href-en="/docs/reference/design/proactive/event-layer.html" data-href-zh="/docs/reference/design/proactive/event-layer.zh.html">Event layer</a>
+<a class="navlink" href="/docs/reference/design/proactive/event-layer.viz.html" data-title-zh="事件流程图解" data-href-en="/docs/reference/design/proactive/event-layer.viz.html" data-href-zh="/docs/reference/design/proactive/event-layer.zh.viz.html">Event flow diagram</a>
+<a class="navlink" href="/docs/reference/design/proactive/events-and-state.html" data-title-zh="事件与状态" data-href-en="/docs/reference/design/proactive/events-and-state.html" data-href-zh="/docs/reference/design/proactive/events-and-state.zh.html">Events and state</a>
+<a class="navlink" href="/docs/reference/design/proactive/execution-model.html" data-title-zh="规则执行" data-href-en="/docs/reference/design/proactive/execution-model.html" data-href-zh="/docs/reference/design/proactive/execution-model.zh.html">Rule execution</a>
+<a class="navlink" href="/docs/reference/design/proactive/overview.html" data-title-zh="场景概览" data-href-en="/docs/reference/design/proactive/overview.html" data-href-zh="/docs/reference/design/proactive/overview.zh.html">Scenario overview</a>
+<a class="navlink" href="/docs/reference/design/proactive/policies-mvp.html" data-title-zh="规则模板" data-href-en="/docs/reference/design/proactive/policies-mvp.html" data-href-zh="/docs/reference/design/proactive/policies-mvp.zh.html">Rule templates</a>
+<a class="navlink" href="/docs/reference/design/proactive/invariants.html" data-title-zh="不变量" data-href-en="/docs/reference/design/proactive/invariants.html" data-href-zh="/docs/reference/design/proactive/invariants.zh.html">Invariants</a>
+<a class="navlink" href="/docs/reference/design/proactive/event-reference.html" data-title-zh="事件参考" data-href-en="/docs/reference/design/proactive/event-reference.html" data-href-zh="/docs/reference/design/proactive/event-reference.zh.html">Event reference</a>
+<a class="navlink" href="/docs/reference/design/proactive/framework-evolution.viz.html" data-title-zh="信号路由图解" data-href-en="/docs/reference/design/proactive/framework-evolution.viz.html" data-href-zh="/docs/reference/design/proactive/framework-evolution.zh.viz.html">Signal routing diagram</a>
+<a class="navlink" href="/docs/reference/design/proactive/framework-evolution.html" data-title-zh="信号路由" data-href-en="/docs/reference/design/proactive/framework-evolution.html" data-href-zh="/docs/reference/design/proactive/framework-evolution.zh.html">Signal routing</a>
+<a class="navlink" href="/docs/reference/design/proactive/event-triggers.html" data-title-zh="事件触发" data-href-en="/docs/reference/design/proactive/event-triggers.html" data-href-zh="/docs/reference/design/proactive/event-triggers.zh.html">Event Triggers</a>
+<a class="navlink" href="/docs/reference/design/scheduler/memory-integration.html" data-title-zh="记忆接口" data-href-en="/docs/reference/design/scheduler/memory-integration.html" data-href-zh="/docs/reference/design/scheduler/memory-integration.zh.html">Memory interface</a></details>
+</details>
+<details class="nav-branch nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="上下文与记忆">Context and memory</span><span class="nav-count">24</span></summary>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="上下文">Context</span><span class="nav-count">10</span></summary><a class="navlink" href="/docs/reference/design/context/README.html" data-title-zh="阅读指南" data-href-en="/docs/reference/design/context/README.html" data-href-zh="/docs/reference/design/context/README.zh.html">Reading guide</a>
+<a class="navlink" href="/docs/reference/design/context/overview.html" data-title-zh="概览" data-href-en="/docs/reference/design/context/overview.html" data-href-zh="/docs/reference/design/context/overview.zh.html">Overview</a>
+<a class="navlink" href="/docs/reference/design/context/composition.html" data-title-zh="组成" data-href-en="/docs/reference/design/context/composition.html" data-href-zh="/docs/reference/design/context/composition.zh.html">Composition</a>
+<a class="navlink" href="/docs/reference/design/context/compaction.html" data-title-zh="压缩" data-href-en="/docs/reference/design/context/compaction.html" data-href-zh="/docs/reference/design/context/compaction.zh.html">Compaction</a>
+<a class="navlink" href="/docs/reference/design/context/compaction-diagram.html" data-title-zh="压缩图解" data-href-en="/docs/reference/design/context/compaction-diagram.html" data-href-zh="/docs/reference/design/context/compaction-diagram.zh.html">Compaction diagram</a>
+<a class="navlink" href="/docs/reference/design/context/occupancy-status.html" data-title-zh="占用状态" data-href-en="/docs/reference/design/context/occupancy-status.html" data-href-zh="/docs/reference/design/context/occupancy-status.zh.html">Occupancy</a>
+<a class="navlink" href="/docs/reference/design/context/statistics.html" data-title-zh="统计口径" data-href-en="/docs/reference/design/context/statistics.html" data-href-zh="/docs/reference/design/context/statistics.zh.html">Accounting rules</a>
+<a class="navlink" href="/docs/reference/design/context/memory-introspection.html" data-title-zh="记忆自查" data-href-en="/docs/reference/design/context/memory-introspection.html" data-href-zh="/docs/reference/design/context/memory-introspection.zh.html">Memory introspection</a>
+<a class="navlink" href="/docs/reference/design/context/comparison.html" data-title-zh="方案对比" data-href-en="/docs/reference/design/context/comparison.html" data-href-zh="/docs/reference/design/context/comparison.zh.html">Design comparison</a>
+<a class="navlink" href="/docs/reference/design/context/claude-code-compaction.html" data-title-zh="Claude 压缩" data-href-en="/docs/reference/design/context/claude-code-compaction.html" data-href-zh="/docs/reference/design/context/claude-code-compaction.zh.html">Claude Code compaction</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="记忆">Memory</span><span class="nav-count">14</span></summary><a class="navlink" href="/docs/reference/design/memory/README.html" data-title-zh="阅读指南" data-href-en="/docs/reference/design/memory/README.html" data-href-zh="/docs/reference/design/memory/README.zh.html">Reading guide</a>
+<a class="navlink" href="/docs/reference/design/memory/overview.html" data-title-zh="架构概览" data-href-en="/docs/reference/design/memory/overview.html" data-href-zh="/docs/reference/design/memory/overview.zh.html">Architecture overview</a>
+<a class="navlink" href="/docs/reference/design/memory/architecture.html" data-title-zh="架构图解" data-href-en="/docs/reference/design/memory/architecture.html" data-href-zh="/docs/reference/design/memory/architecture.zh.html">Architecture diagrams</a>
+<a class="navlink" href="/docs/reference/design/memory/entity-memory-proposal.html" data-title-zh="实体记忆提案" data-href-en="/docs/reference/design/memory/entity-memory-proposal.html" data-href-zh="/docs/reference/design/memory/entity-memory-proposal.zh.html">Entity memory proposal</a>
+<a class="navlink" href="/docs/reference/design/memory/virtual-memory.html" data-title-zh="抽象记忆" data-href-en="/docs/reference/design/memory/virtual-memory.html" data-href-zh="/docs/reference/design/memory/virtual-memory.zh.html">Virtual memory</a>
+<a class="navlink" href="/docs/reference/design/memory/authority-handoff.html" data-title-zh="权限与配对" data-href-en="/docs/reference/design/memory/authority-handoff.html" data-href-zh="/docs/reference/design/memory/authority-handoff.zh.html">Authority and pairing</a>
+<a class="navlink" href="/docs/reference/design/memory/authority-landscape.html" data-title-zh="权限对比" data-href-en="/docs/reference/design/memory/authority-landscape.html" data-href-zh="/docs/reference/design/memory/authority-landscape.zh.html">Authority comparison</a>
+<a class="navlink" href="/docs/reference/design/memory/adoption.html" data-title-zh="方案采用" data-href-en="/docs/reference/design/memory/adoption.html" data-href-zh="/docs/reference/design/memory/adoption.zh.html">Design adoption</a>
+<a class="navlink" href="/docs/reference/design/memory/comparison.html" data-title-zh="写入对比" data-href-en="/docs/reference/design/memory/comparison.html" data-href-zh="/docs/reference/design/memory/comparison.zh.html">Write comparison</a>
+<a class="navlink" href="/docs/reference/design/memory/editor.html" data-title-zh="编辑与历史" data-href-en="/docs/reference/design/memory/editor.html" data-href-zh="/docs/reference/design/memory/editor.zh.html">Editor and history</a>
+<a class="navlink" href="/docs/reference/design/memory/settings-ui.html" data-title-zh="设置提案" data-href-en="/docs/reference/design/memory/settings-ui.html" data-href-zh="/docs/reference/design/memory/settings-ui.zh.html">Settings proposal</a>
+<a class="navlink" href="/docs/reference/design/memory/speaker-identity.html" data-title-zh="发言人身份" data-href-en="/docs/reference/design/memory/speaker-identity.html" data-href-zh="/docs/reference/design/memory/speaker-identity.zh.html">Speaker identity</a>
+<a class="navlink" href="/docs/reference/design/memory/written-marker.viz.html" data-title-zh="写入游标图解" data-href-en="/docs/reference/design/memory/written-marker.viz.html" data-href-zh="/docs/reference/design/memory/written-marker.zh.viz.html">Write cursor diagram</a>
+<a class="navlink" href="/docs/reference/design/memory/written-marker.html" data-title-zh="写入游标" data-href-en="/docs/reference/design/memory/written-marker.html" data-href-zh="/docs/reference/design/memory/written-marker.zh.html">Write cursor</a></details>
+</details>
+<details class="nav-branch nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="界面与交互">Interfaces</span><span class="nav-count">69</span></summary>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="基础">Foundations</span><span class="nav-count">17</span></summary><a class="navlink" href="/docs/reference/design/ui/README.html" data-title-zh="网页界面" data-href-en="/docs/reference/design/ui/README.html" data-href-zh="/docs/reference/design/ui/README.zh.html">Web UI</a>
+<a class="navlink" href="/docs/reference/design/ui/desktop/app-icon.html" data-title-zh="应用图标" data-href-en="/docs/reference/design/ui/desktop/app-icon.html" data-href-zh="/docs/reference/design/ui/desktop/app-icon.zh.html">App icon</a>
+<a class="navlink" href="/docs/reference/design/ui/invariants.html" data-title-zh="界面不变量" data-href-en="/docs/reference/design/ui/invariants.html" data-href-zh="/docs/reference/design/ui/invariants.zh.html">UI invariants</a>
+<a class="navlink" href="/docs/reference/design/ui/visual-system/design-tokens.html" data-title-zh="设计 token" data-href-en="/docs/reference/design/ui/visual-system/design-tokens.html" data-href-zh="/docs/reference/design/ui/visual-system/design-tokens.zh.html">Design tokens</a>
+<a class="navlink" href="/docs/reference/design/ui/visual-system/surface-system.html" data-title-zh="界面层次" data-href-en="/docs/reference/design/ui/visual-system/surface-system.html" data-href-zh="/docs/reference/design/ui/visual-system/surface-system.zh.html">UI surfaces</a>
+<a class="navlink" href="/docs/reference/design/ui/state-layer.html" data-title-zh="状态存储" data-href-en="/docs/reference/design/ui/state-layer.html" data-href-zh="/docs/reference/design/ui/state-layer.zh.html">State stores</a>
+<a class="navlink" href="/docs/reference/design/ui/visual-system/theme-system.html" data-title-zh="主题" data-href-en="/docs/reference/design/ui/visual-system/theme-system.html" data-href-zh="/docs/reference/design/ui/visual-system/theme-system.zh.html">Themes</a>
+<a class="navlink" href="/docs/reference/design/ui/desktop/window-state.html" data-title-zh="窗口状态" data-href-en="/docs/reference/design/ui/desktop/window-state.html" data-href-zh="/docs/reference/design/ui/desktop/window-state.zh.html">Window state</a>
+<a class="navlink" href="/docs/reference/design/ui/workspace/center-canvas-layout.html" data-title-zh="中间画布：任意分屏布局 — 交互原型与规划" data-href-en="/docs/reference/design/ui/workspace/center-canvas-layout.html" data-href-zh="/docs/reference/design/ui/workspace/center-canvas-layout.zh.html">Center canvas layout</a>
+<a class="navlink" href="/docs/reference/design/ui/workspace/session-tab-identity.html" data-title-zh="标签身份" data-href-en="/docs/reference/design/ui/workspace/session-tab-identity.html" data-href-zh="/docs/reference/design/ui/workspace/session-tab-identity.zh.html">Tab identity</a>
+<a class="navlink" href="/docs/reference/design/ui/desktop/window-lifecycle.html" data-title-zh="窗口生命周期" data-href-en="/docs/reference/design/ui/desktop/window-lifecycle.html" data-href-zh="/docs/reference/design/ui/desktop/window-lifecycle.zh.html">Window lifecycle</a>
+<a class="navlink" href="/docs/reference/design/ui/visual-system/web-styles.html" data-title-zh="样式组织" data-href-en="/docs/reference/design/ui/visual-system/web-styles.html" data-href-zh="/docs/reference/design/ui/visual-system/web-styles.zh.html">Style organization</a>
+<a class="navlink" href="/docs/reference/design/ui/interaction-feedback.html" data-title-zh="交互反馈" data-href-en="/docs/reference/design/ui/interaction-feedback.html" data-href-zh="/docs/reference/design/ui/interaction-feedback.zh.html">Interaction feedback</a>
+<a class="navlink" href="/docs/reference/design/ui/page-loading-performance.html" data-title-zh="页面加载性能" data-href-en="/docs/reference/design/ui/page-loading-performance.html" data-href-zh="/docs/reference/design/ui/page-loading-performance.zh.html">Page loading performance</a>
+<a class="navlink" href="/docs/reference/design/ui/visual-system/indicator-dots.html" data-title-zh="状态指示" data-href-en="/docs/reference/design/ui/visual-system/indicator-dots.html" data-href-zh="/docs/reference/design/ui/visual-system/indicator-dots.zh.html">Status indicators</a>
+<a class="navlink" href="/docs/reference/design/ui/visual-system/agent-avatars.html" data-title-zh="Agent 头像" data-href-en="/docs/reference/design/ui/visual-system/agent-avatars.html" data-href-zh="/docs/reference/design/ui/visual-system/agent-avatars.zh.html">Agent avatars</a>
+<a class="navlink" href="/docs/reference/design/ui/sidebar/session-status.html" data-title-zh="会话状态" data-href-en="/docs/reference/design/ui/sidebar/session-status.html" data-href-zh="/docs/reference/design/ui/sidebar/session-status.zh.html">Session status</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="对话与编辑器">Chat and composer</span><span class="nav-count">20</span></summary><a class="navlink" href="/docs/reference/design/ui/chat/attachment-handling.html" data-title-zh="附件方案" data-href-en="/docs/reference/design/ui/chat/attachment-handling.html" data-href-zh="/docs/reference/design/ui/chat/attachment-handling.zh.html">Attachment options</a>
+<a class="navlink" href="/docs/reference/design/ui/chat/chat-attachments.html" data-title-zh="附件传递" data-href-en="/docs/reference/design/ui/chat/chat-attachments.html" data-href-zh="/docs/reference/design/ui/chat/chat-attachments.zh.html">Attachment delivery</a>
+<a class="navlink" href="/docs/reference/design/ui/chat/chat-turn-visual-spec.html" data-title-zh="聊天轮次布局" data-href-en="/docs/reference/design/ui/chat/chat-turn-visual-spec.html" data-href-zh="/docs/reference/design/ui/chat/chat-turn-visual-spec.zh.html">Chat turn layout</a>
+<a class="navlink" href="/docs/reference/design/ui/chat/tool-group-summary.html" data-title-zh="工具组摘要" data-href-en="/docs/reference/design/ui/chat/tool-group-summary.html" data-href-zh="/docs/reference/design/ui/chat/tool-group-summary.zh.html">Tool group summary</a>
+<a class="navlink" href="/docs/reference/design/ui/chat/sub-agent-row.html" data-title-zh="子代理行" data-href-en="/docs/reference/design/ui/chat/sub-agent-row.html" data-href-zh="/docs/reference/design/ui/chat/sub-agent-row.zh.html">Sub-agent row</a>
+<a class="navlink" href="/docs/reference/design/ui/chat/activity-panel.html" data-title-zh="Activity 面板" data-href-en="/docs/reference/design/ui/chat/activity-panel.html" data-href-zh="/docs/reference/design/ui/chat/activity-panel.zh.html">Activity panel</a>
+<a class="navlink" href="/docs/reference/design/ui/chat/chat-transcript-follow.html" data-title-zh="会话记录跟随" data-href-en="/docs/reference/design/ui/chat/chat-transcript-follow.html" data-href-zh="/docs/reference/design/ui/chat/chat-transcript-follow.zh.html">Transcript following</a>
+<a class="navlink" href="/docs/reference/design/ui/composer/composer-interaction-modes.html" data-title-zh="输入框交互" data-href-en="/docs/reference/design/ui/composer/composer-interaction-modes.html" data-href-zh="/docs/reference/design/ui/composer/composer-interaction-modes.zh.html">Composer interaction</a>
+<a class="navlink" href="/docs/reference/design/ui/composer/composer-local-attachment-paths.html" data-title-zh="附件路径" data-href-en="/docs/reference/design/ui/composer/composer-local-attachment-paths.html" data-href-zh="/docs/reference/design/ui/composer/composer-local-attachment-paths.zh.html">Attachment paths</a>
+<a class="navlink" href="/docs/reference/design/ui/composer/composer-responsive-controls.html" data-title-zh="响应式控件" data-href-en="/docs/reference/design/ui/composer/composer-responsive-controls.html" data-href-zh="/docs/reference/design/ui/composer/composer-responsive-controls.zh.html">Responsive controls</a>
+<a class="navlink" href="/docs/reference/design/ui/composer/composer-options-menu.html" data-title-zh="输入框选项菜单" data-href-en="/docs/reference/design/ui/composer/composer-options-menu.html" data-href-zh="/docs/reference/design/ui/composer/composer-options-menu.zh.html">Composer options menu</a>
+<a class="navlink" href="/docs/reference/design/ui/composer/composer-fast-control.html" data-title-zh="速度控制" data-href-en="/docs/reference/design/ui/composer/composer-fast-control.html" data-href-zh="/docs/reference/design/ui/composer/composer-fast-control.zh.html">Speed control</a>
+<a class="navlink" href="/docs/reference/design/ui/browser/agent-control-overlay.html" data-title-zh="Agent 控制提示层" data-href-en="/docs/reference/design/ui/browser/agent-control-overlay.html" data-href-zh="/docs/reference/design/ui/browser/agent-control-overlay.zh.html">Agent control overlay</a>
+<a class="navlink" href="/docs/reference/design/ui/resources/resource-preview.html" data-title-zh="资源与操作预览" data-href-en="/docs/reference/design/ui/resources/resource-preview.html" data-href-zh="/docs/reference/design/ui/resources/resource-preview.zh.html">Resources and operation preview</a>
+<a class="navlink" href="/docs/reference/design/ui/browser/browser-control-surfaces.html" data-title-zh="网页任务控制" data-href-en="/docs/reference/design/ui/browser/browser-control-surfaces.html" data-href-zh="/docs/reference/design/ui/browser/browser-control-surfaces.zh.html">Browser task control</a>
+<a class="navlink" href="/docs/reference/design/ui/turn-lifecycle/send-queue-reliability.html" data-title-zh="队列与执行引导" data-href-en="/docs/reference/design/ui/turn-lifecycle/send-queue-reliability.html" data-href-zh="/docs/reference/design/ui/turn-lifecycle/send-queue-reliability.zh.html">Queue and steering</a>
+<a class="navlink" href="/docs/reference/design/ui/sidebar/session-auto-rename.html" data-title-zh="会话命名" data-href-en="/docs/reference/design/ui/sidebar/session-auto-rename.html" data-href-zh="/docs/reference/design/ui/sidebar/session-auto-rename.zh.html">Session naming</a>
+<a class="navlink" href="/docs/reference/design/ui/composer/slash-and-compact.html" data-title-zh="斜杠命令" data-href-en="/docs/reference/design/ui/composer/slash-and-compact.html" data-href-zh="/docs/reference/design/ui/composer/slash-and-compact.zh.html">Slash commands</a>
+<a class="navlink" href="/docs/reference/design/ui/turn-lifecycle/turn-occupancy.html" data-title-zh="轮次占用" data-href-en="/docs/reference/design/ui/turn-lifecycle/turn-occupancy.html" data-href-zh="/docs/reference/design/ui/turn-lifecycle/turn-occupancy.zh.html">Turn occupancy</a>
+<a class="navlink" href="/docs/reference/design/ui/turn-lifecycle/websocket-command-lifecycle.html" data-title-zh="WebSocket 周期" data-href-en="/docs/reference/design/ui/turn-lifecycle/websocket-command-lifecycle.html" data-href-zh="/docs/reference/design/ui/turn-lifecycle/websocket-command-lifecycle.zh.html">WebSocket lifecycle</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="浏览器与标签页">Browser and tabs</span><span class="nav-count">9</span></summary><a class="navlink" href="/docs/reference/design/ui/browser/browser-extensions.html" data-title-zh="浏览器扩展" data-href-en="/docs/reference/design/ui/browser/browser-extensions.html" data-href-zh="/docs/reference/design/ui/browser/browser-extensions.zh.html">Browser extensions</a>
+<a class="navlink" href="/docs/reference/design/ui/browser/built-in-browser.html" data-title-zh="内置浏览器" data-href-en="/docs/reference/design/ui/browser/built-in-browser.html" data-href-zh="/docs/reference/design/ui/browser/built-in-browser.zh.html">Built-in browser</a>
+<a class="navlink" href="/docs/reference/design/ui/resources/session-resources.html" data-title-zh="会话资源" data-href-en="/docs/reference/design/ui/resources/session-resources.html" data-href-zh="/docs/reference/design/ui/resources/session-resources.zh.html">Session resources</a>
+<a class="navlink" href="/docs/reference/design/ui/workspace/center-tabs-and-split-layout.html" data-title-zh="标签布局" data-href-en="/docs/reference/design/ui/workspace/center-tabs-and-split-layout.html" data-href-zh="/docs/reference/design/ui/workspace/center-tabs-and-split-layout.zh.html">Tab placement</a>
+<a class="navlink" href="/docs/reference/design/ui/desktop/window-tab-transfer.html" data-title-zh="在窗口之间移动标签页" data-href-en="/docs/reference/design/ui/desktop/window-tab-transfer.html" data-href-zh="/docs/reference/design/ui/desktop/window-tab-transfer.zh.html">Moving tabs between windows</a>
+<a class="navlink" href="/docs/reference/design/ui/remote-web-access.viz.html" data-title-zh="远程访问图解" data-href-en="/docs/reference/design/ui/remote-web-access.viz.html" data-href-zh="/docs/reference/design/ui/remote-web-access.zh.viz.html">Remote access diagram</a>
+<a class="navlink" href="/docs/reference/design/ui/remote-web-access.html" data-title-zh="远程访问" data-href-en="/docs/reference/design/ui/remote-web-access.html" data-href-zh="/docs/reference/design/ui/remote-web-access.zh.html">Remote access</a>
+<a class="navlink" href="/docs/reference/design/ui/browser/web-tab-home-button.html" data-title-zh="浏览器主页" data-href-en="/docs/reference/design/ui/browser/web-tab-home-button.html" data-href-zh="/docs/reference/design/ui/browser/web-tab-home-button.zh.html">Browser home</a>
+<a class="navlink" href="/docs/reference/design/ui/browser/web-tab-native-bounds.html" data-title-zh="原生页面边界" data-href-en="/docs/reference/design/ui/browser/web-tab-native-bounds.html" data-href-zh="/docs/reference/design/ui/browser/web-tab-native-bounds.zh.html">Native page bounds</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="设置与目录">Settings and catalog</span><span class="nav-count">4</span></summary><a class="navlink" href="/docs/reference/design/ui/settings/avatar-randomization.html" data-title-zh="头像" data-href-en="/docs/reference/design/ui/settings/avatar-randomization.html" data-href-zh="/docs/reference/design/ui/settings/avatar-randomization.zh.html">Avatars</a>
+<a class="navlink" href="/docs/reference/design/ui/programs/programs-explorer-template.html" data-title-zh="程序浏览器" data-href-en="/docs/reference/design/ui/programs/programs-explorer-template.html" data-href-zh="/docs/reference/design/ui/programs/programs-explorer-template.zh.html">Program explorer</a>
+<a class="navlink" href="/docs/reference/design/ui/programs/programs-source-categories.html" data-title-zh="源码分类" data-href-en="/docs/reference/design/ui/programs/programs-source-categories.html" data-href-zh="/docs/reference/design/ui/programs/programs-source-categories.zh.html">Source categories</a>
+<a class="navlink" href="/docs/reference/design/ui/settings/settings-collapsible-columns.html" data-title-zh="设置导航" data-href-en="/docs/reference/design/ui/settings/settings-collapsible-columns.html" data-href-zh="/docs/reference/design/ui/settings/settings-collapsible-columns.zh.html">Settings navigation</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="工作区与侧栏">Workspace and sidebar</span><span class="nav-count">9</span></summary><a class="navlink" href="/docs/reference/design/ui/workspace/integrated-terminal.html" data-title-zh="内置终端" data-href-en="/docs/reference/design/ui/workspace/integrated-terminal.html" data-href-zh="/docs/reference/design/ui/workspace/integrated-terminal.zh.html">Integrated terminal</a>
+<a class="navlink" href="/docs/reference/design/ui/sidebar/project-order.html" data-title-zh="项目排序" data-href-en="/docs/reference/design/ui/sidebar/project-order.html" data-href-zh="/docs/reference/design/ui/sidebar/project-order.zh.html">Project order</a>
+<a class="navlink" href="/docs/reference/design/ui/workspace/project-location.html" data-title-zh="项目位置" data-href-en="/docs/reference/design/ui/workspace/project-location.html" data-href-zh="/docs/reference/design/ui/workspace/project-location.zh.html">Project location</a>
+<a class="navlink" href="/docs/reference/design/ui/visual-system/file-type-icons.html" data-title-zh="文件图标" data-href-en="/docs/reference/design/ui/visual-system/file-type-icons.html" data-href-zh="/docs/reference/design/ui/visual-system/file-type-icons.zh.html">File icons</a>
+<a class="navlink" href="/docs/reference/design/ui/workspace/project-workspace.html" data-title-zh="项目工作区" data-href-en="/docs/reference/design/ui/workspace/project-workspace.html" data-href-zh="/docs/reference/design/ui/workspace/project-workspace.zh.html">Project workspace</a>
+<a class="navlink" href="/docs/reference/design/ui/sidebar/right-sidebar-files.html" data-title-zh="文件树" data-href-en="/docs/reference/design/ui/sidebar/right-sidebar-files.html" data-href-zh="/docs/reference/design/ui/sidebar/right-sidebar-files.zh.html">File tree</a>
+<a class="navlink" href="/docs/reference/design/ui/sidebar/right-sidebar-typography.html" data-title-zh="右侧边栏文字排版" data-href-en="/docs/reference/design/ui/sidebar/right-sidebar-typography.html" data-href-zh="/docs/reference/design/ui/sidebar/right-sidebar-typography.zh.html">Right sidebar typography</a>
+<a class="navlink" href="/docs/reference/design/ui/sidebar/sidebars-resizing.html" data-title-zh="侧栏宽度" data-href-en="/docs/reference/design/ui/sidebar/sidebars-resizing.html" data-href-zh="/docs/reference/design/ui/sidebar/sidebars-resizing.zh.html">Sidebar sizing</a>
+<a class="navlink" href="/docs/reference/design/ui/sidebar/secondary-rail.html" data-title-zh="二级侧栏" data-href-en="/docs/reference/design/ui/sidebar/secondary-rail.html" data-href-zh="/docs/reference/design/ui/sidebar/secondary-rail.zh.html">Secondary rail</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="命令行与终端界面">CLI and TUI</span><span class="nav-count">10</span></summary><a class="navlink" href="/docs/reference/design/cli/README.html" data-title-zh="命令行与终端" data-href-en="/docs/reference/design/cli/README.html" data-href-zh="/docs/reference/design/cli/README.zh.html">CLI and TUI</a>
+<a class="navlink" href="/docs/reference/design/cli/config-write-safety.html" data-title-zh="配置安全" data-href-en="/docs/reference/design/cli/config-write-safety.html" data-href-zh="/docs/reference/design/cli/config-write-safety.zh.html">Configuration safety</a>
+<a class="navlink" href="/docs/reference/design/cli/drop-run-command.html" data-title-zh="函数执行" data-href-en="/docs/reference/design/cli/drop-run-command.html" data-href-zh="/docs/reference/design/cli/drop-run-command.zh.html">Function execution</a>
+<a class="navlink" href="/docs/reference/design/cli/naming.html" data-title-zh="命名规范" data-href-en="/docs/reference/design/cli/naming.html" data-href-zh="/docs/reference/design/cli/naming.zh.html">Naming conventions</a>
+<a class="navlink" href="/docs/reference/design/cli/ports.html" data-title-zh="端口配置" data-href-en="/docs/reference/design/cli/ports.html" data-href-zh="/docs/reference/design/cli/ports.zh.html">Port configuration</a>
+<a class="navlink" href="/docs/reference/design/cli/redesign.html" data-title-zh="配置界面" data-href-en="/docs/reference/design/cli/redesign.html" data-href-zh="/docs/reference/design/cli/redesign.zh.html">Configuration interface</a>
+<a class="navlink" href="/docs/reference/design/cli/single-port.html" data-title-zh="单端口架构" data-href-en="/docs/reference/design/cli/single-port.html" data-href-zh="/docs/reference/design/cli/single-port.zh.html">Single-port architecture</a>
+<a class="navlink" href="/docs/reference/design/cli/slash-commands-references.html" data-title-zh="命令对比" data-href-en="/docs/reference/design/cli/slash-commands-references.html" data-href-zh="/docs/reference/design/cli/slash-commands-references.zh.html">Command comparison</a>
+<a class="navlink" href="/docs/reference/design/cli/slash-commands.html" data-title-zh="斜杠命令" data-href-en="/docs/reference/design/cli/slash-commands.html" data-href-zh="/docs/reference/design/cli/slash-commands.zh.html">Slash commands</a>
+<a class="navlink" href="/docs/reference/design/cli/tui-upgrade.html" data-title-zh="会话记录渲染" data-href-en="/docs/reference/design/cli/tui-upgrade.html" data-href-zh="/docs/reference/design/cli/tui-upgrade.zh.html">Transcript rendering</a></details>
+</details>
+<details class="nav-branch nav-disclosure" open><summary><span class="nav-sec-title" data-title-zh="模型与外部接入">Models and connections</span><span class="nav-count">46</span></summary>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="请求与模型">Requests and models</span><span class="nav-count">14</span></summary><a class="navlink" href="/docs/reference/design/providers/README.html" data-title-zh="模型服务" data-href-en="/docs/reference/design/providers/README.html" data-href-zh="/docs/reference/design/providers/README.zh.html">Providers</a>
+<a class="navlink" href="/docs/reference/design/providers/models/overview.html" data-title-zh="模型目录" data-href-en="/docs/reference/design/providers/models/overview.html" data-href-zh="/docs/reference/design/providers/models/overview.zh.html">Model catalog</a>
+<a class="navlink" href="/docs/reference/design/providers/request-build.html" data-title-zh="请求构建" data-href-en="/docs/reference/design/providers/request-build.html" data-href-zh="/docs/reference/design/providers/request-build.zh.html">Request construction</a>
+<a class="navlink" href="/docs/reference/design/providers/request-redaction.html" data-title-zh="请求脱敏" data-href-en="/docs/reference/design/providers/request-redaction.html" data-href-zh="/docs/reference/design/providers/request-redaction.zh.html">Request redaction</a>
+<a class="navlink" href="/docs/reference/design/providers/web-search.html" data-title-zh="网页搜索：先用提供商自带的，再用本地工具" data-href-en="/docs/reference/design/providers/web-search.html" data-href-zh="/docs/reference/design/providers/web-search.zh.html">Web search: provider-side first, local tool second</a>
+<a class="navlink" href="/docs/reference/design/providers/routing-overview.html" data-title-zh="路由总览" data-href-en="/docs/reference/design/providers/routing-overview.html" data-href-zh="/docs/reference/design/providers/routing-overview.zh.html">Routing overview</a>
+<a class="navlink" href="/docs/reference/design/providers/custom-openai-compatible-provider.html" data-title-zh="OpenAI 兼容" data-href-en="/docs/reference/design/providers/custom-openai-compatible-provider.html" data-href-zh="/docs/reference/design/providers/custom-openai-compatible-provider.zh.html">OpenAI compatibility</a>
+<a class="navlink" href="/docs/reference/design/providers/models/fast-tier.html" data-title-zh="高速档位" data-href-en="/docs/reference/design/providers/models/fast-tier.html" data-href-zh="/docs/reference/design/providers/models/fast-tier.zh.html">Fast tier</a>
+<a class="navlink" href="/docs/reference/design/providers/models/thinking-effort.html" data-title-zh="推理强度" data-href-en="/docs/reference/design/providers/models/thinking-effort.html" data-href-zh="/docs/reference/design/providers/models/thinking-effort.zh.html">Thinking effort</a>
+<a class="navlink" href="/docs/reference/design/providers/json-schema-structured-output.html" data-title-zh="结构化输出" data-href-en="/docs/reference/design/providers/json-schema-structured-output.html" data-href-zh="/docs/reference/design/providers/json-schema-structured-output.zh.html">Structured output</a>
+<a class="navlink" href="/docs/reference/design/providers/network-proxy.html" data-title-zh="网络代理" data-href-en="/docs/reference/design/providers/network-proxy.html" data-href-zh="/docs/reference/design/providers/network-proxy.zh.html">Network proxy</a>
+<a class="navlink" href="/docs/reference/design/providers/metadata-load-diagnostics.html" data-title-zh="元数据诊断" data-href-en="/docs/reference/design/providers/metadata-load-diagnostics.html" data-href-zh="/docs/reference/design/providers/metadata-load-diagnostics.zh.html">Metadata diagnostics</a>
+<a class="navlink" href="/docs/reference/design/providers/bailian-model-catalog.html" data-title-zh="百炼模型目录" data-href-en="/docs/reference/design/providers/bailian-model-catalog.html" data-href-zh="/docs/reference/design/providers/bailian-model-catalog.zh.html">Bailian catalog</a>
+<a class="navlink" href="/docs/reference/design/usage-metering.html" data-title-zh="用量统计" data-href-en="/docs/reference/design/usage-metering.html" data-href-zh="/docs/reference/design/usage-metering.zh.html">Usage metering</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="账号与认证">Authentication</span><span class="nav-count">7</span></summary><a class="navlink" href="/docs/reference/design/providers/auth/api-key-resolution-unification.html" data-title-zh="凭据解析" data-href-en="/docs/reference/design/providers/auth/api-key-resolution-unification.html" data-href-zh="/docs/reference/design/providers/auth/api-key-resolution-unification.zh.html">Credential resolution</a>
+<a class="navlink" href="/docs/reference/design/providers/auth/credential-connection-unification.html" data-title-zh="凭据连接" data-href-en="/docs/reference/design/providers/auth/credential-connection-unification.html" data-href-zh="/docs/reference/design/providers/auth/credential-connection-unification.zh.html">Credential connections</a>
+<a class="navlink" href="/docs/reference/design/providers/auth/credential-file-hardening.html" data-title-zh="文件凭据" data-href-en="/docs/reference/design/providers/auth/credential-file-hardening.html" data-href-zh="/docs/reference/design/providers/auth/credential-file-hardening.zh.html">File credentials</a>
+<a class="navlink" href="/docs/reference/design/providers/auth/credential-status-redesign.html" data-title-zh="凭据状态" data-href-en="/docs/reference/design/providers/auth/credential-status-redesign.html" data-href-zh="/docs/reference/design/providers/auth/credential-status-redesign.zh.html">Credential status</a>
+<a class="navlink" href="/docs/reference/design/providers/auth/credential-validation-unification.html" data-title-zh="凭据校验" data-href-en="/docs/reference/design/providers/auth/credential-validation-unification.html" data-href-zh="/docs/reference/design/providers/auth/credential-validation-unification.zh.html">Credential validation</a>
+<a class="navlink" href="/docs/reference/design/providers/auth/unified-account-management.html" data-title-zh="账号轮换" data-href-en="/docs/reference/design/providers/auth/unified-account-management.html" data-href-zh="/docs/reference/design/providers/auth/unified-account-management.zh.html">Account rotation</a>
+<a class="navlink" href="/docs/reference/design/providers/auth/unified-auth-storage.html" data-title-zh="凭据存储" data-href-en="/docs/reference/design/providers/auth/unified-auth-storage.html" data-href-zh="/docs/reference/design/providers/auth/unified-auth-storage.zh.html">Credential storage</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="可靠性">Reliability</span><span class="nav-count">7</span></summary><a class="navlink" href="/docs/reference/design/providers/reliability/error-and-timeout-mechanism.html" data-title-zh="错误与超时" data-href-en="/docs/reference/design/providers/reliability/error-and-timeout-mechanism.html" data-href-zh="/docs/reference/design/providers/reliability/error-and-timeout-mechanism.zh.html">Errors and timeouts</a>
+<a class="navlink" href="/docs/reference/design/providers/reliability/error-retry.html" data-title-zh="重试决策" data-href-en="/docs/reference/design/providers/reliability/error-retry.html" data-href-zh="/docs/reference/design/providers/reliability/error-retry.zh.html">Retry decisions</a>
+<a class="navlink" href="/docs/reference/design/providers/reliability/error-taxonomy-propagation.html" data-title-zh="错误传播" data-href-en="/docs/reference/design/providers/reliability/error-taxonomy-propagation.html" data-href-zh="/docs/reference/design/providers/reliability/error-taxonomy-propagation.zh.html">Error propagation</a>
+<a class="navlink" href="/docs/reference/design/providers/reliability/llm-fault-tolerance.html" data-title-zh="容错" data-href-en="/docs/reference/design/providers/reliability/llm-fault-tolerance.html" data-href-zh="/docs/reference/design/providers/reliability/llm-fault-tolerance.zh.html">Fault tolerance</a>
+<a class="navlink" href="/docs/reference/design/providers/record-replay.html" data-title-zh="录制与回放" data-href-en="/docs/reference/design/providers/record-replay.html" data-href-zh="/docs/reference/design/providers/record-replay.zh.html">Recording and replay</a>
+<a class="navlink" href="/docs/reference/design/providers/record-replay.viz.html" data-title-zh="回放图解" data-href-en="/docs/reference/design/providers/record-replay.viz.html" data-href-zh="/docs/reference/design/providers/record-replay.zh.viz.html">Replay diagram</a>
+<a class="navlink" href="/docs/reference/design/providers/responses-reasoning-replay.html" data-title-zh="推理记录回放" data-href-en="/docs/reference/design/providers/responses-reasoning-replay.html" data-href-zh="/docs/reference/design/providers/responses-reasoning-replay.zh.html">Reasoning replay</a></details>
+<details class="nav-sec nav-disclosure" open><summary><span class="nav-sec-title" data-title-zh="扩展与集成">Extensions and integrations</span><span class="nav-count">14</span></summary><a class="navlink" href="/docs/reference/design/integrations/README.html" data-title-zh="集成" data-href-en="/docs/reference/design/integrations/README.html" data-href-zh="/docs/reference/design/integrations/README.zh.html">Integrations</a>
+<a class="navlink" href="/docs/reference/design/integrations/nooa.html" data-title-zh="直接调用、Agent 类与自动 DAG 上下文" data-href-en="/docs/reference/design/integrations/nooa.html" data-href-zh="/docs/reference/design/integrations/nooa.zh.html">Direct calls, Agent classes and automatic DAG context</a>
+<a class="navlink" href="/docs/reference/design/integrations/editor-integration.html" data-title-zh="编辑器集成" data-href-en="/docs/reference/design/integrations/editor-integration.html" data-href-zh="/docs/reference/design/integrations/editor-integration.zh.html">Editor integration</a>
+<a class="navlink" href="/docs/reference/design/integrations/extension-management.html" data-title-zh="扩展管理" data-href-en="/docs/reference/design/integrations/extension-management.html" data-href-zh="/docs/reference/design/integrations/extension-management.zh.html">Extension management</a>
+<a class="navlink" href="/docs/reference/design/integrations/harness-standard.html" data-title-zh="运行环境规范" data-href-en="/docs/reference/design/integrations/harness-standard.html" data-href-zh="/docs/reference/design/integrations/harness-standard.zh.html">Harness standard</a>
+<a class="navlink" href="/docs/reference/design/integrations/mcp-integration.html" data-title-zh="MCP 工具" data-href-en="/docs/reference/design/integrations/mcp-integration.html" data-href-zh="/docs/reference/design/integrations/mcp-integration.zh.html">MCP tools</a>
+<a class="navlink" href="/docs/reference/design/integrations/mcp-server.html" data-title-zh="MCP 服务端" data-href-en="/docs/reference/design/integrations/mcp-server.html" data-href-zh="/docs/reference/design/integrations/mcp-server.zh.html">MCP server</a>
+<a class="navlink" href="/docs/reference/design/integrations/skills-and-plugins.html" data-title-zh="技能与插件" data-href-en="/docs/reference/design/integrations/skills-and-plugins.html" data-href-zh="/docs/reference/design/integrations/skills-and-plugins.zh.html">Skills and plugins</a>
+<a class="navlink" href="/docs/reference/design/integrations/plugin-runtime.html" data-title-zh="插件运行时" data-href-en="/docs/reference/design/integrations/plugin-runtime.html" data-href-zh="/docs/reference/design/integrations/plugin-runtime.zh.html">Plugin Runtime</a>
+<a class="navlink" href="/docs/reference/design/integrations/web-use.html" data-title-zh="网页自动化" data-href-en="/docs/reference/design/integrations/web-use.html" data-href-zh="/docs/reference/design/integrations/web-use.zh.html">Web automation</a>
+<a class="navlink active" href="/docs/reference/design/integrations/computer-and-browser-use.html" data-title-zh="操控电脑与浏览器" data-href-en="/docs/reference/design/integrations/computer-and-browser-use.html" data-href-zh="/docs/reference/design/integrations/computer-and-browser-use.zh.html">Computer and browser use</a>
+<a class="navlink" href="/docs/reference/design/extension-gating/README.html" data-title-zh="扩展控制" data-href-en="/docs/reference/design/extension-gating/README.html" data-href-zh="/docs/reference/design/extension-gating/README.zh.html">Extension controls</a>
+<a class="navlink" href="/docs/reference/design/extension-gating/future-work.html" data-title-zh="后续工作" data-href-en="/docs/reference/design/extension-gating/future-work.html" data-href-zh="/docs/reference/design/extension-gating/future-work.zh.html">Future work</a>
+<a class="navlink" href="/docs/reference/design/extension-gating/reference-comparison.html" data-title-zh="参考对比" data-href-en="/docs/reference/design/extension-gating/reference-comparison.html" data-href-zh="/docs/reference/design/extension-gating/reference-comparison.zh.html">Reference comparison</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="消息渠道">Channels</span><span class="nav-count">4</span></summary><a class="navlink" href="/docs/reference/design/channels/README.html" data-title-zh="通信渠道" data-href-en="/docs/reference/design/channels/README.html" data-href-zh="/docs/reference/design/channels/README.zh.html">Channels</a>
+<a class="navlink" href="/docs/reference/design/channels/audit.html" data-title-zh="需求约束" data-href-en="/docs/reference/design/channels/audit.html" data-href-zh="/docs/reference/design/channels/audit.zh.html">Requirements</a>
+<a class="navlink" href="/docs/reference/design/channels/design.html" data-title-zh="架构" data-href-en="/docs/reference/design/channels/design.html" data-href-zh="/docs/reference/design/channels/design.zh.html">Architecture</a>
+<a class="navlink" href="/docs/reference/design/channels/chat-bots.html" data-title-zh="渠道上的聊天机器人行为" data-href-en="/docs/reference/design/channels/chat-bots.html" data-href-zh="/docs/reference/design/channels/chat-bots.zh.html">Chat-Bot Behavior on Channels</a></details>
+</details>
+<details class="nav-branch nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="安全与工程">Security and engineering</span><span class="nav-count">18</span></summary>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="安全与权限">Security and permissions</span><span class="nav-count">4</span></summary><a class="navlink" href="/docs/reference/design/runtime/security/sandbox-architecture.html" data-title-zh="权限与沙箱" data-href-en="/docs/reference/design/runtime/security/sandbox-architecture.html" data-href-zh="/docs/reference/design/runtime/security/sandbox-architecture.zh.html">Authority and sandbox</a>
+<a class="navlink" href="/docs/reference/design/runtime/security/system-access.html" data-title-zh="系统访问" data-href-en="/docs/reference/design/runtime/security/system-access.html" data-href-zh="/docs/reference/design/runtime/security/system-access.zh.html">System access</a>
+<a class="navlink" href="/docs/reference/design/runtime/security/ssrf-protection.html" data-title-zh="SSRF 防护" data-href-en="/docs/reference/design/runtime/security/ssrf-protection.html" data-href-zh="/docs/reference/design/runtime/security/ssrf-protection.zh.html">SSRF protection</a>
+<a class="navlink" href="/docs/reference/design/security/dependency-security.html" data-title-zh="依赖安全" data-href-en="/docs/reference/design/security/dependency-security.html" data-href-zh="/docs/reference/design/security/dependency-security.zh.html">Dependency security</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="安装与分发">Distribution</span><span class="nav-count">6</span></summary><a class="navlink" href="/docs/reference/design/distribution/installation-packaging.html" data-title-zh="打包与发布" data-href-en="/docs/reference/design/distribution/installation-packaging.html" data-href-zh="/docs/reference/design/distribution/installation-packaging.zh.html">Packaging and releases</a>
+<a class="navlink" href="/docs/reference/design/distribution/automatic-updates.html" data-title-zh="自动更新" data-href-en="/docs/reference/design/distribution/automatic-updates.html" data-href-zh="/docs/reference/design/distribution/automatic-updates.zh.html">Automatic updates</a>
+<a class="navlink" href="/docs/reference/design/distribution/dev-instance.html" data-title-zh="稳定版与开发版实例" data-href-en="/docs/reference/design/distribution/dev-instance.html" data-href-zh="/docs/reference/design/distribution/dev-instance.zh.html">Stable and development instances</a>
+<a class="navlink" href="/docs/reference/design/distribution/github-publishing.html" data-title-zh="向 GitHub 发布源码" data-href-en="/docs/reference/design/distribution/github-publishing.html" data-href-zh="/docs/reference/design/distribution/github-publishing.zh.html">Publishing source to GitHub</a>
+<a class="navlink" href="/docs/reference/design/distribution/developer-id.html" data-title-zh="Developer ID" data-href-en="/docs/reference/design/distribution/developer-id.html" data-href-zh="/docs/reference/design/distribution/developer-id.zh.html">Developer ID</a>
+<a class="navlink" href="/docs/reference/design/distribution/windows-support.html" data-title-zh="Windows 支持" data-href-en="/docs/reference/design/distribution/windows-support.html" data-href-zh="/docs/reference/design/distribution/windows-support.zh.html">Windows support</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="测试与错误处理">Testing and errors</span><span class="nav-count">3</span></summary><a class="navlink" href="/docs/reference/design/testing/test-system.html" data-title-zh="测试系统" data-href-en="/docs/reference/design/testing/test-system.html" data-href-zh="/docs/reference/design/testing/test-system.zh.html">Test system</a>
+<a class="navlink" href="/docs/reference/design/testing/windows-ci.html" data-title-zh="Windows CI" data-href-en="/docs/reference/design/testing/windows-ci.html" data-href-zh="/docs/reference/design/testing/windows-ci.zh.html">Windows CI</a>
+<a class="navlink" href="/docs/reference/design/error-handling.html" data-title-zh="错误处理" data-href-en="/docs/reference/design/error-handling.html" data-href-zh="/docs/reference/design/error-handling.zh.html">Error handling</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="文档与网站">Documentation and website</span><span class="nav-count">5</span></summary><a class="navlink" href="/docs/reference/design/docs-site.html" data-title-zh="文档站" data-href-en="/docs/reference/design/docs-site.html" data-href-zh="/docs/reference/design/docs-site.zh.html">Documentation site</a>
+<a class="navlink" href="/docs/reference/design/site-discoverability-performance.html" data-title-zh="站点检索" data-href-en="/docs/reference/design/site-discoverability-performance.html" data-href-zh="/docs/reference/design/site-discoverability-performance.zh.html">Site discovery</a>
+<a class="navlink" href="/docs/reference/design/site-agent-readable-docs.html" data-title-zh="Agent 文档" data-href-en="/docs/reference/design/site-agent-readable-docs.html" data-href-zh="/docs/reference/design/site-agent-readable-docs.zh.html">Agent-readable docs</a>
+<a class="navlink" href="/docs/reference/design/site-indexnow-discovery.html" data-title-zh="IndexNow 检索" data-href-en="/docs/reference/design/site-indexnow-discovery.html" data-href-zh="/docs/reference/design/site-indexnow-discovery.zh.html">IndexNow discovery</a>
+<a class="navlink" href="/docs/reference/design/community-discoverability.html" data-title-zh="社区检索" data-href-en="/docs/reference/design/community-discoverability.html" data-href-zh="/docs/reference/design/community-discoverability.zh.html">Community discovery</a></details>
+</details>
+<details class="nav-branch nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="补充材料">Supporting material</span><span class="nav-count">22</span></summary>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="交互原型">Prototypes</span><span class="nav-count">6</span></summary><a class="navlink" href="/docs/reference/design/ui/visual-system/layout-density-prototype.html" data-title-zh="密度原型" data-href-en="/docs/reference/design/ui/visual-system/layout-density-prototype.html" data-href-zh="/docs/reference/design/ui/visual-system/layout-density-prototype.zh.html">Density prototype</a>
+<a class="navlink" href="/docs/reference/design/ui/composer/composer-interaction-prototype.html" data-title-zh="输入框原型" data-href-en="/docs/reference/design/ui/composer/composer-interaction-prototype.html" data-href-zh="/docs/reference/design/ui/composer/composer-interaction-prototype.zh.html">Composer prototype</a>
+<a class="navlink" href="/docs/reference/design/ui/workspace/project-workspace-prototype.html" data-title-zh="工作区原型" data-href-en="/docs/reference/design/ui/workspace/project-workspace-prototype.html" data-href-zh="/docs/reference/design/ui/workspace/project-workspace-prototype.zh.html">Workspace prototype</a>
+<a class="navlink" href="/docs/reference/design/ui/sidebar/sidebar-hierarchy-prototype.html" data-title-zh="侧栏原型" data-href-en="/docs/reference/design/ui/sidebar/sidebar-hierarchy-prototype.html" data-href-zh="/docs/reference/design/ui/sidebar/sidebar-hierarchy-prototype.zh.html">Sidebar prototype</a>
+<a class="navlink" href="/docs/reference/design/ui/sidebar/sidebar-luma-prototype.html" data-title-zh="Sidebar Luma draft" data-href-en="/docs/reference/design/ui/sidebar/sidebar-luma-prototype.html" data-href-zh="/docs/reference/design/ui/sidebar/sidebar-luma-prototype.zh.html">Sidebar Luma prototype</a>
+<a class="navlink" href="/docs/reference/design/runtime/dag/live-layout.html" data-title-zh="实时布局" data-href-en="/docs/reference/design/runtime/dag/live-layout.html" data-href-zh="/docs/reference/design/runtime/dag/live-layout.zh.html">Live layout</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="实施记录">Implementation records</span><span class="nav-count">13</span></summary><a class="navlink" href="/docs/reference/design/runtime/execution/p3-three-surface-sync.html" data-title-zh="界面同步" data-href-en="/docs/reference/design/runtime/execution/p3-three-surface-sync.html" data-href-zh="/docs/reference/design/runtime/execution/p3-three-surface-sync.zh.html">Interface synchronization</a>
+<a class="navlink" href="/docs/reference/design/repository-structure-implementation.html" data-title-zh="仓库迁移" data-href-en="/docs/reference/design/repository-structure-implementation.html" data-href-zh="/docs/reference/design/repository-structure-implementation.zh.html">Repository migration</a>
+<a class="navlink" href="/docs/reference/design/site-indexnow-implementation.html" data-title-zh="IndexNow 实施" data-href-en="/docs/reference/design/site-indexnow-implementation.html" data-href-zh="/docs/reference/design/site-indexnow-implementation.zh.html">IndexNow delivery</a>
+<a class="navlink" href="/docs/reference/design/documentation-gaps.html" data-title-zh="文档差异" data-href-en="/docs/reference/design/documentation-gaps.html" data-href-zh="/docs/reference/design/documentation-gaps.zh.html">Documentation gaps</a>
+<a class="navlink" href="/docs/reference/design/engineering-backlog.html" data-title-zh="工程待办" data-href-en="/docs/reference/design/engineering-backlog.html" data-href-zh="/docs/reference/design/engineering-backlog.zh.html">Engineering backlog</a>
+<a class="navlink" href="/docs/reference/design/ui/visual-system/unification-work.html" data-title-zh="界面统一" data-href-en="/docs/reference/design/ui/visual-system/unification-work.html" data-href-zh="/docs/reference/design/ui/visual-system/unification-work.zh.html">UI unification</a>
+<a class="navlink" href="/docs/reference/design/ui/resources/resource-panel-preview-plan.html" data-title-zh="资源预览" data-href-en="/docs/reference/design/ui/resources/resource-panel-preview-plan.html" data-href-zh="/docs/reference/design/ui/resources/resource-panel-preview-plan.zh.html">Resource preview</a>
+<a class="navlink" href="/docs/reference/design/distribution/implementation-plan.html" data-title-zh="分发计划" data-href-en="/docs/reference/design/distribution/implementation-plan.html" data-href-zh="/docs/reference/design/distribution/implementation-plan.zh.html">Distribution plan</a>
+<a class="navlink" href="/docs/reference/design/extension-gating/implementation.html" data-title-zh="实现对应关系" data-href-en="/docs/reference/design/extension-gating/implementation.html" data-href-zh="/docs/reference/design/extension-gating/implementation.zh.html">Implementation map</a>
+<a class="navlink" href="/docs/reference/design/plans/credential-connection-unification.html" data-title-zh="凭据迁移" data-href-en="/docs/reference/design/plans/credential-connection-unification.html" data-href-zh="/docs/reference/design/plans/credential-connection-unification.zh.html">Credential migration</a>
+<a class="navlink" href="/docs/reference/design/plans/mcp-server-implementation.html" data-title-zh="MCP 实施计划" data-href-en="/docs/reference/design/plans/mcp-server-implementation.html" data-href-zh="/docs/reference/design/plans/mcp-server-implementation.zh.html">MCP implementation</a>
+<a class="navlink" href="/docs/reference/design/plans/cache-control-passthrough.html" data-title-zh="缓存控制" data-href-en="/docs/reference/design/plans/cache-control-passthrough.html" data-href-zh="/docs/reference/design/plans/cache-control-passthrough.zh.html">Cache control</a>
+<a class="navlink" href="/docs/reference/design/plans/proactive-implementation.html" data-title-zh="主动执行实施计划" data-href-en="/docs/reference/design/plans/proactive-implementation.html" data-href-zh="/docs/reference/design/plans/proactive-implementation.zh.html">Proactive implementation</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="研究材料">Research</span><span class="nav-count">3</span></summary><a class="navlink" href="/docs/reference/design/proactive/_research_archive/evaluation.html" data-title-zh="评估" data-href-en="/docs/reference/design/proactive/_research_archive/evaluation.html" data-href-zh="/docs/reference/design/proactive/_research_archive/evaluation.zh.html">Evaluation</a>
+<a class="navlink" href="/docs/reference/design/proactive/_research_archive/replay.html" data-title-zh="策略回放" data-href-en="/docs/reference/design/proactive/_research_archive/replay.html" data-href-zh="/docs/reference/design/proactive/_research_archive/replay.zh.html">Policy replay</a>
+<a class="navlink" href="/docs/reference/design/proactive/_research_archive/threat-model.html" data-title-zh="威胁模型" data-href-en="/docs/reference/design/proactive/_research_archive/threat-model.html" data-href-zh="/docs/reference/design/proactive/_research_archive/threat-model.zh.html">Threat model</a></details>
+</details>
+<details class="nav-branch nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="待分类">Uncategorized</span><span class="nav-count">13</span></summary>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="概览">Overview</span><span class="nav-count">1</span></summary><a class="navlink" href="/docs/reference/design/repository-integration.html" data-title-zh="仓库分支整合" data-href-en="/docs/reference/design/repository-integration.html" data-href-zh="/docs/reference/design/repository-integration.zh.html">Repository integration</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="模型服务">Providers</span><span class="nav-count">2</span></summary><a class="navlink" href="/docs/reference/design/providers/anthropic-api-auth.html" data-title-zh="Anthropic API 认证" data-href-en="/docs/reference/design/providers/anthropic-api-auth.html" data-href-zh="/docs/reference/design/providers/anthropic-api-auth.zh.html">Anthropic API authentication</a>
+<a class="navlink" href="/docs/reference/design/providers/local-models.html" data-title-zh="本地模型 Provider" data-href-en="/docs/reference/design/providers/local-models.html" data-href-zh="/docs/reference/design/providers/local-models.zh.html">Local model providers</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title">Execution</span><span class="nav-count">2</span></summary><a class="navlink" href="/docs/reference/design/runtime/execution/tool-name-resolution.html" data-title-zh="工具名解析" data-href-en="/docs/reference/design/runtime/execution/tool-name-resolution.html" data-href-zh="/docs/reference/design/runtime/execution/tool-name-resolution.zh.html">Tool name resolution</a>
+<a class="navlink" href="/docs/reference/design/runtime/execution/unified-agent.html" data-title-zh="统一 Agent 执行" data-href-en="/docs/reference/design/runtime/execution/unified-agent.html" data-href-zh="/docs/reference/design/runtime/execution/unified-agent.zh.html">Unified Agent execution</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="阅读指南">Reading guide</span><span class="nav-count">1</span></summary><a class="navlink" href="/docs/reference/design/runtime/session/environments.html" data-title-zh="运行环境" data-href-en="/docs/reference/design/runtime/session/environments.html" data-href-zh="/docs/reference/design/runtime/session/environments.zh.html">Environments</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title">Chat</span><span class="nav-count">2</span></summary><a class="navlink" href="/docs/reference/design/ui/chat/chat-compose.html" data-title-zh="聊天引用与消息编辑" data-href-en="/docs/reference/design/ui/chat/chat-compose.html" data-href-zh="/docs/reference/design/ui/chat/chat-compose.zh.html">Chat quotes and message editing</a>
+<a class="navlink" href="/docs/reference/design/ui/chat/chat-recovery-copy.html" data-title-zh="历史渲染与对话链接" data-href-en="/docs/reference/design/ui/chat/chat-recovery-copy.html" data-href-zh="/docs/reference/design/ui/chat/chat-recovery-copy.zh.html">History rendering and conversation links</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title">Composer</span><span class="nav-count">3</span></summary><a class="navlink" href="/docs/reference/design/ui/composer/effort-picker.html" data-title-zh="思考力度设置" data-href-en="/docs/reference/design/ui/composer/effort-picker.html" data-href-zh="/docs/reference/design/ui/composer/effort-picker.zh.html">Effort picker</a>
+<a class="navlink" href="/docs/reference/design/ui/composer/git-folder-pills.html" data-title-zh="文件夹 Git 胶囊" data-href-en="/docs/reference/design/ui/composer/git-folder-pills.html" data-href-zh="/docs/reference/design/ui/composer/git-folder-pills.zh.html">Git folder pills</a>
+<a class="navlink" href="/docs/reference/design/ui/composer/hover-tips.html" data-title-zh="输入框区域的悬停提示" data-href-en="/docs/reference/design/ui/composer/hover-tips.html" data-href-zh="/docs/reference/design/ui/composer/hover-tips.zh.html">Hover tips in the composer</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title">Turn Lifecycle</span><span class="nav-count">1</span></summary><a class="navlink" href="/docs/reference/design/ui/turn-lifecycle/conversation-lifecycle.html" data-title-zh="对话生命周期与响应性" data-href-en="/docs/reference/design/ui/turn-lifecycle/conversation-lifecycle.html" data-href-zh="/docs/reference/design/ui/turn-lifecycle/conversation-lifecycle.zh.html">Conversation lifecycle and responsiveness</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title">Visual System</span><span class="nav-count">1</span></summary><a class="navlink" href="/docs/reference/design/ui/visual-system/icons.html" data-title-zh="图标体系" data-href-en="/docs/reference/design/ui/visual-system/icons.html" data-href-zh="/docs/reference/design/ui/visual-system/icons.zh.html">Icon system</a></details>
+</details></div>
+  </nav>
+  <main class="content"><button class="fs-toggle" aria-label="Fullscreen" title="Fullscreen (Esc to exit)"><svg class="ic-expand" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.2 2H2v4.2M9.8 2H14v4.2M6.2 14H2V9.8M9.8 14H14V9.8"/></svg><svg class="ic-collapse" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6.2h4.2V2M14 6.2H9.8V2M2 9.8h4.2V14M14 9.8H9.8V14"/></svg></button><article><nav class="breadcrumb"><span class="bc-seg" data-title-zh="设计">Design</span> <span class='bc-sep'>›</span> <span class="bc-seg" data-title-zh="模型与外部接入">Models and connections</span> <span class='bc-sep'>›</span> <span class="bc-seg" data-title-zh="扩展与集成">Extensions and integrations</span> <span class='bc-sep'>›</span> <span class="bc-seg bc-current" data-title-zh="操控电脑与浏览器">Computer and browser use</span></nav><h1 id="computer-and-browser-use">Computer and browser use<a class="header-anchor" href="#computer-and-browser-use">#</a></h1>
+<p>OpenProgram gives the model one tool for everything that happens on a screen: <code>computer_use_agent</code>. It operates applications on macOS, Linux and Windows, pages in the App's built-in browser and the headless Chromium, and a remote virtual machine. This record explains the tool's shape, how it hands the model only the instructions it needs, how a click target becomes a screen position, how the model chooses whether the work runs in the current context, and how the application and browser backends underneath are built.</p>
+<h2 id="three-ways-to-give-a-model-a-screen">Three ways to give a model a screen<a class="header-anchor" href="#three-ways-to-give-a-model-a-screen">#</a></h2>
+<p><strong>Codex</strong> (ChatGPT.app) has one execution tool, <code>js</code> in the <code>cua_repl</code> MCP server: the model writes JavaScript against <code>sky</code> (Mac apps) and <code>agent.browsers</code> (the in-app browser, Chrome). The knowledge sits in three skills, <code>computer-use</code>, <code>control-in-app-browser</code> and <code>control-chrome</code>, each about 3,200–3,400 tokens. The context holds one line per skill; the model reads a <code>SKILL.md</code> itself when the task needs it, and the browser skill then has it run <code>documentation()</code> inside <code>js</code> to fetch the browser API reference. Loading costs two or three model calls, and a model that skips the reading does not know the API.</p>
+<p><strong>Claude Code</strong> has many small tools: the built-in browser's <code>navigate</code>, <code>read_page</code>, <code>find</code>, <code>computer</code>, <code>form_input</code> and about fifteen more, whose full schemas are always in context, and a second set for the user's Chrome, deferred as bare names until <code>ToolSearch</code> loads them. Every parameter is schema-checked, but two sets with the same verbs invite picking the wrong one, and the resident set costs context in every conversation.</p>
+<p><strong>OpenProgram</strong> takes Codex's single entry and Claude Code's structured arguments:</p>
+<ul>
+<li><strong>One tool.</strong> <code>computer_use_agent</code> is the only screen tool the model sees. Its schema is small and the same for every target; the actions and their arguments live in per-target guides.</li>
+<li><strong>Guides arrive with the first call.</strong> The tool description is a catalogue of the targets. The first call for a target returns that target's guide together with its current state (installed and running apps, open pages), so the guide costs no extra call and does not depend on the model remembering to read it. The guides are <a href="/docs/reference/design/function/tool-guides.html">tool guides</a>, delivered by the agent loop rather than by the tool.</li>
+<li><strong>Arguments or code.</strong> Simple steps are structured calls (<code>action</code> + <code>args</code>, or up to 20 <code>actions</code>). Steps with loops, conditions or data handling are a Python snippet (<code>code</code>) that runs in an isolated interpreter whose variables survive between calls.</li>
+<li><strong>The model chooses the context.</strong> <code>context: &quot;inherit&quot;</code> (default) runs in the current conversation; <code>context: &quot;fresh&quot;</code> starts an agent with a clean context and a written brief, which returns only its result.</li>
+<li><strong>Pointing is explicit.</strong> A click target is an element index, a page ref, or a pixel of the last screenshot.</li>
+</ul>
+<h2 id="computer_use_agent"><code>computer_use_agent</code><a class="header-anchor" href="#computer_use_agent">#</a></h2>
+<h3 id="shape">Shape<a class="header-anchor" href="#shape">#</a></h3>
+<pre><code>computer_use_agent(target, action?, args?, actions?, code?, timeout?, context?, brief?)
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>target</code></td>
+<td><code>app</code>, <code>browser</code> or <code>vm</code>; all three are always in the schema, and a target this host cannot reach answers with how to set it up</td>
+</tr>
+<tr>
+<td><code>action</code>, <code>args</code></td>
+<td>one step and its arguments; omitted, the call opens the target</td>
+</tr>
+<tr>
+<td><code>actions</code></td>
+<td>up to 20 steps <code>{action, args}</code> on one target, stopping at the first error; the state comes back once</td>
+</tr>
+<tr>
+<td><code>code</code></td>
+<td>Python run in the isolated interpreter (see Code)</td>
+</tr>
+<tr>
+<td><code>timeout</code></td>
+<td>seconds a code call may run, at most 120 (default 60)</td>
+</tr>
+<tr>
+<td><code>context</code></td>
+<td><code>inherit</code> (default) or <code>fresh</code></td>
+</tr>
+<tr>
+<td><code>brief</code></td>
+<td>with <code>fresh</code>: goal, known facts, limits and what to hand back</td>
+</tr>
+</tbody>
+</table>
+<p><code>action</code>, <code>actions</code> and <code>code</code> are exclusive. Arguments are validated by the target, and an error names the right spelling, since the schema does not list every action's arguments.</p>
+<h3 id="targets-and-guides">Targets and guides<a class="header-anchor" href="#targets-and-guides">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Target</th>
+<th>Backend</th>
+<th>Opening returns</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>app</code></td>
+<td><code>openprogram/programs/tools/computer_use/computer_use_agent/desktop/</code> (macOS, Linux X11, Windows)</td>
+<td><code>args.app</code> given: its state (tree and screenshot); otherwise the app list</td>
+</tr>
+<tr>
+<td><code>browser</code></td>
+<td>the tab driver over the App's built-in tabs (below); with <code>args.browser</code> = <code>chrome</code> or <code>edge</code>, Playwright MCP in extension mode connected to the user's browser</td>
+<td>the tab list</td>
+</tr>
+<tr>
+<td><code>vm</code></td>
+<td>an OSWorld-compatible server at <code>computer_use.vm_url</code></td>
+<td>a screenshot</td>
+</tr>
+</tbody>
+</table>
+<p>Each target has a guide (<code>guides/&lt;target&gt;.md</code>; the app guide has macOS, Linux and Windows variants): its actions, their arguments, how results look, and the confirmation policy. <code>tool.py</code> registers them as tool guides: <code>computer_use_agent.&lt;target&gt;</code> is included in the first result of a call that operates that target (<code>context</code> other than <code>fresh</code>); <code>computer_use_agent.code</code> is a lookup guide required by a call with <code>code</code>, so that call is refused once with the guide attached. Whether a guide is known is read from the request the agent loop last sent, so compaction, cleared tool results and a worker restart all lead to the guide being sent again, and a fresh agent, whose prompt holds the marked guides, is not sent them a second time. <code>action: &quot;guide&quot;</code> and <code>help(&quot;computer_use_agent.&lt;target&gt;&quot;)</code> return them on request.</p>
+<p>The <code>app</code> actions are those of the application backend below, with the same arguments; the <code>browser</code> actions are the tab driver's (<code>tabs</code>, <code>open</code>, <code>read</code>, <code>click</code>, <code>type</code> …, see <a href="#browser-target-the-tab-driver">Browser target: the tab driver</a>). As in Codex, the browser is chosen first and the actions do not change with it. <code>args.browser</code> omitted is the built-in browser through the tab driver; <code>chrome</code> or <code>edge</code> is the user's own browser, which the tab driver does not reach. For those, <code>targets/browser.py</code> hands each step to <code>workflow/browser/extension_browser.py</code>, which runs <code>@playwright/mcp --extension --browser chrome|msedge</code> (the version pinned for <code>web_use</code>) through <code>_SyncMCPClient</code>, one server per conversation and browser, kept between calls. The server opens <code>chrome-extension://&lt;id&gt;/connect.html</code> in that browser with the address of its relay, and the Playwright Extension connects back and relays CDP for the tab the user shares; with <code>computer_use.chrome_extension_token</code> set, the server passes <code>PLAYWRIGHT_MCP_EXTENSION_TOKEN</code> and the extension connects without asking. <code>tabs</code>, <code>read</code> (with <code>tab</code> an index, which selects that tab), <code>open</code>, <code>close</code>, <code>screenshot</code>, <code>upload</code>, <code>evaluate</code> and the logs map to the server's tab, snapshot, screenshot, file, evaluate and log tools; every element and pointer action goes through <code>OfficialMCPPageBackend._action_call</code>, the same translation the <code>playwright_mcp</code> backend applies to App Pages. Refs are the server's snapshot refs. Code mode registers no resource for the user's browser.</p>
+<h3 id="pointing">Pointing<a class="header-anchor" href="#pointing">#</a></h3>
+<p>A step points at its target in one of two ways, both passed to the backend as they are:</p>
+<table>
+<thead>
+<tr>
+<th>Given</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>element_index</code> (app) / <code>ref</code> (browser)</td>
+<td>the backend acts on the element</td>
+</tr>
+<tr>
+<td><code>x</code>, <code>y</code></td>
+<td>pixels of the target's last screenshot</td>
+</tr>
+</tbody>
+</table>
+<p>The VM has no element tree, so its pointer actions take <code>x</code>, <code>y</code> only.</p>
+<h3 id="code">Code<a class="header-anchor" href="#code">#</a></h3>
+<p><code>code</code> runs in the persistent sandboxed interpreter of <code>computer_use_agent/sandbox/runner.py</code> (seatbelt on macOS, no file, network or process access). The namespace has <code>cu.app</code>, <code>cu.browser</code> and <code>cu.vm</code>; <code>await cu.app.click(app=&quot;Numbers&quot;, element_index=3)</code> is the structured step <code>click</code> with those arguments, dispatched by the host through the same target code and checks, one effect receipt per step (<code>computer_use_agent/sandbox/broker.py</code>). The prelude gives each <code>cu</code> method the guide line of its action as its docstring, so <code>dir(cu.app)</code> and <code>help(cu.app.click)</code> work inside the interpreter. A code call names its <code>target</code> and, for <code>app</code>, <code>args.app</code>; the approval covers that application, and steps on another application are refused. <code>evaluate</code> is not available inside code, since every page script needs its own approval. One interpreter serves one execution attempt, so variables persist for the rest of the turn; it is replaced when it fails or times out. Each call may run 120 seconds and 100 steps. Code mode needs the macOS sandbox; elsewhere a code call reports that the sandbox is unavailable.</p>
+<h3 id="context">Context<a class="header-anchor" href="#context">#</a></h3>
+<p><code>context: &quot;fresh&quot;</code> hands the task to an agent with a clean context through the generic <code>agent</code> spawn (<code>_agent_impl</code>, <code>start_from=&quot;clean&quot;</code>): same session, same model and thinking settings, the result returned as this call's result. Its prompt is the brief, a line naming the target (and <code>args.app</code>), and the target's guide. Its screenshots stay in its context. The spawn depth limit keeps it from starting another one.</p>
+<p>A spawned agent cannot ask for approval, so the <code>fresh</code> call carries it: it names the target and, for <code>app</code>, <code>args.app</code>, and goes through the same approval as a direct call. While the agent runs, the call's exact rule is written as a session rule (unless one already exists) and removed when the agent returns, so the agent's own calls match it and nothing outlives the call.</p>
+<h3 id="approval-and-access">Approval and access<a class="header-anchor" href="#approval-and-access">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Call</th>
+<th>Approval</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>app</code> (except <code>list_apps</code>)</td>
+<td>per application, as before: rule <code>computer_use_agent(&lt;app&gt;)</code>, asked in the modes that ask; former <code>computer_use(&lt;app&gt;)</code> rules still match</td>
+</tr>
+<tr>
+<td><code>browser</code></td>
+<td>the turn's Page grant when the conversation has Pages; otherwise the permission mode; <code>evaluate</code> runs in bypass; otherwise it asks, once or for this conversation</td>
+</tr>
+<tr>
+<td><code>browser</code> with <code>args.browser</code></td>
+<td>the user's Chrome or Edge, once per conversation: rule <code>computer_use_agent(browser:chrome)</code> (or <code>browser:edge</code>), never the Page grant; <code>evaluate</code> is allowed apart from that grant (rule <code>computer_use_agent(browser:chrome:evaluate)</code>)</td>
+</tr>
+<tr>
+<td><code>vm</code></td>
+<td>per endpoint: rule <code>computer_use_agent(vm:&lt;url&gt;)</code></td>
+</tr>
+<tr>
+<td><code>fresh</code></td>
+<td>as the target it names</td>
+</tr>
+</tbody>
+</table>
+<p>System access (Accessibility, Screen Recording) gates <code>app</code> calls other than <code>list_apps</code> as before.</p>
+<h3 id="module-layout">Module layout<a class="header-anchor" href="#module-layout">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Module</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>openprogram/programs/tools/computer_use/computer_use_agent/tool.py</code></td>
+<td>the registered tool: schema, catalogue, routing, guide registration, approval reason</td>
+</tr>
+<tr>
+<td><code>…/computer_use_agent/guides/</code></td>
+<td>the target guides</td>
+</tr>
+<tr>
+<td><code>…/computer_use_agent/targets/app.py</code></td>
+<td>application actions over <code>openprogram/programs/tools/computer_use/computer_use_agent/desktop/</code></td>
+</tr>
+<tr>
+<td><code>…/computer_use_agent/targets/browser.py</code></td>
+<td>the browser actions: the tab driver (the <code>browser</code> service's <code>tabs</code>), or the user's browser (its <code>extension</code>)</td>
+</tr>
+<tr>
+<td><code>…/computer_use_agent/targets/vm.py</code></td>
+<td>screenshot and pyautogui input over the VM server's HTTP API</td>
+</tr>
+<tr>
+<td><code>…/computer_use_agent/code.py</code></td>
+<td>code mode over <code>computer_use_agent/sandbox/runner.py</code> and <code>sandbox/broker.py</code></td>
+</tr>
+<tr>
+<td><code>…/computer_use_agent/fresh.py</code></td>
+<td>the clean-context agent</td>
+</tr>
+</tbody>
+</table>
+<p>There is no separate plan → decide → act → verify loop: a long task goes to a <code>fresh</code> agent working with this same tool.</p>
+<h2 id="application-backend">Application backend<a class="header-anchor" href="#application-backend">#</a></h2>
+<h3 id="shape-1">Shape<a class="header-anchor" href="#shape-1">#</a></h3>
+<pre><code>computer_use_agent(target=&quot;app&quot;, action, args={app, element_index | x,y, …})
+</code></pre>
+<p>Actions come in three groups:</p>
+<ul>
+<li><strong>Reading:</strong> <code>list_apps</code>, <code>list_windows</code>, <code>get_app_state</code> (<code>include</code> = all / tree / screenshot, <code>window</code> or <code>window_id</code>), <code>zoom</code> (a region of the last screenshot at full pixel density), <code>find</code> (text and role search over the last tree).</li>
+<li><strong>Acting</strong>, Codex's target API: <code>click</code> (button, count, held modifiers, hold duration), <code>type_text</code>, <code>press_key</code>, <code>set_value</code>, <code>scroll</code> (pages or pixels), <code>drag</code>, <code>perform_secondary_action</code>, <code>select_text</code>, <code>paste</code>; and from the Claude app's <code>app_*</code> set: <code>copy</code>, <code>focus</code>, <code>menu</code>, <code>show_window</code>; and <code>open_file</code> (macOS).</li>
+<li><strong>Several steps</strong> (<code>actions</code>): up to 20 acting steps on one app, in order, stopping at the first error; one settle and one state at the end.</li>
+</ul>
+<p>Only <code>list_apps</code> is approval-free. A step in <code>actions</code> cannot name a different app, because the approval the call carries names only the call's app.</p>
+<p>Every acting call returns <code>Done: &lt;summary&gt;</code> followed by the Accessibility tree <strong>diff</strong> against the state the model last saw: <code>- line</code> for elements that vanished, <code>+ index line</code> for new or changed ones. When more than half the lines (and at least twelve) changed, the whole tree is returned instead, because a diff of a rebuilt view is longer than the view. <code>get_app_state(full=true)</code> returns the full tree on demand. The tree is capped at 1500 nodes and rendered one element per line: index, role (<code>AXTextField</code> → <code>text field</code>, with the subrole in parentheses), label, value, placeholder, flags (<code>focused</code>, <code>selected</code>, <code>checked</code>, <code>disabled</code>, <code>secure</code>, <code>settable</code> …) and the element's secondary actions other than the primary press. Bidirectional marks some apps wrap numbers in are dropped from the rendering and from <code>find</code>.</p>
+<p>The tree covers the window, the menus, popovers and dialogs beside it, and the menu bar with only open menus expanded. Closed menus are read by the <code>menu</code> action, so every read covers the same ground and a diff never shows a whole menu bar appearing or vanishing.</p>
+<p>Results that changed nothing are marked: <code>menu</code> listings, <code>copy</code> and an already-visible <code>show_window</code> return a <code>Report</code>, and the tool returns it without settling or reading the state again.</p>
+<h3 id="stable-indices">Stable indices<a class="header-anchor" href="#stable-indices">#</a></h3>
+<p><code>tree.number</code> gives indices against the window's previous <code>Snapshot</code> (its index-free lines, their indices, and the next unused index). A line that is equal, or replaced by a line of the same depth and role (a new value, a renamed button), keeps its index; any other new line takes the next unused index. Indices freed by removed elements are never reused. The model's earlier indices therefore never point at a different element after an insertion above them, which Codex's positional numbering does not guarantee.</p>
+<h3 id="settling">Settling<a class="header-anchor" href="#settling">#</a></h3>
+<p>After an action the tool polls a cheap fingerprint of the first 400 elements every 0.2 seconds, starting after 0.3 seconds, and stops when two fingerprints agree, after 1.5 seconds, or after 5 seconds while a busy indicator or an unfinished progress indicator is present — Codex's &quot;about a second, up to five while loading&quot;.</p>
+<h3 id="menu-bar">Menu bar<a class="header-anchor" href="#menu-bar">#</a></h3>
+<p><code>menu</code> walks <code>AXMenuBar</code> by title, case-insensitively and ignoring a trailing <code>…</code> or <code>...</code>. A path that ends at a submenu lists its items with shortcut glyphs (<code>⌃⌥⇧⌘</code> from <code>AXMenuItemCmdModifiers</code>), <code>[checked]</code> and <code>[disabled]</code>; a leaf is pressed with <code>AXPress</code>. Reading the menu tree through Accessibility opens nothing on screen. <code>copy</code> presses the app's own menu item whose shortcut is ⌘C, found by shortcut rather than by its localized title, and falls back to posting ⌘C; when that item exists but is disabled (nothing selected, or focus on a control) it reports so at once. Otherwise it waits for the pasteboard change count, reads the string, and restores the previous pasteboard.</p>
+<p><code>copy</code>, <code>press_key</code>, <code>type_text</code> and <code>paste</code> without an <code>element_index</code> act on the app's current focus and need no earlier <code>get_app_state</code>; <code>menu</code>, <code>show_window</code> and <code>wait</code> never need one. From Claude's computer-use tool come <code>hover</code> (three <code>mouseMoved</code> events posted to the process, approaching the point, then a 0.8-second rest; the real cursor stays put) and <code>wait</code> (up to 10 seconds, cancellable, followed by the usual settle and tree diff). <code>focus</code> sets <code>AXFocused</code> and waits up to half a second for the app to report it, since apps apply focus on a later run-loop turn.</p>
+<p>The screenshot is the window's own image captured through ScreenCaptureKit, scaled so the long side is at most 1568 pixels; coordinates the model sends are pixels of that image. A step maps them to screen points with the scale that produced the image (2 on a Retina display, less when a large window was captured smaller) and the window's origin as the window server reports it at that moment (<code>screen_point</code>, after <code>_follow_window</code>), so a window the user moved since the read is still hit where the model pointed.</p>
+<h3 id="text-on-the-screenshot">Text on the screenshot<a class="header-anchor" href="#text-on-the-screenshot">#</a></h3>
+<p>A window whose own walk yields fewer than 12 elements (frame, title bar buttons and little else) is drawn without Accessibility. For such a window every full or screenshot-only read also runs Vision's accurate text recognizer on the screenshot it just took and lists each line as <code>&quot;text&quot; at (cx, cy), WxH</code> in screenshot pixels, top to bottom and left to right, at most 150 lines. The first recognition language picks Vision's model, so the languages are a hint (the user's preferred languages, then Chinese, Japanese, Korean and English) and language detection chooses per image. <code>find</code> with <code>text</code> falls back to these lines when no element matches; for a window that was not sparse it captures and reads the window once at the same scale, so the positions stay valid for actions. OCR text has no indices and is not part of the tree diff: it is evidence for coordinate actions, and a failure of the recognizer leaves the read without it. The same reads list icons and controls without text (<code>ocr.detect_shapes</code>): Vision's contour detector runs twice, once for dark marks on a light window and once for light on dark, at most 1024 pixels on the long side. Top-level outlines within 3 points of each other merge into one shape, and a shape is dropped when it covers a recognized line of two or more characters, is under 8 points on its short side, over 80 points on its long side, more than 4:1, or touches the screenshot's edge (the window's rounded corners and border). A one-character line does not rule a shape out, because the recognizer often reads an icon as a glyph. Shapes the two passes both find are kept once, and the list is sorted in 16-point rows, left to right, at most 60. A shape carries no name: the model reads the screenshot to tell a gear from a trash can.</p>
+<h3 id="audio">Audio<a class="header-anchor" href="#audio">#</a></h3>
+<p>Codex records computer audio with <code>start_audio_recording</code> / <code>stop_audio_recording</code> (60 seconds by default, 300 at most) and hands the clip to the model as audio input. OpenProgram keeps the two actions and their limits. The clip becomes a WAV on disk plus a transcript from the Settings → Voice engine, which every model can read. <code>ToolReturn.audio</code> also carries the WAV as an <code>AudioContent</code> block. When the model lists <code>audio</code> among its inputs, the Gemini converter passes it as inline audio and the Chat Completions converter as <code>input_audio</code>, each in a user turn after the run of tool results, which must stay together. That Chat Completions turn also carries the run's screenshots for vision models, since a <code>tool</code> message holds only text. The Responses and Anthropic converters skip audio blocks, and tool-result media is not written to the conversation history, so the clip costs nothing for models that cannot hear it. <code>audio.py</code> opens an <code>SCStream</code> whose filter is the display with only the target application included, asks for 16 kHz mono float samples, excludes the OpenProgram process, and attaches only an audio output: the 2×2, one-frame-a-second video side is never consumed. Samples past the limit are dropped and a timer stops the stream half a second after it, so a forgotten recording releases the capture. One recording runs per conversation; it is converted to 16-bit PCM on stop and saved under the state directory, keeping the newest 20. The action keeps the per-application approval: only the named app's sound is in the clip. A clip whose peak stays under 1e-4 is reported silent and not transcribed. An application without a window has no <code>SCRunningApplication</code> and cannot be recorded.</p>
+<h3 id="module-layout-1">Module layout<a class="header-anchor" href="#module-layout-1">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Module</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>openprogram/programs/tools/computer_use/computer_use_agent/desktop/base.py</code></td>
+<td>what every backend shares: <code>ComputerUseError</code>, <code>Report</code>, <code>Observation</code>, <code>AudioClip</code>, argument checks, recording storage</td>
+</tr>
+<tr>
+<td><code>openprogram/programs/tools/computer_use/computer_use_agent/desktop/backends.py</code></td>
+<td><code>support()</code> and <code>backend()</code> for the host: <code>macos</code> on Darwin, <code>linux</code> on Linux, <code>windows</code> on Windows</td>
+</tr>
+<tr>
+<td><code>openprogram/programs/tools/computer_use/computer_use_agent/desktop/keys.py</code></td>
+<td>xdotool chord parsing to macOS key codes and modifier flags (<code>super+shift+z</code>, <code>ctrl++</code>, <code>KP_0</code>, lone modifiers)</td>
+</tr>
+<tr>
+<td><code>openprogram/programs/tools/computer_use/computer_use_agent/desktop/tree.py</code></td>
+<td><code>Node</code>, rendering, signatures, stable numbering (<code>Snapshot</code>, <code>number</code>) and the diff</td>
+</tr>
+<tr>
+<td><code>openprogram/programs/tools/computer_use/computer_use_agent/desktop/audio.py</code></td>
+<td>ScreenCaptureKit audio capture of one application, sample limit, WAV encoding</td>
+</tr>
+<tr>
+<td><code>openprogram/programs/tools/computer_use/computer_use_agent/desktop/ocr.py</code></td>
+<td>Vision text recognition (tesseract TSV on Linux), box conversion to screenshot pixels, reading order, language hints, contour shapes</td>
+</tr>
+<tr>
+<td><code>openprogram/programs/tools/computer_use/computer_use_agent/desktop/skylight.py</code></td>
+<td>ctypes bindings to SkyLight for background pointer and keyboard routing</td>
+</tr>
+<tr>
+<td><code>openprogram/programs/tools/computer_use/computer_use_agent/desktop/macos.py</code></td>
+<td><code>MacComputer</code>: app resolution, window selection, capture, tree walk, every action</td>
+</tr>
+<tr>
+<td><code>openprogram/programs/tools/computer_use/computer_use_agent/desktop/linux.py</code></td>
+<td><code>LinuxComputer</code>: the same interface over AT-SPI, xdotool, Gdk capture and PipeWire/PulseAudio</td>
+</tr>
+<tr>
+<td><code>openprogram/programs/tools/computer_use/computer_use_agent/desktop/windows.py</code></td>
+<td><code>WindowsComputer</code>: the same interface over UI Automation (comtypes), window messages, <code>SendInput</code> and <code>PrintWindow</code></td>
+</tr>
+<tr>
+<td><code>openprogram/programs/tools/computer_use/computer_use_agent/desktop/windows_audio.py</code></td>
+<td>WASAPI process-loopback capture of one process tree</td>
+</tr>
+<tr>
+<td><code>openprogram/programs/tools/computer_use/computer_use_agent/targets/app.py</code></td>
+<td>the <code>app</code> target: step validation, several steps, result assembly</td>
+</tr>
+</tbody>
+</table>
+<h3 id="background-delivery">Background delivery<a class="header-anchor" href="#background-delivery">#</a></h3>
+<p>Element actions go through Accessibility: <code>AXPress</code> / <code>AXConfirm</code> / <code>AXPick</code>, then <code>AXSelected</code>, then focus, then a pointer click at the element's centre as the last resort; <code>AXShowMenu</code> for right clicks; <code>AXValue</code> for <code>set_value</code>; <code>AXSelectedTextRange</code> (UTF-16 offsets) for <code>select_text</code>; page scrolling actions, then the scrollbar's value, then wheel events for <code>scroll</code>.</p>
+<p>Pointer events that have to be real (coordinate clicks, drags, wheel) are posted with the recipe the open-source cua-driver established: a focus-without-raise record posted to the target process serial number, a <code>mouseMoved</code> primer, the event stamped with click state, button, subtype 3, target pid, window id and a click group, <code>CGEventSetWindowLocation</code> with the point relative to the window's top left (<code>window_location</code>: the screen point minus the window's origin, in points, as KWWK computer-use-core and cua-driver set it; AppKit places the click in the window from the event's screen location, and a probe window took a click at the same point whether this field held the window-relative or the screen point), and <code>SLEventPostToPid</code> for delivery. Keyboard events carry an <code>SLSEventAuthenticationMessage</code> so the receiving process accepts them; without SkyLight the code falls back to <code>CGEventPostToPid</code>. The result is a click the application handles as if the user clicked, while the real cursor stays where it is and the front application does not change.</p>
+<p>AppKit still orders the clicked window to the front of its level when the application handles the mouse-down, so a coordinate click or drag first lists the other applications' windows stacked over the target and overlapping it (the front application's own windows excluded), and afterwards raises them again with <code>AXRaise</code>, deepest first, which puts the stack back as it was.</p>
+<p>A window is chosen by <code>window</code> (title substring or index) or <code>window_id</code>; without either, the window the model read last stays selected while it is open, then the focused or main window. Each state records the app's windows (window id, or title without one); when the focused or main window is one that was not there at the last read, the read follows it and says which window it opened over, so a dialog or document a step brought up is what the next steps act on. A new window with a dialog subrole (<code>AXDialog</code>, <code>AXSystemDialog</code>) or a new file dialog is followed even when the focus stays on the window under it, as it does when a background app opens its out-of-process file dialog.</p>
+<p>The system Open and Save dialogs carry <code>AXIdentifier</code> <code>open-panel</code> or <code>save-panel</code>, as a window, an <code>AXSheet</code> or a child window of the window under them. A sandboxed app's dialog is drawn by <code>com.apple.appkit.xpc.openAndSavePanelService</code>, and the window server lists it twice with the same bounds: as the service's off-screen layer-0 window, which holds the Accessibility tree, and as the app's on-screen window that shows it (<code>panel_hosts</code>). A window of the app with those bounds is a file dialog whatever its identifier, and the service's window reports the app window's id, so captures, <code>list_windows</code> and <code>window_id</code> all name the window on screen. The app lists the dialog among its windows while the dialog's link to it holds; when it stops listing a dialog that is still on screen, the dialog's window is taken from the service's <code>AXWindows</code> by window id, so <code>list_windows</code>, <code>window=&lt;title&gt;</code> and the states keep reaching it. Its Accessibility elements are reachable and <code>AXPress</code> and <code>AXValue</code> work, SkyLight-routed clicks land, but key events posted to the app pid, to the service pid, or after a focus-without-raise never arrive, and setting the search field's <code>AXValue</code> does not run the search. While a file dialog is the focused window or in it, stands as a window of its own, or is on screen without Accessibility reaching it, <code>press_key</code>, <code>type_text</code> and <code>paste</code> fail with that explanation and point at <code>open_file</code> instead of sending keys to the window under it; a sheet on another document window leaves keys to the focused one alone. A state of the dialog says it is the file dialog, points at <code>open_file</code> and always adds the OCR text, since the file browser exposes no rows; a state of another window of the app says a file dialog is open. <code>open_file</code> replaces the dialog: a modal dialog holds back the request to open a document, so it first presses an open dialog's Cancel button (<code>AXCancelButton</code>, else a button titled Cancel) and waits for the dialog to close, and fails with what to click when Accessibility does not reach it; then <code>NSWorkspace openURLs:withApplicationAtURL:configuration:</code> with <code>activates</code> off opens the document in the app (launching it in the background if needed), the front app and its windows stay where they are, and the call waits for a window whose <code>AXDocument</code> is the file's URL or whose title names it. It refuses relative or missing paths, bundles and launchers (<code>.app</code>, <code>.command</code>, shell scripts, <code>.workflow</code>, installer packages, location files), files with an execute bit, and terminal apps, which run what they open. A minimized window or a hidden app still gives its tree; the screenshot is unavailable until <code>show_window</code> un-minimizes it (<code>AXMinimized</code>) or unhides the app, neither of which activates it. A window on another Space is read and operated where it is. <code>AXWindows</code> lists only the current Space's windows, so the app's off-screen ordinary windows (layer 0, at least 80×60) that no listed window covers are looked up by SkyLight's remote token: <code>_AXUIElementCreateWithRemoteToken</code> with the pid, <code>0</code>, <code>'coco'</code> and an element id, trying ids from zero (at most 4000) until each window id has its element, as AltTab does; the result is kept per app until that set of ids changes. ScreenCaptureKit captures such a window and SkyLight's pointer route reaches it, but the window server drops key events for it whatever their route, so <code>type_text</code> and <code>paste</code> there set the focused element's <code>AXSelectedText</code> instead, <code>press_key</code> reports that keys do not arrive, and <code>show_window</code> says the window stays on its Space. Moving it is not possible: since macOS 14.5 only the Dock may (<code>SLSMoveWindowsToManagedSpace</code> from any other process needs System Integrity Protection relaxed, as yabai documents).</p>
+<p><code>paste</code> writes the pasteboard (plain text, or HTML rendered from Markdown with <code>markdown-it</code>), sends Cmd+V to the target process, and restores the previous pasteboard contents when the change count shows nothing else wrote in between.</p>
+<h3 id="agent-cursor">Agent cursor<a class="header-anchor" href="#agent-cursor">#</a></h3>
+<p>Before a step that names an element or a point, <code>MacOSComputer.act</code> computes where it lands (the element's centre from its <code>AXFrame</code>, or the screenshot point mapped through the window origin and scale) and calls <code>native_window_resources.note_action_point</code>, then waits <code>CUE_LEAD_SECONDS</code> (0.15 s) so the cursor arrives first. The point is in screen points with the origin at the top left of the main display, the space Electron also uses. The worker broadcasts it as a <code>native.action</code> frame (<code>session_id</code>, <code>x</code>, <code>y</code>, <code>sequence</code>, <code>at</code>, <code>action</code>, <code>app_name</code>); an agentic subprocess forwards it through the same parent channel as operated windows (<code>kind: &quot;action&quot;</code>). In the web client <code>native-window-store.ts</code> hands the frame to <code>openprogramDesktop.nativeActionCue</code> unless <strong>Show actions</strong> is off. The desktop main process (<code>main/worker/agent-control.js</code>) draws it in the conversation's control overlay (below): the cursor glides there and stays. Every App window receives the frame, so the main process drops a step it has already shown by <code>session_id</code>, <code>sequence</code> and <code>at</code>. Linux and Windows do not emit points yet.</p>
+<h3 id="window-marker">Window marker<a class="header-anchor" href="#window-marker">#</a></h3>
+<p>The operated window carries the macOS screen-sharing marker, as under Codex Computer Use: a badge over its title-bar buttons and the sharing icon in the menu bar. macOS draws both for any window under a live ScreenCaptureKit stream, so <code>window_watch.WindowWatch</code> keeps one open on it. <code>MacOSComputer</code> touches it with the window id, the app's name and the frame of its title-bar buttons (read through Accessibility) on every <code>act</code> and every <code>get_state</code> that names a window. The stream filters to that one window (<code>SCContentFilter.initWithDesktopIndependentWindow</code>), asks for a 2x2 frame at one frame a second and attaches no output, so nothing is recorded. Each session watches at most one window: moving to another window releases the previous one, and a window with no step for <code>IDLE_SECONDS</code> (20 s) is released by a sweep timer. Opening the stream runs on its own thread and its failures are ignored, so a step never waits on or fails because of the marker.</p>
+<p>While a window is watched, a second thread reports its place every <code>REPORT_SECONDS</code> (0.12 s) when it changed: <code>window_place</code> reads the on-screen window list for the window's frame and the windows in front of it within <code>GLOW_MARGIN</code> (32 pt), leaving out windows titled <code>OVERLAY_TITLE</code> (the App's own overlays). The report goes through <code>native_window_resources.note_control</code> with the owner captured when the window was touched, as a <code>native.control</code> frame (<code>session_id</code>, <code>window_id</code>, <code>active</code>, <code>app_name</code>, <code>frame</code>, <code>buttons</code>, <code>occluders</code>); a subprocess forwards it as <code>kind: &quot;control&quot;</code>. Releasing the window sends <code>active: false</code>. The web client passes reports to <code>openprogramDesktop.nativeControl</code> while <strong>Show actions</strong> is on, and always passes the end. The desktop main process keeps one transparent, click-through, unfocusable window per conversation over the window plus the margin and loads <code>/menu-overlay/agent-control</code>, which draws the inward glow, the accent lights over the buttons and the cursor. The overlay sits in the window stack directly above the controlled window (<code>moveAbove</code> with its window id, ordered again on every report because the stack changes whenever the user switches apps), so a window in front of the controlled one also covers the overlay; only when the window server refuses that order does it float above all windows. Either way covering windows are cut out of the glow and lights, and the cursor hides while its point lies under one. Its look is set in <a href="/docs/reference/design/ui/browser/agent-control-overlay.html">Agent control overlay</a>.</p>
+<h3 id="refusals">Refusals<a class="header-anchor" href="#refusals">#</a></h3>
+<p>The tool never types into <code>AXSecureTextField</code> elements or while macOS reports secure keyboard input (<code>kCGSSessionSecureInputPID</code>), and refuses to target Keychain Access, Passwords, loginwindow, SecurityAgent and OpenProgram's own bundles. The refusal is returned as an error that asks the user to do the step; no approval scope overrides it.</p>
+<h3 id="linux-backend">Linux backend<a class="header-anchor" href="#linux-backend">#</a></h3>
+<p><code>LinuxComputer</code> keeps <code>MacComputer</code>'s interface, so the tool, the server's app lookup and the tests drive either one through <code>backends.backend()</code>. It runs only in an X11 session: under Wayland no client may read or inject input into another client's surface, and <code>support()</code> says so.</p>
+<ul>
+<li><strong>Apps.</strong> The AT-SPI desktop's children that own a window, plus top-level X windows whose owner does not join the accessibility bus. The owner of an X window is <code>_NET_WM_PID</code>, or, for Xt and Motif clients that do not set it, the newest process whose name or executable starts with the window's WM_CLASS instance. Each app is matched to a desktop entry (<code>Gio.AppInfo</code>) by executable or name, which gives the identifier (<code>org.gnome.Calculator</code>), the display name, and the icon looked up in the hicolor theme. Launching goes through <code>Gio.DesktopAppInfo.launch</code> and then waits for the app's AT-SPI root as well as its window, since GTK 4 apps join the bus after mapping.</li>
+<li><strong>Windows.</strong> Top-level windows are the window manager's <code>_NET_CLIENT_LIST</code> (read with <code>xprop</code>), which leaves out GTK's 10×10 client-leader window; without a client list, windows of 10×10 or smaller are skipped. An AT-SPI frame is paired with its X window by title, then by size. A window missing from the mapped set is reported minimized; <code>show_window</code> maps it again.</li>
+<li><strong>Tree.</strong> Roles are AT-SPI role names (<code>push button</code>, <code>text</code>, <code>check box</code>), so <code>role_name</code> prints them unchanged. A subtree is read when it is on screen: GTK 3 sets SHOWING, GTK 4 sets only VISIBLE below the window, so the walk uses SHOWING when any child of the window reports it and VISIBLE otherwise. A closed combo box's popup items and GTK's tooltip window are skipped. Unnamed fillers, panels and sections are transparent. GTK 4 names unnamed widgets after their class (<code>AdwGizmo</code>, <code>GtkMenuButton</code>); such names are not labels. Flags come from states (CHECKED or PRESSED, FOCUSED, SELECTED, EXPANDED, not ENABLED/SENSITIVE), <code>settable</code> from EditableText or Value, <code>secure</code> from the <code>password text</code> role. Secondary actions are the element's Action names other than click, press, activate, toggle, jump, open and select.</li>
+<li><strong>Element actions in the background.</strong> Click runs the element's primary action; <code>set_value</code> uses <code>EditableText.set_text_contents</code>, <code>Value.set_current_value</code>, or a toggle when a check box's state differs; <code>type_text</code> and <code>paste</code> insert at the caret with <code>EditableText.insert_text</code> (UTF-8 byte length), replacing a selection, and a newline runs the field's <code>activate</code> action; <code>press_key Return</code> on a field runs <code>activate</code>; <code>select_text</code> uses <code>Text.set_selection</code> or the caret offset (character offsets, not UTF-16); <code>copy</code> reads <code>Text.get_selection</code> without the clipboard; <code>scroll</code> by element moves the nearest scroll bar's Value by 90 % of its length per page; <code>menu</code> walks the window's <code>menu bar</code> and runs a leaf's action. <code>Component.grab_focus</code> makes GTK present the window, so wherever focus has to move, the window that was active gets focus back.</li>
+<li><strong>Foreground input.</strong> GTK and Qt read pointer and key input through XInput 2 and ignore core events sent with <code>XSendEvent</code> to an unfocused window, so a coordinate click, drag, wheel scroll, hover or key press is sent with XTEST: the window is activated (<code>windowactivate</code>, or <code>windowraise</code> plus <code>windowfocus</code> without an EWMH window manager), the input runs, and the pointer position and previously active window are restored; <code>hover</code> leaves the pointer. Chords use xdotool names with <code>cmd</code>, <code>command</code>, <code>meta</code> and <code>win</code> mapped to <code>super</code> and <code>option</code> to <code>alt</code>.</li>
+<li><strong>Screenshots.</strong> <code>Gdk.pixbuf_get_from_window</code> on a foreign X window gives the window's own pixels at X resolution, scaled down to 1568 pixels on the long side; a minimized window has none. Screenshot pixels map to screen pixels through the window's position from <code>xdotool getwindowgeometry</code>, the same frame AT-SPI's screen extents use.</li>
+<li><strong>OCR.</strong> For sparse windows (and the <code>find</code> fallback), <code>tesseract --psm 11 tsv</code> with the installed languages among eng, chi_sim, chi_tra, jpn and kor; words with confidence 30 or more are joined into lines. Contour shapes are not detected on Linux.</li>
+<li><strong>Audio.</strong> <code>pactl list sink-inputs</code> gives each stream's <code>application.process.id</code>; the recorder polls until a stream of the app or any of its descendants (re-read on every poll, since players are usually children started after recording began) appears, then reads it with <code>parec --monitor-stream=&lt;index&gt;</code> as 16 kHz mono float. Reading continues until parec ends, so the samples it buffers when stop terminates it are kept. Under PipeWire the first samples arrive within a quarter second; under PulseAudio's timer-based scheduling the first monitor of a stream starts 1.2–1.7 s late and that span is lost.</li>
+<li><strong>Refusals.</strong> <code>password text</code> elements, Seahorse, KWallet, gcr prompts, polkit agents and OpenProgram's own entries.</li>
+</ul>
+<p>The app guide is rewritten for Linux when it is sent (<code>_LINUX_GUIDE</code> in <code>targets/app.py</code>): which steps bring the window forward, plain-text <code>paste</code>, clipboard-free <code>copy</code>, the Linux refusals. The <code>computer_use_apps</code> WebSocket reply carries the worker's <code>platform</code>, and on Linux the approval card states for coordinate input, drags, hovers and keys other than Return (<code>needsForeground</code>) that the window comes forward for that step.</p>
+<h3 id="windows-backend">Windows backend<a class="header-anchor" href="#windows-backend">#</a></h3>
+<p><code>WindowsComputer</code> keeps the same interface. The process is per-monitor DPI aware (<code>SetProcessDpiAwarenessContext(-4)</code>), so window frames, UI Automation bounds and input coordinates are all physical screen pixels. Every Win32 function it calls has its <code>restype</code> and <code>argtypes</code> declared, so 64-bit handles pass intact.</p>
+<ul>
+<li><strong>Apps.</strong> Top-level windows from <code>EnumWindows</code> that are visible, unowned, not tool windows and titled, grouped by process. A UWP frame (<code>ApplicationFrameWindow</code>) belongs to ApplicationFrameHost; its app is the process of the <code>Windows.UI.Core.CoreWindow</code> child. Installed apps are <code>Get-StartApps</code> (desktop and Store alike, cached for a minute); a running process is matched to a row by executable or name, and launching runs <code>explorer.exe shell:AppsFolder\&lt;AppID&gt;</code>, then waits for a new window.</li>
+<li><strong>Tree.</strong> <code>IUIAutomation.ElementFromHandle</code> on the window, walked with the control view walker; offscreen subtrees are skipped except menu items. Roles are the control types (50000–50040) named in lower case (<code>button</code>, <code>edit</code>, <code>check box</code>). Unnamed panes, groups and custom elements without actions are transparent. Flags come from patterns: Toggle state, <code>IsEnabled</code>, <code>HasKeyboardFocus</code>, SelectionItem, ExpandCollapse, a writable Value or a RangeValue (<code>settable</code>), <code>IsPassword</code> (<code>secure</code>). Values come from RangeValue, Value or the Text pattern's document range. Secondary actions are expand, collapse, scroll, select and a LegacyIAccessible default action other than press, click, invoke or jump.</li>
+<li><strong>Element actions in the background.</strong> Click tries Invoke, Toggle, SelectionItem.Select, ExpandCollapse and LegacyIAccessible.DoDefaultAction in order, and focuses an edit; <code>set_value</code> uses Toggle, RangeValue, Value or LegacyIAccessible; <code>select_text</code> moves a Text pattern range by characters; <code>copy</code> reads the Text pattern's selection; <code>scroll</code> by element uses the nearest Scroll pattern by large increments; <code>menu</code> walks a classic <code>HMENU</code> (<code>GetMenu</code>) and posts <code>WM_COMMAND</code>, or expands and invokes UI Automation menu items.</li>
+<li><strong>Posted input.</strong> A coordinate click, drag, wheel scroll or hover is posted as mouse messages to the deepest child window under the point (<code>ChildWindowFromPointEx</code>), in its client coordinates; a second click is <code>WM_LBUTTONDBLCLK</code>. A key without named modifiers is <code>WM_KEYDOWN</code>/<code>WM_CHAR</code>/<code>WM_KEYUP</code> to the thread's focus window (<code>GetGUIThreadInfo</code>); <code>type_text</code> posts <code>WM_CHAR</code> per UTF-16 unit. <code>paste</code> into a classic edit or rich edit control sends <code>WM_PASTE</code>.</li>
+<li><strong>Foreground input.</strong> Shortcuts read <code>GetKeyState</code>, which posted messages do not change, and UWP frames, Chromium and Firefox windows read raw input, so a chord with modifiers, pointer input to those window classes, and <code>paste</code> elsewhere use <code>SendInput</code> inside <code>_Forward</code>: it joins the foreground thread's input queue (<code>AttachThreadInput</code>) to call <code>SetForegroundWindow</code>, runs the input, and then puts the cursor and the previous foreground window back.</li>
+<li><strong>Screenshots.</strong> <code>PrintWindow</code> with <code>PW_RENDERFULLCONTENT</code> renders the window, covered or not, into a bitmap the size of its outer rectangle; the visible frame (<code>DWMWA_EXTENDED_FRAME_BOUNDS</code>) is cut from it and scaled with <code>StretchBlt</code> in HALFTONE mode to 1568 pixels on the long side, then <code>GetDIBits</code> gives BGRA rows that <code>png_encode</code> writes as a PNG without any imaging library. A minimized window has no screenshot; <code>show_window</code> restores it with <code>SW_SHOWNOACTIVATE</code>.</li>
+<li><strong>Clipboard.</strong> <code>paste</code> writes <code>CF_UNICODETEXT</code> and, for md and html, the &quot;HTML Format&quot; payload whose header offsets <code>cf_html</code> computes, and restores the previous text afterwards.</li>
+<li><strong>OCR.</strong> As on Linux, tesseract when it is installed.</li>
+<li><strong>Audio.</strong> <code>ActivateAudioInterfaceAsync</code> on <code>VAD\Process_Loopback</code> with <code>PROCESS_LOOPBACK_MODE_INCLUDE_TARGET_PROCESS_TREE</code> gives an <code>IAudioClient</code> initialised in shared loopback mode with auto-conversion to 16 kHz mono float, read event-driven through <code>IAudioCaptureClient</code> on its own COM thread. The completion handler is an agile COM object, since Windows calls it on a worker thread.</li>
+<li><strong>Refusals.</strong> <code>IsPassword</code> elements, CredentialUIBroker, consent (UAC), LogonUI, LockApp, credwiz, keymgr and OpenProgram.</li>
+</ul>
+<p>The app guide is rewritten for Windows when it is sent (<code>_WINDOWS_GUIDE</code>), and the approval card says for a chord or a paste (<code>needsForeground(args, &quot;windows&quot;)</code>) that the window comes forward for that step.</p>
+<h3 id="permissions-and-approval">Permissions and approval<a class="header-anchor" href="#permissions-and-approval">#</a></h3>
+<p>For the <code>app</code> target <code>requires_approval</code> returns <code>computer_use_agent controls &lt;app&gt;</code> for every action except <code>list_apps</code>; a call with <code>code</code>, <code>fresh</code> or no action is approved as reading the app. <code>parse_command</code> reduces a call to its normalised application name (<code>vm:&lt;url&gt;</code> for the VM, none for the browser), so <code>exact_rule_for_call</code> yields <code>computer_use_agent(calculator)</code> and <code>rule_to_string</code> prints it in the usual form. The approval card offers four scopes:</p>
+<table>
+<thead>
+<tr>
+<th>Scope</th>
+<th>Where the rule is saved</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>once</td>
+<td>nowhere</td>
+</tr>
+<tr>
+<td>session</td>
+<td>the session's run config (<code>permission_rules.allow</code>) — <code>computer_use_agent</code> is in <code>_SESSION_SCOPE_TOOLS</code></td>
+</tr>
+<tr>
+<td>always</td>
+<td>the project rules</td>
+</tr>
+<tr>
+<td>deny</td>
+<td>nowhere</td>
+</tr>
+</tbody>
+</table>
+<p>The grant applies in the modes that ask; Bypass allows the call and Auto sends it to the Auto review. <code>permission_decision</code> treats <code>computer_use_agent</code> as an app-grant tool (<code>_APP_GRANT_TOOLS</code>) for its <code>app</code> and <code>vm</code> targets: when the tool's own <code>requires_approval</code> says the call needs approval and no allow rule names the application, the decision is <code>ask</code> with reason <code>APP_GRANT_REQUIRED</code>, Unattended sources therefore deny such calls outside Bypass, and in the modes that ask an allow rule is the only way past the card. <code>_RULE_ALIASES</code> lets rules saved under the former name, <code>computer_use(&lt;app&gt;)</code>, match <code>computer_use_agent</code> calls. The <code>browser</code> target has no rule of its own: a conversation with Pages gets the turn's <code>SURFACE_GRANT</code>, and an upload or a website outside this computer asks.</p>
+<p>Permission rules are reloaded at every operation boundary (global &lt; project &lt; session), so a session rule applies to the next call without a restart.</p>
+<p>System access: <code>computer_use:desktop</code> is an operation of both the <code>accessibility</code> and <code>screen_recording</code> capabilities; <code>_desktop_operation</code> maps every <code>app</code> call except <code>list_apps</code> and <code>guide</code> to it, so a missing grant pauses the call with the standard &quot;waiting&quot; state and the Settings → System access flow; the waiting request names <code>computer_use_agent</code>.</p>
+<p>The tool is in <code>DEFAULT_TOOLS</code> and resident: its schema is short, so it is not deferred. When the conversation has Pages, <code>_configure_web_use_tools</code> keeps it and removes the independent browser tools; <code>web_use</code> is never offered to the model. <code>unsafe_in</code> hides it in WeChat and Telegram channels and in plan mode.</p>
+<h3 id="web-presentation">Web presentation<a class="header-anchor" href="#web-presentation">#</a></h3>
+<p><code>lib/computer-use/computer-use-agent-call.ts</code> reads a <code>computer_use_agent</code> call: <code>appStepArgs</code> turns an <code>app</code> call into the flat step the app renderers take (<code>{action, app, …}</code>; several steps become a batch, code and a fresh agent their own actions), and <code>screenStep</code> names a browser or VM call's action. <code>tool-presentation.ts</code> renders <code>app</code> steps with the monitor icon and the system tone; the title names the action and the application (&quot;Clicked in Calculator&quot;), the target line shows the key, text, action name or window where one is given. Browser calls show the action and URL, VM calls the action, code &quot;Ran code in <app>&quot;, and a fresh agent &quot;Handed to a new agent&quot; with the brief's first line. The approval card's scope buttons add &quot;Allow this conversation&quot; between once and always, and the answer summary prints &quot;Allowed for this conversation&quot;. Calls recorded by the earlier tools (<code>computer_use</code>, <code>web_use</code>, <code>gui_agent</code>) keep their renderers so old conversations read as before.</p>
+<h2 id="the-browser-application">The browser application<a class="header-anchor" href="#the-browser-application">#</a></h2>
+<p>The built-in browser is the application <code>openprogram/programs/applications/browser/</code>. The core never imports it: the application's <code>setup(ctx)</code> provides the service <code>browser</code>, and every core caller looks it up with <code>_services.lookup(&quot;browser&quot;)</code> and runs without a browser when the lookup returns <code>None</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Module</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>__init__.py</code></td>
+<td><code>PROGRAM_ENTRIES</code> (<code>web_use</code>) and <code>setup</code>: provides the service, registers the L2 context section <code>pages</code> and the resource provider <code>web</code></td>
+</tr>
+<tr>
+<td><code>service.py</code></td>
+<td><code>BrowserService</code>, the service's members (below)</td>
+</tr>
+<tr>
+<td><code>pages.py</code></td>
+<td><code>BrowserResourceStore</code>, per-conversation Page projections, resource control, human page input</td>
+</tr>
+<tr>
+<td><code>tabs.py</code></td>
+<td>the tab driver for <code>computer_use_agent(target=&quot;browser&quot;)</code></td>
+</tr>
+<tr>
+<td><code>extension.py</code></td>
+<td>the user's Chrome or Edge through the Playwright Extension</td>
+</tr>
+<tr>
+<td><code>chrome.py</code>, <code>privacy.py</code></td>
+<td>the Chrome bootstrap that <code>openprogram browser</code> maintains; privacy filters</td>
+</tr>
+<tr>
+<td><code>contract.py</code></td>
+<td>the <code>web_use</code> argument contract shared by agents and MCP</td>
+</tr>
+<tr>
+<td><code>prompt.py</code></td>
+<td>the open-Pages section of a call's prompt</td>
+</tr>
+<tr>
+<td><code>resource.py</code></td>
+<td>the <code>web</code> resource provider and the Page lease for native presentation commands</td>
+</tr>
+<tr>
+<td><code>web_use/</code></td>
+<td>the <code>web_use</code> runtime: page controller, sessions and their registry, recovery, the exact-page MCP backend</td>
+</tr>
+<tr>
+<td><code>engine/</code></td>
+<td>the Playwright verb engine the page controller drives</td>
+</tr>
+</tbody>
+</table>
+<p>The service's members are <code>pages</code>, <code>tabs</code>, <code>chrome</code>, <code>extension</code>, <code>user_browser_names</code>, <code>web_use_parameters()</code>, <code>normalize_web_use_arguments()</code>, <code>execute_direct_web_use(arguments, owner_id=)</code>, <code>registry()</code>, <code>release_owner()</code>, <code>park_owner()</code>, <code>authorized_page()</code> and <code>browser_of()</code>.</p>
+<p>Without the service the core degrades in one way per caller: a call's prompt has no Pages section and the turn gets no <code>web_use</code>; <code>web_use</code> arguments fail validation with &quot;the browser is not enabled&quot;; MCP lists no <code>web_use</code> and refuses its calls; <code>/api/web-use</code> answers <code>browser_not_enabled</code>; the process routes list no browser resources and answer 404 for browser control; the web tab bridge skips Page bookkeeping; <code>computer_use_agent(target=&quot;browser&quot;)</code> reports the target unavailable and the desktop targets keep working; the permission policy sees no user browser.</p>
+<h2 id="the-web_use-runtime">The <code>web_use</code> runtime<a class="header-anchor" href="#the-web_use-runtime">#</a></h2>
+<p><code>web_use</code> is the application's one registered entry. Programs and MCP clients call it directly; the <code>browser</code> target of <code>computer_use_agent</code> uses the tab driver below instead. Its runtime lives in <code>web_use/</code> of the application, and the argument contract in <code>contract.py</code> is shared by agents and MCP.</p>
+<p><strong>Names.</strong> Agents and MCP see one tool, <code>web_use</code>; sessions are <code>web_session_id</code> in a <code>WebUseSessionRegistry</code>. The HTTP route is <code>/api/web-use</code>; <code>/api/computer-use</code> remains a hidden compatibility route on the same handler, kept out of OpenAPI, and old <code>computer_session_id</code> request fields are converted to the new ones.</p>
+<p><strong>Five commands.</strong></p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>list_pages</code></td>
+<td>lists the Pages of every registered OpenProgram window, each with a single-use <code>page_context_token</code></td>
+</tr>
+<tr>
+<td><code>observe</code></td>
+<td>selects a Page by token, opens a WebSession and returns bounded text, ARIA and element refs</td>
+</tr>
+<tr>
+<td><code>act</code></td>
+<td>performs one <code>navigate</code>, <code>click</code>, <code>type</code>, <code>press</code>, <code>scroll</code>, <code>hover</code> or <code>select</code> against the latest <code>expected_frame_id</code></td>
+</tr>
+<tr>
+<td><code>verify</code></td>
+<td>runs a Runtime assertion (<code>text_contains</code>, <code>title_contains</code>, <code>url_contains</code> and so on); a model's claim of completion never makes a result <code>succeeded</code></td>
+</tr>
+<tr>
+<td><code>close</code></td>
+<td>closes the observed Page's tab and releases its WebSession, Page binding and held capabilities</td>
+</tr>
+</tbody>
+</table>
+<pre><code>web_use({ command: &quot;list_pages&quot; })
+web_use({ command: &quot;observe&quot;, page_context_token: &quot;pct_…&quot;, arguments: { detail: &quot;interactive&quot; } })
+web_use({ command: &quot;act&quot;, web_session_id: &quot;cs_…&quot;, arguments: { action: &quot;click&quot;, expected_frame_id: &quot;f_…&quot;, ref: &quot;e1&quot; } })
+web_use({ command: &quot;verify&quot;, web_session_id: &quot;cs_…&quot;, arguments: { action: &quot;verify&quot;, expected_frame_id: &quot;f_…&quot;, assertion: &quot;text_contains&quot;, value: &quot;Saved&quot; } })
+web_use({ command: &quot;close&quot;, web_session_id: &quot;cs_…&quot; })
+</code></pre>
+<p><strong>Page inventory.</strong> <code>list_pages</code> returns <code>windows[]</code>, one snapshot per registered window with its <code>window_id</code>, <code>inventory_revision</code>, <code>active_tab_entry_id</code>, <code>focused_page</code> and <code>tab_entries</code>, and a flattened <code>pages</code> list. A tab entry is one item in the top tab bar: <code>single</code> holds one Page, <code>split</code> two ordered panes (<code>tab:&lt;tab_id&gt;</code> and <code>group:&lt;CenterTabGroup.id&gt;</code>). Each Page carries its <code>window_id</code>, <code>tab_id</code>, <code>tab_entry_id</code>, <code>placement</code>, title, origin, <code>visible</code>, <code>focused</code>, an optional <code>opener_tab_id</code> and its token. Pane order follows the rendered order; left and right derive from actual geometry and are never Page identity. Grouping, reordering or resizing increments <code>inventory_revision</code> without changing a Page. A popup becomes its own tab and Page with <code>opener_tab_id</code>; it never rebinds the opener's session, and the caller picks it up on the next <code>list_pages</code>. When no Desktop window is registered, as after a worker or App restart, discovery waits up to <code>DESKTOP_RECONNECT_WAIT_SECONDS</code> (20 s) and then returns <code>desktop_unavailable</code> with <code>retry_command=list_pages</code>.</p>
+<p><strong>Binding and revisions.</strong> A token binds the caller's owner, the window, the exact CDP target and the server's page and access revisions; missing, replayed, cross-owner or replaced-target tokens are refused before any backend call. Each visible web tab also carries a renderer-owned <code>geometry_revision</code> that changes with its in-App bounds or visibility (not with focus, and not with macOS stacking, occlusion or minimization). The WebSession stores all three revisions, the worker compares page and access, and the exact renderer compares geometry before native activation; any mismatch returns <code>page_context_stale</code> without touching the backend. Writes to one Page hold an exclusive lease; different Pages run concurrently. Background Pages resolve their target directly, with no tab switch, window focus, <code>bringToFront()</code> or OS input. The inventory, WebSession registry and renderer WebSocket registry run in the worker's main process; a workflow subprocess reaches the same WebSession through the parent bridge, which forwards revisions unchanged.</p>
+<p><strong>Owners and cleanup.</strong> A chat turn's owner is its session and assistant turn. Normal return, retry, cancellation and exceptions release every WebSession, Page lease and binding the owner holds, whether or not the model called <code>close</code>. A disconnected owner WebSocket revokes all its bindings at once. Explicit <code>close</code> checks the owner and live binding, asks the App to close the tab and then releases the session; a foreign owner closes nothing.</p>
+<p><strong>Tokens and recovery.</strong> <code>act</code> or <code>verify</code> with a token and no live <code>web_session_id</code> reuses the WebSession that token opened; with an unused token the runtime first observes read-only, and <code>navigate</code>, <code>screenshot</code>, <code>wait</code> and ref-free <code>verify</code> continue on that frame, while ref or coordinate actions return the observation with <code>action_performed=false</code>. The registry remembers, bounded and in memory, the tabs of WebSessions that ended and of tokens that expired. A later <code>page_context_not_found</code>, <code>page_context_consumed</code> or <code>web_session_not_found</code> from the same owner scope carries <code>recovery_tab_id</code>, <code>recovery_window_id</code> and <code>recovery_command=observe</code>; the agent tool then observes that tab with a fresh token and returns <code>recovered_page=true</code>, <code>previous_action_replayed=false</code>. Nothing is replayed. Every recoverable failure names exactly one next call.</p>
+<p><strong>Backends.</strong> <code>observe</code> picks one of three backends and freezes it for the WebSession: <code>playwright_mcp</code> (default, pinned <code>@playwright/mcp</code>), <code>chrome_devtools_mcp</code> (pinned <code>chrome-devtools-mcp</code>) or <code>open_claude_chrome</code> (OpenProgram's own Electron/CDP controller that follows the Open Claude in Chrome tool contract, with no extension or native host). A later request for another backend returns <code>backend_mismatch</code>; failures, timeouts and stale frames never fall back to another backend, so one action writes at most once. Each official-MCP WebSession owns a private MCP process started with <code>npx --prefer-offline</code>, bound to the exact target with tab selection disabled. If that process stops, the next <code>observe</code> restarts it read-only; <code>act</code> never writes through a restarted process and returns <code>computer_use_backend_unavailable</code> with <code>observe_required=true</code>. All three run one parity matrix through <code>WebUseSessionRegistry.execute()</code>: the same results, frame invalidation, reason codes and verification semantics.</p>
+<p><strong>Frames and failures.</strong> Every successful write invalidates the frame and sets <code>observe_required=true</code>. Missing arguments return <code>invalid_arguments</code> with the complete <code>missing_arguments</code> list and leave a valid observation in place; an old frame returns <code>stale_observation</code>; an unknown action returns <code>unsupported_action</code>; a backend error returns <code>backend_action_failed</code>. Reason codes (<code>invalid_capability</code>, <code>ambiguous_page</code>, <code>page_context_stale</code>, <code>page_access_disabled</code>, <code>target_lost</code>, <code>needs_user</code>, <code>timeout</code>, <code>cancelled</code>, <code>verification_failed</code> among them) come from the runtime; backend text never overrides them.</p>
+<p><strong>Cost.</strong> Observation is DOM and ARIA first: URL, title, text, snapshot and refs, without screenshots. <code>screenshot</code> returns one current-viewport PNG, taken from the exact Page's CDP session, for canvas pages or failed semantic location. The image goes only to the next provider request; tool text, the DAG and final results keep only <code>frame_id</code>, the viewport and <code>image_attached</code>, and normal return, provider errors, timeouts and cancellation all clear the image and revoke coordinate permission. No OCR, object detection, crop and zoom, visual memory or workflow replay runs. Login, CAPTCHA, sensitive submissions and irreversible actions return <code>needs_user</code>, and page content is untrusted data that cannot change targets or permissions.</p>
+<p><strong>Agent cursor.</strong> During an agent click, all three backends arm a capture listener in the exact Page only; a real pointer event shows a text-free, <code>aria-hidden</code>, <code>pointer-events: none</code> cursor and ripple at the viewport point, which then fades. User clicks, other Pages and the OS mouse are untouched, and a feedback failure never changes the click's result.</p>
+<h2 id="browser-target-the-tab-driver">Browser target: the tab driver<a class="header-anchor" href="#browser-target-the-tab-driver">#</a></h2>
+<p><code>tabs.py</code> of the browser application drives the App's built-in tabs for the <code>browser</code> target. It replaces, for that target, the <code>web_use</code> runtime's page context tokens, sessions, frames, leases and revision checks: none of them reach the model any more. The <code>web_use</code> runtime stays for the programs and MCP clients that still call it directly; it is the only page entry the application registers.</p>
+<p><strong>Tabs.</strong> A tab is <code>(window_id, tab_id)</code> as the renderer lists it (<code>surface_context.capture_pages_for_listing</code>, which now also carries each tab's CDP <code>target_id</code>). The driver names it <code>t</code> plus the first four base32 letters of the SHA-1 of <code>window_id</code> and <code>tab_id</code> (one letter more on a collision), so every process, the worker and a forked workflow subprocess alike, gives the same tab the same id in every turn, conversation and sub-agent, and listing again in any order does not rename. A tab that moved to another window keeps its id: a listed tab whose <code>target_id</code> belongs to a known tab takes that tab over. A tab whose <code>target_id</code> changed (the App restarted) forgets its refs, document baselines and screenshots. Each listing binds every page again, so the binding a tab had is released when a new one replaces it. An action without <code>tab</code> goes to the tab its agent used last (see below), else to the focused tab, else to the one visible tab. <code>open</code> asks the renderer for a background tab (<code>surface_context.open_page</code>) and makes it the current one; <code>close</code> and <code>screenshot</code> go through the tab's binding (<code>request_close_tab</code>, <code>request_bound_screenshot</code>), and a binding that expired is renewed by listing again.</p>
+<p><strong>Connection.</strong> Playwright's sync API belongs to one thread, so one owner thread holds <code>connect_over_cdp</code> to the App (<code>desktop_app_ws_url</code>) and runs every page call; callers wait on it with their context variables. A page is found by matching <code>Target.getTargetInfo</code> against the tab's <code>target_id</code>. A connection does not always learn of tabs the App opens after it, so a target that is not found makes the driver connect again and look once more; a dropped connection reconnects on the next call. When a page listener is first attached, the driver records its console, page errors and requests (the last 300 of each), and counts its document navigations and in-flight fetch/XHR requests.</p>
+<p><strong>Several agents.</strong> Agents of one conversation share its session id, and sub-agents run in parallel, so no tab is leased to one agent for longer than one action or one list of actions: leases held across turns and their hand-over were what made the earlier runtime refuse its own conversation's turns. Each <code>Tab</code> has a lock. An action takes it before its first page call and keeps it through settling and its result, so another agent's input never lands between an action and the state it reports. A list of actions (<code>targets/browser.run</code> with several steps, inside <code>tabs.batch()</code>) keeps every lock it took until the list ends, so a form filled in one list is not interleaved. Waiting for a lock polls with cancellation checks, and after <code>TAB_WAIT_SECONDS</code> (60 s) the action fails with <code>tab_busy</code>; two lists that each wait for the other's tab end that way rather than deadlock. The agent a call acts for is <code>&lt;session&gt;/&lt;execution&gt;</code> (the <code>_VIEWER</code> context variable, carried into the owner thread). Each agent remembers its own current tab; an agent without one starts from the tab its conversation used last. Snapshots are tracked per agent (<code>track</code> = <code>openprogram:&lt;agent&gt;</code>, and each agent's document baseline), so an agent's changes cover everything since it last looked, including what other agents did. Each tab records its write actions with the agent that made them; a result adds a <code>note</code> when another agent acted on the tab since this agent's last result. Only single page calls run on the owner thread. <code>wait</code> and the settling after an action poll on the caller's thread with short owner calls (<code>_shows</code>, <code>_activity</code>, <code>_loaded</code>), so one agent's wait never holds up another agent's click on another tab.</p>
+<p><strong>Writes are sent once.</strong> Only <code>tab_gone</code>, which <code>_page</code> raises before any input, makes the driver list the tabs again and try the action once more. An action that failed after Playwright may have sent its input counts as a write, and its error says it may have taken effect when it timed out, with the page as it is; a tab that closed during the action is <code>tab_closed</code>. Once an action succeeded, any failure while settling or reading the page comes back as a successful result with a <code>note</code>, never as an error the caller would retry. <code>close</code> treats the renderer's response timeout as <code>close_uncertain</code>, an expired binding as <code>tab_gone</code> (nothing was sent), and other failures as <code>close_failed</code>. <code>evaluate</code> counts as a write.</p>
+<p><strong>Tabs an action opens.</strong> The connection discovers targets (<code>Target.setDiscoverTargets</code>) and counts each new page target. When the count changed during an action, the driver lists the tabs and the result's <code>opened</code> names the new ones whose <code>opener_tab_id</code> is the acted-on tab or unknown. The agent's current tab stays where it was.</p>
+<p><strong>Coordinates.</strong> A screenshot records, per agent, the CSS-to-image ratio, the tab's last write, its URL and its scroll offset. A click by <code>x</code>,<code>y</code> needs that agent's screenshot, and fails with <code>screenshot_stale</code> when any agent wrote to the tab, it navigated or it scrolled since.</p>
+<p><strong>Preview follow.</strong> The conversation's page preview follows the operations the driver reports, as it does for the <code>web_use</code> runtime: the frontend follows only a live <code>browser.resource</code> event whose <code>last_operation</code> is new and <code>dispatched</code> or <code>acknowledged</code>, never a snapshot. Every write action (anything but <code>read</code>, <code>console</code>, <code>network</code>, <code>wait</code>, <code>screenshot</code>, <code>tabs</code> and <code>close</code>) first retains the tab's resource row for the current execution (<code>publish_bound_page</code>), then reports <code>dispatched</code> with <code>follow</code> (<code>pages.report_browser_operation</code>), which stores the operation and sets the resource's control state to <code>active</code> before the input is sent. After the action it reports <code>acknowledged</code>, or <code>failed</code> with the reason code, under the same operation id; a failed one does not set the control state again. The page shows as operated only while the execution that set it is running: the resource projection turns <code>active</code> back into <code>idle</code> once that execution has ended, as for <code>web_use</code>. A click's outcome carries the marker point: before clicking, <code>_aim</code> scrolls the element into view and records the centre of its bounding box, or the CSS point a click by <code>x</code>,<code>y</code> maps to, with the viewport's <code>innerWidth</code> and <code>innerHeight</code>; <code>sanitize_operation</code> turns that into <code>point</code> with the viewport size as <code>width</code> and <code>height</code>, which <code>browser-marker-geometry</code> maps onto the screenshot. Reads (<code>read</code>, <code>console</code>, <code>network</code>, <code>wait</code>, <code>screenshot</code>) report an <code>acknowledged</code> operation without <code>follow</code>, so the preview follows them and the page is not marked operated, and <code>open</code> reports the same for the new tab after publishing it, which makes it the tab followed. Each step of a list reports on its own. Reporting never fails an action: errors are logged at debug level.</p>
+<p><strong>Workflow subprocesses.</strong> A forked child drops the parent's driver (<code>os.register_at_fork</code>), because its owner thread and connection belong to the parent, and starts its own. Its renderer calls (<code>capture_pages_for_listing</code>, <code>open_page</code>, <code>request_close_tab</code>, <code>request_bound_screenshot</code>) go through the parent's webtab bridge, which confines them to the originating window, authorizes only bindings it handed out and closes the tabs the child opened when the child ends. The child holds no App connection, so its operation reports go to the worker as well: <code>pages.forward_operations_to_parent</code> hands each one to the child's event queue as <code>__op_browser_operation__</code>, and the worker reports it with <code>report_forwarded_operation</code>, which keeps only the operation's own fields and falls back to the execution it launched. Tab locks and the write log are per process, so a child and the worker on one tab interleave at single page calls.</p>
+<p><strong>Access and cancellation.</strong> When the turn's surface has agent access disabled (<code>preview_status</code> <code>disabled</code>), every built-in browser action is refused with <code>page_access_disabled</code>. Waiting for a tab, <code>wait</code>, settling and each step of a list check for cancellation.</p>
+<p><strong>Reading.</strong> <code>read</code> returns Playwright's AI snapshot: the ARIA tree with a ref on each element (<code>e12</code>, and <code>f1e3</code> inside a frame). Playwright 1.60 serves it as <code>Frame.ariaSnapshot(mode=&quot;ai&quot;, track)</code>, one text that is incremental when the same document has an earlier tracked snapshot; earlier versions serve <code>Page.snapshotForAI</code>, which returns both. The driver asks for the whole page when the document is new or a full read is wanted, and otherwise only for the changes. Changed lines are marked <code>&lt;changed&gt;</code> and <code>[unchanged]</code> stands for what was already sent. Password field values are redacted from both, and a page is cut at 40,000 characters.</p>
+<p><strong>Refs.</strong> Playwright resolves <code>aria-ref=&lt;ref&gt;</code> against its latest snapshot, and a ref stays the same for as long as its element exists, so refs survive any number of actions and turns. The driver keeps each ref's role and name from the snapshots. A ref that no longer resolves is looked up by that role and name, and so is an element named directly by <code>role</code> and <code>name</code>. If that still finds nothing, the action fails with <code>element_gone</code> and the page as it is now.</p>
+<p><strong>Acting.</strong> Clicks, hovers, key presses, typing (<code>fill</code>, or <code>insert_text</code> with <code>clear: false</code>), <code>select_option</code>, <code>drag_to</code> and <code>set_input_files</code> are Playwright's own trusted input. They reach a tab in the background without bringing it forward, which was checked against the App: a background tab receives <code>isTrusted</code> pointer, mouse and click events. Scrolling uses <code>page_actions.SCROLL_SCRIPT</code>, and <code>paste</code> uses <code>PASTE_SCRIPT</code>. A click by <code>x</code>,<code>y</code> maps screenshot pixels to CSS pixels with the ratio measured when the screenshot was taken, if the screenshot is still current (above). Before a click, the App's agent cursor is armed and placed on the element. After an action, the driver waits up to 0.3 s for a navigation to start. If one starts, it waits for <code>domcontentloaded</code>. It then waits up to 2 s for fetch/XHR requests the action started. Then it returns the changes, or the whole page when the URL changed or the document is new. An exception becomes a result with a reason code and the page as it is now, never a raw error.</p>
+<p><strong>Approval.</strong> The App's tabs need none. <code>open</code> and <code>navigate</code> to an origin outside this computer ask; <code>upload</code> asks; <code>evaluate</code> asks outside bypass, as below. Code mode's validator refuses all three, and its read-only actions (<code>tabs</code>, <code>read</code>, <code>wait</code>, <code>screenshot</code>, <code>console</code>, <code>network</code>) are marked as reads for the broker.</p>
+<p><strong>File upload.</strong> Pages rarely show their file input: it sits behind a styled upload button with <code>display: none</code>, so the outline has only the button, or the page creates the input when the button is clicked. The driver therefore uploads the way a person does, as Playwright MCP does. Every write action runs with a <code>filechooser</code> listener on the page (<code>_catch_choosers</code>), which makes Chromium hand the chooser to the driver instead of opening a window on the user's screen; the listener is removed when the action has settled, so the user's own clicks open the usual window. A chooser caught that way is kept on the tab and the result carries <code>file_chooser</code> (<code>multiple</code>, <code>accept</code>); <code>upload(path)</code> without a ref answers it, a bad path leaves it waiting, and any other write drops it. <code>upload(ref, path)</code> is the one-step form. When the ref is a file input or the label of one (<code>FILE_INPUT_SCRIPT</code>), the file is set on that input, hidden or not; anything else is clicked inside <code>expect_file_chooser</code> and the chooser it opens takes the file, or the call fails with <code>no_file_chooser</code> after 3 s. The driver never guesses an input near a button: a page with a second hidden input would take the file into the wrong field and report success, which is also why Codex exposes uploads only through the chooser. A button that opens nothing is still not a dead end. The page may be stuck in an earlier upload, or open its input only after an <code>await</code> that spent the click's user activation. So the error says what the button reads now and whether it is disabled (<code>ELEMENT_STATE_SCRIPT</code>), and lists the page's enabled file inputs, numbered (<code>FILE_FIELDS_SCRIPT</code>). Each entry gives its id or name, <code>accept</code>, <code>multiple</code>, the text it sits in, and whether it is the only one in the button's section. The model picks one with <code>upload(field=n, path)</code>, which sets the file on that input (<code>Tab.file_fields</code>). Any other write action, or a new page, drops the list, and the user's own browser does not support <code>field</code>. The text result names a caught chooser and its <code>accept</code>, so the model knows to answer it. The user's Chrome or Edge follows the same model through Playwright MCP's own file-chooser state: <code>upload</code> with a ref clicks it first, without a ref it answers the chooser the last click opened. Drop zones with no file input at all are not covered.</p>
+<p><code>evaluate</code> reads everything a signed-in page holds, including what snapshots redact, so it is gated in the permission policy rather than by the tool. <code>page_script</code> marks a <code>computer_use_agent</code> browser call with an <code>evaluate</code> step (single or in <code>actions</code>), or a <code>web_use</code> evaluate. Such a call runs in bypass, as every other call does; in the other modes it asks (<code>PAGE_SCRIPT_APPROVAL</code>, before the Page grant is consulted) unless an allow rule covers it. The card offers &quot;once&quot; and &quot;this conversation&quot;, which saves <code>computer_use_agent(browser:evaluate)</code> (or <code>browser:chrome:evaluate</code>) in the session layer; it never offers a project rule, since one approval should not reach every site in every later conversation, and it shows the arguments untruncated. Operating a browser (<code>browser:chrome</code>) does not allow its page scripts. Non-interactive sources are refused, in bypass too. The result passes the same password redaction. An expression is wrapped as <code>() =&gt; (expr)</code>; scripts are capped at 8000 characters and results at 20,000.</p>
+<h2 id="interface-work">Interface work<a class="header-anchor" href="#interface-work">#</a></h2>
+<p>The approval card for an <code>app</code> call (<code>computer-use-approval.tsx</code>) leads with the application itself: its icon, display name and bundle id come from the <code>computer_use_apps</code> WebSocket action, which calls the backend's <code>app_info</code> and launches nothing, and the web caches them per name (<code>lib/net/computer-use-apps.ts</code>). Below it a chip names the step in words (<code>computer-use-step.ts</code>), two lines state that the step runs in the background (or, for audio, that only that application's sound is recorded) and what the offered scopes cover, and the arguments without empty values fold into &quot;Execution details&quot;.</p>
+<p>The project's Settings tab has a Computer use section (<code>computer-use-apps-section.tsx</code>) between the default settings and the permission rules. It lists the project's <code>computer_use_agent(&lt;app&gt;)</code> allow rules (and those saved as <code>computer_use(&lt;app&gt;)</code>) as one row per application with icon, name, bundle id and a remove control, and the generic rule list leaves those rules out. Removing a row removes the rule. Conversation-scoped grants are session rules that end with their conversation, so the section does not list them.</p>
+<p>The person points the agent at things the way Codex lets them:</p>
+<ul>
+<li>In a web tab, <strong>Comment on the page…</strong> picks one element and adds its selector, text and the comment to the draft; <strong>Screenshot a region…</strong> lets them drag a rectangle and adds those pixels as a PNG attachment. Both run in one isolated world (<code>PICKER_WORLD</code> in <code>apps/desktop/main/web-views/web-views.js</code>) that shares a cancel hook, so one mode ends the other. The region overlay is removed and two frames are painted before <code>capturePage</code> takes the rectangle, scaled by the page zoom. The file reaches the target conversation through <code>lib/chat/composer-inbox.ts</code>: the composer showing that conversation takes it as a dropped file, and it waits there until one does.</li>
+<li>The composer's <code>@</code> menu lists open web tabs and running apps above the files (<code>attach/mention/mention-sources.ts</code>). A tab is written as a markdown link to its address and an app as its name and bundle id, so &quot;this tab&quot; resolves without the model guessing. Running apps come from <code>computer_use_apps</code> with <code>running: true</code>, which lists regular apps other than the refused ones and is kept for ten seconds in the page.</li>
+</ul>
+<h2 id="implementation-status">Implementation status<a class="header-anchor" href="#implementation-status">#</a></h2>
+<ul>
+<li>Implemented: <code>computer_use_agent</code> with the <code>app</code>, <code>browser</code> and <code>vm</code> targets, per-target guides on first use, several steps, code mode, <code>fresh</code> agents with a carried session rule, the VM target over the OSWorld HTTP API (through the outbound policy as the <code>computer_use.vm</code> consumer), and the web presentation; unit tests cover routing, guides, the VM scripts and approval, and a sandbox test runs code against stub targets. Not yet run against a live VM server.</li>
+<li>Implemented: the <code>app</code> target on macOS with the reading and acting actions above, stable indices, adaptive settling, background pointer and keyboard delivery, tree diffs, per-app approval with the four scopes, system-access gating, web presentation, unit tests for keys, tree numbering, menu matching, several steps, rules and approval wiring.</li>
+<li>Implemented: the built-in browser as the application <code>programs/applications/browser/</code>, reached only through the <code>browser</code> service, with tests for each caller running without it.</li>
+<li>Implemented: the <code>web_use</code> runtime with the cross-window Page inventory, page/access/geometry revisions, owner cleanup, recovery hints, the three backends and their parity matrix, the single-viewport screenshot release and the agent cursor.</li>
+<li>Implemented: the tab driver for the <code>browser</code> target, with unit tests for choosing tabs, ref recovery, both snapshot protocols and the result shape, and two end-to-end runs in the App in which an agent filled and submitted a local two-page form (text, email, radio, checkboxes, select, textarea, a confirmation box) through background tabs.</li>
+<li>Implemented: OCR text for windows with a sparse tree and as the <code>find</code> fallback, with a test that reads a rendered image through Vision.</li>
+<li>Implemented: per-application audio recording with WAV output and Voice-engine transcription.</li>
+<li>Implemented: visible tabs and <code>changes_only</code> observations on the native backends.</li>
+<li>Implemented: recordings as audio input for Gemini and Chat Completions audio models; tool-result screenshots on Chat Completions vision models.</li>
+<li>Implemented: element comments and region screenshots in web tabs; <code>@</code>-mentions of open tabs and running apps.</li>
+<li>Implemented: outlines of icons and controls without text in sparse windows.</li>
+<li>Implemented: the Linux (X11) backend described above. It is tested in a Debian 12 container with Xvfb, Openbox, the AT-SPI bus and PipeWire against a GTK 3 window (menu bar, entry, password entry, check box, slider, scrolled text view, drawing area, a button that plays sound from a child process), GNOME Calculator (GTK 4 with libadwaita, launched from its desktop entry, 7×6 computed by element clicks) and ImageMagick <code>display</code> (an Xt client without AT-SPI, read by OCR). Host-independent parts have unit tests.</li>
+<li>Implemented: windows on other Spaces, tested from Desktop 1 against Calculator on Desktop 2 (listing, screenshot, element presses computing 7×6, a coordinate click, a scroll, the key errors), with the pointer and the front app unchanged and the window left on its Space; inserting text there is not covered, since Calculator has no text field.</li>
+<li>Implemented, not yet run on Windows: the Windows backend described above. The macOS machines it is built on have no Windows guest, so only its host-independent parts (PNG encoding, key mapping, the HTML clipboard payload, Start menu parsing, the control-type table, refusals, the recording format) have unit tests.</li>
+<li>Implemented on macOS: the control overlay over desktop apps (inward glow, accent title-bar lights and agent cursor), with unit tests for the window place and step point frames and for the desktop overlay window. Not implemented: the Linux and Windows backends report neither window places nor step points, so no overlay shows there.</li>
+<li>Implemented: the user's Chrome and Edge in the <code>browser</code> target over Playwright MCP's extension mode, with unit tests for the action mapping, Edge, stopping on failure, the tab list and the approval subject. Not yet run against the Playwright Extension in a live browser.</li>
+<li>Implemented on macOS: the window marker, with unit tests for watching, switching and idle release. Not implemented on Linux and Windows.</li>
+<li>Implemented on macOS: following a newly opened window, file-dialog detection with the key refusal, and <code>open_file</code>, tested against Preview and PDF Expert (Open dialog followed, keys refused, Cancel pressed, a PDF opened and its text read) with the front app unchanged throughout, plus unit tests. Following a dialog that leaves the focus where it was, telling the out-of-process dialog by the window list, reading it from the service process, refusing keys while it is open beside the focused window, and cancelling it from <code>open_file</code> have unit tests; of these only the window-list detection has run live, against PDF Expert's Open dialog. Not implemented on Linux and Windows.</li>
+<li>Not implemented: audio input over the Responses and Anthropic APIs, whose models take no audio; moving a window from another Space, and typing into it with keys (see above); naming an icon from its outline (the model reads the screenshot).</li>
+</ul>
+<div class="page-updated"><span data-i18n="updated">Last updated</span> · 2026-11-06</div><div class="prevnext"><a class="pn-link pn-prev" href="/docs/reference/design/integrations/web-use.html" data-href-en="/docs/reference/design/integrations/web-use.html" data-href-zh="/docs/reference/design/integrations/web-use.zh.html"><span class="pn-dir" data-i18n="prev">Previous</span><span class="pn-title" data-title-zh="网页自动化">Web automation</span></a><a class="pn-link pn-next" href="/docs/reference/design/extension-gating/README.html" data-href-en="/docs/reference/design/extension-gating/README.html" data-href-zh="/docs/reference/design/extension-gating/README.zh.html"><span class="pn-dir" data-i18n="next">Next</span><span class="pn-title" data-title-zh="扩展控制">Extension controls</span></a></div></article></main>
+  <aside class="toc"><div class="toc-title" data-i18n="on_this_page">On this page</div>
+<ul class="toc-list">
+<li>
+<a class="lvl-2" href="#three-ways-to-give-a-model-a-screen">Three ways to give a model a screen</a>
+</li>
+<li>
+<details class="toc-disclosure" open=""><summary>
+<a class="lvl-2" href="#computer_use_agent">computer_use_agent</a>
+</summary>
+<ul class="toc-list">
+<li>
+<a class="lvl-3" href="#shape">Shape</a>
+</li>
+<li>
+<a class="lvl-3" href="#targets-and-guides">Targets and guides</a>
+</li>
+<li>
+<a class="lvl-3" href="#pointing">Pointing</a>
+</li>
+<li>
+<a class="lvl-3" href="#code">Code</a>
+</li>
+<li>
+<a class="lvl-3" href="#context">Context</a>
+</li>
+<li>
+<a class="lvl-3" href="#approval-and-access">Approval and access</a>
+</li>
+<li>
+<a class="lvl-3" href="#module-layout">Module layout</a>
+</li>
+</ul>
+</details>
+</li>
+<li>
+<details class="toc-disclosure" open=""><summary>
+<a class="lvl-2" href="#application-backend">Application backend</a>
+</summary>
+<ul class="toc-list">
+<li>
+<a class="lvl-3" href="#shape-1">Shape</a>
+</li>
+<li>
+<a class="lvl-3" href="#stable-indices">Stable indices</a>
+</li>
+<li>
+<a class="lvl-3" href="#settling">Settling</a>
+</li>
+<li>
+<a class="lvl-3" href="#menu-bar">Menu bar</a>
+</li>
+<li>
+<a class="lvl-3" href="#text-on-the-screenshot">Text on the screenshot</a>
+</li>
+<li>
+<a class="lvl-3" href="#audio">Audio</a>
+</li>
+<li>
+<a class="lvl-3" href="#module-layout-1">Module layout</a>
+</li>
+<li>
+<a class="lvl-3" href="#background-delivery">Background delivery</a>
+</li>
+<li>
+<a class="lvl-3" href="#agent-cursor">Agent cursor</a>
+</li>
+<li>
+<a class="lvl-3" href="#window-marker">Window marker</a>
+</li>
+<li>
+<a class="lvl-3" href="#refusals">Refusals</a>
+</li>
+<li>
+<a class="lvl-3" href="#linux-backend">Linux backend</a>
+</li>
+<li>
+<a class="lvl-3" href="#windows-backend">Windows backend</a>
+</li>
+<li>
+<a class="lvl-3" href="#permissions-and-approval">Permissions and approval</a>
+</li>
+<li>
+<a class="lvl-3" href="#web-presentation">Web presentation</a>
+</li>
+</ul>
+</details>
+</li>
+<li>
+<a class="lvl-2" href="#the-browser-application">The browser application</a>
+</li>
+<li>
+<a class="lvl-2" href="#the-web_use-runtime">The web_use runtime</a>
+</li>
+<li>
+<a class="lvl-2" href="#browser-target-the-tab-driver">Browser target: the tab driver</a>
+</li>
+<li>
+<a class="lvl-2" href="#interface-work">Interface work</a>
+</li>
+<li>
+<a class="lvl-2" href="#implementation-status">Implementation status</a>
+</li>
+</ul></aside>
+</div>
+
+<div class="search-overlay">
+  <div class="search-box">
+    <input type="text" data-i18n-ph="search_ph" placeholder="Search titles or text…" autocomplete="off" spellcheck="false">
+    <div class="search-results"></div>
+  </div>
+</div>
+
+<script src="/docs/assets/site.js?v=6520ba46"></script>
+</body>
+</html>

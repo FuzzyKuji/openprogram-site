@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh" data-base="/docs/" data-page-lang="zh" data-build="1793956776" data-alt-lang-url="/docs/interfaces/voice-input.html">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>语音输入 · OpenProgram Docs</title>
+<meta name="description" content="聊天输入框左下角的圆形麦克风按钮把说话转成文字。点一下开始说，再点一下停止。打字时也可以按住 ⌥空格（Alt+空格）说话，松开即停止。">
+<link rel="canonical" href="https://openprogram.io/docs/interfaces/voice-input.zh.html">
+<link rel="alternate" type="text/markdown" href="https://openprogram.io/docs/interfaces/voice-input.zh.html.md">
+<link rel="describedby" href="https://openprogram.io/llms.txt">
+<link rel="alternate" hreflang="en" href="https://openprogram.io/docs/interfaces/voice-input.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://openprogram.io/docs/interfaces/voice-input.zh.html">
+<link rel="alternate" hreflang="x-default" href="https://openprogram.io/docs/interfaces/voice-input.html">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"OpenProgram Docs","item":"https://openprogram.io/docs/"},{"@type":"ListItem","position":2,"name":"语音输入"}]}</script>
+<meta property="og:type" content="article">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:site_name" content="OpenProgram">
+<meta property="og:url" content="https://openprogram.io/docs/interfaces/voice-input.zh.html">
+<meta property="og:title" content="语音输入 · OpenProgram Docs">
+<meta property="og:description" content="聊天输入框左下角的圆形麦克风按钮把说话转成文字。点一下开始说，再点一下停止。打字时也可以按住 ⌥空格（Alt+空格）说话，松开即停止。">
+<meta property="og:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:secure_url" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="语音输入 · OpenProgram Docs">
+<meta name="twitter:description" content="聊天输入框左下角的圆形麦克风按钮把说话转成文字。点一下开始说，再点一下停止。打字时也可以按住 ⌥空格（Alt+空格）说话，松开即停止。">
+<meta name="twitter:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta name="twitter:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/docs/assets/mark.svg">
+<link rel="stylesheet" href="/docs/assets/site.css?v=6520ba46">
+<link rel="stylesheet" href="/docs/assets/pygments-light.css" media="(prefers-color-scheme: light)" id="pyg-light">
+<link rel="stylesheet" href="/docs/assets/pygments-dark.css" media="(prefers-color-scheme: dark)" id="pyg-dark">
+<script src="/docs/assets/theme.js?v=6520ba46"></script>
+
+</head>
+<body>
+<header class="topbar">
+  <button class="icon hamburger" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2.5 4.5h11M2.5 8h11M2.5 11.5h11"/></svg></button>
+  <a class="brand" href="/docs/index.html"><img class="mark" src="/docs/assets/mark.svg" alt="">OpenProgram Docs</a>
+  <div class="spacer"></div>
+  <button class="search-trigger" aria-label="Search">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14"/></svg><span class="label" data-i18n="search">Search docs</span><kbd>⌘K</kbd>
+  </button>
+  <div class="lang-wrap">
+    <button class="icon lang-trigger" id="lang-toggle" aria-haspopup="true" aria-expanded="false" aria-label="Language">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="6.2"/><path d="M1.8 8h12.4" stroke-linecap="round"/><ellipse cx="8" cy="8" rx="2.8" ry="6.2"/></svg><span class="lang-label">EN</span><svg class="chev" width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+    </button>
+    <div class="lang-menu" id="lang-menu" role="menu">
+      <button class="lang-opt" data-lang="en" role="menuitem"><span>English</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="lang-opt" data-lang="zh" role="menuitem"><span>简体中文</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+  <div class="theme-wrap">
+    <button class="icon" id="theme-toggle" aria-label="Theme" aria-haspopup="menu" aria-controls="theme-menu" aria-expanded="false"><svg class="ic-system" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="2.5" width="13" height="9" rx="1.5"/><path d="M8 11.5V14M5.5 14h5"/></svg><svg class="ic-moon" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M13.5 9.5A6 6 0 1 1 6.5 2.5a5 5 0 0 0 7 7z"/></svg><svg class="ic-sun" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="3.2"/><path d="M8 1.2v1.8M8 13v1.8M1.2 8H3M13 8h1.8M3.2 3.2l1.3 1.3M11.5 11.5l1.3 1.3M12.8 3.2l-1.3 1.3M4.5 11.5l-1.3 1.3"/></svg></button>
+    <div class="theme-menu" id="theme-menu" role="menu" aria-labelledby="theme-toggle">
+      <button class="theme-opt" data-theme-choice="system" role="menuitemradio" aria-checked="true"><span>Follow system</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="light" role="menuitemradio" aria-checked="false"><span>Light</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="dark" role="menuitemradio" aria-checked="false"><span>Dark</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+</header>
+<nav class="tabbar"><a class="tablink" href="/docs/README.html" data-title-zh="开始使用" data-href-en="/docs/README.html" data-href-zh="/docs/README.zh.html">Get started</a><a class="tablink" href="/docs/install/install.html" data-title-zh="安装" data-href-en="/docs/install/install.html" data-href-zh="/docs/install/install.zh.html">Install</a><a class="tablink" href="/docs/capabilities/README.html" data-title-zh="能力" data-href-en="/docs/capabilities/README.html" data-href-zh="/docs/capabilities/README.zh.html">Capabilities</a><a class="tablink active" href="/docs/interfaces/README.html" data-title-zh="界面" data-href-en="/docs/interfaces/README.html" data-href-zh="/docs/interfaces/README.zh.html">Interfaces</a><a class="tablink" href="/docs/models/README.html" data-title-zh="模型" data-href-en="/docs/models/README.html" data-href-zh="/docs/models/README.zh.html">Models</a><a class="tablink" href="/docs/integrations/anthropic.html" data-title-zh="集成" data-href-en="/docs/integrations/anthropic.html" data-href-zh="/docs/integrations/anthropic.zh.html">Integrations</a><a class="tablink" href="/docs/server/README.html" data-title-zh="服务与运维" data-href-en="/docs/server/README.html" data-href-zh="/docs/server/README.zh.html">Server &amp; Ops</a><a class="tablink" href="/docs/reference/README.html" data-title-zh="参考" data-href-en="/docs/reference/README.html" data-href-zh="/docs/reference/README.zh.html">Reference</a><a class="tablink" href="/docs/reference/design/README.html" data-title-zh="设计" data-href-en="/docs/reference/design/README.html" data-href-zh="/docs/reference/design/README.zh.html">Design</a></nav>
+
+<div class="scrim"></div>
+<div class="layout">
+  <nav class="sidebar" aria-label="Documentation">
+    <input class="nav-filter" type="text" data-i18n-ph="nav_filter"
+           aria-label="Filter docs" placeholder="Filter docs…" autocomplete="off" spellcheck="false">
+    <div class="nav-tree"><div class="nav-sec"><div class="nav-sec-title" data-title-zh="概览">Overview</div><a class="navlink" href="/docs/interfaces/README.html" data-title-zh="界面" data-href-en="/docs/interfaces/README.html" data-href-zh="/docs/interfaces/README.zh.html">Interfaces</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="界面">Surfaces</div><a class="navlink" href="/docs/interfaces/desktop.html" data-title-zh="桌面应用" data-href-en="/docs/interfaces/desktop.html" data-href-zh="/docs/interfaces/desktop.zh.html">Desktop App</a>
+<a class="navlink" href="/docs/interfaces/web.html" data-title-zh="网页界面" data-href-en="/docs/interfaces/web.html" data-href-zh="/docs/interfaces/web.zh.html">Web UI</a>
+<a class="navlink" href="/docs/interfaces/tui.html" data-title-zh="终端界面" data-href-en="/docs/interfaces/tui.html" data-href-zh="/docs/interfaces/tui.zh.html">Terminal UI</a>
+<a class="navlink" href="/docs/interfaces/cli.html" data-title-zh="命令行" data-href-en="/docs/interfaces/cli.html" data-href-zh="/docs/interfaces/cli.zh.html">CLI</a>
+<a class="navlink" href="/docs/interfaces/acp.html" data-title-zh="编辑器集成" data-href-en="/docs/interfaces/acp.html" data-href-zh="/docs/interfaces/acp.zh.html">Editor integration</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="聊天输入">Chat input</div><a class="navlink active" href="/docs/interfaces/voice-input.html" data-title-zh="语音输入" data-href-en="/docs/interfaces/voice-input.html" data-href-zh="/docs/interfaces/voice-input.zh.html">Voice input</a></div></div>
+  </nav>
+  <main class="content"><button class="fs-toggle" aria-label="Fullscreen" title="Fullscreen (Esc to exit)"><svg class="ic-expand" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.2 2H2v4.2M9.8 2H14v4.2M6.2 14H2V9.8M9.8 14H14V9.8"/></svg><svg class="ic-collapse" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6.2h4.2V2M14 6.2H9.8V2M2 9.8h4.2V14M14 9.8H9.8V14"/></svg></button><article><nav class="breadcrumb"><span class="bc-seg" data-title-zh="界面">Interfaces</span> <span class='bc-sep'>›</span> <span class="bc-seg" data-title-zh="聊天输入">Chat input</span> <span class='bc-sep'>›</span> <span class="bc-seg bc-current" data-title-zh="语音输入">Voice input</span></nav><h1 id="语音输入">语音输入<a class="header-anchor" href="#语音输入">#</a></h1>
+<p>聊天输入框左下角的圆形麦克风按钮把说话转成文字。点一下开始说，再点一下停止。打字时也可以按住 ⌥空格（Alt+空格）说话，松开即停止。</p>
+<p>录音时，发送按钮前面有一条指示：安静时显示一个点，说话时显示随音量变化的竖条。每说完一句停顿一下，这一句就会被转写并插入到光标处，所以文字是一句一句出现，而不是一个词一个词出现。不会自动发送：文字留在输入框里，改完再发。按 Esc 放弃这段录音，并删除它插入的文字。停止后，最后一句转写完成，按钮才恢复可用。</p>
+<p>浏览器或桌面 App 第一次使用时会请求麦克风权限。</p>
+<h2 id="选择语音识别服务">选择语音识别服务<a class="header-anchor" href="#选择语音识别服务">#</a></h2>
+<p>打开 <strong>设置 → 语音</strong>。麦克风本身没有选项，都在这里设置。</p>
+<table>
+<thead>
+<tr>
+<th>设置</th>
+<th>取值</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>识别服务（<code>voice.engine</code>）</td>
+<td><code>auto</code>、<code>openai</code>、<code>groq</code>、<code>local</code></td>
+<td>用哪个服务转写音频。</td>
+</tr>
+<tr>
+<td>说话语言（<code>voice.language</code>）</td>
+<td><code>auto</code>、<code>zh</code>、<code>en</code>、<code>ja</code>、<code>ko</code>、<code>fr</code>、<code>de</code>、<code>es</code></td>
+<td>提示你说的语言；<code>auto</code> 自动识别。选 <code>zh</code> 时输出简体中文。</td>
+</tr>
+<tr>
+<td>模型（<code>voice.model</code>）</td>
+<td>文本</td>
+<td>所选服务的模型名；留空用该服务的默认模型。识别服务为 <code>auto</code> 时不生效。</td>
+</tr>
+</tbody>
+</table>
+<p>各识别服务：</p>
+<ul>
+<li><strong>openai</strong>：把每句话发给 OpenAI 转写 API，默认模型 <code>gpt-4o-mini-transcribe</code>，使用 设置 → 模型服务 里的 OpenAI API key。</li>
+<li><strong>groq</strong>：把每句话发给 Groq，默认模型 <code>whisper-large-v3-turbo</code>，使用 设置 → 模型服务 里的 Groq API key。</li>
+<li><strong>local</strong>：在本机运行 <a href="https://github.com/ggml-org/whisper.cpp">whisper.cpp</a>，音频不离开这台电脑。用 <code>brew install whisper-cpp</code> 安装。第一次使用时把 <code>large-v3-turbo-q5_0</code> 模型（约 570 MB）下载到状态目录；在 Apple 芯片上每句话需要一到两秒。</li>
+</ul>
+<p>选 <code>auto</code> 时，OpenProgram 依次选择：已安装且模型已下载的本机 whisper.cpp、OpenAI、Groq、本机 whisper.cpp（第一次使用时下载模型）。设置页会显示当前使用的服务，以及这台电脑上哪些服务可用。</p>
+<p>这些设置也可以在命令行修改，例如：</p>
+<pre><code class="language-bash">openprogram<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>voice.engine<span class="w"> </span><span class="nb">local</span>
+</code></pre>
+<p><a href="/docs/capabilities/computer-use.zh.html#%E5%BD%95%E9%9F%B3"><code>computer_use_agent</code></a> 从应用录下的声音也由同一个引擎转写。</p>
+<h2 id="限制">限制<a class="header-anchor" href="#限制">#</a></h2>
+<ul>
+<li>音频按 16 kHz 单声道录制，一句一句上传；超过 25 秒没有停顿的一句会在那里切开。</li>
+<li>单次上传最多 20 MB。</li>
+<li>没有可用的识别服务时，点麦克风不会录音，而是提示去 设置 → 语音。</li>
+</ul>
+<div class="page-updated"><span data-i18n="updated">Last updated</span> · 2026-10-18</div><div class="prevnext"><a class="pn-link pn-prev" href="/docs/interfaces/acp.html" data-href-en="/docs/interfaces/acp.html" data-href-zh="/docs/interfaces/acp.zh.html"><span class="pn-dir" data-i18n="prev">Previous</span><span class="pn-title" data-title-zh="编辑器集成">Editor integration</span></a><a class="pn-link pn-next" href="/docs/models/README.html" data-href-en="/docs/models/README.html" data-href-zh="/docs/models/README.zh.html"><span class="pn-dir" data-i18n="next">Next</span><span class="pn-title" data-title-zh="模型配置">Model configuration</span></a></div></article></main>
+  <aside class="toc"><div class="toc-title" data-i18n="on_this_page">On this page</div>
+<ul class="toc-list">
+<li>
+<a class="lvl-2" href="#选择语音识别服务">选择语音识别服务</a>
+</li>
+<li>
+<a class="lvl-2" href="#限制">限制</a>
+</li>
+</ul></aside>
+</div>
+
+<div class="search-overlay">
+  <div class="search-box">
+    <input type="text" data-i18n-ph="search_ph" placeholder="Search titles or text…" autocomplete="off" spellcheck="false">
+    <div class="search-results"></div>
+  </div>
+</div>
+
+<script src="/docs/assets/site.js?v=6520ba46"></script>
+</body>
+</html>

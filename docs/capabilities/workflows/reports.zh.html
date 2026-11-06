@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh" data-base="/docs/" data-page-lang="zh" data-build="1793956776" data-alt-lang-url="/docs/capabilities/workflows/reports.html">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>每周报告 · OpenProgram Docs</title>
+<meta name="description" content="准备每周报告 # 群聊个人周报和飞书个人周报草稿默认直接返回完整 Markdown 正文，不依赖本地文件写入成功。明确指定 Markdown 输出路径时仍按文件交付，旧的文件交付恢复请求保持兼容。返回正文不会对外发送或提交。 weekly_report 是 Agent">
+<link rel="canonical" href="https://openprogram.io/docs/capabilities/workflows/reports.zh.html">
+<link rel="alternate" type="text/markdown" href="https://openprogram.io/docs/capabilities/workflows/reports.zh.html.md">
+<link rel="describedby" href="https://openprogram.io/llms.txt">
+<link rel="alternate" hreflang="en" href="https://openprogram.io/docs/capabilities/workflows/reports.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://openprogram.io/docs/capabilities/workflows/reports.zh.html">
+<link rel="alternate" hreflang="x-default" href="https://openprogram.io/docs/capabilities/workflows/reports.html">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"OpenProgram Docs","item":"https://openprogram.io/docs/"},{"@type":"ListItem","position":2,"name":"每周报告"}]}</script>
+<meta property="og:type" content="article">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:site_name" content="OpenProgram">
+<meta property="og:url" content="https://openprogram.io/docs/capabilities/workflows/reports.zh.html">
+<meta property="og:title" content="每周报告 · OpenProgram Docs">
+<meta property="og:description" content="准备每周报告 # 群聊个人周报和飞书个人周报草稿默认直接返回完整 Markdown 正文，不依赖本地文件写入成功。明确指定 Markdown 输出路径时仍按文件交付，旧的文件交付恢复请求保持兼容。返回正文不会对外发送或提交。 weekly_report 是 Agent">
+<meta property="og:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:secure_url" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="每周报告 · OpenProgram Docs">
+<meta name="twitter:description" content="准备每周报告 # 群聊个人周报和飞书个人周报草稿默认直接返回完整 Markdown 正文，不依赖本地文件写入成功。明确指定 Markdown 输出路径时仍按文件交付，旧的文件交付恢复请求保持兼容。返回正文不会对外发送或提交。 weekly_report 是 Agent">
+<meta name="twitter:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta name="twitter:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/docs/assets/mark.svg">
+<link rel="stylesheet" href="/docs/assets/site.css?v=6520ba46">
+<link rel="stylesheet" href="/docs/assets/pygments-light.css" media="(prefers-color-scheme: light)" id="pyg-light">
+<link rel="stylesheet" href="/docs/assets/pygments-dark.css" media="(prefers-color-scheme: dark)" id="pyg-dark">
+<script src="/docs/assets/theme.js?v=6520ba46"></script>
+
+</head>
+<body>
+<header class="topbar">
+  <button class="icon hamburger" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2.5 4.5h11M2.5 8h11M2.5 11.5h11"/></svg></button>
+  <a class="brand" href="/docs/index.html"><img class="mark" src="/docs/assets/mark.svg" alt="">OpenProgram Docs</a>
+  <div class="spacer"></div>
+  <button class="search-trigger" aria-label="Search">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14"/></svg><span class="label" data-i18n="search">Search docs</span><kbd>⌘K</kbd>
+  </button>
+  <div class="lang-wrap">
+    <button class="icon lang-trigger" id="lang-toggle" aria-haspopup="true" aria-expanded="false" aria-label="Language">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="6.2"/><path d="M1.8 8h12.4" stroke-linecap="round"/><ellipse cx="8" cy="8" rx="2.8" ry="6.2"/></svg><span class="lang-label">EN</span><svg class="chev" width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+    </button>
+    <div class="lang-menu" id="lang-menu" role="menu">
+      <button class="lang-opt" data-lang="en" role="menuitem"><span>English</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="lang-opt" data-lang="zh" role="menuitem"><span>简体中文</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+  <div class="theme-wrap">
+    <button class="icon" id="theme-toggle" aria-label="Theme" aria-haspopup="menu" aria-controls="theme-menu" aria-expanded="false"><svg class="ic-system" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="2.5" width="13" height="9" rx="1.5"/><path d="M8 11.5V14M5.5 14h5"/></svg><svg class="ic-moon" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M13.5 9.5A6 6 0 1 1 6.5 2.5a5 5 0 0 0 7 7z"/></svg><svg class="ic-sun" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="3.2"/><path d="M8 1.2v1.8M8 13v1.8M1.2 8H3M13 8h1.8M3.2 3.2l1.3 1.3M11.5 11.5l1.3 1.3M12.8 3.2l-1.3 1.3M4.5 11.5l-1.3 1.3"/></svg></button>
+    <div class="theme-menu" id="theme-menu" role="menu" aria-labelledby="theme-toggle">
+      <button class="theme-opt" data-theme-choice="system" role="menuitemradio" aria-checked="true"><span>Follow system</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="light" role="menuitemradio" aria-checked="false"><span>Light</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="dark" role="menuitemradio" aria-checked="false"><span>Dark</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+</header>
+<nav class="tabbar"><a class="tablink" href="/docs/README.html" data-title-zh="开始使用" data-href-en="/docs/README.html" data-href-zh="/docs/README.zh.html">Get started</a><a class="tablink" href="/docs/install/install.html" data-title-zh="安装" data-href-en="/docs/install/install.html" data-href-zh="/docs/install/install.zh.html">Install</a><a class="tablink active" href="/docs/capabilities/README.html" data-title-zh="能力" data-href-en="/docs/capabilities/README.html" data-href-zh="/docs/capabilities/README.zh.html">Capabilities</a><a class="tablink" href="/docs/interfaces/README.html" data-title-zh="界面" data-href-en="/docs/interfaces/README.html" data-href-zh="/docs/interfaces/README.zh.html">Interfaces</a><a class="tablink" href="/docs/models/README.html" data-title-zh="模型" data-href-en="/docs/models/README.html" data-href-zh="/docs/models/README.zh.html">Models</a><a class="tablink" href="/docs/integrations/anthropic.html" data-title-zh="集成" data-href-en="/docs/integrations/anthropic.html" data-href-zh="/docs/integrations/anthropic.zh.html">Integrations</a><a class="tablink" href="/docs/server/README.html" data-title-zh="服务与运维" data-href-en="/docs/server/README.html" data-href-zh="/docs/server/README.zh.html">Server &amp; Ops</a><a class="tablink" href="/docs/reference/README.html" data-title-zh="参考" data-href-en="/docs/reference/README.html" data-href-zh="/docs/reference/README.zh.html">Reference</a><a class="tablink" href="/docs/reference/design/README.html" data-title-zh="设计" data-href-en="/docs/reference/design/README.html" data-href-zh="/docs/reference/design/README.zh.html">Design</a></nav>
+
+<div class="scrim"></div>
+<div class="layout">
+  <nav class="sidebar" aria-label="Documentation">
+    <input class="nav-filter" type="text" data-i18n-ph="nav_filter"
+           aria-label="Filter docs" placeholder="Filter docs…" autocomplete="off" spellcheck="false">
+    <div class="nav-tree"><div class="nav-sec"><div class="nav-sec-title" data-title-zh="概览">Overview</div><a class="navlink" href="/docs/capabilities/README.html" data-title-zh="概览" data-href-en="/docs/capabilities/README.html" data-href-zh="/docs/capabilities/README.zh.html">Overview</a>
+<a class="navlink" href="/docs/capabilities/applications.html" data-title-zh="应用" data-href-en="/docs/capabilities/applications.html" data-href-zh="/docs/capabilities/applications.zh.html">Applications</a>
+<a class="navlink" href="/docs/capabilities/framework-control.html" data-title-zh="框架工具" data-href-en="/docs/capabilities/framework-control.html" data-href-zh="/docs/capabilities/framework-control.zh.html">Framework tools</a></div>
+<div class="nav-sec"><div class="nav-sec-title">Agentic Programming</div><a class="navlink" href="/docs/capabilities/agentic-programming/README.html" data-title-zh="指南" data-href-en="/docs/capabilities/agentic-programming/README.html" data-href-zh="/docs/capabilities/agentic-programming/README.zh.html">Guide</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/philosophy.html" data-title-zh="设计原则" data-href-en="/docs/capabilities/agentic-programming/philosophy.html" data-href-zh="/docs/capabilities/agentic-programming/philosophy.zh.html">Philosophy</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/embedding-in-your-own-stack.html" data-title-zh="框架嵌入" data-href-en="/docs/capabilities/agentic-programming/embedding-in-your-own-stack.html" data-href-zh="/docs/capabilities/agentic-programming/embedding-in-your-own-stack.zh.html">Framework embedding</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="编写函数">Writing functions</div><a class="navlink" href="/docs/capabilities/agentic-programming/writing-functions/pure-python.html" data-title-zh="Python 函数" data-href-en="/docs/capabilities/agentic-programming/writing-functions/pure-python.html" data-href-zh="/docs/capabilities/agentic-programming/writing-functions/pure-python.zh.html">Python functions</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/writing-functions/agent.html" data-title-zh="智能体函数" data-href-en="/docs/capabilities/agentic-programming/writing-functions/agent.html" data-href-zh="/docs/capabilities/agentic-programming/writing-functions/agent.zh.html">Agentic functions</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/writing-functions/function-metadata.html" data-title-zh="函数元数据" data-href-en="/docs/capabilities/agentic-programming/writing-functions/function-metadata.html" data-href-zh="/docs/capabilities/agentic-programming/writing-functions/function-metadata.zh.html">Function metadata</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="选择下一步">Choosing the next step</div><a class="navlink" href="/docs/capabilities/agentic-programming/choosing-the-next-step/tool-calling.html" data-title-zh="工具循环" data-href-en="/docs/capabilities/agentic-programming/choosing-the-next-step/tool-calling.html" data-href-zh="/docs/capabilities/agentic-programming/choosing-the-next-step/tool-calling.zh.html">Tool-call loops</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/choosing-the-next-step/fixed-order-calls.html" data-title-zh="顺序调用" data-href-en="/docs/capabilities/agentic-programming/choosing-the-next-step/fixed-order-calls.html" data-href-zh="/docs/capabilities/agentic-programming/choosing-the-next-step/fixed-order-calls.zh.html">Fixed-order calls</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/choosing-the-next-step/next-step-decision.html" data-title-zh="步骤选择" data-href-en="/docs/capabilities/agentic-programming/choosing-the-next-step/next-step-decision.html" data-href-zh="/docs/capabilities/agentic-programming/choosing-the-next-step/next-step-decision.zh.html">Next-step selection</a></div>
+<div class="nav-sec"><div class="nav-sec-title">Agentic Workflows</div><a class="navlink" href="/docs/capabilities/workflows/README.html" data-title-zh="工作流" data-href-en="/docs/capabilities/workflows/README.html" data-href-zh="/docs/capabilities/workflows/README.zh.html">Workflows</a>
+<a class="navlink" href="/docs/capabilities/workflows/authoring.html" data-title-zh="工作流编写" data-href-en="/docs/capabilities/workflows/authoring.html" data-href-zh="/docs/capabilities/workflows/authoring.zh.html">Workflow authoring</a>
+<a class="navlink" href="/docs/capabilities/workflows/recording.html" data-title-zh="录制 Workflow" data-href-en="/docs/capabilities/workflows/recording.html" data-href-zh="/docs/capabilities/workflows/recording.zh.html">Record a workflow</a>
+<a class="navlink active" href="/docs/capabilities/workflows/reports.html" data-title-zh="每周报告" data-href-en="/docs/capabilities/workflows/reports.html" data-href-zh="/docs/capabilities/workflows/reports.zh.html">Weekly reports</a></div>
+<div class="nav-sec"><div class="nav-sec-title">Agents</div><a class="navlink" href="/docs/capabilities/agents.html" data-title-zh="配置 Agent" data-href-en="/docs/capabilities/agents.html" data-href-zh="/docs/capabilities/agents.zh.html">Configure an Agent</a>
+<a class="navlink" href="/docs/capabilities/agents-md.html" data-title-zh="用 AGENTS.md 写指令" data-href-en="/docs/capabilities/agents-md.html" data-href-zh="/docs/capabilities/agents-md.zh.html">Instructions with AGENTS.md</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="常驻 Agent">Always-on Agents</div><a class="navlink" href="/docs/capabilities/always-on-agents.html" data-title-zh="常驻 Agent" data-href-en="/docs/capabilities/always-on-agents.html" data-href-zh="/docs/capabilities/always-on-agents.zh.html">Always-on Agents</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="提醒">Reminders</div><a class="navlink" href="/docs/capabilities/reminders.html" data-title-zh="提醒" data-href-en="/docs/capabilities/reminders.html" data-href-zh="/docs/capabilities/reminders.zh.html">Reminders</a>
+<a class="navlink" href="/docs/capabilities/event-triggers.html" data-title-zh="有事发生时运行任务" data-href-en="/docs/capabilities/event-triggers.html" data-href-zh="/docs/capabilities/event-triggers.zh.html">Run a task when something happens</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="记忆">Memory</div><a class="navlink" href="/docs/capabilities/memory.html" data-title-zh="记忆管理" data-href-en="/docs/capabilities/memory.html" data-href-zh="/docs/capabilities/memory.zh.html">Memory management</a>
+<a class="navlink" href="/docs/capabilities/memory-settings.html" data-title-zh="调整记忆" data-href-en="/docs/capabilities/memory-settings.html" data-href-zh="/docs/capabilities/memory-settings.zh.html">Tune Memory</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="运行环境">Environments</div><a class="navlink" href="/docs/capabilities/environments.html" data-title-zh="在另一台机器上运行会话" data-href-en="/docs/capabilities/environments.html" data-href-zh="/docs/capabilities/environments.zh.html">Run conversations on another machine</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="会话目标">Session goals</div><a class="navlink" href="/docs/capabilities/goal.html" data-title-zh="目标" data-href-en="/docs/capabilities/goal.html" data-href-zh="/docs/capabilities/goal.zh.html">Goals</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="操控电脑">Computer use</div><a class="navlink" href="/docs/capabilities/computer-use.html" data-title-zh="操控电脑" data-href-en="/docs/capabilities/computer-use.html" data-href-zh="/docs/capabilities/computer-use.zh.html">Computer use</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="会议">Meetings</div><a class="navlink" href="/docs/capabilities/meetings.html" data-title-zh="会议" data-href-en="/docs/capabilities/meetings.html" data-href-zh="/docs/capabilities/meetings.zh.html">Meetings</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="扩展">Extending</div><a class="navlink" href="/docs/capabilities/installing-programs.html" data-title-zh="安装程序" data-href-en="/docs/capabilities/installing-programs.html" data-href-zh="/docs/capabilities/installing-programs.zh.html">Installing programs</a>
+<a class="navlink" href="/docs/capabilities/skills.html" data-title-zh="技能" data-href-en="/docs/capabilities/skills.html" data-href-zh="/docs/capabilities/skills.zh.html">Skills</a>
+<a class="navlink" href="/docs/capabilities/plugins.html" data-title-zh="插件" data-href-en="/docs/capabilities/plugins.html" data-href-zh="/docs/capabilities/plugins.zh.html">Plugins</a>
+<a class="navlink" href="/docs/capabilities/mcp.html" data-title-zh="MCP" data-href-en="/docs/capabilities/mcp.html" data-href-zh="/docs/capabilities/mcp.zh.html">MCP</a>
+<a class="navlink" href="/docs/capabilities/tools.html" data-title-zh="内置工具" data-href-en="/docs/capabilities/tools.html" data-href-zh="/docs/capabilities/tools.zh.html">Built-in tools</a>
+<a class="navlink" href="/docs/capabilities/lsp.html" data-title-zh="语言服务器" data-href-en="/docs/capabilities/lsp.html" data-href-zh="/docs/capabilities/lsp.zh.html">Language servers</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="概览">Overview</div><a class="navlink" href="/docs/capabilities/commit-push-pr.html" data-title-zh="提交与拉取请求" data-href-en="/docs/capabilities/commit-push-pr.html" data-href-zh="/docs/capabilities/commit-push-pr.zh.html">Commits and PRs</a>
+<a class="navlink" href="/docs/capabilities/permissions.html" data-title-zh="工具权限" data-href-en="/docs/capabilities/permissions.html" data-href-zh="/docs/capabilities/permissions.zh.html">Tool permissions</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="指南">Guide</div><a class="navlink" href="/docs/capabilities/agentic-programming/self-programming-ai-agents.html" data-title-zh="自编程智能体" data-href-en="/docs/capabilities/agentic-programming/self-programming-ai-agents.html" data-href-zh="/docs/capabilities/agentic-programming/self-programming-ai-agents.zh.html">Self-programming agents</a></div></div>
+  </nav>
+  <main class="content"><button class="fs-toggle" aria-label="Fullscreen" title="Fullscreen (Esc to exit)"><svg class="ic-expand" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.2 2H2v4.2M9.8 2H14v4.2M6.2 14H2V9.8M9.8 14H14V9.8"/></svg><svg class="ic-collapse" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6.2h4.2V2M14 6.2H9.8V2M2 9.8h4.2V14M14 9.8H9.8V14"/></svg></button><article><nav class="breadcrumb"><span class="bc-seg" data-title-zh="能力">Capabilities</span> <span class='bc-sep'>›</span> <span class="bc-seg">Agentic Workflows</span> <span class='bc-sep'>›</span> <span class="bc-seg bc-current" data-title-zh="每周报告">Weekly reports</span></nav><h1 id="准备每周报告">准备每周报告<a class="header-anchor" href="#准备每周报告">#</a></h1>
+<p>群聊个人周报和飞书个人周报草稿默认直接返回完整 Markdown 正文，不依赖本地文件写入成功。明确指定 Markdown 输出路径时仍按文件交付，旧的文件交付恢复请求保持兼容。返回正文不会对外发送或提交。</p>
+<p><code>weekly_report</code> 是 Agent 路由入口：理解完整请求，选择飞书个人、群聊个人、小组、腾讯中的一项或多项，再将原话逐字传给对应 Workflow。不会按关键词或冒号拆分要求，不强制只生成草稿，也不设置共同周次或共同检查点。未提飞书时，「写个人周报 / 本周进展」走群聊三段短稿，不走飞书表单。</p>
+<table>
+<thead>
+<tr>
+<th>入口</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>personal_weekly_report</code></td>
+<td>个人飞书周报草稿、查看、只填写、明确要求的提交或修改</td>
+</tr>
+<tr>
+<td><code>personal_chat_weekly_report</code></td>
+<td>群里发的个人三段短稿（本周进展 / 开会讨论要点 / 下周计划），不发送</td>
+</tr>
+<tr>
+<td><code>group_weekly_report</code></td>
+<td>小组周报收集与本地汇总，不发送微信</td>
+</tr>
+<tr>
+<td><code>tencent_weekly_report</code></td>
+<td>约100字的本周腾讯进度稿，不写下周计划，不发送</td>
+</tr>
+<tr>
+<td><code>weekly_report</code></td>
+<td>Agent 选择所需类型，完整传递请求，返回子入口结果</td>
+</tr>
+</tbody>
+</table>
+<h2 id="使用">使用<a class="header-anchor" href="#使用">#</a></h2>
+<p>直接输入“写个人周报”“个人和腾讯都做，小组不用”或“三个都做”。Agent 结合完整语义、否定和可用上下文选择；未指定受众时默认生成群聊个人周报草稿，不通过提问中止路由。单项结果原样返回，多项结果加类型标签。</p>
+<p>显式 <code>requests</code> JSON 仍可直接指定子 Workflow，参数不改写。各子 Workflow 管理自己的进度与恢复；总入口不再恢复旧的共同检查点，请使用对应子入口的恢复参数。</p>
+<h2 id="材料与输出">材料与输出<a class="header-anchor" href="#材料与输出">#</a></h2>
+<p>腾讯入口语义理解周次与用户提供的进展，保留完整原话到后续模型上下文；提供的材料必须来自原文。未提供材料时查找已有原始报告、近期会话中的本人原始消息和有精确日期的记忆，排除其他周次和不可靠记录。腾讯周报同时读取近期会话中具有本人归属和精确日期的原始消息，保留 session/message 来源，排除助手草稿和未归属消息。聊天消息只是候选，仍需选择相关进展。派生的聊天来源引用不会再次作为原始证据导入。待确认的记忆和未可信归属的原始记忆来源被排除；生成的记忆笔记可以作为查找候选，但不等于独立核实的本人事实。会话检索最多读取近期 20 个会话及每个会话最后 200 条消息，合并候选最多 30 条、18,000 UTF-8 字节。证据不足仅描述本次已检查范围，不能据此断言其他记录中没有相关工作。 目标为约100字，通常80–120字，只报告本周实际进展。微信只读取、整理和生成本地稿件，由用户发送。</p>
+<p>五个独立包并列放在 <code>~/.openprogram/programs/</code>，总入口 <code>weekly_report</code> 直接 import 其余四个包。在 能力 → Programs 的 Applications 下即可选择各入口。调用图显示总入口到路由 Agent 和四个子 Workflow 的可能调用关系；不代表每次全部执行。</p>
+<p>路由、小组请求解析和个人周报的模型调用继承 Runtime 超时配置（<code>OPENPROGRAM_EXEC_TIMEOUT_S</code>），不再单独限制为 90 秒。小组请求对未验证原生 schema 能力的提供商允许使用提示词兼容模式，并保留 schema 校验和 Runtime 已有的有限格式修正重试；未恢复的模型异常保留真实失败类型，不再误报为缺少用户输入。外部记录写入结果不确定时不自动重复执行。</p>
+<p>小组汇报可以只输入“做小组汇报”。流程主动从记忆、相关本地资料及已确定的微信群查找群、名单、当周材料和作者证据，不再要求用户补字段。原始正文保留；未指定周次时使用当前 ISO 周并标注这一假设。作者未核实则明确标注，资料不足则生成带来源限制的部分草稿，不编造进展。</p>
+<p>默认 <code>source=auto</code>；显式 <code>source=supplied</code> 只使用输入材料。微信读取验证群身份并保留来源证据，历史覆盖始终不完整；微信访问失败时继续查询本地资料。流程不发送消息、不修改系统权限，也不因信息缺失调用 ask_user。</p>
+<p>个人飞书和个人群聊周报的只读 Agent 使用 <code>list_agents(scope=&quot;all&quot;)</code> 和 <code>read_conversation</code> 检索其他会话，并读取记忆和原始本地记录。聊天原文保留 UTC 消息时间；没有指定报告周期时采用 <code>Asia/Shanghai</code> 当前 ISO 周。会话最近活动不代表旧消息属于本周。指令、计划、模型草稿和 README 功能描述不能证明工作已经完成；失败或未完成的工作保留原状态，证据缺失需要明确标注。 JSON Schema 校验完整字段或局部修改，使用 prompt fallback 和现有的一次格式修正，随后才允许写入。个人飞书周报将未恢复的模型失败原样抛出。远程写入结果不确定时会抛出不可自动重试的失败，必须先检查实际记录。</p>
+<p>自然语言个人飞书和群聊周报逐条绑定实际读取的本人原始陈述或工具原始结果，引用包含精确来源 ID 和本次可见原文。记忆、文件和助手总结用于查找原始记录，仅有其叙述不能证明工作完成。当前用户提供的事实必须与实际本人输入一致，明确描述历史期间时须通过独立时间归属核验，实际输入日期保持原值。每种报告按自身受众解释完整请求中的周次，其他报告的周期不覆盖本报告；结构化个人周报也先绑定原始来源，再按输入材料范围核验。完整请求中唯一明确的 ISO 周次保持不变；多个受众分别指定周期时分别解释。原始来源自动发现最多列出近期 100 个会话、读取 10 个分支，优先选择请求提到的项目标题。来源保留消息自身日期、工具操作、参数、状态和错误标记。原始记录不足返回 <code>NEEDS_INPUT</code>，引用或语义不受原文支持返回 <code>NEEDS_REVIEW</code>，随后不交付草稿、不填写表单。独立语义核验逐条检查内容与请求周次，但不能保证事实完全正确。默认姓名、明确清空和可选空内容不作为研究进展事实。</p>
+<p>结构化 Agent 的正常工具轮次由 <code>max_iterations</code> 限制，不消耗失败请求的重试预算。完成工具轮次后保留剩余重试额度；格式修正与失败请求仍共用该额度。达到轮次上限会停止执行，不重新执行已完成的工具。</p>
+<p>记忆 search、grep、get、browse 使用正常只读安全工具策略，显式 deny/ask 规则与 <code>memory.read</code> 权限仍生效。个人操作选择、来源核验，以及腾讯各 JSON 输出步骤均声明 schema，复用 Runtime 的格式修正。个人飞书周报的格式失败原样抛出；腾讯周报保留原始模型异常类型及恢复任务，两者都不当作用户缺少输入。腾讯请求解释继承部署超时。</p>
+<h2 id="只填写个人飞书表单">只填写个人飞书表单<a class="header-anchor" href="#只填写个人飞书表单">#</a></h2>
+<p>选择 <code>personal_weekly_report</code>，输入“只填写个人网页周报，不要提交”。流程检查当前记录，准备六个字段，实际填写后重新逐字段读取。<code>FILLED</code> 表示已核对字段，未提交或保存；<code>SUBMITTED</code> 是明确要求提交后才能返回的独立结果。</p>
+<p>只填写仅支持检查确认没有现存记录的新表单。已有记录或表单达到上限时返回 <code>BLOCKED</code>，不创建重复记录。这一模式允许已观察到的提交记录导航和准确的字段值，网页执行前拒绝提交/保存点击、按键、坐标操作和过期观察。字段缺失或归属不明确、值截断或脱敏、动作失败、写入结果不确定时不能返回 <code>FILLED</code>；不确定的写入不自动重试。</p>
+<p>读回要求完整的实际字段值，逐字精确比较换行和连续空格。仅有 ARIA 文本不能确认填写成功；未提供实际值的旧浏览器 schema 不能返回 <code>FILLED</code>。原生浏览器 backend 支持普通表单标签及 contenteditable 周围唯一可见的字段标签；标签缺失或歧义会在字段写入前停止。浏览器可访问且能识别字段标签仍是填写的前提。</p>
+<h2 id="飞书网页操作失败">飞书网页操作失败<a class="header-anchor" href="#飞书网页操作失败">#</a></h2>
+<p>飞书检查和写入阶段只提供 <code>web_use</code>，使用当前的 <code>command</code> 参数协议。接受页面观察或报告写入前必须有真实工具回执，模型正文中的工具调用文本不算网页操作。这两个阶段不设置固定的总超时或工具轮次上限，显式 Runtime 部署限制仍然生效。网页访问失败通过总入口传递，不再作为成功文本返回。后续子 Workflow 失败时，原始异常保留此前已完成子任务的结果，总入口不会自动重跑这些任务。</p>
+<p>提交和修改也要求准确字段绑定及重新读回字段。提交请求遇到已有记录时返回检查结果，只有明确要求修改才允许更新。最终提交或保存动作在派发前记录，结果不确定时不能自动再次点击。没有原始事实的五维空占位不计入进展正文。</p>
+<div class="page-updated"><span data-i18n="updated">Last updated</span> · 2026-11-01</div><div class="prevnext"><a class="pn-link pn-prev" href="/docs/capabilities/workflows/recording.html" data-href-en="/docs/capabilities/workflows/recording.html" data-href-zh="/docs/capabilities/workflows/recording.zh.html"><span class="pn-dir" data-i18n="prev">Previous</span><span class="pn-title" data-title-zh="录制 Workflow">Record a workflow</span></a><a class="pn-link pn-next" href="/docs/capabilities/agents.html" data-href-en="/docs/capabilities/agents.html" data-href-zh="/docs/capabilities/agents.zh.html"><span class="pn-dir" data-i18n="next">Next</span><span class="pn-title" data-title-zh="配置 Agent">Configure an Agent</span></a></div></article></main>
+  <aside class="toc"><div class="toc-title" data-i18n="on_this_page">On this page</div>
+<ul class="toc-list">
+<li>
+<a class="lvl-2" href="#使用">使用</a>
+</li>
+<li>
+<a class="lvl-2" href="#材料与输出">材料与输出</a>
+</li>
+<li>
+<a class="lvl-2" href="#只填写个人飞书表单">只填写个人飞书表单</a>
+</li>
+<li>
+<a class="lvl-2" href="#飞书网页操作失败">飞书网页操作失败</a>
+</li>
+</ul></aside>
+</div>
+
+<div class="search-overlay">
+  <div class="search-box">
+    <input type="text" data-i18n-ph="search_ph" placeholder="Search titles or text…" autocomplete="off" spellcheck="false">
+    <div class="search-results"></div>
+  </div>
+</div>
+
+<script src="/docs/assets/site.js?v=6520ba46"></script>
+</body>
+</html>

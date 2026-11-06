@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en" data-base="/docs/" data-page-lang="en" data-build="1793956776" data-alt-lang-url="/docs/capabilities/agentic-programming/writing-functions/function-metadata.zh.html">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Function metadata · OpenProgram Docs</title>
+<meta name="description" content="This document defines what metadata a function in this framework must carry — whether or not it calls an LLM — where that metadata lives, and which components">
+<link rel="canonical" href="https://openprogram.io/docs/capabilities/agentic-programming/writing-functions/function-metadata.html">
+<link rel="alternate" type="text/markdown" href="https://openprogram.io/docs/capabilities/agentic-programming/writing-functions/function-metadata.html.md">
+<link rel="describedby" href="https://openprogram.io/llms.txt">
+<link rel="alternate" hreflang="en" href="https://openprogram.io/docs/capabilities/agentic-programming/writing-functions/function-metadata.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://openprogram.io/docs/capabilities/agentic-programming/writing-functions/function-metadata.zh.html">
+<link rel="alternate" hreflang="x-default" href="https://openprogram.io/docs/capabilities/agentic-programming/writing-functions/function-metadata.html">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"OpenProgram Docs","item":"https://openprogram.io/docs/"},{"@type":"ListItem","position":2,"name":"Function metadata"}]}</script>
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="OpenProgram">
+<meta property="og:url" content="https://openprogram.io/docs/capabilities/agentic-programming/writing-functions/function-metadata.html">
+<meta property="og:title" content="Function metadata · OpenProgram Docs">
+<meta property="og:description" content="This document defines what metadata a function in this framework must carry — whether or not it calls an LLM — where that metadata lives, and which components">
+<meta property="og:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:secure_url" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Function metadata · OpenProgram Docs">
+<meta name="twitter:description" content="This document defines what metadata a function in this framework must carry — whether or not it calls an LLM — where that metadata lives, and which components">
+<meta name="twitter:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta name="twitter:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/docs/assets/mark.svg">
+<link rel="stylesheet" href="/docs/assets/site.css?v=6520ba46">
+<link rel="stylesheet" href="/docs/assets/pygments-light.css" media="(prefers-color-scheme: light)" id="pyg-light">
+<link rel="stylesheet" href="/docs/assets/pygments-dark.css" media="(prefers-color-scheme: dark)" id="pyg-dark">
+<script src="/docs/assets/theme.js?v=6520ba46"></script>
+
+</head>
+<body>
+<header class="topbar">
+  <button class="icon hamburger" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2.5 4.5h11M2.5 8h11M2.5 11.5h11"/></svg></button>
+  <a class="brand" href="/docs/index.html"><img class="mark" src="/docs/assets/mark.svg" alt="">OpenProgram Docs</a>
+  <div class="spacer"></div>
+  <button class="search-trigger" aria-label="Search">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14"/></svg><span class="label" data-i18n="search">Search docs</span><kbd>⌘K</kbd>
+  </button>
+  <div class="lang-wrap">
+    <button class="icon lang-trigger" id="lang-toggle" aria-haspopup="true" aria-expanded="false" aria-label="Language">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="6.2"/><path d="M1.8 8h12.4" stroke-linecap="round"/><ellipse cx="8" cy="8" rx="2.8" ry="6.2"/></svg><span class="lang-label">EN</span><svg class="chev" width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+    </button>
+    <div class="lang-menu" id="lang-menu" role="menu">
+      <button class="lang-opt" data-lang="en" role="menuitem"><span>English</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="lang-opt" data-lang="zh" role="menuitem"><span>简体中文</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+  <div class="theme-wrap">
+    <button class="icon" id="theme-toggle" aria-label="Theme" aria-haspopup="menu" aria-controls="theme-menu" aria-expanded="false"><svg class="ic-system" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="2.5" width="13" height="9" rx="1.5"/><path d="M8 11.5V14M5.5 14h5"/></svg><svg class="ic-moon" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M13.5 9.5A6 6 0 1 1 6.5 2.5a5 5 0 0 0 7 7z"/></svg><svg class="ic-sun" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="3.2"/><path d="M8 1.2v1.8M8 13v1.8M1.2 8H3M13 8h1.8M3.2 3.2l1.3 1.3M11.5 11.5l1.3 1.3M12.8 3.2l-1.3 1.3M4.5 11.5l-1.3 1.3"/></svg></button>
+    <div class="theme-menu" id="theme-menu" role="menu" aria-labelledby="theme-toggle">
+      <button class="theme-opt" data-theme-choice="system" role="menuitemradio" aria-checked="true"><span>Follow system</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="light" role="menuitemradio" aria-checked="false"><span>Light</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="dark" role="menuitemradio" aria-checked="false"><span>Dark</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+</header>
+<nav class="tabbar"><a class="tablink" href="/docs/README.html" data-title-zh="开始使用" data-href-en="/docs/README.html" data-href-zh="/docs/README.zh.html">Get started</a><a class="tablink" href="/docs/install/install.html" data-title-zh="安装" data-href-en="/docs/install/install.html" data-href-zh="/docs/install/install.zh.html">Install</a><a class="tablink active" href="/docs/capabilities/README.html" data-title-zh="能力" data-href-en="/docs/capabilities/README.html" data-href-zh="/docs/capabilities/README.zh.html">Capabilities</a><a class="tablink" href="/docs/interfaces/README.html" data-title-zh="界面" data-href-en="/docs/interfaces/README.html" data-href-zh="/docs/interfaces/README.zh.html">Interfaces</a><a class="tablink" href="/docs/models/README.html" data-title-zh="模型" data-href-en="/docs/models/README.html" data-href-zh="/docs/models/README.zh.html">Models</a><a class="tablink" href="/docs/integrations/anthropic.html" data-title-zh="集成" data-href-en="/docs/integrations/anthropic.html" data-href-zh="/docs/integrations/anthropic.zh.html">Integrations</a><a class="tablink" href="/docs/server/README.html" data-title-zh="服务与运维" data-href-en="/docs/server/README.html" data-href-zh="/docs/server/README.zh.html">Server &amp; Ops</a><a class="tablink" href="/docs/reference/README.html" data-title-zh="参考" data-href-en="/docs/reference/README.html" data-href-zh="/docs/reference/README.zh.html">Reference</a><a class="tablink" href="/docs/reference/design/README.html" data-title-zh="设计" data-href-en="/docs/reference/design/README.html" data-href-zh="/docs/reference/design/README.zh.html">Design</a></nav>
+
+<div class="scrim"></div>
+<div class="layout">
+  <nav class="sidebar" aria-label="Documentation">
+    <input class="nav-filter" type="text" data-i18n-ph="nav_filter"
+           aria-label="Filter docs" placeholder="Filter docs…" autocomplete="off" spellcheck="false">
+    <div class="nav-tree"><div class="nav-sec"><div class="nav-sec-title" data-title-zh="概览">Overview</div><a class="navlink" href="/docs/capabilities/README.html" data-title-zh="概览" data-href-en="/docs/capabilities/README.html" data-href-zh="/docs/capabilities/README.zh.html">Overview</a>
+<a class="navlink" href="/docs/capabilities/applications.html" data-title-zh="应用" data-href-en="/docs/capabilities/applications.html" data-href-zh="/docs/capabilities/applications.zh.html">Applications</a>
+<a class="navlink" href="/docs/capabilities/framework-control.html" data-title-zh="框架工具" data-href-en="/docs/capabilities/framework-control.html" data-href-zh="/docs/capabilities/framework-control.zh.html">Framework tools</a></div>
+<div class="nav-sec"><div class="nav-sec-title">Agentic Programming</div><a class="navlink" href="/docs/capabilities/agentic-programming/README.html" data-title-zh="指南" data-href-en="/docs/capabilities/agentic-programming/README.html" data-href-zh="/docs/capabilities/agentic-programming/README.zh.html">Guide</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/philosophy.html" data-title-zh="设计原则" data-href-en="/docs/capabilities/agentic-programming/philosophy.html" data-href-zh="/docs/capabilities/agentic-programming/philosophy.zh.html">Philosophy</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/embedding-in-your-own-stack.html" data-title-zh="框架嵌入" data-href-en="/docs/capabilities/agentic-programming/embedding-in-your-own-stack.html" data-href-zh="/docs/capabilities/agentic-programming/embedding-in-your-own-stack.zh.html">Framework embedding</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="编写函数">Writing functions</div><a class="navlink" href="/docs/capabilities/agentic-programming/writing-functions/pure-python.html" data-title-zh="Python 函数" data-href-en="/docs/capabilities/agentic-programming/writing-functions/pure-python.html" data-href-zh="/docs/capabilities/agentic-programming/writing-functions/pure-python.zh.html">Python functions</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/writing-functions/agent.html" data-title-zh="智能体函数" data-href-en="/docs/capabilities/agentic-programming/writing-functions/agent.html" data-href-zh="/docs/capabilities/agentic-programming/writing-functions/agent.zh.html">Agentic functions</a>
+<a class="navlink active" href="/docs/capabilities/agentic-programming/writing-functions/function-metadata.html" data-title-zh="函数元数据" data-href-en="/docs/capabilities/agentic-programming/writing-functions/function-metadata.html" data-href-zh="/docs/capabilities/agentic-programming/writing-functions/function-metadata.zh.html">Function metadata</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="选择下一步">Choosing the next step</div><a class="navlink" href="/docs/capabilities/agentic-programming/choosing-the-next-step/tool-calling.html" data-title-zh="工具循环" data-href-en="/docs/capabilities/agentic-programming/choosing-the-next-step/tool-calling.html" data-href-zh="/docs/capabilities/agentic-programming/choosing-the-next-step/tool-calling.zh.html">Tool-call loops</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/choosing-the-next-step/fixed-order-calls.html" data-title-zh="顺序调用" data-href-en="/docs/capabilities/agentic-programming/choosing-the-next-step/fixed-order-calls.html" data-href-zh="/docs/capabilities/agentic-programming/choosing-the-next-step/fixed-order-calls.zh.html">Fixed-order calls</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/choosing-the-next-step/next-step-decision.html" data-title-zh="步骤选择" data-href-en="/docs/capabilities/agentic-programming/choosing-the-next-step/next-step-decision.html" data-href-zh="/docs/capabilities/agentic-programming/choosing-the-next-step/next-step-decision.zh.html">Next-step selection</a></div>
+<div class="nav-sec"><div class="nav-sec-title">Agentic Workflows</div><a class="navlink" href="/docs/capabilities/workflows/README.html" data-title-zh="工作流" data-href-en="/docs/capabilities/workflows/README.html" data-href-zh="/docs/capabilities/workflows/README.zh.html">Workflows</a>
+<a class="navlink" href="/docs/capabilities/workflows/authoring.html" data-title-zh="工作流编写" data-href-en="/docs/capabilities/workflows/authoring.html" data-href-zh="/docs/capabilities/workflows/authoring.zh.html">Workflow authoring</a>
+<a class="navlink" href="/docs/capabilities/workflows/recording.html" data-title-zh="录制 Workflow" data-href-en="/docs/capabilities/workflows/recording.html" data-href-zh="/docs/capabilities/workflows/recording.zh.html">Record a workflow</a>
+<a class="navlink" href="/docs/capabilities/workflows/reports.html" data-title-zh="每周报告" data-href-en="/docs/capabilities/workflows/reports.html" data-href-zh="/docs/capabilities/workflows/reports.zh.html">Weekly reports</a></div>
+<div class="nav-sec"><div class="nav-sec-title">Agents</div><a class="navlink" href="/docs/capabilities/agents.html" data-title-zh="配置 Agent" data-href-en="/docs/capabilities/agents.html" data-href-zh="/docs/capabilities/agents.zh.html">Configure an Agent</a>
+<a class="navlink" href="/docs/capabilities/agents-md.html" data-title-zh="用 AGENTS.md 写指令" data-href-en="/docs/capabilities/agents-md.html" data-href-zh="/docs/capabilities/agents-md.zh.html">Instructions with AGENTS.md</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="常驻 Agent">Always-on Agents</div><a class="navlink" href="/docs/capabilities/always-on-agents.html" data-title-zh="常驻 Agent" data-href-en="/docs/capabilities/always-on-agents.html" data-href-zh="/docs/capabilities/always-on-agents.zh.html">Always-on Agents</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="提醒">Reminders</div><a class="navlink" href="/docs/capabilities/reminders.html" data-title-zh="提醒" data-href-en="/docs/capabilities/reminders.html" data-href-zh="/docs/capabilities/reminders.zh.html">Reminders</a>
+<a class="navlink" href="/docs/capabilities/event-triggers.html" data-title-zh="有事发生时运行任务" data-href-en="/docs/capabilities/event-triggers.html" data-href-zh="/docs/capabilities/event-triggers.zh.html">Run a task when something happens</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="记忆">Memory</div><a class="navlink" href="/docs/capabilities/memory.html" data-title-zh="记忆管理" data-href-en="/docs/capabilities/memory.html" data-href-zh="/docs/capabilities/memory.zh.html">Memory management</a>
+<a class="navlink" href="/docs/capabilities/memory-settings.html" data-title-zh="调整记忆" data-href-en="/docs/capabilities/memory-settings.html" data-href-zh="/docs/capabilities/memory-settings.zh.html">Tune Memory</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="运行环境">Environments</div><a class="navlink" href="/docs/capabilities/environments.html" data-title-zh="在另一台机器上运行会话" data-href-en="/docs/capabilities/environments.html" data-href-zh="/docs/capabilities/environments.zh.html">Run conversations on another machine</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="会话目标">Session goals</div><a class="navlink" href="/docs/capabilities/goal.html" data-title-zh="目标" data-href-en="/docs/capabilities/goal.html" data-href-zh="/docs/capabilities/goal.zh.html">Goals</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="操控电脑">Computer use</div><a class="navlink" href="/docs/capabilities/computer-use.html" data-title-zh="操控电脑" data-href-en="/docs/capabilities/computer-use.html" data-href-zh="/docs/capabilities/computer-use.zh.html">Computer use</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="会议">Meetings</div><a class="navlink" href="/docs/capabilities/meetings.html" data-title-zh="会议" data-href-en="/docs/capabilities/meetings.html" data-href-zh="/docs/capabilities/meetings.zh.html">Meetings</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="扩展">Extending</div><a class="navlink" href="/docs/capabilities/installing-programs.html" data-title-zh="安装程序" data-href-en="/docs/capabilities/installing-programs.html" data-href-zh="/docs/capabilities/installing-programs.zh.html">Installing programs</a>
+<a class="navlink" href="/docs/capabilities/skills.html" data-title-zh="技能" data-href-en="/docs/capabilities/skills.html" data-href-zh="/docs/capabilities/skills.zh.html">Skills</a>
+<a class="navlink" href="/docs/capabilities/plugins.html" data-title-zh="插件" data-href-en="/docs/capabilities/plugins.html" data-href-zh="/docs/capabilities/plugins.zh.html">Plugins</a>
+<a class="navlink" href="/docs/capabilities/mcp.html" data-title-zh="MCP" data-href-en="/docs/capabilities/mcp.html" data-href-zh="/docs/capabilities/mcp.zh.html">MCP</a>
+<a class="navlink" href="/docs/capabilities/tools.html" data-title-zh="内置工具" data-href-en="/docs/capabilities/tools.html" data-href-zh="/docs/capabilities/tools.zh.html">Built-in tools</a>
+<a class="navlink" href="/docs/capabilities/lsp.html" data-title-zh="语言服务器" data-href-en="/docs/capabilities/lsp.html" data-href-zh="/docs/capabilities/lsp.zh.html">Language servers</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="概览">Overview</div><a class="navlink" href="/docs/capabilities/commit-push-pr.html" data-title-zh="提交与拉取请求" data-href-en="/docs/capabilities/commit-push-pr.html" data-href-zh="/docs/capabilities/commit-push-pr.zh.html">Commits and PRs</a>
+<a class="navlink" href="/docs/capabilities/permissions.html" data-title-zh="工具权限" data-href-en="/docs/capabilities/permissions.html" data-href-zh="/docs/capabilities/permissions.zh.html">Tool permissions</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="指南">Guide</div><a class="navlink" href="/docs/capabilities/agentic-programming/self-programming-ai-agents.html" data-title-zh="自编程智能体" data-href-en="/docs/capabilities/agentic-programming/self-programming-ai-agents.html" data-href-zh="/docs/capabilities/agentic-programming/self-programming-ai-agents.zh.html">Self-programming agents</a></div></div>
+  </nav>
+  <main class="content"><button class="fs-toggle" aria-label="Fullscreen" title="Fullscreen (Esc to exit)"><svg class="ic-expand" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.2 2H2v4.2M9.8 2H14v4.2M6.2 14H2V9.8M9.8 14H14V9.8"/></svg><svg class="ic-collapse" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6.2h4.2V2M14 6.2H9.8V2M2 9.8h4.2V14M14 9.8H9.8V14"/></svg></button><article><nav class="breadcrumb"><span class="bc-seg" data-title-zh="能力">Capabilities</span> <span class='bc-sep'>›</span> <span class="bc-seg" data-title-zh="编写函数">Writing functions</span> <span class='bc-sep'>›</span> <span class="bc-seg bc-current" data-title-zh="函数元数据">Function metadata</span></nav><h1 id="function-metadata">Function metadata<a class="header-anchor" href="#function-metadata">#</a></h1>
+<p>This document defines what metadata a function in this framework must carry — whether or not it calls an LLM — where that metadata lives, and which components consume it.</p>
+<p>Scope: every function defined as an ordinary Agent method, plus any plain Python callable passed into <code>render_options</code> or any other component of the decision-menu protocol. (<code>runtime.exec(tools=[...])</code> does not accept plain callables — entries must be an <code>Agent</code> method, a <code>{&quot;spec&quot;, &quot;execute&quot;}</code> dict, or an object with <code>.spec</code>/<code>.execute</code>; anything else raises <code>TypeError</code>.)</p>
+<h2 id="1-why-this-spec-exists">1. Why this spec exists<a class="header-anchor" href="#1-why-this-spec-exists">#</a></h2>
+<p>Historically the same piece of information lived in multiple places:</p>
+<ul>
+<li>Parameter descriptions could be written in the docstring <code>Args:</code> section or in <code>method_options = dict(input={...})</code></li>
+<li>Decision-menu callers hand-wrote a verbose <code>available</code> registry dict at the call site, repeating information already present on the function</li>
+<li>Different consumers (tool_use spec, WebUI, decision menu, meta tooling) followed slightly different read-order conventions</li>
+</ul>
+<p>The result: authors of new functions didn't know where to put descriptions, the framework read metadata from inconsistent sources, and generated code didn't always match what other consumers expected.</p>
+<p>This spec defines a single source-of-truth so every consumer reads metadata by the same rules.</p>
+<h2 id="2-who-consumes-function-metadata">2. Who consumes function metadata<a class="header-anchor" href="#2-who-consumes-function-metadata">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Consumer</th>
+<th>Required fields</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>runtime.exec(tools=[fn])</code> (provider-native tool_use)</td>
+<td>function name, overall description, parameter JSON schema (type / required / enum / description)</td>
+</tr>
+<tr>
+<td><code>render_options(options)</code> (decision menu)</td>
+<td>function name, when-to-pick description, parameter name / type / description / enum, whether each parameter is system-filled</td>
+</tr>
+<tr>
+<td><code>parse_args(reply, options, ...)</code> (decision extract + dispatch + retry)</td>
+<td>parameter names + types + enum + hidden flag, <code>runtime</code>-style auto-inject allowlist</td>
+</tr>
+<tr>
+<td>WebUI parameter form</td>
+<td>description / placeholder / multiline / options / hidden</td>
+</tr>
+<tr>
+<td><code>llm()</code> rendered context</td>
+<td>docstring — carried as <code>metadata.doc</code> and prefixed into the rendered context text. The default system prompt comes from the ambient runtime (plus the skills block), not from the docstring.</td>
+</tr>
+<tr>
+<td>Session-DAG rendering (<code>render_context</code>)</td>
+<td><code>expose</code> mode + <code>render_range</code></td>
+</tr>
+<tr>
+<td>auto-trace / persistence</td>
+<td>function identity, argument values, return value, timing</td>
+</tr>
+</tbody>
+</table>
+<h2 id="3-metadata-fields-and-their-canonical-locations">3. Metadata fields and their canonical locations<a class="header-anchor" href="#3-metadata-fields-and-their-canonical-locations">#</a></h2>
+<p>Every piece of information has exactly one source-of-truth. This table is the spec:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Where it lives</th>
+<th>How to read it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Function name</td>
+<td><code>def name(...)</code></td>
+<td><code>fn.__name__</code></td>
+</tr>
+<tr>
+<td>Parameter names</td>
+<td>signature</td>
+<td><code>inspect.signature(fn).parameters</code></td>
+</tr>
+<tr>
+<td>Parameter types</td>
+<td>annotation</td>
+<td><code>param.annotation</code></td>
+</tr>
+<tr>
+<td>Parameter defaults</td>
+<td>annotation default</td>
+<td><code>param.default</code></td>
+</tr>
+<tr>
+<td>One-line summary (what / when-to-pick)</td>
+<td>first paragraph of docstring (up to first blank line)</td>
+<td><code>inspect.getdoc(fn)</code>, first paragraph</td>
+</tr>
+<tr>
+<td>Per-call LLM instructions (prompt + data for one specific <code>llm()</code>)</td>
+<td>the prompt passed to that <code>llm()</code> call</td>
+<td>passed directly at call time</td>
+</tr>
+<tr>
+<td>Per-parameter description</td>
+<td><code>method_options = dict(input={&quot;x&quot;: {&quot;description&quot;: ...}})</code></td>
+<td><code>fn.input_meta[&quot;x&quot;][&quot;description&quot;]</code></td>
+</tr>
+<tr>
+<td>Per-parameter enum</td>
+<td><code>method_options = dict(input={&quot;x&quot;: {&quot;options&quot;: [...]}})</code></td>
+<td><code>fn.input_meta[&quot;x&quot;][&quot;options&quot;]</code></td>
+</tr>
+<tr>
+<td>Whether the parameter is LLM-visible</td>
+<td><code>method_options = dict(input={&quot;x&quot;: {&quot;hidden&quot;: True}})</code></td>
+<td><code>fn.input_meta[&quot;x&quot;][&quot;hidden&quot;]</code></td>
+</tr>
+<tr>
+<td>WebUI placeholder</td>
+<td><code>method_options = dict(input={&quot;x&quot;: {&quot;placeholder&quot;: &quot;...&quot;}})</code></td>
+<td><code>fn.input_meta[&quot;x&quot;][&quot;placeholder&quot;]</code></td>
+</tr>
+<tr>
+<td>WebUI multiline input</td>
+<td><code>method_options = dict(input={&quot;x&quot;: {&quot;multiline&quot;: True}})</code></td>
+<td><code>fn.input_meta[&quot;x&quot;][&quot;multiline&quot;]</code></td>
+</tr>
+<tr>
+<td>Dynamic option source</td>
+<td><code>method_options = dict(input={&quot;x&quot;: {&quot;options_from&quot;: &quot;functions&quot;}})</code></td>
+<td><code>fn.input_meta[&quot;x&quot;][&quot;options_from&quot;]</code></td>
+</tr>
+<tr>
+<td>Framework-auto-injected parameters</td>
+<td>two constants in two files, both <code>{&quot;runtime&quot;, &quot;exec_runtime&quot;, &quot;review_runtime&quot;}</code>: <code>_RUNTIME_PARAMS</code> in <code>agent/call_state.py</code> (injection + tool-spec filtering) and <code>_AUTO_PARAMS</code> in <code>agent/decision.py</code> (menu hiding + dispatch)</td>
+<td>module level</td>
+</tr>
+<tr>
+<td>Override of the ambient LLM system prompt</td>
+<td><code>method_options = dict(system=&quot;...&quot;)</code></td>
+<td><code>fn.system</code></td>
+</tr>
+<tr>
+<td>DAG expose mode</td>
+<td><code>method_options = dict(expose=&quot;io&quot;|&quot;llm&quot;|&quot;full&quot;|&quot;hidden&quot;)</code> — controls what <strong>callers</strong> see of this function in their DAG render</td>
+<td><code>fn.expose</code></td>
+</tr>
+<tr>
+<td>DAG render range</td>
+<td><code>method_options = dict(render_range={&quot;callers&quot;: N, &quot;subcalls&quot;: M})</code> — controls how much DAG history <strong>this function's own</strong> <code>llm()</code> calls read. Both are node-count slices on <code>seq</code>: <code>callers</code> = most-recent N nodes written <strong>before</strong> this function's frame started (default <code>None</code> = uncapped, <code>0</code> = wall off all prior context); <code>subcalls</code> = most-recent N nodes written <strong>since</strong> this function's frame started (default <code>-1</code> = uncapped — the frame sees its own progress; child internals are hidden by <em>their</em> <code>expose</code> setting, not by subcalls counting; set <code>N&gt;=0</code> only to actively cap prompt size in a loop).</td>
+<td><code>fn.render_range</code></td>
+</tr>
+<tr>
+<td>Skill trigger words / agent discovery</td>
+<td>sibling <code>SKILL.md</code> frontmatter</td>
+<td>loaded separately by the skill loader</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Core principle</strong>: anything expressible in the signature / annotation is not repeated in method_options; anything expressible in <code>input=</code> is not repeated in the docstring.</p>
+<p>The method configuration accepts the shared tool-registration / gating kwargs (<code>name</code>, <code>description</code>, <code>toolset</code>, <code>unsafe_in</code>, <code>requires_approval</code>, <code>available_if</code>, <code>defer</code>, ...) documented in <code>docs/reference/design/function/calling-unification.md</code>; <code>cache</code> / <code>cache_ttl</code> (memoize results on name + args) and <code>timeout</code> (hard-kill the body after N seconds, returning an error result) behave as in <code>@function</code>.</p>
+<h3 id="effective-defaults-for-ordinary-agent-methods">Effective defaults for ordinary Agent methods<a class="header-anchor" href="#effective-defaults-for-ordinary-agent-methods">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>Default</th>
+<th>Resulting behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>expose</code></td>
+<td><code>&quot;full&quot;</code> for ordinary methods, <code>&quot;io&quot;</code> for explicit tools</td>
+<td>Callers see my name + input + output. My internal <code>llm()</code> calls are hidden from them.</td>
+</tr>
+<tr>
+<td><code>render_range</code></td>
+<td><code>None</code> → <code>render_context</code> falls through to <code>callers=None, subcalls=-1</code></td>
+<td>Pre-frame history is uncapped. In-frame nodes (the frame's own progress: earlier <code>llm()</code> results, returned sub-function io) are also uncapped. A child configured with <code>expose=&quot;io&quot;</code> hides its internals, not because subcalls trims them.</td>
+</tr>
+<tr>
+<td>top-level chat turn</td>
+<td><code>frame_entry_seq=-1</code>, no pre-frame</td>
+<td>Same code path as any other frame — all nodes are in-frame and visible. No special-casing.</td>
+</tr>
+<tr>
+<td>tools</td>
+<td>full toolset</td>
+<td>A bare <code>runtime.exec</code> with neither <code>tools=</code> nor <code>toolset=</code> resolves the full registry toolset by default — tools are ON. Pass <code>tools=[...]</code> for an explicit menu; pass <code>toolset=&quot;none&quot;</code> or <code>tools=[]</code> for a tool-free reasoning call. A nested <code>exec</code> inside a tool body inherits the outer <code>tools=</code> list via the <code>_current_tools</code> contextvar.</td>
+</tr>
+<tr>
+<td><code>system</code></td>
+<td><code>None</code></td>
+<td>Use the runtime's existing system prompt as-is.</td>
+</tr>
+</tbody>
+</table>
+<p>Implication: a frame naturally accumulates its own work. Set <code>subcalls=N</code> explicitly only to bound prompt size in a long loop. Set <code>subcalls=0</code> explicitly to fully wall off in-frame nodes (rare).</p>
+<h2 id="4-the-role-of-the-docstring-vs-content">4. The role of the docstring vs <code>content</code><a class="header-anchor" href="#4-the-role-of-the-docstring-vs-content">#</a></h2>
+<p>These two channels can carry overlapping information, but they have <strong>different responsibilities</strong> — neither replaces the other:</p>
+<table>
+<thead>
+<tr>
+<th>Channel</th>
+<th>Scope</th>
+<th>What goes here</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>docstring</td>
+<td>Whole-function level. Describes what the function as a whole does (it may run preprocessing, several LLM calls, and postprocessing). Read by humans, decision menus, tool_use specs, and meta tooling.</td>
+<td>One-line summary required. May also describe in detail what each LLM call does, expected output, edge cases — as much detail as you want, for readers and for context.</td>
+</tr>
+<tr>
+<td><code>llm(prompt)</code></td>
+<td>One specific LLM call inside the function. Each call is its own request; the function may make several with different prompts.</td>
+<td>The actual prompt + data for <em>this</em> LLM call: what task, what output format, what constraints, plus the data to operate on. <strong>This must be written even if the docstring already describes it.</strong></td>
+</tr>
+</tbody>
+</table>
+<p>A function may have a rich docstring explaining &quot;this function classifies sentiment by asking the LLM and normalizing the reply&quot;, but the body still needs an explicit <code>llm(prompt)</code> containing the actual instruction + data going to the LLM. <strong>Documentation in the docstring does not propagate into the LLM call</strong> — the framework sends the docstring as descriptive context (carried on the DAG node as <code>metadata.doc</code> and rendered into the inner call's situation prompt), not as authoritative instruction. Always put the per-call instruction and data in the <code>llm()</code> prompt.</p>
+<p>Docstring writing rules:</p>
+<ul>
+<li>One-line summary (the first paragraph) is required — that's what decision menus and tool_use specs read.</li>
+<li>The body may be as detailed as is useful for code readers — including describing what each LLM call does.</li>
+<li>Do not write filler (&quot;You are a helpful assistant&quot;, &quot;Complete the task&quot;).</li>
+<li>A detailed docstring does NOT eliminate the need for explicit <code>content=[...]</code> text on each exec call.</li>
+</ul>
+<p><code>content</code> writing rules:</p>
+<ul>
+<li>Each item is a dict like <code>{&quot;type&quot;: &quot;text&quot;, &quot;text&quot;: ...}</code> or <code>{&quot;type&quot;: &quot;image&quot;, &quot;path&quot;: ...}</code>.</li>
+<li>Embed both the instruction <em>and</em> the data for this LLM call. Example:<pre><code class="language-python"><span class="n">llm</span><span class="p">([{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="p">(</span>
+    <span class="sa">f</span><span class="s2">&quot;Classify the sentiment of the following text. Reply with exactly one &quot;</span>
+    <span class="sa">f</span><span class="s2">&quot;word: positive, negative, or neutral.</span><span class="se">\n\n</span><span class="s2">Text:</span><span class="se">\n</span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="p">)}])</span>
+</code></pre>
+</li>
+<li>Define the exact output format inline; don't rely on the docstring or external context to convey it.</li>
+</ul>
+<h2 id="5-input-vs-docstring-args-section">5. <code>input=</code> vs. docstring <code>Args:</code> section<a class="header-anchor" href="#5-input-vs-docstring-args-section">#</a></h2>
+<p>Historically the same parameter description could appear both in the docstring <code>Args:</code> section and in <code>method_options = dict(input={...})</code>. This spec makes <code>input=</code> the source-of-truth.</p>
+<h3 id="recommended-style-required-for-new-code">Recommended style (required for new code)<a class="header-anchor" href="#recommended-style-required-for-new-code">#</a></h3>
+<p>Minimal example:</p>
+<pre><code class="language-python"><span class="kn">from</span><span class="w"> </span><span class="nn">openprogram</span><span class="w"> </span><span class="kn">import</span> <span class="n">Agent</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ExampleAgent</span><span class="p">(</span><span class="n">Agent</span><span class="p">):</span>
+    <span class="n">method_options</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;polish&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;tool&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;input&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;text&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Text to polish.&#39;</span><span class="p">},</span> <span class="s1">&#39;style&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Output style.&#39;</span><span class="p">,</span> <span class="s1">&#39;options&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;academic&#39;</span><span class="p">,</span> <span class="s1">&#39;casual&#39;</span><span class="p">]}}},</span>
+    <span class="p">}</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">polish</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Polish a text in the given style.&quot;&quot;&quot;</span>
+        <span class="o">...</span>
+
+<span class="n">_example_agent</span> <span class="o">=</span> <span class="n">ExampleAgent</span><span class="p">()</span>
+<span class="n">polish</span> <span class="o">=</span> <span class="n">_example_agent</span><span class="o">.</span><span class="n">polish</span>
+</code></pre>
+<p>Fuller example exercising more metadata features (placeholder, multiline, hidden, mixed types):</p>
+<pre><code class="language-python"><span class="kn">from</span><span class="w"> </span><span class="nn">openprogram</span><span class="w"> </span><span class="kn">import</span> <span class="n">Agent</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ExampleAgent</span><span class="p">(</span><span class="n">Agent</span><span class="p">):</span>
+    <span class="n">method_options</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;review_essay&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;tool&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;input&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;essay&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Essay to review.&#39;</span><span class="p">,</span> <span class="s1">&#39;placeholder&#39;</span><span class="p">:</span> <span class="s1">&#39;Paste the essay text here...&#39;</span><span class="p">,</span> <span class="s1">&#39;multiline&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span> <span class="s1">&#39;rubric_id&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Which rubric to apply.&#39;</span><span class="p">,</span> <span class="s1">&#39;options&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;ielts_writing&#39;</span><span class="p">,</span> <span class="s1">&#39;toefl_writing&#39;</span><span class="p">,</span> <span class="s1">&#39;gre_argument&#39;</span><span class="p">]},</span> <span class="s1">&#39;max_score&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Upper bound for the numeric score.&#39;</span><span class="p">},</span> <span class="s1">&#39;show_rubric_internals&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Include rubric breakdown in the output.&#39;</span><span class="p">},</span> <span class="s1">&#39;session_id&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;hidden&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}}},</span>
+    <span class="p">}</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">review_essay</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+        <span class="n">essay</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">rubric_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">max_score</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">show_rubric_internals</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="n">session_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>           <span class="c1"># filled by Python via context, not LLM</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Score an essay against a named rubric and return a structured report.&quot;&quot;&quot;</span>
+        <span class="o">...</span>
+
+<span class="n">_example_agent</span> <span class="o">=</span> <span class="n">ExampleAgent</span><span class="p">()</span>
+<span class="n">review_essay</span> <span class="o">=</span> <span class="n">_example_agent</span><span class="o">.</span><span class="n">review_essay</span>
+</code></pre>
+<p>The docstring keeps only the one-line summary — <strong>no <code>Args:</code> section and no <code>Returns:</code> section</strong>. If the meaning of return-value fields matters to downstream LLM-driven calls, encode it with a structured return type (e.g. <code>TypedDict</code> or a dataclass) so consumers can introspect it; do not duplicate the schema in a docstring paragraph.</p>
+<h3 id="legacy-style-still-supported">Legacy style (still supported)<a class="header-anchor" href="#legacy-style-still-supported">#</a></h3>
+<pre><code class="language-python"><span class="kn">from</span><span class="w"> </span><span class="nn">openprogram</span><span class="w"> </span><span class="kn">import</span> <span class="n">Agent</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ExampleAgent</span><span class="p">(</span><span class="n">Agent</span><span class="p">):</span>
+    <span class="n">method_options</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;polish&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;tool&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
+    <span class="p">}</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">polish</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Polish a text in the given style.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            text: Text to polish.</span>
+<span class="sd">            style: Output style.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Polished text.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="o">...</span>
+
+<span class="n">_example_agent</span> <span class="o">=</span> <span class="n">ExampleAgent</span><span class="p">()</span>
+<span class="n">polish</span> <span class="o">=</span> <span class="n">_example_agent</span><span class="o">.</span><span class="n">polish</span>
+</code></pre>
+<p>Legacy functions still run, but the <code>Args:</code> section is dead text — <strong>no docstring-<code>Args:</code> parser exists anywhere in the framework</strong> (see §10). <code>_build_agentic_tool_spec</code> falls back as follows:</p>
+<pre><code>fn.input_meta[name][&quot;description&quot;]
+    ↓ not found
+fn.input_meta[name][&quot;placeholder&quot;]  (rendered as &quot;e.g. {placeholder}&quot;)
+    ↓ not found
+no description; only parameter name + type
+</code></pre>
+<p><code>render_options</code> reads only <code>description</code> and <code>options</code> from <code>input_meta</code>; parameters without them get name + type only.</p>
+<h2 id="6-plain-python-callables-undecorated">6. Plain Python callables (undecorated)<a class="header-anchor" href="#6-plain-python-callables-undecorated">#</a></h2>
+<p><code>Agent</code> method is not required for the decision-menu path: plain callables can be passed to <code>render_options</code> (and as <code>decision.make</code> / <code>choices=</code> options), but they carry less metadata. They can <strong>not</strong> be passed to <code>runtime.exec(tools=[...])</code> — <code>_adapt_tools</code> raises <code>TypeError</code> for anything that is not an <code>Agent</code> method, a <code>{&quot;spec&quot;, &quot;execute&quot;}</code> dict, or an object with <code>.spec</code>/<code>.execute</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Decorated</th>
+<th>Undecorated</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Parameter description</td>
+<td>from <code>input=</code></td>
+<td>empty (no docstring fallback exists)</td>
+</tr>
+<tr>
+<td>Parameter enum</td>
+<td><code>input={&quot;x&quot;: {&quot;options&quot;: [...]}}</code></td>
+<td>none</td>
+</tr>
+<tr>
+<td>Hidden flag</td>
+<td><code>input={&quot;x&quot;: {&quot;hidden&quot;: True}}</code></td>
+<td>only <code>_AUTO_PARAMS</code> names (<code>runtime</code>, etc.) are auto-hidden</td>
+</tr>
+<tr>
+<td>Recorded in session DAG</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+</tbody>
+</table>
+<p>Use plain callables for: simple decision branches with few parameters, no WebUI surface, and no need for rich menu hints. Upgrade to <code>Agent</code> method as soon as you need enums, hidden parameters, or detailed descriptions.</p>
+<h2 id="7-auto-injected-parameters">7. Auto-injected parameters<a class="header-anchor" href="#7-auto-injected-parameters">#</a></h2>
+<p>The following parameter names are reserved by convention: if a function's signature includes any of them, the framework auto-injects them at call time. The LLM does not see them and does not need to fill them.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter name</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>runtime</code></td>
+<td>The current Runtime instance</td>
+</tr>
+<tr>
+<td><code>exec_runtime</code></td>
+<td>The runtime used for execution (multi-runtime setups)</td>
+</tr>
+<tr>
+<td><code>review_runtime</code></td>
+<td>The runtime used for review (multi-runtime setups)</td>
+</tr>
+</tbody>
+</table>
+<p>New Agent methods do not declare these parameters: a method runs on its Agent's Runtime (<code>Agent(runtime=...)</code>) or the caller's, and nested calls inherit it. Injection remains for existing functions that still declare them.</p>
+<p>These names live in two constants in two files: <code>_RUNTIME_PARAMS</code> in <code>agent/call_state.py</code> (runtime injection + filtering from tool specs) and <code>_AUTO_PARAMS</code> in <code>agent/decision.py</code> (hiding from decision menus + dispatch). To add a new auto-injected name, edit both. Do not mark them per-callsite via <code>input={&quot;x&quot;: {&quot;hidden&quot;: True}}</code>.</p>
+<h2 id="8-webui-rendering-behavior">8. WebUI rendering behavior<a class="header-anchor" href="#8-webui-rendering-behavior">#</a></h2>
+<p>The WebUI does not introspect live Python objects: it AST/regex-parses the source files (<code>openprogram/interfaces/server/function_catalog.py</code>). Consequently <code>input=</code> must be written as a literal dict in the method configuration call to show up in the form — metadata built dynamically (variables, helper calls) is invisible to the WebUI.</p>
+<p>The WebUI form renders each parameter by the following rules (implemented in <code>apps/web/components/chat/composer/modes/fn-form/fn-form.tsx</code> and <code>fn-form-fields.tsx</code>). When configuring <code>method_options[&quot;method&quot;][&quot;input&quot;]</code>, use this table to predict what kind of input control your function will produce:</p>
+<table>
+<thead>
+<tr>
+<th>Parameter trait</th>
+<th>WebUI control</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>bool</code> type</td>
+<td>Yes / No toggle buttons (not a checkbox)</td>
+</tr>
+<tr>
+<td><code>str</code> type, <code>multiline</code> not set</td>
+<td>Defaults to a textarea (<code>multiline=True</code> is implied)</td>
+</tr>
+<tr>
+<td><code>str</code> type, <code>multiline: False</code></td>
+<td>Single-line <code>&lt;input&gt;</code></td>
+</tr>
+<tr>
+<td>Non-<code>str</code> non-<code>bool</code>, <code>multiline</code> not set</td>
+<td>Single-line <code>&lt;input&gt;</code></td>
+</tr>
+<tr>
+<td><code>options: [&quot;a&quot;, &quot;b&quot;, ...]</code></td>
+<td>Clickable chips plus a free-form text input (user can pick a preset OR type a custom value)</td>
+</tr>
+<tr>
+<td><code>options_from: &quot;functions&quot;</code></td>
+<td><code>&lt;select&gt;</code> dropdown populated from currently-registered non-builtin / non-meta functions</td>
+</tr>
+<tr>
+<td><code>hidden: True</code></td>
+<td>Omitted from the form entirely</td>
+</tr>
+<tr>
+<td>Has a Python default and no explicit <code>placeholder</code></td>
+<td>the raw default value becomes the placeholder ghost text (no <code>&quot;default: &quot;</code> prefix); pressing Tab in the empty field promotes it into the actual value; defaults of <code>None</code> or starting with <code>_</code> are suppressed</td>
+</tr>
+</tbody>
+</table>
+<p>Parameter <code>description</code> renders as a small label next to the parameter name; the type annotation is shown on the same row, and non-required parameters get an &quot;optional&quot; marker (there is no &quot;required&quot; marker).</p>
+<h2 id="9-out-of-scope-deferred-for-future-expansion">9. Out of scope (deferred for future expansion)<a class="header-anchor" href="#9-out-of-scope-deferred-for-future-expansion">#</a></h2>
+<p>The following fields were discussed and are <strong>intentionally not introduced now</strong>, because no consumer exists yet:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Intended use</th>
+<th>Why deferred</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>effects=[&quot;fs&quot;, &quot;net&quot;, &quot;state&quot;]</code></td>
+<td>Mark function side effects for permission gating / dangerous-op blocking</td>
+<td>A gating surface already exists on the method configuration (<code>requires_approval</code>, <code>check_fn</code>, <code>unsafe_in</code>, <code>available_if</code>, <code>defer</code>); a declarative <code>effects=</code> field on top of it remains future work</td>
+</tr>
+<tr>
+<td><code>permissions=[...]</code></td>
+<td>Required permission scope before calling</td>
+<td>Same as above</td>
+</tr>
+<tr>
+<td><code>idempotent=True</code></td>
+<td>Whether the function can be safely retried</td>
+<td>No auto-retry component exists</td>
+</tr>
+<tr>
+<td><code>latency_hint=&quot;long&quot;</code></td>
+<td>Scheduler hint</td>
+<td>No scheduler exists</td>
+</tr>
+<tr>
+<td><code>cost_hint=...</code></td>
+<td>Quota management</td>
+<td>Same as above</td>
+</tr>
+</tbody>
+</table>
+<p>Revisit this section once a real upstream consumer appears.</p>
+<h2 id="10-migration-path-informational">10. Migration path (informational)<a class="header-anchor" href="#10-migration-path-informational">#</a></h2>
+<p>The recommended order for migrating existing code to this spec; not strictly required:</p>
+<ol>
+<li>Add a shared helper <code>_parse_docstring_args(fn) -&gt; dict[name, description]</code> in <code>agent/call_state.py</code></li>
+<li><code>_build_agentic_tool_spec</code> calls this helper as a fallback (currently the spec does not read docstring <code>Args:</code> at all)</li>
+<li><code>render_options</code> calls the same helper for the same fallback</li>
+<li>Existing All executable entries use ordinary Agent methods and explicit method_options</li>
+</ol>
+<h2 id="11-style-checklist">11. Style checklist<a class="header-anchor" href="#11-style-checklist">#</a></h2>
+<p>When writing a new <code>Agent</code> method:</p>
+<ul class="contains-task-list">
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"  type="checkbox"> First paragraph of the docstring is a one-line summary (state what the function does / when to pick it, directly)</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"  type="checkbox"> No <code>Args:</code> or <code>Returns:</code> sections in the docstring (unless you specifically want them for debugging / reading)</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"  type="checkbox"> Every LLM-visible parameter has a <code>description</code> in <code>input=</code></li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"  type="checkbox"> Enum parameters use <code>options</code> in <code>input=</code> (not buried in the description text)</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"  type="checkbox"> System-filled parameters (DB session, current user, etc.) are marked <code>hidden: True</code></li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"  type="checkbox"> No <code>runtime</code> parameter: the method runs on its Agent's Runtime</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"  type="checkbox"> The function name is clear (<code>fn.__name__</code> is what the LLM sees as the action name)</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"  type="checkbox"> No role-play, no empty directives, no metaphors in the docstring</li>
+</ul>
+<h2 id="12-references">12. References<a class="header-anchor" href="#12-references">#</a></h2>
+<ul>
+<li><code>openprogram/runtime/agent/call_state.py</code> — Agent method execution implementation</li>
+<li><code>openprogram/runtime/agent/decision.py</code> — options-menu rendering, reply parsing, and the next-step decision primitive (<code>decision.make</code>, <code>render_options</code>, <code>parse_args</code>, <code>DecisionError</code>)</li>
+<li><code>docs/capabilities/agentic-programming/writing-functions/agent.md</code> — method configuration usage guide</li>
+<li><code>docs/reference/design/function/calling-unification.md</code> — function/tool calling framework</li>
+<li><code>docs/capabilities/agentic-programming/choosing-the-next-step/tool-calling.md</code> — per-turn native tool-use loop mechanics</li>
+</ul>
+<div class="page-updated"><span data-i18n="updated">Last updated</span> · 2026-11-02</div><div class="prevnext"><a class="pn-link pn-prev" href="/docs/capabilities/agentic-programming/writing-functions/agent.html" data-href-en="/docs/capabilities/agentic-programming/writing-functions/agent.html" data-href-zh="/docs/capabilities/agentic-programming/writing-functions/agent.zh.html"><span class="pn-dir" data-i18n="prev">Previous</span><span class="pn-title" data-title-zh="智能体函数">Agentic functions</span></a><a class="pn-link pn-next" href="/docs/capabilities/agentic-programming/choosing-the-next-step/tool-calling.html" data-href-en="/docs/capabilities/agentic-programming/choosing-the-next-step/tool-calling.html" data-href-zh="/docs/capabilities/agentic-programming/choosing-the-next-step/tool-calling.zh.html"><span class="pn-dir" data-i18n="next">Next</span><span class="pn-title" data-title-zh="工具循环">Tool-call loops</span></a></div></article></main>
+  <aside class="toc"><div class="toc-title" data-i18n="on_this_page">On this page</div>
+<ul class="toc-list">
+<li>
+<a class="lvl-2" href="#1-why-this-spec-exists">1. Why this spec exists</a>
+</li>
+<li>
+<a class="lvl-2" href="#2-who-consumes-function-metadata">2. Who consumes function metadata</a>
+</li>
+<li>
+<details class="toc-disclosure" open=""><summary>
+<a class="lvl-2" href="#3-metadata-fields-and-their-canonical-locations">3. Metadata fields and their canonical locations</a>
+</summary>
+<ul class="toc-list">
+<li>
+<a class="lvl-3" href="#effective-defaults-for-ordinary-agent-methods">Effective defaults for ordinary Agent methods</a>
+</li>
+</ul>
+</details>
+</li>
+<li>
+<a class="lvl-2" href="#4-the-role-of-the-docstring-vs-content">4. The role of the docstring vs content</a>
+</li>
+<li>
+<details class="toc-disclosure" open=""><summary>
+<a class="lvl-2" href="#5-input-vs-docstring-args-section">5. input= vs. docstring Args: section</a>
+</summary>
+<ul class="toc-list">
+<li>
+<a class="lvl-3" href="#recommended-style-required-for-new-code">Recommended style (required for new code)</a>
+</li>
+<li>
+<a class="lvl-3" href="#legacy-style-still-supported">Legacy style (still supported)</a>
+</li>
+</ul>
+</details>
+</li>
+<li>
+<a class="lvl-2" href="#6-plain-python-callables-undecorated">6. Plain Python callables (undecorated)</a>
+</li>
+<li>
+<a class="lvl-2" href="#7-auto-injected-parameters">7. Auto-injected parameters</a>
+</li>
+<li>
+<a class="lvl-2" href="#8-webui-rendering-behavior">8. WebUI rendering behavior</a>
+</li>
+<li>
+<a class="lvl-2" href="#9-out-of-scope-deferred-for-future-expansion">9. Out of scope (deferred for future expansion)</a>
+</li>
+<li>
+<a class="lvl-2" href="#10-migration-path-informational">10. Migration path (informational)</a>
+</li>
+<li>
+<a class="lvl-2" href="#11-style-checklist">11. Style checklist</a>
+</li>
+<li>
+<a class="lvl-2" href="#12-references">12. References</a>
+</li>
+</ul></aside>
+</div>
+
+<div class="search-overlay">
+  <div class="search-box">
+    <input type="text" data-i18n-ph="search_ph" placeholder="Search titles or text…" autocomplete="off" spellcheck="false">
+    <div class="search-results"></div>
+  </div>
+</div>
+
+<script src="/docs/assets/site.js?v=6520ba46"></script>
+</body>
+</html>

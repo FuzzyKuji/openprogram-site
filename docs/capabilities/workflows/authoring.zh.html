@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="zh" data-base="/docs/" data-page-lang="zh" data-build="1793956776" data-alt-lang-url="/docs/capabilities/workflows/authoring.html">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>工作流编写 · OpenProgram Docs</title>
+<meta name="description" content="编写和检查 Workflow # Workflow 是一个小型 Python 包。 Agent 实例定义角色， Context 对象定义每次模型调用看到什么，普通函数决定调用顺序。聊天里的 Agent 用普通文件工具编写 Workflow；你也可以按同样的形式手写，或者 录制一次演示 让 agent 做成">
+<link rel="canonical" href="https://openprogram.io/docs/capabilities/workflows/authoring.zh.html">
+<link rel="alternate" type="text/markdown" href="https://openprogram.io/docs/capabilities/workflows/authoring.zh.html.md">
+<link rel="describedby" href="https://openprogram.io/llms.txt">
+<link rel="alternate" hreflang="en" href="https://openprogram.io/docs/capabilities/workflows/authoring.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://openprogram.io/docs/capabilities/workflows/authoring.zh.html">
+<link rel="alternate" hreflang="x-default" href="https://openprogram.io/docs/capabilities/workflows/authoring.html">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"OpenProgram Docs","item":"https://openprogram.io/docs/"},{"@type":"ListItem","position":2,"name":"工作流编写"}]}</script>
+<meta property="og:type" content="article">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:site_name" content="OpenProgram">
+<meta property="og:url" content="https://openprogram.io/docs/capabilities/workflows/authoring.zh.html">
+<meta property="og:title" content="工作流编写 · OpenProgram Docs">
+<meta property="og:description" content="编写和检查 Workflow # Workflow 是一个小型 Python 包。 Agent 实例定义角色， Context 对象定义每次模型调用看到什么，普通函数决定调用顺序。聊天里的 Agent 用普通文件工具编写 Workflow；你也可以按同样的形式手写，或者 录制一次演示 让 agent 做成">
+<meta property="og:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:secure_url" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="工作流编写 · OpenProgram Docs">
+<meta name="twitter:description" content="编写和检查 Workflow # Workflow 是一个小型 Python 包。 Agent 实例定义角色， Context 对象定义每次模型调用看到什么，普通函数决定调用顺序。聊天里的 Agent 用普通文件工具编写 Workflow；你也可以按同样的形式手写，或者 录制一次演示 让 agent 做成">
+<meta name="twitter:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta name="twitter:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/docs/assets/mark.svg">
+<link rel="stylesheet" href="/docs/assets/site.css?v=6520ba46">
+<link rel="stylesheet" href="/docs/assets/pygments-light.css" media="(prefers-color-scheme: light)" id="pyg-light">
+<link rel="stylesheet" href="/docs/assets/pygments-dark.css" media="(prefers-color-scheme: dark)" id="pyg-dark">
+<script src="/docs/assets/theme.js?v=6520ba46"></script>
+
+</head>
+<body>
+<header class="topbar">
+  <button class="icon hamburger" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2.5 4.5h11M2.5 8h11M2.5 11.5h11"/></svg></button>
+  <a class="brand" href="/docs/index.html"><img class="mark" src="/docs/assets/mark.svg" alt="">OpenProgram Docs</a>
+  <div class="spacer"></div>
+  <button class="search-trigger" aria-label="Search">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14"/></svg><span class="label" data-i18n="search">Search docs</span><kbd>⌘K</kbd>
+  </button>
+  <div class="lang-wrap">
+    <button class="icon lang-trigger" id="lang-toggle" aria-haspopup="true" aria-expanded="false" aria-label="Language">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="6.2"/><path d="M1.8 8h12.4" stroke-linecap="round"/><ellipse cx="8" cy="8" rx="2.8" ry="6.2"/></svg><span class="lang-label">EN</span><svg class="chev" width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+    </button>
+    <div class="lang-menu" id="lang-menu" role="menu">
+      <button class="lang-opt" data-lang="en" role="menuitem"><span>English</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="lang-opt" data-lang="zh" role="menuitem"><span>简体中文</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+  <div class="theme-wrap">
+    <button class="icon" id="theme-toggle" aria-label="Theme" aria-haspopup="menu" aria-controls="theme-menu" aria-expanded="false"><svg class="ic-system" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="2.5" width="13" height="9" rx="1.5"/><path d="M8 11.5V14M5.5 14h5"/></svg><svg class="ic-moon" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M13.5 9.5A6 6 0 1 1 6.5 2.5a5 5 0 0 0 7 7z"/></svg><svg class="ic-sun" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="3.2"/><path d="M8 1.2v1.8M8 13v1.8M1.2 8H3M13 8h1.8M3.2 3.2l1.3 1.3M11.5 11.5l1.3 1.3M12.8 3.2l-1.3 1.3M4.5 11.5l-1.3 1.3"/></svg></button>
+    <div class="theme-menu" id="theme-menu" role="menu" aria-labelledby="theme-toggle">
+      <button class="theme-opt" data-theme-choice="system" role="menuitemradio" aria-checked="true"><span>Follow system</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="light" role="menuitemradio" aria-checked="false"><span>Light</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="dark" role="menuitemradio" aria-checked="false"><span>Dark</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+</header>
+<nav class="tabbar"><a class="tablink" href="/docs/README.html" data-title-zh="开始使用" data-href-en="/docs/README.html" data-href-zh="/docs/README.zh.html">Get started</a><a class="tablink" href="/docs/install/install.html" data-title-zh="安装" data-href-en="/docs/install/install.html" data-href-zh="/docs/install/install.zh.html">Install</a><a class="tablink active" href="/docs/capabilities/README.html" data-title-zh="能力" data-href-en="/docs/capabilities/README.html" data-href-zh="/docs/capabilities/README.zh.html">Capabilities</a><a class="tablink" href="/docs/interfaces/README.html" data-title-zh="界面" data-href-en="/docs/interfaces/README.html" data-href-zh="/docs/interfaces/README.zh.html">Interfaces</a><a class="tablink" href="/docs/models/README.html" data-title-zh="模型" data-href-en="/docs/models/README.html" data-href-zh="/docs/models/README.zh.html">Models</a><a class="tablink" href="/docs/integrations/anthropic.html" data-title-zh="集成" data-href-en="/docs/integrations/anthropic.html" data-href-zh="/docs/integrations/anthropic.zh.html">Integrations</a><a class="tablink" href="/docs/server/README.html" data-title-zh="服务与运维" data-href-en="/docs/server/README.html" data-href-zh="/docs/server/README.zh.html">Server &amp; Ops</a><a class="tablink" href="/docs/reference/README.html" data-title-zh="参考" data-href-en="/docs/reference/README.html" data-href-zh="/docs/reference/README.zh.html">Reference</a><a class="tablink" href="/docs/reference/design/README.html" data-title-zh="设计" data-href-en="/docs/reference/design/README.html" data-href-zh="/docs/reference/design/README.zh.html">Design</a></nav>
+
+<div class="scrim"></div>
+<div class="layout">
+  <nav class="sidebar" aria-label="Documentation">
+    <input class="nav-filter" type="text" data-i18n-ph="nav_filter"
+           aria-label="Filter docs" placeholder="Filter docs…" autocomplete="off" spellcheck="false">
+    <div class="nav-tree"><div class="nav-sec"><div class="nav-sec-title" data-title-zh="概览">Overview</div><a class="navlink" href="/docs/capabilities/README.html" data-title-zh="概览" data-href-en="/docs/capabilities/README.html" data-href-zh="/docs/capabilities/README.zh.html">Overview</a>
+<a class="navlink" href="/docs/capabilities/applications.html" data-title-zh="应用" data-href-en="/docs/capabilities/applications.html" data-href-zh="/docs/capabilities/applications.zh.html">Applications</a>
+<a class="navlink" href="/docs/capabilities/framework-control.html" data-title-zh="框架工具" data-href-en="/docs/capabilities/framework-control.html" data-href-zh="/docs/capabilities/framework-control.zh.html">Framework tools</a></div>
+<div class="nav-sec"><div class="nav-sec-title">Agentic Programming</div><a class="navlink" href="/docs/capabilities/agentic-programming/README.html" data-title-zh="指南" data-href-en="/docs/capabilities/agentic-programming/README.html" data-href-zh="/docs/capabilities/agentic-programming/README.zh.html">Guide</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/philosophy.html" data-title-zh="设计原则" data-href-en="/docs/capabilities/agentic-programming/philosophy.html" data-href-zh="/docs/capabilities/agentic-programming/philosophy.zh.html">Philosophy</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/embedding-in-your-own-stack.html" data-title-zh="框架嵌入" data-href-en="/docs/capabilities/agentic-programming/embedding-in-your-own-stack.html" data-href-zh="/docs/capabilities/agentic-programming/embedding-in-your-own-stack.zh.html">Framework embedding</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="编写函数">Writing functions</div><a class="navlink" href="/docs/capabilities/agentic-programming/writing-functions/pure-python.html" data-title-zh="Python 函数" data-href-en="/docs/capabilities/agentic-programming/writing-functions/pure-python.html" data-href-zh="/docs/capabilities/agentic-programming/writing-functions/pure-python.zh.html">Python functions</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/writing-functions/agent.html" data-title-zh="智能体函数" data-href-en="/docs/capabilities/agentic-programming/writing-functions/agent.html" data-href-zh="/docs/capabilities/agentic-programming/writing-functions/agent.zh.html">Agentic functions</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/writing-functions/function-metadata.html" data-title-zh="函数元数据" data-href-en="/docs/capabilities/agentic-programming/writing-functions/function-metadata.html" data-href-zh="/docs/capabilities/agentic-programming/writing-functions/function-metadata.zh.html">Function metadata</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="选择下一步">Choosing the next step</div><a class="navlink" href="/docs/capabilities/agentic-programming/choosing-the-next-step/tool-calling.html" data-title-zh="工具循环" data-href-en="/docs/capabilities/agentic-programming/choosing-the-next-step/tool-calling.html" data-href-zh="/docs/capabilities/agentic-programming/choosing-the-next-step/tool-calling.zh.html">Tool-call loops</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/choosing-the-next-step/fixed-order-calls.html" data-title-zh="顺序调用" data-href-en="/docs/capabilities/agentic-programming/choosing-the-next-step/fixed-order-calls.html" data-href-zh="/docs/capabilities/agentic-programming/choosing-the-next-step/fixed-order-calls.zh.html">Fixed-order calls</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/choosing-the-next-step/next-step-decision.html" data-title-zh="步骤选择" data-href-en="/docs/capabilities/agentic-programming/choosing-the-next-step/next-step-decision.html" data-href-zh="/docs/capabilities/agentic-programming/choosing-the-next-step/next-step-decision.zh.html">Next-step selection</a></div>
+<div class="nav-sec"><div class="nav-sec-title">Agentic Workflows</div><a class="navlink" href="/docs/capabilities/workflows/README.html" data-title-zh="工作流" data-href-en="/docs/capabilities/workflows/README.html" data-href-zh="/docs/capabilities/workflows/README.zh.html">Workflows</a>
+<a class="navlink active" href="/docs/capabilities/workflows/authoring.html" data-title-zh="工作流编写" data-href-en="/docs/capabilities/workflows/authoring.html" data-href-zh="/docs/capabilities/workflows/authoring.zh.html">Workflow authoring</a>
+<a class="navlink" href="/docs/capabilities/workflows/recording.html" data-title-zh="录制 Workflow" data-href-en="/docs/capabilities/workflows/recording.html" data-href-zh="/docs/capabilities/workflows/recording.zh.html">Record a workflow</a>
+<a class="navlink" href="/docs/capabilities/workflows/reports.html" data-title-zh="每周报告" data-href-en="/docs/capabilities/workflows/reports.html" data-href-zh="/docs/capabilities/workflows/reports.zh.html">Weekly reports</a></div>
+<div class="nav-sec"><div class="nav-sec-title">Agents</div><a class="navlink" href="/docs/capabilities/agents.html" data-title-zh="配置 Agent" data-href-en="/docs/capabilities/agents.html" data-href-zh="/docs/capabilities/agents.zh.html">Configure an Agent</a>
+<a class="navlink" href="/docs/capabilities/agents-md.html" data-title-zh="用 AGENTS.md 写指令" data-href-en="/docs/capabilities/agents-md.html" data-href-zh="/docs/capabilities/agents-md.zh.html">Instructions with AGENTS.md</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="常驻 Agent">Always-on Agents</div><a class="navlink" href="/docs/capabilities/always-on-agents.html" data-title-zh="常驻 Agent" data-href-en="/docs/capabilities/always-on-agents.html" data-href-zh="/docs/capabilities/always-on-agents.zh.html">Always-on Agents</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="提醒">Reminders</div><a class="navlink" href="/docs/capabilities/reminders.html" data-title-zh="提醒" data-href-en="/docs/capabilities/reminders.html" data-href-zh="/docs/capabilities/reminders.zh.html">Reminders</a>
+<a class="navlink" href="/docs/capabilities/event-triggers.html" data-title-zh="有事发生时运行任务" data-href-en="/docs/capabilities/event-triggers.html" data-href-zh="/docs/capabilities/event-triggers.zh.html">Run a task when something happens</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="记忆">Memory</div><a class="navlink" href="/docs/capabilities/memory.html" data-title-zh="记忆管理" data-href-en="/docs/capabilities/memory.html" data-href-zh="/docs/capabilities/memory.zh.html">Memory management</a>
+<a class="navlink" href="/docs/capabilities/memory-settings.html" data-title-zh="调整记忆" data-href-en="/docs/capabilities/memory-settings.html" data-href-zh="/docs/capabilities/memory-settings.zh.html">Tune Memory</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="运行环境">Environments</div><a class="navlink" href="/docs/capabilities/environments.html" data-title-zh="在另一台机器上运行会话" data-href-en="/docs/capabilities/environments.html" data-href-zh="/docs/capabilities/environments.zh.html">Run conversations on another machine</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="会话目标">Session goals</div><a class="navlink" href="/docs/capabilities/goal.html" data-title-zh="目标" data-href-en="/docs/capabilities/goal.html" data-href-zh="/docs/capabilities/goal.zh.html">Goals</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="操控电脑">Computer use</div><a class="navlink" href="/docs/capabilities/computer-use.html" data-title-zh="操控电脑" data-href-en="/docs/capabilities/computer-use.html" data-href-zh="/docs/capabilities/computer-use.zh.html">Computer use</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="会议">Meetings</div><a class="navlink" href="/docs/capabilities/meetings.html" data-title-zh="会议" data-href-en="/docs/capabilities/meetings.html" data-href-zh="/docs/capabilities/meetings.zh.html">Meetings</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="扩展">Extending</div><a class="navlink" href="/docs/capabilities/installing-programs.html" data-title-zh="安装程序" data-href-en="/docs/capabilities/installing-programs.html" data-href-zh="/docs/capabilities/installing-programs.zh.html">Installing programs</a>
+<a class="navlink" href="/docs/capabilities/skills.html" data-title-zh="技能" data-href-en="/docs/capabilities/skills.html" data-href-zh="/docs/capabilities/skills.zh.html">Skills</a>
+<a class="navlink" href="/docs/capabilities/plugins.html" data-title-zh="插件" data-href-en="/docs/capabilities/plugins.html" data-href-zh="/docs/capabilities/plugins.zh.html">Plugins</a>
+<a class="navlink" href="/docs/capabilities/mcp.html" data-title-zh="MCP" data-href-en="/docs/capabilities/mcp.html" data-href-zh="/docs/capabilities/mcp.zh.html">MCP</a>
+<a class="navlink" href="/docs/capabilities/tools.html" data-title-zh="内置工具" data-href-en="/docs/capabilities/tools.html" data-href-zh="/docs/capabilities/tools.zh.html">Built-in tools</a>
+<a class="navlink" href="/docs/capabilities/lsp.html" data-title-zh="语言服务器" data-href-en="/docs/capabilities/lsp.html" data-href-zh="/docs/capabilities/lsp.zh.html">Language servers</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="概览">Overview</div><a class="navlink" href="/docs/capabilities/commit-push-pr.html" data-title-zh="提交与拉取请求" data-href-en="/docs/capabilities/commit-push-pr.html" data-href-zh="/docs/capabilities/commit-push-pr.zh.html">Commits and PRs</a>
+<a class="navlink" href="/docs/capabilities/permissions.html" data-title-zh="工具权限" data-href-en="/docs/capabilities/permissions.html" data-href-zh="/docs/capabilities/permissions.zh.html">Tool permissions</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="指南">Guide</div><a class="navlink" href="/docs/capabilities/agentic-programming/self-programming-ai-agents.html" data-title-zh="自编程智能体" data-href-en="/docs/capabilities/agentic-programming/self-programming-ai-agents.html" data-href-zh="/docs/capabilities/agentic-programming/self-programming-ai-agents.zh.html">Self-programming agents</a></div></div>
+  </nav>
+  <main class="content"><button class="fs-toggle" aria-label="Fullscreen" title="Fullscreen (Esc to exit)"><svg class="ic-expand" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.2 2H2v4.2M9.8 2H14v4.2M6.2 14H2V9.8M9.8 14H14V9.8"/></svg><svg class="ic-collapse" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6.2h4.2V2M14 6.2H9.8V2M2 9.8h4.2V14M14 9.8H9.8V14"/></svg></button><article><nav class="breadcrumb"><span class="bc-seg" data-title-zh="能力">Capabilities</span> <span class='bc-sep'>›</span> <span class="bc-seg">Agentic Workflows</span> <span class='bc-sep'>›</span> <span class="bc-seg bc-current" data-title-zh="工作流编写">Workflow authoring</span></nav><h1 id="编写和检查-workflow">编写和检查 Workflow<a class="header-anchor" href="#编写和检查-workflow">#</a></h1>
+<p>Workflow 是一个小型 Python 包。<code>Agent</code> 实例定义角色，<code>Context</code> 对象定义每次模型调用看到什么，普通函数决定调用顺序。聊天里的 Agent 用普通文件工具编写 Workflow；你也可以按同样的形式手写，或者<a href="/docs/capabilities/workflows/recording.zh.html">录制一次演示</a>让 agent 做成 Workflow。包通过 <code>openprogram programs check</code> 后，它的入口就成为可调用的工具。</p>
+<h2 id="编码前明确合同">编码前明确合同<a class="header-anchor" href="#编码前明确合同">#</a></h2>
+<p>在包的 <code>README.md</code> 中写明：</p>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th>必需信息</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>目的</td>
+<td>具体任务以及完成任务所需的证据</td>
+</tr>
+<tr>
+<td>输入</td>
+<td>入口参数、必需上下文和非法输入的处理</td>
+</tr>
+<tr>
+<td>输出</td>
+<td>返回类型、产生的文件以及如何验证成功</td>
+</tr>
+<tr>
+<td>副作用</td>
+<td>模型、工具、文件、网络和外部提交行为</td>
+</tr>
+<tr>
+<td>失败与取消</td>
+<td>失败或中断后保留什么；重试是否安全</td>
+</tr>
+<tr>
+<td>依赖</td>
+<td>导入的 Workflow、所需工具与服务</td>
+</tr>
+<tr>
+<td>测试</td>
+<td>行为验证、脚本化的模型回复和独立的在线验证</td>
+</tr>
+<tr>
+<td>使用</td>
+<td>一个可复现的调用以及预期结果</td>
+</tr>
+</tbody>
+</table>
+<p>每个函数保持简短。明确处理预期的非法输入，让运行时的取消正常传播。</p>
+<h2 id="包结构">包结构<a class="header-anchor" href="#包结构">#</a></h2>
+<p>用户 Workflow 放在 <code>~/.openprogram/programs/&lt;name&gt;/</code>。目录名就是包名：小写的 Python 标识符，且不能与标准库模块或其他可导入的包重名。每个 Workflow 是独立的 Git 仓库。</p>
+<pre><code class="language-text">~/.openprogram/programs/project_report/
+├── .git/
+├── README.md
+├── __init__.py
+├── workflow.py
+├── steps/
+│   └── prepare.py
+└── tests/
+    └── test_workflow.py
+</code></pre>
+<p>包以自己的名字导入（<code>project_report</code>、<code>project_report.steps.prepare</code>）。包内相对导入和对其他 Workflow 的普通导入都可用。</p>
+<h2 id="角色context-和函数">角色、Context 和函数<a class="header-anchor" href="#角色context-和函数">#</a></h2>
+<p>一个包里有三类对象：</p>
+<ul>
+<li><strong>角色</strong>是模块顶层创建的 <code>Agent</code> 实例，只保存配置：<code>model</code>、<code>instructions</code>、<code>tools</code>、<code>effort</code>。没有指定模型的角色使用调用方的模型。</li>
+<li><strong>Context</strong> 在函数内构造，显式传给角色调用。</li>
+<li><strong>函数</strong>是普通 Python 函数，负责调用角色、转换数据、分支、循环和调用其他函数。</li>
+</ul>
+<pre><code class="language-python"><span class="sd">&quot;&quot;&quot;Prepare a project report from verified notes.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">openprogram</span><span class="w"> </span><span class="kn">import</span> <span class="n">Agent</span><span class="p">,</span> <span class="n">Context</span>
+
+<span class="n">writer</span> <span class="o">=</span> <span class="n">Agent</span><span class="p">(</span><span class="n">instructions</span><span class="o">=</span><span class="s2">&quot;You write project reports.&quot;</span><span class="p">)</span>
+<span class="n">reviewer</span> <span class="o">=</span> <span class="n">Agent</span><span class="p">(</span><span class="n">instructions</span><span class="o">=</span><span class="s2">&quot;You check facts.&quot;</span><span class="p">,</span> <span class="n">tools</span><span class="o">=</span><span class="p">[])</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">project_report</span><span class="p">(</span><span class="n">notes</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Turn this week&#39;s project notes into a report.&quot;&quot;&quot;</span>
+    <span class="n">ctx</span> <span class="o">=</span> <span class="n">Context</span><span class="p">({</span><span class="s2">&quot;notes&quot;</span><span class="p">:</span> <span class="n">notes</span><span class="p">})</span>
+    <span class="n">draft</span> <span class="o">=</span> <span class="n">write_draft</span><span class="p">(</span><span class="n">ctx</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">check</span><span class="p">(</span><span class="n">draft</span><span class="p">,</span> <span class="n">ctx</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">write_draft</span><span class="p">(</span><span class="n">ctx</span><span class="p">:</span> <span class="n">Context</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Write three sections: progress, problems, plans. At most three items each.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">writer</span><span class="p">(</span><span class="s2">&quot;Write this week&#39;s report&quot;</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="n">ctx</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">check</span><span class="p">(</span><span class="n">draft</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">ctx</span><span class="p">:</span> <span class="n">Context</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Only check that the draft matches the notes. Do not change the style.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">reviewer</span><span class="p">(</span><span class="s2">&quot;Fix any mismatch and return the final text&quot;</span><span class="p">,</span>
+                    <span class="n">context</span><span class="o">=</span><span class="n">ctx</span><span class="o">.</span><span class="n">derive</span><span class="p">({</span><span class="s2">&quot;draft&quot;</span><span class="p">:</span> <span class="n">draft</span><span class="p">}))</span>
+
+
+<span class="n">PROGRAM_ENTRIES</span> <span class="o">=</span> <span class="p">[</span><span class="n">project_report</span><span class="p">]</span>
+</code></pre>
+<p>规则：</p>
+<ul>
+<li>模型调用只通过角色。<code>role(prompt, context=ctx)</code> 用角色的工具运行一轮模型；<code>role.choose(prompt, {id: label}, context=ctx)</code> 返回其中一个选项 ID。Workflow 代码不调用自由函数 <code>llm()</code> 或 <code>agent()</code>。</li>
+<li><code>PROGRAM_ENTRIES</code> 列出作为工具公开的函数。每个入口都要有 docstring（作为工具描述），每个参数都要有类型注解（作为工具 schema）。</li>
+<li>不用装饰器、基类或分发表。一个 Workflow 通过普通 Python import 使用另一个。</li>
+</ul>
+<h2 id="一次模型调用看到什么">一次模型调用看到什么<a class="header-anchor" href="#一次模型调用看到什么">#</a></h2>
+<p>一次 <code>role(prompt, context=ctx)</code> 调用只发送以下部分：</p>
+<table>
+<thead>
+<tr>
+<th>部分</th>
+<th>由谁定义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>角色的 <code>instructions</code>，作为 system prompt</td>
+<td><code>Agent(...)</code> 实例</td>
+</tr>
+<tr>
+<td>历史，默认为空，作为之前的消息</td>
+<td><code>ctx</code> 的 <code>history</code> 设置</td>
+</tr>
+<tr>
+<td>发起调用的 Workflow 函数的 docstring</td>
+<td>该函数</td>
+</tr>
+<tr>
+<td><code>ctx</code> 的命名块，每块为 <code>name:</code> 加其值</td>
+<td>构造或派生 <code>ctx</code> 的代码</td>
+</tr>
+<tr>
+<td><code>prompt</code></td>
+<td>这次调用</td>
+</tr>
+</tbody>
+</table>
+<p>除此之外什么都不进入请求：没有聊天历史、没有召回的记忆、没有其他角色的输出，除非代码把它们放进 <code>ctx</code> 或 <code>prompt</code>。Context 不改变工具或权限；工具属于角色。</p>
+<p>docstring 通过沿调用栈找到最近的、定义在 Workflow 包内的函数获得，只作用于这一次请求。没有 docstring 的函数不添加任何内容，所以只做数据转换的辅助函数可以不写。</p>
+<h3 id="context">Context<a class="header-anchor" href="#context">#</a></h3>
+<ul>
+<li><strong>块：</strong><code>Context({&quot;notes&quot;: notes})</code> 或 <code>ctx[&quot;notes&quot;] = notes</code>。</li>
+<li><strong>计算块：</strong><code>Context(providers={&quot;today&quot;: lambda c: ...})</code>。provider 是同步可调用对象，每次调用时求值。</li>
+<li><strong>派生：</strong><code>ctx.derive({...})</code> 返回独立副本，函数可以增删块而不影响调用方的 <code>ctx</code>。</li>
+<li><strong>历史：</strong><code>Context(..., history=...)</code> 或 <code>ctx.derive(history=...)</code>：
+<ul>
+<li><code>None</code>：没有历史（角色调用的默认值）；</li>
+<li><code>&quot;thread&quot;</code>：之前用同一个 <code>ctx</code> 对象发起的调用，适合一个角色的多轮工作；</li>
+<li><code>&quot;chat&quot;</code>：调用这个 Workflow 的对话；</li>
+<li>可调用对象 <code>(node, context) -&gt; bool</code>，用来挑选对话节点。</li>
+</ul>
+</li>
+</ul>
+<p>要让模型知道这次调用在程序中的位置，可以加入 <code>openprogram.runtime.context</code> 的内置 provider：</p>
+<pre><code class="language-python"><span class="kn">from</span><span class="w"> </span><span class="nn">openprogram.runtime.context</span><span class="w"> </span><span class="kn">import</span> <span class="n">call_path</span><span class="p">,</span> <span class="n">workflow_source</span>
+
+<span class="n">ctx</span> <span class="o">=</span> <span class="n">Context</span><span class="p">(</span><span class="n">providers</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;call path&quot;</span><span class="p">:</span> <span class="n">call_path</span><span class="p">,</span> <span class="s2">&quot;program&quot;</span><span class="p">:</span> <span class="n">workflow_source</span><span class="p">})</span>
+</code></pre>
+<p><code>call_path</code> 列出调用栈上的 Workflow 函数（例如 <code>project_report → check</code>；<code>call_path(docs=True)</code> 会附上每个 docstring），<code>workflow_source</code> 返回入口函数的源码。也可以直接写普通块，例如 <code>{&quot;flow&quot;: &quot;Draft first, then review.&quot;}</code>。</p>
+<h3 id="入口选项">入口选项<a class="header-anchor" href="#入口选项">#</a></h3>
+<p>可选的 <code>ENTRY_OPTIONS</code> 字典把入口名映射到工具选项，例如每个参数的表单说明：</p>
+<pre><code class="language-python"><span class="n">ENTRY_OPTIONS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;project_report&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;input&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;notes&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;This week&#39;s notes&quot;</span><span class="p">,</span> <span class="s2">&quot;multiline&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}},</span>
+    <span class="p">},</span>
+<span class="p">}</span>
+</code></pre>
+<p><code>&quot;run_in_worker&quot;: True</code> 让工具在 worker 进程内运行而不是 fork 子进程，适用于使用 worker 持有的状态（如浏览器会话）的入口。</p>
+<h3 id="重启后恢复">重启后恢复<a class="header-anchor" href="#重启后恢复">#</a></h3>
+<p>在入口上设置 <code>&quot;resumable&quot;: True</code>，运行就能在 worker 重启或暂停后继续。可恢复入口内，每一段工作都用 <code>step(name, fn, *args)</code> 包起来：</p>
+<pre><code class="language-python"><span class="kn">from</span><span class="w"> </span><span class="nn">openprogram.runtime.agent.durable_steps</span><span class="w"> </span><span class="kn">import</span> <span class="n">step</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">project_report</span><span class="p">(</span><span class="n">notes</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Turn this week&#39;s project notes into a report.&quot;&quot;&quot;</span>
+    <span class="n">draft</span> <span class="o">=</span> <span class="n">step</span><span class="p">(</span><span class="s2">&quot;draft&quot;</span><span class="p">,</span> <span class="n">write_draft</span><span class="p">,</span> <span class="n">notes</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">step</span><span class="p">(</span><span class="s2">&quot;check&quot;</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span> <span class="n">notes</span><span class="p">,</span> <span class="n">draft</span><span class="p">)</span>
+
+
+<span class="n">ENTRY_OPTIONS</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;project_report&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;resumable&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}}</span>
+</code></pre>
+<ul>
+<li>每个 step 只运行一次，结果会保存。运行继续时，入口从头再执行；已完成的 step 直接返回保存的结果而不再运行，其中的角色调用不会重复。</li>
+<li>step 之外的代码会再次运行。它必须是确定性的、没有副作用，step 的名字和顺序要保持稳定。</li>
+<li>step 的参数和结果必须是 JSON 值。<code>Context</code> 不会跨重启保留，请在用到它的 step 内构造。</li>
+<li>因 worker 重启而中断的运行，会在 <code>execution.auto_resume_window_seconds</code> 时间窗内自动继续；暂停的运行在聊天中继续。</li>
+<li>一次运行绑定 Workflow 的提交。如果期间 Workflow 有改动，由 <code>execution.code_change_policy</code> 决定：<code>keep_original</code>（默认）以 &quot;Workflow code changed&quot; 停止运行，<code>use_latest</code> 用新代码继续。用新代码时，删掉或调换已完成的 step 也会停止运行。</li>
+<li>可恢复入口必须是同步函数，且不能使用 <code>run_in_worker</code>。</li>
+</ul>
+<h2 id="执行参数由-workflow-负责">执行参数由 Workflow 负责<a class="header-anchor" href="#执行参数由-workflow-负责">#</a></h2>
+<p>用户描述任务、证据和交付物，不配置模型 ID、推理强度、迭代次数、超时、token 预算或重试次数，Workflow 也不向用户索要这些值。固定值写在角色上（<code>Agent(model=..., effort=...)</code>）或代码里。</p>
+<p>当内部参数取决于任务时，在开始工作前做一次角色调用生成完整参数计划，在代码中校验（必需键、类型、范围、各上限之间的关系），规划失败时回退到完整且已校验的默认值。用户的明确约束和应用限制始终优先于模型输出。可恢复的 Workflow 会保存计划检查点，并在恢复时复用。</p>
+<h2 id="编写行为测试">编写行为测试<a class="header-anchor" href="#编写行为测试">#</a></h2>
+<p><code>openprogram.programs._authoring.testing.script_roles</code> 用脚本化回复回答每个角色的调用，并记录每次请求；请求由与真实调用相同的代码路径构造：</p>
+<pre><code class="language-python"><span class="kn">from</span><span class="w"> </span><span class="nn">openprogram.programs._authoring.testing</span><span class="w"> </span><span class="kn">import</span> <span class="n">script_roles</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">project_report</span><span class="w"> </span><span class="kn">import</span> <span class="n">workflow</span> <span class="k">as</span> <span class="n">wf</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_reviewer_sees_the_draft_but_not_the_writer_prompt</span><span class="p">():</span>
+    <span class="k">with</span> <span class="n">script_roles</span><span class="p">({</span><span class="n">wf</span><span class="o">.</span><span class="n">writer</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Draft&quot;</span><span class="p">],</span> <span class="n">wf</span><span class="o">.</span><span class="n">reviewer</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Final&quot;</span><span class="p">]})</span> <span class="k">as</span> <span class="n">calls</span><span class="p">:</span>
+        <span class="k">assert</span> <span class="n">wf</span><span class="o">.</span><span class="n">project_report</span><span class="p">(</span><span class="s2">&quot;Shipped the parser.&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;Final&quot;</span>
+
+    <span class="n">request</span> <span class="o">=</span> <span class="n">calls</span><span class="p">[</span><span class="n">wf</span><span class="o">.</span><span class="n">reviewer</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">assert</span> <span class="s2">&quot;Do not change the style&quot;</span> <span class="ow">in</span> <span class="n">request</span><span class="o">.</span><span class="n">text</span>      <span class="c1"># check() docstring</span>
+    <span class="k">assert</span> <span class="s2">&quot;Draft&quot;</span> <span class="ow">in</span> <span class="n">request</span><span class="o">.</span><span class="n">text</span>                        <span class="c1"># the draft block</span>
+    <span class="k">assert</span> <span class="s2">&quot;Write this week&#39;s report&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">request</span><span class="o">.</span><span class="n">text</span>
+    <span class="k">assert</span> <span class="n">request</span><span class="o">.</span><span class="n">history_text</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span>
+</code></pre>
+<ul>
+<li>回复可以是字符串，也可以是任意可 JSON 序列化的值（用于带 <code>response_format</code> 的调用）。对 <code>role.choose</code> 的回复是选项 ID。</li>
+<li>脚本里的异常会由调用抛出，并且留在队列中，所以也会回答模型循环的重试。</li>
+<li><code>request.text</code> 包含 instructions、docstring、块和 prompt；<code>request.history_text</code> 包含历史。</li>
+</ul>
+<p>工具、文件和服务照常用 <code>monkeypatch</code> 替换。在线 provider 验证不要放进 <code>tests/</code>，检查时无法运行。</p>
+<h2 id="检查提交和列出">检查、提交和列出<a class="header-anchor" href="#检查提交和列出">#</a></h2>
+<pre><code class="language-bash">openprogram<span class="w"> </span>programs<span class="w"> </span>check<span class="w"> </span>~/.openprogram/programs/project_report
+openprogram<span class="w"> </span>programs<span class="w"> </span>check<span class="w"> </span>~/.openprogram/programs/project_report<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Tighten the review step&quot;</span>
+openprogram<span class="w"> </span>programs<span class="w"> </span>list
+</code></pre>
+<p><code>check</code> 会：</p>
+<ol>
+<li>在独立进程中导入包，校验 <code>PROGRAM_ENTRIES</code> 和入口签名；</li>
+<li>用 pytest 运行 <code>tests/</code>，可用时在操作系统沙箱内运行：无网络、包目录只读、<code>HOME</code> 是空的临时目录；</li>
+<li>全部通过后把改动提交到 Workflow 的 Git 仓库。<code>-m</code> 设置提交信息；<code>--json</code> 输出完整报告。</li>
+</ol>
+<p>只有已提交且干净的包会加载。有未提交改动的包继续提供上次加载的版本，所以通过检查才会让改动可调用。历史和回滚使用 Git。</p>
+<p>worker 监视 <code>~/.openprogram/programs</code>，改动后几秒内重新加载对应 Workflow，无需重启。<code>programs list</code> 把每个 Workflow 显示为一行 <code>package</code>，附状态：<code>loaded</code>（已加载）、<code>error</code>（加载失败，附错误）、<code>pending</code>（暂不可调用，附原因，例如有未提交改动）。Programs 页面在每个 Workflow 旁显示同样的状态。</p>
+<h2 id="运行-workflow">运行 Workflow<a class="header-anchor" href="#运行-workflow">#</a></h2>
+<ul>
+<li>**聊天中：**每个入口都是一个工具。描述任务，Agent 会调用它。</li>
+<li>**Programs 页面：**打开 <strong>Abilities → Programs</strong>，在 <strong>Applications</strong> 下选择 Workflow，点击 <strong>Use</strong> 在聊天中打开参数表单。发送表单前不会运行。</li>
+<li><strong>命令行：</strong><code>openprogram programs run &lt;entry&gt; -a key=value</code>。</li>
+<li>**Python：**入口是普通的可导入函数。</li>
+</ul>
+<p>每次入口调用都记录在会话图中，每次角色调用是一个子节点，保存模型收到的完整请求。普通函数不记录。</p>
+<div class="page-updated"><span data-i18n="updated">Last updated</span> · 2026-11-02</div><div class="prevnext"><a class="pn-link pn-prev" href="/docs/capabilities/workflows/README.html" data-href-en="/docs/capabilities/workflows/README.html" data-href-zh="/docs/capabilities/workflows/README.zh.html"><span class="pn-dir" data-i18n="prev">Previous</span><span class="pn-title" data-title-zh="工作流">Workflows</span></a><a class="pn-link pn-next" href="/docs/capabilities/workflows/recording.html" data-href-en="/docs/capabilities/workflows/recording.html" data-href-zh="/docs/capabilities/workflows/recording.zh.html"><span class="pn-dir" data-i18n="next">Next</span><span class="pn-title" data-title-zh="录制 Workflow">Record a workflow</span></a></div></article></main>
+  <aside class="toc"><div class="toc-title" data-i18n="on_this_page">On this page</div>
+<ul class="toc-list">
+<li>
+<a class="lvl-2" href="#编码前明确合同">编码前明确合同</a>
+</li>
+<li>
+<a class="lvl-2" href="#包结构">包结构</a>
+</li>
+<li>
+<a class="lvl-2" href="#角色context-和函数">角色、Context 和函数</a>
+</li>
+<li>
+<details class="toc-disclosure" open=""><summary>
+<a class="lvl-2" href="#一次模型调用看到什么">一次模型调用看到什么</a>
+</summary>
+<ul class="toc-list">
+<li>
+<a class="lvl-3" href="#context">Context</a>
+</li>
+<li>
+<a class="lvl-3" href="#入口选项">入口选项</a>
+</li>
+<li>
+<a class="lvl-3" href="#重启后恢复">重启后恢复</a>
+</li>
+</ul>
+</details>
+</li>
+<li>
+<a class="lvl-2" href="#执行参数由-workflow-负责">执行参数由 Workflow 负责</a>
+</li>
+<li>
+<a class="lvl-2" href="#编写行为测试">编写行为测试</a>
+</li>
+<li>
+<a class="lvl-2" href="#检查提交和列出">检查、提交和列出</a>
+</li>
+<li>
+<a class="lvl-2" href="#运行-workflow">运行 Workflow</a>
+</li>
+</ul></aside>
+</div>
+
+<div class="search-overlay">
+  <div class="search-box">
+    <input type="text" data-i18n-ph="search_ph" placeholder="Search titles or text…" autocomplete="off" spellcheck="false">
+    <div class="search-results"></div>
+  </div>
+</div>
+
+<script src="/docs/assets/site.js?v=6520ba46"></script>
+</body>
+</html>

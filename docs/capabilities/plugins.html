@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en" data-base="/docs/" data-page-lang="en" data-build="1793956776" data-alt-lang-url="/docs/capabilities/plugins.zh.html">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plugins · OpenProgram Docs</title>
+<meta name="description" content="A plugin is a declarative package: a manifest that names skills, slash commands, agents, hooks, MCP servers and model provider directories, in the format">
+<link rel="canonical" href="https://openprogram.io/docs/capabilities/plugins.html">
+<link rel="alternate" type="text/markdown" href="https://openprogram.io/docs/capabilities/plugins.html.md">
+<link rel="describedby" href="https://openprogram.io/llms.txt">
+<link rel="alternate" hreflang="en" href="https://openprogram.io/docs/capabilities/plugins.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://openprogram.io/docs/capabilities/plugins.zh.html">
+<link rel="alternate" hreflang="x-default" href="https://openprogram.io/docs/capabilities/plugins.html">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"OpenProgram Docs","item":"https://openprogram.io/docs/"},{"@type":"ListItem","position":2,"name":"Plugins"}]}</script>
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="OpenProgram">
+<meta property="og:url" content="https://openprogram.io/docs/capabilities/plugins.html">
+<meta property="og:title" content="Plugins · OpenProgram Docs">
+<meta property="og:description" content="A plugin is a declarative package: a manifest that names skills, slash commands, agents, hooks, MCP servers and model provider directories, in the format">
+<meta property="og:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:secure_url" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Plugins · OpenProgram Docs">
+<meta name="twitter:description" content="A plugin is a declarative package: a manifest that names skills, slash commands, agents, hooks, MCP servers and model provider directories, in the format">
+<meta name="twitter:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta name="twitter:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/docs/assets/mark.svg">
+<link rel="stylesheet" href="/docs/assets/site.css?v=6520ba46">
+<link rel="stylesheet" href="/docs/assets/pygments-light.css" media="(prefers-color-scheme: light)" id="pyg-light">
+<link rel="stylesheet" href="/docs/assets/pygments-dark.css" media="(prefers-color-scheme: dark)" id="pyg-dark">
+<script src="/docs/assets/theme.js?v=6520ba46"></script>
+
+</head>
+<body>
+<header class="topbar">
+  <button class="icon hamburger" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2.5 4.5h11M2.5 8h11M2.5 11.5h11"/></svg></button>
+  <a class="brand" href="/docs/index.html"><img class="mark" src="/docs/assets/mark.svg" alt="">OpenProgram Docs</a>
+  <div class="spacer"></div>
+  <button class="search-trigger" aria-label="Search">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14"/></svg><span class="label" data-i18n="search">Search docs</span><kbd>⌘K</kbd>
+  </button>
+  <div class="lang-wrap">
+    <button class="icon lang-trigger" id="lang-toggle" aria-haspopup="true" aria-expanded="false" aria-label="Language">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="6.2"/><path d="M1.8 8h12.4" stroke-linecap="round"/><ellipse cx="8" cy="8" rx="2.8" ry="6.2"/></svg><span class="lang-label">EN</span><svg class="chev" width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+    </button>
+    <div class="lang-menu" id="lang-menu" role="menu">
+      <button class="lang-opt" data-lang="en" role="menuitem"><span>English</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="lang-opt" data-lang="zh" role="menuitem"><span>简体中文</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+  <div class="theme-wrap">
+    <button class="icon" id="theme-toggle" aria-label="Theme" aria-haspopup="menu" aria-controls="theme-menu" aria-expanded="false"><svg class="ic-system" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="2.5" width="13" height="9" rx="1.5"/><path d="M8 11.5V14M5.5 14h5"/></svg><svg class="ic-moon" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M13.5 9.5A6 6 0 1 1 6.5 2.5a5 5 0 0 0 7 7z"/></svg><svg class="ic-sun" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="3.2"/><path d="M8 1.2v1.8M8 13v1.8M1.2 8H3M13 8h1.8M3.2 3.2l1.3 1.3M11.5 11.5l1.3 1.3M12.8 3.2l-1.3 1.3M4.5 11.5l-1.3 1.3"/></svg></button>
+    <div class="theme-menu" id="theme-menu" role="menu" aria-labelledby="theme-toggle">
+      <button class="theme-opt" data-theme-choice="system" role="menuitemradio" aria-checked="true"><span>Follow system</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="light" role="menuitemradio" aria-checked="false"><span>Light</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="dark" role="menuitemradio" aria-checked="false"><span>Dark</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+</header>
+<nav class="tabbar"><a class="tablink" href="/docs/README.html" data-title-zh="开始使用" data-href-en="/docs/README.html" data-href-zh="/docs/README.zh.html">Get started</a><a class="tablink" href="/docs/install/install.html" data-title-zh="安装" data-href-en="/docs/install/install.html" data-href-zh="/docs/install/install.zh.html">Install</a><a class="tablink active" href="/docs/capabilities/README.html" data-title-zh="能力" data-href-en="/docs/capabilities/README.html" data-href-zh="/docs/capabilities/README.zh.html">Capabilities</a><a class="tablink" href="/docs/interfaces/README.html" data-title-zh="界面" data-href-en="/docs/interfaces/README.html" data-href-zh="/docs/interfaces/README.zh.html">Interfaces</a><a class="tablink" href="/docs/models/README.html" data-title-zh="模型" data-href-en="/docs/models/README.html" data-href-zh="/docs/models/README.zh.html">Models</a><a class="tablink" href="/docs/integrations/anthropic.html" data-title-zh="集成" data-href-en="/docs/integrations/anthropic.html" data-href-zh="/docs/integrations/anthropic.zh.html">Integrations</a><a class="tablink" href="/docs/server/README.html" data-title-zh="服务与运维" data-href-en="/docs/server/README.html" data-href-zh="/docs/server/README.zh.html">Server &amp; Ops</a><a class="tablink" href="/docs/reference/README.html" data-title-zh="参考" data-href-en="/docs/reference/README.html" data-href-zh="/docs/reference/README.zh.html">Reference</a><a class="tablink" href="/docs/reference/design/README.html" data-title-zh="设计" data-href-en="/docs/reference/design/README.html" data-href-zh="/docs/reference/design/README.zh.html">Design</a></nav>
+
+<div class="scrim"></div>
+<div class="layout">
+  <nav class="sidebar" aria-label="Documentation">
+    <input class="nav-filter" type="text" data-i18n-ph="nav_filter"
+           aria-label="Filter docs" placeholder="Filter docs…" autocomplete="off" spellcheck="false">
+    <div class="nav-tree"><div class="nav-sec"><div class="nav-sec-title" data-title-zh="概览">Overview</div><a class="navlink" href="/docs/capabilities/README.html" data-title-zh="概览" data-href-en="/docs/capabilities/README.html" data-href-zh="/docs/capabilities/README.zh.html">Overview</a>
+<a class="navlink" href="/docs/capabilities/applications.html" data-title-zh="应用" data-href-en="/docs/capabilities/applications.html" data-href-zh="/docs/capabilities/applications.zh.html">Applications</a>
+<a class="navlink" href="/docs/capabilities/framework-control.html" data-title-zh="框架工具" data-href-en="/docs/capabilities/framework-control.html" data-href-zh="/docs/capabilities/framework-control.zh.html">Framework tools</a></div>
+<div class="nav-sec"><div class="nav-sec-title">Agentic Programming</div><a class="navlink" href="/docs/capabilities/agentic-programming/README.html" data-title-zh="指南" data-href-en="/docs/capabilities/agentic-programming/README.html" data-href-zh="/docs/capabilities/agentic-programming/README.zh.html">Guide</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/philosophy.html" data-title-zh="设计原则" data-href-en="/docs/capabilities/agentic-programming/philosophy.html" data-href-zh="/docs/capabilities/agentic-programming/philosophy.zh.html">Philosophy</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/embedding-in-your-own-stack.html" data-title-zh="框架嵌入" data-href-en="/docs/capabilities/agentic-programming/embedding-in-your-own-stack.html" data-href-zh="/docs/capabilities/agentic-programming/embedding-in-your-own-stack.zh.html">Framework embedding</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="编写函数">Writing functions</div><a class="navlink" href="/docs/capabilities/agentic-programming/writing-functions/pure-python.html" data-title-zh="Python 函数" data-href-en="/docs/capabilities/agentic-programming/writing-functions/pure-python.html" data-href-zh="/docs/capabilities/agentic-programming/writing-functions/pure-python.zh.html">Python functions</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/writing-functions/agent.html" data-title-zh="智能体函数" data-href-en="/docs/capabilities/agentic-programming/writing-functions/agent.html" data-href-zh="/docs/capabilities/agentic-programming/writing-functions/agent.zh.html">Agentic functions</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/writing-functions/function-metadata.html" data-title-zh="函数元数据" data-href-en="/docs/capabilities/agentic-programming/writing-functions/function-metadata.html" data-href-zh="/docs/capabilities/agentic-programming/writing-functions/function-metadata.zh.html">Function metadata</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="选择下一步">Choosing the next step</div><a class="navlink" href="/docs/capabilities/agentic-programming/choosing-the-next-step/tool-calling.html" data-title-zh="工具循环" data-href-en="/docs/capabilities/agentic-programming/choosing-the-next-step/tool-calling.html" data-href-zh="/docs/capabilities/agentic-programming/choosing-the-next-step/tool-calling.zh.html">Tool-call loops</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/choosing-the-next-step/fixed-order-calls.html" data-title-zh="顺序调用" data-href-en="/docs/capabilities/agentic-programming/choosing-the-next-step/fixed-order-calls.html" data-href-zh="/docs/capabilities/agentic-programming/choosing-the-next-step/fixed-order-calls.zh.html">Fixed-order calls</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/choosing-the-next-step/next-step-decision.html" data-title-zh="步骤选择" data-href-en="/docs/capabilities/agentic-programming/choosing-the-next-step/next-step-decision.html" data-href-zh="/docs/capabilities/agentic-programming/choosing-the-next-step/next-step-decision.zh.html">Next-step selection</a></div>
+<div class="nav-sec"><div class="nav-sec-title">Agentic Workflows</div><a class="navlink" href="/docs/capabilities/workflows/README.html" data-title-zh="工作流" data-href-en="/docs/capabilities/workflows/README.html" data-href-zh="/docs/capabilities/workflows/README.zh.html">Workflows</a>
+<a class="navlink" href="/docs/capabilities/workflows/authoring.html" data-title-zh="工作流编写" data-href-en="/docs/capabilities/workflows/authoring.html" data-href-zh="/docs/capabilities/workflows/authoring.zh.html">Workflow authoring</a>
+<a class="navlink" href="/docs/capabilities/workflows/recording.html" data-title-zh="录制 Workflow" data-href-en="/docs/capabilities/workflows/recording.html" data-href-zh="/docs/capabilities/workflows/recording.zh.html">Record a workflow</a>
+<a class="navlink" href="/docs/capabilities/workflows/reports.html" data-title-zh="每周报告" data-href-en="/docs/capabilities/workflows/reports.html" data-href-zh="/docs/capabilities/workflows/reports.zh.html">Weekly reports</a></div>
+<div class="nav-sec"><div class="nav-sec-title">Agents</div><a class="navlink" href="/docs/capabilities/agents.html" data-title-zh="配置 Agent" data-href-en="/docs/capabilities/agents.html" data-href-zh="/docs/capabilities/agents.zh.html">Configure an Agent</a>
+<a class="navlink" href="/docs/capabilities/agents-md.html" data-title-zh="用 AGENTS.md 写指令" data-href-en="/docs/capabilities/agents-md.html" data-href-zh="/docs/capabilities/agents-md.zh.html">Instructions with AGENTS.md</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="常驻 Agent">Always-on Agents</div><a class="navlink" href="/docs/capabilities/always-on-agents.html" data-title-zh="常驻 Agent" data-href-en="/docs/capabilities/always-on-agents.html" data-href-zh="/docs/capabilities/always-on-agents.zh.html">Always-on Agents</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="提醒">Reminders</div><a class="navlink" href="/docs/capabilities/reminders.html" data-title-zh="提醒" data-href-en="/docs/capabilities/reminders.html" data-href-zh="/docs/capabilities/reminders.zh.html">Reminders</a>
+<a class="navlink" href="/docs/capabilities/event-triggers.html" data-title-zh="有事发生时运行任务" data-href-en="/docs/capabilities/event-triggers.html" data-href-zh="/docs/capabilities/event-triggers.zh.html">Run a task when something happens</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="记忆">Memory</div><a class="navlink" href="/docs/capabilities/memory.html" data-title-zh="记忆管理" data-href-en="/docs/capabilities/memory.html" data-href-zh="/docs/capabilities/memory.zh.html">Memory management</a>
+<a class="navlink" href="/docs/capabilities/memory-settings.html" data-title-zh="调整记忆" data-href-en="/docs/capabilities/memory-settings.html" data-href-zh="/docs/capabilities/memory-settings.zh.html">Tune Memory</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="运行环境">Environments</div><a class="navlink" href="/docs/capabilities/environments.html" data-title-zh="在另一台机器上运行会话" data-href-en="/docs/capabilities/environments.html" data-href-zh="/docs/capabilities/environments.zh.html">Run conversations on another machine</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="会话目标">Session goals</div><a class="navlink" href="/docs/capabilities/goal.html" data-title-zh="目标" data-href-en="/docs/capabilities/goal.html" data-href-zh="/docs/capabilities/goal.zh.html">Goals</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="操控电脑">Computer use</div><a class="navlink" href="/docs/capabilities/computer-use.html" data-title-zh="操控电脑" data-href-en="/docs/capabilities/computer-use.html" data-href-zh="/docs/capabilities/computer-use.zh.html">Computer use</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="会议">Meetings</div><a class="navlink" href="/docs/capabilities/meetings.html" data-title-zh="会议" data-href-en="/docs/capabilities/meetings.html" data-href-zh="/docs/capabilities/meetings.zh.html">Meetings</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="扩展">Extending</div><a class="navlink" href="/docs/capabilities/installing-programs.html" data-title-zh="安装程序" data-href-en="/docs/capabilities/installing-programs.html" data-href-zh="/docs/capabilities/installing-programs.zh.html">Installing programs</a>
+<a class="navlink" href="/docs/capabilities/skills.html" data-title-zh="技能" data-href-en="/docs/capabilities/skills.html" data-href-zh="/docs/capabilities/skills.zh.html">Skills</a>
+<a class="navlink active" href="/docs/capabilities/plugins.html" data-title-zh="插件" data-href-en="/docs/capabilities/plugins.html" data-href-zh="/docs/capabilities/plugins.zh.html">Plugins</a>
+<a class="navlink" href="/docs/capabilities/mcp.html" data-title-zh="MCP" data-href-en="/docs/capabilities/mcp.html" data-href-zh="/docs/capabilities/mcp.zh.html">MCP</a>
+<a class="navlink" href="/docs/capabilities/tools.html" data-title-zh="内置工具" data-href-en="/docs/capabilities/tools.html" data-href-zh="/docs/capabilities/tools.zh.html">Built-in tools</a>
+<a class="navlink" href="/docs/capabilities/lsp.html" data-title-zh="语言服务器" data-href-en="/docs/capabilities/lsp.html" data-href-zh="/docs/capabilities/lsp.zh.html">Language servers</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="概览">Overview</div><a class="navlink" href="/docs/capabilities/commit-push-pr.html" data-title-zh="提交与拉取请求" data-href-en="/docs/capabilities/commit-push-pr.html" data-href-zh="/docs/capabilities/commit-push-pr.zh.html">Commits and PRs</a>
+<a class="navlink" href="/docs/capabilities/permissions.html" data-title-zh="工具权限" data-href-en="/docs/capabilities/permissions.html" data-href-zh="/docs/capabilities/permissions.zh.html">Tool permissions</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="指南">Guide</div><a class="navlink" href="/docs/capabilities/agentic-programming/self-programming-ai-agents.html" data-title-zh="自编程智能体" data-href-en="/docs/capabilities/agentic-programming/self-programming-ai-agents.html" data-href-zh="/docs/capabilities/agentic-programming/self-programming-ai-agents.zh.html">Self-programming agents</a></div></div>
+  </nav>
+  <main class="content"><button class="fs-toggle" aria-label="Fullscreen" title="Fullscreen (Esc to exit)"><svg class="ic-expand" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.2 2H2v4.2M9.8 2H14v4.2M6.2 14H2V9.8M9.8 14H14V9.8"/></svg><svg class="ic-collapse" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6.2h4.2V2M14 6.2H9.8V2M2 9.8h4.2V14M14 9.8H9.8V14"/></svg></button><article><nav class="breadcrumb"><span class="bc-seg" data-title-zh="能力">Capabilities</span> <span class='bc-sep'>›</span> <span class="bc-seg" data-title-zh="扩展">Extending</span> <span class='bc-sep'>›</span> <span class="bc-seg bc-current" data-title-zh="插件">Plugins</span></nav><h1 id="plugins">Plugins<a class="header-anchor" href="#plugins">#</a></h1>
+<p>A plugin is a declarative package: a manifest that names skills, slash commands, agents, hooks, MCP servers and model provider directories, in the format Claude Code, Codex, OpenCode or Hermes already use. OpenProgram reads the manifest and mounts those contents itself; no plugin code runs inside OpenProgram. Code that adds tools or a screen of its own is an <a href="/docs/capabilities/applications.html">application</a>, not a plugin. This page covers installing and managing plugins, and what a plugin may contain.</p>
+<h2 id="install-and-manage">Install and manage<a class="header-anchor" href="#install-and-manage">#</a></h2>
+<pre><code class="language-bash">openprogram<span class="w"> </span>plugins<span class="w"> </span>list<span class="w">                 </span><span class="c1"># installed plugins</span>
+openprogram<span class="w"> </span>plugins<span class="w"> </span>search<span class="w"> </span>&lt;query&gt;<span class="w">       </span><span class="c1"># search the configured marketplaces</span>
+openprogram<span class="w"> </span>plugins<span class="w"> </span>install<span class="w"> </span>git<span class="w"> </span>&lt;url&gt;<span class="w"> </span>--ref<span class="w"> </span>v1.2<span class="w">   </span><span class="c1"># source is one of npm / git / path</span>
+openprogram<span class="w"> </span>plugins<span class="w"> </span>install<span class="w"> </span>npm<span class="w"> </span>&lt;package&gt;
+openprogram<span class="w"> </span>plugins<span class="w"> </span>install<span class="w"> </span>path<span class="w"> </span>/abs/path/to/plugin
+openprogram<span class="w"> </span>plugins<span class="w"> </span>update<span class="w"> </span>--all<span class="w">         </span><span class="c1"># reinstall-upgrade npm plugins (or pass one name)</span>
+openprogram<span class="w"> </span>plugins<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>&lt;name&gt;
+openprogram<span class="w"> </span>plugins<span class="w"> </span>disable<span class="w"> </span>&lt;name&gt;
+openprogram<span class="w"> </span>plugins<span class="w"> </span>reload<span class="w"> </span>&lt;name&gt;<span class="w">         </span><span class="c1"># re-read its manifest and files after editing</span>
+openprogram<span class="w"> </span>plugins<span class="w"> </span>uninstall<span class="w"> </span>&lt;name&gt;<span class="w">       </span><span class="c1"># for a linked local plugin, removes only the link</span>
+openprogram<span class="w"> </span>plugins<span class="w"> </span>inspect<span class="w">               </span><span class="c1"># what a plugin may contain, and every entry&#39;s exposure tier</span>
+</code></pre>
+<p>Git clones land under <code>~/.openprogram/plugins/</code>, npm packages under its <code>node_modules/</code>, and a local path is linked there so edits apply on <code>reload</code>. Trust levels (<code>verified</code> / <code>community</code> / <code>untrusted</code>; unlisted plugins default to <code>untrusted</code>, and a local <code>path</code> install is trusted as <code>community</code>) persist in <code>~/.openprogram/plugin-trust.json</code>; hooks and MCP servers run commands, so an <code>untrusted</code> plugin is not enabled. The web UI exposes the same management API through the plugin routes.</p>
+<h2 id="what-a-plugin-may-contain">What a plugin may contain<a class="header-anchor" href="#what-a-plugin-may-contain">#</a></h2>
+<p>A directory carrying one of these manifests, resolved in this order:</p>
+<ol>
+<li><code>.claude-plugin/plugin.json</code> (Claude Code), <code>.codex-plugin/plugin.json</code> (Codex) or <code>plugin.json</code> at the root</li>
+<li><code>[tool.openprogram.plugin]</code> in <code>pyproject.toml</code></li>
+<li>the <code>openprogram</code>, <code>opencode</code> or <code>hermes</code> field of <code>package.json</code></li>
+<li><code>plugin.yaml</code> / <code>plugin.yml</code> (Hermes)</li>
+</ol>
+<p>Manifest fields are <code>name</code>, <code>version</code>, <code>description</code>, <code>trust</code>, <code>entrypoints</code>, <code>options</code> and <code>requires</code>; the contribution keys may also sit at the top level, as Claude Code writes them. <code>requires</code> declares inter-plugin dependencies: the loader enables plugins in topological order and reports <code>missing dependencies: ...</code> when one is absent.</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Contents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>skills</code></td>
+<td>a directory of <code>SKILL.md</code> skills</td>
+</tr>
+<tr>
+<td><code>commands</code></td>
+<td>slash commands: <code>{name: {description, prompt}}</code>, or a directory of <code>.md</code> files with front matter</td>
+</tr>
+<tr>
+<td><code>agents</code></td>
+<td>a list of <code>{name, description, prompt, tools}</code>, or a directory of <code>.md</code> agents; created as <code>&lt;plugin&gt;-&lt;name&gt;</code> and kept when the plugin is disabled, because deleting an agent would delete its sessions</td>
+</tr>
+<tr>
+<td><code>hooks</code></td>
+<td>shell commands run on events, inline or as a <code>.json</code> path (below)</td>
+</tr>
+<tr>
+<td><code>mcpServers</code></td>
+<td><code>{name: {command, args, env} | {url}}</code> inline, or a <code>.mcp.json</code> path; started for as long as the plugin is enabled</td>
+</tr>
+<tr>
+<td><code>providers</code></td>
+<td>a directory whose children each hold a <code>provider.json</code></td>
+</tr>
+</tbody>
+</table>
+<p>Everything a plugin adds is mounted through one context owned by <code>plugin:&lt;name&gt;</code>; <code>disable</code> and <code>reload</code> remove all of it.</p>
+<h3 id="hooks">Hooks<a class="header-anchor" href="#hooks">#</a></h3>
+<p><code>hooks</code> takes either OpenProgram's shape, the same as the <code>hooks</code> key of <code>config.json</code>:</p>
+<pre><code class="language-json"><span class="p">{</span><span class="nt">&quot;tool.before&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="nt">&quot;command&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;${CLAUDE_PLUGIN_ROOT}/check.sh&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;timeout&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">}]}</span>
+</code></pre>
+<p>or Claude Code's <code>hooks/hooks.json</code>:</p>
+<pre><code class="language-json"><span class="p">{</span><span class="nt">&quot;hooks&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;PreToolUse&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="nt">&quot;matcher&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bash|write&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;hooks&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">  </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;command&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;command&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;${CLAUDE_PLUGIN_ROOT}/check.sh&quot;</span><span class="p">}]}]}}</span>
+</code></pre>
+<p>Claude Code's events map to OpenProgram's: <code>PreToolUse</code> → <code>tool.before</code>, <code>PostToolUse</code> → <code>tool.after</code>, <code>UserPromptSubmit</code> → <code>chat.before_send</code>, <code>Stop</code> → <code>turn.stop</code>, <code>SessionStart</code> → <code>session.start</code>. <code>matcher</code> is a regular expression over the tool name. In either shape <code>${CLAUDE_PLUGIN_ROOT}</code> is replaced by the plugin directory; commands run in the worker's working directory. The command receives the event as JSON on stdin. On a gate event (<code>tool.before</code>, <code>turn.stop</code>) exit code 2 denies, with stderr as the reason; any other exit code allows. <code>openprogram plugins inspect</code> lists every event.</p>
+<h3 id="what-is-refused">What is refused<a class="header-anchor" href="#what-is-refused">#</a></h3>
+<p>A manifest that names code installs and enables nowhere: <code>install</code> refuses it (a git clone or npm package is removed again), and one placed in the plugins directory by hand is listed with the error and never loads. The refused keys are <code>python</code>, <code>module</code>, <code>setup</code>, <code>main</code> and <code>tools</code> (Python or JavaScript code), <code>client</code>, <code>web</code> and <code>sidebar</code> (a screen of its own), <code>hooks</code> written as <code>module:name</code> (a Python handler mapping), and a Hermes <code>plugin.yaml</code> beside an <code>__init__.py</code>. pip is not a plugin source. The refusal names the keys and says what to do instead: add an <code>application.json</code> to the directory and run <code>openprogram programs install &lt;dir&gt;</code> — see <a href="/docs/capabilities/applications.html">Applications</a>.</p>
+<h2 id="write-a-plugin">Write a plugin<a class="header-anchor" href="#write-a-plugin">#</a></h2>
+<pre><code>house-style/
+  .claude-plugin/plugin.json
+  skills/review/SKILL.md
+  commands/summarize.md
+  hooks/hooks.json
+</code></pre>
+<pre><code class="language-json"><span class="p">{</span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;house-style&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;skills&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;./skills&quot;</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;commands&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;./commands&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;hooks&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;./hooks/hooks.json&quot;</span><span class="p">}</span>
+</code></pre>
+<pre><code class="language-bash">openprogram<span class="w"> </span>plugins<span class="w"> </span>install<span class="w"> </span>path<span class="w"> </span>/abs/path/to/house-style<span class="w">   </span><span class="c1"># links the directory</span>
+openprogram<span class="w"> </span>plugins<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>house-style
+openprogram<span class="w"> </span>plugins<span class="w"> </span>reload<span class="w"> </span>house-style<span class="w">                      </span><span class="c1"># after editing its files</span>
+</code></pre>
+<h3 id="let-an-agent-write-it">Let an agent write it<a class="header-anchor" href="#let-an-agent-write-it">#</a></h3>
+<p>Agents have a <code>plugin</code> tool (approval required, not offered on chat channels or in plan mode). <code>guide</code> returns the authoring guide, generated from the running build; after writing the files, <code>install</code> with the directory's absolute path links, trusts and enables the plugin in one step, and <code>reload</code> applies later edits. A plugin that names code is refused with the same message as the CLI.</p>
+<div class="page-updated"><span data-i18n="updated">Last updated</span> · 2026-11-01</div><div class="prevnext"><a class="pn-link pn-prev" href="/docs/capabilities/skills.html" data-href-en="/docs/capabilities/skills.html" data-href-zh="/docs/capabilities/skills.zh.html"><span class="pn-dir" data-i18n="prev">Previous</span><span class="pn-title" data-title-zh="技能">Skills</span></a><a class="pn-link pn-next" href="/docs/capabilities/mcp.html" data-href-en="/docs/capabilities/mcp.html" data-href-zh="/docs/capabilities/mcp.zh.html"><span class="pn-dir" data-i18n="next">Next</span><span class="pn-title" data-title-zh="MCP">MCP</span></a></div></article></main>
+  <aside class="toc"><div class="toc-title" data-i18n="on_this_page">On this page</div>
+<ul class="toc-list">
+<li>
+<a class="lvl-2" href="#install-and-manage">Install and manage</a>
+</li>
+<li>
+<details class="toc-disclosure" open=""><summary>
+<a class="lvl-2" href="#what-a-plugin-may-contain">What a plugin may contain</a>
+</summary>
+<ul class="toc-list">
+<li>
+<a class="lvl-3" href="#hooks">Hooks</a>
+</li>
+<li>
+<a class="lvl-3" href="#what-is-refused">What is refused</a>
+</li>
+</ul>
+</details>
+</li>
+<li>
+<details class="toc-disclosure" open=""><summary>
+<a class="lvl-2" href="#write-a-plugin">Write a plugin</a>
+</summary>
+<ul class="toc-list">
+<li>
+<a class="lvl-3" href="#let-an-agent-write-it">Let an agent write it</a>
+</li>
+</ul>
+</details>
+</li>
+</ul></aside>
+</div>
+
+<div class="search-overlay">
+  <div class="search-box">
+    <input type="text" data-i18n-ph="search_ph" placeholder="Search titles or text…" autocomplete="off" spellcheck="false">
+    <div class="search-results"></div>
+  </div>
+</div>
+
+<script src="/docs/assets/site.js?v=6520ba46"></script>
+</body>
+</html>

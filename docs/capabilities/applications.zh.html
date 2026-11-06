@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh" data-base="/docs/" data-page-lang="zh" data-build="1793956776" data-alt-lang-url="/docs/capabilities/applications.html">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>应用 · OpenProgram Docs</title>
+<meta name="description" content="从新标签页打开应用 # 侧栏 Applications（应用） 页面把内置和已安装的应用列在同一张表里：图标、标题、版本和作用范围，以及一句话说明。用 全部 、 内置 、 已安装 筛选。应用有自己的窗口时，该行有 打开 ；每行都有启用开关和 ⋯ 菜单： 在能力中显示 、 从新标签页隐藏 （或 在新标签页显示 ）、">
+<link rel="canonical" href="https://openprogram.io/docs/capabilities/applications.zh.html">
+<link rel="alternate" type="text/markdown" href="https://openprogram.io/docs/capabilities/applications.zh.html.md">
+<link rel="describedby" href="https://openprogram.io/llms.txt">
+<link rel="alternate" hreflang="en" href="https://openprogram.io/docs/capabilities/applications.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://openprogram.io/docs/capabilities/applications.zh.html">
+<link rel="alternate" hreflang="x-default" href="https://openprogram.io/docs/capabilities/applications.html">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"OpenProgram Docs","item":"https://openprogram.io/docs/"},{"@type":"ListItem","position":2,"name":"应用"}]}</script>
+<meta property="og:type" content="article">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:site_name" content="OpenProgram">
+<meta property="og:url" content="https://openprogram.io/docs/capabilities/applications.zh.html">
+<meta property="og:title" content="应用 · OpenProgram Docs">
+<meta property="og:description" content="从新标签页打开应用 # 侧栏 Applications（应用） 页面把内置和已安装的应用列在同一张表里：图标、标题、版本和作用范围，以及一句话说明。用 全部 、 内置 、 已安装 筛选。应用有自己的窗口时，该行有 打开 ；每行都有启用开关和 ⋯ 菜单： 在能力中显示 、 从新标签页隐藏 （或 在新标签页显示 ）、">
+<meta property="og:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:secure_url" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="应用 · OpenProgram Docs">
+<meta name="twitter:description" content="从新标签页打开应用 # 侧栏 Applications（应用） 页面把内置和已安装的应用列在同一张表里：图标、标题、版本和作用范围，以及一句话说明。用 全部 、 内置 、 已安装 筛选。应用有自己的窗口时，该行有 打开 ；每行都有启用开关和 ⋯ 菜单： 在能力中显示 、 从新标签页隐藏 （或 在新标签页显示 ）、">
+<meta name="twitter:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta name="twitter:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/docs/assets/mark.svg">
+<link rel="stylesheet" href="/docs/assets/site.css?v=6520ba46">
+<link rel="stylesheet" href="/docs/assets/pygments-light.css" media="(prefers-color-scheme: light)" id="pyg-light">
+<link rel="stylesheet" href="/docs/assets/pygments-dark.css" media="(prefers-color-scheme: dark)" id="pyg-dark">
+<script src="/docs/assets/theme.js?v=6520ba46"></script>
+
+</head>
+<body>
+<header class="topbar">
+  <button class="icon hamburger" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2.5 4.5h11M2.5 8h11M2.5 11.5h11"/></svg></button>
+  <a class="brand" href="/docs/index.html"><img class="mark" src="/docs/assets/mark.svg" alt="">OpenProgram Docs</a>
+  <div class="spacer"></div>
+  <button class="search-trigger" aria-label="Search">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14"/></svg><span class="label" data-i18n="search">Search docs</span><kbd>⌘K</kbd>
+  </button>
+  <div class="lang-wrap">
+    <button class="icon lang-trigger" id="lang-toggle" aria-haspopup="true" aria-expanded="false" aria-label="Language">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="6.2"/><path d="M1.8 8h12.4" stroke-linecap="round"/><ellipse cx="8" cy="8" rx="2.8" ry="6.2"/></svg><span class="lang-label">EN</span><svg class="chev" width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+    </button>
+    <div class="lang-menu" id="lang-menu" role="menu">
+      <button class="lang-opt" data-lang="en" role="menuitem"><span>English</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="lang-opt" data-lang="zh" role="menuitem"><span>简体中文</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+  <div class="theme-wrap">
+    <button class="icon" id="theme-toggle" aria-label="Theme" aria-haspopup="menu" aria-controls="theme-menu" aria-expanded="false"><svg class="ic-system" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="2.5" width="13" height="9" rx="1.5"/><path d="M8 11.5V14M5.5 14h5"/></svg><svg class="ic-moon" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M13.5 9.5A6 6 0 1 1 6.5 2.5a5 5 0 0 0 7 7z"/></svg><svg class="ic-sun" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="3.2"/><path d="M8 1.2v1.8M8 13v1.8M1.2 8H3M13 8h1.8M3.2 3.2l1.3 1.3M11.5 11.5l1.3 1.3M12.8 3.2l-1.3 1.3M4.5 11.5l-1.3 1.3"/></svg></button>
+    <div class="theme-menu" id="theme-menu" role="menu" aria-labelledby="theme-toggle">
+      <button class="theme-opt" data-theme-choice="system" role="menuitemradio" aria-checked="true"><span>Follow system</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="light" role="menuitemradio" aria-checked="false"><span>Light</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="dark" role="menuitemradio" aria-checked="false"><span>Dark</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+</header>
+<nav class="tabbar"><a class="tablink" href="/docs/README.html" data-title-zh="开始使用" data-href-en="/docs/README.html" data-href-zh="/docs/README.zh.html">Get started</a><a class="tablink" href="/docs/install/install.html" data-title-zh="安装" data-href-en="/docs/install/install.html" data-href-zh="/docs/install/install.zh.html">Install</a><a class="tablink active" href="/docs/capabilities/README.html" data-title-zh="能力" data-href-en="/docs/capabilities/README.html" data-href-zh="/docs/capabilities/README.zh.html">Capabilities</a><a class="tablink" href="/docs/interfaces/README.html" data-title-zh="界面" data-href-en="/docs/interfaces/README.html" data-href-zh="/docs/interfaces/README.zh.html">Interfaces</a><a class="tablink" href="/docs/models/README.html" data-title-zh="模型" data-href-en="/docs/models/README.html" data-href-zh="/docs/models/README.zh.html">Models</a><a class="tablink" href="/docs/integrations/anthropic.html" data-title-zh="集成" data-href-en="/docs/integrations/anthropic.html" data-href-zh="/docs/integrations/anthropic.zh.html">Integrations</a><a class="tablink" href="/docs/server/README.html" data-title-zh="服务与运维" data-href-en="/docs/server/README.html" data-href-zh="/docs/server/README.zh.html">Server &amp; Ops</a><a class="tablink" href="/docs/reference/README.html" data-title-zh="参考" data-href-en="/docs/reference/README.html" data-href-zh="/docs/reference/README.zh.html">Reference</a><a class="tablink" href="/docs/reference/design/README.html" data-title-zh="设计" data-href-en="/docs/reference/design/README.html" data-href-zh="/docs/reference/design/README.zh.html">Design</a></nav>
+
+<div class="scrim"></div>
+<div class="layout">
+  <nav class="sidebar" aria-label="Documentation">
+    <input class="nav-filter" type="text" data-i18n-ph="nav_filter"
+           aria-label="Filter docs" placeholder="Filter docs…" autocomplete="off" spellcheck="false">
+    <div class="nav-tree"><div class="nav-sec"><div class="nav-sec-title" data-title-zh="概览">Overview</div><a class="navlink" href="/docs/capabilities/README.html" data-title-zh="概览" data-href-en="/docs/capabilities/README.html" data-href-zh="/docs/capabilities/README.zh.html">Overview</a>
+<a class="navlink active" href="/docs/capabilities/applications.html" data-title-zh="应用" data-href-en="/docs/capabilities/applications.html" data-href-zh="/docs/capabilities/applications.zh.html">Applications</a>
+<a class="navlink" href="/docs/capabilities/framework-control.html" data-title-zh="框架工具" data-href-en="/docs/capabilities/framework-control.html" data-href-zh="/docs/capabilities/framework-control.zh.html">Framework tools</a></div>
+<div class="nav-sec"><div class="nav-sec-title">Agentic Programming</div><a class="navlink" href="/docs/capabilities/agentic-programming/README.html" data-title-zh="指南" data-href-en="/docs/capabilities/agentic-programming/README.html" data-href-zh="/docs/capabilities/agentic-programming/README.zh.html">Guide</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/philosophy.html" data-title-zh="设计原则" data-href-en="/docs/capabilities/agentic-programming/philosophy.html" data-href-zh="/docs/capabilities/agentic-programming/philosophy.zh.html">Philosophy</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/embedding-in-your-own-stack.html" data-title-zh="框架嵌入" data-href-en="/docs/capabilities/agentic-programming/embedding-in-your-own-stack.html" data-href-zh="/docs/capabilities/agentic-programming/embedding-in-your-own-stack.zh.html">Framework embedding</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="编写函数">Writing functions</div><a class="navlink" href="/docs/capabilities/agentic-programming/writing-functions/pure-python.html" data-title-zh="Python 函数" data-href-en="/docs/capabilities/agentic-programming/writing-functions/pure-python.html" data-href-zh="/docs/capabilities/agentic-programming/writing-functions/pure-python.zh.html">Python functions</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/writing-functions/agent.html" data-title-zh="智能体函数" data-href-en="/docs/capabilities/agentic-programming/writing-functions/agent.html" data-href-zh="/docs/capabilities/agentic-programming/writing-functions/agent.zh.html">Agentic functions</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/writing-functions/function-metadata.html" data-title-zh="函数元数据" data-href-en="/docs/capabilities/agentic-programming/writing-functions/function-metadata.html" data-href-zh="/docs/capabilities/agentic-programming/writing-functions/function-metadata.zh.html">Function metadata</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="选择下一步">Choosing the next step</div><a class="navlink" href="/docs/capabilities/agentic-programming/choosing-the-next-step/tool-calling.html" data-title-zh="工具循环" data-href-en="/docs/capabilities/agentic-programming/choosing-the-next-step/tool-calling.html" data-href-zh="/docs/capabilities/agentic-programming/choosing-the-next-step/tool-calling.zh.html">Tool-call loops</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/choosing-the-next-step/fixed-order-calls.html" data-title-zh="顺序调用" data-href-en="/docs/capabilities/agentic-programming/choosing-the-next-step/fixed-order-calls.html" data-href-zh="/docs/capabilities/agentic-programming/choosing-the-next-step/fixed-order-calls.zh.html">Fixed-order calls</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/choosing-the-next-step/next-step-decision.html" data-title-zh="步骤选择" data-href-en="/docs/capabilities/agentic-programming/choosing-the-next-step/next-step-decision.html" data-href-zh="/docs/capabilities/agentic-programming/choosing-the-next-step/next-step-decision.zh.html">Next-step selection</a></div>
+<div class="nav-sec"><div class="nav-sec-title">Agentic Workflows</div><a class="navlink" href="/docs/capabilities/workflows/README.html" data-title-zh="工作流" data-href-en="/docs/capabilities/workflows/README.html" data-href-zh="/docs/capabilities/workflows/README.zh.html">Workflows</a>
+<a class="navlink" href="/docs/capabilities/workflows/authoring.html" data-title-zh="工作流编写" data-href-en="/docs/capabilities/workflows/authoring.html" data-href-zh="/docs/capabilities/workflows/authoring.zh.html">Workflow authoring</a>
+<a class="navlink" href="/docs/capabilities/workflows/recording.html" data-title-zh="录制 Workflow" data-href-en="/docs/capabilities/workflows/recording.html" data-href-zh="/docs/capabilities/workflows/recording.zh.html">Record a workflow</a>
+<a class="navlink" href="/docs/capabilities/workflows/reports.html" data-title-zh="每周报告" data-href-en="/docs/capabilities/workflows/reports.html" data-href-zh="/docs/capabilities/workflows/reports.zh.html">Weekly reports</a></div>
+<div class="nav-sec"><div class="nav-sec-title">Agents</div><a class="navlink" href="/docs/capabilities/agents.html" data-title-zh="配置 Agent" data-href-en="/docs/capabilities/agents.html" data-href-zh="/docs/capabilities/agents.zh.html">Configure an Agent</a>
+<a class="navlink" href="/docs/capabilities/agents-md.html" data-title-zh="用 AGENTS.md 写指令" data-href-en="/docs/capabilities/agents-md.html" data-href-zh="/docs/capabilities/agents-md.zh.html">Instructions with AGENTS.md</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="常驻 Agent">Always-on Agents</div><a class="navlink" href="/docs/capabilities/always-on-agents.html" data-title-zh="常驻 Agent" data-href-en="/docs/capabilities/always-on-agents.html" data-href-zh="/docs/capabilities/always-on-agents.zh.html">Always-on Agents</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="提醒">Reminders</div><a class="navlink" href="/docs/capabilities/reminders.html" data-title-zh="提醒" data-href-en="/docs/capabilities/reminders.html" data-href-zh="/docs/capabilities/reminders.zh.html">Reminders</a>
+<a class="navlink" href="/docs/capabilities/event-triggers.html" data-title-zh="有事发生时运行任务" data-href-en="/docs/capabilities/event-triggers.html" data-href-zh="/docs/capabilities/event-triggers.zh.html">Run a task when something happens</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="记忆">Memory</div><a class="navlink" href="/docs/capabilities/memory.html" data-title-zh="记忆管理" data-href-en="/docs/capabilities/memory.html" data-href-zh="/docs/capabilities/memory.zh.html">Memory management</a>
+<a class="navlink" href="/docs/capabilities/memory-settings.html" data-title-zh="调整记忆" data-href-en="/docs/capabilities/memory-settings.html" data-href-zh="/docs/capabilities/memory-settings.zh.html">Tune Memory</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="运行环境">Environments</div><a class="navlink" href="/docs/capabilities/environments.html" data-title-zh="在另一台机器上运行会话" data-href-en="/docs/capabilities/environments.html" data-href-zh="/docs/capabilities/environments.zh.html">Run conversations on another machine</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="会话目标">Session goals</div><a class="navlink" href="/docs/capabilities/goal.html" data-title-zh="目标" data-href-en="/docs/capabilities/goal.html" data-href-zh="/docs/capabilities/goal.zh.html">Goals</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="操控电脑">Computer use</div><a class="navlink" href="/docs/capabilities/computer-use.html" data-title-zh="操控电脑" data-href-en="/docs/capabilities/computer-use.html" data-href-zh="/docs/capabilities/computer-use.zh.html">Computer use</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="会议">Meetings</div><a class="navlink" href="/docs/capabilities/meetings.html" data-title-zh="会议" data-href-en="/docs/capabilities/meetings.html" data-href-zh="/docs/capabilities/meetings.zh.html">Meetings</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="扩展">Extending</div><a class="navlink" href="/docs/capabilities/installing-programs.html" data-title-zh="安装程序" data-href-en="/docs/capabilities/installing-programs.html" data-href-zh="/docs/capabilities/installing-programs.zh.html">Installing programs</a>
+<a class="navlink" href="/docs/capabilities/skills.html" data-title-zh="技能" data-href-en="/docs/capabilities/skills.html" data-href-zh="/docs/capabilities/skills.zh.html">Skills</a>
+<a class="navlink" href="/docs/capabilities/plugins.html" data-title-zh="插件" data-href-en="/docs/capabilities/plugins.html" data-href-zh="/docs/capabilities/plugins.zh.html">Plugins</a>
+<a class="navlink" href="/docs/capabilities/mcp.html" data-title-zh="MCP" data-href-en="/docs/capabilities/mcp.html" data-href-zh="/docs/capabilities/mcp.zh.html">MCP</a>
+<a class="navlink" href="/docs/capabilities/tools.html" data-title-zh="内置工具" data-href-en="/docs/capabilities/tools.html" data-href-zh="/docs/capabilities/tools.zh.html">Built-in tools</a>
+<a class="navlink" href="/docs/capabilities/lsp.html" data-title-zh="语言服务器" data-href-en="/docs/capabilities/lsp.html" data-href-zh="/docs/capabilities/lsp.zh.html">Language servers</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="概览">Overview</div><a class="navlink" href="/docs/capabilities/commit-push-pr.html" data-title-zh="提交与拉取请求" data-href-en="/docs/capabilities/commit-push-pr.html" data-href-zh="/docs/capabilities/commit-push-pr.zh.html">Commits and PRs</a>
+<a class="navlink" href="/docs/capabilities/permissions.html" data-title-zh="工具权限" data-href-en="/docs/capabilities/permissions.html" data-href-zh="/docs/capabilities/permissions.zh.html">Tool permissions</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="指南">Guide</div><a class="navlink" href="/docs/capabilities/agentic-programming/self-programming-ai-agents.html" data-title-zh="自编程智能体" data-href-en="/docs/capabilities/agentic-programming/self-programming-ai-agents.html" data-href-zh="/docs/capabilities/agentic-programming/self-programming-ai-agents.zh.html">Self-programming agents</a></div></div>
+  </nav>
+  <main class="content"><button class="fs-toggle" aria-label="Fullscreen" title="Fullscreen (Esc to exit)"><svg class="ic-expand" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.2 2H2v4.2M9.8 2H14v4.2M6.2 14H2V9.8M9.8 14H14V9.8"/></svg><svg class="ic-collapse" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6.2h4.2V2M14 6.2H9.8V2M2 9.8h4.2V14M14 9.8H9.8V14"/></svg></button><article><nav class="breadcrumb"><span class="bc-seg" data-title-zh="能力">Capabilities</span> <span class='bc-sep'>›</span> <span class="bc-seg" data-title-zh="概览">Overview</span> <span class='bc-sep'>›</span> <span class="bc-seg bc-current" data-title-zh="应用">Applications</span></nav><h1 id="从新标签页打开应用">从新标签页打开应用<a class="header-anchor" href="#从新标签页打开应用">#</a></h1>
+<p>侧栏 <strong>Applications（应用）</strong> 页面把内置和已安装的应用列在同一张表里：图标、标题、版本和作用范围，以及一句话说明。用 <strong>全部</strong>、<strong>内置</strong>、<strong>已安装</strong> 筛选。应用有自己的窗口时，该行有 <strong>打开</strong>；每行都有启用开关和 <strong>⋯</strong> 菜单：<strong>在能力中显示</strong>、<strong>从新标签页隐藏</strong>（或 <strong>在新标签页显示</strong>）、<strong>从来源更新</strong>（显示来源目录）和 <strong>卸载</strong>（会先确认，保留应用数据）。<strong>安装…</strong> 打开安装表单，安装 Python 后端或声明 <code>files.project.write</code> 能力的应用需要明确勾选信任；<strong>从来源更新</strong> 打开同一个表单并填好来源，请审查来源后再提交。<strong>能力 → Programs</strong> 的 <strong>Applications</strong> 下也列出这些应用，连同内置应用和没有界面的已安装程序；内置工具列在 <strong>Tools</strong> 下。和 Tools 一样，Applications 是普通的文件夹视图：每个应用目录一个文件夹，用目录名命名（<code>browser</code>、<code>calculator</code>、<code>auto_research</code>），按字母排序。展开文件夹显示它真实的子文件夹和源码文件；位于某个已安装包内的应用就是那个包的子文件夹，例如 <code>auto_research/app</code>。应用的调用逻辑是它注册的所有 Agent 入口的并集，例如 <code>browser</code> 的 <code>web_use</code>。选中一个应用，显示与应用页相同的图标、标题和说明，以及目录名、类型和版本；有窗口时有 <strong>打开</strong>，只有一个 Agent 入口时有 <strong>在对话中使用</strong>；启用开关；Agent 可调用的入口及各自的一句话说明；位置、窗口、权限等详情。工具则列出它的参数。Agent 不能调用的应用用一行说明：仅界面的应用只作为窗口打开，只为其他 Program 导出 Python 函数的包是 Python 库。调用逻辑折叠在最下面，摘要给出简短计数，展开后是调用树和图。包里的源码文件直接显示调用逻辑。</p>
+<p>应用也是 Program，用 <code>openprogram programs</code> 管理。应用目录可以放在你的 Programs 目录 <code>~/.openprogram/programs/&lt;name&gt;/</code> 里，也可以放在任何别的地方。注册保存在 <code>~/.openprogram/programs/catalog.json</code>：每条记录应用的源目录及其启停、隐藏和显示名设置；应用从源目录加载，不复制任何文件。运行时为应用保存的内容（业务数据、运行记录、Python 环境）在 <code>~/.openprogram/programs/.runtime/</code>。</p>
+<p>安装后的应用会与文件、新建对话、浏览器、终端一起出现在新标签页。点击名称打开应用自己的界面，再次打开会选中同一个实例。关闭标签页不会取消后台操作。</p>
+<p>应用界面使用标准 HTML、CSS 和 JavaScript，也可以提供 Python 业务操作。界面不必使用 OpenProgram 组件。前端依赖需要打包到本地，资源和 JavaScript 模块导入使用相对路径。应用运行在独立 opaque origin 的 sandbox iframe 中，不能读取宿主页面、直接调用宿主 API、加载远程脚本、嵌套其他页面或提交导航表单。资源 URL 只授权按打开时的内容摘要读取该应用的 UI 目录，不是宿主凭据。</p>
+<h2 id="安装与打开">安装与打开<a class="header-anchor" href="#安装与打开">#</a></h2>
+<p>在本地 OpenProgram worker 运行时执行：</p>
+<pre><code class="language-bash">openprogram<span class="w"> </span>programs<span class="w"> </span>install<span class="w"> </span>/absolute/path/to/application
+openprogram<span class="w"> </span>programs<span class="w"> </span>list
+</code></pre>
+<p><code>install</code> 记录这个目录，应用从这里加载，所以目录要留在原处。<code>list</code> 直接读取注册表和各个源目录，不需要 worker；每个应用一行，显示 id、状态（<code>enabled</code>、<code>disabled</code>、<code>error</code>）、加载目录和 Agent 条目及其暴露层级（应用条目为 <code>deferred</code>）。<code>openprogram programs list --json</code> 以 JSON 输出同样的行，每行带一个 <code>tiers</code> 映射。</p>
+<p>直接放进 <code>~/.openprogram/programs/</code> 的应用目录不需要 <code>install</code>：worker 下次扫描该目录时会自动登记。需要信任的应用（见下文）在用 <code>--trust</code> 安装之前显示为 <code>needs trust</code>。<code>openprogram programs check DIRECTORY</code> 校验 manifest、包内文件和后端声明的操作，不登记任何内容。</p>
+<p>Python 后端以当前操作系统用户执行受信代码，<code>files.project.write</code> 允许这些代码在绑定项目中创建和替换文件。检查源码和依赖后，使用 <code>--trust</code> 授权运行：</p>
+<pre><code class="language-bash">openprogram<span class="w"> </span>programs<span class="w"> </span>install<span class="w"> </span>/absolute/path/to/application<span class="w"> </span>--trust
+</code></pre>
+<p><code>openprogram programs disable ID</code> 移除应用的界面、资源、服务和 Agent 条目，并取消活动操作；<code>openprogram programs enable ID</code> 重新加载它。内置应用 <code>browser</code> 同样适用：<code>openprogram programs disable browser</code> 会移除浏览器服务和 <code>web_use</code>，直到再次启用；<code>openprogram programs disable workflow_recording</code> 会移除<a href="/docs/capabilities/workflows/recording.zh.html">录制 Workflow</a>：输入框的 <strong>录制 Workflow</strong> 和录制路由。内置应用 <code>office_editor</code>（<strong>ONLYOFFICE</strong>）在文件窗口中打开 Word、Excel 和 PowerPoint 文档；<code>openprogram programs disable office_editor</code> 关闭它，这些文件随后只提供原文件下载。这两个应用都有自己的窗口，在它们那一行点 <strong>打开</strong>，或在新标签页点它们的图块即可打开。ONLYOFFICE 窗口可以在当前项目根目录新建空白文档、表格或演示文稿，并列出项目里已有的 Office 文档；Workflow Recording 窗口不经过输入框直接开始录制。内置应用 <code>meeting</code>（<a href="/docs/capabilities/meetings.zh.html">会议</a>）录下这台电脑上的通话，转写后在新对话里总结；<code>openprogram programs disable meeting</code> 关闭它。<strong>应用</strong>页面把它们列为内置应用，各自的启用开关与 <code>enable</code>、<code>disable</code> 作用相同。这个设置保存在 <code>catalog.json</code> 里，worker 重启后依然有效。工具（<code>bash</code>、<code>read</code>、<code>goal</code> 等）总是提供给 Agent，不能停用。含应用的 git URL 或 GitHub <code>owner/repo</code> 会被克隆到 <code>~/.openprogram/programs/&lt;name&gt;/</code> 并同样登记（<code>openprogram programs install owner/repo --trust</code>）。</p>
+<p>插件不能带代码：添加工具或自带界面的 Claude Code、Codex、OpenCode 或 Hermes 包要作为应用安装（加一个 <code>application.json</code>），见<a href="/docs/capabilities/plugins.zh.html">插件</a>。</p>
+<p>新标签页获得焦点时和每十秒刷新应用列表。项目级应用在打开时绑定当前选中的项目，之后切换对话项目不会改变已经打开的实例。没有当前项目时会复用唯一的已有绑定；首次使用或有多个绑定时提供项目选择，也可以选择新文件夹。全局应用使用当前 owner 的同一个实例；不同项目的实例独立保存业务数据。</p>
+<p>仓库包含<a href="https://github.com/FuzzyKuji/OpenProgram/tree/main/examples/applications/calculator">计算器</a>和<a href="https://github.com/FuzzyKuji/OpenProgram/tree/main/examples/applications/pdf_editor">PDF 编辑器</a>样例。PDF 编辑器读取、批注和重排所绑定项目里的 PDF 文件，只在你要求生成摘要时调用配置的模型。</p>
+<h2 id="应用定义与接口">应用定义与接口<a class="header-anchor" href="#应用定义与接口">#</a></h2>
+<p>包根目录中的 <code>application.json</code> 定义稳定 <code>id</code>、<code>title</code>、<code>version</code>、<code>scope</code>（<code>global</code> 或 <code>project</code>）、<code>dataSchema</code>、<code>ui</code>、可选 <code>description</code>、<code>icon</code>、<code>backend</code> 和 <code>operations</code>。完整 JSON 示例见<a href="/docs/capabilities/applications.html">英文版</a>。新标签页、应用页和“能力 → Programs”都显示 <code>title</code> 和 <code>description</code>：<code>description</code> 写成一句平实的话，单行，最多 300 个字符。没有 <code>application.json</code> 的 Program 包显示其 <code>README.md</code> 第一个 <code># 标题</code>和标题下第一段的第一句；没有 README 时显示目录名。<code>icon</code> 决定新标签页、应用页、能力页和应用标签上的图标，可选 <code>calculator</code>, <code>book-open</code>, <code>file-search</code>, <code>file-text</code>, <code>file-pdf</code>, <code>telescope</code>, <code>notebook-pen</code>, <code>table</code>, <code>chart-column</code>, <code>database</code>, <code>image</code>, <code>music</code>, <code>video</code>, <code>map</code>, <code>calendar</code>, <code>globe</code>, <code>code</code>, <code>terminal</code>, <code>mail</code>, <code>message-square</code>, <code>list-checks</code>, <code>languages</code>, <code>pen-tool</code>, <code>palette</code>, <code>sigma</code>, <code>flask-conical</code>, <code>briefcase</code>, <code>bot</code>, <code>sparkles</code>；其他名字或不填时显示通用应用图块，颜色由应用 id 决定。<code>ui.root</code> 相对包根目录，<code>ui.entry</code> 相对 UI 目录。Python 和私有配置应放在 UI 目录之外。</p>
+<p>Python 后端的 <code>module:object</code> 入口导出操作字典。操作接收 <code>(input, context)</code>，同步或异步返回 JSON 值；输入输出使用 JSON Schema 校验。声明 <code>agent: true</code> 的操作可以由 Program 客户端调用。<code>backend.dependencies</code> 使用精确固定版本，例如 <code>package-name==1.2.3</code>。每个应用的每组固定依赖对应一个 Python 环境，首次使用时创建，同时使用已安装宿主框架及其依赖。安装时在独立进程中检查后端；列出应用不会导入代码。</p>
+<p>支持的宿主能力：</p>
+<table>
+<thead>
+<tr>
+<th>能力</th>
+<th>授予后端</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>storage.app</code></td>
+<td><code>context.load()</code> 和 <code>context.save()</code>：实例自己的保存状态</td>
+</tr>
+<tr>
+<td><code>model.invoke</code></td>
+<td>供 <code>llm()</code> 和 <code>agent()</code> 使用的 ambient Runtime</td>
+</tr>
+<tr>
+<td><code>files.project.read</code></td>
+<td>在绑定项目内使用 <code>context.read_file(relative_path)</code></td>
+</tr>
+<tr>
+<td><code>files.project.write</code></td>
+<td>在绑定项目内使用 <code>context.write_file(relative_path, content)</code>；需要 Python 后端，安装时需要 <code>--trust</code></td>
+</tr>
+</tbody>
+</table>
+<p>这些声明限制宿主 bridge，不限制受信 Python 代码的操作系统权限。</p>
+<p>页面使用 <code>window.openprogramApp</code>：</p>
+<ul>
+<li><code>load()</code> 返回 <code>{value, version}</code>，<code>save(value, version)</code> 只在版本仍匹配时保存，并发写入冲突后需要重新读取。</li>
+<li><code>run(operation, input, requestKey)</code> 返回持久任务记录。重试相同请求时复用 request key，不同输入复用同一个 key 会被拒绝。</li>
+<li><code>runs()</code> 列出最近任务；<code>status(id, after)</code> 返回状态、结果、错误、待回答问题和指定序号之后的事件。</li>
+<li><code>cancel(id)</code> 取消任务；<code>answer(id, requestId, answer)</code> 回答当前问题。bridge 不能操作其他实例的任务。</li>
+</ul>
+<p>Python 操作使用 <code>context.load()</code>、<code>context.save(value, expected_version=...)</code>、<code>context.progress(value)</code>、<code>context.ask(question)</code>、<code>context.read_file(relative_path)</code> 和 <code>context.write_file(relative_path, content)</code>。访问项目文件需要声明能力并绑定项目。<code>write_file</code> 接受文本或字节，路径相对项目根目录；解析后落在项目之外（包括经由符号链接）或指向 <code>.git</code> 的路径会被拒绝。它先在目标旁写临时文件，再改名覆盖目标，读者不会看到写了一半的文件，返回写入的 <code>path</code> 和 <code>bytes</code>。声明模型能力的操作可直接使用现有 <code>llm()</code>、<code>agent()</code> 和 ambient Runtime，模型凭据留在后端。应用提问使用 <code>context.ask()</code>；要求预声明持久等待点的 Runtime 工作流交互仍保留原有要求。</p>
+<p>Program 调用同一套操作：</p>
+<pre><code class="language-python"><span class="kn">from</span><span class="w"> </span><span class="nn">openprogram.programs._authoring.application_client</span><span class="w"> </span><span class="kn">import</span> <span class="n">run</span><span class="p">,</span> <span class="n">status</span>
+<span class="n">job</span> <span class="o">=</span> <span class="n">run</span><span class="p">(</span><span class="s2">&quot;local.notes&quot;</span><span class="p">,</span> <span class="s2">&quot;summarize&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;...&quot;</span><span class="p">},</span> <span class="n">request_key</span><span class="o">=</span><span class="s2">&quot;summary-1&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">status</span><span class="p">(</span><span class="n">job</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]))</span>
+</code></pre>
+<p>CLI 对应 <code>openprogram programs run APP OPERATION --input JSON</code>，项目级应用增加 <code>--project ID</code>；查看和取消使用 <code>openprogram programs status RUN_ID</code>、<code>openprogram programs cancel RUN_ID</code>。</p>
+<h2 id="数据与生命周期">数据与生命周期<a class="header-anchor" href="#数据与生命周期">#</a></h2>
+<p>应用从源目录运行。加载时宿主计算这个目录的内容摘要（忽略 <code>.git</code>、<code>node_modules</code>、<code>__pycache__</code> 和 <code>.venv</code>），页面和资源提供者按这个摘要识别打开的版本。worker 监视源目录：修改后应用以新摘要重新加载，重新打开的页面显示修改后的界面，新操作运行修改后的后端；修改前打开的页面或资源 <code>open</code> 带着旧摘要会被拒绝，需要重新打开。正在执行的操作继续执行。如果修改改变了 <code>dataSchema</code> 或 <code>scope</code>，或者给未经信任安装的应用加入 Python 后端或 <code>files.project.write</code>，应用停止加载，直到重新安装。在应用改为从源目录加载之前做的注册仍然有效：它们从记录的源目录加载，<code>~/.openprogram/programs/.runtime/versions/</code> 下复制的版本只在源目录不存在时使用。</p>
+<p>业务数据与代码、对话分开保存，每个实例使用自己的 SQLite 状态，JSON 值上限为 4 MiB，单个事件上限为 1 MiB。执行状态使用现有 execution store；模型调用记录通过现有 session-node writer 保存到应用运行目录。</p>
+<p>worker 停止会中断未完成的 Python 函数，重启后显示中断状态，不会自动恢复任意 Python 调用栈。应用应逐步保存进度，用户查看中断情况后明确启动另一次操作。当前版本拒绝改变数据 schema 或 scope 的升级，不提供自动迁移。</p>
+<p><code>openprogram programs uninstall APP</code> 移除菜单入口并取消活动操作，保留业务数据和注册的 schema/scope 兼容身份。重新安装兼容包可以恢复数据，不兼容的重新安装会在激活前被拒绝。owner API 的 <code>PATCH /api/applications/{id}</code> 支持 <code>enabled</code>、<code>hidden</code>、<code>display_title</code>；隐藏不取消任务，停用会取消。</p>
+<p>独立部署、非 Python 后端、MCP Apps 兼容以及原生操作系统 GUI 窗口嵌入尚未实现。</p>
+<p>项目应用在启动操作和读取项目文件前，根据绑定的项目 ID 重新确认当前位置。移动项目不改变应用实例和已保存数据；位置缺失、被其他目录替代或尚未确认时，拒绝启动新操作，已保存的应用数据仍可读取。</p>
+<h2 id="将应用作为资源使用">将应用作为资源使用<a class="header-anchor" href="#将应用作为资源使用">#</a></h2>
+<p>已启用应用自动出现在 <code>resource(action=&quot;describe&quot;)</code> 中，名称为 <code>application.&lt;id&gt;</code>。安装、禁用、更新和卸载无需重启 worker 即生效。</p>
+<p>每个标了 <code>agent: true</code> 的操作同时是一个 Agent 条目，名为 <code>&lt;id&gt;__&lt;operation&gt;</code>，字母、数字、<code>_</code> 和 <code>-</code> 以外的字符换成 <code>_</code>（<code>local.notes</code> 和 <code>summarize</code> 得到 <code>local_notes__summarize</code>）。它把操作输入作为 <code>input</code>，项目级应用另有 <code>project_id</code>，等待执行结束后返回结果。条目需要审批，与 <code>resource</code> 工具一致，并且是 deferred 的：模型看到它们的名字，需要时用 <code>tool_search</code> 加载 schema。应用在某个对话里打开期间，它的条目在该对话里是 resident 的：每次请求都带上它们的 schema。仍在等待回答问题的执行会带着 id 返回，通过资源的 <code>status</code>、<code>answer</code> 或 <code>cancel</code> 继续。标了 <code>agent: false</code> 的操作没有条目。项目级应用的 <code>open</code> 接受 <code>project_id</code>，并将实例关联调用会话；正是这个关联让应用在该对话里算作打开。owner API 对窗口做同样的事：带 <code>session_id</code> 调用 <code>POST /api/applications/{id}/open</code> 建立关联，带 <code>instance_id</code> 和 <code>session_id</code> 调用 <code>POST /api/applications/{id}/close</code> 解除关联。<code>observe</code> 返回实例数据与最近执行；<code>act</code> 接受清单中 Agent 可见的操作及稳定的 <code>request_key</code>。使用 open 返回的 <code>instance_id</code> 与 <code>digest</code>，更新应用后旧 digest 会被拒绝。</p>
+<p><code>status</code>、<code>cancel</code>、<code>answer</code> 只处理属于该实例的执行。声明 <code>storage.app</code> 后，<code>save</code> 要求预期的数据版本。<code>release</code> 只移除会话关联，保留实例、数据和正在执行的操作；隐藏视图也不停止操作。Resources 和顶部标签复用同一实例及现有 sandbox 应用 frame，无需另外编写前端适配器。</p>
+<p>通过 <a href="/docs/capabilities/framework-control.zh.html">framework 工具</a> 调用 <code>POST /api/applications/scaffold</code>，传入 <code>path</code>、<code>app_id</code>、<code>title</code> 可生成可运行的示例包。父目录必须存在，目标目录不能已存在。包中分别放置 <code>backend/operations.py</code>、<code>ui/index.html</code> 和 <code>application.json</code>，界面与 Agent 都调用声明的 read/save 操作。审查源码后，通过 <code>/api/applications/install</code> 传入源路径及 <code>trust: true</code> 安装。增加功能时同步扩展后端和操作清单，不要仅在前端事件中实现业务修改。</p>
+<div class="page-updated"><span data-i18n="updated">Last updated</span> · 2026-11-06</div><div class="prevnext"><a class="pn-link pn-prev" href="/docs/capabilities/README.html" data-href-en="/docs/capabilities/README.html" data-href-zh="/docs/capabilities/README.zh.html"><span class="pn-dir" data-i18n="prev">Previous</span><span class="pn-title" data-title-zh="概览">Overview</span></a><a class="pn-link pn-next" href="/docs/capabilities/framework-control.html" data-href-en="/docs/capabilities/framework-control.html" data-href-zh="/docs/capabilities/framework-control.zh.html"><span class="pn-dir" data-i18n="next">Next</span><span class="pn-title" data-title-zh="框架工具">Framework tools</span></a></div></article></main>
+  <aside class="toc"><div class="toc-title" data-i18n="on_this_page">On this page</div>
+<ul class="toc-list">
+<li>
+<a class="lvl-2" href="#安装与打开">安装与打开</a>
+</li>
+<li>
+<a class="lvl-2" href="#应用定义与接口">应用定义与接口</a>
+</li>
+<li>
+<a class="lvl-2" href="#数据与生命周期">数据与生命周期</a>
+</li>
+<li>
+<a class="lvl-2" href="#将应用作为资源使用">将应用作为资源使用</a>
+</li>
+</ul></aside>
+</div>
+
+<div class="search-overlay">
+  <div class="search-box">
+    <input type="text" data-i18n-ph="search_ph" placeholder="Search titles or text…" autocomplete="off" spellcheck="false">
+    <div class="search-results"></div>
+  </div>
+</div>
+
+<script src="/docs/assets/site.js?v=6520ba46"></script>
+</body>
+</html>

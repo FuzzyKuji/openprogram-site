@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="zh" data-base="/docs/" data-page-lang="zh" data-build="1793956776" data-alt-lang-url="/docs/models/providers.html">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>模型服务 · OpenProgram Docs</title>
+<meta name="description" content="Provider 一览 # 本页列出仓库内置的 provider 实现（ openprogram/models/providers/adapters/ 下每个子目录一个）、各自的接入方式，以及在 Python 代码里直接使用 provider 的方法。内置实现之外， openprogram providers">
+<link rel="canonical" href="https://openprogram.io/docs/models/providers.zh.html">
+<link rel="alternate" type="text/markdown" href="https://openprogram.io/docs/models/providers.zh.html.md">
+<link rel="describedby" href="https://openprogram.io/llms.txt">
+<link rel="alternate" hreflang="en" href="https://openprogram.io/docs/models/providers.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://openprogram.io/docs/models/providers.zh.html">
+<link rel="alternate" hreflang="x-default" href="https://openprogram.io/docs/models/providers.html">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"OpenProgram Docs","item":"https://openprogram.io/docs/"},{"@type":"ListItem","position":2,"name":"模型服务"}]}</script>
+<meta property="og:type" content="article">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:site_name" content="OpenProgram">
+<meta property="og:url" content="https://openprogram.io/docs/models/providers.zh.html">
+<meta property="og:title" content="模型服务 · OpenProgram Docs">
+<meta property="og:description" content="Provider 一览 # 本页列出仓库内置的 provider 实现（ openprogram/models/providers/adapters/ 下每个子目录一个）、各自的接入方式，以及在 Python 代码里直接使用 provider 的方法。内置实现之外， openprogram providers">
+<meta property="og:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:secure_url" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="模型服务 · OpenProgram Docs">
+<meta name="twitter:description" content="Provider 一览 # 本页列出仓库内置的 provider 实现（ openprogram/models/providers/adapters/ 下每个子目录一个）、各自的接入方式，以及在 Python 代码里直接使用 provider 的方法。内置实现之外， openprogram providers">
+<meta name="twitter:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta name="twitter:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/docs/assets/mark.svg">
+<link rel="stylesheet" href="/docs/assets/site.css?v=6520ba46">
+<link rel="stylesheet" href="/docs/assets/pygments-light.css" media="(prefers-color-scheme: light)" id="pyg-light">
+<link rel="stylesheet" href="/docs/assets/pygments-dark.css" media="(prefers-color-scheme: dark)" id="pyg-dark">
+<script src="/docs/assets/theme.js?v=6520ba46"></script>
+
+</head>
+<body>
+<header class="topbar">
+  <button class="icon hamburger" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2.5 4.5h11M2.5 8h11M2.5 11.5h11"/></svg></button>
+  <a class="brand" href="/docs/index.html"><img class="mark" src="/docs/assets/mark.svg" alt="">OpenProgram Docs</a>
+  <div class="spacer"></div>
+  <button class="search-trigger" aria-label="Search">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14"/></svg><span class="label" data-i18n="search">Search docs</span><kbd>⌘K</kbd>
+  </button>
+  <div class="lang-wrap">
+    <button class="icon lang-trigger" id="lang-toggle" aria-haspopup="true" aria-expanded="false" aria-label="Language">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="6.2"/><path d="M1.8 8h12.4" stroke-linecap="round"/><ellipse cx="8" cy="8" rx="2.8" ry="6.2"/></svg><span class="lang-label">EN</span><svg class="chev" width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+    </button>
+    <div class="lang-menu" id="lang-menu" role="menu">
+      <button class="lang-opt" data-lang="en" role="menuitem"><span>English</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="lang-opt" data-lang="zh" role="menuitem"><span>简体中文</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+  <div class="theme-wrap">
+    <button class="icon" id="theme-toggle" aria-label="Theme" aria-haspopup="menu" aria-controls="theme-menu" aria-expanded="false"><svg class="ic-system" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="2.5" width="13" height="9" rx="1.5"/><path d="M8 11.5V14M5.5 14h5"/></svg><svg class="ic-moon" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M13.5 9.5A6 6 0 1 1 6.5 2.5a5 5 0 0 0 7 7z"/></svg><svg class="ic-sun" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="3.2"/><path d="M8 1.2v1.8M8 13v1.8M1.2 8H3M13 8h1.8M3.2 3.2l1.3 1.3M11.5 11.5l1.3 1.3M12.8 3.2l-1.3 1.3M4.5 11.5l-1.3 1.3"/></svg></button>
+    <div class="theme-menu" id="theme-menu" role="menu" aria-labelledby="theme-toggle">
+      <button class="theme-opt" data-theme-choice="system" role="menuitemradio" aria-checked="true"><span>Follow system</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="light" role="menuitemradio" aria-checked="false"><span>Light</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="dark" role="menuitemradio" aria-checked="false"><span>Dark</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+</header>
+<nav class="tabbar"><a class="tablink" href="/docs/README.html" data-title-zh="开始使用" data-href-en="/docs/README.html" data-href-zh="/docs/README.zh.html">Get started</a><a class="tablink" href="/docs/install/install.html" data-title-zh="安装" data-href-en="/docs/install/install.html" data-href-zh="/docs/install/install.zh.html">Install</a><a class="tablink" href="/docs/capabilities/README.html" data-title-zh="能力" data-href-en="/docs/capabilities/README.html" data-href-zh="/docs/capabilities/README.zh.html">Capabilities</a><a class="tablink" href="/docs/interfaces/README.html" data-title-zh="界面" data-href-en="/docs/interfaces/README.html" data-href-zh="/docs/interfaces/README.zh.html">Interfaces</a><a class="tablink active" href="/docs/models/README.html" data-title-zh="模型" data-href-en="/docs/models/README.html" data-href-zh="/docs/models/README.zh.html">Models</a><a class="tablink" href="/docs/integrations/anthropic.html" data-title-zh="集成" data-href-en="/docs/integrations/anthropic.html" data-href-zh="/docs/integrations/anthropic.zh.html">Integrations</a><a class="tablink" href="/docs/server/README.html" data-title-zh="服务与运维" data-href-en="/docs/server/README.html" data-href-zh="/docs/server/README.zh.html">Server &amp; Ops</a><a class="tablink" href="/docs/reference/README.html" data-title-zh="参考" data-href-en="/docs/reference/README.html" data-href-zh="/docs/reference/README.zh.html">Reference</a><a class="tablink" href="/docs/reference/design/README.html" data-title-zh="设计" data-href-en="/docs/reference/design/README.html" data-href-zh="/docs/reference/design/README.zh.html">Design</a></nav>
+
+<div class="scrim"></div>
+<div class="layout">
+  <nav class="sidebar" aria-label="Documentation">
+    <input class="nav-filter" type="text" data-i18n-ph="nav_filter"
+           aria-label="Filter docs" placeholder="Filter docs…" autocomplete="off" spellcheck="false">
+    <div class="nav-tree"><div class="nav-sec"><div class="nav-sec-title" data-title-zh="概览">Overview</div><a class="navlink" href="/docs/models/README.html" data-title-zh="模型配置" data-href-en="/docs/models/README.html" data-href-zh="/docs/models/README.zh.html">Model configuration</a>
+<a class="navlink active" href="/docs/models/providers.html" data-title-zh="模型服务" data-href-en="/docs/models/providers.html" data-href-zh="/docs/models/providers.zh.html">Providers</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="配置">Configuration</div><a class="navlink" href="/docs/models/auth.html" data-title-zh="认证" data-href-en="/docs/models/auth.html" data-href-zh="/docs/models/auth.zh.html">Authentication</a>
+<a class="navlink" href="/docs/models/local-models.html" data-title-zh="使用本地部署的模型" data-href-en="/docs/models/local-models.html" data-href-zh="/docs/models/local-models.zh.html">Use locally deployed models</a>
+<a class="navlink" href="/docs/models/fast-tier.html" data-title-zh="高速模式" data-href-en="/docs/models/fast-tier.html" data-href-zh="/docs/models/fast-tier.zh.html">Fast mode</a>
+<a class="navlink" href="/docs/models/thinking-effort.html" data-title-zh="推理强度" data-href-en="/docs/models/thinking-effort.html" data-href-zh="/docs/models/thinking-effort.zh.html">Thinking effort</a>
+<a class="navlink" href="/docs/models/token-tracking.html" data-title-zh="Token 计量" data-href-en="/docs/models/token-tracking.html" data-href-zh="/docs/models/token-tracking.zh.html">Token accounting</a></div></div>
+  </nav>
+  <main class="content"><button class="fs-toggle" aria-label="Fullscreen" title="Fullscreen (Esc to exit)"><svg class="ic-expand" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.2 2H2v4.2M9.8 2H14v4.2M6.2 14H2V9.8M9.8 14H14V9.8"/></svg><svg class="ic-collapse" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6.2h4.2V2M14 6.2H9.8V2M2 9.8h4.2V14M14 9.8H9.8V14"/></svg></button><article><nav class="breadcrumb"><span class="bc-seg" data-title-zh="模型">Models</span> <span class='bc-sep'>›</span> <span class="bc-seg" data-title-zh="概览">Overview</span> <span class='bc-sep'>›</span> <span class="bc-seg bc-current" data-title-zh="模型服务">Providers</span></nav><h1 id="provider-一览">Provider 一览<a class="header-anchor" href="#provider-一览">#</a></h1>
+<p>本页列出仓库内置的 provider 实现（<code>openprogram/models/providers/adapters/</code> 下每个子目录一个）、各自的接入方式，以及在 Python 代码里直接使用 provider 的方法。内置实现之外，<code>openprogram providers available</code> 还能列出几百个走 OpenAI 兼容协议的社区 provider 目录，配置方式相同。</p>
+<h2 id="内置-provider">内置 provider<a class="header-anchor" href="#内置-provider">#</a></h2>
+<p>接入方式说明：<strong>API key</strong> = 存入凭据库的密钥（<code>providers login &lt;id&gt;</code>，也可从环境变量导入）；<strong>OAuth</strong> = 浏览器 / 设备码登录订阅账号；<strong>CLI 凭据</strong> = 直接读外部 CLI 已登录的凭据文件；<strong>云凭据链</strong> = 运行时自动走云厂商的标准凭据链。</p>
+<table>
+<thead>
+<tr>
+<th>Provider</th>
+<th>协议</th>
+<th>接入方式</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>anthropic</code></td>
+<td>Anthropic Messages</td>
+<td>API key（<code>ANTHROPIC_API_KEY</code>）</td>
+<td>显式 prompt caching（<code>cache_control</code>，支持 1h TTL）</td>
+</tr>
+<tr>
+<td><code>openai</code></td>
+<td>OpenAI Responses</td>
+<td>API key（<code>OPENAI_API_KEY</code>）</td>
+<td>Responses 协议自动缓存（<code>prompt_cache_key</code>）</td>
+</tr>
+<tr>
+<td><code>openai_responses</code> / <code>openai_completions</code></td>
+<td>OpenAI Responses / Chat Completions</td>
+<td>—（共享协议实现，被众多 provider 复用）</td>
+<td></td>
+</tr>
+<tr>
+<td><code>openai_codex</code></td>
+<td>ChatGPT 后端</td>
+<td>OAuth（ChatGPT 订阅）：浏览器 PKCE 登录；已有的 <code>codex</code> CLI 登录态也可用 <code>providers discover</code> 导入</td>
+<td>模型清单从官方端点实时拉取</td>
+</tr>
+<tr>
+<td><code>azure_openai_responses</code></td>
+<td>Azure OpenAI Responses</td>
+<td>API key（<code>AZURE_OPENAI_API_KEY</code>）+ 自填 base URL</td>
+<td></td>
+</tr>
+<tr>
+<td><code>google</code></td>
+<td>Google Generative AI</td>
+<td>API key（<code>GEMINI_API_KEY</code> / <code>GOOGLE_API_KEY</code>）</td>
+<td>thinking 用 token budget 控制</td>
+</tr>
+<tr>
+<td><code>google_gemini_cli</code></td>
+<td>Cloud Code Assist</td>
+<td>CLI 凭据：直接读 <code>~/.gemini/oauth_creds.json</code>，刷新由 Gemini CLI 负责</td>
+<td></td>
+</tr>
+<tr>
+<td><code>gemini_subscription</code></td>
+<td>Cloud Code Assist</td>
+<td>CLI 凭据：导入 <code>~/.gemini/oauth_creds.json</code>（先用 Gemini CLI 登录）</td>
+<td>别名 <code>gemini</code>、<code>gemini-cli</code></td>
+</tr>
+<tr>
+<td><code>amazon_bedrock</code></td>
+<td>Bedrock Converse Stream</td>
+<td>云凭据链（<code>AWS_PROFILE</code> / access key / bearer token 等，运行时自动识别）</td>
+<td>显式 prompt caching（<code>cachePoint</code>）</td>
+</tr>
+<tr>
+<td><code>github_copilot</code></td>
+<td>OpenAI Responses 等</td>
+<td>GitHub 浏览器设备码登录，或导入 <code>COPILOT_GITHUB_TOKEN</code> / <code>GH_TOKEN</code> / <code>GITHUB_TOKEN</code> 环境变量；按需换取 Copilot 短期 token，不落盘</td>
+<td>不支持 thinking 档位</td>
+</tr>
+<tr>
+<td><code>deepseek</code></td>
+<td>OpenAI Completions</td>
+<td>API key（<code>DEEPSEEK_API_KEY</code>）</td>
+<td>reasoner 型号推理不可调档</td>
+</tr>
+<tr>
+<td><code>openrouter</code></td>
+<td>OpenAI Completions</td>
+<td>API key（<code>OPENROUTER_API_KEY</code>)</td>
+<td>聚合网关</td>
+</tr>
+<tr>
+<td><code>vercel_ai_gateway</code></td>
+<td>Anthropic Messages</td>
+<td>API key（<code>AI_GATEWAY_API_KEY</code>）</td>
+<td>聚合网关</td>
+</tr>
+<tr>
+<td><code>groq</code></td>
+<td>OpenAI Completions</td>
+<td>API key（<code>GROQ_API_KEY</code>）</td>
+<td></td>
+</tr>
+<tr>
+<td><code>cerebras</code></td>
+<td>OpenAI Completions</td>
+<td>API key（<code>CEREBRAS_API_KEY</code>）</td>
+<td></td>
+</tr>
+<tr>
+<td><code>mistral</code></td>
+<td>OpenAI Completions</td>
+<td>API key（<code>MISTRAL_API_KEY</code>）</td>
+<td></td>
+</tr>
+<tr>
+<td><code>xai</code></td>
+<td>OpenAI Completions</td>
+<td>API key（<code>XAI_API_KEY</code>）</td>
+<td></td>
+</tr>
+<tr>
+<td><code>xai_subscription</code></td>
+<td>OpenAI Responses</td>
+<td>OAuth（SuperGrok / X Premium+）：浏览器 PKCE 登录</td>
+<td>模型与 <code>xai</code> 相同，走 <code>cli-chat-proxy.grok.com</code>（不是 <code>api.x.ai</code>）</td>
+</tr>
+<tr>
+<td><code>zai</code></td>
+<td>OpenAI Completions</td>
+<td>API key（<code>ZAI_API_KEY</code>）</td>
+<td></td>
+</tr>
+<tr>
+<td><code>huggingface</code></td>
+<td>OpenAI Completions</td>
+<td>API key（<code>HF_TOKEN</code>）</td>
+<td></td>
+</tr>
+<tr>
+<td><code>minimax</code> / <code>minimax_cn</code></td>
+<td>Anthropic Messages</td>
+<td>API key（<code>MINIMAX_API_KEY</code> / <code>MINIMAX_CN_API_KEY</code>）</td>
+<td>国际 / 国内两个端点</td>
+</tr>
+<tr>
+<td><code>minimax_cn_coding_plan</code></td>
+<td>Anthropic Messages</td>
+<td>API key（<code>MINIMAX_CN_API_KEY</code> / <code>MINIMAX_API_KEY</code>，与 <code>minimax_cn</code> 同账号同密钥）</td>
+<td>&quot;MiniMax Token Plan (CN)&quot; coding 套餐</td>
+</tr>
+<tr>
+<td><code>kimi_coding</code></td>
+<td>Anthropic Messages</td>
+<td>API key（<code>KIMI_API_KEY</code> / <code>MOONSHOT_API_KEY</code>）</td>
+<td></td>
+</tr>
+<tr>
+<td><code>alibaba_token_plan_cn</code></td>
+<td>OpenAI Completions</td>
+<td>套餐 API key</td>
+<td>别名 <code>bailian</code></td>
+</tr>
+<tr>
+<td><code>opencode</code></td>
+<td>OpenAI Completions 等</td>
+<td>API key（<code>OPENCODE_API_KEY</code>）</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>流式输出所有 provider 都支持（整个层建立在流式接口上）。多模态输入按模型而非按 provider 决定，来自各 provider 的模型目录数据，界面上以模型实际标注为准。prompt caching 只在上表标注处经代码核实。</p>
+<h2 id="本地模型服务">本地模型服务<a class="header-anchor" href="#本地模型服务">#</a></h2>
+<p>Ollama、LM Studio、vLLM、llama.cpp 和通用本地服务作为内置 Provider 提供，支持地址配置、可选 API key、模型发现和手动模型 ID。连接多个服务时，可将自定义 Provider 标记为本地服务。配置方式和部署相关 token 限制见<a href="/docs/models/local-models.zh.html">本地模型</a>。</p>
+<h2 id="自定义-provider">自定义 provider<a class="header-anchor" href="#自定义-provider">#</a></h2>
+<p>上表没覆盖的 OpenAI 兼容端点可以在 Web UI 的 Settings → Providers 里添加：必填项只有显示名和 base URL（不填 id 时从名字自动派生）。之后同一个 Fetch 按钮就能浏览该端点 <code>/models</code> 返回的模型列表，启用后无需改代码即可使用。自定义 provider 记在配置的 <code>providers.&lt;id&gt;</code> 下，标记 <code>source: &quot;custom&quot;</code>。</p>
+<h2 id="查看每个会话在用哪个模型">查看每个会话在用哪个模型<a class="header-anchor" href="#查看每个会话在用哪个模型">#</a></h2>
+<p>Settings → Providers 打开时显示<strong>总览</strong>。左栏列出正在回答、或在所选时间范围（实时、24 小时、7 天）里调用过模型的会话，每个会话下面是它的分支、子 Agent 和程序运行开出的子会话。不属于任何会话的模型调用（比如起标题、记忆整理）归在<strong>后台调用</strong>下。右栏是它们用到的模型，按 provider 分组。每条分支和它的模型之间有一条线：</p>
+<ul>
+<li>蓝线上有小点在移动，表示请求正在进行；</li>
+<li>橙色虚线指向刚才失败、被切换掉的模型（见<a href="#%E5%A4%87%E9%80%89%E6%A8%A1%E5%9E%8B">备选模型</a>）；</li>
+<li>某个 provider 的 key 因限流在冷却，或者需要处理时，会在名字旁边标出来。</li>
+</ul>
+<p>鼠标移到某一行上会突出它的连线。点会话打开它，点 provider 打开它的设置。图下面的<strong>最近的改道</strong>列出每次切换和原因。时间范围内没有调用模型的会话只计数，不画出来。这张图需要较宽的面板；窗口太窄时，先折叠侧边栏或把窗口拉宽。</p>
+<h2 id="备选模型">备选模型<a class="header-anchor" href="#备选模型">#</a></h2>
+<p>模型遇到限流、过载、故障或无法连接时，OpenProgram 可以改用另一个模型回答，而不是直接显示错误。这个功能默认关闭。在 Settings → System → Models 里开启，或者用命令行：</p>
+<pre><code class="language-bash">openprogram<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>model_fallback.mode<span class="w"> </span>same-provider
+</code></pre>
+<table>
+<thead>
+<tr>
+<th><code>model_fallback.mode</code></th>
+<th>遇到上述失败时</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>off</code>（默认）</td>
+<td>显示错误。</td>
+</tr>
+<tr>
+<td><code>same-provider</code></td>
+<td>依次尝试同一 provider 下最多两个其他已启用的模型，顺序与 provider 设置里的顺序一致。不会联系其他 provider。</td>
+</tr>
+<tr>
+<td><code>list</code></td>
+<td>按顺序尝试 <code>model_fallback.models</code> 里的模型，可以来自其他 provider。</td>
+</tr>
+</tbody>
+</table>
+<p><code>list</code> 模式下填 <code>provider/model</code> 形式的 ID：</p>
+<pre><code class="language-bash">openprogram<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>model_fallback.models<span class="w"> </span><span class="s1">&#39;[&quot;anthropic/claude-sonnet-5-5&quot;, &quot;openai/gpt-5.5&quot;]&#39;</span>
+</code></pre>
+<p>只有在回复还没输出任何文字时才会切换，所以一条回答不会由两个模型拼接而成。鉴权错误、非法请求、上下文已满和内容策略拒绝不会换模型重试，因为换了也会失败。设置了 <code>OPENPROGRAM_FALLBACK_MODELS</code> 环境变量时，它优先于这个设置项。</p>
+<h2 id="请求中隐去密钥">请求中隐去密钥<a class="header-anchor" href="#请求中隐去密钥">#</a></h2>
+<p>在 Settings → System → Models 里打开 <strong>Redact secrets in requests</strong>（或运行 <code>openprogram config set privacy.redact_requests true</code>），凭据和邮箱地址就不会发给模型 provider。每次请求发出之前，下面这些内容会被替换成 <code>[[SECRET_1]]</code>、<code>[[EMAIL_2]]</code> 这样的占位符：</p>
+<ul>
+<li>形态可识别的 API key 和 token（Anthropic、OpenAI、GitHub、AWS、Google、Slack、JWT）</li>
+<li>私钥块</li>
+<li><code>password=…</code>、<code>api_key: …</code>、<code>Authorization: Bearer …</code> 这类赋值里的值</li>
+<li>邮箱地址</li>
+</ul>
+<p>回复和它发起的工具调用会在你或工具看到之前换回真实值，所以模型写出带 <code>[[SECRET_1]]</code> 的命令，执行时用的是真正的 key。对应关系只在内存里保留一次请求。只有上面这些形态能被识别：一段普通文字里的密码，如果前面没有 <code>password=</code> 之类的写法，会原样发出。这个功能默认关闭。</p>
+<h2 id="库方式使用">库方式使用<a class="header-anchor" href="#库方式使用">#</a></h2>
+<p>在自己的 Python 代码里创建 runtime，首选自动检测：</p>
+<pre><code class="language-python"><span class="kn">from</span><span class="w"> </span><span class="nn">openprogram.runtime.agent.runtime.factory</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_runtime</span>
+
+<span class="n">runtime</span> <span class="o">=</span> <span class="n">create_runtime</span><span class="p">()</span>                                        <span class="c1"># 自动选第一个可用 provider</span>
+<span class="n">runtime</span> <span class="o">=</span> <span class="n">create_runtime</span><span class="p">(</span><span class="n">provider</span><span class="o">=</span><span class="s2">&quot;anthropic&quot;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;claude-sonnet-4-6&quot;</span><span class="p">)</span>
+</code></pre>
+<p>六个 provider 在 <code>create_runtime</code> 背后有专属 runtime 行为（OAuth / CLI 凭据接管、按 provider 的约定）：</p>
+<pre><code class="language-python"><span class="n">runtime</span> <span class="o">=</span> <span class="n">create_runtime</span><span class="p">(</span><span class="n">provider</span><span class="o">=</span><span class="s2">&quot;anthropic&quot;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;claude-sonnet-4-6&quot;</span><span class="p">)</span>  <span class="c1"># Anthropic API key</span>
+<span class="n">runtime</span> <span class="o">=</span> <span class="n">create_runtime</span><span class="p">(</span><span class="n">provider</span><span class="o">=</span><span class="s2">&quot;openai&quot;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;gpt-4.1&quot;</span><span class="p">)</span>               <span class="c1"># OpenAI Responses API</span>
+<span class="n">runtime</span> <span class="o">=</span> <span class="n">create_runtime</span><span class="p">(</span><span class="n">provider</span><span class="o">=</span><span class="s2">&quot;gemini&quot;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;gemini-2.5-flash&quot;</span><span class="p">)</span>      <span class="c1"># Google Generative AI</span>
+<span class="n">runtime</span> <span class="o">=</span> <span class="n">create_runtime</span><span class="p">(</span><span class="n">provider</span><span class="o">=</span><span class="s2">&quot;anthropic&quot;</span><span class="p">)</span>   <span class="c1"># 需要 Anthropic API key</span>
+<span class="n">runtime</span> <span class="o">=</span> <span class="n">create_runtime</span><span class="p">(</span><span class="n">provider</span><span class="o">=</span><span class="s2">&quot;openai-codex&quot;</span><span class="p">)</span>  <span class="c1"># ChatGPT 订阅（Codex OAuth）</span>
+<span class="n">runtime</span> <span class="o">=</span> <span class="n">create_runtime</span><span class="p">(</span><span class="n">provider</span><span class="o">=</span><span class="s2">&quot;gemini-cli&quot;</span><span class="p">)</span>    <span class="c1"># 复用 Gemini CLI 登录态</span>
+</code></pre>
+<p>上表其余 provider：<code>create_runtime(provider=..., model=...)</code> 会按该模型的协议自动路由，与聊天界面走同一条路径。</p>
+<p>Grok Subscription 在代理路由请求头中保留所选模型 ID。选择 <code>grok-4.6</code> 时请求该模型，不替换成 <code>grok-build</code> 别名。</p>
+<div class="page-updated"><span data-i18n="updated">Last updated</span> · 2026-11-02</div><div class="prevnext"><a class="pn-link pn-prev" href="/docs/models/README.html" data-href-en="/docs/models/README.html" data-href-zh="/docs/models/README.zh.html"><span class="pn-dir" data-i18n="prev">Previous</span><span class="pn-title" data-title-zh="模型配置">Model configuration</span></a><a class="pn-link pn-next" href="/docs/models/auth.html" data-href-en="/docs/models/auth.html" data-href-zh="/docs/models/auth.zh.html"><span class="pn-dir" data-i18n="next">Next</span><span class="pn-title" data-title-zh="认证">Authentication</span></a></div></article></main>
+  <aside class="toc"><div class="toc-title" data-i18n="on_this_page">On this page</div>
+<ul class="toc-list">
+<li>
+<a class="lvl-2" href="#内置-provider">内置 provider</a>
+</li>
+<li>
+<a class="lvl-2" href="#本地模型服务">本地模型服务</a>
+</li>
+<li>
+<a class="lvl-2" href="#自定义-provider">自定义 provider</a>
+</li>
+<li>
+<a class="lvl-2" href="#查看每个会话在用哪个模型">查看每个会话在用哪个模型</a>
+</li>
+<li>
+<a class="lvl-2" href="#备选模型">备选模型</a>
+</li>
+<li>
+<a class="lvl-2" href="#请求中隐去密钥">请求中隐去密钥</a>
+</li>
+<li>
+<a class="lvl-2" href="#库方式使用">库方式使用</a>
+</li>
+</ul></aside>
+</div>
+
+<div class="search-overlay">
+  <div class="search-box">
+    <input type="text" data-i18n-ph="search_ph" placeholder="Search titles or text…" autocomplete="off" spellcheck="false">
+    <div class="search-results"></div>
+  </div>
+</div>
+
+<script src="/docs/assets/site.js?v=6520ba46"></script>
+</body>
+</html>

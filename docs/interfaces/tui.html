@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en" data-base="/docs/" data-page-lang="en" data-build="1793956776" data-alt-lang-url="/docs/interfaces/tui.zh.html">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Terminal UI · OpenProgram Docs</title>
+<meta name="description" content="Terminal TUI # See tool permission modes and live changes for approval behavior and changes during a task. The full chat interface for using OpenProgram">
+<link rel="canonical" href="https://openprogram.io/docs/interfaces/tui.html">
+<link rel="alternate" type="text/markdown" href="https://openprogram.io/docs/interfaces/tui.html.md">
+<link rel="describedby" href="https://openprogram.io/llms.txt">
+<link rel="alternate" hreflang="en" href="https://openprogram.io/docs/interfaces/tui.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://openprogram.io/docs/interfaces/tui.zh.html">
+<link rel="alternate" hreflang="x-default" href="https://openprogram.io/docs/interfaces/tui.html">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"OpenProgram Docs","item":"https://openprogram.io/docs/"},{"@type":"ListItem","position":2,"name":"Terminal UI"}]}</script>
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="OpenProgram">
+<meta property="og:url" content="https://openprogram.io/docs/interfaces/tui.html">
+<meta property="og:title" content="Terminal UI · OpenProgram Docs">
+<meta property="og:description" content="Terminal TUI # See tool permission modes and live changes for approval behavior and changes during a task. The full chat interface for using OpenProgram">
+<meta property="og:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:secure_url" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Terminal UI · OpenProgram Docs">
+<meta name="twitter:description" content="Terminal TUI # See tool permission modes and live changes for approval behavior and changes during a task. The full chat interface for using OpenProgram">
+<meta name="twitter:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta name="twitter:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/docs/assets/mark.svg">
+<link rel="stylesheet" href="/docs/assets/site.css?v=6520ba46">
+<link rel="stylesheet" href="/docs/assets/pygments-light.css" media="(prefers-color-scheme: light)" id="pyg-light">
+<link rel="stylesheet" href="/docs/assets/pygments-dark.css" media="(prefers-color-scheme: dark)" id="pyg-dark">
+<script src="/docs/assets/theme.js?v=6520ba46"></script>
+
+</head>
+<body>
+<header class="topbar">
+  <button class="icon hamburger" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2.5 4.5h11M2.5 8h11M2.5 11.5h11"/></svg></button>
+  <a class="brand" href="/docs/index.html"><img class="mark" src="/docs/assets/mark.svg" alt="">OpenProgram Docs</a>
+  <div class="spacer"></div>
+  <button class="search-trigger" aria-label="Search">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14"/></svg><span class="label" data-i18n="search">Search docs</span><kbd>⌘K</kbd>
+  </button>
+  <div class="lang-wrap">
+    <button class="icon lang-trigger" id="lang-toggle" aria-haspopup="true" aria-expanded="false" aria-label="Language">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="6.2"/><path d="M1.8 8h12.4" stroke-linecap="round"/><ellipse cx="8" cy="8" rx="2.8" ry="6.2"/></svg><span class="lang-label">EN</span><svg class="chev" width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+    </button>
+    <div class="lang-menu" id="lang-menu" role="menu">
+      <button class="lang-opt" data-lang="en" role="menuitem"><span>English</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="lang-opt" data-lang="zh" role="menuitem"><span>简体中文</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+  <div class="theme-wrap">
+    <button class="icon" id="theme-toggle" aria-label="Theme" aria-haspopup="menu" aria-controls="theme-menu" aria-expanded="false"><svg class="ic-system" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="2.5" width="13" height="9" rx="1.5"/><path d="M8 11.5V14M5.5 14h5"/></svg><svg class="ic-moon" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M13.5 9.5A6 6 0 1 1 6.5 2.5a5 5 0 0 0 7 7z"/></svg><svg class="ic-sun" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="3.2"/><path d="M8 1.2v1.8M8 13v1.8M1.2 8H3M13 8h1.8M3.2 3.2l1.3 1.3M11.5 11.5l1.3 1.3M12.8 3.2l-1.3 1.3M4.5 11.5l-1.3 1.3"/></svg></button>
+    <div class="theme-menu" id="theme-menu" role="menu" aria-labelledby="theme-toggle">
+      <button class="theme-opt" data-theme-choice="system" role="menuitemradio" aria-checked="true"><span>Follow system</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="light" role="menuitemradio" aria-checked="false"><span>Light</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="dark" role="menuitemradio" aria-checked="false"><span>Dark</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+</header>
+<nav class="tabbar"><a class="tablink" href="/docs/README.html" data-title-zh="开始使用" data-href-en="/docs/README.html" data-href-zh="/docs/README.zh.html">Get started</a><a class="tablink" href="/docs/install/install.html" data-title-zh="安装" data-href-en="/docs/install/install.html" data-href-zh="/docs/install/install.zh.html">Install</a><a class="tablink" href="/docs/capabilities/README.html" data-title-zh="能力" data-href-en="/docs/capabilities/README.html" data-href-zh="/docs/capabilities/README.zh.html">Capabilities</a><a class="tablink active" href="/docs/interfaces/README.html" data-title-zh="界面" data-href-en="/docs/interfaces/README.html" data-href-zh="/docs/interfaces/README.zh.html">Interfaces</a><a class="tablink" href="/docs/models/README.html" data-title-zh="模型" data-href-en="/docs/models/README.html" data-href-zh="/docs/models/README.zh.html">Models</a><a class="tablink" href="/docs/integrations/anthropic.html" data-title-zh="集成" data-href-en="/docs/integrations/anthropic.html" data-href-zh="/docs/integrations/anthropic.zh.html">Integrations</a><a class="tablink" href="/docs/server/README.html" data-title-zh="服务与运维" data-href-en="/docs/server/README.html" data-href-zh="/docs/server/README.zh.html">Server &amp; Ops</a><a class="tablink" href="/docs/reference/README.html" data-title-zh="参考" data-href-en="/docs/reference/README.html" data-href-zh="/docs/reference/README.zh.html">Reference</a><a class="tablink" href="/docs/reference/design/README.html" data-title-zh="设计" data-href-en="/docs/reference/design/README.html" data-href-zh="/docs/reference/design/README.zh.html">Design</a></nav>
+
+<div class="scrim"></div>
+<div class="layout">
+  <nav class="sidebar" aria-label="Documentation">
+    <input class="nav-filter" type="text" data-i18n-ph="nav_filter"
+           aria-label="Filter docs" placeholder="Filter docs…" autocomplete="off" spellcheck="false">
+    <div class="nav-tree"><div class="nav-sec"><div class="nav-sec-title" data-title-zh="概览">Overview</div><a class="navlink" href="/docs/interfaces/README.html" data-title-zh="界面" data-href-en="/docs/interfaces/README.html" data-href-zh="/docs/interfaces/README.zh.html">Interfaces</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="界面">Surfaces</div><a class="navlink" href="/docs/interfaces/desktop.html" data-title-zh="桌面应用" data-href-en="/docs/interfaces/desktop.html" data-href-zh="/docs/interfaces/desktop.zh.html">Desktop App</a>
+<a class="navlink" href="/docs/interfaces/web.html" data-title-zh="网页界面" data-href-en="/docs/interfaces/web.html" data-href-zh="/docs/interfaces/web.zh.html">Web UI</a>
+<a class="navlink active" href="/docs/interfaces/tui.html" data-title-zh="终端界面" data-href-en="/docs/interfaces/tui.html" data-href-zh="/docs/interfaces/tui.zh.html">Terminal UI</a>
+<a class="navlink" href="/docs/interfaces/cli.html" data-title-zh="命令行" data-href-en="/docs/interfaces/cli.html" data-href-zh="/docs/interfaces/cli.zh.html">CLI</a>
+<a class="navlink" href="/docs/interfaces/acp.html" data-title-zh="编辑器集成" data-href-en="/docs/interfaces/acp.html" data-href-zh="/docs/interfaces/acp.zh.html">Editor integration</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="聊天输入">Chat input</div><a class="navlink" href="/docs/interfaces/voice-input.html" data-title-zh="语音输入" data-href-en="/docs/interfaces/voice-input.html" data-href-zh="/docs/interfaces/voice-input.zh.html">Voice input</a></div></div>
+  </nav>
+  <main class="content"><button class="fs-toggle" aria-label="Fullscreen" title="Fullscreen (Esc to exit)"><svg class="ic-expand" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.2 2H2v4.2M9.8 2H14v4.2M6.2 14H2V9.8M9.8 14H14V9.8"/></svg><svg class="ic-collapse" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6.2h4.2V2M14 6.2H9.8V2M2 9.8h4.2V14M14 9.8H9.8V14"/></svg></button><article><nav class="breadcrumb"><span class="bc-seg" data-title-zh="界面">Interfaces</span> <span class='bc-sep'>›</span> <span class="bc-seg" data-title-zh="界面">Surfaces</span> <span class='bc-sep'>›</span> <span class="bc-seg bc-current" data-title-zh="终端界面">Terminal UI</span></nav><h1 id="terminal-tui">Terminal TUI<a class="header-anchor" href="#terminal-tui">#</a></h1>
+<p>See <a href="/docs/capabilities/permissions.html">tool permission modes and live changes</a> for approval behavior and changes during a task.</p>
+<p>The full chat interface for using OpenProgram without leaving the terminal. This page covers entering and exiting, keyboard shortcuts, and slash commands.</p>
+<h2 id="entering-and-exiting">Entering and exiting<a class="header-anchor" href="#entering-and-exiting">#</a></h2>
+<pre><code class="language-bash">openprogram<span class="w"> </span>tui<span class="w">      </span><span class="c1"># straight into the terminal chat (alias: openprogram chat)</span>
+openprogram<span class="w">          </span><span class="c1"># bare invocation first asks: terminal UI or web UI</span>
+openprogram<span class="w"> </span>tui<span class="w"> </span>--no-alt-screen<span class="w">  </span><span class="c1"># inline mode; keep terminal scrollback</span>
+openprogram<span class="w"> </span>tui<span class="w"> </span>--screen-reader<span class="w">  </span><span class="c1"># inline mode without mouse tracking</span>
+</code></pre>
+<p>The release CLI includes a self-contained Node.js Ink interface on Windows, macOS, and Linux. It uses the terminal's actual raw-input capability rather than an operating-system allowlist: Windows Terminal, PowerShell under ConPTY, and modern integrated terminals get the full-screen interface. A terminal without usable raw input falls back to the built-in Python Rich interface with an explicit message. Both implementations connect to the same local worker over WebSocket and share sessions with the Web UI.</p>
+<p>The full-screen interface requires both stdin and stdout to be terminals. Redirected or piped invocations skip Ink before it writes any ANSI frames and use the line-oriented fallback; use <code>openprogram --print &quot;...&quot;</code> for automation. The alternate screen preserves the shell's main-screen contents and restores them on exit. Cursor movement and deletion operate on complete Unicode grapheme clusters, so emoji, combining characters, and CJK input are not split while editing.</p>
+<p><code>/copy</code> uses <code>wl-copy</code> in Wayland sessions, <code>xclip</code> or <code>xsel</code> in X11 sessions, and <code>clip.exe</code> under WSL. Over SSH it avoids the remote graphical clipboard and uses OSC 52, including tmux passthrough and its paste buffer when available. Native clipboard helpers have a bounded timeout, so a stale display cannot freeze the TUI.</p>
+<p>On Windows, Windows Terminal is recommended. Git Bash running in MinTTY may use the Rich fallback; running PowerShell inside Windows Terminal gets the full interface. The release carries its own Node.js executable, so users do not need to install Node.js for the TUI.</p>
+<p>Exit: <code>/quit</code>, or press <code>Ctrl-C</code> twice quickly while idle.</p>
+<p>To resume a past session: use <code>/resume</code> inside the TUI to pick one, or launch <code>openprogram --resume &lt;id&gt;</code> directly. Session ids are listed by <code>openprogram sessions list</code>.</p>
+<p>With <code>--profile &lt;name&gt;</code>, startup diagnostics are written under that profile's state directory (<code>~/.openprogram-&lt;name&gt;/logs/ink-startup.log</code>) rather than the default profile.</p>
+<h2 id="keys">Keys<a class="header-anchor" href="#keys">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Enter</code></td>
+<td>Send</td>
+</tr>
+<tr>
+<td><code>?</code> on an empty prompt</td>
+<td>Open the keyboard shortcut reference</td>
+</tr>
+<tr>
+<td><code>Alt+Enter</code></td>
+<td>Newline</td>
+</tr>
+<tr>
+<td><code>Esc</code></td>
+<td>Clear the input line; abort the current turn while generating</td>
+</tr>
+<tr>
+<td><code>Ctrl-C</code> (while generating)</td>
+<td>Three-stage stop: first press warns, second stops gracefully, third forces</td>
+</tr>
+<tr>
+<td><code>Ctrl-C</code> double press (idle)</td>
+<td>Exit</td>
+</tr>
+<tr>
+<td><code>↑</code> / <code>↓</code></td>
+<td>Input history; navigate up/down when the completion menu is open</td>
+</tr>
+<tr>
+<td><code>Tab</code></td>
+<td>Accept file / slash-command completion</td>
+</tr>
+<tr>
+<td><code>→</code> (at end of line) or <code>Ctrl+E</code></td>
+<td>Accept the autocomplete suggestion</td>
+</tr>
+<tr>
+<td><code>Ctrl+A</code> / <code>Ctrl+E</code></td>
+<td>Move to the beginning / end of the input when no suggestion is being accepted</td>
+</tr>
+<tr>
+<td><code>Ctrl+W</code></td>
+<td>Delete the previous word</td>
+</tr>
+<tr>
+<td><code>Ctrl+R</code></td>
+<td>Search saved contexts</td>
+</tr>
+<tr>
+<td><code>Shift+Tab</code></td>
+<td>Cycle permission profiles (ask → acceptEdits → plan → auto)</td>
+</tr>
+<tr>
+<td><code>Ctrl+K</code></td>
+<td>Command palette (covers all slash commands)</td>
+</tr>
+<tr>
+<td><code>PageUp</code> / <code>PageDown</code>, <code>Ctrl+U</code> / <code>Ctrl+D</code></td>
+<td>Scroll back by page / half page</td>
+</tr>
+<tr>
+<td><code>Home</code> / <code>End</code></td>
+<td>Jump to top / bottom</td>
+</tr>
+</tbody>
+</table>
+<h2 id="slash-commands">Slash commands<a class="header-anchor" href="#slash-commands">#</a></h2>
+<p>Type <code>/</code> to trigger completion. Common ones:</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/help</code>, <code>/keybindings</code></td>
+<td>Command list and keyboard shortcut reference</td>
+</tr>
+<tr>
+<td><code>/model</code>, <code>/fetch-models</code></td>
+<td>Switch model, re-fetch the model list</td>
+</tr>
+<tr>
+<td><code>/effort</code></td>
+<td>Adjust thinking effort (levels in <a href="/docs/models/thinking-effort.html">thinking effort</a>)</td>
+</tr>
+<tr>
+<td><code>/new</code>, <code>/resume</code>, <code>/sessions</code>, <code>/session</code></td>
+<td>New session, resume, session list, current session info</td>
+</tr>
+<tr>
+<td><code>/rewind</code></td>
+<td>Roll the session back to a message</td>
+</tr>
+<tr>
+<td><code>/compact</code>, <code>/context</code>, <code>/clear</code></td>
+<td>Compact context, view context, clear screen</td>
+</tr>
+<tr>
+<td><code>/permissions</code>, <code>/sandbox</code></td>
+<td>Permission profiles and sandbox</td>
+</tr>
+<tr>
+<td><code>/login &lt;provider&gt;</code>, <code>/logout</code></td>
+<td>Provider login / logout (see <a href="/docs/models/auth.html">auth and credentials</a>)</td>
+</tr>
+<tr>
+<td><code>/agents</code>, <code>/agent</code></td>
+<td>Manage / switch agents</td>
+</tr>
+<tr>
+<td><code>/mcp</code>, <code>/memory</code></td>
+<td>Inspect and manage the same data as the corresponding Web UI pages</td>
+</tr>
+<tr>
+<td><code>/cost</code></td>
+<td>Token usage for this session</td>
+</tr>
+<tr>
+<td><code>/export</code>, <code>/copy</code></td>
+<td>Export the session, copy a reply</td>
+</tr>
+<tr>
+<td><code>/config</code>, <code>/theme</code>, <code>/bell</code></td>
+<td>Settings, theme, notification sound</td>
+</tr>
+<tr>
+<td><code>/doctor</code></td>
+<td>Health check</td>
+</tr>
+<tr>
+<td><code>/channel</code>, <code>/attach</code>, <code>/detach</code>, <code>/connections</code></td>
+<td>Chat-channel hookup and session routing</td>
+</tr>
+<tr>
+<td><code>/quit</code></td>
+<td>Exit</td>
+</tr>
+</tbody>
+</table>
+<p><code>/compact</code> summarizes older complete turns, including their visible tool results,
+while retaining recent turns. It changes the next model context; original
+messages remain available in the session. The before/after token counts are local
+estimates. A short history, a failed summary or a summary that saves no space
+leaves the context unchanged.</p>
+<p>Also available: <code>/search</code>, <code>/review</code>, <code>/diff</code>, <code>/init</code>, <code>/welcome</code>. The <code>/help</code> output is the authoritative full list.</p>
+<p>Beyond these built-ins, the completion menu also lists every command from the unified command registry — skills, MCP prompts, plugin commands, and your own command files under <code>~/.openprogram/commands/</code> or <code>&lt;project&gt;/.openprogram/commands/</code> (markdown with optional YAML frontmatter). Running one expands its body and sends it as the message, exactly like the Web composer: the TUI and the Web UI read the same registry, so a command defined once appears in both.</p>
+<p>Tool continuations can compact completed text results within the same user message; no additional <code>/compact</code> command is required. Original execution records are retained.</p>
+<p>Channel messages with non-string user or assistant text are ignored for that field. Existing background-session text is preserved, and malformed text does not become a transcript message.</p>
+<p>When tool-result summaries are insufficient, older complete text-only execution
+history can be replaced in the next request by a task summary. All user messages
+and the latest assistant segment remain verbatim. Incomplete tool groups,
+multimodal input and signed reasoning are not eligible for this checkpoint.
+Checkpoints are reused only within the current invocation for the same model and
+unchanged source prefix; the DAG remains the durable record.</p>
+<p>Summary requests process long text in bounded chunks and retry context overflow
+with smaller chunks. They share a finite call/time budget; failures leave the
+original history intact. If protected content alone exceeds the window, the
+request fails explicitly instead of silently dropping user instructions.</p>
+<div class="page-updated"><span data-i18n="updated">Last updated</span> · 2026-11-01</div><div class="prevnext"><a class="pn-link pn-prev" href="/docs/interfaces/web.html" data-href-en="/docs/interfaces/web.html" data-href-zh="/docs/interfaces/web.zh.html"><span class="pn-dir" data-i18n="prev">Previous</span><span class="pn-title" data-title-zh="网页界面">Web UI</span></a><a class="pn-link pn-next" href="/docs/interfaces/cli.html" data-href-en="/docs/interfaces/cli.html" data-href-zh="/docs/interfaces/cli.zh.html"><span class="pn-dir" data-i18n="next">Next</span><span class="pn-title" data-title-zh="命令行">CLI</span></a></div></article></main>
+  <aside class="toc"><div class="toc-title" data-i18n="on_this_page">On this page</div>
+<ul class="toc-list">
+<li>
+<a class="lvl-2" href="#entering-and-exiting">Entering and exiting</a>
+</li>
+<li>
+<a class="lvl-2" href="#keys">Keys</a>
+</li>
+<li>
+<a class="lvl-2" href="#slash-commands">Slash commands</a>
+</li>
+</ul></aside>
+</div>
+
+<div class="search-overlay">
+  <div class="search-box">
+    <input type="text" data-i18n-ph="search_ph" placeholder="Search titles or text…" autocomplete="off" spellcheck="false">
+    <div class="search-results"></div>
+  </div>
+</div>
+
+<script src="/docs/assets/site.js?v=6520ba46"></script>
+</body>
+</html>

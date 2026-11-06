@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh" data-base="/docs/" data-page-lang="zh" data-build="1793956776" data-alt-lang-url="/docs/start/GETTING_STARTED.html">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>快速上手 · OpenProgram Docs</title>
+<meta name="description" content="这页带你在五分钟内完成：安装、接入一个 LLM provider、打开界面、发出第一条消息，并装上第一个现成的 agent 程序。 第 1 步：安装 # 在 macOS 或 Linux 安装包含受控 Python 的完整 release runtime： curl -fsSL">
+<link rel="canonical" href="https://openprogram.io/docs/start/GETTING_STARTED.zh.html">
+<link rel="alternate" type="text/markdown" href="https://openprogram.io/docs/start/GETTING_STARTED.zh.html.md">
+<link rel="describedby" href="https://openprogram.io/llms.txt">
+<link rel="alternate" hreflang="en" href="https://openprogram.io/docs/start/GETTING_STARTED.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://openprogram.io/docs/start/GETTING_STARTED.zh.html">
+<link rel="alternate" hreflang="x-default" href="https://openprogram.io/docs/start/GETTING_STARTED.html">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"OpenProgram Docs","item":"https://openprogram.io/docs/"},{"@type":"ListItem","position":2,"name":"快速上手"}]}</script>
+<meta property="og:type" content="article">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:site_name" content="OpenProgram">
+<meta property="og:url" content="https://openprogram.io/docs/start/GETTING_STARTED.zh.html">
+<meta property="og:title" content="快速上手 · OpenProgram Docs">
+<meta property="og:description" content="这页带你在五分钟内完成：安装、接入一个 LLM provider、打开界面、发出第一条消息，并装上第一个现成的 agent 程序。 第 1 步：安装 # 在 macOS 或 Linux 安装包含受控 Python 的完整 release runtime： curl -fsSL">
+<meta property="og:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:secure_url" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="快速上手 · OpenProgram Docs">
+<meta name="twitter:description" content="这页带你在五分钟内完成：安装、接入一个 LLM provider、打开界面、发出第一条消息，并装上第一个现成的 agent 程序。 第 1 步：安装 # 在 macOS 或 Linux 安装包含受控 Python 的完整 release runtime： curl -fsSL">
+<meta name="twitter:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta name="twitter:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/docs/assets/mark.svg">
+<link rel="stylesheet" href="/docs/assets/site.css?v=6520ba46">
+<link rel="stylesheet" href="/docs/assets/pygments-light.css" media="(prefers-color-scheme: light)" id="pyg-light">
+<link rel="stylesheet" href="/docs/assets/pygments-dark.css" media="(prefers-color-scheme: dark)" id="pyg-dark">
+<script src="/docs/assets/theme.js?v=6520ba46"></script>
+
+</head>
+<body>
+<header class="topbar">
+  <button class="icon hamburger" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2.5 4.5h11M2.5 8h11M2.5 11.5h11"/></svg></button>
+  <a class="brand" href="/docs/index.html"><img class="mark" src="/docs/assets/mark.svg" alt="">OpenProgram Docs</a>
+  <div class="spacer"></div>
+  <button class="search-trigger" aria-label="Search">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14"/></svg><span class="label" data-i18n="search">Search docs</span><kbd>⌘K</kbd>
+  </button>
+  <div class="lang-wrap">
+    <button class="icon lang-trigger" id="lang-toggle" aria-haspopup="true" aria-expanded="false" aria-label="Language">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="6.2"/><path d="M1.8 8h12.4" stroke-linecap="round"/><ellipse cx="8" cy="8" rx="2.8" ry="6.2"/></svg><span class="lang-label">EN</span><svg class="chev" width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+    </button>
+    <div class="lang-menu" id="lang-menu" role="menu">
+      <button class="lang-opt" data-lang="en" role="menuitem"><span>English</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="lang-opt" data-lang="zh" role="menuitem"><span>简体中文</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+  <div class="theme-wrap">
+    <button class="icon" id="theme-toggle" aria-label="Theme" aria-haspopup="menu" aria-controls="theme-menu" aria-expanded="false"><svg class="ic-system" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="2.5" width="13" height="9" rx="1.5"/><path d="M8 11.5V14M5.5 14h5"/></svg><svg class="ic-moon" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M13.5 9.5A6 6 0 1 1 6.5 2.5a5 5 0 0 0 7 7z"/></svg><svg class="ic-sun" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="3.2"/><path d="M8 1.2v1.8M8 13v1.8M1.2 8H3M13 8h1.8M3.2 3.2l1.3 1.3M11.5 11.5l1.3 1.3M12.8 3.2l-1.3 1.3M4.5 11.5l-1.3 1.3"/></svg></button>
+    <div class="theme-menu" id="theme-menu" role="menu" aria-labelledby="theme-toggle">
+      <button class="theme-opt" data-theme-choice="system" role="menuitemradio" aria-checked="true"><span>Follow system</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="light" role="menuitemradio" aria-checked="false"><span>Light</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="dark" role="menuitemradio" aria-checked="false"><span>Dark</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+</header>
+<nav class="tabbar"><a class="tablink active" href="/docs/README.html" data-title-zh="开始使用" data-href-en="/docs/README.html" data-href-zh="/docs/README.zh.html">Get started</a><a class="tablink" href="/docs/install/install.html" data-title-zh="安装" data-href-en="/docs/install/install.html" data-href-zh="/docs/install/install.zh.html">Install</a><a class="tablink" href="/docs/capabilities/README.html" data-title-zh="能力" data-href-en="/docs/capabilities/README.html" data-href-zh="/docs/capabilities/README.zh.html">Capabilities</a><a class="tablink" href="/docs/interfaces/README.html" data-title-zh="界面" data-href-en="/docs/interfaces/README.html" data-href-zh="/docs/interfaces/README.zh.html">Interfaces</a><a class="tablink" href="/docs/models/README.html" data-title-zh="模型" data-href-en="/docs/models/README.html" data-href-zh="/docs/models/README.zh.html">Models</a><a class="tablink" href="/docs/integrations/anthropic.html" data-title-zh="集成" data-href-en="/docs/integrations/anthropic.html" data-href-zh="/docs/integrations/anthropic.zh.html">Integrations</a><a class="tablink" href="/docs/server/README.html" data-title-zh="服务与运维" data-href-en="/docs/server/README.html" data-href-zh="/docs/server/README.zh.html">Server &amp; Ops</a><a class="tablink" href="/docs/reference/README.html" data-title-zh="参考" data-href-en="/docs/reference/README.html" data-href-zh="/docs/reference/README.zh.html">Reference</a><a class="tablink" href="/docs/reference/design/README.html" data-title-zh="设计" data-href-en="/docs/reference/design/README.html" data-href-zh="/docs/reference/design/README.zh.html">Design</a></nav>
+
+<div class="scrim"></div>
+<div class="layout">
+  <nav class="sidebar" aria-label="Documentation">
+    <input class="nav-filter" type="text" data-i18n-ph="nav_filter"
+           aria-label="Filter docs" placeholder="Filter docs…" autocomplete="off" spellcheck="false">
+    <div class="nav-tree"><div class="nav-sec"><div class="nav-sec-title" data-title-zh="概览">Overview</div><a class="navlink" href="/docs/README.html" data-title-zh="概览" data-href-en="/docs/README.html" data-href-zh="/docs/README.zh.html">Overview</a>
+<a class="navlink" href="/docs/start/features.html" data-title-zh="功能" data-href-en="/docs/start/features.html" data-href-zh="/docs/start/features.zh.html">Features</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="第一步">First steps</div><a class="navlink active" href="/docs/start/GETTING_STARTED.html" data-title-zh="快速上手" data-href-en="/docs/start/GETTING_STARTED.html" data-href-zh="/docs/start/GETTING_STARTED.zh.html">Getting started</a>
+<a class="navlink" href="/docs/start/daily-use.html" data-title-zh="日常操作" data-href-en="/docs/start/daily-use.html" data-href-zh="/docs/start/daily-use.zh.html">Daily use</a>
+<a class="navlink" href="/docs/start/faq.html" data-title-zh="常见问题" data-href-en="/docs/start/faq.html" data-href-zh="/docs/start/faq.zh.html">FAQ</a></div></div>
+  </nav>
+  <main class="content"><button class="fs-toggle" aria-label="Fullscreen" title="Fullscreen (Esc to exit)"><svg class="ic-expand" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.2 2H2v4.2M9.8 2H14v4.2M6.2 14H2V9.8M9.8 14H14V9.8"/></svg><svg class="ic-collapse" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6.2h4.2V2M14 6.2H9.8V2M2 9.8h4.2V14M14 9.8H9.8V14"/></svg></button><article><nav class="breadcrumb"><span class="bc-seg" data-title-zh="开始使用">Get started</span> <span class='bc-sep'>›</span> <span class="bc-seg" data-title-zh="第一步">First steps</span> <span class='bc-sep'>›</span> <span class="bc-seg bc-current" data-title-zh="快速上手">Getting started</span></nav><h1 id="快速上手">快速上手<a class="header-anchor" href="#快速上手">#</a></h1>
+<p>这页带你在五分钟内完成：安装、接入一个 LLM provider、打开界面、发出第一条消息，并装上第一个现成的 agent 程序。</p>
+<h2 id="第-1-步安装">第 1 步：安装<a class="header-anchor" href="#第-1-步安装">#</a></h2>
+<p>在 macOS 或 Linux 安装包含受控 Python 的完整 release runtime：</p>
+<pre><code class="language-bash">curl<span class="w"> </span>-fsSL<span class="w"> </span>https://openprogram.io/install<span class="w"> </span><span class="p">|</span><span class="w"> </span>sh
+</code></pre>
+<p>Windows x86_64 使用 PowerShell：</p>
+<pre><code class="language-powershell"><span class="nb">irm </span><span class="n">https</span><span class="p">://</span><span class="n">openprogram</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">install</span><span class="p">.</span><span class="n">ps1</span> <span class="p">|</span> <span class="nb">iex</span>
+</code></pre>
+<p>installer 提供自己的 Python 并包含 Web UI，因此运行时不需要 Node.js。Session 与 Memory 历史需要 Git；<code>openprogram doctor</code> 会报告 Git 是否可用。macOS Desktop 使用 release DMG。Windows Desktop 只在已发布 release 附带带签名 <code>win-x64.exe</code> 时使用该 installer；否则使用完整 Windows CLI/server runtime 和浏览器 UI。Windows 沙箱是单独层级。平台范围和开发 checkout 安装见<a href="/docs/install/install.zh.html">安装</a>。</p>
+<h2 id="第-2-步首次运行接入-provider">第 2 步：首次运行，接入 provider<a class="header-anchor" href="#第-2-步首次运行接入-provider">#</a></h2>
+<pre><code class="language-bash">openprogram
+</code></pre>
+<p>第一次运行会进入 setup 向导，引导你完成 provider 配置——从已登录的 Claude Code / Codex / Gemini CLI 导入凭据，或输入一个 API key——随后直接打开终端聊天界面。随时可以用 <code>openprogram setup</code> 重新运行向导。</p>
+<p>如果环境里已经有 provider key，可以把它导入 OpenProgram 的凭据库，省去在向导里再次粘贴：</p>
+<pre><code class="language-bash"><span class="nb">export</span><span class="w"> </span><span class="nv">OPENAI_API_KEY</span><span class="o">=</span>sk-...
+openprogram<span class="w"> </span>providers<span class="w"> </span>discover
+openprogram<span class="w"> </span>providers<span class="w"> </span>adopt<span class="w"> </span>env:OPENAI_API_KEY
+</code></pre>
+<p>其他 provider 使用对应的 <code>env:&lt;变量名&gt;</code> source id 重复最后一条命令。也可以把 key
+通过 stdin 直接交给 <code>openprogram providers login &lt;provider&gt; --api-key-stdin</code>。
+确认检查：<code>openprogram providers</code> 会列出已存储的凭据。</p>
+<h2 id="第-3-步打开-web-界面">第 3 步：打开 web 界面<a class="header-anchor" href="#第-3-步打开-web-界面">#</a></h2>
+<pre><code class="language-bash">openprogram<span class="w"> </span>web
+</code></pre>
+<p>它会启动后台 worker 并打开浏览器到 <strong>http://localhost:18100</strong>——web UI、API 和 WebSocket 共用这一个端口。改端口用 <code>openprogram ports --port &lt;p&gt;</code>。</p>
+<h2 id="第-4-步发第一条消息">第 4 步：发第一条消息<a class="header-anchor" href="#第-4-步发第一条消息">#</a></h2>
+<p>在终端聊天界面或 web 输入框里直接输入即可。想快速验证一条命令也行：</p>
+<pre><code class="language-bash">openprogram<span class="w"> </span>--print<span class="w"> </span><span class="s2">&quot;用一句话介绍你自己&quot;</span>
+</code></pre>
+<p>它发送一条消息、打印回复、然后退出。之前的会话可以用 <code>openprogram --resume &lt;session_id&gt;</code> 续上，id 来自 <code>openprogram sessions list</code> 或 web 侧栏。</p>
+<h2 id="第-5-步添加-agent-program">第 5 步：添加 agent Program<a class="header-anchor" href="#第-5-步添加-agent-program">#</a></h2>
+<p>release 不捆绑任何 agent Program。用 <code>openprogram programs install &lt;source&gt;</code> 从目录、git URL 或 GitHub <code>owner/repo</code> 安装，之后它会出现在 Web UI 和函数列表中。可用 <code>openprogram programs list</code> 查看注册状态。见<a href="/docs/capabilities/installing-programs.zh.html">安装程序</a>。</p>
+<h2 id="下一步">下一步<a class="header-anchor" href="#下一步">#</a></h2>
+<ul>
+<li><a href="/docs/models/README.zh.html">模型与 provider</a> — 各 provider 的接入方式、多账户与密钥轮换</li>
+<li><a href="/docs/capabilities/agentic-programming/README.zh.html">Agentic Programming</a> — 写你自己的 <code>Agent</code> method</li>
+<li><a href="/docs/interfaces/README.zh.html">界面</a> — 终端 TUI、web UI 与 channels</li>
+<li><a href="/docs/start/daily-use.zh.html">日常操作</a> — 会话管理、分支与回退</li>
+</ul>
+<div class="page-updated"><span data-i18n="updated">Last updated</span> · 2026-11-02</div><div class="prevnext"><a class="pn-link pn-prev" href="/docs/start/features.html" data-href-en="/docs/start/features.html" data-href-zh="/docs/start/features.zh.html"><span class="pn-dir" data-i18n="prev">Previous</span><span class="pn-title" data-title-zh="功能">Features</span></a><a class="pn-link pn-next" href="/docs/start/daily-use.html" data-href-en="/docs/start/daily-use.html" data-href-zh="/docs/start/daily-use.zh.html"><span class="pn-dir" data-i18n="next">Next</span><span class="pn-title" data-title-zh="日常操作">Daily use</span></a></div></article></main>
+  <aside class="toc"><div class="toc-title" data-i18n="on_this_page">On this page</div>
+<ul class="toc-list">
+<li>
+<a class="lvl-2" href="#第-1-步安装">第 1 步：安装</a>
+</li>
+<li>
+<a class="lvl-2" href="#第-2-步首次运行接入-provider">第 2 步：首次运行，接入 provider</a>
+</li>
+<li>
+<a class="lvl-2" href="#第-3-步打开-web-界面">第 3 步：打开 web 界面</a>
+</li>
+<li>
+<a class="lvl-2" href="#第-4-步发第一条消息">第 4 步：发第一条消息</a>
+</li>
+<li>
+<a class="lvl-2" href="#第-5-步添加-agent-program">第 5 步：添加 agent Program</a>
+</li>
+<li>
+<a class="lvl-2" href="#下一步">下一步</a>
+</li>
+</ul></aside>
+</div>
+
+<div class="search-overlay">
+  <div class="search-box">
+    <input type="text" data-i18n-ph="search_ph" placeholder="Search titles or text…" autocomplete="off" spellcheck="false">
+    <div class="search-results"></div>
+  </div>
+</div>
+
+<script src="/docs/assets/site.js?v=6520ba46"></script>
+</body>
+</html>

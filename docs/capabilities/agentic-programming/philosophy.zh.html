@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="zh" data-base="/docs/" data-page-lang="zh" data-build="1793956776" data-alt-lang-url="/docs/capabilities/agentic-programming/philosophy.html">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>设计原则 · OpenProgram Docs</title>
+<meta name="description" content="设计哲学 # OpenProgram 是 Agentic Programming 这一编程范式的产品化实现。 这篇文档讲的是范式本身：它解决什么问题、为什么要反转控制权、核心原语是什么。 范式的正式表述见论文 LLM-as-Code: Agentic Programming for Agent Harness （">
+<link rel="canonical" href="https://openprogram.io/docs/capabilities/agentic-programming/philosophy.zh.html">
+<link rel="alternate" type="text/markdown" href="https://openprogram.io/docs/capabilities/agentic-programming/philosophy.zh.html.md">
+<link rel="describedby" href="https://openprogram.io/llms.txt">
+<link rel="alternate" hreflang="en" href="https://openprogram.io/docs/capabilities/agentic-programming/philosophy.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://openprogram.io/docs/capabilities/agentic-programming/philosophy.zh.html">
+<link rel="alternate" hreflang="x-default" href="https://openprogram.io/docs/capabilities/agentic-programming/philosophy.html">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"OpenProgram Docs","item":"https://openprogram.io/docs/"},{"@type":"ListItem","position":2,"name":"设计原则"}]}</script>
+<meta property="og:type" content="article">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:site_name" content="OpenProgram">
+<meta property="og:url" content="https://openprogram.io/docs/capabilities/agentic-programming/philosophy.zh.html">
+<meta property="og:title" content="设计原则 · OpenProgram Docs">
+<meta property="og:description" content="设计哲学 # OpenProgram 是 Agentic Programming 这一编程范式的产品化实现。 这篇文档讲的是范式本身：它解决什么问题、为什么要反转控制权、核心原语是什么。 范式的正式表述见论文 LLM-as-Code: Agentic Programming for Agent Harness （">
+<meta property="og:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:secure_url" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="设计原则 · OpenProgram Docs">
+<meta name="twitter:description" content="设计哲学 # OpenProgram 是 Agentic Programming 这一编程范式的产品化实现。 这篇文档讲的是范式本身：它解决什么问题、为什么要反转控制权、核心原语是什么。 范式的正式表述见论文 LLM-as-Code: Agentic Programming for Agent Harness （">
+<meta name="twitter:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta name="twitter:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/docs/assets/mark.svg">
+<link rel="stylesheet" href="/docs/assets/site.css?v=6520ba46">
+<link rel="stylesheet" href="/docs/assets/pygments-light.css" media="(prefers-color-scheme: light)" id="pyg-light">
+<link rel="stylesheet" href="/docs/assets/pygments-dark.css" media="(prefers-color-scheme: dark)" id="pyg-dark">
+<script src="/docs/assets/theme.js?v=6520ba46"></script>
+
+</head>
+<body>
+<header class="topbar">
+  <button class="icon hamburger" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2.5 4.5h11M2.5 8h11M2.5 11.5h11"/></svg></button>
+  <a class="brand" href="/docs/index.html"><img class="mark" src="/docs/assets/mark.svg" alt="">OpenProgram Docs</a>
+  <div class="spacer"></div>
+  <button class="search-trigger" aria-label="Search">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14"/></svg><span class="label" data-i18n="search">Search docs</span><kbd>⌘K</kbd>
+  </button>
+  <div class="lang-wrap">
+    <button class="icon lang-trigger" id="lang-toggle" aria-haspopup="true" aria-expanded="false" aria-label="Language">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="6.2"/><path d="M1.8 8h12.4" stroke-linecap="round"/><ellipse cx="8" cy="8" rx="2.8" ry="6.2"/></svg><span class="lang-label">EN</span><svg class="chev" width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+    </button>
+    <div class="lang-menu" id="lang-menu" role="menu">
+      <button class="lang-opt" data-lang="en" role="menuitem"><span>English</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="lang-opt" data-lang="zh" role="menuitem"><span>简体中文</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+  <div class="theme-wrap">
+    <button class="icon" id="theme-toggle" aria-label="Theme" aria-haspopup="menu" aria-controls="theme-menu" aria-expanded="false"><svg class="ic-system" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="2.5" width="13" height="9" rx="1.5"/><path d="M8 11.5V14M5.5 14h5"/></svg><svg class="ic-moon" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M13.5 9.5A6 6 0 1 1 6.5 2.5a5 5 0 0 0 7 7z"/></svg><svg class="ic-sun" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="3.2"/><path d="M8 1.2v1.8M8 13v1.8M1.2 8H3M13 8h1.8M3.2 3.2l1.3 1.3M11.5 11.5l1.3 1.3M12.8 3.2l-1.3 1.3M4.5 11.5l-1.3 1.3"/></svg></button>
+    <div class="theme-menu" id="theme-menu" role="menu" aria-labelledby="theme-toggle">
+      <button class="theme-opt" data-theme-choice="system" role="menuitemradio" aria-checked="true"><span>Follow system</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="light" role="menuitemradio" aria-checked="false"><span>Light</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="dark" role="menuitemradio" aria-checked="false"><span>Dark</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+</header>
+<nav class="tabbar"><a class="tablink" href="/docs/README.html" data-title-zh="开始使用" data-href-en="/docs/README.html" data-href-zh="/docs/README.zh.html">Get started</a><a class="tablink" href="/docs/install/install.html" data-title-zh="安装" data-href-en="/docs/install/install.html" data-href-zh="/docs/install/install.zh.html">Install</a><a class="tablink active" href="/docs/capabilities/README.html" data-title-zh="能力" data-href-en="/docs/capabilities/README.html" data-href-zh="/docs/capabilities/README.zh.html">Capabilities</a><a class="tablink" href="/docs/interfaces/README.html" data-title-zh="界面" data-href-en="/docs/interfaces/README.html" data-href-zh="/docs/interfaces/README.zh.html">Interfaces</a><a class="tablink" href="/docs/models/README.html" data-title-zh="模型" data-href-en="/docs/models/README.html" data-href-zh="/docs/models/README.zh.html">Models</a><a class="tablink" href="/docs/integrations/anthropic.html" data-title-zh="集成" data-href-en="/docs/integrations/anthropic.html" data-href-zh="/docs/integrations/anthropic.zh.html">Integrations</a><a class="tablink" href="/docs/server/README.html" data-title-zh="服务与运维" data-href-en="/docs/server/README.html" data-href-zh="/docs/server/README.zh.html">Server &amp; Ops</a><a class="tablink" href="/docs/reference/README.html" data-title-zh="参考" data-href-en="/docs/reference/README.html" data-href-zh="/docs/reference/README.zh.html">Reference</a><a class="tablink" href="/docs/reference/design/README.html" data-title-zh="设计" data-href-en="/docs/reference/design/README.html" data-href-zh="/docs/reference/design/README.zh.html">Design</a></nav>
+
+<div class="scrim"></div>
+<div class="layout">
+  <nav class="sidebar" aria-label="Documentation">
+    <input class="nav-filter" type="text" data-i18n-ph="nav_filter"
+           aria-label="Filter docs" placeholder="Filter docs…" autocomplete="off" spellcheck="false">
+    <div class="nav-tree"><div class="nav-sec"><div class="nav-sec-title" data-title-zh="概览">Overview</div><a class="navlink" href="/docs/capabilities/README.html" data-title-zh="概览" data-href-en="/docs/capabilities/README.html" data-href-zh="/docs/capabilities/README.zh.html">Overview</a>
+<a class="navlink" href="/docs/capabilities/applications.html" data-title-zh="应用" data-href-en="/docs/capabilities/applications.html" data-href-zh="/docs/capabilities/applications.zh.html">Applications</a>
+<a class="navlink" href="/docs/capabilities/framework-control.html" data-title-zh="框架工具" data-href-en="/docs/capabilities/framework-control.html" data-href-zh="/docs/capabilities/framework-control.zh.html">Framework tools</a></div>
+<div class="nav-sec"><div class="nav-sec-title">Agentic Programming</div><a class="navlink" href="/docs/capabilities/agentic-programming/README.html" data-title-zh="指南" data-href-en="/docs/capabilities/agentic-programming/README.html" data-href-zh="/docs/capabilities/agentic-programming/README.zh.html">Guide</a>
+<a class="navlink active" href="/docs/capabilities/agentic-programming/philosophy.html" data-title-zh="设计原则" data-href-en="/docs/capabilities/agentic-programming/philosophy.html" data-href-zh="/docs/capabilities/agentic-programming/philosophy.zh.html">Philosophy</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/embedding-in-your-own-stack.html" data-title-zh="框架嵌入" data-href-en="/docs/capabilities/agentic-programming/embedding-in-your-own-stack.html" data-href-zh="/docs/capabilities/agentic-programming/embedding-in-your-own-stack.zh.html">Framework embedding</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="编写函数">Writing functions</div><a class="navlink" href="/docs/capabilities/agentic-programming/writing-functions/pure-python.html" data-title-zh="Python 函数" data-href-en="/docs/capabilities/agentic-programming/writing-functions/pure-python.html" data-href-zh="/docs/capabilities/agentic-programming/writing-functions/pure-python.zh.html">Python functions</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/writing-functions/agent.html" data-title-zh="智能体函数" data-href-en="/docs/capabilities/agentic-programming/writing-functions/agent.html" data-href-zh="/docs/capabilities/agentic-programming/writing-functions/agent.zh.html">Agentic functions</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/writing-functions/function-metadata.html" data-title-zh="函数元数据" data-href-en="/docs/capabilities/agentic-programming/writing-functions/function-metadata.html" data-href-zh="/docs/capabilities/agentic-programming/writing-functions/function-metadata.zh.html">Function metadata</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="选择下一步">Choosing the next step</div><a class="navlink" href="/docs/capabilities/agentic-programming/choosing-the-next-step/tool-calling.html" data-title-zh="工具循环" data-href-en="/docs/capabilities/agentic-programming/choosing-the-next-step/tool-calling.html" data-href-zh="/docs/capabilities/agentic-programming/choosing-the-next-step/tool-calling.zh.html">Tool-call loops</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/choosing-the-next-step/fixed-order-calls.html" data-title-zh="顺序调用" data-href-en="/docs/capabilities/agentic-programming/choosing-the-next-step/fixed-order-calls.html" data-href-zh="/docs/capabilities/agentic-programming/choosing-the-next-step/fixed-order-calls.zh.html">Fixed-order calls</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/choosing-the-next-step/next-step-decision.html" data-title-zh="步骤选择" data-href-en="/docs/capabilities/agentic-programming/choosing-the-next-step/next-step-decision.html" data-href-zh="/docs/capabilities/agentic-programming/choosing-the-next-step/next-step-decision.zh.html">Next-step selection</a></div>
+<div class="nav-sec"><div class="nav-sec-title">Agentic Workflows</div><a class="navlink" href="/docs/capabilities/workflows/README.html" data-title-zh="工作流" data-href-en="/docs/capabilities/workflows/README.html" data-href-zh="/docs/capabilities/workflows/README.zh.html">Workflows</a>
+<a class="navlink" href="/docs/capabilities/workflows/authoring.html" data-title-zh="工作流编写" data-href-en="/docs/capabilities/workflows/authoring.html" data-href-zh="/docs/capabilities/workflows/authoring.zh.html">Workflow authoring</a>
+<a class="navlink" href="/docs/capabilities/workflows/recording.html" data-title-zh="录制 Workflow" data-href-en="/docs/capabilities/workflows/recording.html" data-href-zh="/docs/capabilities/workflows/recording.zh.html">Record a workflow</a>
+<a class="navlink" href="/docs/capabilities/workflows/reports.html" data-title-zh="每周报告" data-href-en="/docs/capabilities/workflows/reports.html" data-href-zh="/docs/capabilities/workflows/reports.zh.html">Weekly reports</a></div>
+<div class="nav-sec"><div class="nav-sec-title">Agents</div><a class="navlink" href="/docs/capabilities/agents.html" data-title-zh="配置 Agent" data-href-en="/docs/capabilities/agents.html" data-href-zh="/docs/capabilities/agents.zh.html">Configure an Agent</a>
+<a class="navlink" href="/docs/capabilities/agents-md.html" data-title-zh="用 AGENTS.md 写指令" data-href-en="/docs/capabilities/agents-md.html" data-href-zh="/docs/capabilities/agents-md.zh.html">Instructions with AGENTS.md</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="常驻 Agent">Always-on Agents</div><a class="navlink" href="/docs/capabilities/always-on-agents.html" data-title-zh="常驻 Agent" data-href-en="/docs/capabilities/always-on-agents.html" data-href-zh="/docs/capabilities/always-on-agents.zh.html">Always-on Agents</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="提醒">Reminders</div><a class="navlink" href="/docs/capabilities/reminders.html" data-title-zh="提醒" data-href-en="/docs/capabilities/reminders.html" data-href-zh="/docs/capabilities/reminders.zh.html">Reminders</a>
+<a class="navlink" href="/docs/capabilities/event-triggers.html" data-title-zh="有事发生时运行任务" data-href-en="/docs/capabilities/event-triggers.html" data-href-zh="/docs/capabilities/event-triggers.zh.html">Run a task when something happens</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="记忆">Memory</div><a class="navlink" href="/docs/capabilities/memory.html" data-title-zh="记忆管理" data-href-en="/docs/capabilities/memory.html" data-href-zh="/docs/capabilities/memory.zh.html">Memory management</a>
+<a class="navlink" href="/docs/capabilities/memory-settings.html" data-title-zh="调整记忆" data-href-en="/docs/capabilities/memory-settings.html" data-href-zh="/docs/capabilities/memory-settings.zh.html">Tune Memory</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="运行环境">Environments</div><a class="navlink" href="/docs/capabilities/environments.html" data-title-zh="在另一台机器上运行会话" data-href-en="/docs/capabilities/environments.html" data-href-zh="/docs/capabilities/environments.zh.html">Run conversations on another machine</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="会话目标">Session goals</div><a class="navlink" href="/docs/capabilities/goal.html" data-title-zh="目标" data-href-en="/docs/capabilities/goal.html" data-href-zh="/docs/capabilities/goal.zh.html">Goals</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="操控电脑">Computer use</div><a class="navlink" href="/docs/capabilities/computer-use.html" data-title-zh="操控电脑" data-href-en="/docs/capabilities/computer-use.html" data-href-zh="/docs/capabilities/computer-use.zh.html">Computer use</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="会议">Meetings</div><a class="navlink" href="/docs/capabilities/meetings.html" data-title-zh="会议" data-href-en="/docs/capabilities/meetings.html" data-href-zh="/docs/capabilities/meetings.zh.html">Meetings</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="扩展">Extending</div><a class="navlink" href="/docs/capabilities/installing-programs.html" data-title-zh="安装程序" data-href-en="/docs/capabilities/installing-programs.html" data-href-zh="/docs/capabilities/installing-programs.zh.html">Installing programs</a>
+<a class="navlink" href="/docs/capabilities/skills.html" data-title-zh="技能" data-href-en="/docs/capabilities/skills.html" data-href-zh="/docs/capabilities/skills.zh.html">Skills</a>
+<a class="navlink" href="/docs/capabilities/plugins.html" data-title-zh="插件" data-href-en="/docs/capabilities/plugins.html" data-href-zh="/docs/capabilities/plugins.zh.html">Plugins</a>
+<a class="navlink" href="/docs/capabilities/mcp.html" data-title-zh="MCP" data-href-en="/docs/capabilities/mcp.html" data-href-zh="/docs/capabilities/mcp.zh.html">MCP</a>
+<a class="navlink" href="/docs/capabilities/tools.html" data-title-zh="内置工具" data-href-en="/docs/capabilities/tools.html" data-href-zh="/docs/capabilities/tools.zh.html">Built-in tools</a>
+<a class="navlink" href="/docs/capabilities/lsp.html" data-title-zh="语言服务器" data-href-en="/docs/capabilities/lsp.html" data-href-zh="/docs/capabilities/lsp.zh.html">Language servers</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="概览">Overview</div><a class="navlink" href="/docs/capabilities/commit-push-pr.html" data-title-zh="提交与拉取请求" data-href-en="/docs/capabilities/commit-push-pr.html" data-href-zh="/docs/capabilities/commit-push-pr.zh.html">Commits and PRs</a>
+<a class="navlink" href="/docs/capabilities/permissions.html" data-title-zh="工具权限" data-href-en="/docs/capabilities/permissions.html" data-href-zh="/docs/capabilities/permissions.zh.html">Tool permissions</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="指南">Guide</div><a class="navlink" href="/docs/capabilities/agentic-programming/self-programming-ai-agents.html" data-title-zh="自编程智能体" data-href-en="/docs/capabilities/agentic-programming/self-programming-ai-agents.html" data-href-zh="/docs/capabilities/agentic-programming/self-programming-ai-agents.zh.html">Self-programming agents</a></div></div>
+  </nav>
+  <main class="content"><button class="fs-toggle" aria-label="Fullscreen" title="Fullscreen (Esc to exit)"><svg class="ic-expand" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.2 2H2v4.2M9.8 2H14v4.2M6.2 14H2V9.8M9.8 14H14V9.8"/></svg><svg class="ic-collapse" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6.2h4.2V2M14 6.2H9.8V2M2 9.8h4.2V14M14 9.8H9.8V14"/></svg></button><article><nav class="breadcrumb"><span class="bc-seg" data-title-zh="能力">Capabilities</span> <span class='bc-sep'>›</span> <span class="bc-seg">Agentic Programming</span> <span class='bc-sep'>›</span> <span class="bc-seg bc-current" data-title-zh="设计原则">Philosophy</span></nav><h1 id="设计哲学">设计哲学<a class="header-anchor" href="#设计哲学">#</a></h1>
+<blockquote>
+<p>OpenProgram 是 Agentic Programming 这一编程范式的产品化实现。
+这篇文档讲的是范式本身：它解决什么问题、为什么要反转控制权、核心原语是什么。
+范式的正式表述见论文 <em>LLM-as-Code: Agentic Programming for Agent Harness</em>（<a href="https://arxiv.org/abs/2606.15874">arXiv:2606.15874</a>），已被 KDD 2026 AgenticSE workshop 接收。</p>
+</blockquote>
+<h2 id="问题">问题<a class="header-anchor" href="#问题">#</a></h2>
+<p>当前所有 LLM Agent 框架都把控制权交给模型：</p>
+<ul>
+<li><strong>做什么</strong> 由 LLM 决定（planner 先规划、agent 再执行）</li>
+<li><strong>何时做</strong> 由 LLM 决定（while loop 直到 agent 说&quot;我做完了&quot;）</li>
+<li><strong>怎么做</strong> 由 LLM 决定（工具调用、参数、顺序）</li>
+</ul>
+<p>代价：</p>
+<ul>
+<li><strong>执行不可预测</strong> —— 同样的输入，每次轨迹不同</li>
+<li><strong>上下文爆炸</strong> —— 每一步都把历史塞给模型</li>
+<li><strong>输出无保证</strong> —— 没人能说&quot;这个任务一定会跑完&quot;</li>
+<li><strong>调试地狱</strong> —— 出错时，你分不清是 prompt 问题、工具问题、还是模型幻觉</li>
+</ul>
+<p>根本原因：<strong>用一个黑箱概率系统，去做一件本来就能用确定性代码完成的工作</strong>。</p>
+<h2 id="反转python-控流llm-推理">反转：Python 控流，LLM 推理<a class="header-anchor" href="#反转python-控流llm-推理">#</a></h2>
+<p>Agentic Programming 把控制权还给程序员：</p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>传统 Agent</th>
+<th>Agentic Programming</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>流程</td>
+<td>LLM 规划</td>
+<td>Python 代码</td>
+</tr>
+<tr>
+<td>决策</td>
+<td>LLM 每步判断</td>
+<td>Python 决定调不调 LLM</td>
+</tr>
+<tr>
+<td>状态</td>
+<td>塞在上下文里</td>
+<td>函数变量、返回值</td>
+</tr>
+<tr>
+<td>可测</td>
+<td>prompt 回归</td>
+<td>单元测试</td>
+</tr>
+</tbody>
+</table>
+<p>把一个复杂任务拆解成函数调用图。图上的每个节点，你决定：</p>
+<ul>
+<li><strong>不需要推理的</strong> —— 用普通 Python 函数</li>
+<li><strong>需要理解 / 生成 / 判断的</strong> —— 用 <code>Agent</code> method 装饰，函数体里调 <code>llm(...)</code></li>
+</ul>
+<p>LLM 变成一个工具，被你调用、被你约束、被你组合。</p>
+<h2 id="三个原语">三个原语<a class="header-anchor" href="#三个原语">#</a></h2>
+<p>整个范式只有三样东西：</p>
+<h3 id="1-agent-method">1. <code>Agent</code> method<a class="header-anchor" href="#1-agent-method">#</a></h3>
+<p>一个装饰器。被它装饰的函数，docstring 作为描述性上下文随调用传递，函数体里的 <code>llm(...)</code> 发起一次模型调用。装饰器提供环境 runtime。</p>
+<pre><code class="language-python"><span class="kn">from</span><span class="w"> </span><span class="nn">openprogram</span><span class="w"> </span><span class="kn">import</span> <span class="n">Agent</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">openprogram.runtime.agent</span><span class="w"> </span><span class="kn">import</span> <span class="n">llm</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ExampleAgent</span><span class="p">(</span><span class="n">Agent</span><span class="p">):</span>
+    <span class="n">method_options</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;summarize&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;tool&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
+    <span class="p">}</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">summarize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Summarize a text in one sentence, preserving the core point.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">llm</span><span class="p">([{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Summarize in one sentence, preserving the core point:</span><span class="se">\n\n</span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)}])</span>
+
+<span class="n">_example_agent</span> <span class="o">=</span> <span class="n">ExampleAgent</span><span class="p">()</span>
+<span class="n">summarize</span> <span class="o">=</span> <span class="n">_example_agent</span><span class="o">.</span><span class="n">summarize</span>
+</code></pre>
+<p>外部调用者感觉不到差别 —— <code>summarize(article)</code> 看起来和任何 Python 函数一样。</p>
+<h3 id="2-runtime">2. <code>Runtime</code><a class="header-anchor" href="#2-runtime">#</a></h3>
+<p>LLM 调用的运行时抽象。负责：</p>
+<ul>
+<li>把当前对话历史打包</li>
+<li>调用底层 provider（Anthropic / OpenAI / Claude Code / ...）</li>
+<li>把结果写回上下文</li>
+</ul>
+<p>用户编排代码使用 <code>llm()</code> 发起单次模型请求。<code>Runtime.exec()</code> 保留为其下层的嵌入与基础设施 API。</p>
+<h3 id="3-context">3. <code>Context</code><a class="header-anchor" href="#3-context">#</a></h3>
+<p>每个 Agent 执行分别管理自己的 DAG。聊天只记录用户消息、模型请求和直接工具调用；普通辅助函数不产生持久化节点。调用另一个 Agent 时创建独立 DAG，父图只保存调用结果和 child_session_id 引用。权限、取消与文件修改备份仍由原执行负责，不依赖图所有权。</p>
+<p>这张 DAG 不只是执行轨迹——它同时是<strong>每次 LLM 调用的历史来源</strong>：<code>llm()</code> 通过环境 runtime 从 DAG 渲染消息历史。装饰器上的两个旋钮按函数塑造这条数据流：</p>
+<ul>
+<li><code>expose</code> —— 一次调用完成后向父级暴露什么（默认 <code>&quot;io&quot;</code>：函数名 + 输入 + 输出，内部细节隐藏）。</li>
+<li><code>render_range</code> —— 函数自身的 <code>exec</code> 拉取多少历史。<code>render_range={&quot;callers&quot;: 0}</code> 得到一个隔离的草稿上下文，看不到任何先前对话。</li>
+</ul>
+<p>于是上下文管理不再是 prompt 拼接的体力活，而变成写在函数声明上的属性。同一张 DAG 也兼作你的调试视图：可视化、token 记账、回放失败路径。</p>
+<h2 id="衍生概念">衍生概念<a class="header-anchor" href="#衍生概念">#</a></h2>
+<h3 id="llm-也写代码">LLM 也写代码<a class="header-anchor" href="#llm-也写代码">#</a></h3>
+<p>LLM 不只是运行时的推理引擎，它也可以<strong>写代码</strong>——生成、修改、修复符合 API 文档的 <code>Agent</code> method。这件事不需要专门的 <code>create()</code> / <code>fix()</code> 框架函数；agent 直接用普通文件编辑工具完成。后台 watcher 会重扫 <code>~/.openprogram/programs/</code> 并热加载新模块：import 时 <code>Agent</code> method 装饰器触发、自行注册，刚写完的函数无需重启即可调用。</p>
+<p>代码是数据，LLM 是编译器，函数是产品 —— 循环闭合。</p>
+<h3 id="双模式">双模式<a class="header-anchor" href="#双模式">#</a></h3>
+<p>Agentic Programming 同时是：</p>
+<ul>
+<li><strong>一个库</strong> —— 你写 <code>Agent</code> method，手动搭 pipeline</li>
+<li><strong>一个跑着的产品</strong> —— 在 CLI 或 WebUI 里聊天，让 agent 帮你把函数写出来；生成的包落到 <code>~/.openprogram/programs/</code> 并热加载</li>
+</ul>
+<p>初学者从提需求开始，拿到手的就是完整可读的 Python 文件。想深挖的人再 import 手写。这是一个<strong>可以被逐步理解</strong>的工具。</p>
+<h2 id="和传统-agent-框架的对照">和传统 Agent 框架的对照<a class="header-anchor" href="#和传统-agent-框架的对照">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>LangChain / AutoGPT</th>
+<th>Agentic Programming</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&quot;抓 10 个页面，每个生成摘要&quot;</td>
+<td>Agent 自己决定顺序和并行</td>
+<td>Python 写 <code>for url in urls: summarize(fetch(url))</code></td>
+</tr>
+<tr>
+<td>&quot;连续 3 次对话里记住上下文&quot;</td>
+<td>把对话塞进 memory store，每次查询</td>
+<td>就是 Python 函数的局部变量</td>
+</tr>
+<tr>
+<td>&quot;让 LLM 决定调哪个工具&quot;</td>
+<td>function calling + agent loop</td>
+<td><code>agent(prompt, tools=[...])</code> 或 <code>decision.make(prompt, options)</code></td>
+</tr>
+<tr>
+<td>&quot;错了要重试&quot;</td>
+<td>Agent 自己决定</td>
+<td><code>try / except</code> + 代码门控：无效的选择被校验拦下，让模型重新决策</td>
+</tr>
+</tbody>
+</table>
+<p>不是说 Agent 框架错了，它们适合一类任务（完全开放、目标模糊）。但大多数你想做的事，其实都能用 Agentic Programming 更可靠地完成。</p>
+<h2 id="openprogram-范式的产品化">OpenProgram = 范式的产品化<a class="header-anchor" href="#openprogram-范式的产品化">#</a></h2>
+<p><code>agent/</code> 子包是范式的引擎代码。<code>context/</code> 实现扁平 DAG 上下文模型。<code>providers/</code> 适配各家 LLM。<code>programs/</code> 是这个范式下已经写好的工具和应用。<code>webui/</code> 让初学者不写代码也能跑。</p>
+<p>范式先行，产品为用。</p>
+<hr />
+<p>延伸阅读：</p>
+<ul>
+<li><a href="/docs/start/GETTING_STARTED.zh.html">快速开始</a></li>
+<li><a href="/docs/reference/api">API 参考</a></li>
+<li><a href="/docs/reference/design">设计细节</a></li>
+</ul>
+<div class="page-updated"><span data-i18n="updated">Last updated</span> · 2026-11-02</div><div class="prevnext"><a class="pn-link pn-prev" href="/docs/capabilities/agentic-programming/README.html" data-href-en="/docs/capabilities/agentic-programming/README.html" data-href-zh="/docs/capabilities/agentic-programming/README.zh.html"><span class="pn-dir" data-i18n="prev">Previous</span><span class="pn-title" data-title-zh="指南">Guide</span></a><a class="pn-link pn-next" href="/docs/capabilities/agentic-programming/embedding-in-your-own-stack.html" data-href-en="/docs/capabilities/agentic-programming/embedding-in-your-own-stack.html" data-href-zh="/docs/capabilities/agentic-programming/embedding-in-your-own-stack.zh.html"><span class="pn-dir" data-i18n="next">Next</span><span class="pn-title" data-title-zh="框架嵌入">Framework embedding</span></a></div></article></main>
+  <aside class="toc"><div class="toc-title" data-i18n="on_this_page">On this page</div>
+<ul class="toc-list">
+<li>
+<a class="lvl-2" href="#问题">问题</a>
+</li>
+<li>
+<a class="lvl-2" href="#反转python-控流llm-推理">反转：Python 控流，LLM 推理</a>
+</li>
+<li>
+<details class="toc-disclosure" open=""><summary>
+<a class="lvl-2" href="#三个原语">三个原语</a>
+</summary>
+<ul class="toc-list">
+<li>
+<a class="lvl-3" href="#1-agent-method">1. Agent method</a>
+</li>
+<li>
+<a class="lvl-3" href="#2-runtime">2. Runtime</a>
+</li>
+<li>
+<a class="lvl-3" href="#3-context">3. Context</a>
+</li>
+</ul>
+</details>
+</li>
+<li>
+<details class="toc-disclosure" open=""><summary>
+<a class="lvl-2" href="#衍生概念">衍生概念</a>
+</summary>
+<ul class="toc-list">
+<li>
+<a class="lvl-3" href="#llm-也写代码">LLM 也写代码</a>
+</li>
+<li>
+<a class="lvl-3" href="#双模式">双模式</a>
+</li>
+</ul>
+</details>
+</li>
+<li>
+<a class="lvl-2" href="#和传统-agent-框架的对照">和传统 Agent 框架的对照</a>
+</li>
+<li>
+<a class="lvl-2" href="#openprogram-范式的产品化">OpenProgram = 范式的产品化</a>
+</li>
+</ul></aside>
+</div>
+
+<div class="search-overlay">
+  <div class="search-box">
+    <input type="text" data-i18n-ph="search_ph" placeholder="Search titles or text…" autocomplete="off" spellcheck="false">
+    <div class="search-results"></div>
+  </div>
+</div>
+
+<script src="/docs/assets/site.js?v=6520ba46"></script>
+</body>
+</html>

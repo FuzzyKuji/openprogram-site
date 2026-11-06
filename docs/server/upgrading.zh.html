@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh" data-base="/docs/" data-page-lang="zh" data-build="1793956776" data-alt-lang-url="/docs/server/upgrading.html">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>源码升级 · OpenProgram Docs</title>
+<meta name="description" content="升级源码检出 # openprogram upgrade 根据安装类型选择行为。managed release 安装最新 stable GitHub Release，但在用户显式重启前不改变运行中的 worker。source checkout 使用本文 记录的 Git">
+<link rel="canonical" href="https://openprogram.io/docs/server/upgrading.zh.html">
+<link rel="alternate" type="text/markdown" href="https://openprogram.io/docs/server/upgrading.zh.html.md">
+<link rel="describedby" href="https://openprogram.io/llms.txt">
+<link rel="alternate" hreflang="en" href="https://openprogram.io/docs/server/upgrading.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://openprogram.io/docs/server/upgrading.zh.html">
+<link rel="alternate" hreflang="x-default" href="https://openprogram.io/docs/server/upgrading.html">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"OpenProgram Docs","item":"https://openprogram.io/docs/"},{"@type":"ListItem","position":2,"name":"源码升级"}]}</script>
+<meta property="og:type" content="article">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:site_name" content="OpenProgram">
+<meta property="og:url" content="https://openprogram.io/docs/server/upgrading.zh.html">
+<meta property="og:title" content="源码升级 · OpenProgram Docs">
+<meta property="og:description" content="升级源码检出 # openprogram upgrade 根据安装类型选择行为。managed release 安装最新 stable GitHub Release，但在用户显式重启前不改变运行中的 worker。source checkout 使用本文 记录的 Git">
+<meta property="og:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:secure_url" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="源码升级 · OpenProgram Docs">
+<meta name="twitter:description" content="升级源码检出 # openprogram upgrade 根据安装类型选择行为。managed release 安装最新 stable GitHub Release，但在用户显式重启前不改变运行中的 worker。source checkout 使用本文 记录的 Git">
+<meta name="twitter:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta name="twitter:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/docs/assets/mark.svg">
+<link rel="stylesheet" href="/docs/assets/site.css?v=6520ba46">
+<link rel="stylesheet" href="/docs/assets/pygments-light.css" media="(prefers-color-scheme: light)" id="pyg-light">
+<link rel="stylesheet" href="/docs/assets/pygments-dark.css" media="(prefers-color-scheme: dark)" id="pyg-dark">
+<script src="/docs/assets/theme.js?v=6520ba46"></script>
+
+</head>
+<body>
+<header class="topbar">
+  <button class="icon hamburger" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2.5 4.5h11M2.5 8h11M2.5 11.5h11"/></svg></button>
+  <a class="brand" href="/docs/index.html"><img class="mark" src="/docs/assets/mark.svg" alt="">OpenProgram Docs</a>
+  <div class="spacer"></div>
+  <button class="search-trigger" aria-label="Search">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14"/></svg><span class="label" data-i18n="search">Search docs</span><kbd>⌘K</kbd>
+  </button>
+  <div class="lang-wrap">
+    <button class="icon lang-trigger" id="lang-toggle" aria-haspopup="true" aria-expanded="false" aria-label="Language">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="6.2"/><path d="M1.8 8h12.4" stroke-linecap="round"/><ellipse cx="8" cy="8" rx="2.8" ry="6.2"/></svg><span class="lang-label">EN</span><svg class="chev" width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+    </button>
+    <div class="lang-menu" id="lang-menu" role="menu">
+      <button class="lang-opt" data-lang="en" role="menuitem"><span>English</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="lang-opt" data-lang="zh" role="menuitem"><span>简体中文</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+  <div class="theme-wrap">
+    <button class="icon" id="theme-toggle" aria-label="Theme" aria-haspopup="menu" aria-controls="theme-menu" aria-expanded="false"><svg class="ic-system" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="2.5" width="13" height="9" rx="1.5"/><path d="M8 11.5V14M5.5 14h5"/></svg><svg class="ic-moon" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M13.5 9.5A6 6 0 1 1 6.5 2.5a5 5 0 0 0 7 7z"/></svg><svg class="ic-sun" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="3.2"/><path d="M8 1.2v1.8M8 13v1.8M1.2 8H3M13 8h1.8M3.2 3.2l1.3 1.3M11.5 11.5l1.3 1.3M12.8 3.2l-1.3 1.3M4.5 11.5l-1.3 1.3"/></svg></button>
+    <div class="theme-menu" id="theme-menu" role="menu" aria-labelledby="theme-toggle">
+      <button class="theme-opt" data-theme-choice="system" role="menuitemradio" aria-checked="true"><span>Follow system</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="light" role="menuitemradio" aria-checked="false"><span>Light</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="dark" role="menuitemradio" aria-checked="false"><span>Dark</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+</header>
+<nav class="tabbar"><a class="tablink" href="/docs/README.html" data-title-zh="开始使用" data-href-en="/docs/README.html" data-href-zh="/docs/README.zh.html">Get started</a><a class="tablink" href="/docs/install/install.html" data-title-zh="安装" data-href-en="/docs/install/install.html" data-href-zh="/docs/install/install.zh.html">Install</a><a class="tablink" href="/docs/capabilities/README.html" data-title-zh="能力" data-href-en="/docs/capabilities/README.html" data-href-zh="/docs/capabilities/README.zh.html">Capabilities</a><a class="tablink" href="/docs/interfaces/README.html" data-title-zh="界面" data-href-en="/docs/interfaces/README.html" data-href-zh="/docs/interfaces/README.zh.html">Interfaces</a><a class="tablink" href="/docs/models/README.html" data-title-zh="模型" data-href-en="/docs/models/README.html" data-href-zh="/docs/models/README.zh.html">Models</a><a class="tablink" href="/docs/integrations/anthropic.html" data-title-zh="集成" data-href-en="/docs/integrations/anthropic.html" data-href-zh="/docs/integrations/anthropic.zh.html">Integrations</a><a class="tablink active" href="/docs/server/README.html" data-title-zh="服务与运维" data-href-en="/docs/server/README.html" data-href-zh="/docs/server/README.zh.html">Server &amp; Ops</a><a class="tablink" href="/docs/reference/README.html" data-title-zh="参考" data-href-en="/docs/reference/README.html" data-href-zh="/docs/reference/README.zh.html">Reference</a><a class="tablink" href="/docs/reference/design/README.html" data-title-zh="设计" data-href-en="/docs/reference/design/README.html" data-href-zh="/docs/reference/design/README.zh.html">Design</a></nav>
+
+<div class="scrim"></div>
+<div class="layout">
+  <nav class="sidebar" aria-label="Documentation">
+    <input class="nav-filter" type="text" data-i18n-ph="nav_filter"
+           aria-label="Filter docs" placeholder="Filter docs…" autocomplete="off" spellcheck="false">
+    <div class="nav-tree"><div class="nav-sec"><div class="nav-sec-title" data-title-zh="概览">Overview</div><a class="navlink" href="/docs/server/README.html" data-title-zh="概览" data-href-en="/docs/server/README.html" data-href-zh="/docs/server/README.zh.html">Overview</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="运维">Operations</div><a class="navlink" href="/docs/server/configuration.html" data-title-zh="服务端配置" data-href-en="/docs/server/configuration.html" data-href-zh="/docs/server/configuration.zh.html">Server configuration</a>
+<a class="navlink active" href="/docs/server/upgrading.html" data-title-zh="源码升级" data-href-en="/docs/server/upgrading.html" data-href-zh="/docs/server/upgrading.zh.html">Source upgrades</a>
+<a class="navlink" href="/docs/server/backup.html" data-title-zh="备份与恢复" data-href-en="/docs/server/backup.html" data-href-zh="/docs/server/backup.zh.html">Backup and restore</a>
+<a class="navlink" href="/docs/server/troubleshooting.html" data-title-zh="故障排查" data-href-en="/docs/server/troubleshooting.html" data-href-zh="/docs/server/troubleshooting.zh.html">Troubleshooting</a></div></div>
+  </nav>
+  <main class="content"><button class="fs-toggle" aria-label="Fullscreen" title="Fullscreen (Esc to exit)"><svg class="ic-expand" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.2 2H2v4.2M9.8 2H14v4.2M6.2 14H2V9.8M9.8 14H14V9.8"/></svg><svg class="ic-collapse" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6.2h4.2V2M14 6.2H9.8V2M2 9.8h4.2V14M14 9.8H9.8V14"/></svg></button><article><nav class="breadcrumb"><span class="bc-seg" data-title-zh="服务与运维">Server &amp; Ops</span> <span class='bc-sep'>›</span> <span class="bc-seg" data-title-zh="运维">Operations</span> <span class='bc-sep'>›</span> <span class="bc-seg bc-current" data-title-zh="源码升级">Source upgrades</span></nav><p><span id="升级"></span></p>
+<h1 id="升级源码检出">升级源码检出<a class="header-anchor" href="#升级源码检出">#</a></h1>
+<p><code>openprogram upgrade</code> 根据安装类型选择行为。managed release 安装最新 stable
+GitHub Release，但在用户显式重启前不改变运行中的 worker。source checkout 使用本文
+记录的 Git 门禁流程：只有证明新代码能够启动后，才更新代码并重启服务。</p>
+<p>Desktop 与 managed CLI/server 的 release 升级，以及从 v0.6.6 到 v0.7.0 的一次性过渡，见
+<a href="/docs/install/upgrade.zh.html">升级 release 安装</a>。</p>
+<h2 id="source-checkout-行为">Source checkout 行为<a class="header-anchor" href="#source-checkout-行为">#</a></h2>
+<p>对于 source checkout，<code>upgrade</code> 是&quot;<code>git pull</code> 然后 <code>openprogram restart</code>&quot;的安全替代。</p>
+<p>它解决的问题是：OpenProgram 以可编辑安装（editable install）的方式装在仓库里，
+所以它运行的仓库就是它开发的仓库。一个坏提交在下次重启前都看不出来，
+而等到那时，本来能用来修复它的工具正好就是坏掉的那个。<code>upgrade</code> 把这个失败提前，
+挪到一个没人依赖的临时进程里。</p>
+<h2 id="快速参考">快速参考<a class="header-anchor" href="#快速参考">#</a></h2>
+<pre><code class="language-bash">openprogram<span class="w"> </span>upgrade<span class="w"> </span>status<span class="w">          </span><span class="c1"># 会变什么？只读</span>
+openprogram<span class="w"> </span>upgrade<span class="w"> </span>--dry-run<span class="w">       </span><span class="c1"># 打印计划，不移动代码或 worker</span>
+openprogram<span class="w"> </span>upgrade<span class="w">                 </span><span class="c1"># 执行</span>
+</code></pre>
+<h2 id="执行过程">执行过程<a class="header-anchor" href="#执行过程">#</a></h2>
+<p>七个步骤，按顺序执行。第一个失败会中断整条链并打印原因。</p>
+<table>
+<thead>
+<tr>
+<th>步骤</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>preflight</td>
+<td>拒绝脏工作区，解析目标提交，降级前先询问</td>
+</tr>
+<tr>
+<td>checkout</td>
+<td>将检出快进到目标提交</td>
+</tr>
+<tr>
+<td>deps</td>
+<td><code>pyproject.toml</code> 变了就刷新源码 checkout 的 Python 环境；<code>package-lock.json</code> 变了就安装 frontend workspaces</td>
+</tr>
+<tr>
+<td>build</td>
+<td><code>apps/web</code>、<code>apps/cli</code> 或 <code>package-lock.json</code> 变更时重建对应 frontend workspace</td>
+</tr>
+<tr>
+<td>probe</td>
+<td>用隔离 profile 在临时端口冷启动新代码，等待 <code>/healthz</code>，跑 doctor 检查，然后杀掉</td>
+</tr>
+<tr>
+<td>restart</td>
+<td>重启真正的服务</td>
+</tr>
+<tr>
+<td>verify</td>
+<td>轮询 <code>/healthz</code> 直到它报告新的提交 sha</td>
+</tr>
+</tbody>
+</table>
+<p><strong>restart</strong> 之前的一切都不会碰到正在运行的实例。语法错误、配置 schema 损坏、
+前端构建失败，都由 probe 步骤拦下，你的服务继续用旧代码提供服务。</p>
+<h2 id="决定升级前先确认">决定升级前先确认<a class="header-anchor" href="#决定升级前先确认">#</a></h2>
+<p><code>status</code> 告诉你有没有可更新的内容：</p>
+<pre><code class="language-console"><span class="gp">$ </span>openprogram<span class="w"> </span>upgrade<span class="w"> </span>status
+<span class="go">  channel        stable (origin/main)</span>
+<span class="go">  head           f5671fd25e4c6ae89e6d77f3fcffc4d4a2c0570a</span>
+<span class="go">  target         a2d7f95633527e182ac850e40aca727aa0f6a3e6</span>
+<span class="go">  update         available</span>
+</code></pre>
+<p>加 <code>--json</code> 得到机器可读输出（<code>head_sha</code>、<code>target_sha</code>、<code>update_available</code>）。</p>
+<p><code>--dry-run</code> 解析目标并打印将要执行的步骤，不修改 checkout、worker 或 upgrade
+state；如果同时显式传入 <code>--channel</code>，该 source-channel 选择仍会持久化：</p>
+<pre><code class="language-console"><span class="gp">$ </span>openprogram<span class="w"> </span>upgrade<span class="w"> </span>--dry-run
+<span class="go">  [OK  ] preflight  stable → origin/main: 80d77d1ed44c → 1a4101433b13</span>
+<span class="go">  [OK  ] checkout   planned (dry run)</span>
+<span class="go">  [OK  ] deps       planned (dry run)</span>
+<span class="go">  [OK  ] build      planned (dry run)</span>
+<span class="go">  [OK  ] probe      planned (dry run)</span>
+<span class="go">  [OK  ] restart    planned (dry run)</span>
+<span class="go">  [OK  ] verify     planned (dry run)</span>
+</code></pre>
+<h2 id="参数">参数<a class="header-anchor" href="#参数">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--dry-run</code></td>
+<td>打印计划步骤，不修改 checkout、worker 或 upgrade state；显式传入的 <code>--channel</code> 仍会持久化</td>
+</tr>
+<tr>
+<td><code>--no-restart</code></td>
+<td>在 probe 之后停止。检出会移动、代码会被验证，但运行中的服务在你手动重启前仍用旧代码</td>
+</tr>
+<tr>
+<td><code>--yes</code>、<code>-y</code></td>
+<td>跳过降级所需的确认</td>
+</tr>
+<tr>
+<td><code>--channel NAME</code></td>
+<td>跟随另一条发布线，并记住它</td>
+</tr>
+<tr>
+<td><code>--json</code></td>
+<td>输出包含每个步骤的机器可读结果</td>
+</tr>
+</tbody>
+</table>
+<h2 id="source-checkout-通道channel">Source checkout 通道（Channel）<a class="header-anchor" href="#source-checkout-通道channel">#</a></h2>
+<p>source-checkout channel 是要跟踪的 ref 名称。<code>stable</code> 跟随 <code>origin/main</code>，也是唯一
+内置的通道；这里的 stable 是开发 ref，不是 managed installation 使用的 stable GitHub
+Release。<code>--channel</code> 会把选择持久化为 <code>update.channel</code> 设置，之后运行不必重复传参。</p>
+<h2 id="某个步骤失败时">某个步骤失败时<a class="header-anchor" href="#某个步骤失败时">#</a></h2>
+<p>失败会打印原因码（<code>dirty-worktree</code>、<code>probe-failed</code>、<code>build-failed</code>、
+<code>verify-failed</code> 等）并以非零状态退出。</p>
+<ul>
+<li>
+<p><strong><code>dirty-worktree</code></strong> — 提交或 stash 你的改动。<code>upgrade</code> 不会移动一个还有未完成
+工作的检出。</p>
+</li>
+<li>
+<p><strong><code>downgrade-needs-confirmation</code></strong> — 目标比你正在运行的版本旧。旧代码可能读不懂
+新代码写出的配置；确实要这么做就加 <code>--yes</code>。</p>
+</li>
+<li>
+<p><strong><code>probe-failed</code></strong> — 新代码启动不了。什么都没有重启，你的服务完好无损；
+问题要在上游修。</p>
+</li>
+<li>
+<p><strong><code>verify-failed</code></strong> — 重启发生了，但服务没有报告新的 sha。自动回滚尚未实现，
+所以命令会打印手动的逃生出口：</p>
+<pre><code class="language-bash">git<span class="w"> </span>-C<span class="w"> </span>&lt;repo&gt;<span class="w"> </span>checkout<span class="w"> </span>&lt;previous-sha&gt;<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>openprogram<span class="w"> </span>restart
+</code></pre>
+</li>
+</ul>
+<p>每一步之后进度都会写入 <code>~/.openprogram/upgrade-state.json</code>，
+升级中途挂掉时就去那里查。</p>
+<h2 id="相关">相关<a class="header-anchor" href="#相关">#</a></h2>
+<ul>
+<li><a href="/docs/server/troubleshooting.zh.html">故障排查</a>：与更新无关的问题。</li>
+<li><code>openprogram update</code> 是 <code>openprogram upgrade</code> 的兼容别名。managed release
+使用 stable GitHub Release 路径；source checkout 使用上文的 Git 升级流程。</li>
+</ul>
+<div class="page-updated"><span data-i18n="updated">Last updated</span> · 2026-09-27</div><div class="prevnext"><a class="pn-link pn-prev" href="/docs/server/configuration.html" data-href-en="/docs/server/configuration.html" data-href-zh="/docs/server/configuration.zh.html"><span class="pn-dir" data-i18n="prev">Previous</span><span class="pn-title" data-title-zh="服务端配置">Server configuration</span></a><a class="pn-link pn-next" href="/docs/server/backup.html" data-href-en="/docs/server/backup.html" data-href-zh="/docs/server/backup.zh.html"><span class="pn-dir" data-i18n="next">Next</span><span class="pn-title" data-title-zh="备份与恢复">Backup and restore</span></a></div></article></main>
+  <aside class="toc"><div class="toc-title" data-i18n="on_this_page">On this page</div>
+<ul class="toc-list">
+<li>
+<a class="lvl-2" href="#source-checkout-行为">Source checkout 行为</a>
+</li>
+<li>
+<a class="lvl-2" href="#快速参考">快速参考</a>
+</li>
+<li>
+<a class="lvl-2" href="#执行过程">执行过程</a>
+</li>
+<li>
+<a class="lvl-2" href="#决定升级前先确认">决定升级前先确认</a>
+</li>
+<li>
+<a class="lvl-2" href="#参数">参数</a>
+</li>
+<li>
+<a class="lvl-2" href="#source-checkout-通道channel">Source checkout 通道（Channel）</a>
+</li>
+<li>
+<a class="lvl-2" href="#某个步骤失败时">某个步骤失败时</a>
+</li>
+<li>
+<a class="lvl-2" href="#相关">相关</a>
+</li>
+</ul></aside>
+</div>
+
+<div class="search-overlay">
+  <div class="search-box">
+    <input type="text" data-i18n-ph="search_ph" placeholder="Search titles or text…" autocomplete="off" spellcheck="false">
+    <div class="search-results"></div>
+  </div>
+</div>
+
+<script src="/docs/assets/site.js?v=6520ba46"></script>
+</body>
+</html>

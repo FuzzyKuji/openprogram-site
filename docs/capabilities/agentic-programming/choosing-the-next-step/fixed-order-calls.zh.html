@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh" data-base="/docs/" data-page-lang="zh" data-build="1793956776" data-alt-lang-url="/docs/capabilities/agentic-programming/choosing-the-next-step/fixed-order-calls.html">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>顺序调用 · OpenProgram Docs</title>
+<meta name="description" content="固定顺序调用 # 在按 Python 中硬编码的顺序调用多个子函数的同时，（可选地）调用 LLM。 适用场景 # 研究流水线：调研 → 找差距 → 生成想法 论文流水线：起草 → 评审 → 修改 数据流水线：采集 → 清洗 → 分析 任何步骤顺序事先已知的多步任务 设计要点 # 编排函数写成普通的 Agent">
+<link rel="canonical" href="https://openprogram.io/docs/capabilities/agentic-programming/choosing-the-next-step/fixed-order-calls.zh.html">
+<link rel="alternate" type="text/markdown" href="https://openprogram.io/docs/capabilities/agentic-programming/choosing-the-next-step/fixed-order-calls.zh.html.md">
+<link rel="describedby" href="https://openprogram.io/llms.txt">
+<link rel="alternate" hreflang="en" href="https://openprogram.io/docs/capabilities/agentic-programming/choosing-the-next-step/fixed-order-calls.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://openprogram.io/docs/capabilities/agentic-programming/choosing-the-next-step/fixed-order-calls.zh.html">
+<link rel="alternate" hreflang="x-default" href="https://openprogram.io/docs/capabilities/agentic-programming/choosing-the-next-step/fixed-order-calls.html">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"OpenProgram Docs","item":"https://openprogram.io/docs/"},{"@type":"ListItem","position":2,"name":"顺序调用"}]}</script>
+<meta property="og:type" content="article">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:site_name" content="OpenProgram">
+<meta property="og:url" content="https://openprogram.io/docs/capabilities/agentic-programming/choosing-the-next-step/fixed-order-calls.zh.html">
+<meta property="og:title" content="顺序调用 · OpenProgram Docs">
+<meta property="og:description" content="固定顺序调用 # 在按 Python 中硬编码的顺序调用多个子函数的同时，（可选地）调用 LLM。 适用场景 # 研究流水线：调研 → 找差距 → 生成想法 论文流水线：起草 → 评审 → 修改 数据流水线：采集 → 清洗 → 分析 任何步骤顺序事先已知的多步任务 设计要点 # 编排函数写成普通的 Agent">
+<meta property="og:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:secure_url" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="顺序调用 · OpenProgram Docs">
+<meta name="twitter:description" content="固定顺序调用 # 在按 Python 中硬编码的顺序调用多个子函数的同时，（可选地）调用 LLM。 适用场景 # 研究流水线：调研 → 找差距 → 生成想法 论文流水线：起草 → 评审 → 修改 数据流水线：采集 → 清洗 → 分析 任何步骤顺序事先已知的多步任务 设计要点 # 编排函数写成普通的 Agent">
+<meta name="twitter:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta name="twitter:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/docs/assets/mark.svg">
+<link rel="stylesheet" href="/docs/assets/site.css?v=6520ba46">
+<link rel="stylesheet" href="/docs/assets/pygments-light.css" media="(prefers-color-scheme: light)" id="pyg-light">
+<link rel="stylesheet" href="/docs/assets/pygments-dark.css" media="(prefers-color-scheme: dark)" id="pyg-dark">
+<script src="/docs/assets/theme.js?v=6520ba46"></script>
+
+</head>
+<body>
+<header class="topbar">
+  <button class="icon hamburger" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2.5 4.5h11M2.5 8h11M2.5 11.5h11"/></svg></button>
+  <a class="brand" href="/docs/index.html"><img class="mark" src="/docs/assets/mark.svg" alt="">OpenProgram Docs</a>
+  <div class="spacer"></div>
+  <button class="search-trigger" aria-label="Search">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14"/></svg><span class="label" data-i18n="search">Search docs</span><kbd>⌘K</kbd>
+  </button>
+  <div class="lang-wrap">
+    <button class="icon lang-trigger" id="lang-toggle" aria-haspopup="true" aria-expanded="false" aria-label="Language">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="6.2"/><path d="M1.8 8h12.4" stroke-linecap="round"/><ellipse cx="8" cy="8" rx="2.8" ry="6.2"/></svg><span class="lang-label">EN</span><svg class="chev" width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+    </button>
+    <div class="lang-menu" id="lang-menu" role="menu">
+      <button class="lang-opt" data-lang="en" role="menuitem"><span>English</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="lang-opt" data-lang="zh" role="menuitem"><span>简体中文</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+  <div class="theme-wrap">
+    <button class="icon" id="theme-toggle" aria-label="Theme" aria-haspopup="menu" aria-controls="theme-menu" aria-expanded="false"><svg class="ic-system" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="2.5" width="13" height="9" rx="1.5"/><path d="M8 11.5V14M5.5 14h5"/></svg><svg class="ic-moon" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M13.5 9.5A6 6 0 1 1 6.5 2.5a5 5 0 0 0 7 7z"/></svg><svg class="ic-sun" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="3.2"/><path d="M8 1.2v1.8M8 13v1.8M1.2 8H3M13 8h1.8M3.2 3.2l1.3 1.3M11.5 11.5l1.3 1.3M12.8 3.2l-1.3 1.3M4.5 11.5l-1.3 1.3"/></svg></button>
+    <div class="theme-menu" id="theme-menu" role="menu" aria-labelledby="theme-toggle">
+      <button class="theme-opt" data-theme-choice="system" role="menuitemradio" aria-checked="true"><span>Follow system</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="light" role="menuitemradio" aria-checked="false"><span>Light</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="dark" role="menuitemradio" aria-checked="false"><span>Dark</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+</header>
+<nav class="tabbar"><a class="tablink" href="/docs/README.html" data-title-zh="开始使用" data-href-en="/docs/README.html" data-href-zh="/docs/README.zh.html">Get started</a><a class="tablink" href="/docs/install/install.html" data-title-zh="安装" data-href-en="/docs/install/install.html" data-href-zh="/docs/install/install.zh.html">Install</a><a class="tablink active" href="/docs/capabilities/README.html" data-title-zh="能力" data-href-en="/docs/capabilities/README.html" data-href-zh="/docs/capabilities/README.zh.html">Capabilities</a><a class="tablink" href="/docs/interfaces/README.html" data-title-zh="界面" data-href-en="/docs/interfaces/README.html" data-href-zh="/docs/interfaces/README.zh.html">Interfaces</a><a class="tablink" href="/docs/models/README.html" data-title-zh="模型" data-href-en="/docs/models/README.html" data-href-zh="/docs/models/README.zh.html">Models</a><a class="tablink" href="/docs/integrations/anthropic.html" data-title-zh="集成" data-href-en="/docs/integrations/anthropic.html" data-href-zh="/docs/integrations/anthropic.zh.html">Integrations</a><a class="tablink" href="/docs/server/README.html" data-title-zh="服务与运维" data-href-en="/docs/server/README.html" data-href-zh="/docs/server/README.zh.html">Server &amp; Ops</a><a class="tablink" href="/docs/reference/README.html" data-title-zh="参考" data-href-en="/docs/reference/README.html" data-href-zh="/docs/reference/README.zh.html">Reference</a><a class="tablink" href="/docs/reference/design/README.html" data-title-zh="设计" data-href-en="/docs/reference/design/README.html" data-href-zh="/docs/reference/design/README.zh.html">Design</a></nav>
+
+<div class="scrim"></div>
+<div class="layout">
+  <nav class="sidebar" aria-label="Documentation">
+    <input class="nav-filter" type="text" data-i18n-ph="nav_filter"
+           aria-label="Filter docs" placeholder="Filter docs…" autocomplete="off" spellcheck="false">
+    <div class="nav-tree"><div class="nav-sec"><div class="nav-sec-title" data-title-zh="概览">Overview</div><a class="navlink" href="/docs/capabilities/README.html" data-title-zh="概览" data-href-en="/docs/capabilities/README.html" data-href-zh="/docs/capabilities/README.zh.html">Overview</a>
+<a class="navlink" href="/docs/capabilities/applications.html" data-title-zh="应用" data-href-en="/docs/capabilities/applications.html" data-href-zh="/docs/capabilities/applications.zh.html">Applications</a>
+<a class="navlink" href="/docs/capabilities/framework-control.html" data-title-zh="框架工具" data-href-en="/docs/capabilities/framework-control.html" data-href-zh="/docs/capabilities/framework-control.zh.html">Framework tools</a></div>
+<div class="nav-sec"><div class="nav-sec-title">Agentic Programming</div><a class="navlink" href="/docs/capabilities/agentic-programming/README.html" data-title-zh="指南" data-href-en="/docs/capabilities/agentic-programming/README.html" data-href-zh="/docs/capabilities/agentic-programming/README.zh.html">Guide</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/philosophy.html" data-title-zh="设计原则" data-href-en="/docs/capabilities/agentic-programming/philosophy.html" data-href-zh="/docs/capabilities/agentic-programming/philosophy.zh.html">Philosophy</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/embedding-in-your-own-stack.html" data-title-zh="框架嵌入" data-href-en="/docs/capabilities/agentic-programming/embedding-in-your-own-stack.html" data-href-zh="/docs/capabilities/agentic-programming/embedding-in-your-own-stack.zh.html">Framework embedding</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="编写函数">Writing functions</div><a class="navlink" href="/docs/capabilities/agentic-programming/writing-functions/pure-python.html" data-title-zh="Python 函数" data-href-en="/docs/capabilities/agentic-programming/writing-functions/pure-python.html" data-href-zh="/docs/capabilities/agentic-programming/writing-functions/pure-python.zh.html">Python functions</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/writing-functions/agent.html" data-title-zh="智能体函数" data-href-en="/docs/capabilities/agentic-programming/writing-functions/agent.html" data-href-zh="/docs/capabilities/agentic-programming/writing-functions/agent.zh.html">Agentic functions</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/writing-functions/function-metadata.html" data-title-zh="函数元数据" data-href-en="/docs/capabilities/agentic-programming/writing-functions/function-metadata.html" data-href-zh="/docs/capabilities/agentic-programming/writing-functions/function-metadata.zh.html">Function metadata</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="选择下一步">Choosing the next step</div><a class="navlink" href="/docs/capabilities/agentic-programming/choosing-the-next-step/tool-calling.html" data-title-zh="工具循环" data-href-en="/docs/capabilities/agentic-programming/choosing-the-next-step/tool-calling.html" data-href-zh="/docs/capabilities/agentic-programming/choosing-the-next-step/tool-calling.zh.html">Tool-call loops</a>
+<a class="navlink active" href="/docs/capabilities/agentic-programming/choosing-the-next-step/fixed-order-calls.html" data-title-zh="顺序调用" data-href-en="/docs/capabilities/agentic-programming/choosing-the-next-step/fixed-order-calls.html" data-href-zh="/docs/capabilities/agentic-programming/choosing-the-next-step/fixed-order-calls.zh.html">Fixed-order calls</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/choosing-the-next-step/next-step-decision.html" data-title-zh="步骤选择" data-href-en="/docs/capabilities/agentic-programming/choosing-the-next-step/next-step-decision.html" data-href-zh="/docs/capabilities/agentic-programming/choosing-the-next-step/next-step-decision.zh.html">Next-step selection</a></div>
+<div class="nav-sec"><div class="nav-sec-title">Agentic Workflows</div><a class="navlink" href="/docs/capabilities/workflows/README.html" data-title-zh="工作流" data-href-en="/docs/capabilities/workflows/README.html" data-href-zh="/docs/capabilities/workflows/README.zh.html">Workflows</a>
+<a class="navlink" href="/docs/capabilities/workflows/authoring.html" data-title-zh="工作流编写" data-href-en="/docs/capabilities/workflows/authoring.html" data-href-zh="/docs/capabilities/workflows/authoring.zh.html">Workflow authoring</a>
+<a class="navlink" href="/docs/capabilities/workflows/recording.html" data-title-zh="录制 Workflow" data-href-en="/docs/capabilities/workflows/recording.html" data-href-zh="/docs/capabilities/workflows/recording.zh.html">Record a workflow</a>
+<a class="navlink" href="/docs/capabilities/workflows/reports.html" data-title-zh="每周报告" data-href-en="/docs/capabilities/workflows/reports.html" data-href-zh="/docs/capabilities/workflows/reports.zh.html">Weekly reports</a></div>
+<div class="nav-sec"><div class="nav-sec-title">Agents</div><a class="navlink" href="/docs/capabilities/agents.html" data-title-zh="配置 Agent" data-href-en="/docs/capabilities/agents.html" data-href-zh="/docs/capabilities/agents.zh.html">Configure an Agent</a>
+<a class="navlink" href="/docs/capabilities/agents-md.html" data-title-zh="用 AGENTS.md 写指令" data-href-en="/docs/capabilities/agents-md.html" data-href-zh="/docs/capabilities/agents-md.zh.html">Instructions with AGENTS.md</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="常驻 Agent">Always-on Agents</div><a class="navlink" href="/docs/capabilities/always-on-agents.html" data-title-zh="常驻 Agent" data-href-en="/docs/capabilities/always-on-agents.html" data-href-zh="/docs/capabilities/always-on-agents.zh.html">Always-on Agents</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="提醒">Reminders</div><a class="navlink" href="/docs/capabilities/reminders.html" data-title-zh="提醒" data-href-en="/docs/capabilities/reminders.html" data-href-zh="/docs/capabilities/reminders.zh.html">Reminders</a>
+<a class="navlink" href="/docs/capabilities/event-triggers.html" data-title-zh="有事发生时运行任务" data-href-en="/docs/capabilities/event-triggers.html" data-href-zh="/docs/capabilities/event-triggers.zh.html">Run a task when something happens</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="记忆">Memory</div><a class="navlink" href="/docs/capabilities/memory.html" data-title-zh="记忆管理" data-href-en="/docs/capabilities/memory.html" data-href-zh="/docs/capabilities/memory.zh.html">Memory management</a>
+<a class="navlink" href="/docs/capabilities/memory-settings.html" data-title-zh="调整记忆" data-href-en="/docs/capabilities/memory-settings.html" data-href-zh="/docs/capabilities/memory-settings.zh.html">Tune Memory</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="运行环境">Environments</div><a class="navlink" href="/docs/capabilities/environments.html" data-title-zh="在另一台机器上运行会话" data-href-en="/docs/capabilities/environments.html" data-href-zh="/docs/capabilities/environments.zh.html">Run conversations on another machine</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="会话目标">Session goals</div><a class="navlink" href="/docs/capabilities/goal.html" data-title-zh="目标" data-href-en="/docs/capabilities/goal.html" data-href-zh="/docs/capabilities/goal.zh.html">Goals</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="操控电脑">Computer use</div><a class="navlink" href="/docs/capabilities/computer-use.html" data-title-zh="操控电脑" data-href-en="/docs/capabilities/computer-use.html" data-href-zh="/docs/capabilities/computer-use.zh.html">Computer use</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="会议">Meetings</div><a class="navlink" href="/docs/capabilities/meetings.html" data-title-zh="会议" data-href-en="/docs/capabilities/meetings.html" data-href-zh="/docs/capabilities/meetings.zh.html">Meetings</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="扩展">Extending</div><a class="navlink" href="/docs/capabilities/installing-programs.html" data-title-zh="安装程序" data-href-en="/docs/capabilities/installing-programs.html" data-href-zh="/docs/capabilities/installing-programs.zh.html">Installing programs</a>
+<a class="navlink" href="/docs/capabilities/skills.html" data-title-zh="技能" data-href-en="/docs/capabilities/skills.html" data-href-zh="/docs/capabilities/skills.zh.html">Skills</a>
+<a class="navlink" href="/docs/capabilities/plugins.html" data-title-zh="插件" data-href-en="/docs/capabilities/plugins.html" data-href-zh="/docs/capabilities/plugins.zh.html">Plugins</a>
+<a class="navlink" href="/docs/capabilities/mcp.html" data-title-zh="MCP" data-href-en="/docs/capabilities/mcp.html" data-href-zh="/docs/capabilities/mcp.zh.html">MCP</a>
+<a class="navlink" href="/docs/capabilities/tools.html" data-title-zh="内置工具" data-href-en="/docs/capabilities/tools.html" data-href-zh="/docs/capabilities/tools.zh.html">Built-in tools</a>
+<a class="navlink" href="/docs/capabilities/lsp.html" data-title-zh="语言服务器" data-href-en="/docs/capabilities/lsp.html" data-href-zh="/docs/capabilities/lsp.zh.html">Language servers</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="概览">Overview</div><a class="navlink" href="/docs/capabilities/commit-push-pr.html" data-title-zh="提交与拉取请求" data-href-en="/docs/capabilities/commit-push-pr.html" data-href-zh="/docs/capabilities/commit-push-pr.zh.html">Commits and PRs</a>
+<a class="navlink" href="/docs/capabilities/permissions.html" data-title-zh="工具权限" data-href-en="/docs/capabilities/permissions.html" data-href-zh="/docs/capabilities/permissions.zh.html">Tool permissions</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="指南">Guide</div><a class="navlink" href="/docs/capabilities/agentic-programming/self-programming-ai-agents.html" data-title-zh="自编程智能体" data-href-en="/docs/capabilities/agentic-programming/self-programming-ai-agents.html" data-href-zh="/docs/capabilities/agentic-programming/self-programming-ai-agents.zh.html">Self-programming agents</a></div></div>
+  </nav>
+  <main class="content"><button class="fs-toggle" aria-label="Fullscreen" title="Fullscreen (Esc to exit)"><svg class="ic-expand" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.2 2H2v4.2M9.8 2H14v4.2M6.2 14H2V9.8M9.8 14H14V9.8"/></svg><svg class="ic-collapse" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6.2h4.2V2M14 6.2H9.8V2M2 9.8h4.2V14M14 9.8H9.8V14"/></svg></button><article><nav class="breadcrumb"><span class="bc-seg" data-title-zh="能力">Capabilities</span> <span class='bc-sep'>›</span> <span class="bc-seg" data-title-zh="选择下一步">Choosing the next step</span> <span class='bc-sep'>›</span> <span class="bc-seg bc-current" data-title-zh="顺序调用">Fixed-order calls</span></nav><h1 id="固定顺序调用">固定顺序调用<a class="header-anchor" href="#固定顺序调用">#</a></h1>
+<p>在按 Python 中硬编码的顺序调用多个子函数的同时，（可选地）调用 LLM。</p>
+<h2 id="适用场景">适用场景<a class="header-anchor" href="#适用场景">#</a></h2>
+<ul>
+<li>研究流水线：调研 → 找差距 → 生成想法</li>
+<li>论文流水线：起草 → 评审 → 修改</li>
+<li>数据流水线：采集 → 清洗 → 分析</li>
+<li>任何步骤顺序事先已知的多步任务</li>
+</ul>
+<h2 id="设计要点">设计要点<a class="header-anchor" href="#设计要点">#</a></h2>
+<ul>
+<li>编排函数写成普通的 <code>Agent</code> method</li>
+<li>按固定顺序调用多个子 <code>Agent</code> method</li>
+<li><code>llm()</code> 是可选的：可以跳过它（纯链式调用），也可以多次调用它
+（每次调用都会创建一个 <code>llm</code> 子节点）</li>
+<li>数据通过普通 Python 变量在子函数之间流动</li>
+<li>子 method 沿用调用方的 Runtime，步骤之间不传 <code>runtime</code> 参数</li>
+<li>一个函数既可以多次调用 <code>llm()</code>，也可以调用任意多个其他
+<code>Agent</code> method</li>
+</ul>
+<h2 id="示例不调用-llm纯链式调用">示例：不调用 LLM，纯链式调用<a class="header-anchor" href="#示例不调用-llm纯链式调用">#</a></h2>
+<pre><code class="language-python"><span class="kn">from</span><span class="w"> </span><span class="nn">openprogram</span><span class="w"> </span><span class="kn">import</span> <span class="n">Agent</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">openprogram.runtime.agent</span><span class="w"> </span><span class="kn">import</span> <span class="n">llm</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ExampleAgent</span><span class="p">(</span><span class="n">Agent</span><span class="p">):</span>
+    <span class="n">method_options</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;survey_pipeline&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;tool&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;input&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;task&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Research topic.&#39;</span><span class="p">}}},</span>
+    <span class="p">}</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">survey_pipeline</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Run the full research pipeline: survey, find gaps, generate ideas.&quot;&quot;&quot;</span>
+        <span class="n">survey</span> <span class="o">=</span> <span class="n">survey_topic</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="n">task</span><span class="p">)</span>
+        <span class="n">gaps</span> <span class="o">=</span> <span class="n">identify_gaps</span><span class="p">(</span><span class="n">survey</span><span class="o">=</span><span class="n">survey</span><span class="p">)</span>
+        <span class="n">ideas</span> <span class="o">=</span> <span class="n">generate_ideas</span><span class="p">(</span><span class="n">gaps</span><span class="o">=</span><span class="n">gaps</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;survey&quot;</span><span class="p">:</span> <span class="n">survey</span><span class="p">,</span> <span class="s2">&quot;gaps&quot;</span><span class="p">:</span> <span class="n">gaps</span><span class="p">,</span> <span class="s2">&quot;ideas&quot;</span><span class="p">:</span> <span class="n">ideas</span><span class="p">}</span>
+
+<span class="n">_example_agent</span> <span class="o">=</span> <span class="n">ExampleAgent</span><span class="p">()</span>
+<span class="n">survey_pipeline</span> <span class="o">=</span> <span class="n">_example_agent</span><span class="o">.</span><span class="n">survey_pipeline</span>
+</code></pre>
+<h2 id="示例用一次-llm-调用做汇总">示例：用一次 <code>llm()</code> 调用做汇总<a class="header-anchor" href="#示例用一次-llm-调用做汇总">#</a></h2>
+<pre><code class="language-python"><span class="kn">from</span><span class="w"> </span><span class="nn">openprogram</span><span class="w"> </span><span class="kn">import</span> <span class="n">Agent</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">openprogram.runtime.agent</span><span class="w"> </span><span class="kn">import</span> <span class="n">llm</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ExampleAgent</span><span class="p">(</span><span class="n">Agent</span><span class="p">):</span>
+    <span class="n">method_options</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;survey_pipeline&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;tool&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;input&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;task&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Research topic.&#39;</span><span class="p">}}},</span>
+    <span class="p">}</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">survey_pipeline</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Run the full research pipeline and summarise the results.&quot;&quot;&quot;</span>
+        <span class="n">survey</span> <span class="o">=</span> <span class="n">survey_topic</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="n">task</span><span class="p">)</span>
+        <span class="n">gaps</span> <span class="o">=</span> <span class="n">identify_gaps</span><span class="p">(</span><span class="n">survey</span><span class="o">=</span><span class="n">survey</span><span class="p">)</span>
+        <span class="n">ideas</span> <span class="o">=</span> <span class="n">generate_ideas</span><span class="p">(</span><span class="n">gaps</span><span class="o">=</span><span class="n">gaps</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">llm</span><span class="p">([</span>
+            <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Survey:</span><span class="se">\n</span><span class="si">{</span><span class="n">survey</span><span class="si">}</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;Gaps:</span><span class="se">\n</span><span class="si">{</span><span class="n">gaps</span><span class="si">}</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;Ideas:</span><span class="se">\n</span><span class="si">{</span><span class="n">ideas</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)},</span>
+        <span class="p">])</span>
+
+<span class="n">_example_agent</span> <span class="o">=</span> <span class="n">ExampleAgent</span><span class="p">()</span>
+<span class="n">survey_pipeline</span> <span class="o">=</span> <span class="n">_example_agent</span><span class="o">.</span><span class="n">survey_pipeline</span>
+</code></pre>
+<h2 id="会话-dag">会话 DAG<a class="header-anchor" href="#会话-dag">#</a></h2>
+<p>每次调用是一个节点；<code>caller</code> 边指向编排函数：</p>
+<pre><code>survey_pipeline
+├── survey_topic       ← step 1
+├── identify_gaps      ← step 2
+└── generate_ideas     ← step 3
+</code></pre>
+<h2 id="在步骤之间传递数据">在步骤之间传递数据<a class="header-anchor" href="#在步骤之间传递数据">#</a></h2>
+<p>子函数通过 Python 变量彼此交接数据 —— 不涉及任何 LLM：</p>
+<pre><code class="language-python"><span class="n">survey</span> <span class="o">=</span> <span class="n">survey_topic</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="n">task</span><span class="p">)</span>
+<span class="n">gaps</span> <span class="o">=</span> <span class="n">identify_gaps</span><span class="p">(</span><span class="n">survey</span><span class="o">=</span><span class="n">survey</span><span class="p">)</span>
+</code></pre>
+<p><code>survey_topic</code> 的返回值直接作为 <code>identify_gaps</code> 的输入参数传入。</p>
+<h2 id="在步骤之间插入-python-处理逻辑">在步骤之间插入 Python 处理逻辑<a class="header-anchor" href="#在步骤之间插入-python-处理逻辑">#</a></h2>
+<pre><code class="language-python"><span class="n">survey</span> <span class="o">=</span> <span class="n">survey_topic</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="n">task</span><span class="p">)</span>
+
+<span class="c1"># 中间穿插普通的 Python 处理</span>
+<span class="n">key_points</span> <span class="o">=</span> <span class="n">extract_key_points</span><span class="p">(</span><span class="n">survey</span><span class="p">)</span>
+<span class="n">filtered</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">key_points</span> <span class="k">if</span> <span class="n">p</span><span class="p">[</span><span class="s2">&quot;relevance&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">]</span>
+
+<span class="n">gaps</span> <span class="o">=</span> <span class="n">identify_gaps</span><span class="p">(</span><span class="n">survey</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">filtered</span><span class="p">))</span>
+</code></pre>
+<h2 id="错误处理">错误处理<a class="header-anchor" href="#错误处理">#</a></h2>
+<p>主要机制是异常传播：当子函数抛出异常时，其 DAG 节点会以
+<code>status='error'</code> 记录，异常重新抛回到编排器中。在那里用普通的
+<code>try/except</code> 捕获它：</p>
+<pre><code class="language-python"><span class="k">try</span><span class="p">:</span>
+    <span class="n">survey</span> <span class="o">=</span> <span class="n">survey_topic</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="n">task</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Survey failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">}</span>
+
+<span class="n">gaps</span> <span class="o">=</span> <span class="n">identify_gaps</span><span class="p">(</span><span class="n">survey</span><span class="o">=</span><span class="n">survey</span><span class="p">)</span>
+</code></pre>
+<p>或者，如果子函数以带内方式上报失败（返回错误字符串而非抛出异常），
+则检查其返回值：</p>
+<pre><code class="language-python"><span class="n">survey</span> <span class="o">=</span> <span class="n">survey_topic</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="n">task</span><span class="p">)</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">survey</span> <span class="ow">or</span> <span class="s2">&quot;error&quot;</span> <span class="ow">in</span> <span class="n">survey</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;Survey failed&quot;</span><span class="p">,</span> <span class="s2">&quot;survey&quot;</span><span class="p">:</span> <span class="n">survey</span><span class="p">}</span>
+
+<span class="n">gaps</span> <span class="o">=</span> <span class="n">identify_gaps</span><span class="p">(</span><span class="n">survey</span><span class="o">=</span><span class="n">survey</span><span class="p">)</span>
+</code></pre>
+<h2 id="与由-llm-选择调用的对比">与“由 LLM 选择调用”的对比<a class="header-anchor" href="#与由-llm-选择调用的对比">#</a></h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>固定顺序调用</th>
+<th><a href="/docs/capabilities/agentic-programming/choosing-the-next-step/tool-calling.zh.html">工具调用</a> / <a href="/docs/capabilities/agentic-programming/choosing-the-next-step/next-step-decision.zh.html">下一步决策</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>由谁决定调用顺序</td>
+<td>Python 代码</td>
+<td>LLM</td>
+</tr>
+<tr>
+<td>运行多少个子函数</td>
+<td>若干个，全部运行</td>
+<td>工具循环：跨多轮运行多个；决策菜单：仅一个</td>
+</tr>
+<tr>
+<td>灵活性</td>
+<td>固定流水线</td>
+<td>随任务而变</td>
+</tr>
+</tbody>
+</table>
+<div class="page-updated"><span data-i18n="updated">Last updated</span> · 2026-11-02</div><div class="prevnext"><a class="pn-link pn-prev" href="/docs/capabilities/agentic-programming/choosing-the-next-step/tool-calling.html" data-href-en="/docs/capabilities/agentic-programming/choosing-the-next-step/tool-calling.html" data-href-zh="/docs/capabilities/agentic-programming/choosing-the-next-step/tool-calling.zh.html"><span class="pn-dir" data-i18n="prev">Previous</span><span class="pn-title" data-title-zh="工具循环">Tool-call loops</span></a><a class="pn-link pn-next" href="/docs/capabilities/agentic-programming/choosing-the-next-step/next-step-decision.html" data-href-en="/docs/capabilities/agentic-programming/choosing-the-next-step/next-step-decision.html" data-href-zh="/docs/capabilities/agentic-programming/choosing-the-next-step/next-step-decision.zh.html"><span class="pn-dir" data-i18n="next">Next</span><span class="pn-title" data-title-zh="步骤选择">Next-step selection</span></a></div></article></main>
+  <aside class="toc"><div class="toc-title" data-i18n="on_this_page">On this page</div>
+<ul class="toc-list">
+<li>
+<a class="lvl-2" href="#适用场景">适用场景</a>
+</li>
+<li>
+<a class="lvl-2" href="#设计要点">设计要点</a>
+</li>
+<li>
+<a class="lvl-2" href="#示例不调用-llm纯链式调用">示例：不调用 LLM，纯链式调用</a>
+</li>
+<li>
+<a class="lvl-2" href="#示例用一次-llm-调用做汇总">示例：用一次 llm() 调用做汇总</a>
+</li>
+<li>
+<a class="lvl-2" href="#会话-dag">会话 DAG</a>
+</li>
+<li>
+<a class="lvl-2" href="#在步骤之间传递数据">在步骤之间传递数据</a>
+</li>
+<li>
+<a class="lvl-2" href="#在步骤之间插入-python-处理逻辑">在步骤之间插入 Python 处理逻辑</a>
+</li>
+<li>
+<a class="lvl-2" href="#错误处理">错误处理</a>
+</li>
+<li>
+<a class="lvl-2" href="#与由-llm-选择调用的对比">与“由 LLM 选择调用”的对比</a>
+</li>
+</ul></aside>
+</div>
+
+<div class="search-overlay">
+  <div class="search-box">
+    <input type="text" data-i18n-ph="search_ph" placeholder="Search titles or text…" autocomplete="off" spellcheck="false">
+    <div class="search-results"></div>
+  </div>
+</div>
+
+<script src="/docs/assets/site.js?v=6520ba46"></script>
+</body>
+</html>

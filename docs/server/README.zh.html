@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh" data-base="/docs/" data-page-lang="zh" data-build="1793956776" data-alt-lang-url="/docs/server/README.html">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>概览 · OpenProgram Docs</title>
+<meta name="description" content="OpenProgram 的 Web UI、TUI、CLI 背后是同一个常驻本地服务，代码和日志里叫 worker。本页说明它如何启动、如何查看状态、端口和日志在哪。 启动 # 不需要手动启动。直接运行 openprogram （终端 UI）时，如果没有 worker 在跑，会自动拉起一个后台 worker">
+<link rel="canonical" href="https://openprogram.io/docs/server/README.zh.html">
+<link rel="alternate" type="text/markdown" href="https://openprogram.io/docs/server/README.zh.html.md">
+<link rel="describedby" href="https://openprogram.io/llms.txt">
+<link rel="alternate" hreflang="en" href="https://openprogram.io/docs/server/README.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://openprogram.io/docs/server/README.zh.html">
+<link rel="alternate" hreflang="x-default" href="https://openprogram.io/docs/server/README.html">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"OpenProgram Docs","item":"https://openprogram.io/docs/"},{"@type":"ListItem","position":2,"name":"概览"}]}</script>
+<meta property="og:type" content="article">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:site_name" content="OpenProgram">
+<meta property="og:url" content="https://openprogram.io/docs/server/README.zh.html">
+<meta property="og:title" content="概览 · OpenProgram Docs">
+<meta property="og:description" content="OpenProgram 的 Web UI、TUI、CLI 背后是同一个常驻本地服务，代码和日志里叫 worker。本页说明它如何启动、如何查看状态、端口和日志在哪。 启动 # 不需要手动启动。直接运行 openprogram （终端 UI）时，如果没有 worker 在跑，会自动拉起一个后台 worker">
+<meta property="og:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:secure_url" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="概览 · OpenProgram Docs">
+<meta name="twitter:description" content="OpenProgram 的 Web UI、TUI、CLI 背后是同一个常驻本地服务，代码和日志里叫 worker。本页说明它如何启动、如何查看状态、端口和日志在哪。 启动 # 不需要手动启动。直接运行 openprogram （终端 UI）时，如果没有 worker 在跑，会自动拉起一个后台 worker">
+<meta name="twitter:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta name="twitter:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/docs/assets/mark.svg">
+<link rel="stylesheet" href="/docs/assets/site.css?v=6520ba46">
+<link rel="stylesheet" href="/docs/assets/pygments-light.css" media="(prefers-color-scheme: light)" id="pyg-light">
+<link rel="stylesheet" href="/docs/assets/pygments-dark.css" media="(prefers-color-scheme: dark)" id="pyg-dark">
+<script src="/docs/assets/theme.js?v=6520ba46"></script>
+
+</head>
+<body>
+<header class="topbar">
+  <button class="icon hamburger" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2.5 4.5h11M2.5 8h11M2.5 11.5h11"/></svg></button>
+  <a class="brand" href="/docs/index.html"><img class="mark" src="/docs/assets/mark.svg" alt="">OpenProgram Docs</a>
+  <div class="spacer"></div>
+  <button class="search-trigger" aria-label="Search">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14"/></svg><span class="label" data-i18n="search">Search docs</span><kbd>⌘K</kbd>
+  </button>
+  <div class="lang-wrap">
+    <button class="icon lang-trigger" id="lang-toggle" aria-haspopup="true" aria-expanded="false" aria-label="Language">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="6.2"/><path d="M1.8 8h12.4" stroke-linecap="round"/><ellipse cx="8" cy="8" rx="2.8" ry="6.2"/></svg><span class="lang-label">EN</span><svg class="chev" width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+    </button>
+    <div class="lang-menu" id="lang-menu" role="menu">
+      <button class="lang-opt" data-lang="en" role="menuitem"><span>English</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="lang-opt" data-lang="zh" role="menuitem"><span>简体中文</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+  <div class="theme-wrap">
+    <button class="icon" id="theme-toggle" aria-label="Theme" aria-haspopup="menu" aria-controls="theme-menu" aria-expanded="false"><svg class="ic-system" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="2.5" width="13" height="9" rx="1.5"/><path d="M8 11.5V14M5.5 14h5"/></svg><svg class="ic-moon" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M13.5 9.5A6 6 0 1 1 6.5 2.5a5 5 0 0 0 7 7z"/></svg><svg class="ic-sun" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="3.2"/><path d="M8 1.2v1.8M8 13v1.8M1.2 8H3M13 8h1.8M3.2 3.2l1.3 1.3M11.5 11.5l1.3 1.3M12.8 3.2l-1.3 1.3M4.5 11.5l-1.3 1.3"/></svg></button>
+    <div class="theme-menu" id="theme-menu" role="menu" aria-labelledby="theme-toggle">
+      <button class="theme-opt" data-theme-choice="system" role="menuitemradio" aria-checked="true"><span>Follow system</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="light" role="menuitemradio" aria-checked="false"><span>Light</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="dark" role="menuitemradio" aria-checked="false"><span>Dark</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+</header>
+<nav class="tabbar"><a class="tablink" href="/docs/README.html" data-title-zh="开始使用" data-href-en="/docs/README.html" data-href-zh="/docs/README.zh.html">Get started</a><a class="tablink" href="/docs/install/install.html" data-title-zh="安装" data-href-en="/docs/install/install.html" data-href-zh="/docs/install/install.zh.html">Install</a><a class="tablink" href="/docs/capabilities/README.html" data-title-zh="能力" data-href-en="/docs/capabilities/README.html" data-href-zh="/docs/capabilities/README.zh.html">Capabilities</a><a class="tablink" href="/docs/interfaces/README.html" data-title-zh="界面" data-href-en="/docs/interfaces/README.html" data-href-zh="/docs/interfaces/README.zh.html">Interfaces</a><a class="tablink" href="/docs/models/README.html" data-title-zh="模型" data-href-en="/docs/models/README.html" data-href-zh="/docs/models/README.zh.html">Models</a><a class="tablink" href="/docs/integrations/anthropic.html" data-title-zh="集成" data-href-en="/docs/integrations/anthropic.html" data-href-zh="/docs/integrations/anthropic.zh.html">Integrations</a><a class="tablink active" href="/docs/server/README.html" data-title-zh="服务与运维" data-href-en="/docs/server/README.html" data-href-zh="/docs/server/README.zh.html">Server &amp; Ops</a><a class="tablink" href="/docs/reference/README.html" data-title-zh="参考" data-href-en="/docs/reference/README.html" data-href-zh="/docs/reference/README.zh.html">Reference</a><a class="tablink" href="/docs/reference/design/README.html" data-title-zh="设计" data-href-en="/docs/reference/design/README.html" data-href-zh="/docs/reference/design/README.zh.html">Design</a></nav>
+
+<div class="scrim"></div>
+<div class="layout">
+  <nav class="sidebar" aria-label="Documentation">
+    <input class="nav-filter" type="text" data-i18n-ph="nav_filter"
+           aria-label="Filter docs" placeholder="Filter docs…" autocomplete="off" spellcheck="false">
+    <div class="nav-tree"><div class="nav-sec"><div class="nav-sec-title" data-title-zh="概览">Overview</div><a class="navlink active" href="/docs/server/README.html" data-title-zh="概览" data-href-en="/docs/server/README.html" data-href-zh="/docs/server/README.zh.html">Overview</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="运维">Operations</div><a class="navlink" href="/docs/server/configuration.html" data-title-zh="服务端配置" data-href-en="/docs/server/configuration.html" data-href-zh="/docs/server/configuration.zh.html">Server configuration</a>
+<a class="navlink" href="/docs/server/upgrading.html" data-title-zh="源码升级" data-href-en="/docs/server/upgrading.html" data-href-zh="/docs/server/upgrading.zh.html">Source upgrades</a>
+<a class="navlink" href="/docs/server/backup.html" data-title-zh="备份与恢复" data-href-en="/docs/server/backup.html" data-href-zh="/docs/server/backup.zh.html">Backup and restore</a>
+<a class="navlink" href="/docs/server/troubleshooting.html" data-title-zh="故障排查" data-href-en="/docs/server/troubleshooting.html" data-href-zh="/docs/server/troubleshooting.zh.html">Troubleshooting</a></div></div>
+  </nav>
+  <main class="content"><button class="fs-toggle" aria-label="Fullscreen" title="Fullscreen (Esc to exit)"><svg class="ic-expand" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.2 2H2v4.2M9.8 2H14v4.2M6.2 14H2V9.8M9.8 14H14V9.8"/></svg><svg class="ic-collapse" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6.2h4.2V2M14 6.2H9.8V2M2 9.8h4.2V14M14 9.8H9.8V14"/></svg></button><article><nav class="breadcrumb"><span class="bc-seg" data-title-zh="服务与运维">Server &amp; Ops</span> <span class='bc-sep'>›</span> <span class="bc-seg" data-title-zh="概览">Overview</span> <span class='bc-sep'>›</span> <span class="bc-seg bc-current" data-title-zh="概览">Overview</span></nav><h1 id="概览">概览<a class="header-anchor" href="#概览">#</a></h1>
+<p>OpenProgram 的 Web UI、TUI、CLI 背后是同一个常驻本地服务，代码和日志里叫 worker。本页说明它如何启动、如何查看状态、端口和日志在哪。</p>
+<h2 id="启动">启动<a class="header-anchor" href="#启动">#</a></h2>
+<p>不需要手动启动。直接运行 <code>openprogram</code>（终端 UI）时，如果没有 worker 在跑，会自动拉起一个后台 worker 并连上去。不想自动拉起时设 <code>OPENPROGRAM_NO_AUTO_WORKER=1</code>，此时 TUI 只连接已有 worker。</p>
+<p>手动控制用 <code>openprogram worker</code> 子命令：</p>
+<pre><code class="language-bash">openprogram<span class="w"> </span>worker<span class="w"> </span>start<span class="w">     </span><span class="c1"># 后台启动一个 worker 并返回</span>
+openprogram<span class="w"> </span>worker<span class="w"> </span>run<span class="w">       </span><span class="c1"># 前台运行（阻塞），调试用，Ctrl-C 停止</span>
+openprogram<span class="w"> </span>worker<span class="w"> </span>status<span class="w">    </span><span class="c1"># 是否在跑、PID、端口、运行时长</span>
+openprogram<span class="w"> </span>worker<span class="w"> </span>stop<span class="w">      </span><span class="c1"># 停止（已安装的服务会一直停着，直到下次 start 或登录）</span>
+openprogram<span class="w"> </span>worker<span class="w"> </span>restart<span class="w">   </span><span class="c1"># 停掉再起一个新的</span>
+</code></pre>
+<p><code>openprogram web</code> 在当前终端启动服务并打开浏览器 UI（<code>http://localhost:18100</code>）。</p>
+<h2 id="status-stop-restart">status / stop / restart<a class="header-anchor" href="#status-stop-restart">#</a></h2>
+<p>顶层也有三个快捷命令：</p>
+<pre><code class="language-bash">openprogram<span class="w"> </span>status<span class="w">     </span><span class="c1"># 后台服务是否在跑（PID、端口、运行时长、日志路径）</span>
+openprogram<span class="w"> </span>stop<span class="w">       </span><span class="c1"># 停止后台服务</span>
+openprogram<span class="w"> </span>restart<span class="w">    </span><span class="c1"># 重启（改了代码或配置之后用）</span>
+</code></pre>
+<p><code>openprogram status</code> 的输出示例：</p>
+<pre><code>openprogram: running (PID 82472, port 18100, up 48m)
+  logs: ~/.openprogram/worker.log
+</code></pre>
+<h2 id="端口">端口<a class="header-anchor" href="#端口">#</a></h2>
+<p>worker 只监听一个端口（默认 18100），承载全部内容：API、WebSocket（TUI 和 Web UI 都连它）以及 web UI 本身——浏览器里打开的就是这个地址。</p>
+<p>持久化修改：</p>
+<pre><code class="language-bash">openprogram<span class="w"> </span>ports<span class="w"> </span>--port<span class="w"> </span><span class="m">8101</span>
+</code></pre>
+<p>单次运行覆盖：环境变量 <code>OPENPROGRAM_WEB_PORT</code>，或 <code>openprogram web --web-port &lt;p&gt;</code>。优先级：显式参数 → 环境变量 → 持久化偏好 → 默认值。</p>
+<h2 id="日志">日志<a class="header-anchor" href="#日志">#</a></h2>
+<pre><code class="language-bash">openprogram<span class="w"> </span>logs<span class="w"> </span>list<span class="w">           </span><span class="c1"># 所有日志文件（大小、更新时间）</span>
+openprogram<span class="w"> </span>logs<span class="w"> </span>tail<span class="w"> </span><span class="o">[</span>name<span class="o">]</span><span class="w">    </span><span class="c1"># 最后 N 行（默认 50）；-n 行数，-f 持续跟踪</span>
+openprogram<span class="w"> </span>logs<span class="w"> </span>path<span class="w"> </span><span class="o">[</span>name<span class="o">]</span><span class="w">    </span><span class="c1"># 打印日志文件的绝对路径</span>
+</code></pre>
+<p>日志名有三个：<code>worker</code>（默认，<code>~/.openprogram/worker.log</code>）、<code>runtime</code>（<code>~/.openprogram/logs/runtime.log</code>）、<code>ink-startup</code>（TUI 启动日志，<code>~/.openprogram/logs/ink-startup.log</code>）。名字按前缀匹配，所以 <code>openprogram logs tail ink</code> 也行。worker 日志超过 16 MB 后会在下次启动时轮转：旧内容移到 <code>worker.log.1</code>（最多到 <code>worker.log.3</code>），文件从头开始写。</p>
+<h2 id="作为登录服务运行">作为登录服务运行<a class="header-anchor" href="#作为登录服务运行">#</a></h2>
+<pre><code class="language-bash">openprogram<span class="w"> </span>worker<span class="w"> </span>install<span class="w">      </span><span class="c1"># 安装为系统服务</span>
+openprogram<span class="w"> </span>worker<span class="w"> </span>uninstall<span class="w">    </span><span class="c1"># 移除</span>
+</code></pre>
+<p>macOS 使用 launchd（<code>~/Library/LaunchAgents/ai.openprogram.worker.plist</code>），
+Linux 使用 systemd --user，Windows source checkout 使用最低权限的每用户任务计划。
+安装后 worker 随登录自动启动，崩溃后自动重启。<code>openprogram status</code> 会显示服务是否已安装。</p>
+<p>macOS 和 Linux 安装服务后，<code>worker start</code>、<code>stop</code>、<code>restart</code> 会继续通过已安装的
+launchd 或 systemd 用户服务执行，不会悄悄改成脱管的后台进程。macOS 上 <code>stop</code>
+会卸载 launchd 任务，worker 会一直停着，直到下次 <code>start</code> 或重新登录，不会被崩溃
+自动重启拉起来。<code>start</code> 和 <code>restart</code> 还会按当前 CLI runtime 刷新生成的 plist 或
+unit，因此不可变 release 升级后不会继续启动旧 runtime。Linux 上每个命名 <a href="/docs/install/profiles.zh.html">profile</a> 都有独立 unit，所以一个 profile 的
+服务命令不会停止或替换另一个 profile 的 worker。</p>
+<h2 id="相关页面">相关页面<a class="header-anchor" href="#相关页面">#</a></h2>
+<ul>
+<li><a href="/docs/server/configuration.zh.html">配置与数据目录</a> —— <code>~/.openprogram/</code> 里有什么，<code>openprogram config</code> 怎么用</li>
+<li><a href="/docs/server/backup.zh.html">备份与恢复</a> —— 用 <code>openprogram backup</code> 快照记忆、会话与配置</li>
+<li><a href="/docs/server/troubleshooting.zh.html">故障排查</a> —— 常见的&quot;它不工作&quot;场景</li>
+</ul>
+<div class="page-updated"><span data-i18n="updated">Last updated</span> · 2026-11-05</div><div class="prevnext"><a class="pn-link pn-prev" href="/docs/integrations/channels.html" data-href-en="/docs/integrations/channels.html" data-href-zh="/docs/integrations/channels.zh.html"><span class="pn-dir" data-i18n="prev">Previous</span><span class="pn-title" data-title-zh="聊天渠道">Chat channels</span></a><a class="pn-link pn-next" href="/docs/server/configuration.html" data-href-en="/docs/server/configuration.html" data-href-zh="/docs/server/configuration.zh.html"><span class="pn-dir" data-i18n="next">Next</span><span class="pn-title" data-title-zh="服务端配置">Server configuration</span></a></div></article></main>
+  <aside class="toc"><div class="toc-title" data-i18n="on_this_page">On this page</div>
+<ul class="toc-list">
+<li>
+<a class="lvl-2" href="#启动">启动</a>
+</li>
+<li>
+<a class="lvl-2" href="#status-stop-restart">status / stop / restart</a>
+</li>
+<li>
+<a class="lvl-2" href="#端口">端口</a>
+</li>
+<li>
+<a class="lvl-2" href="#日志">日志</a>
+</li>
+<li>
+<a class="lvl-2" href="#作为登录服务运行">作为登录服务运行</a>
+</li>
+<li>
+<a class="lvl-2" href="#相关页面">相关页面</a>
+</li>
+</ul></aside>
+</div>
+
+<div class="search-overlay">
+  <div class="search-box">
+    <input type="text" data-i18n-ph="search_ph" placeholder="Search titles or text…" autocomplete="off" spellcheck="false">
+    <div class="search-results"></div>
+  </div>
+</div>
+
+<script src="/docs/assets/site.js?v=6520ba46"></script>
+</body>
+</html>

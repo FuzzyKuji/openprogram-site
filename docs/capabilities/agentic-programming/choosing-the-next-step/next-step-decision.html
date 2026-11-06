@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en" data-base="/docs/" data-page-lang="en" data-build="1793956776" data-alt-lang-url="/docs/capabilities/agentic-programming/choosing-the-next-step/next-step-decision.zh.html">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Next-step selection · OpenProgram Docs</title>
+<meta name="description" content="Next-step decision # This document describes OpenProgram&#x27;s next-step decision mechanism: an agentic function hands &quot;what happens next&quot; to the LLM — give it a">
+<link rel="canonical" href="https://openprogram.io/docs/capabilities/agentic-programming/choosing-the-next-step/next-step-decision.html">
+<link rel="alternate" type="text/markdown" href="https://openprogram.io/docs/capabilities/agentic-programming/choosing-the-next-step/next-step-decision.html.md">
+<link rel="describedby" href="https://openprogram.io/llms.txt">
+<link rel="alternate" hreflang="en" href="https://openprogram.io/docs/capabilities/agentic-programming/choosing-the-next-step/next-step-decision.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://openprogram.io/docs/capabilities/agentic-programming/choosing-the-next-step/next-step-decision.zh.html">
+<link rel="alternate" hreflang="x-default" href="https://openprogram.io/docs/capabilities/agentic-programming/choosing-the-next-step/next-step-decision.html">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"OpenProgram Docs","item":"https://openprogram.io/docs/"},{"@type":"ListItem","position":2,"name":"Next-step selection"}]}</script>
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="OpenProgram">
+<meta property="og:url" content="https://openprogram.io/docs/capabilities/agentic-programming/choosing-the-next-step/next-step-decision.html">
+<meta property="og:title" content="Next-step selection · OpenProgram Docs">
+<meta property="og:description" content="Next-step decision # This document describes OpenProgram&#x27;s next-step decision mechanism: an agentic function hands &quot;what happens next&quot; to the LLM — give it a">
+<meta property="og:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:secure_url" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Next-step selection · OpenProgram Docs">
+<meta name="twitter:description" content="Next-step decision # This document describes OpenProgram&#x27;s next-step decision mechanism: an agentic function hands &quot;what happens next&quot; to the LLM — give it a">
+<meta name="twitter:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta name="twitter:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/docs/assets/mark.svg">
+<link rel="stylesheet" href="/docs/assets/site.css?v=6520ba46">
+<link rel="stylesheet" href="/docs/assets/pygments-light.css" media="(prefers-color-scheme: light)" id="pyg-light">
+<link rel="stylesheet" href="/docs/assets/pygments-dark.css" media="(prefers-color-scheme: dark)" id="pyg-dark">
+<script src="/docs/assets/theme.js?v=6520ba46"></script>
+
+</head>
+<body>
+<header class="topbar">
+  <button class="icon hamburger" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2.5 4.5h11M2.5 8h11M2.5 11.5h11"/></svg></button>
+  <a class="brand" href="/docs/index.html"><img class="mark" src="/docs/assets/mark.svg" alt="">OpenProgram Docs</a>
+  <div class="spacer"></div>
+  <button class="search-trigger" aria-label="Search">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14"/></svg><span class="label" data-i18n="search">Search docs</span><kbd>⌘K</kbd>
+  </button>
+  <div class="lang-wrap">
+    <button class="icon lang-trigger" id="lang-toggle" aria-haspopup="true" aria-expanded="false" aria-label="Language">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="6.2"/><path d="M1.8 8h12.4" stroke-linecap="round"/><ellipse cx="8" cy="8" rx="2.8" ry="6.2"/></svg><span class="lang-label">EN</span><svg class="chev" width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+    </button>
+    <div class="lang-menu" id="lang-menu" role="menu">
+      <button class="lang-opt" data-lang="en" role="menuitem"><span>English</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="lang-opt" data-lang="zh" role="menuitem"><span>简体中文</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+  <div class="theme-wrap">
+    <button class="icon" id="theme-toggle" aria-label="Theme" aria-haspopup="menu" aria-controls="theme-menu" aria-expanded="false"><svg class="ic-system" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="2.5" width="13" height="9" rx="1.5"/><path d="M8 11.5V14M5.5 14h5"/></svg><svg class="ic-moon" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M13.5 9.5A6 6 0 1 1 6.5 2.5a5 5 0 0 0 7 7z"/></svg><svg class="ic-sun" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="3.2"/><path d="M8 1.2v1.8M8 13v1.8M1.2 8H3M13 8h1.8M3.2 3.2l1.3 1.3M11.5 11.5l1.3 1.3M12.8 3.2l-1.3 1.3M4.5 11.5l-1.3 1.3"/></svg></button>
+    <div class="theme-menu" id="theme-menu" role="menu" aria-labelledby="theme-toggle">
+      <button class="theme-opt" data-theme-choice="system" role="menuitemradio" aria-checked="true"><span>Follow system</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="light" role="menuitemradio" aria-checked="false"><span>Light</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="dark" role="menuitemradio" aria-checked="false"><span>Dark</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+</header>
+<nav class="tabbar"><a class="tablink" href="/docs/README.html" data-title-zh="开始使用" data-href-en="/docs/README.html" data-href-zh="/docs/README.zh.html">Get started</a><a class="tablink" href="/docs/install/install.html" data-title-zh="安装" data-href-en="/docs/install/install.html" data-href-zh="/docs/install/install.zh.html">Install</a><a class="tablink active" href="/docs/capabilities/README.html" data-title-zh="能力" data-href-en="/docs/capabilities/README.html" data-href-zh="/docs/capabilities/README.zh.html">Capabilities</a><a class="tablink" href="/docs/interfaces/README.html" data-title-zh="界面" data-href-en="/docs/interfaces/README.html" data-href-zh="/docs/interfaces/README.zh.html">Interfaces</a><a class="tablink" href="/docs/models/README.html" data-title-zh="模型" data-href-en="/docs/models/README.html" data-href-zh="/docs/models/README.zh.html">Models</a><a class="tablink" href="/docs/integrations/anthropic.html" data-title-zh="集成" data-href-en="/docs/integrations/anthropic.html" data-href-zh="/docs/integrations/anthropic.zh.html">Integrations</a><a class="tablink" href="/docs/server/README.html" data-title-zh="服务与运维" data-href-en="/docs/server/README.html" data-href-zh="/docs/server/README.zh.html">Server &amp; Ops</a><a class="tablink" href="/docs/reference/README.html" data-title-zh="参考" data-href-en="/docs/reference/README.html" data-href-zh="/docs/reference/README.zh.html">Reference</a><a class="tablink" href="/docs/reference/design/README.html" data-title-zh="设计" data-href-en="/docs/reference/design/README.html" data-href-zh="/docs/reference/design/README.zh.html">Design</a></nav>
+
+<div class="scrim"></div>
+<div class="layout">
+  <nav class="sidebar" aria-label="Documentation">
+    <input class="nav-filter" type="text" data-i18n-ph="nav_filter"
+           aria-label="Filter docs" placeholder="Filter docs…" autocomplete="off" spellcheck="false">
+    <div class="nav-tree"><div class="nav-sec"><div class="nav-sec-title" data-title-zh="概览">Overview</div><a class="navlink" href="/docs/capabilities/README.html" data-title-zh="概览" data-href-en="/docs/capabilities/README.html" data-href-zh="/docs/capabilities/README.zh.html">Overview</a>
+<a class="navlink" href="/docs/capabilities/applications.html" data-title-zh="应用" data-href-en="/docs/capabilities/applications.html" data-href-zh="/docs/capabilities/applications.zh.html">Applications</a>
+<a class="navlink" href="/docs/capabilities/framework-control.html" data-title-zh="框架工具" data-href-en="/docs/capabilities/framework-control.html" data-href-zh="/docs/capabilities/framework-control.zh.html">Framework tools</a></div>
+<div class="nav-sec"><div class="nav-sec-title">Agentic Programming</div><a class="navlink" href="/docs/capabilities/agentic-programming/README.html" data-title-zh="指南" data-href-en="/docs/capabilities/agentic-programming/README.html" data-href-zh="/docs/capabilities/agentic-programming/README.zh.html">Guide</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/philosophy.html" data-title-zh="设计原则" data-href-en="/docs/capabilities/agentic-programming/philosophy.html" data-href-zh="/docs/capabilities/agentic-programming/philosophy.zh.html">Philosophy</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/embedding-in-your-own-stack.html" data-title-zh="框架嵌入" data-href-en="/docs/capabilities/agentic-programming/embedding-in-your-own-stack.html" data-href-zh="/docs/capabilities/agentic-programming/embedding-in-your-own-stack.zh.html">Framework embedding</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="编写函数">Writing functions</div><a class="navlink" href="/docs/capabilities/agentic-programming/writing-functions/pure-python.html" data-title-zh="Python 函数" data-href-en="/docs/capabilities/agentic-programming/writing-functions/pure-python.html" data-href-zh="/docs/capabilities/agentic-programming/writing-functions/pure-python.zh.html">Python functions</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/writing-functions/agent.html" data-title-zh="智能体函数" data-href-en="/docs/capabilities/agentic-programming/writing-functions/agent.html" data-href-zh="/docs/capabilities/agentic-programming/writing-functions/agent.zh.html">Agentic functions</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/writing-functions/function-metadata.html" data-title-zh="函数元数据" data-href-en="/docs/capabilities/agentic-programming/writing-functions/function-metadata.html" data-href-zh="/docs/capabilities/agentic-programming/writing-functions/function-metadata.zh.html">Function metadata</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="选择下一步">Choosing the next step</div><a class="navlink" href="/docs/capabilities/agentic-programming/choosing-the-next-step/tool-calling.html" data-title-zh="工具循环" data-href-en="/docs/capabilities/agentic-programming/choosing-the-next-step/tool-calling.html" data-href-zh="/docs/capabilities/agentic-programming/choosing-the-next-step/tool-calling.zh.html">Tool-call loops</a>
+<a class="navlink" href="/docs/capabilities/agentic-programming/choosing-the-next-step/fixed-order-calls.html" data-title-zh="顺序调用" data-href-en="/docs/capabilities/agentic-programming/choosing-the-next-step/fixed-order-calls.html" data-href-zh="/docs/capabilities/agentic-programming/choosing-the-next-step/fixed-order-calls.zh.html">Fixed-order calls</a>
+<a class="navlink active" href="/docs/capabilities/agentic-programming/choosing-the-next-step/next-step-decision.html" data-title-zh="步骤选择" data-href-en="/docs/capabilities/agentic-programming/choosing-the-next-step/next-step-decision.html" data-href-zh="/docs/capabilities/agentic-programming/choosing-the-next-step/next-step-decision.zh.html">Next-step selection</a></div>
+<div class="nav-sec"><div class="nav-sec-title">Agentic Workflows</div><a class="navlink" href="/docs/capabilities/workflows/README.html" data-title-zh="工作流" data-href-en="/docs/capabilities/workflows/README.html" data-href-zh="/docs/capabilities/workflows/README.zh.html">Workflows</a>
+<a class="navlink" href="/docs/capabilities/workflows/authoring.html" data-title-zh="工作流编写" data-href-en="/docs/capabilities/workflows/authoring.html" data-href-zh="/docs/capabilities/workflows/authoring.zh.html">Workflow authoring</a>
+<a class="navlink" href="/docs/capabilities/workflows/recording.html" data-title-zh="录制 Workflow" data-href-en="/docs/capabilities/workflows/recording.html" data-href-zh="/docs/capabilities/workflows/recording.zh.html">Record a workflow</a>
+<a class="navlink" href="/docs/capabilities/workflows/reports.html" data-title-zh="每周报告" data-href-en="/docs/capabilities/workflows/reports.html" data-href-zh="/docs/capabilities/workflows/reports.zh.html">Weekly reports</a></div>
+<div class="nav-sec"><div class="nav-sec-title">Agents</div><a class="navlink" href="/docs/capabilities/agents.html" data-title-zh="配置 Agent" data-href-en="/docs/capabilities/agents.html" data-href-zh="/docs/capabilities/agents.zh.html">Configure an Agent</a>
+<a class="navlink" href="/docs/capabilities/agents-md.html" data-title-zh="用 AGENTS.md 写指令" data-href-en="/docs/capabilities/agents-md.html" data-href-zh="/docs/capabilities/agents-md.zh.html">Instructions with AGENTS.md</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="常驻 Agent">Always-on Agents</div><a class="navlink" href="/docs/capabilities/always-on-agents.html" data-title-zh="常驻 Agent" data-href-en="/docs/capabilities/always-on-agents.html" data-href-zh="/docs/capabilities/always-on-agents.zh.html">Always-on Agents</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="提醒">Reminders</div><a class="navlink" href="/docs/capabilities/reminders.html" data-title-zh="提醒" data-href-en="/docs/capabilities/reminders.html" data-href-zh="/docs/capabilities/reminders.zh.html">Reminders</a>
+<a class="navlink" href="/docs/capabilities/event-triggers.html" data-title-zh="有事发生时运行任务" data-href-en="/docs/capabilities/event-triggers.html" data-href-zh="/docs/capabilities/event-triggers.zh.html">Run a task when something happens</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="记忆">Memory</div><a class="navlink" href="/docs/capabilities/memory.html" data-title-zh="记忆管理" data-href-en="/docs/capabilities/memory.html" data-href-zh="/docs/capabilities/memory.zh.html">Memory management</a>
+<a class="navlink" href="/docs/capabilities/memory-settings.html" data-title-zh="调整记忆" data-href-en="/docs/capabilities/memory-settings.html" data-href-zh="/docs/capabilities/memory-settings.zh.html">Tune Memory</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="运行环境">Environments</div><a class="navlink" href="/docs/capabilities/environments.html" data-title-zh="在另一台机器上运行会话" data-href-en="/docs/capabilities/environments.html" data-href-zh="/docs/capabilities/environments.zh.html">Run conversations on another machine</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="会话目标">Session goals</div><a class="navlink" href="/docs/capabilities/goal.html" data-title-zh="目标" data-href-en="/docs/capabilities/goal.html" data-href-zh="/docs/capabilities/goal.zh.html">Goals</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="操控电脑">Computer use</div><a class="navlink" href="/docs/capabilities/computer-use.html" data-title-zh="操控电脑" data-href-en="/docs/capabilities/computer-use.html" data-href-zh="/docs/capabilities/computer-use.zh.html">Computer use</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="会议">Meetings</div><a class="navlink" href="/docs/capabilities/meetings.html" data-title-zh="会议" data-href-en="/docs/capabilities/meetings.html" data-href-zh="/docs/capabilities/meetings.zh.html">Meetings</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="扩展">Extending</div><a class="navlink" href="/docs/capabilities/installing-programs.html" data-title-zh="安装程序" data-href-en="/docs/capabilities/installing-programs.html" data-href-zh="/docs/capabilities/installing-programs.zh.html">Installing programs</a>
+<a class="navlink" href="/docs/capabilities/skills.html" data-title-zh="技能" data-href-en="/docs/capabilities/skills.html" data-href-zh="/docs/capabilities/skills.zh.html">Skills</a>
+<a class="navlink" href="/docs/capabilities/plugins.html" data-title-zh="插件" data-href-en="/docs/capabilities/plugins.html" data-href-zh="/docs/capabilities/plugins.zh.html">Plugins</a>
+<a class="navlink" href="/docs/capabilities/mcp.html" data-title-zh="MCP" data-href-en="/docs/capabilities/mcp.html" data-href-zh="/docs/capabilities/mcp.zh.html">MCP</a>
+<a class="navlink" href="/docs/capabilities/tools.html" data-title-zh="内置工具" data-href-en="/docs/capabilities/tools.html" data-href-zh="/docs/capabilities/tools.zh.html">Built-in tools</a>
+<a class="navlink" href="/docs/capabilities/lsp.html" data-title-zh="语言服务器" data-href-en="/docs/capabilities/lsp.html" data-href-zh="/docs/capabilities/lsp.zh.html">Language servers</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="概览">Overview</div><a class="navlink" href="/docs/capabilities/commit-push-pr.html" data-title-zh="提交与拉取请求" data-href-en="/docs/capabilities/commit-push-pr.html" data-href-zh="/docs/capabilities/commit-push-pr.zh.html">Commits and PRs</a>
+<a class="navlink" href="/docs/capabilities/permissions.html" data-title-zh="工具权限" data-href-en="/docs/capabilities/permissions.html" data-href-zh="/docs/capabilities/permissions.zh.html">Tool permissions</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="指南">Guide</div><a class="navlink" href="/docs/capabilities/agentic-programming/self-programming-ai-agents.html" data-title-zh="自编程智能体" data-href-en="/docs/capabilities/agentic-programming/self-programming-ai-agents.html" data-href-zh="/docs/capabilities/agentic-programming/self-programming-ai-agents.zh.html">Self-programming agents</a></div></div>
+  </nav>
+  <main class="content"><button class="fs-toggle" aria-label="Fullscreen" title="Fullscreen (Esc to exit)"><svg class="ic-expand" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.2 2H2v4.2M9.8 2H14v4.2M6.2 14H2V9.8M9.8 14H14V9.8"/></svg><svg class="ic-collapse" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6.2h4.2V2M14 6.2H9.8V2M2 9.8h4.2V14M14 9.8H9.8V14"/></svg></button><article><nav class="breadcrumb"><span class="bc-seg" data-title-zh="能力">Capabilities</span> <span class='bc-sep'>›</span> <span class="bc-seg" data-title-zh="选择下一步">Choosing the next step</span> <span class='bc-sep'>›</span> <span class="bc-seg bc-current" data-title-zh="步骤选择">Next-step selection</span></nav><h1 id="next-step-decision">Next-step decision<a class="header-anchor" href="#next-step-decision">#</a></h1>
+<p>This document describes OpenProgram's <strong>next-step decision</strong> mechanism: an
+agentic function hands &quot;what happens next&quot; to the LLM — give it a set of
+options, it picks one, and the framework resolves that pick directly into
+&quot;the result of the next step&quot;. This mechanism is a separate path from
+provider-native tool calls.</p>
+<p>It lives in the framework at <code>openprogram/runtime/agent/decision.py</code>.
+Two entry points share the same option shapes and parsing:</p>
+<ul>
+<li><code>decision.make(prompt, options)</code> — pure decision; the model does no work,
+it just picks.</li>
+<li><code>agent(prompt, choices=options)</code> — the model first runs a full turn
+(reasoning, tool calls), and only the closing move is a decision.</li>
+</ul>
+<p>Both issue their model call on the Runtime of the enclosing call. Every
+<code>Agent</code> method call binds one — the Agent's configured Runtime, or the
+caller's — so inside an <code>Agent</code> method neither entry takes a runtime
+argument. Only outside any Agent call do you pass <code>runtime=</code> explicitly;
+without one there, <code>decision.make</code> raises <code>RuntimeError</code>.</p>
+<h2 id="versus-native-tool-calls">Versus native tool calls<a class="header-anchor" href="#versus-native-tool-calls">#</a></h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Native tool call</th>
+<th>Next-step decision (this mechanism)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>How options reach the model</td>
+<td>the provider protocol's <code>tools</code> field</td>
+<td>a text menu inside the prompt</td>
+</tr>
+<tr>
+<td>How the model expresses its pick</td>
+<td>protocol-level structured <code>ToolCall</code></td>
+<td>a JSON snippet in the reply body</td>
+</tr>
+<tr>
+<td>Who parses</td>
+<td>provider / agent_loop</td>
+<td><code>decision.py</code> itself</td>
+</tr>
+<tr>
+<td>Can an option be a non-function</td>
+<td>no, must be a tool</td>
+<td>yes, value options are supported</td>
+</tr>
+<tr>
+<td>Dependency</td>
+<td>provider tool-use support</td>
+<td>none, plain text suffices</td>
+</tr>
+</tbody>
+</table>
+<p>Pick this mechanism when you don't want to depend on the provider's tool-use
+support, or when you need &quot;an option that is not a function&quot; — a decision
+that returns a value directly (typically routing markers like <code>done</code> /
+<code>escalate</code>).</p>
+<h2 id="entry-one-decisionmake-pure-decision">Entry one: <code>decision.make</code> — pure decision<a class="header-anchor" href="#entry-one-decisionmake-pure-decision">#</a></h2>
+<p>Inside an <code>Agent</code> method, call <code>decision.make</code> once — no runtime passed,
+no <code>if</code> written:</p>
+<pre><code class="language-python"><span class="kn">from</span><span class="w"> </span><span class="nn">openprogram</span><span class="w"> </span><span class="kn">import</span> <span class="n">Agent</span><span class="p">,</span> <span class="n">decision</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ExampleAgent</span><span class="p">(</span><span class="n">Agent</span><span class="p">):</span>
+    <span class="n">method_options</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;route_message&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;tool&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
+    <span class="p">}</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">route_message</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">decision</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="s2">&quot;Pick one way to handle this message.&quot;</span><span class="p">,</span> <span class="p">{</span>
+            <span class="s2">&quot;analyze&quot;</span><span class="p">:</span>  <span class="n">analyze_sentiment</span><span class="p">,</span>        <span class="c1"># a function</span>
+            <span class="s2">&quot;fallback&quot;</span><span class="p">:</span> <span class="n">fallback_reply</span><span class="p">,</span>           <span class="c1"># a function</span>
+            <span class="s2">&quot;done&quot;</span><span class="p">:</span>     <span class="s2">&quot;CONVERSATION_OVER&quot;</span><span class="p">,</span>      <span class="c1"># a value</span>
+        <span class="p">})</span>
+
+<span class="n">_example_agent</span> <span class="o">=</span> <span class="n">ExampleAgent</span><span class="p">()</span>
+<span class="n">route_message</span> <span class="o">=</span> <span class="n">_example_agent</span><span class="o">.</span><span class="n">route_message</span>
+</code></pre>
+<p><code>decision.make</code> renders the menu, calls the model, parses the reply, then
+<strong>resolves the pick directly into the result of the next step</strong>:</p>
+<ul>
+<li>LLM picked a function → that function executes (with parsed + injected
+arguments) and its return value is returned.</li>
+<li>LLM picked a value → that value is returned as-is.</li>
+</ul>
+<p>Both cases return &quot;the result of the next step&quot; itself. The caller never
+checks &quot;which one was picked&quot; and never branches by type — the decision IS
+the branch, so there is no <code>if</code> to write.</p>
+<h2 id="entry-two-agentchoices-work-first-decide-last">Entry two: <code>agent(choices=...)</code> — work first, decide last<a class="header-anchor" href="#entry-two-agentchoices-work-first-decide-last">#</a></h2>
+<p>The more common need: the model first runs a full turn (reasoning, tool
+calls, whatever the job takes), and the <strong>closing</strong> return must be a
+decision. Use <code>agent</code>'s <code>choices=</code> parameter:</p>
+<pre><code class="language-python"><span class="kn">from</span><span class="w"> </span><span class="nn">openprogram</span><span class="w"> </span><span class="kn">import</span> <span class="n">Agent</span><span class="p">,</span> <span class="n">agent</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ExampleAgent</span><span class="p">(</span><span class="n">Agent</span><span class="p">):</span>
+    <span class="n">method_options</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;handle_ticket&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;tool&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
+    <span class="p">}</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">handle_ticket</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ticket</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Read the ticket, look things up, then decide which flow to route to.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">agent</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Handle this ticket: </span><span class="si">{</span><span class="n">ticket</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="n">toolset</span><span class="o">=</span><span class="s2">&quot;default&quot;</span><span class="p">,</span>          <span class="c1"># before: the model uses tools to research, run commands</span>
+            <span class="n">choices</span><span class="o">=</span><span class="p">{</span>                   <span class="c1"># closing: the return must be one of these</span>
+                <span class="s2">&quot;refund&quot;</span><span class="p">:</span>    <span class="n">issue_refund</span><span class="p">,</span>
+                <span class="s2">&quot;escalate&quot;</span><span class="p">:</span>  <span class="n">escalate_to_human</span><span class="p">,</span>
+                <span class="s2">&quot;close&quot;</span><span class="p">:</span>     <span class="p">{</span><span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;closed&quot;</span><span class="p">},</span>
+            <span class="p">},</span>
+        <span class="p">)</span>
+
+<span class="n">_example_agent</span> <span class="o">=</span> <span class="n">ExampleAgent</span><span class="p">()</span>
+<span class="n">handle_ticket</span> <span class="o">=</span> <span class="n">_example_agent</span><span class="o">.</span><span class="n">handle_ticket</span>
+</code></pre>
+<p>What <code>agent(choices=...)</code> does: it hands <code>choices</code> to the Runtime's
+<code>exec</code>, which splices the option menu plus a &quot;work first, close with a JSON
+pick&quot; instruction (<code>DECISION_FINISH_INSTRUCTION</code>) into the prompt, then runs
+a normal exec turn — tools from <code>tools</code> /
+<code>toolset</code> get called as usual, the model reasons as usual. At the end of the
+turn, the model's final reply must be one <code>{&quot;call&quot;: ...}</code> JSON, and <code>exec</code>
+resolves it with <code>resolve_decision</code>: a picked function executes and returns
+its result, a picked value is returned.</p>
+<p><code>agent</code> without <code>choices</code> returns the reply text; with <code>choices</code> it
+returns the resolved decision result. <code>decision.make(prompt, options)</code> is
+equivalent to an <code>agent(..., choices=options)</code> with no preceding work — with one
+nuance: only <code>exec(choices=)</code> appends the <code>DECISION_FINISH_INSTRUCTION</code>;
+<code>decision.make</code> sends just your prompt plus the menu, so your own prompt
+must tell the model to pick.</p>
+<h2 id="option-containers">Option containers<a class="header-anchor" href="#option-containers">#</a></h2>
+<p>Each option is shaped like a tool: it has a name, a description, and a
+<strong>payload schema</strong>. Three option kinds:</p>
+<table>
+<thead>
+<tr>
+<th>Option kind</th>
+<th>When picked</th>
+<th>Schema comes from</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Function option</td>
+<td>executes the function, returns its return value</td>
+<td>the function signature</td>
+</tr>
+<tr>
+<td>Value option</td>
+<td>returns that fixed value</td>
+<td>none</td>
+</tr>
+<tr>
+<td>Schema option</td>
+<td>the model fills structured data per the schema; returns <code>{&quot;decision&quot;: name, **filled fields}</code></td>
+<td>the schema you declare explicitly</td>
+</tr>
+</tbody>
+</table>
+<p><code>options</code> can be a dict or a list.</p>
+<p><strong>Dict form</strong> <code>{name: handler}</code>, where the key is the option name:</p>
+<pre><code class="language-python"><span class="n">decision</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="s2">&quot;...&quot;</span><span class="p">,</span> <span class="p">{</span>
+    <span class="s2">&quot;retry&quot;</span><span class="p">:</span>     <span class="n">retry_fn</span><span class="p">,</span>                            <span class="c1"># function option</span>
+    <span class="s2">&quot;skip&quot;</span><span class="p">:</span>      <span class="s2">&quot;SKIPPED&quot;</span><span class="p">,</span>                           <span class="c1"># value option</span>
+    <span class="s2">&quot;abort&quot;</span><span class="p">:</span>     <span class="p">(</span><span class="n">AbortSignal</span><span class="p">(),</span> <span class="s2">&quot;pick when stuck&quot;</span><span class="p">),</span>  <span class="c1"># value option + description</span>
+    <span class="s2">&quot;emit_plan&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;Produce a plan.&quot;</span><span class="p">,</span> <span class="p">{</span>                <span class="c1"># schema option: (&quot;description&quot;, schema)</span>
+        <span class="s2">&quot;steps&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&quot;action&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;target&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">}],</span>
+        <span class="s2">&quot;rationale&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">}),</span>
+<span class="p">})</span>
+</code></pre>
+<p><strong>List form</strong> — each item is a callable, a <code>(callable, &quot;description&quot;)</code>
+tuple, or a string option shape (<code>&quot;name&quot;</code> / <code>(&quot;name&quot;, &quot;description&quot;)</code> /
+<code>(&quot;name&quot;, &quot;description&quot;, schema)</code>). In list form a function option's name is
+the function's <code>__name__</code>.</p>
+<h3 id="schema-structure">Schema structure<a class="header-anchor" href="#schema-structure">#</a></h3>
+<p>A schema is <code>{field_name: field_type}</code>, and field types <strong>nest
+recursively</strong>, so one option can have the model return arbitrarily
+structured JSON:</p>
+<table>
+<thead>
+<tr>
+<th>Notation</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>field: str</code> (any Python type)</td>
+<td>a scalar of that type</td>
+</tr>
+<tr>
+<td><code>field: &quot;description&quot;</code></td>
+<td>a described <code>str</code> scalar</td>
+</tr>
+<tr>
+<td><code>field: [subschema]</code></td>
+<td>a list whose every element matches <code>subschema</code></td>
+</tr>
+<tr>
+<td><code>field: {subfield: ...}</code></td>
+<td>a nested object (keys are subfield names)</td>
+</tr>
+<tr>
+<td><code>field: {&quot;type&quot;: T, &quot;description&quot;: ..., &quot;options&quot;: [...]}</code></td>
+<td>meta-description with type/description/enum</td>
+</tr>
+</tbody>
+</table>
+<p>Three caveats: a list schema must contain <strong>exactly one</strong> item template —
+<code>[str, int]</code> raises <code>TypeError</code>; a dict whose keys all fall inside
+<code>{type, description, options, fields, items}</code> is parsed as a meta-spec, not
+a nested object (a nested object needs at least one key outside that set);
+and tuples are reserved syntax in handler position — a literal 2-tuple value
+option gets misparsed as <code>(value, &quot;description&quot;)</code>.</p>
+<p>After parsing, <code>parse_args</code> <strong>recursively validates</strong> types and nesting
+against the schema; the <code>Call:</code> example <code>render_options</code> renders also
+carries the nested placeholder shape. This aligns &quot;finite-branch choice&quot;
+with tool calling — every branch can carry an arbitrarily structured
+payload. If the need is &quot;no branching at all, always return the same
+structure&quot;, use a single-option <code>decision.make</code>, or just
+<code>exec(response_format=...)</code>.</p>
+<h2 id="internal-steps">Internal steps<a class="header-anchor" href="#internal-steps">#</a></h2>
+<h3 id="1-render_options-renders-the-menu">1. <code>render_options</code> renders the menu<a class="header-anchor" href="#1-render_options-renders-the-menu">#</a></h3>
+<p>For each option it emits: the signature <code>name(param: type, ...)</code>, the
+description, per-parameter detail, and a one-line <code>Call:</code> JSON example. Only
+<code>source=&quot;llm&quot;</code> parameters are shown — <code>runtime</code> / <code>context</code> injected
+parameters are hidden from the LLM. If a parameter declares <code>options</code>
+(enum), the detail lists the allowed values. Placeholder values in the
+<code>Call:</code> example are native JSON literals (<code>0</code> / <code>false</code> / <code>[]</code> / <code>{}</code> /
+<code>&quot;&lt;str&gt;&quot;</code>).</p>
+<h3 id="2-call-the-model">2. Call the model<a class="header-anchor" href="#2-call-the-model">#</a></h3>
+<p><code>decision.make</code> does a direct <code>runtime.exec(prompt + menu)</code>;
+<code>exec(choices=)</code> splices the menu into the turn it was going to send anyway.</p>
+<h3 id="3-parse_args-parses-and-validates">3. <code>parse_args</code> parses and validates<a class="header-anchor" href="#3-parse_args-parses-and-validates">#</a></h3>
+<ul>
+<li><code>extract_action</code> digs the JSON carrying a <code>call</code> key out of a
+<code>```json</code> code block or bare text. The <code>call</code> key has aliases
+<code>action</code> / <code>function</code> / <code>tool</code>, any of which is accepted.</li>
+<li><code>call</code> not in the registry → <code>_ParseError(&quot;unknown_call&quot;)</code>.</li>
+<li><code>_validate_field</code> validates field by field: type
+(<code>str/int/float/bool/list/dict</code>; <code>bool</code> does not count as <code>int</code>, <code>float</code>
+accepts <code>int</code>), enum (<code>options</code>).</li>
+<li>Function options: fill <code>source=&quot;context&quot;</code> parameters from the <code>context</code>
+dict per the signature, inject <code>runtime</code>-class parameters, drop fields
+outside the signature, check required ones (those without defaults).</li>
+<li>Value/text options: every declared schema field is required; hallucinated
+fields outside the schema are dropped.</li>
+<li>Returns <code>(chosen, kwargs)</code> — for a function option <code>chosen</code> is the
+original function; for a value/text option it is the name string.</li>
+</ul>
+<h3 id="4-retry-on-parse-failure">4. Retry on parse failure<a class="header-anchor" href="#4-retry-on-parse-failure">#</a></h3>
+<p>If any step raises <code>_ParseError</code>, <code>parse_args</code> retries (default
+<code>max_retries=1</code>, set 0 to disable; <code>max_retries</code> is settable only on
+<code>decision.make</code> / <code>parse_args</code> — the <code>exec(choices=)</code> path is fixed at one
+retry): it uses <code>runtime.exec</code> to send &quot;the
+previous reply + the error reason + the re-rendered menu&quot; back to the LLM
+for another pick. The retry is a model call like any other and lands in the
+DAG as usual. When all retries are exhausted → raises <code>DecisionError</code>
+carrying the last error kind, message, and the head of the reply.</p>
+<p><code>DecisionError</code> subclasses <code>ValueError</code> (old <code>except ValueError</code> code still
+catches it), and callers can <code>except DecisionError</code> to catch exactly &quot;the
+model never produced a valid pick&quot; without trapping unrelated
+<code>ValueError</code>s — e.g. a planner treating it as &quot;this step is over&quot;. The
+framework stops at &quot;raise a clear exception&quot;; what happens after catching is
+the caller's business, with no built-in fallback.</p>
+<h3 id="5-resolve_decision-resolves-into-a-result">5. <code>resolve_decision</code> resolves into a result<a class="header-anchor" href="#5-resolve_decision-resolves-into-a-result">#</a></h3>
+<p>If <code>chosen</code> is a function, run <code>chosen(**kwargs)</code> and return the result; if
+it is a string, look the value up in the value table and return it (a value
+option that declared a schema returns <code>{&quot;decision&quot;: name, **kwargs}</code>).</p>
+<h2 id="relation-to-the-tool-call-loop">Relation to the tool-call loop<a class="header-anchor" href="#relation-to-the-tool-call-loop">#</a></h2>
+<p>This mechanism does not conflict with the tool-call loop of
+<code>agent_loop/</code> described in <code>tool-calling.md</code> — they are two parallel
+implementations of &quot;let the model pick the next step&quot;. An
+<code>Agent</code> method can serve both as a native tool for <code>exec(tools=[...])</code>
+and as a decision option — same function, two call paths. Which to use
+hinges on: whether you want to depend on provider tool use, whether an
+option needs to be a value rather than a function, and whether every
+decision and retry should be a traceable DAG node.</p>
+<div class="page-updated"><span data-i18n="updated">Last updated</span> · 2026-11-02</div><div class="prevnext"><a class="pn-link pn-prev" href="/docs/capabilities/agentic-programming/choosing-the-next-step/fixed-order-calls.html" data-href-en="/docs/capabilities/agentic-programming/choosing-the-next-step/fixed-order-calls.html" data-href-zh="/docs/capabilities/agentic-programming/choosing-the-next-step/fixed-order-calls.zh.html"><span class="pn-dir" data-i18n="prev">Previous</span><span class="pn-title" data-title-zh="顺序调用">Fixed-order calls</span></a><a class="pn-link pn-next" href="/docs/capabilities/workflows/README.html" data-href-en="/docs/capabilities/workflows/README.html" data-href-zh="/docs/capabilities/workflows/README.zh.html"><span class="pn-dir" data-i18n="next">Next</span><span class="pn-title" data-title-zh="工作流">Workflows</span></a></div></article></main>
+  <aside class="toc"><div class="toc-title" data-i18n="on_this_page">On this page</div>
+<ul class="toc-list">
+<li>
+<a class="lvl-2" href="#versus-native-tool-calls">Versus native tool calls</a>
+</li>
+<li>
+<a class="lvl-2" href="#entry-one-decisionmake-pure-decision">Entry one: decision.make — pure decision</a>
+</li>
+<li>
+<a class="lvl-2" href="#entry-two-agentchoices-work-first-decide-last">Entry two: agent(choices=...) — work first, decide last</a>
+</li>
+<li>
+<details class="toc-disclosure" open=""><summary>
+<a class="lvl-2" href="#option-containers">Option containers</a>
+</summary>
+<ul class="toc-list">
+<li>
+<a class="lvl-3" href="#schema-structure">Schema structure</a>
+</li>
+</ul>
+</details>
+</li>
+<li>
+<details class="toc-disclosure" open=""><summary>
+<a class="lvl-2" href="#internal-steps">Internal steps</a>
+</summary>
+<ul class="toc-list">
+<li>
+<a class="lvl-3" href="#1-render_options-renders-the-menu">1. render_options renders the menu</a>
+</li>
+<li>
+<a class="lvl-3" href="#2-call-the-model">2. Call the model</a>
+</li>
+<li>
+<a class="lvl-3" href="#3-parse_args-parses-and-validates">3. parse_args parses and validates</a>
+</li>
+<li>
+<a class="lvl-3" href="#4-retry-on-parse-failure">4. Retry on parse failure</a>
+</li>
+<li>
+<a class="lvl-3" href="#5-resolve_decision-resolves-into-a-result">5. resolve_decision resolves into a result</a>
+</li>
+</ul>
+</details>
+</li>
+<li>
+<a class="lvl-2" href="#relation-to-the-tool-call-loop">Relation to the tool-call loop</a>
+</li>
+</ul></aside>
+</div>
+
+<div class="search-overlay">
+  <div class="search-box">
+    <input type="text" data-i18n-ph="search_ph" placeholder="Search titles or text…" autocomplete="off" spellcheck="false">
+    <div class="search-results"></div>
+  </div>
+</div>
+
+<script src="/docs/assets/site.js?v=6520ba46"></script>
+</body>
+</html>

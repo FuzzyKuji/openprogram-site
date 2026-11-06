@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="zh" data-base="/docs/" data-page-lang="zh" data-build="1793956776" data-alt-lang-url="/docs/reference/api/agent.html">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>函数 API · OpenProgram Docs</title>
+<meta name="description" content="Agent 与 Context # agent() 执行模型工具循环。 Agent 保存可复用配置，并为普通子类方法建立作用域。 Context 提供命名内容与历史选择。所有入口复用现有 Runtime 和 Session DAG。 直接调用与 Agent 类 # 普通调用不需要手动构建或绑定 Context。">
+<link rel="canonical" href="https://openprogram.io/docs/reference/api/agent.zh.html">
+<link rel="alternate" type="text/markdown" href="https://openprogram.io/docs/reference/api/agent.zh.html.md">
+<link rel="describedby" href="https://openprogram.io/llms.txt">
+<link rel="alternate" hreflang="en" href="https://openprogram.io/docs/reference/api/agent.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://openprogram.io/docs/reference/api/agent.zh.html">
+<link rel="alternate" hreflang="x-default" href="https://openprogram.io/docs/reference/api/agent.html">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"OpenProgram Docs","item":"https://openprogram.io/docs/"},{"@type":"ListItem","position":2,"name":"函数 API"}]}</script>
+<meta property="og:type" content="article">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:site_name" content="OpenProgram">
+<meta property="og:url" content="https://openprogram.io/docs/reference/api/agent.zh.html">
+<meta property="og:title" content="函数 API · OpenProgram Docs">
+<meta property="og:description" content="Agent 与 Context # agent() 执行模型工具循环。 Agent 保存可复用配置，并为普通子类方法建立作用域。 Context 提供命名内容与历史选择。所有入口复用现有 Runtime 和 Session DAG。 直接调用与 Agent 类 # 普通调用不需要手动构建或绑定 Context。">
+<meta property="og:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:secure_url" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="函数 API · OpenProgram Docs">
+<meta name="twitter:description" content="Agent 与 Context # agent() 执行模型工具循环。 Agent 保存可复用配置，并为普通子类方法建立作用域。 Context 提供命名内容与历史选择。所有入口复用现有 Runtime 和 Session DAG。 直接调用与 Agent 类 # 普通调用不需要手动构建或绑定 Context。">
+<meta name="twitter:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta name="twitter:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/docs/assets/mark.svg">
+<link rel="stylesheet" href="/docs/assets/site.css?v=6520ba46">
+<link rel="stylesheet" href="/docs/assets/pygments-light.css" media="(prefers-color-scheme: light)" id="pyg-light">
+<link rel="stylesheet" href="/docs/assets/pygments-dark.css" media="(prefers-color-scheme: dark)" id="pyg-dark">
+<script src="/docs/assets/theme.js?v=6520ba46"></script>
+
+</head>
+<body>
+<header class="topbar">
+  <button class="icon hamburger" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2.5 4.5h11M2.5 8h11M2.5 11.5h11"/></svg></button>
+  <a class="brand" href="/docs/index.html"><img class="mark" src="/docs/assets/mark.svg" alt="">OpenProgram Docs</a>
+  <div class="spacer"></div>
+  <button class="search-trigger" aria-label="Search">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14"/></svg><span class="label" data-i18n="search">Search docs</span><kbd>⌘K</kbd>
+  </button>
+  <div class="lang-wrap">
+    <button class="icon lang-trigger" id="lang-toggle" aria-haspopup="true" aria-expanded="false" aria-label="Language">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="6.2"/><path d="M1.8 8h12.4" stroke-linecap="round"/><ellipse cx="8" cy="8" rx="2.8" ry="6.2"/></svg><span class="lang-label">EN</span><svg class="chev" width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+    </button>
+    <div class="lang-menu" id="lang-menu" role="menu">
+      <button class="lang-opt" data-lang="en" role="menuitem"><span>English</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="lang-opt" data-lang="zh" role="menuitem"><span>简体中文</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+  <div class="theme-wrap">
+    <button class="icon" id="theme-toggle" aria-label="Theme" aria-haspopup="menu" aria-controls="theme-menu" aria-expanded="false"><svg class="ic-system" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="2.5" width="13" height="9" rx="1.5"/><path d="M8 11.5V14M5.5 14h5"/></svg><svg class="ic-moon" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M13.5 9.5A6 6 0 1 1 6.5 2.5a5 5 0 0 0 7 7z"/></svg><svg class="ic-sun" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="3.2"/><path d="M8 1.2v1.8M8 13v1.8M1.2 8H3M13 8h1.8M3.2 3.2l1.3 1.3M11.5 11.5l1.3 1.3M12.8 3.2l-1.3 1.3M4.5 11.5l-1.3 1.3"/></svg></button>
+    <div class="theme-menu" id="theme-menu" role="menu" aria-labelledby="theme-toggle">
+      <button class="theme-opt" data-theme-choice="system" role="menuitemradio" aria-checked="true"><span>Follow system</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="light" role="menuitemradio" aria-checked="false"><span>Light</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="dark" role="menuitemradio" aria-checked="false"><span>Dark</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+</header>
+<nav class="tabbar"><a class="tablink" href="/docs/README.html" data-title-zh="开始使用" data-href-en="/docs/README.html" data-href-zh="/docs/README.zh.html">Get started</a><a class="tablink" href="/docs/install/install.html" data-title-zh="安装" data-href-en="/docs/install/install.html" data-href-zh="/docs/install/install.zh.html">Install</a><a class="tablink" href="/docs/capabilities/README.html" data-title-zh="能力" data-href-en="/docs/capabilities/README.html" data-href-zh="/docs/capabilities/README.zh.html">Capabilities</a><a class="tablink" href="/docs/interfaces/README.html" data-title-zh="界面" data-href-en="/docs/interfaces/README.html" data-href-zh="/docs/interfaces/README.zh.html">Interfaces</a><a class="tablink" href="/docs/models/README.html" data-title-zh="模型" data-href-en="/docs/models/README.html" data-href-zh="/docs/models/README.zh.html">Models</a><a class="tablink" href="/docs/integrations/anthropic.html" data-title-zh="集成" data-href-en="/docs/integrations/anthropic.html" data-href-zh="/docs/integrations/anthropic.zh.html">Integrations</a><a class="tablink" href="/docs/server/README.html" data-title-zh="服务与运维" data-href-en="/docs/server/README.html" data-href-zh="/docs/server/README.zh.html">Server &amp; Ops</a><a class="tablink active" href="/docs/reference/README.html" data-title-zh="参考" data-href-en="/docs/reference/README.html" data-href-zh="/docs/reference/README.zh.html">Reference</a><a class="tablink" href="/docs/reference/design/README.html" data-title-zh="设计" data-href-en="/docs/reference/design/README.html" data-href-zh="/docs/reference/design/README.zh.html">Design</a></nav>
+
+<div class="scrim"></div>
+<div class="layout">
+  <nav class="sidebar" aria-label="Documentation">
+    <input class="nav-filter" type="text" data-i18n-ph="nav_filter"
+           aria-label="Filter docs" placeholder="Filter docs…" autocomplete="off" spellcheck="false">
+    <div class="nav-tree"><div class="nav-sec"><div class="nav-sec-title" data-title-zh="概览">Overview</div><a class="navlink" href="/docs/reference/README.html" data-title-zh="概览" data-href-en="/docs/reference/README.html" data-href-zh="/docs/reference/README.zh.html">Overview</a></div>
+<div class="nav-sec"><div class="nav-sec-title">API</div><a class="navlink" href="/docs/reference/API.html" data-title-zh="API 参考" data-href-en="/docs/reference/API.html" data-href-zh="/docs/reference/API.zh.html">API reference</a>
+<a class="navlink" href="/docs/reference/api/runtime.html" data-title-zh="运行时 API" data-href-en="/docs/reference/api/runtime.html" data-href-zh="/docs/reference/api/runtime.zh.html">Runtime API</a>
+<a class="navlink" href="/docs/reference/api/providers.html" data-title-zh="模型服务 API" data-href-en="/docs/reference/api/providers.html" data-href-zh="/docs/reference/api/providers.zh.html">Provider API</a>
+<a class="navlink active" href="/docs/reference/api/agent.html" data-title-zh="函数 API" data-href-en="/docs/reference/api/agent.html" data-href-zh="/docs/reference/api/agent.zh.html">Function API</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="CLI 与配置">CLI and configuration</div><a class="navlink" href="/docs/reference/cli.html" data-title-zh="CLI 参考" data-href-en="/docs/reference/cli.html" data-href-zh="/docs/reference/cli.zh.html">CLI reference</a>
+<a class="navlink" href="/docs/reference/config.html" data-title-zh="配置项参考" data-href-en="/docs/reference/config.html" data-href-zh="/docs/reference/config.zh.html">Configuration reference</a>
+<a class="navlink" href="/docs/reference/diagnostics.html" data-title-zh="诊断" data-href-en="/docs/reference/diagnostics.html" data-href-zh="/docs/reference/diagnostics.zh.html">Diagnostics</a>
+<a class="navlink" href="/docs/reference/session-export.html" data-title-zh="会话导出" data-href-en="/docs/reference/session-export.html" data-href-zh="/docs/reference/session-export.zh.html">Session export</a>
+<a class="navlink" href="/docs/reference/output-styles.html" data-title-zh="输出风格" data-href-en="/docs/reference/output-styles.html" data-href-zh="/docs/reference/output-styles.zh.html">Output styles</a>
+<a class="navlink" href="/docs/reference/config-keys.html" data-title-zh="配置键" data-href-en="/docs/reference/config-keys.html" data-href-zh="/docs/reference/config-keys.zh.html">Config keys</a>
+<a class="navlink" href="/docs/reference/provider-registry.html" data-title-zh="模型服务清单" data-href-en="/docs/reference/provider-registry.html" data-href-zh="/docs/reference/provider-registry.zh.html">Provider registry</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="对比">Comparisons</div><a class="navlink" href="/docs/reference/comparisons/ai-agent-frameworks.html" data-title-zh="框架对比" data-href-en="/docs/reference/comparisons/ai-agent-frameworks.html" data-href-zh="/docs/reference/comparisons/ai-agent-frameworks.zh.html">Framework comparison</a>
+<a class="navlink" href="/docs/reference/comparisons/related-projects.html" data-title-zh="相关项目" data-href-en="/docs/reference/comparisons/related-projects.html" data-href-zh="/docs/reference/comparisons/related-projects.zh.html">Related projects</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="CLI 命令">CLI commands</div><a class="navlink" href="/docs/reference/cli/README.html" data-title-zh="全局参数" data-href-en="/docs/reference/cli/README.html" data-href-zh="/docs/reference/cli/README.zh.html">Global flags</a>
+<a class="navlink" href="/docs/reference/cli/acp.html" data-title-zh="编辑器协议" data-href-en="/docs/reference/cli/acp.html" data-href-zh="/docs/reference/cli/acp.zh.html">acp</a>
+<a class="navlink" href="/docs/reference/cli/agents.html" data-title-zh="Agent 管理" data-href-en="/docs/reference/cli/agents.html" data-href-zh="/docs/reference/cli/agents.zh.html">agents</a>
+<a class="navlink" href="/docs/reference/cli/backup.html" data-title-zh="备份" data-href-en="/docs/reference/cli/backup.html" data-href-zh="/docs/reference/cli/backup.zh.html">backup</a>
+<a class="navlink" href="/docs/reference/cli/browser.html" data-title-zh="浏览器" data-href-en="/docs/reference/cli/browser.html" data-href-zh="/docs/reference/cli/browser.zh.html">browser</a>
+<a class="navlink" href="/docs/reference/cli/channels.html" data-title-zh="渠道" data-href-en="/docs/reference/cli/channels.html" data-href-zh="/docs/reference/cli/channels.zh.html">channels</a>
+<a class="navlink" href="/docs/reference/cli/chat.html" data-title-zh="聊天" data-href-en="/docs/reference/cli/chat.html" data-href-zh="/docs/reference/cli/chat.zh.html">chat</a>
+<a class="navlink" href="/docs/reference/cli/completion.html" data-title-zh="命令补全" data-href-en="/docs/reference/cli/completion.html" data-href-zh="/docs/reference/cli/completion.zh.html">completion</a>
+<a class="navlink" href="/docs/reference/cli/config.html" data-title-zh="设置" data-href-en="/docs/reference/cli/config.html" data-href-zh="/docs/reference/cli/config.zh.html">config</a>
+<a class="navlink" href="/docs/reference/cli/cron-worker.html" data-title-zh="定时任务" data-href-en="/docs/reference/cli/cron-worker.html" data-href-zh="/docs/reference/cli/cron-worker.zh.html">cron-worker</a>
+<a class="navlink" href="/docs/reference/cli/dev.html" data-title-zh="开发版" data-href-en="/docs/reference/cli/dev.html" data-href-zh="/docs/reference/cli/dev.zh.html">dev</a>
+<a class="navlink" href="/docs/reference/cli/diagnostics.html" data-title-zh="诊断包" data-href-en="/docs/reference/cli/diagnostics.html" data-href-zh="/docs/reference/cli/diagnostics.zh.html">diagnostics</a>
+<a class="navlink" href="/docs/reference/cli/doctor.html" data-title-zh="环境诊断" data-href-en="/docs/reference/cli/doctor.html" data-href-zh="/docs/reference/cli/doctor.zh.html">doctor</a>
+<a class="navlink" href="/docs/reference/cli/environments.html" data-title-zh="运行环境" data-href-en="/docs/reference/cli/environments.html" data-href-zh="/docs/reference/cli/environments.zh.html">environments</a>
+<a class="navlink" href="/docs/reference/cli/execution.html" data-title-zh="执行控制" data-href-en="/docs/reference/cli/execution.html" data-href-zh="/docs/reference/cli/execution.zh.html">execution</a>
+<a class="navlink" href="/docs/reference/cli/jobs.html" data-title-zh="后台任务" data-href-en="/docs/reference/cli/jobs.html" data-href-zh="/docs/reference/cli/jobs.zh.html">jobs</a>
+<a class="navlink" href="/docs/reference/cli/logs.html" data-title-zh="日志" data-href-en="/docs/reference/cli/logs.html" data-href-zh="/docs/reference/cli/logs.zh.html">logs</a>
+<a class="navlink" href="/docs/reference/cli/mcp.html" data-title-zh="MCP 服务器" data-href-en="/docs/reference/cli/mcp.html" data-href-zh="/docs/reference/cli/mcp.zh.html">mcp</a>
+<a class="navlink" href="/docs/reference/cli/memory.html" data-title-zh="记忆" data-href-en="/docs/reference/cli/memory.html" data-href-zh="/docs/reference/cli/memory.zh.html">memory</a>
+<a class="navlink" href="/docs/reference/cli/permissions.html" data-title-zh="CLI：权限规则" data-href-en="/docs/reference/cli/permissions.html" data-href-zh="/docs/reference/cli/permissions.zh.html">permissions</a>
+<a class="navlink" href="/docs/reference/cli/plugins.html" data-title-zh="插件" data-href-en="/docs/reference/cli/plugins.html" data-href-zh="/docs/reference/cli/plugins.zh.html">plugins</a>
+<a class="navlink" href="/docs/reference/cli/ports.html" data-title-zh="端口" data-href-en="/docs/reference/cli/ports.html" data-href-zh="/docs/reference/cli/ports.zh.html">ports</a>
+<a class="navlink" href="/docs/reference/cli/programs.html" data-title-zh="程序" data-href-en="/docs/reference/cli/programs.html" data-href-zh="/docs/reference/cli/programs.zh.html">programs</a>
+<a class="navlink" href="/docs/reference/cli/providers.html" data-title-zh="模型服务" data-href-en="/docs/reference/cli/providers.html" data-href-zh="/docs/reference/cli/providers.zh.html">providers</a>
+<a class="navlink" href="/docs/reference/cli/recordings.html" data-title-zh="录制" data-href-en="/docs/reference/cli/recordings.html" data-href-zh="/docs/reference/cli/recordings.zh.html">recordings</a>
+<a class="navlink" href="/docs/reference/cli/rescue.html" data-title-zh="恢复" data-href-en="/docs/reference/cli/rescue.html" data-href-zh="/docs/reference/cli/rescue.zh.html">rescue</a>
+<a class="navlink" href="/docs/reference/cli/restart.html" data-title-zh="重启" data-href-en="/docs/reference/cli/restart.html" data-href-zh="/docs/reference/cli/restart.zh.html">restart</a>
+<a class="navlink" href="/docs/reference/cli/scheduler-worker.html" data-title-zh="任务调度" data-href-en="/docs/reference/cli/scheduler-worker.html" data-href-zh="/docs/reference/cli/scheduler-worker.zh.html">scheduler-worker</a>
+<a class="navlink" href="/docs/reference/cli/secrets.html" data-title-zh="凭据" data-href-en="/docs/reference/cli/secrets.html" data-href-zh="/docs/reference/cli/secrets.zh.html">secrets</a>
+<a class="navlink" href="/docs/reference/cli/self-update.html" data-title-zh="应用更新" data-href-en="/docs/reference/cli/self-update.html" data-href-zh="/docs/reference/cli/self-update.zh.html">self-update</a>
+<a class="navlink" href="/docs/reference/cli/sessions.html" data-title-zh="会话" data-href-en="/docs/reference/cli/sessions.html" data-href-zh="/docs/reference/cli/sessions.zh.html">sessions</a>
+<a class="navlink" href="/docs/reference/cli/setup.html" data-title-zh="初始设置" data-href-en="/docs/reference/cli/setup.html" data-href-zh="/docs/reference/cli/setup.zh.html">setup</a>
+<a class="navlink" href="/docs/reference/cli/skills.html" data-title-zh="技能" data-href-en="/docs/reference/cli/skills.html" data-href-zh="/docs/reference/cli/skills.zh.html">skills</a>
+<a class="navlink" href="/docs/reference/cli/status.html" data-title-zh="运行状态" data-href-en="/docs/reference/cli/status.html" data-href-zh="/docs/reference/cli/status.zh.html">status</a>
+<a class="navlink" href="/docs/reference/cli/stop.html" data-title-zh="停止" data-href-en="/docs/reference/cli/stop.html" data-href-zh="/docs/reference/cli/stop.zh.html">stop</a>
+<a class="navlink" href="/docs/reference/cli/subagent.html" data-title-zh="子 Agent" data-href-en="/docs/reference/cli/subagent.html" data-href-zh="/docs/reference/cli/subagent.zh.html">subagent</a>
+<a class="navlink" href="/docs/reference/cli/trash.html" data-title-zh="删除恢复" data-href-en="/docs/reference/cli/trash.html" data-href-zh="/docs/reference/cli/trash.zh.html">trash</a>
+<a class="navlink" href="/docs/reference/cli/tui.html" data-title-zh="终端界面" data-href-en="/docs/reference/cli/tui.html" data-href-zh="/docs/reference/cli/tui.zh.html">tui</a>
+<a class="navlink" href="/docs/reference/cli/update.html" data-title-zh="更新检查" data-href-en="/docs/reference/cli/update.html" data-href-zh="/docs/reference/cli/update.zh.html">update</a>
+<a class="navlink" href="/docs/reference/cli/upgrade.html" data-title-zh="版本升级" data-href-en="/docs/reference/cli/upgrade.html" data-href-zh="/docs/reference/cli/upgrade.zh.html">upgrade</a>
+<a class="navlink" href="/docs/reference/cli/web.html" data-title-zh="网页界面" data-href-en="/docs/reference/cli/web.html" data-href-zh="/docs/reference/cli/web.zh.html">web</a>
+<a class="navlink" href="/docs/reference/cli/worker.html" data-title-zh="后台服务" data-href-en="/docs/reference/cli/worker.html" data-href-zh="/docs/reference/cli/worker.zh.html">worker</a></div></div>
+  </nav>
+  <main class="content"><button class="fs-toggle" aria-label="Fullscreen" title="Fullscreen (Esc to exit)"><svg class="ic-expand" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.2 2H2v4.2M9.8 2H14v4.2M6.2 14H2V9.8M9.8 14H14V9.8"/></svg><svg class="ic-collapse" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6.2h4.2V2M14 6.2H9.8V2M2 9.8h4.2V14M14 9.8H9.8V14"/></svg></button><article><nav class="breadcrumb"><span class="bc-seg" data-title-zh="参考">Reference</span> <span class='bc-sep'>›</span> <span class="bc-seg">API</span> <span class='bc-sep'>›</span> <span class="bc-seg bc-current" data-title-zh="函数 API">Function API</span></nav><h1 id="agent-与-context">Agent 与 Context<a class="header-anchor" href="#agent-与-context">#</a></h1>
+<p><code>agent()</code> 执行模型工具循环。<code>Agent</code> 保存可复用配置，并为普通子类方法建立作用域。<code>Context</code> 提供命名内容与历史选择。所有入口复用现有 Runtime 和 Session DAG。</p>
+<h2 id="直接调用与-agent-类">直接调用与 Agent 类<a class="header-anchor" href="#直接调用与-agent-类">#</a></h2>
+<p>普通调用不需要手动构建或绑定 Context。</p>
+<pre><code class="language-python"><span class="kn">from</span><span class="w"> </span><span class="nn">openprogram</span><span class="w"> </span><span class="kn">import</span> <span class="n">Agent</span><span class="p">,</span> <span class="n">agent</span><span class="p">,</span> <span class="n">agent_async</span>
+
+<span class="n">answer</span> <span class="o">=</span> <span class="n">agent</span><span class="p">(</span><span class="s2">&quot;Summarize this text&quot;</span><span class="p">,</span> <span class="n">tools</span><span class="o">=</span><span class="p">[])</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Researcher</span><span class="p">(</span><span class="n">Agent</span><span class="p">):</span>
+    <span class="n">instructions</span> <span class="o">=</span> <span class="s2">&quot;Return a short, factual answer.&quot;</span>
+    <span class="n">tools</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">prepare</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">question</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Remove surrounding whitespace.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">question</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">research</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">question</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Answer the prepared question.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">prepare</span><span class="p">(</span><span class="n">question</span><span class="p">))</span>
+
+<span class="n">researcher</span> <span class="o">=</span> <span class="n">Researcher</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s2">&quot;configured-model&quot;</span><span class="p">)</span>
+<span class="n">answer</span> <span class="o">=</span> <span class="n">researcher</span><span class="o">.</span><span class="n">research</span><span class="p">(</span><span class="s2">&quot;A question&quot;</span><span class="p">)</span>
+<span class="c1"># 异步代码：answer = await researcher.arun(&quot;A question&quot;)</span>
+<span class="c1"># 或：answer = await agent_async(&quot;A question&quot;, tools=[])</span>
+</code></pre>
+<p><code>agent()</code> 接收字符串或内容块，可指定 <code>model</code>、<code>effort</code>、<code>tools</code>、<code>choices</code> 和 <code>runtime</code>。<code>choices</code> 让收尾回复成为一次<a href="/docs/capabilities/agentic-programming/choosing-the-next-step/next-step-decision.zh.html">下一步决策</a>，并返回解析后的选择结果。工具执行选项见 <a href="/docs/reference/api/runtime.zh.html">Runtime</a>。<code>tools=None</code> 选择可用工具，<code>tools=[]</code> 禁用工具。<code>agent_async()</code> 使用同样的选项。</p>
+<p><code>Agent(model=..., instructions=..., context=..., tools=..., runtime=..., effort=..., **options)</code> 用实例设置覆盖类默认值，调用参数再覆盖实例设置。<code>Agent.from_spec(spec, **overrides)</code> 使用现有 AgentSpec 配置，不创建已保存 Agent 条目。</p>
+<p>构造对象不请求模型，也不创建执行会话。调用继承当前执行；没有外层执行时创建独立执行，并在结束时释放资源。复用实例不自动续接上一次独立会话。</p>
+<p>普通实例方法、静态方法与类方法自动建立调用作用域，包括单下划线帮助方法。双下划线特殊方法与生成器不采集。方法记录不会注册模型工具。在对应 <code>method_options</code> 设置 <code>&quot;tool&quot;: True</code> 可显式登记工具。 <code>method_options = {&quot;method_name&quot;: {&quot;expose&quot;: &quot;io&quot;, &quot;render_range&quot;: {...}}}</code> 无需装饰器即可设置方法元数据。</p>
+<h2 id="context-内容与可见性">Context 内容与可见性<a class="header-anchor" href="#context-内容与可见性">#</a></h2>
+<p>框架自动派生并绑定 Context。显式配置是可选的：</p>
+<pre><code class="language-python"><span class="kn">from</span><span class="w"> </span><span class="nn">openprogram</span><span class="w"> </span><span class="kn">import</span> <span class="n">Agent</span><span class="p">,</span> <span class="n">Context</span>
+
+<span class="n">context</span> <span class="o">=</span> <span class="n">Context</span><span class="p">(</span>
+    <span class="p">{</span><span class="s2">&quot;notes&quot;</span><span class="p">:</span> <span class="s2">&quot;Use the project terminology.&quot;</span><span class="p">},</span>
+    <span class="n">providers</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;current_topic&quot;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">current</span><span class="p">:</span> <span class="s2">&quot;Agent context&quot;</span><span class="p">},</span>
+<span class="p">)</span>
+<span class="n">researcher</span> <span class="o">=</span> <span class="n">Agent</span><span class="p">(</span><span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">,</span> <span class="n">tools</span><span class="o">=</span><span class="p">[])</span>
+</code></pre>
+<p><code>Context(blocks=None, *, parent=None, providers=None, history=..., call_id=..., store=None, head_id=None)</code> 是命名内容的可变映射。<code>derive()</code> 创建具有独立内容的子上下文。<code>Context.current()</code> 返回当前任务绑定，无绑定时返回 <code>None</code>。<code>merge(other)</code> 覆盖命名内容和显式选择规则，不替换作用域调用身份。宿主集成可使用 <code>bind()</code> 显式绑定。</p>
+<p>提供函数是接收当前 Context 的同步 Python callable，在每次模型请求时运行。提供函数失败会终止该请求。框架不执行表达式字符串。</p>
+<p><code>history</code> 选择模型请求看到的历史。<code>None</code> 不发送历史。<code>&quot;thread&quot;</code> 只发送之前用同一个 Context 对象发起的请求。<code>&quot;chat&quot;</code>（Context 的默认值）发送可见的对话。callable 接收 <code>(node, context)</code>，在现有可见性检查之后筛选对话节点。没有显式设置 <code>history</code> 的 Workflow 角色调用不发送历史。这些设置不能扩大工具权限。</p>
+<p>Context 使用同一模型：父继承、命名内容、请求时求值和历史可见性。Agent 实例内容是该模型的实例绑定。模型交互仍归执行会话保存。内容与系统指令、工具权限分别处理。</p>
+<h2 id="显式会话生命周期">显式会话生命周期<a class="header-anchor" href="#显式会话生命周期">#</a></h2>
+<p>多次独立调用需要续接同一会话时，使用 <code>Context(store=writer, head_id=None)</code>。writer 是现有 <code>SessionNodeWriter</code>：</p>
+<pre><code class="language-python"><span class="kn">from</span><span class="w"> </span><span class="nn">openprogram</span><span class="w"> </span><span class="kn">import</span> <span class="n">Agent</span><span class="p">,</span> <span class="n">Context</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">openprogram.state.store</span><span class="w"> </span><span class="kn">import</span> <span class="n">SessionStore</span><span class="p">,</span> <span class="n">SessionNodeWriter</span>
+
+<span class="n">store</span> <span class="o">=</span> <span class="n">SessionStore</span><span class="p">(</span><span class="n">root_path</span><span class="o">=</span><span class="s2">&quot;/var/lib/myapp/sessions&quot;</span><span class="p">)</span>
+<span class="n">store</span><span class="o">.</span><span class="n">create_session</span><span class="p">(</span><span class="s2">&quot;research&quot;</span><span class="p">,</span> <span class="n">agent_id</span><span class="o">=</span><span class="s2">&quot;main&quot;</span><span class="p">)</span>
+<span class="n">writer</span> <span class="o">=</span> <span class="n">SessionNodeWriter</span><span class="p">(</span><span class="n">store</span><span class="p">,</span> <span class="s2">&quot;research&quot;</span><span class="p">)</span>
+<span class="n">researcher</span> <span class="o">=</span> <span class="n">Agent</span><span class="p">(</span><span class="n">context</span><span class="o">=</span><span class="n">Context</span><span class="p">(</span><span class="n">store</span><span class="o">=</span><span class="n">writer</span><span class="p">),</span> <span class="n">tools</span><span class="o">=</span><span class="p">[])</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">first</span> <span class="o">=</span> <span class="n">researcher</span><span class="p">(</span><span class="s2">&quot;List the project requirements.&quot;</span><span class="p">)</span>
+    <span class="n">second</span> <span class="o">=</span> <span class="n">researcher</span><span class="p">(</span><span class="s2">&quot;Review the requirements from the previous call.&quot;</span><span class="p">)</span>
+<span class="k">finally</span><span class="p">:</span>
+    <span class="n">store</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre>
+<p><code>head_id</code> 选择已有分支末端作为初始前序节点。<code>None</code> 续接当前会话末端。调用者拥有并关闭显式 store，执行作用域不会关闭它。</p>
+<p>该显式 Context 会话提供 NOOA 式重复实例调用需要的事件生命周期，复用已有 Session DAG。Agent 仍保存配置，默认调用保持独立。</p>
+<h2 id="受管-program-源码">受管 Program 源码<a class="header-anchor" href="#受管-program-源码">#</a></h2>
+<p>受管加载器采集显式授权包目录内的源码函数，包括已选择的第一方源码、已安装及目录登记的 Program 包、所有者登记的外部 harness、已发布 Program 与保留源码快照。采集包含子模块与嵌套源码定义。任意宿主文件、无关依赖、lambda、动态生成代码与不可用源码不在该范围内。</p>
+<p>包通过 <code>PROGRAM_ENTRIES</code> 列出公开入口。普通入口可用显式 <code>__agent_options__</code> 映射提供已有入口元数据。被采集的帮助函数不会自动成为工具。加载器保留方法配置，并排除生成器采集。</p>
+<p>类与方法接口参考 <a href="https://github.com/NVIDIA-NeMo/labs-OO-Agents">NVIDIA-labs OO Agents</a>。OpenProgram 不声称 NOOA API 兼容。</p>
+<h2 id="方法配置">方法配置<a class="header-anchor" href="#方法配置">#</a></h2>
+<p>普通 Agent 方法产生 code 节点，模型请求产生 llm 节点。Agent 承担方法元数据、执行控制与显式登记。Context 动态构建每次请求。</p>
+<p>Agent 定义方法执行、配置与登记，Context 动态构建每次请求。</p>
+<h3 id="用法">用法<a class="header-anchor" href="#用法">#</a></h3>
+<pre><code class="language-python"><span class="kn">from</span><span class="w"> </span><span class="nn">openprogram</span><span class="w"> </span><span class="kn">import</span> <span class="n">Agent</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">openprogram.runtime.agent</span><span class="w"> </span><span class="kn">import</span> <span class="n">llm</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ExampleAgent</span><span class="p">(</span><span class="n">Agent</span><span class="p">):</span>
+    <span class="n">method_options</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;f&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;tool&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
+    <span class="p">}</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">f</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;One-line summary of what f does.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">llm</span><span class="p">([{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;...</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">}])</span>
+
+<span class="n">_example_agent</span> <span class="o">=</span> <span class="n">ExampleAgent</span><span class="p">()</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">_example_agent</span><span class="o">.</span><span class="n">f</span>
+</code></pre>
+<p>每个普通方法自动建立调用作用域。通过类的 <code>method_options</code> 映射配置指定方法。</p>
+<h3 id="方法配置-1">方法配置<a class="header-anchor" href="#方法配置-1">#</a></h3>
+<h3 id="执行与-context-设置">执行与 Context 设置<a class="header-anchor" href="#执行与-context-设置">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>默认</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>expose</code></td>
+<td><code>str</code></td>
+<td>普通方法 <code>&quot;full&quot;</code>；登记工具 <code>&quot;io&quot;</code></td>
+<td><strong>朝外</strong>:别人渲染 DAG 时能看到我的什么。<code>&quot;io&quot;</code> = 对外只露函数名和返回值,内部(LLM 交换、子调用)隐藏;<code>&quot;llm&quot;</code> = 反过来,只露内部 LLM 交换,藏函数自己的名字/返回值和嵌套的 code 子调用;<code>&quot;full&quot;</code> = 全可见(docstring + 参数 + 输出 + LLM 回复 + 内部);<code>&quot;hidden&quot;</code> = 根本不写 DAG 节点。其余值在装饰时抛 <code>ValueError</code></td>
+</tr>
+<tr>
+<td><code>render_range</code></td>
+<td><code>dict</code></td>
+<td><code>None</code></td>
+<td><strong>朝内</strong>:本函数内部 <code>llm()</code> 拼 prompt 时,从 DAG 读多少历史节点。形状 <code>{&quot;callers&quot;: N, &quot;subcalls&quot;: M}</code>,两个数字都是 <strong>节点计数(按 <code>seq</code> 切片)</strong>:<br>• <code>callers</code> — 本函数 frame <strong>启动前</strong>的节点,取最近 N 个(<code>None</code> 默认 = 不限,<code>0</code> = 全墙)<br>• <code>subcalls</code> — 本函数 frame <strong>启动后</strong>已写入的节点,取最近 N 个(<code>-1</code> 默认 = 不限,frame 自然看见自己的进度;<code>N&gt;=0</code> = 只想截 prompt 时显式设;<code>0</code> = 完全墙掉 in-frame)<br><code>{&quot;callers&quot;:0,&quot;subcalls&quot;:0}</code> = 跟外界和自己 frame 全断绝</td>
+</tr>
+<tr>
+<td><code>input</code></td>
+<td><code>dict</code></td>
+<td><code>None</code></td>
+<td>每个参数的 UI 元数据,WebUI 据此渲染输入表单。每个参数支持的字段:<code>description</code>(参数名旁的标签)、<code>placeholder</code>(示例文字)、<code>multiline</code>(<code>True</code> = textarea)、<code>options</code>(允许值列表,渲染为下拉框并写进 JSON-schema <code>enum</code>)、<code>hidden</code>(<code>True</code> = 从表单和 LLM 工具 schema 里排除)</td>
+</tr>
+<tr>
+<td><code>system</code></td>
+<td><code>str</code></td>
+<td><code>None</code></td>
+<td>本函数 LLM 调用的 system prompt(调用期间盖到注入的 runtime 上,调用后恢复)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="工具注册参数">工具注册参数<a class="header-anchor" href="#工具注册参数">#</a></h3>
+<p>设置 <code>tool=True</code> 的 Agent 方法注册进共享注册表(<code>openprogram.programs</code>),成为 LLM 可调用的工具,与 <code>@function</code> 装饰的工具并列。以下参数控制这次注册,名字和语义与 <code>@function</code> 一致:</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>默认</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tool</code> / <code>as_tool</code></td>
+<td><code>bool</code></td>
+<td><code>False</code></td>
+<td>注册为 LLM 可调用工具。<code>False</code> = 只能 Python 直接调用</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>str</code></td>
+<td><code>None</code></td>
+<td>工具名覆盖。默认取函数的 <code>__name__</code></td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td><code>str</code></td>
+<td><code>None</code></td>
+<td>工具描述覆盖。默认取函数 docstring</td>
+</tr>
+<tr>
+<td><code>parameters</code></td>
+<td><code>dict</code></td>
+<td><code>None</code></td>
+<td>JSON-schema 参数覆盖。默认由签名类型注解加 <code>input</code> 元数据自动生成(runtime 注入参数和 <code>hidden</code> 参数被排除)</td>
+</tr>
+<tr>
+<td><code>label</code></td>
+<td><code>str</code></td>
+<td><code>None</code></td>
+<td>工具 UI 里显示的可读标签</td>
+</tr>
+<tr>
+<td><code>toolset</code></td>
+<td><code>tuple</code></td>
+<td><code>()</code></td>
+<td>本工具所属的工具集名(供 <code>exec(toolset=...)</code> 预设使用)</td>
+</tr>
+<tr>
+<td><code>unsafe_in</code></td>
+<td><code>tuple</code></td>
+<td><code>()</code></td>
+<td>在哪些渠道来源下视为不安全并被过滤</td>
+</tr>
+<tr>
+<td><code>check_fn</code></td>
+<td><code>Callable</code></td>
+<td><code>None</code></td>
+<td>逐次调用的门禁:分发前调用,返回假值则拦下</td>
+</tr>
+<tr>
+<td><code>requires_env</code></td>
+<td><code>tuple</code></td>
+<td><code>()</code></td>
+<td>必须设置的环境变量名,缺了就不提供该工具</td>
+</tr>
+<tr>
+<td><code>can_use</code></td>
+<td><code>Callable</code></td>
+<td><code>None</code></td>
+<td>工具解析时求值的动态可用性谓词</td>
+</tr>
+<tr>
+<td><code>max_result_chars</code></td>
+<td><code>int</code></td>
+<td><code>None</code></td>
+<td>回喂给模型的工具结果截断上限。<code>None</code> = 注册表默认 <code>DEFAULT_MAX_RESULT_CHARS</code>(30,000 字符)</td>
+</tr>
+<tr>
+<td><code>persist_full</code></td>
+<td><code>bool</code></td>
+<td><code>False</code></td>
+<td>把未截断的完整结果保存到状态目录中的独立路径，供 agent 回读；后续保存不覆盖旧引用。仅在写入成功后返回路径</td>
+</tr>
+<tr>
+<td><code>head_ratio</code></td>
+<td><code>float</code></td>
+<td><code>None</code></td>
+<td>截断时头部保留的比例,其余留尾部。<code>None</code> = 注册表默认 <code>DEFAULT_HEAD_RATIO</code>(0.7)</td>
+</tr>
+<tr>
+<td><code>requires_approval</code></td>
+<td>—</td>
+<td><code>None</code></td>
+<td>转发给工具注册表的审批要求(与 <code>@function</code> 同形)</td>
+</tr>
+<tr>
+<td><code>cache</code></td>
+<td><code>bool</code></td>
+<td><code>False</code></td>
+<td>工具分发调用按 <code>(name, args)</code> 记忆化结果</td>
+</tr>
+<tr>
+<td><code>cache_ttl</code></td>
+<td><code>float</code></td>
+<td><code>300.0</code></td>
+<td><code>cache=True</code> 时的缓存寿命(秒)</td>
+</tr>
+<tr>
+<td><code>timeout</code></td>
+<td><code>float</code></td>
+<td><code>None</code></td>
+<td>工具分发调用的硬性墙钟超时(秒),到点模型收到错误结果</td>
+</tr>
+<tr>
+<td><code>available_if</code></td>
+<td><code>Callable</code></td>
+<td><code>None</code></td>
+<td>工具登记门禁：返回假值或抛异常时不登记工具，普通方法作用域仍有效</td>
+</tr>
+<tr>
+<td><code>defer</code></td>
+<td><code>bool</code></td>
+<td><code>False</code></td>
+<td>注册为延迟工具(schema 按需加载,不随每次调用发送)</td>
+</tr>
+<tr>
+<td><code>register_globally</code></td>
+<td><code>bool</code></td>
+<td><code>True</code></td>
+<td><code>False</code> = 构建工具但不进全局注册表</td>
+</tr>
+</tbody>
+</table>
+<p>函数名、参数名 / 类型 / 默认值、一句话摘要都从函数签名和 docstring 自动读取,不在 method_options 中重复。</p>
+<h3 id="选择-runtime">选择 Runtime<a class="header-anchor" href="#选择-runtime">#</a></h3>
+<p>方法在它所属 Agent 配置的 Runtime 上运行;Agent 没有配置时用调用方的:<code>ExampleAgent(runtime=rt).f(&quot;x&quot;)</code> 让 <code>f</code> 及其中每次模型请求都在 <code>rt</code> 上运行,它调用的 Agent 方法也继承 <code>rt</code>。Runtime 在程序入口(CLI、脚本、测试)配置,不通过方法参数往下传。一个工作流要用两个模型时——比如作者和评审——给第二个角色一个自带 Runtime 的 Agent 实例。</p>
+<h3 id="runtime-注入">Runtime 注入<a class="header-anchor" href="#runtime-注入">#</a></h3>
+<p>旧函数仍可能声明名为 <code>runtime</code>、<code>exec_runtime</code> 或 <code>review_runtime</code> 的参数,它们会自动注入:调用方没传(或传 <code>None</code>)时,先从当前调用链取 runtime;作为入口调用时经 <code>create_runtime()</code>(自动检测)新建,函数返回时再关闭。一个函数可以声明多个 runtime 参数,全部填同一个 runtime。这些参数不会出现在 LLM 工具 schema 和 WebUI 表单里。新写的方法不声明这些参数。</p>
+<h3 id="自省与安全">自省与安全<a class="header-anchor" href="#自省与安全">#</a></h3>
+<ul>
+<li><code>fn.spec</code> — 自动生成的 JSON-schema 工具 spec(<code>{&quot;name&quot;, &quot;description&quot;, &quot;parameters&quot;}</code>);<code>fn.execute(**kwargs)</code> 用 LLM 提供的 kwargs 调用 wrapper。</li>
+<li>自递归兜底:函数自我重入超过 5 层抛 <code>RecursionError</code>(注入的情境 prompt 也会引导模型不要自调用)。</li>
+<li>预调用钩子(<code>add_pre_invocation_hook</code> / <code>remove_pre_invocation_hook</code>)在每次调用开头运行,可以抛 <code>CancelledError</code> 中止本次调用(WebUI 的停止按钮就是这么实现的)。</li>
+</ul>
+<h3 id="记录到-dag">记录到 DAG<a class="header-anchor" href="#记录到-dag">#</a></h3>
+<ul>
+<li><strong>进入函数</strong>:写一个 <code>code</code> 节点(<code>output=None</code>, <code>status=&quot;running&quot;</code>),函数 docstring 一并存进该节点的 <code>metadata.doc</code>,渲染上下文时拼在 <code>函数名(参数)</code> 前面。</li>
+<li><strong>函数体内 <code>llm()</code></strong>:每次调用写一个 <code>llm</code> 节点。</li>
+<li><strong>退出函数</strong>:回填同一个 <code>code</code> 节点的 <code>output</code> / <code>status</code>。</li>
+</ul>
+<p><code>expose=&quot;hidden&quot;</code> 时不写任何节点。standalone 运行(没安装 DAG store)时记录全部 no-op,函数照常执行。</p>
+<h3 id="可恢复步骤与代码版本">可恢复步骤与代码版本<a class="header-anchor" href="#可恢复步骤与代码版本">#</a></h3>
+<p>为同步编排函数声明 <code>method_options = {&quot;report&quot;: {&quot;resumable&quot;: True}}</code>，将外部操作放入 <code>step(&quot;稳定名称&quot;, 操作函数, *args, **kwargs)</code>。步骤输入和结果必须可保存为 JSON；继续执行时，已完成步骤直接返回保存的结果，不再调用操作函数。重复名称按出现次数区分，已执行步骤的顺序和输入必须保持兼容。</p>
+<p>嵌套编排使用 <code>workflow(&quot;名称&quot;, 函数, *args, **kwargs)</code>。并行编排使用 <code>parallel({&quot;分支名&quot;: (函数, args, kwargs)})</code>；各分支独立保存进度，所有分支停止后才释放任务所有权。</p>
+<p>设置项 <code>execution.code_change_policy</code> 默认是 <code>keep_original</code>，继续使用保存的原函数和 Python 辅助函数源码；<code>use_latest</code> 保留已完成步骤的结果，并用当前代码执行后续兼容步骤。任务的“继续”操作可以覆盖此设置。A 已采用 B 后，再更新到 C 时选择保留原代码，会继续 B；尚未通过已有进度兼容性检查的候选版本不会取代已采用版本。新代码需要转换局部状态时，应在剩余步骤之前通过纯编排代码转换已保存的 JSON。已记录步骤被删除、重排、输入不兼容或固定依赖不可用时，任务保持暂停。权限和工具参数约定仍然需要通过兼容性检查。</p>
+<p>手动调用恢复原执行记录；聊天调用将最终结果交给原来的待完成工具调用。重启导致的中断沿用两小时自动继续期限。主动暂停、取消、未回答的授权请求以及结果不确定的外部操作不会自动重试。</p>
+<p>此功能在显式步骤处恢复，不保存任意 Python 调用栈。步骤外的外部调用和状态修改、异步编排、生成器、活动句柄及非 JSON 结果不支持此恢复约定。外部操作已经开始、但结果尚未保存时进程退出，必须先核对操作结果。函数运行界面显示是否声明可恢复步骤，普通函数中断后需要重新运行。</p>
+<p>步骤之间不得依赖可变的 Python 全局变量、闭包或默认参数。需要持续保存的状态应通过步骤的 JSON 输入和结果传递，进程内变量修改不能作为恢复依据。</p>
+<p>步骤依赖需要在模块级导入；辅助函数内部导入、动态导入 API 和动态生成代码会在执行步骤前被拒绝。Python 辅助函数源码递归保存。模块和类对象目前仅支持固定的标准库身份，第三方及用户包对象会被拒绝，因为只保存包初始化文件无法确定完整实现。</p>
+<h2 id="会话轮次与恢复">会话轮次与恢复<a class="header-anchor" href="#会话轮次与恢复">#</a></h2>
+<p><code>Agent.run_turn(request, *, context=None, on_event=None, cancel_event=None, execution_context=None)</code> 返回 <code>TurnResult</code>。从 <code>openprogram</code> 导入 <code>TurnRequest</code> 和 <code>TurnResult</code>。新轮次执行前应用实例配置；<code>Context.for_session(store, session_id, head_id=..., blocks=..., providers=...)</code> 绑定持久化存储和分支。请求与 Context 的会话不一致时拒绝执行。<code>Context.session_id</code> 返回所选图的标识。</p>
+<p><code>arun_turn(request, **options)</code> 提供协作式取消的异步执行。<code>resume_turn(continuation, **options)</code> 与 <code>aresume_turn(...)</code> 复用断点请求，不重复执行准入。事件回调在执行线程接收现有运行时事件字典。持久化暂停和执行中追加输入沿用已有执行控制及安全点协议。</p>
+<p><code>ChatAgent</code> 继承这套契约，是实际聊天使用的类型。子类重写轮次入口时，不会将其自动包装为普通函数调用。旧 <code>openprogram.runtime.conversation.turn_runtime</code> 导入与共享 <code>openprogram.runtime.conversation.turn_runtime</code> 指向同一模块，不再维护另一份执行循环。</p>
+<div class="page-updated"><span data-i18n="updated">Last updated</span> · 2026-11-02</div><div class="prevnext"><a class="pn-link pn-prev" href="/docs/reference/api/providers.html" data-href-en="/docs/reference/api/providers.html" data-href-zh="/docs/reference/api/providers.zh.html"><span class="pn-dir" data-i18n="prev">Previous</span><span class="pn-title" data-title-zh="模型服务 API">Provider API</span></a><a class="pn-link pn-next" href="/docs/reference/cli.html" data-href-en="/docs/reference/cli.html" data-href-zh="/docs/reference/cli.zh.html"><span class="pn-dir" data-i18n="next">Next</span><span class="pn-title" data-title-zh="CLI 参考">CLI reference</span></a></div></article></main>
+  <aside class="toc"><div class="toc-title" data-i18n="on_this_page">On this page</div>
+<ul class="toc-list">
+<li>
+<a class="lvl-2" href="#直接调用与-agent-类">直接调用与 Agent 类</a>
+</li>
+<li>
+<a class="lvl-2" href="#context-内容与可见性">Context 内容与可见性</a>
+</li>
+<li>
+<a class="lvl-2" href="#显式会话生命周期">显式会话生命周期</a>
+</li>
+<li>
+<a class="lvl-2" href="#受管-program-源码">受管 Program 源码</a>
+</li>
+<li>
+<details class="toc-disclosure" open=""><summary>
+<a class="lvl-2" href="#方法配置">方法配置</a>
+</summary>
+<ul class="toc-list">
+<li>
+<a class="lvl-3" href="#用法">用法</a>
+</li>
+<li>
+<a class="lvl-3" href="#方法配置-1">方法配置</a>
+</li>
+<li>
+<a class="lvl-3" href="#执行与-context-设置">执行与 Context 设置</a>
+</li>
+<li>
+<a class="lvl-3" href="#工具注册参数">工具注册参数</a>
+</li>
+<li>
+<a class="lvl-3" href="#选择-runtime">选择 Runtime</a>
+</li>
+<li>
+<a class="lvl-3" href="#runtime-注入">Runtime 注入</a>
+</li>
+<li>
+<a class="lvl-3" href="#自省与安全">自省与安全</a>
+</li>
+<li>
+<a class="lvl-3" href="#记录到-dag">记录到 DAG</a>
+</li>
+<li>
+<a class="lvl-3" href="#可恢复步骤与代码版本">可恢复步骤与代码版本</a>
+</li>
+</ul>
+</details>
+</li>
+<li>
+<a class="lvl-2" href="#会话轮次与恢复">会话轮次与恢复</a>
+</li>
+</ul></aside>
+</div>
+
+<div class="search-overlay">
+  <div class="search-box">
+    <input type="text" data-i18n-ph="search_ph" placeholder="Search titles or text…" autocomplete="off" spellcheck="false">
+    <div class="search-results"></div>
+  </div>
+</div>
+
+<script src="/docs/assets/site.js?v=6520ba46"></script>
+</body>
+</html>

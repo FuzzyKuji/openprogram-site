@@ -1,0 +1,1691 @@
+<!DOCTYPE html>
+<html lang="zh" data-base="/docs/" data-page-lang="zh" data-build="1793956776" data-alt-lang-url="/docs/reference/design/runtime/dag/rendering.html">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>渲染规范 · OpenProgram Docs</title>
+<meta name="description" content="会话图怎么画：每个节点放哪、每条线什么样、默认给用户看什么。 本文是权威 实现标准 ——布局代码照此写，出问题对照本文查。数据语义（节点、两条边）见 dag/overview.md ；本文只管画。 每条规则配示例。 SVG 场景图以 layout.html 为权威 （共 13 个 场景：1–7 基础布局，8">
+<link rel="canonical" href="https://openprogram.io/docs/reference/design/runtime/dag/rendering.zh.html">
+<link rel="alternate" type="text/markdown" href="https://openprogram.io/docs/reference/design/runtime/dag/rendering.zh.html.md">
+<link rel="describedby" href="https://openprogram.io/llms.txt">
+<link rel="alternate" hreflang="en" href="https://openprogram.io/docs/reference/design/runtime/dag/rendering.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://openprogram.io/docs/reference/design/runtime/dag/rendering.zh.html">
+<link rel="alternate" hreflang="x-default" href="https://openprogram.io/docs/reference/design/runtime/dag/rendering.html">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"OpenProgram Docs","item":"https://openprogram.io/docs/"},{"@type":"ListItem","position":2,"name":"渲染规范"}]}</script>
+<meta property="og:type" content="article">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:site_name" content="OpenProgram">
+<meta property="og:url" content="https://openprogram.io/docs/reference/design/runtime/dag/rendering.zh.html">
+<meta property="og:title" content="渲染规范 · OpenProgram Docs">
+<meta property="og:description" content="会话图怎么画：每个节点放哪、每条线什么样、默认给用户看什么。 本文是权威 实现标准 ——布局代码照此写，出问题对照本文查。数据语义（节点、两条边）见 dag/overview.md ；本文只管画。 每条规则配示例。 SVG 场景图以 layout.html 为权威 （共 13 个 场景：1–7 基础布局，8">
+<meta property="og:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:secure_url" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="渲染规范 · OpenProgram Docs">
+<meta name="twitter:description" content="会话图怎么画：每个节点放哪、每条线什么样、默认给用户看什么。 本文是权威 实现标准 ——布局代码照此写，出问题对照本文查。数据语义（节点、两条边）见 dag/overview.md ；本文只管画。 每条规则配示例。 SVG 场景图以 layout.html 为权威 （共 13 个 场景：1–7 基础布局，8">
+<meta name="twitter:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta name="twitter:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/docs/assets/mark.svg">
+<link rel="stylesheet" href="/docs/assets/site.css?v=6520ba46">
+<link rel="stylesheet" href="/docs/assets/pygments-light.css" media="(prefers-color-scheme: light)" id="pyg-light">
+<link rel="stylesheet" href="/docs/assets/pygments-dark.css" media="(prefers-color-scheme: dark)" id="pyg-dark">
+<script src="/docs/assets/theme.js?v=6520ba46"></script>
+
+</head>
+<body>
+<header class="topbar">
+  <button class="icon hamburger" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2.5 4.5h11M2.5 8h11M2.5 11.5h11"/></svg></button>
+  <a class="brand" href="/docs/index.html"><img class="mark" src="/docs/assets/mark.svg" alt="">OpenProgram Docs</a>
+  <div class="spacer"></div>
+  <button class="search-trigger" aria-label="Search">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14"/></svg><span class="label" data-i18n="search">Search docs</span><kbd>⌘K</kbd>
+  </button>
+  <div class="lang-wrap">
+    <button class="icon lang-trigger" id="lang-toggle" aria-haspopup="true" aria-expanded="false" aria-label="Language">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="6.2"/><path d="M1.8 8h12.4" stroke-linecap="round"/><ellipse cx="8" cy="8" rx="2.8" ry="6.2"/></svg><span class="lang-label">EN</span><svg class="chev" width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+    </button>
+    <div class="lang-menu" id="lang-menu" role="menu">
+      <button class="lang-opt" data-lang="en" role="menuitem"><span>English</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="lang-opt" data-lang="zh" role="menuitem"><span>简体中文</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+  <div class="theme-wrap">
+    <button class="icon" id="theme-toggle" aria-label="Theme" aria-haspopup="menu" aria-controls="theme-menu" aria-expanded="false"><svg class="ic-system" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="2.5" width="13" height="9" rx="1.5"/><path d="M8 11.5V14M5.5 14h5"/></svg><svg class="ic-moon" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M13.5 9.5A6 6 0 1 1 6.5 2.5a5 5 0 0 0 7 7z"/></svg><svg class="ic-sun" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="3.2"/><path d="M8 1.2v1.8M8 13v1.8M1.2 8H3M13 8h1.8M3.2 3.2l1.3 1.3M11.5 11.5l1.3 1.3M12.8 3.2l-1.3 1.3M4.5 11.5l-1.3 1.3"/></svg></button>
+    <div class="theme-menu" id="theme-menu" role="menu" aria-labelledby="theme-toggle">
+      <button class="theme-opt" data-theme-choice="system" role="menuitemradio" aria-checked="true"><span>Follow system</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="light" role="menuitemradio" aria-checked="false"><span>Light</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="dark" role="menuitemradio" aria-checked="false"><span>Dark</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+</header>
+<nav class="tabbar"><a class="tablink" href="/docs/README.html" data-title-zh="开始使用" data-href-en="/docs/README.html" data-href-zh="/docs/README.zh.html">Get started</a><a class="tablink" href="/docs/install/install.html" data-title-zh="安装" data-href-en="/docs/install/install.html" data-href-zh="/docs/install/install.zh.html">Install</a><a class="tablink" href="/docs/capabilities/README.html" data-title-zh="能力" data-href-en="/docs/capabilities/README.html" data-href-zh="/docs/capabilities/README.zh.html">Capabilities</a><a class="tablink" href="/docs/interfaces/README.html" data-title-zh="界面" data-href-en="/docs/interfaces/README.html" data-href-zh="/docs/interfaces/README.zh.html">Interfaces</a><a class="tablink" href="/docs/models/README.html" data-title-zh="模型" data-href-en="/docs/models/README.html" data-href-zh="/docs/models/README.zh.html">Models</a><a class="tablink" href="/docs/integrations/anthropic.html" data-title-zh="集成" data-href-en="/docs/integrations/anthropic.html" data-href-zh="/docs/integrations/anthropic.zh.html">Integrations</a><a class="tablink" href="/docs/server/README.html" data-title-zh="服务与运维" data-href-en="/docs/server/README.html" data-href-zh="/docs/server/README.zh.html">Server &amp; Ops</a><a class="tablink" href="/docs/reference/README.html" data-title-zh="参考" data-href-en="/docs/reference/README.html" data-href-zh="/docs/reference/README.zh.html">Reference</a><a class="tablink active" href="/docs/reference/design/README.html" data-title-zh="设计" data-href-en="/docs/reference/design/README.html" data-href-zh="/docs/reference/design/README.zh.html">Design</a></nav>
+
+<div class="scrim"></div>
+<div class="layout">
+  <nav class="sidebar" aria-label="Documentation">
+    <input class="nav-filter" type="text" data-i18n-ph="nav_filter"
+           aria-label="Filter docs" placeholder="Filter docs…" autocomplete="off" spellcheck="false">
+    <div class="nav-tree"><details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="架构总览">Architecture</span><span class="nav-count">6</span></summary><a class="navlink" href="/docs/reference/design/README.html" data-title-zh="设计指南" data-href-en="/docs/reference/design/README.html" data-href-zh="/docs/reference/design/README.zh.html">Design guide</a>
+<a class="navlink" href="/docs/reference/design/framework-overview.html" data-title-zh="框架总览" data-href-en="/docs/reference/design/framework-overview.html" data-href-zh="/docs/reference/design/framework-overview.zh.html">Framework overview</a>
+<a class="navlink" href="/docs/reference/design/repository-structure.html" data-title-zh="仓库结构" data-href-en="/docs/reference/design/repository-structure.html" data-href-zh="/docs/reference/design/repository-structure.zh.html">Repository structure</a>
+<a class="navlink" href="/docs/reference/design/implementation-status.html" data-title-zh="实现索引" data-href-en="/docs/reference/design/implementation-status.html" data-href-zh="/docs/reference/design/implementation-status.zh.html">Implementation index</a>
+<a class="navlink" href="/docs/reference/design/framework-comparison.html" data-title-zh="框架对比" data-href-en="/docs/reference/design/framework-comparison.html" data-href-zh="/docs/reference/design/framework-comparison.zh.html">Framework comparison</a>
+<a class="navlink" href="/docs/reference/design/feature-matrix.html" data-title-zh="功能矩阵" data-href-en="/docs/reference/design/feature-matrix.html" data-href-zh="/docs/reference/design/feature-matrix.zh.html">Feature matrix</a></details>
+<details class="nav-branch nav-disclosure" open><summary><span class="nav-sec-title" data-title-zh="Agent 与工作流">Agents and workflows</span><span class="nav-count">88</span></summary>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="执行与控制">Execution</span><span class="nav-count">14</span></summary><a class="navlink" href="/docs/reference/design/runtime/README.html" data-title-zh="运行时" data-href-en="/docs/reference/design/runtime/README.html" data-href-zh="/docs/reference/design/runtime/README.zh.html">Runtime</a>
+<a class="navlink" href="/docs/reference/design/runtime/codex-capability-adoption.html" data-title-zh="Codex 功能核对" data-href-en="/docs/reference/design/runtime/codex-capability-adoption.html" data-href-zh="/docs/reference/design/runtime/codex-capability-adoption.zh.html">Codex capability audit</a>
+<a class="navlink" href="/docs/reference/design/runtime/execution/agent-call-flow.html" data-title-zh="调用流程" data-href-en="/docs/reference/design/runtime/execution/agent-call-flow.html" data-href-zh="/docs/reference/design/runtime/execution/agent-call-flow.zh.html">Call flow</a>
+<a class="navlink" href="/docs/reference/design/runtime/execution/control.html" data-title-zh="执行控制" data-href-en="/docs/reference/design/runtime/execution/control.html" data-href-zh="/docs/reference/design/runtime/execution/control.zh.html">Execution control</a>
+<a class="navlink" href="/docs/reference/design/runtime/execution/agent-action-lifecycle.html" data-title-zh="操作生命周期" data-href-en="/docs/reference/design/runtime/execution/agent-action-lifecycle.html" data-href-zh="/docs/reference/design/runtime/execution/agent-action-lifecycle.zh.html">Action lifecycle</a>
+<a class="navlink" href="/docs/reference/design/runtime/execution/agent-worktree.html" data-title-zh="工作树" data-href-en="/docs/reference/design/runtime/execution/agent-worktree.html" data-href-zh="/docs/reference/design/runtime/execution/agent-worktree.zh.html">Worktrees</a>
+<a class="navlink" href="/docs/reference/design/runtime/execution/command-sessions.html" data-title-zh="命令会话" data-href-en="/docs/reference/design/runtime/execution/command-sessions.html" data-href-zh="/docs/reference/design/runtime/execution/command-sessions.zh.html">Command sessions</a>
+<a class="navlink" href="/docs/reference/design/runtime/execution/agentic-self-recursion.viz.html" data-title-zh="递归图解" data-href-en="/docs/reference/design/runtime/execution/agentic-self-recursion.viz.html" data-href-zh="/docs/reference/design/runtime/execution/agentic-self-recursion.zh.viz.html">Recursion diagram</a>
+<a class="navlink" href="/docs/reference/design/runtime/execution/agentic-self-recursion.html" data-title-zh="递归保护" data-href-en="/docs/reference/design/runtime/execution/agentic-self-recursion.html" data-href-zh="/docs/reference/design/runtime/execution/agentic-self-recursion.zh.html">Recursion guard</a>
+<a class="navlink" href="/docs/reference/design/runtime/execution/async-job-lifecycle.html" data-title-zh="异步任务" data-href-en="/docs/reference/design/runtime/execution/async-job-lifecycle.html" data-href-zh="/docs/reference/design/runtime/execution/async-job-lifecycle.zh.html">Async tasks</a>
+<a class="navlink" href="/docs/reference/design/runtime/execution/agentic-llm-streaming.html" data-title-zh="嵌套 LLM 流式" data-href-en="/docs/reference/design/runtime/execution/agentic-llm-streaming.html" data-href-zh="/docs/reference/design/runtime/execution/agentic-llm-streaming.zh.html">Nested LLM streaming</a>
+<a class="navlink" href="/docs/reference/design/runtime/execution/controllability-and-three-surface-sync.html" data-title-zh="任务可控性" data-href-en="/docs/reference/design/runtime/execution/controllability-and-three-surface-sync.html" data-href-zh="/docs/reference/design/runtime/execution/controllability-and-three-surface-sync.zh.html">Task controllability</a>
+<a class="navlink" href="/docs/reference/design/runtime/execution/dispatcher-split.html" data-title-zh="调度器结构" data-href-en="/docs/reference/design/runtime/execution/dispatcher-split.html" data-href-zh="/docs/reference/design/runtime/execution/dispatcher-split.zh.html">Dispatcher structure</a>
+<a class="navlink" href="/docs/reference/design/runtime/execution/next-step-decision.html" data-title-zh="下一步决策" data-href-en="/docs/reference/design/runtime/execution/next-step-decision.html" data-href-zh="/docs/reference/design/runtime/execution/next-step-decision.zh.html">Next-step decisions</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="会话与存储">Sessions</span><span class="nav-count">9</span></summary><a class="navlink" href="/docs/reference/design/runtime/session/README.html" data-title-zh="阅读指南" data-href-en="/docs/reference/design/runtime/session/README.html" data-href-zh="/docs/reference/design/runtime/session/README.zh.html">Reading guide</a>
+<a class="navlink" href="/docs/reference/design/runtime/session/storage.html" data-title-zh="数据模型" data-href-en="/docs/reference/design/runtime/session/storage.html" data-href-zh="/docs/reference/design/runtime/session/storage.zh.html">Data model</a>
+<a class="navlink" href="/docs/reference/design/runtime/session/operations.html" data-title-zh="操作流程" data-href-en="/docs/reference/design/runtime/session/operations.html" data-href-zh="/docs/reference/design/runtime/session/operations.zh.html">Operations</a>
+<a class="navlink" href="/docs/reference/design/runtime/session/context.html" data-title-zh="上下文" data-href-en="/docs/reference/design/runtime/session/context.html" data-href-zh="/docs/reference/design/runtime/session/context.zh.html">Context</a>
+<a class="navlink" href="/docs/reference/design/runtime/session/unified-session-context.html" data-title-zh="上下文创建" data-href-en="/docs/reference/design/runtime/session/unified-session-context.html" data-href-zh="/docs/reference/design/runtime/session/unified-session-context.zh.html">Context creation</a>
+<a class="navlink" href="/docs/reference/design/runtime/session/additional-working-directories.html" data-title-zh="工作目录" data-href-en="/docs/reference/design/runtime/session/additional-working-directories.html" data-href-zh="/docs/reference/design/runtime/session/additional-working-directories.zh.html">Working directories</a>
+<a class="navlink" href="/docs/reference/design/runtime/session/comparison.html" data-title-zh="管理对比" data-href-en="/docs/reference/design/runtime/session/comparison.html" data-href-zh="/docs/reference/design/runtime/session/comparison.zh.html">Management comparison</a>
+<a class="navlink" href="/docs/reference/design/runtime/session/storage-consistency.html" data-title-zh="存储一致性" data-href-en="/docs/reference/design/runtime/session/storage-consistency.html" data-href-zh="/docs/reference/design/runtime/session/storage-consistency.zh.html">Storage consistency</a>
+<a class="navlink" href="/docs/reference/design/runtime/session/name.html" data-title-zh="标题生成" data-href-en="/docs/reference/design/runtime/session/name.html" data-href-zh="/docs/reference/design/runtime/session/name.zh.html">Title generation</a></details>
+<details class="nav-sec nav-disclosure" open><summary><span class="nav-sec-title" data-title-zh="DAG 与协作">DAG and collaboration</span><span class="nav-count">14</span></summary><a class="navlink" href="/docs/reference/design/runtime/dag/overview.html" data-title-zh="设计概览" data-href-en="/docs/reference/design/runtime/dag/overview.html" data-href-zh="/docs/reference/design/runtime/dag/overview.zh.html">Design overview</a>
+<a class="navlink" href="/docs/reference/design/runtime/dag/nested-llm-node-content.html" data-title-zh="LLM 节点内容" data-href-en="/docs/reference/design/runtime/dag/nested-llm-node-content.html" data-href-zh="/docs/reference/design/runtime/dag/nested-llm-node-content.zh.html">LLM node content</a>
+<a class="navlink" href="/docs/reference/design/runtime/collaboration/agent-collaboration.html" data-title-zh="智能体通信" data-href-en="/docs/reference/design/runtime/collaboration/agent-collaboration.html" data-href-zh="/docs/reference/design/runtime/collaboration/agent-collaboration.zh.html">Agent communication</a>
+<a class="navlink" href="/docs/reference/design/runtime/collaboration/agent-collab-architecture.html" data-title-zh="协作工具" data-href-en="/docs/reference/design/runtime/collaboration/agent-collab-architecture.html" data-href-zh="/docs/reference/design/runtime/collaboration/agent-collab-architecture.zh.html">Collaboration tools</a>
+<a class="navlink" href="/docs/reference/design/runtime/collaboration/agent-collab-comparison.html" data-title-zh="协作对比" data-href-en="/docs/reference/design/runtime/collaboration/agent-collab-comparison.html" data-href-zh="/docs/reference/design/runtime/collaboration/agent-collab-comparison.zh.html">Collaboration comparison</a>
+<a class="navlink" href="/docs/reference/design/runtime/dag/branch-collaboration.html" data-title-zh="分支协作" data-href-en="/docs/reference/design/runtime/dag/branch-collaboration.html" data-href-zh="/docs/reference/design/runtime/dag/branch-collaboration.zh.html">Branch collaboration</a>
+<a class="navlink" href="/docs/reference/design/runtime/dag/layout.html" data-title-zh="布局规范" data-href-en="/docs/reference/design/runtime/dag/layout.html" data-href-zh="/docs/reference/design/runtime/dag/layout.zh.html">Layout specification</a>
+<a class="navlink" href="/docs/reference/design/runtime/dag/external-program-run-node.html" data-title-zh="程序节点" data-href-en="/docs/reference/design/runtime/dag/external-program-run-node.html" data-href-zh="/docs/reference/design/runtime/dag/external-program-run-node.zh.html">Program nodes</a>
+<a class="navlink" href="/docs/reference/design/runtime/dag/persistence-observability.html" data-title-zh="Agent 图所有权" data-href-en="/docs/reference/design/runtime/dag/persistence-observability.html" data-href-zh="/docs/reference/design/runtime/dag/persistence-observability.zh.html">Agent DAG ownership</a>
+<a class="navlink active" href="/docs/reference/design/runtime/dag/rendering.html" data-title-zh="渲染规范" data-href-en="/docs/reference/design/runtime/dag/rendering.html" data-href-zh="/docs/reference/design/runtime/dag/rendering.zh.html">Rendering specification</a>
+<a class="navlink" href="/docs/reference/design/runtime/operations/branch-naming.html" data-title-zh="分支命名" data-href-en="/docs/reference/design/runtime/operations/branch-naming.html" data-href-zh="/docs/reference/design/runtime/operations/branch-naming.zh.html">Branch naming</a>
+<a class="navlink" href="/docs/reference/design/runtime/operations/branch-naming.viz.html" data-title-zh="命名图解" data-href-en="/docs/reference/design/runtime/operations/branch-naming.viz.html" data-href-zh="/docs/reference/design/runtime/operations/branch-naming.zh.viz.html">Naming diagram</a>
+<a class="navlink" href="/docs/reference/design/runtime/operations/edge-field-rename.html" data-title-zh="边字段命名" data-href-en="/docs/reference/design/runtime/operations/edge-field-rename.html" data-href-zh="/docs/reference/design/runtime/operations/edge-field-rename.zh.html">Edge naming</a>
+<a class="navlink" href="/docs/reference/design/runtime/operations/unify-parent-called-by.html" data-title-zh="调用者标识" data-href-en="/docs/reference/design/runtime/operations/unify-parent-called-by.html" data-href-zh="/docs/reference/design/runtime/operations/unify-parent-called-by.zh.html">Caller identity</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="目标与恢复">Goals and recovery</span><span class="nav-count">10</span></summary><a class="navlink" href="/docs/reference/design/runtime/reliability/goal-and-recovery.html" data-title-zh="目标与恢复" data-href-en="/docs/reference/design/runtime/reliability/goal-and-recovery.html" data-href-zh="/docs/reference/design/runtime/reliability/goal-and-recovery.zh.html">Goals and recovery</a>
+<a class="navlink" href="/docs/reference/design/runtime/always-on-agents.html" data-title-zh="常驻 Agent" data-href-en="/docs/reference/design/runtime/always-on-agents.html" data-href-zh="/docs/reference/design/runtime/always-on-agents.zh.html">Always-on Agents</a>
+<a class="navlink" href="/docs/reference/design/runtime/security/outbound-hold.html" data-title-zh="代发暂存" data-href-en="/docs/reference/design/runtime/security/outbound-hold.html" data-href-zh="/docs/reference/design/runtime/security/outbound-hold.zh.html">Outbound Hold</a>
+<a class="navlink" href="/docs/reference/design/runtime/reliability/agent-resource-governance.html" data-title-zh="资源配额" data-href-en="/docs/reference/design/runtime/reliability/agent-resource-governance.html" data-href-zh="/docs/reference/design/runtime/reliability/agent-resource-governance.zh.html">Resource quotas</a>
+<a class="navlink" href="/docs/reference/design/runtime/reliability/structured-generation-recovery.html" data-title-zh="生成恢复" data-href-en="/docs/reference/design/runtime/reliability/structured-generation-recovery.html" data-href-zh="/docs/reference/design/runtime/reliability/structured-generation-recovery.zh.html">Generation recovery</a>
+<a class="navlink" href="/docs/reference/design/runtime/reliability/durable-tool-results.html" data-title-zh="工具结果存储" data-href-en="/docs/reference/design/runtime/reliability/durable-tool-results.html" data-href-zh="/docs/reference/design/runtime/reliability/durable-tool-results.zh.html">Tool result storage</a>
+<a class="navlink" href="/docs/reference/design/runtime/operations/streaming-resume.html" data-title-zh="流式恢复" data-href-en="/docs/reference/design/runtime/operations/streaming-resume.html" data-href-zh="/docs/reference/design/runtime/operations/streaming-resume.zh.html">Stream recovery</a>
+<a class="navlink" href="/docs/reference/design/runtime/operations/chat-progress-recovery.html" data-title-zh="进度恢复" data-href-en="/docs/reference/design/runtime/operations/chat-progress-recovery.html" data-href-zh="/docs/reference/design/runtime/operations/chat-progress-recovery.zh.html">Progress recovery</a>
+<a class="navlink" href="/docs/reference/design/runtime/reliability/web-runtime-reliability.html" data-title-zh="网页可靠性" data-href-en="/docs/reference/design/runtime/reliability/web-runtime-reliability.html" data-href-zh="/docs/reference/design/runtime/reliability/web-runtime-reliability.zh.html">Web reliability</a>
+<a class="navlink" href="/docs/reference/design/runtime/reliability/web-frontend-spawn.html" data-title-zh="前端进程" data-href-en="/docs/reference/design/runtime/reliability/web-frontend-spawn.html" data-href-zh="/docs/reference/design/runtime/reliability/web-frontend-spawn.zh.html">Frontend processes</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="配置与操作">Configuration and operations</span><span class="nav-count">10</span></summary><a class="navlink" href="/docs/reference/design/runtime/agent-configuration/agent-configuration-ui.html" data-title-zh="智能体设置" data-href-en="/docs/reference/design/runtime/agent-configuration/agent-configuration-ui.html" data-href-zh="/docs/reference/design/runtime/agent-configuration/agent-configuration-ui.zh.html">Agent settings</a>
+<a class="navlink" href="/docs/reference/design/runtime/agent-configuration/agent-core-configuration-ui.html" data-title-zh="基础设置" data-href-en="/docs/reference/design/runtime/agent-configuration/agent-core-configuration-ui.html" data-href-zh="/docs/reference/design/runtime/agent-configuration/agent-core-configuration-ui.zh.html">Core settings</a>
+<a class="navlink" href="/docs/reference/design/runtime/agent-configuration/agent-tool-configuration-ui.html" data-title-zh="工具设置" data-href-en="/docs/reference/design/runtime/agent-configuration/agent-tool-configuration-ui.html" data-href-zh="/docs/reference/design/runtime/agent-configuration/agent-tool-configuration-ui.zh.html">Tool settings</a>
+<a class="navlink" href="/docs/reference/design/runtime/agent-configuration/agent-capability-configuration-ui.html" data-title-zh="能力设置" data-href-en="/docs/reference/design/runtime/agent-configuration/agent-capability-configuration-ui.html" data-href-zh="/docs/reference/design/runtime/agent-configuration/agent-capability-configuration-ui.zh.html">Capability settings</a>
+<a class="navlink" href="/docs/reference/design/runtime/agent-configuration/agent-configuration-plan.html" data-title-zh="Agent 实施计划" data-href-en="/docs/reference/design/runtime/agent-configuration/agent-configuration-plan.html" data-href-zh="/docs/reference/design/runtime/agent-configuration/agent-configuration-plan.zh.html">Agent implementation plan</a>
+<a class="navlink" href="/docs/reference/design/runtime/agent-configuration/chat-search-settings.html" data-title-zh="聊天搜索" data-href-en="/docs/reference/design/runtime/agent-configuration/chat-search-settings.html" data-href-zh="/docs/reference/design/runtime/agent-configuration/chat-search-settings.zh.html">Chat search</a>
+<a class="navlink" href="/docs/reference/design/runtime/agent-configuration/tool-toggle-management.html" data-title-zh="工具集" data-href-en="/docs/reference/design/runtime/agent-configuration/tool-toggle-management.html" data-href-zh="/docs/reference/design/runtime/agent-configuration/tool-toggle-management.zh.html">Toolsets</a>
+<a class="navlink" href="/docs/reference/design/runtime/agent-configuration/bot-template-references.html" data-title-zh="Bot 模板参考资料" data-href-en="/docs/reference/design/runtime/agent-configuration/bot-template-references.html" data-href-zh="/docs/reference/design/runtime/agent-configuration/bot-template-references.zh.html">Bot template references</a>
+<a class="navlink" href="/docs/reference/design/runtime/operations/user-input-requests.html" data-title-zh="输入请求" data-href-en="/docs/reference/design/runtime/operations/user-input-requests.html" data-href-zh="/docs/reference/design/runtime/operations/user-input-requests.zh.html">Input requests</a>
+<a class="navlink" href="/docs/reference/design/runtime/operations/file-management.html" data-title-zh="文件与恢复" data-href-en="/docs/reference/design/runtime/operations/file-management.html" data-href-zh="/docs/reference/design/runtime/operations/file-management.zh.html">Files and recovery</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="程序与工作流">Programs and workflows</span><span class="nav-count">14</span></summary><a class="navlink" href="/docs/reference/design/function/README.html" data-title-zh="函数" data-href-en="/docs/reference/design/function/README.html" data-href-zh="/docs/reference/design/function/README.zh.html">Functions</a>
+<a class="navlink" href="/docs/reference/design/function/program-model.html" data-title-zh="Program 模型" data-href-en="/docs/reference/design/function/program-model.html" data-href-zh="/docs/reference/design/function/program-model.zh.html">Program Model</a>
+<a class="navlink" href="/docs/reference/design/function/agentic-program.html" data-title-zh="Agentic Program" data-href-en="/docs/reference/design/function/agentic-program.html" data-href-zh="/docs/reference/design/function/agentic-program.zh.html">Agentic Program</a>
+<a class="navlink" href="/docs/reference/design/function/calling-unification.html" data-title-zh="函数调用" data-href-en="/docs/reference/design/function/calling-unification.html" data-href-zh="/docs/reference/design/function/calling-unification.zh.html">Function calling</a>
+<a class="navlink" href="/docs/reference/design/function/tool-guides.html" data-title-zh="工具指南" data-href-en="/docs/reference/design/function/tool-guides.html" data-href-zh="/docs/reference/design/function/tool-guides.zh.html">Tool guides</a>
+<a class="navlink" href="/docs/reference/design/function/calling/code-call.html" data-title-zh="顺序调用" data-href-en="/docs/reference/design/function/calling/code-call.html" data-href-zh="/docs/reference/design/function/calling/code-call.zh.html">Fixed-order calls</a>
+<a class="navlink" href="/docs/reference/design/runtime/programs/application-runtime.html" data-title-zh="应用运行时" data-href-en="/docs/reference/design/runtime/programs/application-runtime.html" data-href-zh="/docs/reference/design/runtime/programs/application-runtime.zh.html">Application runtime</a>
+<a class="navlink" href="/docs/reference/design/runtime/programs/programs-architecture.html" data-title-zh="程序结构" data-href-en="/docs/reference/design/runtime/programs/programs-architecture.html" data-href-zh="/docs/reference/design/runtime/programs/programs-architecture.zh.html">Program structure</a>
+<a class="navlink" href="/docs/reference/design/runtime/programs/meetings.html" data-title-zh="会议" data-href-en="/docs/reference/design/runtime/programs/meetings.html" data-href-zh="/docs/reference/design/runtime/programs/meetings.zh.html">Meetings</a>
+<a class="navlink" href="/docs/reference/design/runtime/workflows/workflow.html" data-title-zh="Workflow" data-href-en="/docs/reference/design/runtime/workflows/workflow.html" data-href-zh="/docs/reference/design/runtime/workflows/workflow.zh.html">Workflows</a>
+<a class="navlink" href="/docs/reference/design/runtime/workflows/workflow-recording.html" data-title-zh="录制 Workflow" data-href-en="/docs/reference/design/runtime/workflows/workflow-recording.html" data-href-zh="/docs/reference/design/runtime/workflows/workflow-recording.zh.html">Recording a workflow</a>
+<a class="navlink" href="/docs/reference/design/runtime/workflows/self-programming-workflow-ui.html" data-title-zh="程序界面" data-href-en="/docs/reference/design/runtime/workflows/self-programming-workflow-ui.html" data-href-zh="/docs/reference/design/runtime/workflows/self-programming-workflow-ui.zh.html">Program interface</a>
+<a class="navlink" href="/docs/reference/design/runtime/execution/llm-and-agent.html" data-title-zh="执行统一方案" data-href-en="/docs/reference/design/runtime/execution/llm-and-agent.html" data-href-zh="/docs/reference/design/runtime/execution/llm-and-agent.zh.html">Execution unification</a>
+<a class="navlink" href="/docs/reference/design/runtime/self-update.html" data-title-zh="自主更新" data-href-en="/docs/reference/design/runtime/self-update.html" data-href-zh="/docs/reference/design/runtime/self-update.zh.html">Self-updates</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="报告">Reports</span><span class="nav-count">4</span></summary><a class="navlink" href="/docs/reference/design/runtime/workflows/report-suite.html" data-title-zh="报告工作流" data-href-en="/docs/reference/design/runtime/workflows/report-suite.html" data-href-zh="/docs/reference/design/runtime/workflows/report-suite.zh.html">Report workflows</a>
+<a class="navlink" href="/docs/reference/design/runtime/workflows/weekly-report.html" data-title-zh="每周报告" data-href-en="/docs/reference/design/runtime/workflows/weekly-report.html" data-href-zh="/docs/reference/design/runtime/workflows/weekly-report.zh.html">Weekly reports</a>
+<a class="navlink" href="/docs/reference/design/runtime/workflows/group-weekly-report.html" data-title-zh="小组报告" data-href-en="/docs/reference/design/runtime/workflows/group-weekly-report.html" data-href-zh="/docs/reference/design/runtime/workflows/group-weekly-report.zh.html">Group reports</a>
+<a class="navlink" href="/docs/reference/design/runtime/workflows/report-delivery-intent.html" data-title-zh="报告交付" data-href-en="/docs/reference/design/runtime/workflows/report-delivery-intent.html" data-href-zh="/docs/reference/design/runtime/workflows/report-delivery-intent.zh.html">Report delivery</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="事件与调度">Events and scheduling</span><span class="nav-count">13</span></summary><a class="navlink" href="/docs/reference/design/proactive/README.html" data-title-zh="主动执行" data-href-en="/docs/reference/design/proactive/README.html" data-href-zh="/docs/reference/design/proactive/README.zh.html">Proactive execution</a>
+<a class="navlink" href="/docs/reference/design/proactive/event-layer.html" data-title-zh="事件层" data-href-en="/docs/reference/design/proactive/event-layer.html" data-href-zh="/docs/reference/design/proactive/event-layer.zh.html">Event layer</a>
+<a class="navlink" href="/docs/reference/design/proactive/event-layer.viz.html" data-title-zh="事件流程图解" data-href-en="/docs/reference/design/proactive/event-layer.viz.html" data-href-zh="/docs/reference/design/proactive/event-layer.zh.viz.html">Event flow diagram</a>
+<a class="navlink" href="/docs/reference/design/proactive/events-and-state.html" data-title-zh="事件与状态" data-href-en="/docs/reference/design/proactive/events-and-state.html" data-href-zh="/docs/reference/design/proactive/events-and-state.zh.html">Events and state</a>
+<a class="navlink" href="/docs/reference/design/proactive/execution-model.html" data-title-zh="规则执行" data-href-en="/docs/reference/design/proactive/execution-model.html" data-href-zh="/docs/reference/design/proactive/execution-model.zh.html">Rule execution</a>
+<a class="navlink" href="/docs/reference/design/proactive/overview.html" data-title-zh="场景概览" data-href-en="/docs/reference/design/proactive/overview.html" data-href-zh="/docs/reference/design/proactive/overview.zh.html">Scenario overview</a>
+<a class="navlink" href="/docs/reference/design/proactive/policies-mvp.html" data-title-zh="规则模板" data-href-en="/docs/reference/design/proactive/policies-mvp.html" data-href-zh="/docs/reference/design/proactive/policies-mvp.zh.html">Rule templates</a>
+<a class="navlink" href="/docs/reference/design/proactive/invariants.html" data-title-zh="不变量" data-href-en="/docs/reference/design/proactive/invariants.html" data-href-zh="/docs/reference/design/proactive/invariants.zh.html">Invariants</a>
+<a class="navlink" href="/docs/reference/design/proactive/event-reference.html" data-title-zh="事件参考" data-href-en="/docs/reference/design/proactive/event-reference.html" data-href-zh="/docs/reference/design/proactive/event-reference.zh.html">Event reference</a>
+<a class="navlink" href="/docs/reference/design/proactive/framework-evolution.viz.html" data-title-zh="信号路由图解" data-href-en="/docs/reference/design/proactive/framework-evolution.viz.html" data-href-zh="/docs/reference/design/proactive/framework-evolution.zh.viz.html">Signal routing diagram</a>
+<a class="navlink" href="/docs/reference/design/proactive/framework-evolution.html" data-title-zh="信号路由" data-href-en="/docs/reference/design/proactive/framework-evolution.html" data-href-zh="/docs/reference/design/proactive/framework-evolution.zh.html">Signal routing</a>
+<a class="navlink" href="/docs/reference/design/proactive/event-triggers.html" data-title-zh="事件触发" data-href-en="/docs/reference/design/proactive/event-triggers.html" data-href-zh="/docs/reference/design/proactive/event-triggers.zh.html">Event Triggers</a>
+<a class="navlink" href="/docs/reference/design/scheduler/memory-integration.html" data-title-zh="记忆接口" data-href-en="/docs/reference/design/scheduler/memory-integration.html" data-href-zh="/docs/reference/design/scheduler/memory-integration.zh.html">Memory interface</a></details>
+</details>
+<details class="nav-branch nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="上下文与记忆">Context and memory</span><span class="nav-count">24</span></summary>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="上下文">Context</span><span class="nav-count">10</span></summary><a class="navlink" href="/docs/reference/design/context/README.html" data-title-zh="阅读指南" data-href-en="/docs/reference/design/context/README.html" data-href-zh="/docs/reference/design/context/README.zh.html">Reading guide</a>
+<a class="navlink" href="/docs/reference/design/context/overview.html" data-title-zh="概览" data-href-en="/docs/reference/design/context/overview.html" data-href-zh="/docs/reference/design/context/overview.zh.html">Overview</a>
+<a class="navlink" href="/docs/reference/design/context/composition.html" data-title-zh="组成" data-href-en="/docs/reference/design/context/composition.html" data-href-zh="/docs/reference/design/context/composition.zh.html">Composition</a>
+<a class="navlink" href="/docs/reference/design/context/compaction.html" data-title-zh="压缩" data-href-en="/docs/reference/design/context/compaction.html" data-href-zh="/docs/reference/design/context/compaction.zh.html">Compaction</a>
+<a class="navlink" href="/docs/reference/design/context/compaction-diagram.html" data-title-zh="压缩图解" data-href-en="/docs/reference/design/context/compaction-diagram.html" data-href-zh="/docs/reference/design/context/compaction-diagram.zh.html">Compaction diagram</a>
+<a class="navlink" href="/docs/reference/design/context/occupancy-status.html" data-title-zh="占用状态" data-href-en="/docs/reference/design/context/occupancy-status.html" data-href-zh="/docs/reference/design/context/occupancy-status.zh.html">Occupancy</a>
+<a class="navlink" href="/docs/reference/design/context/statistics.html" data-title-zh="统计口径" data-href-en="/docs/reference/design/context/statistics.html" data-href-zh="/docs/reference/design/context/statistics.zh.html">Accounting rules</a>
+<a class="navlink" href="/docs/reference/design/context/memory-introspection.html" data-title-zh="记忆自查" data-href-en="/docs/reference/design/context/memory-introspection.html" data-href-zh="/docs/reference/design/context/memory-introspection.zh.html">Memory introspection</a>
+<a class="navlink" href="/docs/reference/design/context/comparison.html" data-title-zh="方案对比" data-href-en="/docs/reference/design/context/comparison.html" data-href-zh="/docs/reference/design/context/comparison.zh.html">Design comparison</a>
+<a class="navlink" href="/docs/reference/design/context/claude-code-compaction.html" data-title-zh="Claude 压缩" data-href-en="/docs/reference/design/context/claude-code-compaction.html" data-href-zh="/docs/reference/design/context/claude-code-compaction.zh.html">Claude Code compaction</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="记忆">Memory</span><span class="nav-count">14</span></summary><a class="navlink" href="/docs/reference/design/memory/README.html" data-title-zh="阅读指南" data-href-en="/docs/reference/design/memory/README.html" data-href-zh="/docs/reference/design/memory/README.zh.html">Reading guide</a>
+<a class="navlink" href="/docs/reference/design/memory/overview.html" data-title-zh="架构概览" data-href-en="/docs/reference/design/memory/overview.html" data-href-zh="/docs/reference/design/memory/overview.zh.html">Architecture overview</a>
+<a class="navlink" href="/docs/reference/design/memory/architecture.html" data-title-zh="架构图解" data-href-en="/docs/reference/design/memory/architecture.html" data-href-zh="/docs/reference/design/memory/architecture.zh.html">Architecture diagrams</a>
+<a class="navlink" href="/docs/reference/design/memory/entity-memory-proposal.html" data-title-zh="实体记忆提案" data-href-en="/docs/reference/design/memory/entity-memory-proposal.html" data-href-zh="/docs/reference/design/memory/entity-memory-proposal.zh.html">Entity memory proposal</a>
+<a class="navlink" href="/docs/reference/design/memory/virtual-memory.html" data-title-zh="抽象记忆" data-href-en="/docs/reference/design/memory/virtual-memory.html" data-href-zh="/docs/reference/design/memory/virtual-memory.zh.html">Virtual memory</a>
+<a class="navlink" href="/docs/reference/design/memory/authority-handoff.html" data-title-zh="权限与配对" data-href-en="/docs/reference/design/memory/authority-handoff.html" data-href-zh="/docs/reference/design/memory/authority-handoff.zh.html">Authority and pairing</a>
+<a class="navlink" href="/docs/reference/design/memory/authority-landscape.html" data-title-zh="权限对比" data-href-en="/docs/reference/design/memory/authority-landscape.html" data-href-zh="/docs/reference/design/memory/authority-landscape.zh.html">Authority comparison</a>
+<a class="navlink" href="/docs/reference/design/memory/adoption.html" data-title-zh="方案采用" data-href-en="/docs/reference/design/memory/adoption.html" data-href-zh="/docs/reference/design/memory/adoption.zh.html">Design adoption</a>
+<a class="navlink" href="/docs/reference/design/memory/comparison.html" data-title-zh="写入对比" data-href-en="/docs/reference/design/memory/comparison.html" data-href-zh="/docs/reference/design/memory/comparison.zh.html">Write comparison</a>
+<a class="navlink" href="/docs/reference/design/memory/editor.html" data-title-zh="编辑与历史" data-href-en="/docs/reference/design/memory/editor.html" data-href-zh="/docs/reference/design/memory/editor.zh.html">Editor and history</a>
+<a class="navlink" href="/docs/reference/design/memory/settings-ui.html" data-title-zh="设置提案" data-href-en="/docs/reference/design/memory/settings-ui.html" data-href-zh="/docs/reference/design/memory/settings-ui.zh.html">Settings proposal</a>
+<a class="navlink" href="/docs/reference/design/memory/speaker-identity.html" data-title-zh="发言人身份" data-href-en="/docs/reference/design/memory/speaker-identity.html" data-href-zh="/docs/reference/design/memory/speaker-identity.zh.html">Speaker identity</a>
+<a class="navlink" href="/docs/reference/design/memory/written-marker.viz.html" data-title-zh="写入游标图解" data-href-en="/docs/reference/design/memory/written-marker.viz.html" data-href-zh="/docs/reference/design/memory/written-marker.zh.viz.html">Write cursor diagram</a>
+<a class="navlink" href="/docs/reference/design/memory/written-marker.html" data-title-zh="写入游标" data-href-en="/docs/reference/design/memory/written-marker.html" data-href-zh="/docs/reference/design/memory/written-marker.zh.html">Write cursor</a></details>
+</details>
+<details class="nav-branch nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="界面与交互">Interfaces</span><span class="nav-count">69</span></summary>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="基础">Foundations</span><span class="nav-count">17</span></summary><a class="navlink" href="/docs/reference/design/ui/README.html" data-title-zh="网页界面" data-href-en="/docs/reference/design/ui/README.html" data-href-zh="/docs/reference/design/ui/README.zh.html">Web UI</a>
+<a class="navlink" href="/docs/reference/design/ui/desktop/app-icon.html" data-title-zh="应用图标" data-href-en="/docs/reference/design/ui/desktop/app-icon.html" data-href-zh="/docs/reference/design/ui/desktop/app-icon.zh.html">App icon</a>
+<a class="navlink" href="/docs/reference/design/ui/invariants.html" data-title-zh="界面不变量" data-href-en="/docs/reference/design/ui/invariants.html" data-href-zh="/docs/reference/design/ui/invariants.zh.html">UI invariants</a>
+<a class="navlink" href="/docs/reference/design/ui/visual-system/design-tokens.html" data-title-zh="设计 token" data-href-en="/docs/reference/design/ui/visual-system/design-tokens.html" data-href-zh="/docs/reference/design/ui/visual-system/design-tokens.zh.html">Design tokens</a>
+<a class="navlink" href="/docs/reference/design/ui/visual-system/surface-system.html" data-title-zh="界面层次" data-href-en="/docs/reference/design/ui/visual-system/surface-system.html" data-href-zh="/docs/reference/design/ui/visual-system/surface-system.zh.html">UI surfaces</a>
+<a class="navlink" href="/docs/reference/design/ui/state-layer.html" data-title-zh="状态存储" data-href-en="/docs/reference/design/ui/state-layer.html" data-href-zh="/docs/reference/design/ui/state-layer.zh.html">State stores</a>
+<a class="navlink" href="/docs/reference/design/ui/visual-system/theme-system.html" data-title-zh="主题" data-href-en="/docs/reference/design/ui/visual-system/theme-system.html" data-href-zh="/docs/reference/design/ui/visual-system/theme-system.zh.html">Themes</a>
+<a class="navlink" href="/docs/reference/design/ui/desktop/window-state.html" data-title-zh="窗口状态" data-href-en="/docs/reference/design/ui/desktop/window-state.html" data-href-zh="/docs/reference/design/ui/desktop/window-state.zh.html">Window state</a>
+<a class="navlink" href="/docs/reference/design/ui/workspace/center-canvas-layout.html" data-title-zh="中间画布：任意分屏布局 — 交互原型与规划" data-href-en="/docs/reference/design/ui/workspace/center-canvas-layout.html" data-href-zh="/docs/reference/design/ui/workspace/center-canvas-layout.zh.html">Center canvas layout</a>
+<a class="navlink" href="/docs/reference/design/ui/workspace/session-tab-identity.html" data-title-zh="标签身份" data-href-en="/docs/reference/design/ui/workspace/session-tab-identity.html" data-href-zh="/docs/reference/design/ui/workspace/session-tab-identity.zh.html">Tab identity</a>
+<a class="navlink" href="/docs/reference/design/ui/desktop/window-lifecycle.html" data-title-zh="窗口生命周期" data-href-en="/docs/reference/design/ui/desktop/window-lifecycle.html" data-href-zh="/docs/reference/design/ui/desktop/window-lifecycle.zh.html">Window lifecycle</a>
+<a class="navlink" href="/docs/reference/design/ui/visual-system/web-styles.html" data-title-zh="样式组织" data-href-en="/docs/reference/design/ui/visual-system/web-styles.html" data-href-zh="/docs/reference/design/ui/visual-system/web-styles.zh.html">Style organization</a>
+<a class="navlink" href="/docs/reference/design/ui/interaction-feedback.html" data-title-zh="交互反馈" data-href-en="/docs/reference/design/ui/interaction-feedback.html" data-href-zh="/docs/reference/design/ui/interaction-feedback.zh.html">Interaction feedback</a>
+<a class="navlink" href="/docs/reference/design/ui/page-loading-performance.html" data-title-zh="页面加载性能" data-href-en="/docs/reference/design/ui/page-loading-performance.html" data-href-zh="/docs/reference/design/ui/page-loading-performance.zh.html">Page loading performance</a>
+<a class="navlink" href="/docs/reference/design/ui/visual-system/indicator-dots.html" data-title-zh="状态指示" data-href-en="/docs/reference/design/ui/visual-system/indicator-dots.html" data-href-zh="/docs/reference/design/ui/visual-system/indicator-dots.zh.html">Status indicators</a>
+<a class="navlink" href="/docs/reference/design/ui/visual-system/agent-avatars.html" data-title-zh="Agent 头像" data-href-en="/docs/reference/design/ui/visual-system/agent-avatars.html" data-href-zh="/docs/reference/design/ui/visual-system/agent-avatars.zh.html">Agent avatars</a>
+<a class="navlink" href="/docs/reference/design/ui/sidebar/session-status.html" data-title-zh="会话状态" data-href-en="/docs/reference/design/ui/sidebar/session-status.html" data-href-zh="/docs/reference/design/ui/sidebar/session-status.zh.html">Session status</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="对话与编辑器">Chat and composer</span><span class="nav-count">20</span></summary><a class="navlink" href="/docs/reference/design/ui/chat/attachment-handling.html" data-title-zh="附件方案" data-href-en="/docs/reference/design/ui/chat/attachment-handling.html" data-href-zh="/docs/reference/design/ui/chat/attachment-handling.zh.html">Attachment options</a>
+<a class="navlink" href="/docs/reference/design/ui/chat/chat-attachments.html" data-title-zh="附件传递" data-href-en="/docs/reference/design/ui/chat/chat-attachments.html" data-href-zh="/docs/reference/design/ui/chat/chat-attachments.zh.html">Attachment delivery</a>
+<a class="navlink" href="/docs/reference/design/ui/chat/chat-turn-visual-spec.html" data-title-zh="聊天轮次布局" data-href-en="/docs/reference/design/ui/chat/chat-turn-visual-spec.html" data-href-zh="/docs/reference/design/ui/chat/chat-turn-visual-spec.zh.html">Chat turn layout</a>
+<a class="navlink" href="/docs/reference/design/ui/chat/tool-group-summary.html" data-title-zh="工具组摘要" data-href-en="/docs/reference/design/ui/chat/tool-group-summary.html" data-href-zh="/docs/reference/design/ui/chat/tool-group-summary.zh.html">Tool group summary</a>
+<a class="navlink" href="/docs/reference/design/ui/chat/sub-agent-row.html" data-title-zh="子代理行" data-href-en="/docs/reference/design/ui/chat/sub-agent-row.html" data-href-zh="/docs/reference/design/ui/chat/sub-agent-row.zh.html">Sub-agent row</a>
+<a class="navlink" href="/docs/reference/design/ui/chat/activity-panel.html" data-title-zh="Activity 面板" data-href-en="/docs/reference/design/ui/chat/activity-panel.html" data-href-zh="/docs/reference/design/ui/chat/activity-panel.zh.html">Activity panel</a>
+<a class="navlink" href="/docs/reference/design/ui/chat/chat-transcript-follow.html" data-title-zh="会话记录跟随" data-href-en="/docs/reference/design/ui/chat/chat-transcript-follow.html" data-href-zh="/docs/reference/design/ui/chat/chat-transcript-follow.zh.html">Transcript following</a>
+<a class="navlink" href="/docs/reference/design/ui/composer/composer-interaction-modes.html" data-title-zh="输入框交互" data-href-en="/docs/reference/design/ui/composer/composer-interaction-modes.html" data-href-zh="/docs/reference/design/ui/composer/composer-interaction-modes.zh.html">Composer interaction</a>
+<a class="navlink" href="/docs/reference/design/ui/composer/composer-local-attachment-paths.html" data-title-zh="附件路径" data-href-en="/docs/reference/design/ui/composer/composer-local-attachment-paths.html" data-href-zh="/docs/reference/design/ui/composer/composer-local-attachment-paths.zh.html">Attachment paths</a>
+<a class="navlink" href="/docs/reference/design/ui/composer/composer-responsive-controls.html" data-title-zh="响应式控件" data-href-en="/docs/reference/design/ui/composer/composer-responsive-controls.html" data-href-zh="/docs/reference/design/ui/composer/composer-responsive-controls.zh.html">Responsive controls</a>
+<a class="navlink" href="/docs/reference/design/ui/composer/composer-options-menu.html" data-title-zh="输入框选项菜单" data-href-en="/docs/reference/design/ui/composer/composer-options-menu.html" data-href-zh="/docs/reference/design/ui/composer/composer-options-menu.zh.html">Composer options menu</a>
+<a class="navlink" href="/docs/reference/design/ui/composer/composer-fast-control.html" data-title-zh="速度控制" data-href-en="/docs/reference/design/ui/composer/composer-fast-control.html" data-href-zh="/docs/reference/design/ui/composer/composer-fast-control.zh.html">Speed control</a>
+<a class="navlink" href="/docs/reference/design/ui/browser/agent-control-overlay.html" data-title-zh="Agent 控制提示层" data-href-en="/docs/reference/design/ui/browser/agent-control-overlay.html" data-href-zh="/docs/reference/design/ui/browser/agent-control-overlay.zh.html">Agent control overlay</a>
+<a class="navlink" href="/docs/reference/design/ui/resources/resource-preview.html" data-title-zh="资源与操作预览" data-href-en="/docs/reference/design/ui/resources/resource-preview.html" data-href-zh="/docs/reference/design/ui/resources/resource-preview.zh.html">Resources and operation preview</a>
+<a class="navlink" href="/docs/reference/design/ui/browser/browser-control-surfaces.html" data-title-zh="网页任务控制" data-href-en="/docs/reference/design/ui/browser/browser-control-surfaces.html" data-href-zh="/docs/reference/design/ui/browser/browser-control-surfaces.zh.html">Browser task control</a>
+<a class="navlink" href="/docs/reference/design/ui/turn-lifecycle/send-queue-reliability.html" data-title-zh="队列与执行引导" data-href-en="/docs/reference/design/ui/turn-lifecycle/send-queue-reliability.html" data-href-zh="/docs/reference/design/ui/turn-lifecycle/send-queue-reliability.zh.html">Queue and steering</a>
+<a class="navlink" href="/docs/reference/design/ui/sidebar/session-auto-rename.html" data-title-zh="会话命名" data-href-en="/docs/reference/design/ui/sidebar/session-auto-rename.html" data-href-zh="/docs/reference/design/ui/sidebar/session-auto-rename.zh.html">Session naming</a>
+<a class="navlink" href="/docs/reference/design/ui/composer/slash-and-compact.html" data-title-zh="斜杠命令" data-href-en="/docs/reference/design/ui/composer/slash-and-compact.html" data-href-zh="/docs/reference/design/ui/composer/slash-and-compact.zh.html">Slash commands</a>
+<a class="navlink" href="/docs/reference/design/ui/turn-lifecycle/turn-occupancy.html" data-title-zh="轮次占用" data-href-en="/docs/reference/design/ui/turn-lifecycle/turn-occupancy.html" data-href-zh="/docs/reference/design/ui/turn-lifecycle/turn-occupancy.zh.html">Turn occupancy</a>
+<a class="navlink" href="/docs/reference/design/ui/turn-lifecycle/websocket-command-lifecycle.html" data-title-zh="WebSocket 周期" data-href-en="/docs/reference/design/ui/turn-lifecycle/websocket-command-lifecycle.html" data-href-zh="/docs/reference/design/ui/turn-lifecycle/websocket-command-lifecycle.zh.html">WebSocket lifecycle</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="浏览器与标签页">Browser and tabs</span><span class="nav-count">9</span></summary><a class="navlink" href="/docs/reference/design/ui/browser/browser-extensions.html" data-title-zh="浏览器扩展" data-href-en="/docs/reference/design/ui/browser/browser-extensions.html" data-href-zh="/docs/reference/design/ui/browser/browser-extensions.zh.html">Browser extensions</a>
+<a class="navlink" href="/docs/reference/design/ui/browser/built-in-browser.html" data-title-zh="内置浏览器" data-href-en="/docs/reference/design/ui/browser/built-in-browser.html" data-href-zh="/docs/reference/design/ui/browser/built-in-browser.zh.html">Built-in browser</a>
+<a class="navlink" href="/docs/reference/design/ui/resources/session-resources.html" data-title-zh="会话资源" data-href-en="/docs/reference/design/ui/resources/session-resources.html" data-href-zh="/docs/reference/design/ui/resources/session-resources.zh.html">Session resources</a>
+<a class="navlink" href="/docs/reference/design/ui/workspace/center-tabs-and-split-layout.html" data-title-zh="标签布局" data-href-en="/docs/reference/design/ui/workspace/center-tabs-and-split-layout.html" data-href-zh="/docs/reference/design/ui/workspace/center-tabs-and-split-layout.zh.html">Tab placement</a>
+<a class="navlink" href="/docs/reference/design/ui/desktop/window-tab-transfer.html" data-title-zh="在窗口之间移动标签页" data-href-en="/docs/reference/design/ui/desktop/window-tab-transfer.html" data-href-zh="/docs/reference/design/ui/desktop/window-tab-transfer.zh.html">Moving tabs between windows</a>
+<a class="navlink" href="/docs/reference/design/ui/remote-web-access.viz.html" data-title-zh="远程访问图解" data-href-en="/docs/reference/design/ui/remote-web-access.viz.html" data-href-zh="/docs/reference/design/ui/remote-web-access.zh.viz.html">Remote access diagram</a>
+<a class="navlink" href="/docs/reference/design/ui/remote-web-access.html" data-title-zh="远程访问" data-href-en="/docs/reference/design/ui/remote-web-access.html" data-href-zh="/docs/reference/design/ui/remote-web-access.zh.html">Remote access</a>
+<a class="navlink" href="/docs/reference/design/ui/browser/web-tab-home-button.html" data-title-zh="浏览器主页" data-href-en="/docs/reference/design/ui/browser/web-tab-home-button.html" data-href-zh="/docs/reference/design/ui/browser/web-tab-home-button.zh.html">Browser home</a>
+<a class="navlink" href="/docs/reference/design/ui/browser/web-tab-native-bounds.html" data-title-zh="原生页面边界" data-href-en="/docs/reference/design/ui/browser/web-tab-native-bounds.html" data-href-zh="/docs/reference/design/ui/browser/web-tab-native-bounds.zh.html">Native page bounds</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="设置与目录">Settings and catalog</span><span class="nav-count">4</span></summary><a class="navlink" href="/docs/reference/design/ui/settings/avatar-randomization.html" data-title-zh="头像" data-href-en="/docs/reference/design/ui/settings/avatar-randomization.html" data-href-zh="/docs/reference/design/ui/settings/avatar-randomization.zh.html">Avatars</a>
+<a class="navlink" href="/docs/reference/design/ui/programs/programs-explorer-template.html" data-title-zh="程序浏览器" data-href-en="/docs/reference/design/ui/programs/programs-explorer-template.html" data-href-zh="/docs/reference/design/ui/programs/programs-explorer-template.zh.html">Program explorer</a>
+<a class="navlink" href="/docs/reference/design/ui/programs/programs-source-categories.html" data-title-zh="源码分类" data-href-en="/docs/reference/design/ui/programs/programs-source-categories.html" data-href-zh="/docs/reference/design/ui/programs/programs-source-categories.zh.html">Source categories</a>
+<a class="navlink" href="/docs/reference/design/ui/settings/settings-collapsible-columns.html" data-title-zh="设置导航" data-href-en="/docs/reference/design/ui/settings/settings-collapsible-columns.html" data-href-zh="/docs/reference/design/ui/settings/settings-collapsible-columns.zh.html">Settings navigation</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="工作区与侧栏">Workspace and sidebar</span><span class="nav-count">9</span></summary><a class="navlink" href="/docs/reference/design/ui/workspace/integrated-terminal.html" data-title-zh="内置终端" data-href-en="/docs/reference/design/ui/workspace/integrated-terminal.html" data-href-zh="/docs/reference/design/ui/workspace/integrated-terminal.zh.html">Integrated terminal</a>
+<a class="navlink" href="/docs/reference/design/ui/sidebar/project-order.html" data-title-zh="项目排序" data-href-en="/docs/reference/design/ui/sidebar/project-order.html" data-href-zh="/docs/reference/design/ui/sidebar/project-order.zh.html">Project order</a>
+<a class="navlink" href="/docs/reference/design/ui/workspace/project-location.html" data-title-zh="项目位置" data-href-en="/docs/reference/design/ui/workspace/project-location.html" data-href-zh="/docs/reference/design/ui/workspace/project-location.zh.html">Project location</a>
+<a class="navlink" href="/docs/reference/design/ui/visual-system/file-type-icons.html" data-title-zh="文件图标" data-href-en="/docs/reference/design/ui/visual-system/file-type-icons.html" data-href-zh="/docs/reference/design/ui/visual-system/file-type-icons.zh.html">File icons</a>
+<a class="navlink" href="/docs/reference/design/ui/workspace/project-workspace.html" data-title-zh="项目工作区" data-href-en="/docs/reference/design/ui/workspace/project-workspace.html" data-href-zh="/docs/reference/design/ui/workspace/project-workspace.zh.html">Project workspace</a>
+<a class="navlink" href="/docs/reference/design/ui/sidebar/right-sidebar-files.html" data-title-zh="文件树" data-href-en="/docs/reference/design/ui/sidebar/right-sidebar-files.html" data-href-zh="/docs/reference/design/ui/sidebar/right-sidebar-files.zh.html">File tree</a>
+<a class="navlink" href="/docs/reference/design/ui/sidebar/right-sidebar-typography.html" data-title-zh="右侧边栏文字排版" data-href-en="/docs/reference/design/ui/sidebar/right-sidebar-typography.html" data-href-zh="/docs/reference/design/ui/sidebar/right-sidebar-typography.zh.html">Right sidebar typography</a>
+<a class="navlink" href="/docs/reference/design/ui/sidebar/sidebars-resizing.html" data-title-zh="侧栏宽度" data-href-en="/docs/reference/design/ui/sidebar/sidebars-resizing.html" data-href-zh="/docs/reference/design/ui/sidebar/sidebars-resizing.zh.html">Sidebar sizing</a>
+<a class="navlink" href="/docs/reference/design/ui/sidebar/secondary-rail.html" data-title-zh="二级侧栏" data-href-en="/docs/reference/design/ui/sidebar/secondary-rail.html" data-href-zh="/docs/reference/design/ui/sidebar/secondary-rail.zh.html">Secondary rail</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="命令行与终端界面">CLI and TUI</span><span class="nav-count">10</span></summary><a class="navlink" href="/docs/reference/design/cli/README.html" data-title-zh="命令行与终端" data-href-en="/docs/reference/design/cli/README.html" data-href-zh="/docs/reference/design/cli/README.zh.html">CLI and TUI</a>
+<a class="navlink" href="/docs/reference/design/cli/config-write-safety.html" data-title-zh="配置安全" data-href-en="/docs/reference/design/cli/config-write-safety.html" data-href-zh="/docs/reference/design/cli/config-write-safety.zh.html">Configuration safety</a>
+<a class="navlink" href="/docs/reference/design/cli/drop-run-command.html" data-title-zh="函数执行" data-href-en="/docs/reference/design/cli/drop-run-command.html" data-href-zh="/docs/reference/design/cli/drop-run-command.zh.html">Function execution</a>
+<a class="navlink" href="/docs/reference/design/cli/naming.html" data-title-zh="命名规范" data-href-en="/docs/reference/design/cli/naming.html" data-href-zh="/docs/reference/design/cli/naming.zh.html">Naming conventions</a>
+<a class="navlink" href="/docs/reference/design/cli/ports.html" data-title-zh="端口配置" data-href-en="/docs/reference/design/cli/ports.html" data-href-zh="/docs/reference/design/cli/ports.zh.html">Port configuration</a>
+<a class="navlink" href="/docs/reference/design/cli/redesign.html" data-title-zh="配置界面" data-href-en="/docs/reference/design/cli/redesign.html" data-href-zh="/docs/reference/design/cli/redesign.zh.html">Configuration interface</a>
+<a class="navlink" href="/docs/reference/design/cli/single-port.html" data-title-zh="单端口架构" data-href-en="/docs/reference/design/cli/single-port.html" data-href-zh="/docs/reference/design/cli/single-port.zh.html">Single-port architecture</a>
+<a class="navlink" href="/docs/reference/design/cli/slash-commands-references.html" data-title-zh="命令对比" data-href-en="/docs/reference/design/cli/slash-commands-references.html" data-href-zh="/docs/reference/design/cli/slash-commands-references.zh.html">Command comparison</a>
+<a class="navlink" href="/docs/reference/design/cli/slash-commands.html" data-title-zh="斜杠命令" data-href-en="/docs/reference/design/cli/slash-commands.html" data-href-zh="/docs/reference/design/cli/slash-commands.zh.html">Slash commands</a>
+<a class="navlink" href="/docs/reference/design/cli/tui-upgrade.html" data-title-zh="会话记录渲染" data-href-en="/docs/reference/design/cli/tui-upgrade.html" data-href-zh="/docs/reference/design/cli/tui-upgrade.zh.html">Transcript rendering</a></details>
+</details>
+<details class="nav-branch nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="模型与外部接入">Models and connections</span><span class="nav-count">46</span></summary>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="请求与模型">Requests and models</span><span class="nav-count">14</span></summary><a class="navlink" href="/docs/reference/design/providers/README.html" data-title-zh="模型服务" data-href-en="/docs/reference/design/providers/README.html" data-href-zh="/docs/reference/design/providers/README.zh.html">Providers</a>
+<a class="navlink" href="/docs/reference/design/providers/models/overview.html" data-title-zh="模型目录" data-href-en="/docs/reference/design/providers/models/overview.html" data-href-zh="/docs/reference/design/providers/models/overview.zh.html">Model catalog</a>
+<a class="navlink" href="/docs/reference/design/providers/request-build.html" data-title-zh="请求构建" data-href-en="/docs/reference/design/providers/request-build.html" data-href-zh="/docs/reference/design/providers/request-build.zh.html">Request construction</a>
+<a class="navlink" href="/docs/reference/design/providers/request-redaction.html" data-title-zh="请求脱敏" data-href-en="/docs/reference/design/providers/request-redaction.html" data-href-zh="/docs/reference/design/providers/request-redaction.zh.html">Request redaction</a>
+<a class="navlink" href="/docs/reference/design/providers/web-search.html" data-title-zh="网页搜索：先用提供商自带的，再用本地工具" data-href-en="/docs/reference/design/providers/web-search.html" data-href-zh="/docs/reference/design/providers/web-search.zh.html">Web search: provider-side first, local tool second</a>
+<a class="navlink" href="/docs/reference/design/providers/routing-overview.html" data-title-zh="路由总览" data-href-en="/docs/reference/design/providers/routing-overview.html" data-href-zh="/docs/reference/design/providers/routing-overview.zh.html">Routing overview</a>
+<a class="navlink" href="/docs/reference/design/providers/custom-openai-compatible-provider.html" data-title-zh="OpenAI 兼容" data-href-en="/docs/reference/design/providers/custom-openai-compatible-provider.html" data-href-zh="/docs/reference/design/providers/custom-openai-compatible-provider.zh.html">OpenAI compatibility</a>
+<a class="navlink" href="/docs/reference/design/providers/models/fast-tier.html" data-title-zh="高速档位" data-href-en="/docs/reference/design/providers/models/fast-tier.html" data-href-zh="/docs/reference/design/providers/models/fast-tier.zh.html">Fast tier</a>
+<a class="navlink" href="/docs/reference/design/providers/models/thinking-effort.html" data-title-zh="推理强度" data-href-en="/docs/reference/design/providers/models/thinking-effort.html" data-href-zh="/docs/reference/design/providers/models/thinking-effort.zh.html">Thinking effort</a>
+<a class="navlink" href="/docs/reference/design/providers/json-schema-structured-output.html" data-title-zh="结构化输出" data-href-en="/docs/reference/design/providers/json-schema-structured-output.html" data-href-zh="/docs/reference/design/providers/json-schema-structured-output.zh.html">Structured output</a>
+<a class="navlink" href="/docs/reference/design/providers/network-proxy.html" data-title-zh="网络代理" data-href-en="/docs/reference/design/providers/network-proxy.html" data-href-zh="/docs/reference/design/providers/network-proxy.zh.html">Network proxy</a>
+<a class="navlink" href="/docs/reference/design/providers/metadata-load-diagnostics.html" data-title-zh="元数据诊断" data-href-en="/docs/reference/design/providers/metadata-load-diagnostics.html" data-href-zh="/docs/reference/design/providers/metadata-load-diagnostics.zh.html">Metadata diagnostics</a>
+<a class="navlink" href="/docs/reference/design/providers/bailian-model-catalog.html" data-title-zh="百炼模型目录" data-href-en="/docs/reference/design/providers/bailian-model-catalog.html" data-href-zh="/docs/reference/design/providers/bailian-model-catalog.zh.html">Bailian catalog</a>
+<a class="navlink" href="/docs/reference/design/usage-metering.html" data-title-zh="用量统计" data-href-en="/docs/reference/design/usage-metering.html" data-href-zh="/docs/reference/design/usage-metering.zh.html">Usage metering</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="账号与认证">Authentication</span><span class="nav-count">7</span></summary><a class="navlink" href="/docs/reference/design/providers/auth/api-key-resolution-unification.html" data-title-zh="凭据解析" data-href-en="/docs/reference/design/providers/auth/api-key-resolution-unification.html" data-href-zh="/docs/reference/design/providers/auth/api-key-resolution-unification.zh.html">Credential resolution</a>
+<a class="navlink" href="/docs/reference/design/providers/auth/credential-connection-unification.html" data-title-zh="凭据连接" data-href-en="/docs/reference/design/providers/auth/credential-connection-unification.html" data-href-zh="/docs/reference/design/providers/auth/credential-connection-unification.zh.html">Credential connections</a>
+<a class="navlink" href="/docs/reference/design/providers/auth/credential-file-hardening.html" data-title-zh="文件凭据" data-href-en="/docs/reference/design/providers/auth/credential-file-hardening.html" data-href-zh="/docs/reference/design/providers/auth/credential-file-hardening.zh.html">File credentials</a>
+<a class="navlink" href="/docs/reference/design/providers/auth/credential-status-redesign.html" data-title-zh="凭据状态" data-href-en="/docs/reference/design/providers/auth/credential-status-redesign.html" data-href-zh="/docs/reference/design/providers/auth/credential-status-redesign.zh.html">Credential status</a>
+<a class="navlink" href="/docs/reference/design/providers/auth/credential-validation-unification.html" data-title-zh="凭据校验" data-href-en="/docs/reference/design/providers/auth/credential-validation-unification.html" data-href-zh="/docs/reference/design/providers/auth/credential-validation-unification.zh.html">Credential validation</a>
+<a class="navlink" href="/docs/reference/design/providers/auth/unified-account-management.html" data-title-zh="账号轮换" data-href-en="/docs/reference/design/providers/auth/unified-account-management.html" data-href-zh="/docs/reference/design/providers/auth/unified-account-management.zh.html">Account rotation</a>
+<a class="navlink" href="/docs/reference/design/providers/auth/unified-auth-storage.html" data-title-zh="凭据存储" data-href-en="/docs/reference/design/providers/auth/unified-auth-storage.html" data-href-zh="/docs/reference/design/providers/auth/unified-auth-storage.zh.html">Credential storage</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="可靠性">Reliability</span><span class="nav-count">7</span></summary><a class="navlink" href="/docs/reference/design/providers/reliability/error-and-timeout-mechanism.html" data-title-zh="错误与超时" data-href-en="/docs/reference/design/providers/reliability/error-and-timeout-mechanism.html" data-href-zh="/docs/reference/design/providers/reliability/error-and-timeout-mechanism.zh.html">Errors and timeouts</a>
+<a class="navlink" href="/docs/reference/design/providers/reliability/error-retry.html" data-title-zh="重试决策" data-href-en="/docs/reference/design/providers/reliability/error-retry.html" data-href-zh="/docs/reference/design/providers/reliability/error-retry.zh.html">Retry decisions</a>
+<a class="navlink" href="/docs/reference/design/providers/reliability/error-taxonomy-propagation.html" data-title-zh="错误传播" data-href-en="/docs/reference/design/providers/reliability/error-taxonomy-propagation.html" data-href-zh="/docs/reference/design/providers/reliability/error-taxonomy-propagation.zh.html">Error propagation</a>
+<a class="navlink" href="/docs/reference/design/providers/reliability/llm-fault-tolerance.html" data-title-zh="容错" data-href-en="/docs/reference/design/providers/reliability/llm-fault-tolerance.html" data-href-zh="/docs/reference/design/providers/reliability/llm-fault-tolerance.zh.html">Fault tolerance</a>
+<a class="navlink" href="/docs/reference/design/providers/record-replay.html" data-title-zh="录制与回放" data-href-en="/docs/reference/design/providers/record-replay.html" data-href-zh="/docs/reference/design/providers/record-replay.zh.html">Recording and replay</a>
+<a class="navlink" href="/docs/reference/design/providers/record-replay.viz.html" data-title-zh="回放图解" data-href-en="/docs/reference/design/providers/record-replay.viz.html" data-href-zh="/docs/reference/design/providers/record-replay.zh.viz.html">Replay diagram</a>
+<a class="navlink" href="/docs/reference/design/providers/responses-reasoning-replay.html" data-title-zh="推理记录回放" data-href-en="/docs/reference/design/providers/responses-reasoning-replay.html" data-href-zh="/docs/reference/design/providers/responses-reasoning-replay.zh.html">Reasoning replay</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="扩展与集成">Extensions and integrations</span><span class="nav-count">14</span></summary><a class="navlink" href="/docs/reference/design/integrations/README.html" data-title-zh="集成" data-href-en="/docs/reference/design/integrations/README.html" data-href-zh="/docs/reference/design/integrations/README.zh.html">Integrations</a>
+<a class="navlink" href="/docs/reference/design/integrations/nooa.html" data-title-zh="直接调用、Agent 类与自动 DAG 上下文" data-href-en="/docs/reference/design/integrations/nooa.html" data-href-zh="/docs/reference/design/integrations/nooa.zh.html">Direct calls, Agent classes and automatic DAG context</a>
+<a class="navlink" href="/docs/reference/design/integrations/editor-integration.html" data-title-zh="编辑器集成" data-href-en="/docs/reference/design/integrations/editor-integration.html" data-href-zh="/docs/reference/design/integrations/editor-integration.zh.html">Editor integration</a>
+<a class="navlink" href="/docs/reference/design/integrations/extension-management.html" data-title-zh="扩展管理" data-href-en="/docs/reference/design/integrations/extension-management.html" data-href-zh="/docs/reference/design/integrations/extension-management.zh.html">Extension management</a>
+<a class="navlink" href="/docs/reference/design/integrations/harness-standard.html" data-title-zh="运行环境规范" data-href-en="/docs/reference/design/integrations/harness-standard.html" data-href-zh="/docs/reference/design/integrations/harness-standard.zh.html">Harness standard</a>
+<a class="navlink" href="/docs/reference/design/integrations/mcp-integration.html" data-title-zh="MCP 工具" data-href-en="/docs/reference/design/integrations/mcp-integration.html" data-href-zh="/docs/reference/design/integrations/mcp-integration.zh.html">MCP tools</a>
+<a class="navlink" href="/docs/reference/design/integrations/mcp-server.html" data-title-zh="MCP 服务端" data-href-en="/docs/reference/design/integrations/mcp-server.html" data-href-zh="/docs/reference/design/integrations/mcp-server.zh.html">MCP server</a>
+<a class="navlink" href="/docs/reference/design/integrations/skills-and-plugins.html" data-title-zh="技能与插件" data-href-en="/docs/reference/design/integrations/skills-and-plugins.html" data-href-zh="/docs/reference/design/integrations/skills-and-plugins.zh.html">Skills and plugins</a>
+<a class="navlink" href="/docs/reference/design/integrations/plugin-runtime.html" data-title-zh="插件运行时" data-href-en="/docs/reference/design/integrations/plugin-runtime.html" data-href-zh="/docs/reference/design/integrations/plugin-runtime.zh.html">Plugin Runtime</a>
+<a class="navlink" href="/docs/reference/design/integrations/web-use.html" data-title-zh="网页自动化" data-href-en="/docs/reference/design/integrations/web-use.html" data-href-zh="/docs/reference/design/integrations/web-use.zh.html">Web automation</a>
+<a class="navlink" href="/docs/reference/design/integrations/computer-and-browser-use.html" data-title-zh="操控电脑与浏览器" data-href-en="/docs/reference/design/integrations/computer-and-browser-use.html" data-href-zh="/docs/reference/design/integrations/computer-and-browser-use.zh.html">Computer and browser use</a>
+<a class="navlink" href="/docs/reference/design/extension-gating/README.html" data-title-zh="扩展控制" data-href-en="/docs/reference/design/extension-gating/README.html" data-href-zh="/docs/reference/design/extension-gating/README.zh.html">Extension controls</a>
+<a class="navlink" href="/docs/reference/design/extension-gating/future-work.html" data-title-zh="后续工作" data-href-en="/docs/reference/design/extension-gating/future-work.html" data-href-zh="/docs/reference/design/extension-gating/future-work.zh.html">Future work</a>
+<a class="navlink" href="/docs/reference/design/extension-gating/reference-comparison.html" data-title-zh="参考对比" data-href-en="/docs/reference/design/extension-gating/reference-comparison.html" data-href-zh="/docs/reference/design/extension-gating/reference-comparison.zh.html">Reference comparison</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="消息渠道">Channels</span><span class="nav-count">4</span></summary><a class="navlink" href="/docs/reference/design/channels/README.html" data-title-zh="通信渠道" data-href-en="/docs/reference/design/channels/README.html" data-href-zh="/docs/reference/design/channels/README.zh.html">Channels</a>
+<a class="navlink" href="/docs/reference/design/channels/audit.html" data-title-zh="需求约束" data-href-en="/docs/reference/design/channels/audit.html" data-href-zh="/docs/reference/design/channels/audit.zh.html">Requirements</a>
+<a class="navlink" href="/docs/reference/design/channels/design.html" data-title-zh="架构" data-href-en="/docs/reference/design/channels/design.html" data-href-zh="/docs/reference/design/channels/design.zh.html">Architecture</a>
+<a class="navlink" href="/docs/reference/design/channels/chat-bots.html" data-title-zh="渠道上的聊天机器人行为" data-href-en="/docs/reference/design/channels/chat-bots.html" data-href-zh="/docs/reference/design/channels/chat-bots.zh.html">Chat-Bot Behavior on Channels</a></details>
+</details>
+<details class="nav-branch nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="安全与工程">Security and engineering</span><span class="nav-count">18</span></summary>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="安全与权限">Security and permissions</span><span class="nav-count">4</span></summary><a class="navlink" href="/docs/reference/design/runtime/security/sandbox-architecture.html" data-title-zh="权限与沙箱" data-href-en="/docs/reference/design/runtime/security/sandbox-architecture.html" data-href-zh="/docs/reference/design/runtime/security/sandbox-architecture.zh.html">Authority and sandbox</a>
+<a class="navlink" href="/docs/reference/design/runtime/security/system-access.html" data-title-zh="系统访问" data-href-en="/docs/reference/design/runtime/security/system-access.html" data-href-zh="/docs/reference/design/runtime/security/system-access.zh.html">System access</a>
+<a class="navlink" href="/docs/reference/design/runtime/security/ssrf-protection.html" data-title-zh="SSRF 防护" data-href-en="/docs/reference/design/runtime/security/ssrf-protection.html" data-href-zh="/docs/reference/design/runtime/security/ssrf-protection.zh.html">SSRF protection</a>
+<a class="navlink" href="/docs/reference/design/security/dependency-security.html" data-title-zh="依赖安全" data-href-en="/docs/reference/design/security/dependency-security.html" data-href-zh="/docs/reference/design/security/dependency-security.zh.html">Dependency security</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="安装与分发">Distribution</span><span class="nav-count">6</span></summary><a class="navlink" href="/docs/reference/design/distribution/installation-packaging.html" data-title-zh="打包与发布" data-href-en="/docs/reference/design/distribution/installation-packaging.html" data-href-zh="/docs/reference/design/distribution/installation-packaging.zh.html">Packaging and releases</a>
+<a class="navlink" href="/docs/reference/design/distribution/automatic-updates.html" data-title-zh="自动更新" data-href-en="/docs/reference/design/distribution/automatic-updates.html" data-href-zh="/docs/reference/design/distribution/automatic-updates.zh.html">Automatic updates</a>
+<a class="navlink" href="/docs/reference/design/distribution/dev-instance.html" data-title-zh="稳定版与开发版实例" data-href-en="/docs/reference/design/distribution/dev-instance.html" data-href-zh="/docs/reference/design/distribution/dev-instance.zh.html">Stable and development instances</a>
+<a class="navlink" href="/docs/reference/design/distribution/github-publishing.html" data-title-zh="向 GitHub 发布源码" data-href-en="/docs/reference/design/distribution/github-publishing.html" data-href-zh="/docs/reference/design/distribution/github-publishing.zh.html">Publishing source to GitHub</a>
+<a class="navlink" href="/docs/reference/design/distribution/developer-id.html" data-title-zh="Developer ID" data-href-en="/docs/reference/design/distribution/developer-id.html" data-href-zh="/docs/reference/design/distribution/developer-id.zh.html">Developer ID</a>
+<a class="navlink" href="/docs/reference/design/distribution/windows-support.html" data-title-zh="Windows 支持" data-href-en="/docs/reference/design/distribution/windows-support.html" data-href-zh="/docs/reference/design/distribution/windows-support.zh.html">Windows support</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="测试与错误处理">Testing and errors</span><span class="nav-count">3</span></summary><a class="navlink" href="/docs/reference/design/testing/test-system.html" data-title-zh="测试系统" data-href-en="/docs/reference/design/testing/test-system.html" data-href-zh="/docs/reference/design/testing/test-system.zh.html">Test system</a>
+<a class="navlink" href="/docs/reference/design/testing/windows-ci.html" data-title-zh="Windows CI" data-href-en="/docs/reference/design/testing/windows-ci.html" data-href-zh="/docs/reference/design/testing/windows-ci.zh.html">Windows CI</a>
+<a class="navlink" href="/docs/reference/design/error-handling.html" data-title-zh="错误处理" data-href-en="/docs/reference/design/error-handling.html" data-href-zh="/docs/reference/design/error-handling.zh.html">Error handling</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="文档与网站">Documentation and website</span><span class="nav-count">5</span></summary><a class="navlink" href="/docs/reference/design/docs-site.html" data-title-zh="文档站" data-href-en="/docs/reference/design/docs-site.html" data-href-zh="/docs/reference/design/docs-site.zh.html">Documentation site</a>
+<a class="navlink" href="/docs/reference/design/site-discoverability-performance.html" data-title-zh="站点检索" data-href-en="/docs/reference/design/site-discoverability-performance.html" data-href-zh="/docs/reference/design/site-discoverability-performance.zh.html">Site discovery</a>
+<a class="navlink" href="/docs/reference/design/site-agent-readable-docs.html" data-title-zh="Agent 文档" data-href-en="/docs/reference/design/site-agent-readable-docs.html" data-href-zh="/docs/reference/design/site-agent-readable-docs.zh.html">Agent-readable docs</a>
+<a class="navlink" href="/docs/reference/design/site-indexnow-discovery.html" data-title-zh="IndexNow 检索" data-href-en="/docs/reference/design/site-indexnow-discovery.html" data-href-zh="/docs/reference/design/site-indexnow-discovery.zh.html">IndexNow discovery</a>
+<a class="navlink" href="/docs/reference/design/community-discoverability.html" data-title-zh="社区检索" data-href-en="/docs/reference/design/community-discoverability.html" data-href-zh="/docs/reference/design/community-discoverability.zh.html">Community discovery</a></details>
+</details>
+<details class="nav-branch nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="补充材料">Supporting material</span><span class="nav-count">22</span></summary>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="交互原型">Prototypes</span><span class="nav-count">6</span></summary><a class="navlink" href="/docs/reference/design/ui/visual-system/layout-density-prototype.html" data-title-zh="密度原型" data-href-en="/docs/reference/design/ui/visual-system/layout-density-prototype.html" data-href-zh="/docs/reference/design/ui/visual-system/layout-density-prototype.zh.html">Density prototype</a>
+<a class="navlink" href="/docs/reference/design/ui/composer/composer-interaction-prototype.html" data-title-zh="输入框原型" data-href-en="/docs/reference/design/ui/composer/composer-interaction-prototype.html" data-href-zh="/docs/reference/design/ui/composer/composer-interaction-prototype.zh.html">Composer prototype</a>
+<a class="navlink" href="/docs/reference/design/ui/workspace/project-workspace-prototype.html" data-title-zh="工作区原型" data-href-en="/docs/reference/design/ui/workspace/project-workspace-prototype.html" data-href-zh="/docs/reference/design/ui/workspace/project-workspace-prototype.zh.html">Workspace prototype</a>
+<a class="navlink" href="/docs/reference/design/ui/sidebar/sidebar-hierarchy-prototype.html" data-title-zh="侧栏原型" data-href-en="/docs/reference/design/ui/sidebar/sidebar-hierarchy-prototype.html" data-href-zh="/docs/reference/design/ui/sidebar/sidebar-hierarchy-prototype.zh.html">Sidebar prototype</a>
+<a class="navlink" href="/docs/reference/design/ui/sidebar/sidebar-luma-prototype.html" data-title-zh="Sidebar Luma draft" data-href-en="/docs/reference/design/ui/sidebar/sidebar-luma-prototype.html" data-href-zh="/docs/reference/design/ui/sidebar/sidebar-luma-prototype.zh.html">Sidebar Luma prototype</a>
+<a class="navlink" href="/docs/reference/design/runtime/dag/live-layout.html" data-title-zh="实时布局" data-href-en="/docs/reference/design/runtime/dag/live-layout.html" data-href-zh="/docs/reference/design/runtime/dag/live-layout.zh.html">Live layout</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="实施记录">Implementation records</span><span class="nav-count">13</span></summary><a class="navlink" href="/docs/reference/design/runtime/execution/p3-three-surface-sync.html" data-title-zh="界面同步" data-href-en="/docs/reference/design/runtime/execution/p3-three-surface-sync.html" data-href-zh="/docs/reference/design/runtime/execution/p3-three-surface-sync.zh.html">Interface synchronization</a>
+<a class="navlink" href="/docs/reference/design/repository-structure-implementation.html" data-title-zh="仓库迁移" data-href-en="/docs/reference/design/repository-structure-implementation.html" data-href-zh="/docs/reference/design/repository-structure-implementation.zh.html">Repository migration</a>
+<a class="navlink" href="/docs/reference/design/site-indexnow-implementation.html" data-title-zh="IndexNow 实施" data-href-en="/docs/reference/design/site-indexnow-implementation.html" data-href-zh="/docs/reference/design/site-indexnow-implementation.zh.html">IndexNow delivery</a>
+<a class="navlink" href="/docs/reference/design/documentation-gaps.html" data-title-zh="文档差异" data-href-en="/docs/reference/design/documentation-gaps.html" data-href-zh="/docs/reference/design/documentation-gaps.zh.html">Documentation gaps</a>
+<a class="navlink" href="/docs/reference/design/engineering-backlog.html" data-title-zh="工程待办" data-href-en="/docs/reference/design/engineering-backlog.html" data-href-zh="/docs/reference/design/engineering-backlog.zh.html">Engineering backlog</a>
+<a class="navlink" href="/docs/reference/design/ui/visual-system/unification-work.html" data-title-zh="界面统一" data-href-en="/docs/reference/design/ui/visual-system/unification-work.html" data-href-zh="/docs/reference/design/ui/visual-system/unification-work.zh.html">UI unification</a>
+<a class="navlink" href="/docs/reference/design/ui/resources/resource-panel-preview-plan.html" data-title-zh="资源预览" data-href-en="/docs/reference/design/ui/resources/resource-panel-preview-plan.html" data-href-zh="/docs/reference/design/ui/resources/resource-panel-preview-plan.zh.html">Resource preview</a>
+<a class="navlink" href="/docs/reference/design/distribution/implementation-plan.html" data-title-zh="分发计划" data-href-en="/docs/reference/design/distribution/implementation-plan.html" data-href-zh="/docs/reference/design/distribution/implementation-plan.zh.html">Distribution plan</a>
+<a class="navlink" href="/docs/reference/design/extension-gating/implementation.html" data-title-zh="实现对应关系" data-href-en="/docs/reference/design/extension-gating/implementation.html" data-href-zh="/docs/reference/design/extension-gating/implementation.zh.html">Implementation map</a>
+<a class="navlink" href="/docs/reference/design/plans/credential-connection-unification.html" data-title-zh="凭据迁移" data-href-en="/docs/reference/design/plans/credential-connection-unification.html" data-href-zh="/docs/reference/design/plans/credential-connection-unification.zh.html">Credential migration</a>
+<a class="navlink" href="/docs/reference/design/plans/mcp-server-implementation.html" data-title-zh="MCP 实施计划" data-href-en="/docs/reference/design/plans/mcp-server-implementation.html" data-href-zh="/docs/reference/design/plans/mcp-server-implementation.zh.html">MCP implementation</a>
+<a class="navlink" href="/docs/reference/design/plans/cache-control-passthrough.html" data-title-zh="缓存控制" data-href-en="/docs/reference/design/plans/cache-control-passthrough.html" data-href-zh="/docs/reference/design/plans/cache-control-passthrough.zh.html">Cache control</a>
+<a class="navlink" href="/docs/reference/design/plans/proactive-implementation.html" data-title-zh="主动执行实施计划" data-href-en="/docs/reference/design/plans/proactive-implementation.html" data-href-zh="/docs/reference/design/plans/proactive-implementation.zh.html">Proactive implementation</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="研究材料">Research</span><span class="nav-count">3</span></summary><a class="navlink" href="/docs/reference/design/proactive/_research_archive/evaluation.html" data-title-zh="评估" data-href-en="/docs/reference/design/proactive/_research_archive/evaluation.html" data-href-zh="/docs/reference/design/proactive/_research_archive/evaluation.zh.html">Evaluation</a>
+<a class="navlink" href="/docs/reference/design/proactive/_research_archive/replay.html" data-title-zh="策略回放" data-href-en="/docs/reference/design/proactive/_research_archive/replay.html" data-href-zh="/docs/reference/design/proactive/_research_archive/replay.zh.html">Policy replay</a>
+<a class="navlink" href="/docs/reference/design/proactive/_research_archive/threat-model.html" data-title-zh="威胁模型" data-href-en="/docs/reference/design/proactive/_research_archive/threat-model.html" data-href-zh="/docs/reference/design/proactive/_research_archive/threat-model.zh.html">Threat model</a></details>
+</details>
+<details class="nav-branch nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="待分类">Uncategorized</span><span class="nav-count">13</span></summary>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="概览">Overview</span><span class="nav-count">1</span></summary><a class="navlink" href="/docs/reference/design/repository-integration.html" data-title-zh="仓库分支整合" data-href-en="/docs/reference/design/repository-integration.html" data-href-zh="/docs/reference/design/repository-integration.zh.html">Repository integration</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="模型服务">Providers</span><span class="nav-count">2</span></summary><a class="navlink" href="/docs/reference/design/providers/anthropic-api-auth.html" data-title-zh="Anthropic API 认证" data-href-en="/docs/reference/design/providers/anthropic-api-auth.html" data-href-zh="/docs/reference/design/providers/anthropic-api-auth.zh.html">Anthropic API authentication</a>
+<a class="navlink" href="/docs/reference/design/providers/local-models.html" data-title-zh="本地模型 Provider" data-href-en="/docs/reference/design/providers/local-models.html" data-href-zh="/docs/reference/design/providers/local-models.zh.html">Local model providers</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title">Execution</span><span class="nav-count">2</span></summary><a class="navlink" href="/docs/reference/design/runtime/execution/tool-name-resolution.html" data-title-zh="工具名解析" data-href-en="/docs/reference/design/runtime/execution/tool-name-resolution.html" data-href-zh="/docs/reference/design/runtime/execution/tool-name-resolution.zh.html">Tool name resolution</a>
+<a class="navlink" href="/docs/reference/design/runtime/execution/unified-agent.html" data-title-zh="统一 Agent 执行" data-href-en="/docs/reference/design/runtime/execution/unified-agent.html" data-href-zh="/docs/reference/design/runtime/execution/unified-agent.zh.html">Unified Agent execution</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title" data-title-zh="阅读指南">Reading guide</span><span class="nav-count">1</span></summary><a class="navlink" href="/docs/reference/design/runtime/session/environments.html" data-title-zh="运行环境" data-href-en="/docs/reference/design/runtime/session/environments.html" data-href-zh="/docs/reference/design/runtime/session/environments.zh.html">Environments</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title">Chat</span><span class="nav-count">2</span></summary><a class="navlink" href="/docs/reference/design/ui/chat/chat-compose.html" data-title-zh="聊天引用与消息编辑" data-href-en="/docs/reference/design/ui/chat/chat-compose.html" data-href-zh="/docs/reference/design/ui/chat/chat-compose.zh.html">Chat quotes and message editing</a>
+<a class="navlink" href="/docs/reference/design/ui/chat/chat-recovery-copy.html" data-title-zh="历史渲染与对话链接" data-href-en="/docs/reference/design/ui/chat/chat-recovery-copy.html" data-href-zh="/docs/reference/design/ui/chat/chat-recovery-copy.zh.html">History rendering and conversation links</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title">Composer</span><span class="nav-count">3</span></summary><a class="navlink" href="/docs/reference/design/ui/composer/effort-picker.html" data-title-zh="思考力度设置" data-href-en="/docs/reference/design/ui/composer/effort-picker.html" data-href-zh="/docs/reference/design/ui/composer/effort-picker.zh.html">Effort picker</a>
+<a class="navlink" href="/docs/reference/design/ui/composer/git-folder-pills.html" data-title-zh="文件夹 Git 胶囊" data-href-en="/docs/reference/design/ui/composer/git-folder-pills.html" data-href-zh="/docs/reference/design/ui/composer/git-folder-pills.zh.html">Git folder pills</a>
+<a class="navlink" href="/docs/reference/design/ui/composer/hover-tips.html" data-title-zh="输入框区域的悬停提示" data-href-en="/docs/reference/design/ui/composer/hover-tips.html" data-href-zh="/docs/reference/design/ui/composer/hover-tips.zh.html">Hover tips in the composer</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title">Turn Lifecycle</span><span class="nav-count">1</span></summary><a class="navlink" href="/docs/reference/design/ui/turn-lifecycle/conversation-lifecycle.html" data-title-zh="对话生命周期与响应性" data-href-en="/docs/reference/design/ui/turn-lifecycle/conversation-lifecycle.html" data-href-zh="/docs/reference/design/ui/turn-lifecycle/conversation-lifecycle.zh.html">Conversation lifecycle and responsiveness</a></details>
+<details class="nav-sec nav-disclosure"><summary><span class="nav-sec-title">Visual System</span><span class="nav-count">1</span></summary><a class="navlink" href="/docs/reference/design/ui/visual-system/icons.html" data-title-zh="图标体系" data-href-en="/docs/reference/design/ui/visual-system/icons.html" data-href-zh="/docs/reference/design/ui/visual-system/icons.zh.html">Icon system</a></details>
+</details></div>
+  </nav>
+  <main class="content"><button class="fs-toggle" aria-label="Fullscreen" title="Fullscreen (Esc to exit)"><svg class="ic-expand" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.2 2H2v4.2M9.8 2H14v4.2M6.2 14H2V9.8M9.8 14H14V9.8"/></svg><svg class="ic-collapse" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6.2h4.2V2M14 6.2H9.8V2M2 9.8h4.2V14M14 9.8H9.8V14"/></svg></button><article><nav class="breadcrumb"><span class="bc-seg" data-title-zh="设计">Design</span> <span class='bc-sep'>›</span> <span class="bc-seg" data-title-zh="Agent 与工作流">Agents and workflows</span> <span class='bc-sep'>›</span> <span class="bc-seg" data-title-zh="DAG 与协作">DAG and collaboration</span> <span class='bc-sep'>›</span> <span class="bc-seg bc-current" data-title-zh="渲染规范">Rendering specification</span></nav><div id="dag-渲染规范布局-连线-图例-默认可见性"></div>
+<h1 id="渲染规范">渲染规范<a class="header-anchor" href="#渲染规范">#</a></h1>
+<blockquote>
+<p>会话图怎么画：每个节点放哪、每条线什么样、默认给用户看什么。<strong>本文是权威
+实现标准</strong>——布局代码照此写，出问题对照本文查。数据语义（节点、两条边）见
+<code>dag/overview.md</code>；本文只管画。</p>
+<p>每条规则配示例。<strong>SVG 场景图以 <code>layout.html</code> 为权威</strong>（共 13 个
+场景：1–7 基础布局，8 merge，9 分支间通信，10 spawn 派活回流，11 执行子树
+聚合，12 状态与徽标图例，13 badge 锚定与碰撞）。本文的 ASCII 图是文字版
+速览，与 html 等价；冲突时以 html 为准。</p>
+</blockquote>
+<hr />
+<h2 id="图在哪中央的一个视角">图在哪：中央的一个视角<a class="header-anchor" href="#图在哪中央的一个视角">#</a></h2>
+<p>图是聊天面板两个<strong>视角</strong>之一，不是侧面板。每个中央 tab 要么在会话记录视角、
+要么在上下文图视角，面板右上角那对控件负责切换——一个视角切换按钮加一个 <code>…</code>
+会话操作菜单，照 Obsidian 的面板控件做。视角按 tab 记忆，把一个会话停在图上
+不影响其他会话。</p>
+<p>给图整列宽度是关键：分支多的会话要摆开 lane、tier 和分支名 badge，288px 的
+侧栏装不下。</p>
+<table>
+<thead>
+<tr>
+<th>部件</th>
+<th>位置</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>视角状态</td>
+<td><code>CenterTab.dagView</code>（<code>apps/web/lib/tabs/center-tabs-store.ts</code>）——不持久化，刷新后回到会话记录</td>
+</tr>
+<tr>
+<td>控件</td>
+<td><code>apps/web/components/chat/pane/view-controls.tsx</code></td>
+</tr>
+<tr>
+<td>图的宿主</td>
+<td><code>apps/web/components/chat/dag/dag-view.tsx</code>——渲染 <code>#historyPanel</code> + <code>.history-body</code>，即 <code>apps/web/lib/runtime-bridge/dag/pipeline.ts</code> 与 <code>apps/web/lib/runtime-bridge/dag/render/visibility.ts</code> 选取的元素</td>
+</tr>
+<tr>
+<td>视角切换</td>
+<td><code>apps/web/app/styles/dag/view-host.css</code> 的 <code>.center-pane-chat[data-center-view]</code></td>
+</tr>
+</tbody>
+</table>
+<p>两个界面同时挂载，靠 <code>display</code> 互换：无论当前显示哪个视角，渲染器每次 capture
+都往宿主里画，卸载会让图空到下一次 capture。宿主不随尺寸重排——它是一块无限
+画布，面板变宽只是露出更多（见下）。</p>
+<p>点击图上的节点填充右侧栏的详情 / 上下文视图；这两个视图留在侧栏，因为它们读
+的是选中的单个节点，不是整个会话。</p>
+<h3 id="画布是无限的">画布是无限的<a class="header-anchor" href="#画布是无限的">#</a></h3>
+<p>没有滚动容器，也没有按内容定尺寸的 SVG。SVG 铺满面板，一切绘制物都在一个
+<code>&lt;g&gt;</code> 里，这个 <code>&lt;g&gt;</code> 带着用户直接操控的 translate + scale。</p>
+<table>
+<thead>
+<tr>
+<th>手势</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>鼠标滚轮或触控板捏合</td>
+<td>以光标为锚缩放，限 25%–300%——指针下的节点缩放前后都在指针下</td>
+</tr>
+<tr>
+<td>触控板双指滑动</td>
+<td>平移</td>
+</tr>
+<tr>
+<td>右键（或中键）拖动</td>
+<td>平移，在图上任何地方都行</td>
+</tr>
+<tr>
+<td>在空白处左键拖动</td>
+<td>选择框（第十三节）</td>
+</tr>
+<tr>
+<td>在节点上左键按下</td>
+<td>归节点——单击、双击照常生效</td>
+</tr>
+</tbody>
+</table>
+<p><strong>滚轮</strong>（<code>apps/web/lib/runtime-bridge/dag/interaction/view/gestures.ts</code>、
+<code>interaction/view/wheel.ts</code>）：鼠标滚轮缩放，和地图一样；触控板双指滑动平移，和设计画布
+一样；捏合缩放。三者都是 <code>wheel</code> 事件，所以从事件本身判断：捏合带 <code>ctrlKey</code>（⌘ + 滚轮
+也缩放）；有横向 delta 的是双指；App 所用的 Chromium 把触控板的旧字段 <code>wheelDeltaY</code>
+报成恰好 <code>-3 × deltaY</code>，而滚轮按格报 120 的倍数。以前按 delta 大小去猜，把真实鼠标当成
+触控板，滚轮就变成了滚动；<code>wheelDeltaY</code> 判据不看大小。一次手势按第一个事件定性，事件
+停顿（180 ms）前不改，所以触控板的惯性尾巴不会翻成缩放。捏合用自己更快的速率；line、
+page 模式的 delta（部分鼠标）先换算成像素。驱动发出像素级平滑 delta 且
+<code>wheelDeltaY = -3 × deltaY</code> 的鼠标会被当成触控板而平移。</p>
+<p>按内容定尺寸的容器替用户决定了两件不该它决定的事：图能画多大才需要滚动条，
+以及&quot;中间&quot;在哪。宽会话给一条横滚动条，深会话给一条竖滚动条，看全貌要在两个轴
+上滚，还没有缩小的办法。</p>
+<p><strong>点阵就是坐标系。</strong> 面板背景按布局自己的步长（<code>COL_W</code>）每格画一个点，跟着
+同一组平移缩放变换，并按布局的原点偏移（<code>PAD_X</code> / <code>PAD_Y</code>，点阵自内边距再退
+半格）对位，让每个节点锚点下面正好是一颗点——偏离格点是任何人不看布局代码也
+能发现的 bug。fit 把平移量吸到整像素，正是为此。点的半径也跟着缩放走（收在
+1–3px）：定死 1.2px 在放大后的大格子里会细到看不见。</p>
+<p><strong>视角状态跨重绘保持。</strong> 图每次 capture 都重绘，每次都动镜头会在用户读图时把
+视野拖走。平移与缩放按会话存在 <code>apps/web/lib/runtime-bridge/dag/store/globals.ts</code> 里，只有进入另一个会话才重新
+fit。改面板尺寸永不重新 fit——用户看图的角度是他自己的。</p>
+<p><strong>进入会话时可读，Shift+1 才看全图。</strong> 打开时的视野就是 fit，但下限 80%：长会话
+整张塞进来会缩成一根细线上的小点（40 轮的聊天打开时是 37%）。图在这个下限下
+仍比可视条带大时，溢出的那个方向跟着 HEAD——放在条带靠下处，就像会话记录打开
+时停在最新一条。“显示整张图”（Shift+1）保持原来的 fit，最低到 25%：要求看全图就是要的
+这个（<code>apps/web/lib/runtime-bridge/dag/interaction/view/canvas.ts</code> 的 <code>fitCanvas(opening)</code>）。</p>
+<p><strong>缩放竖列。</strong> 在画布右上角，紧接在窗格视角切换那一条下面，所有看图的控件都在这一角的一列里：一条凸起竖条放 + · 读数 · −，
+隔一道发丝线是<strong>找到正在工作的 agent</strong>（F）；
+下面第二条竖条开关小地图，再隔一道发丝线是两份指南——图例（各种标记是什么意思）和操作说明面板（画布认哪些操作），每个点一下一直开着，再点按钮才关，几个可以同时开着。缩放竖列左边从顶部起是一条和小地图同宽的侧栏，像 macOS 的小组件侧栏：依次是小地图、停靠在这里的本会话浮动网页小窗、图例、操作说明，间隔 16px，每块都是完整高度。侧栏底部停在输入框上方 16px，整条一起滚动——在任何一块上（包括小地图）滚滚轮都是滚整条侧栏，单块面板自己不滚。关掉的面板不占位置。会话视角有同样的停靠位：窗格视图按钮左边一条只放小窗占位的侧栏（<code>components/chat/pane/view-controls.tsx</code>），所以两个视角里小窗都在右上角，切换视角时在两个停靠位之间换过去。小窗默认停靠（<code>apps/web/lib/browser/web-tab/web-tab-pip-dock.ts</code>；<code>PipDockSlot</code> 在侧栏里占位，小窗浮在这个位置上，随侧栏滚动裁切，部分滚出时用一张静止画面代替原生网页）。拖小窗标题栏时，指针移动不到 36px 小窗保持不动；超过后它恢复自由尺寸、以弹簧动画跟到指针下，之后可以放到任何地方，两个视角都保持这个位置。松手前侧栏一直留着它的位置。拖回到侧栏顶部 56px 以内会以弹簧吸进去——靠近时侧栏先让出位置——要再拖开 88px 才会脱开，所以在边界上不会来回闪；松手就重新停靠。每次进出都是一段弹簧动画（framer-motion），从小窗当前画的位置走到它现在该在的位置，而这个位置一直跟着指针。展开的小窗始终浮动。三块面板出现和收起都和应用里的弹层一样：100ms 内淡入、从 95% 放大、从竖列那一侧滑进 8px，收起时原样倒放（<code>components/chat/dag/dag-key-sheet.tsx</code> 的 <code>PANEL_MOTION</code>；小地图是 <code>app/styles/dag/panels/tools.css</code> 里的 <code>.is-hidden</code>）。进入图视角时，先把小地图无动画地收起（<code>stowMinimap</code>）——上次离开时它可能还开着，最初几帧画的又是清空的缓存——这样它只在第一次画出图时出现一次，不会先缩回去再弹出来。竖列里的几条按钮从上到下依次淡入并从右侧滑进 8px，每条 150ms、间隔 40ms；离开图视角仍是瞬间切换。
+<strong>全屏</strong>属于会话面板，不属于图：按钮在竖列上方的视角切换那一条里（对话视图控件里的专注模式），所以切换视角不会退出。它把窗口让给会话面板：中间的主体（画布或对话，连同输入框）脱离布局，从原来的位置向外长大，盖在应用的左侧栏、右侧栏和中间的标签栏上面——它们留在原地不动——直到四边都离窗口 <code>--canvas-fullscreen-inset</code>（8px），和侧栏卡片离窗口边的距离一样，标签栏在它下面淡出，连带它的底色变成其他几道缝露出的页面色；画布里的其他面板在全屏期间让开。长大时移动的是主体真实的四条边，和画布移动面板、macOS 缩放窗口一样：四条边各自从会话面板原来的框连续走到窗口内缩的位置，内容每一帧都按当前框的大小排版——不会先跳到最终尺寸再缩放。动画用 Web Animations API，从第一帧画出来时才开始计时，400ms，用对称的缓入缓出曲线（内容长到对话栏的最大宽度就不再变，这发生在展开的前段，前快后慢的曲线会让它一下子跳到位）；退出用 320ms 把四条边收回面板原来的框，再落回布局。过渡开始前绝不按全屏尺寸排版内容：那样对话的滚动位置会被压到更短的文字上而跳动，所以终点是写明的内缩值而不是量出来的，起点也同时写进主体自己的样式——Chromium 按元素自身样式排新动画的第一帧。过渡期间画布算作“在移动”（<code>lib/tabs/canvas/canvas-motion.ts</code>）：对话只重排可见的几行，用浏览器的滚动锚定固定住第一行可见内容，消息行到静止后才重渲染一次。期间外壳不会因为主体尺寸变化而重渲染。动画中途再切换会从当前位置原路返回；系统开了“减少动态效果”时不做动画。这是应用内的模式，不是浏览器全屏，窗口大小不变；全屏盖住原生网页视图期间，它们会隐藏。再点一次、按 Esc（没有选中节点时）、切到别的类型的标签或刷新都会退出（<code>lib/tabs/canvas/canvas-fullscreen.ts</code> 管状态、Esc 和过渡；样式靠 <code>app/styles/chat/pane/center-pane.css</code> 里的 <code>html[data-canvas-fullscreen]</code>）。这个位置以前是“显示整张图”：图小的时候它和点读数回到 100% 看起来一样，所以现在只留 Shift+1。
+开着的开关保持悬停时的灰色底，不用强调色。竖列和窗格视角切换那一条里的图标都是 Solar Bold Duotone，悬停时和输入框按钮一样弹一下（<code>docs/reference/design/ui/visual-system/icons.zh.md</code>）。
+−/+ 每次步进恰好一个滚轮格（<code>ZOOM_STEP</code>），点读数本身重置 100%——按钮没有光标可锚，
+两者都以面板中心为锚。按钮和 + / −、Shift+0 这几个键都用 0.22 秒平滑过渡过去，缩放比例按对数均匀变化，放大和缩小快慢一样；过渡中再按，从目标比例接着走一步。滚轮和捏合仍是即时的——手势本身就是连续的——滚轮或平移会接管正在进行的过渡（<code>canvas.ts</code> 的 <code>glideZoom</code>）。读数由 <code>apps/web/lib/runtime-bridge/dag/interaction/view/canvas.ts</code> 在每次视角变化时命令式写入——把
+一次手势的每个 wheel 事件走 React state 会让整棵树每秒重绘六十次。这些控件以前分散在
+输入框的 env chip 行和左侧竖条上，现在合成右缘这一列，左侧竖条已经去掉。</p>
+<p>竖列的几条共用同一套材质和按钮（<code>apps/web/app/styles/dag/panels/tools.css</code>）。图例面板和操作说明面板的内边距来自 <code>MENU_PANEL</code>
+（<code>components/chat/top-bar/menu-styles</code>），外框却和小地图一致——同样的底色、浮起阴影、10px 圆角、没有外圈描边——因为三者叠成一列 280px，带描边会比小地图左右各宽出 1px；
+<code>apps/web/app/styles/dag/panels/legend.css</code> 只留图例的锚位和行。</p>
+<table>
+<thead>
+<tr>
+<th>部件</th>
+<th>位置</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>平移 / 缩放 / fit</td>
+<td><code>apps/web/lib/runtime-bridge/dag/interaction/view/canvas.ts</code>（缩放竖列走 <code>zoomStep</code> / <code>resetZoom</code>）</td>
+</tr>
+<tr>
+<td>视角状态</td>
+<td><code>apps/web/lib/runtime-bridge/dag/store/globals.ts</code> 的 <code>_viewTx</code> / <code>_viewTy</code> / <code>_viewScale</code> / <code>_viewSession</code></td>
+</tr>
+<tr>
+<td>画布与点阵</td>
+<td><code>apps/web/app/styles/dag/graph/canvas.css</code> 的 <code>.history-body</code></td>
+</tr>
+<tr>
+<td>缩放竖列</td>
+<td><code>apps/web/components/chat/dag/dag-view.tsx</code> 的 <code>DagZoomColumn</code>；竖条样式在 <code>apps/web/app/styles/dag/panels/tools.css</code>，图例和操作说明的内边距来自 <code>MENU_PANEL</code>、外框和小地图共用，图例的行在 <code>apps/web/app/styles/dag/panels/legend.css</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="输入框属于面板不属于会话记录">输入框属于面板，不属于会话记录<a class="header-anchor" href="#输入框属于面板不属于会话记录">#</a></h3>
+<p><strong>视角切换隐藏的是会话记录滚动区 <code>#chatArea</code>，绝不是 <code>#chatView</code>。</strong> 输入框
+是单例，portal 进 <code>#chatView</code> 里的 <code>#composer-mount</code>，并以 <code>bottom: 0</code> 锚在
+它身上——隐藏这个祖先就会把输入框跟着会话记录一起带走，而挂第二个实例会把
+草稿、运行状态、模型行分叉成两份，用户读作一个输入框的东西就有了两套状态。
+因此两个视角共用同一个输入框实例，图只替换它上方的滚动区。</p>
+<p>在图视角能直接发消息，发出的节点在下一次 capture 出现在图上——发送走的就是
+会话记录那条路径，没有改动，图视角不需要知道自己正在显示。</p>
+<p>图是<strong>盖住面板</strong>来取代会话记录的，不是去占列里的那个位置：<code>#chatView</code> 保持
+<code>flex: 1</code> 和满高，输入框的 <code>bottom: 0</code> 因此仍然落在面板底边，剩下的交给层叠
+顺序——图压在输入框 <code>z-index: 5</code> 之下。反过来把 <code>#chatView</code> 压扁，只会把输入
+框拽到面板中间。</p>
+<p>画布在输入框底下一直铺到边——从输入框后面平移过去只是一个手势，fit 会把图
+居中在输入框上方的空间里（<code>apps/web/lib/runtime-bridge/dag/interaction/view/canvas.ts::fitCanvas</code>），所以不需要预留 padding。</p>
+<h3 id="分支切换在图里">分支切换在图里<a class="header-anchor" href="#分支切换在图里">#</a></h3>
+<p>画布上方没有分支条。每条分支的名字是画在图里的按钮，锚在该分支最后一个对话层
+节点下方（<code>apps/web/lib/runtime-bridge/dag/render/labels/badges.ts</code>，第五节）：活跃分支的标签是 lane 色的扁平色块，点
+其他标签即 checkout。图本身已经画出分支结构，再来一条横条是重复信息，还会横穿
+面板右上角的悬浮视角按钮。重命名、删除、merge、attach 留在右侧栏的分支列表里，
+那里有这些流程需要的纵向空间。</p>
+<hr />
+<h2 id="〇先回答画什么两层粒度默认只画对话层">〇、先回答&quot;画什么&quot;：两层粒度，默认只画对话层<a class="header-anchor" href="#〇先回答画什么两层粒度默认只画对话层">#</a></h2>
+<p>一张会话图里有两类节点，量级差一个数量级：</p>
+<table>
+<thead>
+<tr>
+<th>层</th>
+<th>节点</th>
+<th>回答的问题</th>
+<th>量级</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>对话层</strong></td>
+<td>ROOT、user、llm 回复、spawn 分支根、merge、<strong>手动调用的顶层函数节点</strong>（用户的显式动作，fn-form/run 卡对应的 code 节点本体）</td>
+<td>会话什么形状：几轮、几支、谁开的谁</td>
+<td>个位数~几十</td>
+</tr>
+<tr>
+<td><strong>执行层</strong></td>
+<td>code（tool call）及其内部子调用</td>
+<td>某一轮内部干了什么</td>
+<td>一轮可达几十</td>
+</tr>
+</tbody>
+</table>
+<p><strong>默认可见性规则：Viewport 只布局对话层。</strong> 一轮干过的一切——每次函数调用、
+每个派出去的 agent——是这一轮的<strong>调用线程</strong>（第十二节）：默认折叠成节点肩上
+的一个数字，点节点才展开成旁边的一列真节点。</p>
+<p>两条归并让链保持在用户可见的粒度——<strong>一个三角形 = 一次回复到下一条用户消息
+之前的全部模型活动</strong>：</p>
+<ul>
+<li>运行时通知的回复不是链节点：agent 返回触发的那一轮（<code>source=&quot;job_followup&quot;</code>），
+以及后台命令结束触发的那一轮（<code>source=&quot;process_exit&quot;</code>）。函数返回后模型
+接着说话不画新节点，这些返回是同一件事的另一个尺度——回复归并进它的
+<strong>锚轮</strong>：沿 <code>predecessor</code> 爬过所有 followup 找到的那一轮。通知的合成用户
+消息是 <code>display=runtime</code>，从不画出；<code>graph_layout/filter.py</code> 先把回复改挂到
+通知的上家，回复就不会指向 payload 里不存在的节点（否则它会画成悬空孤点，
+之后每一轮都另起一列往右错开）。同一步（<code>bridge_hidden</code>）覆盖所有被剥掉的
+<code>display=runtime</code> 行，不只是通知：恢复被中断的运行会写一条合成的「继续被中断
+的任务」用户轮，它的续答改挂到被重启切断的那条回复上，分支在原列里接着走，
+而不是脱离整张图漂在下方。这条续答被标上 <code>resumed</code>：它是被切断回复的后半截
+（聊天里本来就画成同一条回复），所以和通知回复一样归并进同一个锚轮，画成一个
+节点，线程里装着前后两半的调用。一个值得点名的
+副作用：老回卷 bug 弄脏过 followup predecessor 的旧数据也解析到同一个锚，
+疤痕从此不再画成幻影分叉。</li>
+<li>spawn 的 agent 内部轮同样不上链。spawn 头就是那个 agent（第十二节），
+它 lane 里的一切归并进它。</li>
+</ul>
+<pre><code>默认（对话层）:                  点击回复展开它的线程:
+◇ROOT                          ◇ROOT
+├ ○你好                        ├ ○你好
+│ └ △回复                      │ └ △回复
+├ ○查天气                      ├ ○查天气
+│ └ △回复 ⁹                    │ └ △回复┄┐
+                               │        ■ bash
+                               │        ■ web_fetch
+                               │        ■ 子 agent ⁵
+                               │        ■ …(共9行)
+</code></pre>
+<p>理由：执行层信息在聊天流里已有更好的呈现（每轮的执行树卡片、Executions 页）。
+Viewport 的职责是让人一眼看清会话结构；50 个工具方块平铺会把 8 个结构节点
+淹没——一个真实的天气会话（66 节点，50+ 是 code）就是这个样子。</p>
+<blockquote>
+<p>聊天流与调用树两种视图不受影响：聊天流按 seq 铺顶层、函数嵌套折叠；
+Executions/执行树卡片沿 caller 全展开。同一份数据，三种投影。</p>
+</blockquote>
+<hr />
+<h2 id="一一个节点的位置-列-行">一、一个节点的位置 = (列, 行)<a class="header-anchor" href="#一一个节点的位置-列-行">#</a></h2>
+<ul>
+<li><strong>列（横向）= lane 起始列 + tier 缩进</strong></li>
+<li><strong>行（纵向）= depth</strong></li>
+</ul>
+<p>两轴步长相同（<code>COL_W == ROW_H</code>，<code>apps/web/lib/runtime-bridge/dag/types.ts</code>），整体自原点偏移
+<code>PAD_X</code> / <code>PAD_Y</code>——这就是画布点阵所画的那张方格。</p>
+<h3 id="lane-属于第几条分支">lane —— 属于第几条分支<a class="header-anchor" href="#lane-属于第几条分支">#</a></h3>
+<p><strong>数分支，按出现顺序发列号 0,1,2…，不跳号，不判断&quot;主干&quot;。</strong></p>
+<p>一条分支 = 一条对话链（user → llm → user → …）。三种事件产生新分支：</p>
+<table>
+<thead>
+<tr>
+<th>事件</th>
+<th>新分支的根</th>
+<th>挂接</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>retry / 改写某轮</td>
+<td>分叉出的 user / llm 节点</td>
+<td>与被替换节点共享 predecessor</td>
+</tr>
+<tr>
+<td>spawn（agent / send_message 派活）</td>
+<td>source=agent_spawn 的 user 节点</td>
+<td>caller=发起节点，predecessor 空</td>
+</tr>
+<tr>
+<td>merge 出的新主线</td>
+<td>merge 节点本身</td>
+<td>落 base 分支 lane（见场景 8），不新开</td>
+</tr>
+</tbody>
+</table>
+<p><strong>分支按实际占用列紧贴排</strong>：一条分支占用的列 = 起始列到其可见<strong>链</strong>节点的最深
+一格；下一条分支从上一条实际占用的最右列 +1 开始，互不重叠。以 fork 根开头的
+lane 与它分叉出来的 lane 之间<strong>多留一个空列</strong>——分支是平行版本，两格的空气就是
+这句话。tier 按 lane 内归零（后端给 fork 根的 tier 带着旧位置的偏移，不归零会让
+单节点分支凭空右移好几列）。<strong>fork lane 内部复刻主干</strong>：lane 的第一列是一根
+空的脊线——桥的虚线落在脊线上，线从 fork 根所在行起往下走，每一轮（含 fork
+根自己）向右错一列、从脊线上伸出来，和主干轮次从 ROOT 的线上伸出完全同构。
+分支以一条线开始，不以节点开始。只有胶囊和被取代的旧摘要——lane 里没有自己
+的用户轮次——桥才直接连到字形本身。
+线程条目（第十二节）不占 lane 宽度：它的列在 lane
+落定之后再选，取锚点右侧最近的、在插入行处没有连线竖着穿过的列（这一列在插入行
+以上和以下都有东西才算穿过）。完全在上方的不挡路，下方的会被整体推到线程下面，所以
+不同行上的线程可以共用一列——两条打开的线程仍不共享格子，横线也不会为了绕开根本
+碰不到这一行的 lane 而拉得很长。</p>
+<h3 id="tier-分支内往右缩进几格">tier —— 分支内往右缩进几格<a class="header-anchor" href="#tier-分支内往右缩进几格">#</a></h3>
+<p><strong>对话层按 role 固定。</strong> 执行层不再按 caller 深度缩进——展开的线程是一列扁平
+的时间序（第十二节），因为图要回答的是&quot;这一轮干了什么、按什么顺序&quot;；逐调用
+的嵌套是聊天流和 Executions 页的职责。</p>
+<table>
+<thead>
+<tr>
+<th>节点</th>
+<th>层</th>
+<th>列</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ROOT</td>
+<td>对话层</td>
+<td>tier 0</td>
+</tr>
+<tr>
+<td>user</td>
+<td>对话层</td>
+<td>tier 1</td>
+</tr>
+<tr>
+<td>llm 回复、merge</td>
+<td>对话层</td>
+<td>tier 2</td>
+</tr>
+<tr>
+<td>线程条目（调用方块、spawn 头）</td>
+<td>执行层</td>
+<td>锚点列 +1；嵌套展开的 agent 线程再 +1</td>
+</tr>
+</tbody>
+</table>
+<h3 id="depth-第几行">depth —— 第几行<a class="header-anchor" href="#depth-第几行">#</a></h3>
+<p>链的行号按<strong>结构父树的前序遍历</strong>分配：每个可见链节点独占一行，子树占多少行就
+把下方兄弟推多少行。行号<strong>不是</strong>&quot;到根跳数&quot;——那会把同一父的所有孩子叠在一行。</p>
+<p>一个&quot;横着长&quot;的例外：fork 根与它平行的那条链兄弟<strong>同一行</strong>（场景 3），同一分叉
+点的所有分支共享这一行——它们本就是同一轮的平行版本。每条分支桥接到紧邻左侧
+的那条分支，而不是跨回主干，虚线桥因此是一段两格长的同行横线。</p>
+<p>线程的行号<strong>递归</strong>分配（第十二节）：锚点的条目从它的下一行起（让开挂在它名下
+的分支行）逐行往下；展开的 spawn 自己的线程接着它的行继续，它占的行把父线程
+后面的条目往下推。链上锚点的线程落座后，它后面的对话层节点（以及已经落在插入
+位置下方的线程行）按占用行数下移——展开是插入，不是覆盖。跨会话 spawn 落到目标会话时是该会话
+自己的对话链（lane 0），不是侧枝（场景 12）。</p>
+<hr />
+<h2 id="二三条全局排版规则">二、三条全局排版规则<a class="header-anchor" href="#二三条全局排版规则">#</a></h2>
+<p><strong>① 方格网</strong>：<code>COL_W == ROW_H</code>，子节点严格落在父节点右下角（45°）。画布的点阵
+背景画的就是这张网（见上文&quot;画布是无限的&quot;），于是这一条是眼睛能验的性质，不是
+代码作的承诺。</p>
+<p><strong>② 严格对齐 + 紧凑化</strong>：节点落在格点上；<strong>空行上移补齐、空列左移补齐，不保留
+空行空列</strong>。本条适用于一切显隐变化：执行子树收起/展开、分支折叠、visibility
+过滤——收起后它占的行列立刻腾出。<strong>推论：任何&quot;占位框&quot;都违反本条</strong>——running
+状态用节点自身的色块表达（见图例），不画虚线占位节点。</p>
+<p><strong>③ 字形占格，文字是注文</strong>：一个节点占它那个格点；计数用注文灰挂在旁边，绝不
+装进按自身文字定尺寸的形状里。跟着标签长的字形，是每个邻居都得拿它量一遍的
+字形——这场谈判正是第十二节早先那颗药丸做错的事。所有字形（含第九节的压缩
+胶囊）都是同一种圆角图块（第四节），各占恰好一格；网格在相邻图块之间留出一格
+图块宽的空隙，图块间的传送带始终看得见。调用和你的消息在图标
+右边带一行注文灰的说明（&quot;Ran npm test&quot;&quot;Read a.ts&quot;、你写的开头；
+<code>render/labels/captions.ts</code>）。注文只占没人用的地方：沿本行一直写到下一个图块、分支标签
+或横穿的连线为止；正好从它起点竖着走过的分叉线，它会让到线的右边；地方不够就不画，
+所以它从不挤动布局。agent 站着的那个图块改显示 agent 的气
+泡；缩得很远时注文隐藏。</p>
+<hr />
+<h2 id="三连线颜色-分支线型-类型正交">三、连线：颜色 = 分支，线型 = 类型（正交）<a class="header-anchor" href="#三连线颜色-分支线型-类型正交">#</a></h2>
+<p>每条 lane 一个颜色（<code>LANE_COLORS</code>，即 <code>apps/web/app/styles/design/color.css</code> 里 <code>--lane-*</code> token 的 <code>var(--lane-N)</code> 引用；小地图经计算样式解析）。任何线用它所属/指向分支的
+lane 色；<strong>绝不给某类线固定颜色</strong>。类型只靠线型：</p>
+<p><strong>通往 HEAD 的路穿 HEAD 的颜色。</strong> 几条分支共享的轮次（从 ROOT 到分叉处）属于你当前
+所在的分支，所以它们、它们发起的调用以及它们的线都用 HEAD 的 lane 色
+（<code>layout/assign-lanes.ts</code> 的 <code>_stampPathLanes</code> 戳上 <code>_pathLane</code>，<code>_branchColor</code> 优先读
+它）。切到另一条分支，共享段就改画成那条分支的颜色；你离开的分支从分叉处往后保持自己
+的颜色。每个轮次的线都从 ROOT 沿主干往下画，线会重叠：<code>render/edges.ts</code> 最后画这条
+路，否则后画的分支会盖在它上面。</p>
+<table>
+<thead>
+<tr>
+<th>连线类型</th>
+<th>线型</th>
+<th>颜色</th>
+<th>默认</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>同分支父→子</td>
+<td>实线</td>
+<td>本分支色</td>
+<td>显示</td>
+</tr>
+<tr>
+<td>retry 分叉桥（起点 → 分支 lane 的脊线顶端，同行）</td>
+<td>虚线 <code>6 4</code> 横线；行错开时才走肘线</td>
+<td>本分支色</td>
+<td>显示</td>
+</tr>
+<tr>
+<td>调用线程（锚点 → 它的条目，第十二节）</td>
+<td>1.4px 实线——主干模式下探一层：锚点自己的列一根竖线，每个条目一根右伸横杆（先下后右，和链上连线同构）</td>
+<td>锚点的分支色</td>
+<td>展开时显示</td>
+</tr>
+<tr>
+<td>merge 汇入（peer tip → merge 节点）</td>
+<td>粗实线 2.4px</td>
+<td>peer 分支色</td>
+<td>显示</td>
+</tr>
+<tr>
+<td>attach 回流（源 tip → 嵌入位置）</td>
+<td>长虚线 <code>4 4</code></td>
+<td>源分支色</td>
+<td>两端都可见才画——agent 内部 tip 归并进三角形后不画线，spawn 头在线程上的位置就是返回关系</td>
+</tr>
+<tr>
+<td>分支间通信（send_message）</td>
+<td>点线 <code>1 5</code></td>
+<td>目标分支色</td>
+<td><strong>hover 才显示</strong>（量大，常驻会糊）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>链上连线和线程连线是传送带</strong>：一条 8px 的中性底轨（<code>.dag-belt</code>，单独一层压在
+所有线下面；不透明，共用主干或在路口相交的底轨叠在一起也不会变深），上面是 2px
+的分支色线。通向工作的传送带会运货：分支色的小珠沿底轨朝工作中的节点移动，压
+在实线下面，所以运行中的传送带不会被读成 ghost 虚线。链上的传送带在它通向的节点
+自己运行时转动；线程的传送带在它通向的条目之下有任何东西运行时转动——正在进行的
+调用，或 spawn 背后子 agent 的轮次——线程主干只转到那个条目为止。<code>paintBelts</code>
+通过每条传送带的 <code>data-to</code> 从图数据算出这一点，所以原地状态补丁也会重画它。ghost
+线保留虚线、不铺底轨：它不是下一次请求携带的内容。</p>
+<p><strong>所有线一律画到节点中心</strong>，由图块的底色填充盖住线头，不用量偏移，每种图块都
+严丝合缝。</p>
+<hr />
+<h2 id="四节点图例图标图块-角色色调-种类状态-css">四、节点图例：图标图块 = 角色，色调 = 种类，状态 = CSS<a class="header-anchor" href="#四节点图例图标图块-角色色调-种类状态-css">#</a></h2>
+<p><strong>每个节点都是同一种圆形色块</strong>（<code>apps/web/lib/runtime-bridge/dag/render/tiles.ts</code>）：
+28px 的圆，底色是节点自己颜色的浅色（色调 18% 混进画布色，所以不透明，能盖住下面
+的传送带线头），图标用全色。你的消息、回复和调用是同一家族；早先的版本把你的消息
+画成灰色凸起按钮、其余是黑色方底板加 38% 的图标，整张图读起来是一堆互不相干的灰色
+零件。每种状态都改变色块本身，像游戏里按下的按钮会亮起来——不在外面画任何东西：</p>
+<table>
+<thead>
+<tr>
+<th>状态</th>
+<th>色块</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>普通</td>
+<td>18% 底色，图标全色</td>
+</tr>
+<tr>
+<td>悬停</td>
+<td>30% 底色</td>
+</tr>
+<tr>
+<td>选中（第十三节）</td>
+<td>填满自己的颜色，图标变成画布色，放大 8%</td>
+</tr>
+<tr>
+<td>HEAD</td>
+<td>24% 底色，加一圈自己颜色的慢呼吸光晕</td>
+</tr>
+<tr>
+<td>不在下次请求里（第八节）</td>
+<td>10% 底色，图标 60%</td>
+</tr>
+<tr>
+<td>报错</td>
+<td>右上边缘的红色 <code>!</code> 角标</td>
+</tr>
+</tbody>
+</table>
+<p>调用沿用 <code>presentTool</code> 在会话
+记录里给它的图标和色调，&quot;运行了 npm test&quot;在两处长得一样；色调是共享 CSS 变量
+（<code>apps/web/app/styles/tool-tones.css</code>）。对话节点有自己的：</p>
+<table>
+<thead>
+<tr>
+<th>节点</th>
+<th>图标</th>
+<th>色调</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ROOT</td>
+<td>房子</td>
+<td>次级墨色</td>
+</tr>
+<tr>
+<td>user</td>
+<td>人像</td>
+<td>所在分支的颜色，分支既能从线也能从消息认出</td>
+</tr>
+<tr>
+<td>agent 回复</td>
+<td>agent 的角色：主 agent 是会话所用 Agent 的角色，子 agent 运行里是子 agent 的角色</td>
+<td>所在分支的颜色</td>
+</tr>
+<tr>
+<td>调用</td>
+<td>按工具（<code>presentTool</code>）</td>
+<td>按工具（shell、edit、read、search、web……）</td>
+</tr>
+<tr>
+<td>子 agent spawn</td>
+<td>子 agent 的角色</td>
+<td>所在分支的颜色——派发 agent 就是一次调用；展开进入 agent 的活动（第十二节）</td>
+</tr>
+<tr>
+<td>压缩摘要</td>
+<td>归档盒</td>
+<td>memory（第九节）</td>
+</tr>
+<tr>
+<td>merge / attach</td>
+<td>合并请求 / 链接</td>
+<td>plan</td>
+</tr>
+</tbody>
+</table>
+<p>agent 的角色就是它头像的形状（<a href="/docs/reference/design/ui/visual-system/agent-avatars.zh.html">Agent 头像</a>），像图标一样平面绘制：身体用圆片的颜色，眼睛挖空、露出后面的圆片（<code>components/avatar/bot/glyph.ts</code>）。颜色取分支色而不是角色自己的颜色，所以分支仍能按颜色区分，圆片的所有状态（浅色、HEAD、选中、缩远）照旧适用。主 agent 穿会话所用 Agent 的角色：图的节点不带 Agent id，所以由 <code>components/chat/dag/dag-view.tsx</code> 报给 <code>render/agent-look.ts</code>，变化时重画整张图。子 agent 穿它名字（标签上显示的名字）对应的角色，规则和没设头像的 Agent 一样，所以两个子 agent 长得不一样，同一个子 agent 在各处长得一样。图例和运行记录面板的 agent 行画的是同样的图案。</p>
+<p><strong>agent 站在它正在做的那一步上</strong>（<code>render/agents.ts</code>）。每个正在工作的 agent
+在它所在图块的左上角放一个分支色的状态圆点——就是 Activity 面板的 <code>indicator-dot</code>，工作时同样呼吸；同一图块上的第二个 agent 排在旁边；图块旁边一个气泡
+写着&quot;名字 · 在做什么&quot;（图块的活动文字，英文用进行时：&quot;思考中…&quot;&quot;运行 npm
+test&quot;）。agent 从整张图读出：一个节点属于它的链能追溯到的那个 spawn 根对应的子
+agent，否则属于主 agent；每个 agent 显示它最新的运行中节点。那个节点被折进计数时，
+圆点放在最近的已绘制图块上，气泡仍然说出那次调用；同一图块上的几个 agent 气泡上
+下堆叠。</p>
+<p>早先的版本在图块角上放一个写着 agent 首字母（&quot;M&quot;）的圆形令牌；没人看得懂这个字母，
+而气泡本来就写着 agent 的名字；之后换成套在图块外的一圈环，又太抢眼。现在圆点标出<em>在哪</em>，气泡说出<em>是谁</em>。</p>
+<p><strong>语义缩放。</strong> 缩小时圆点和气泡保持屏幕上的大小，像地图上的单位标记
+（<code>--dag-marker-scale</code>，由 <code>interaction/view/canvas.ts</code> 设置；标记以世界坐标钉在图块上，
+只缩放它的本体）。agent 的圆点钉在图块的角本身，而不是这个角在 100% 时的屏幕偏移，
+所以它跟着缩小的图块走，不会漂出去。低于 55% 时图标只剩几个像素的噪点，所以每个图块变成自己色调的
+实心块（<code>is-far</code>）：地图靠颜色读，被覆盖的图块仍比其余的亮。图块自己已经是个 7px 的点，
+旁边再放一个状态点就像两个节点，所以角上的圆点随图标一起隐藏；气泡自带的圆点仍标着在干活的 agent。</p>
+<p>缩到这么小时，画布像地图一样读：地图缩小时地名保持可读、显示得更少；以前所有标签跟着
+图一起缩成灰色小点。所以低于 55% 时：</p>
+<ul>
+<li>圆点在屏幕上固定约 7px，相隔 14px 的相邻点不会粘在一起；线不细于 1.5px；点击范围保持约 10px；</li>
+<li><strong>选中的节点始终醒目</strong>：有选中时，图的其余部分（点、线、文字）淡到 25%，选中的点保持
+本色（画布上的 <code>has-selection</code>，由 <code>interaction/selection/selection.ts</code> 设置）。不放大也不加
+描边：放大的点会和相邻的点糊在一起，墨色在浅色主题下是黑的，选中会变成一团黑。
+小地图用强调色把选中的节点画得更大，选中的东西在屏幕外也能在小地图上找到；</li>
+<li>分支名和你的消息开头（<code>is-turn</code> 注文，<code>render/labels/captions.ts</code>）保持可读。实际上所有
+标签——注文、分支名、折叠数——在缩放低于 100% 时都走同一条平缓的曲线
+（<code>--dag-label-scale</code>）：100% 时 12px，最小缩放时约 8.5px。字先跟着图缩小、到 55%
+又跳回原大，看起来像故障；一路保持 12px，又挤成一堵字墙。从 100% 往下，
+<code>interaction/view/far-labels.ts</code> 把离已显示标签不足 8px 的隐藏——先分支名（当前分支优先），
+再按离 HEAD 由近到远排你的消息，最后是调用；</li>
+<li>调用注文、折叠数和角标属于细节，隐藏；放大回来再看。</li>
+</ul>
+<p>什么都没在运行时，主 agent 的圆点停在 HEAD
+上，不呼吸，不带气泡。这一层从节点 DOM 重建，所以原地的状态补丁也会重画它。</p>
+<p><strong>HEAD 是色块自己身上的呼吸光晕</strong>：一圈色块颜色的 <code>drop-shadow</code>，以 2.4 秒的
+慢周期胀起又落下，直接盖在形状上（<code>data-head</code>）。光贴着字形轮廓走，任何缩放
+都跟随——不像画出来的光环圈，那读起来像旁边多了一个更糊的节点；也不像实心
+填充，填充改掉了形状词汇本身，而光晕下 HEAD 仍然一眼是和邻居一样的图块，只是亮着。
+<code>prefers-reduced-motion</code> 下脉动凝固成恒定光晕。HEAD 不带自己的覆盖标记：它是
+唯一不可能离开上下文窗口的节点——下一次请求就落在它上面。</p>
+<p><strong>status 映射</strong>——状态画在节点自己身上，不画独立的虚线占位框：</p>
+<table>
+<thead>
+<tr>
+<th>status</th>
+<th>画法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>success</td>
+<td>普通色块</td>
+</tr>
+<tr>
+<td>running</td>
+<td><code>is-running</code>：图标呼吸，它的 agent 的圆点和气泡出现</td>
+</tr>
+<tr>
+<td>error</td>
+<td><code>is-error</code>：右上角是 Activity 面板的红色角标，计数换成 <code>!</code>；色调不变，失败的 agent 回复仍是它自己颜色的角色</td>
+</tr>
+<tr>
+<td>cancelled</td>
+<td><code>is-faded</code>：色调变成 ghost 灰</td>
+</tr>
+</tbody>
+</table>
+<p><strong>徽标</strong>（附着在节点上，不占格）：</p>
+<table>
+<thead>
+<tr>
+<th>徽标</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>折叠数（右上肩，注文灰）</td>
+<td>节点折叠的调用线程的大小——第十二节，写作 <code>+N</code>（&quot;里面还有 N 个&quot;）。贴着字形，没有任何包裹形状：带轮廓的东西会被读成节点。展开后消失——调用都在屏上，数得出来</td>
+</tr>
+<tr>
+<td><code>↗</code>（右上角）</td>
+<td>跨会话 spawn 的<strong>两侧都标</strong>：目标 session 的第一个 user 节点标 <code>spawn_remote</code>，源 session 的发起节点标 <code>spawn_out</code>。目标投影把外部 caller 归到 ROOT；源 attach 卡片保留目标 session 和分支 head。跨会话 attach 的终点属于另一个图，因此不生成本图内 <code>attach_returns</code> 边。当前字形只标识跨会话关系，点击不会跳转。<strong>只在跨会话时出现</strong>：同会话 spawn 的两端在同一个图内，保留普通回流边，不加 ↗</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="五分支名-badge">五、分支名 badge<a class="header-anchor" href="#五分支名-badge">#</a></h2>
+<ul>
+<li><strong>锚定</strong>：分支<strong>当前可见的最深节点</strong>那一行，图块右侧，和消息旁的注记一样。默认（折叠）视图下就是
+最后一个对话层节点；调用线程展开时徽章跟到线程最底下的条目，收起时自动回去。
+分支归属按 lane（线程条目与锚轮同 lane），但只跟到本分支自己的后代：同 lane 的
+兄弟分支（从某一轮挂出去的定时任务回复）保留自己的末端。以前放在图块下方，名字
+会压到下一行；居中时长名字还会伸到左边的泳道，再被碰撞规则推到别的分支末端
+下面。图块上有 agent 气泡时名字让开，和注记一样。</li>
+<li><strong>spawn 的 agent 分支不立徽章</strong>：agent 就是线程上的那个三角形（第十二节），
+再立分支药丸是同一事实的第二种画法。从分支行的 head 爬链撞到 spawn 根就
+直接不放。</li>
+<li><strong>避让</strong>：名字在图块右侧，碰不到本列的下行竖线；沿行向右的线从字后穿过时被
+画布色光晕断开。</li>
+<li><strong>碰撞</strong>：按<strong>实测像素盒</strong>判定（badge 底宽＝名字实测宽度 + 内边距，不是按格子）。
+短名字在方格间距下几乎碰不上；分支名自动取自消息/任务描述时很长，同行锚位的
+盒子会叠——后到者（按分支序）向下顺延一行，直至无碰撞。</li>
+<li><strong>来源</strong>：badge 只来自 <code>list_branches</code> 的<strong>活跃分支</strong>（亮色、可点击 checkout）。
+<strong>合并即消名</strong>（git 语义）：被合并的分支不再画 badge；它的名字进 ◉ merge 节点
+的 tooltip（像 merge commit message 记录来源），session meta 里的名字数据保留。</li>
+<li>样式沿用 HEAD 标签（<code>--bg-hover</code> 圆角底、9px 文字、实测文字宽度撑底）。</li>
+</ul>
+<hr />
+<h2 id="六场景svg-权威在-spechtml共-13-个">六、场景（SVG 权威在 spec.html，共 13 个）<a class="header-anchor" href="#六场景svg-权威在-spechtml共-13-个">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>场景</th>
+<th>要点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1–7</td>
+<td>基础布局（单轮/多轮/retry/工具缩进/手动函数/综合/收起左移）</td>
+<td>场景 4 的工具调用在默认视图下先表现为肩上折叠数（场景 11），展开后才是线程方块</td>
+</tr>
+<tr>
+<td>8</td>
+<td>merge 多父汇聚</td>
+<td>◉ 实心带孔圆、落 base 分支 lane、peer 汇入粗实线（peer lane 色）；attach pointer 节点不画，只画线</td>
+</tr>
+<tr>
+<td>9</td>
+<td>分支间通信（send_message）</td>
+<td>点线 <code>1 5</code>、目标分支色、默认隐藏 hover 显示；目标分支末尾加 from_branch user 节点</td>
+</tr>
+<tr>
+<td>10</td>
+<td>spawn 派活 → 返回</td>
+<td>子 agent 头是发起轮线程上的一个条目（第十二节）：落在派活实际发生的序列位置，前后是它前后的调用。返回不需要额外的线——它触发的 followup 回复归并进同一个锚轮（第〇节），派活、干活、返回从上到下读一列（聊天流仍渲染 Spawned 卡片，显示序提前——见 <code>ui/invariants.md</code> 规则 9）</td>
+</tr>
+<tr>
+<td>11</td>
+<td>调用线程默认聚合</td>
+<td>见第〇节/第十二节：默认收成肩上折叠数，点击展开进布局，收起按规则② 即时回收；各节点展开状态互不影响、可递归</td>
+</tr>
+<tr>
+<td>12</td>
+<td>状态与徽标图例</td>
+<td>见第四节：status 画在节点色块上，不画占位框；跨会话 spawn 两侧都标 ↗</td>
+</tr>
+<tr>
+<td>13</td>
+<td>badge 锚定·避让·碰撞·已合并</td>
+<td>见第五节：名字放在本分支可见末节点那一行、图块右侧、碰撞下移一行、合并即消名（来源进 merge tooltip）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>回送节点与切换器（语义补充，无独立布局场景）</strong>：send_message 的回送
+（子分支答复作为 user 节点回到发起方 lane，<code>predecessor=发起点</code>）若与用户等待
+期间自己发的消息共享 predecessor，即构成 fork——<strong>回送节点参与 <code>&lt; N/M &gt;</code>
+切换器</strong>（它是发起方对话的真实延续替代；<code>source=from_branch</code> 不做
+agent_spawn 那样的隔离，隔离规则见 <code>ui/invariants.md</code> 规则 7）。回送节点是
+接收方链上的一轮，不看它的 <code>caller</code>：<code>caller</code> 只记录发出它的那轮，所以它按
+user 层（tier 1）排，回复在它右边一格，也从不算发送方的内部节点。它的标签是
+发送方名字加正文：图数据从 <code>preview</code> 去掉 <code>[message from …]</code> 回执行，发送方
+放在 <code>message_from</code>。</p>
+<p><strong>子代理再 spawn</strong>：默认派生预算下数据语义已禁止（<code>agent.max_spawn_depth=1</code>，
+只有主 agent 能 agent()，被 spawn 的 agent 自己干活，见 <code>ui/invariants.md</code>
+规则 6；调大预算就能再开代）。
+渲染层本来就递归（第十二节——agent 线程上的 spawn 是一个普通三角形），历史
+数据里的多代委托链照样画得出来。</p>
+<h2 id="七渲染管线代码地图">七、渲染管线（代码地图）<a class="header-anchor" href="#七渲染管线代码地图">#</a></h2>
+<pre><code>apps/web/lib/runtime-bridge/dag/
+  pipeline.ts        调度：passes → layout → edges → nodes → badges → visibility
+  interaction/view/canvas.ts    无限画布：视角（平移 / 缩放 / fit）和显出网格的点阵
+  interaction/view/gestures.ts  滚轮、捏合与拖动，它们移动视角
+  render/seat.ts           读回已画元素的 translate(x,y)，给画完之后才跑的步骤用
+  passes/            数据变换，按顺序：
+    merge-runs.ts               合并同一节点的连续 run
+    collapse-runtime-pairs.ts   把老式 display=runtime 的 user/assistant 包装对折成
+                                一行（`caller` 边 schema 之前，包装行自身没有聊天内容，
+                                单独画就是重复一列）
+    demote-decoration-cards.ts  把 LLM 触发的 runtime 卡片改挂，避免&quot;一条回复既有卡片
+                                子节点又有后续 user 轮&quot;被误判成 fork（那会把图劈成两条 lane）
+    fold-summaries.ts           折叠压缩胶囊覆盖的区间（第九节）
+    thread.ts                   调用线程模型（第〇节/第十二节）：followup 轮与
+                                agent 内部轮归并进锚、事件按时间归入锚的线程、
+                                按展开集算可见性
+  apps/web/lib/runtime-bridge/dag/layout/geometry.ts 第一节的实现：链节点按 lane/tier/depth 打包成格点
+                     （分支 lane 隔一空列、fork 根落兄弟行），再把每条展开
+                     的线程递归安放在锚点旁边，按插入行数下移后续链行，并占用
+                     每条线程列。
+                     **tier 不在这里算**——由后端
+                     `openprogram/state/store/session/graph/layout/tier.py` 算好随节点下发，
+                     前端只消费。
+  apps/web/lib/runtime-bridge/dag/render/edges.ts    第三节的线型表
+  apps/web/lib/runtime-bridge/dag/render/nodes.ts    第四节的图块 + 状态 + 徽标
+  apps/web/lib/runtime-bridge/dag/render/labels/badges.ts   第五节的分支名 badge
+  apps/web/lib/runtime-bridge/dag/store/globals.ts   展开状态、lastGraph、签名
+</code></pre>
+<p><strong>一次绘制的开销。</strong> 每次 capture 都整张重画 SVG，所以绘制器把两次 capture 之间不变的
+东西留着：每个图标只解析一次、克隆进各个图块；工具的展示按名字、参数和语言缓存；文字宽度
+按字体和字符串缓存。挂上新 SVG 时立刻设好它的 transform，需要面板尺寸的事都留到下一帧，
+所以一次 capture 不会自己强制一次布局。手势只改 store 里的视角，<code>applyView</code> 每帧画一次。
+平移只改两个平移量和点阵偏移；跟缩放比例绑定的工作——语义缩放变量、标签剔除、点阵间距——
+只在比例或画出的图变化时才做。150 个节点的会话，一次重绘约占主线程 5ms。</p>
+<p>后端 <code>openprogram/state/store/session/graph/builder.py</code> 产出节点数组（含 <code>branch_name</code> stamp、
+caller/predecessor），<code>graph_layout/</code> 做 lane/tier/depth 标注——<strong>tier 具体在
+<code>graph_layout/tier.py</code></strong>。验证工具：
+<code>python scripts/dag_dump.py &lt;session_id&gt;</code> 打印 lane/tier/depth + ASCII 网格。</p>
+<h2 id="八填充-上下文覆盖">八、填充 = 上下文覆盖<a class="header-anchor" href="#八填充-上下文覆盖">#</a></h2>
+<p>节点的填充表示它<strong>属于下一次 LLM 调用会携带的内容</strong>。被覆盖的图块
+（<code>is-covered</code>，由 <code>apps/web/lib/runtime-bridge/dag/render/visibility.ts</code> 设置）图标
+在带底色的色块上满墨；未覆盖的退后一步——底色降到 10%、图标 60%——快老化出窗口的
+图标 75%。两者都看得清：38% 的图标会让长会话的大半张图都发灰。气泡、
+注文和分支标签都是没有底块的文字，带一圈画布色光晕，线从后面穿过时在字周围断开。
+两种主题同一条规则，图例色块就是一个被覆盖的图块。下文
+的&quot;白色填充&quot;&quot;白点&quot;都指这个填充。没有模式可选，也没
+有开关要找：只要图在显示，它就独占面板。单个会话 tab 得到聊天外壳加这张图；
+两个会话 tab 分屏时两侧都是 <code>PeerSessionPane</code>，外壳——以及这张图——根本不
+渲染。所以图旁边永远不会有会话记录，&quot;哪些气泡在视口内&quot;给不出任何读数，白点
+就只是覆盖这一个意思。</p>
+<p>覆盖集由 <code>GET /api/sessions/{id}/context-range</code> 提供：从 head 回溯活跃分支，
+止于最近一次压缩摘要，再加上每个被覆盖的轮做过的调用。前驱回溯只看得到轮——
+调用是通过 <code>caller</code> 挂在它的回复下面的——所以路由补上 <code>render_context</code> 会读、
+且对话层归属在集合里的 code 节点，每个紧跟在它的归属轮后面
+（<code>openprogram/interfaces/server/routes/files/tree.py</code> 的 <code>_with_code_nodes</code>）。
+没有这一步，每个展开的调用都画成&quot;不在下一次请求里&quot;，而 <code>aged</code> 这个 code 节点
+才有的事实永远不会被置上。集合外的节点变暗。宿主调
+<code>enterExclusiveCoverageMode</code>（<code>apps/web/lib/runtime-bridge/dag/index.ts</code>）拉取并
+应用它。</p>
+<h3 id="覆盖数据形状">覆盖数据形状<a class="header-anchor" href="#覆盖数据形状">#</a></h3>
+<p>同一个响应逐节点带上上下文管线对&quot;仍在携带的内容&quot;施加的两级衰减：</p>
+<pre><code class="language-json"><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;session_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;…&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;node_ids&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;…&quot;</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;count&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;nodes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;node_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;…&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;in_context&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;aged&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;spilled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>含义</th>
+<th>后端来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>in_context</code></td>
+<td>节点在覆盖集内——每行恒为 true，因为这个列表<strong>就是</strong>覆盖集</td>
+<td><code>get_branch</code></td>
+</tr>
+<tr>
+<td><code>aged</code></td>
+<td>老到结果被折成一行残根的 code 节点</td>
+<td><code>openprogram/runtime/context/render.py::_aged_code_ids</code>，边界来自 <code>context/aging.py</code></td>
+</tr>
+<tr>
+<td><code>spilled</code></td>
+<td>结果已写入 <code>large_nodes/</code>，正文只留引用</td>
+<td><code>metadata.spilled</code>，由 <code>state/store/session/spill.py::spill_if_large</code> 写入</td>
+</tr>
+</tbody>
+</table>
+<p>两个标志都取自真实渲染路径调用的那几个函数，而不是平行的另一套实现——
+<strong>图永远不自己推导上下文语义</strong>，它问后端，然后把答案画出来。</p>
+<h3 id="两级衰减怎么画">两级衰减怎么画<a class="header-anchor" href="#两级衰减怎么画">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>状态</th>
+<th>画法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>在上下文中</td>
+<td>白色填充（基线）</td>
+</tr>
+<tr>
+<td><code>aged</code></td>
+<td>被覆盖的色块淡一档（20% 色调）——读作&quot;还在，但只剩梗概&quot;</td>
+</tr>
+<tr>
+<td><code>spilled</code></td>
+<td>节点<strong>左</strong>上角加 <code>▤</code></td>
+</tr>
+</tbody>
+</table>
+<p><code>aged</code> 压的是 <strong>色块的色调，绝不是 <code>opacity</code></strong>：填充是覆盖信号，整体
+变淡会把图标和徽标一起淡掉，两件独立的事就塌成一件。<code>▤</code> 占左上角是因为右上角已被
+占用（<code>!</code> 报错、<code>↗</code> 跨会话 spawn），右下角是折叠徽标；用 <code>&lt;text&gt;</code> 画，免得
+<code>_applyVisibility</code> 找&quot;第一个形状子元素&quot;时把它当成节点本体。</p>
+<p>压缩会用一个摘要覆盖一段节点；被覆盖的节点直接落出 <code>node_ids</code>，所以白点只落
+在摘要上，覆盖区间里一个都没有。图接下来拿这段区间做什么，见第九节。</p>
+<p>刷新时机：<code>context_stats</code> 或 <code>compaction_finished</code> 到达即重拉覆盖
+（<code>chat-handlers.ts</code>），所以白点跟着真实上下文走，前端从不自行计算。注意
+<code>aged</code> 和 <code>spilled</code> <strong>不进</strong>渲染签名，所以应用新覆盖时要打掉签名
+（<code>setLastSignature(null)</code>），否则重绘会静默 no-op，图会一直画着上一份答案。</p>
+<p>与压缩的联动：</p>
+<ul>
+<li><code>insert_summary_node</code> 不复制任何东西（dag/overview.md §8）：summary 是带
+<code>metadata.covers</code> 的普通 <code>role=llm</code> 链上成员，保留尾部保持自己的 id 与
+predecessor。因此分支 id <strong>就是</strong>图上画的 id，<code>/context-range</code> 直接返回
+它们——没有翻译层，也没有第二套 id 空间。</li>
+<li>summary 节点在数据关心的每一方面都和其他对话节点一样绘制；只有真正的合成
+桥会被过滤（<code>graph_layout/filter.py</code>）。它的胶囊是形状，不是 role——见第
+九节。</li>
+<li>压缩后被覆盖的前缀落出集合，白点落在 summary 与保留尾部上。</li>
+<li><code>compaction_finished</code> 必须触发 context range 刷新（<code>chat-handlers.ts</code>）；
+覆盖和其他一切一样事件驱动——前端永不自行计算上下文成员关系。</li>
+<li>集合中没有对应图节点的 id（如 <code>display=runtime</code> 的 task-followup 行）
+静默忽略：它们在上下文里，但不在图上。</li>
+</ul>
+<h2 id="九压缩读作一个胶囊不是十四个变暗的轮次">九、压缩读作一个胶囊，不是十四个变暗的轮次<a class="header-anchor" href="#九压缩读作一个胶囊不是十四个变暗的轮次">#</a></h2>
+<p>把覆盖区间画成变暗，对每个节点说的都对，对整个会话说的却是错的：十四个浅色
+圆圈照样占十四行，眼睛照样要走完它们才够得着活的对话。摘要是一个替所有这些
+说话的节点，图就该这么画它。</p>
+<p><strong>胶囊</strong>。摘要节点在主线上画成双圈圆：基准圆内套一道细一号的同心内圈。
+和其他字形同尺寸、占一格——内圈就是&quot;这一轮装着比它显出来更多的东西&quot;这句话。
+内圈跟随外圈的颜色态（inert / superseded 时同为灰）。它仍然是
+普通的 <code>role=llm</code> 链上成员（dag/overview.md §8）：形状就是形状，不是第四种
+role。</p>
+<p><strong>折叠数</strong>。折叠的胶囊在右肩戴着被覆盖节点数的数字——与轮次调用线程的折叠数
+（第十二节）同一套词汇，展开即消失，因为那时这摞被画出来了。没有文字注记：
+字形（双圈）说明它是什么，数字说明收了多少，幽灵说明它开着，详情在
+tooltip 和检查器里。</p>
+<p><strong>折叠按分支生效</strong>。摘要属于上下文携带它的那条分支——活跃链完整包含覆盖链段
+的分支（context/compaction.md 第三节）。只有在这条分支上胶囊才折叠：覆盖区间
+默认省略，点胶囊以幽灵态放回，再点收起（仅视图状态、永不落盘，新开会话一律
+从折叠态起步）。展开态在切分支之间是黏性的：在某条分支上被覆盖轮次按原文
+画过，摘要就记为已展开，切回携带分支时区间保持打开而不是重新收拢——看过就是
+看过。在其他任何分支上——从覆盖范围内部分出去的、同时代的姐妹——
+那些轮次就是活的上下文：按原文、按分支本色渲染，胶囊仍在屏上但呈惰性：保持
+本色、无折叠交互、无角标、无白底——节点集合在每条分支上完全一致，变的只是
+读法。切换分支时两种读法互换；存储的图分毫不动。</p>
+<p><strong>幽灵态</strong>。展开的区间保持分支本色；&quot;不属于下一次请求&quot;由入边虚线和白底的
+缺席来说（白填充只落在上下文集合里的节点上），绝不靠把颜色抽成灰——灰色留给
+死历史（失败废弃线、被取代的旧摘要），它们在任何分支上都永远回不了上下文。
+可读、可点、明显不是活的：&quot;摘要到底有没有抓住我说的话&quot;这个问题能被回答，
+而答案永远不会被误当成上下文。</p>
+<p><strong>滚动摘要</strong>。压缩是接力式的：第二次压缩把第一份摘要的文本喂回 summarizer，
+<code>extra_meta._last_summary_id</code> 指向替代者——下一次请求永远只带一份摘要，不会
+叠加。图说同一件事：只有现役摘要拿到 <code>covers_ids</code>（胶囊 + 折叠）；被取代的
+摘要保留行和胶囊轮廓，但带 <code>superseded_summary</code> 标记下发，画成幽灵灰，不折叠
+任何东西。</p>
+<p><strong>胶囊的位置</strong>。一个槽位，在所有状态、所有分支上完全一致：覆盖链段的末尾。
+展开时它跟在自己的幽灵后面（幽灵 → 胶囊 → 尾巴）；在不携带它的分支上它跟在
+同样那几轮的原文后面（白底原文 → 镂空胶囊 → 其余）；折叠就是同一槽位把链段收
+起，胶囊因此顶到主干最前。切分支、开合折叠都不改变位置——变的只有颜色和折
+叠。所有摆位都是 <code>fold-summaries.ts</code> 里仅视图层的克隆改写；存储行在任何状态
+下都保留真实的 <code>predecessor</code>（区间起点，即 ROOT）。</p>
+<p>两种状态下白点都不会落在被覆盖的节点上，因为 <code>/context-range</code> 根本不列它。
+一件事，一个来源（第八节）。</p>
+<h3 id="覆盖从哪来">覆盖从哪来<a class="header-anchor" href="#覆盖从哪来">#</a></h3>
+<p>持久化器写的是 <code>metadata.covers_ids</code>——摘要所替代的那些链节点的确切 id
+（context/persistence.py）。是 id 而不是 seq 区间：在 DAG 里 seq 区间会横跨
+姐妹分支，seq 恰好落进 <code>[first_seq, last_seq]</code> 的死分叉会被折进一个从未总结
+过它的胶囊，而且 HEAD 一动答案就变。<code>openprogram/state/store/session/graph/builder.py</code> 把这份列表原样
+下发，加上被覆盖轮次挂着的 caller 子树（被覆盖的轮连同它的调用一起折叠），
+丢掉已不存在的 id，结果作为 <code>covers_ids</code> 放在摘要行上。</p>
+<p>一个字段驱动全部：胶囊形状、折叠、褶皱数量、幽灵标记、检查器的覆盖行。前端不做
+任何 seq 运算，也不调第二个接口。</p>
+<h2 id="十失败轮以留档存在不以警报存在">十、失败轮以留档存在，不以警报存在<a class="header-anchor" href="#十失败轮以留档存在不以警报存在">#</a></h2>
+<p>以 <code>status = error</code> 收尾的轮是终态节点；重试从它的前驱分叉，对话在新线上继续
+（dag/overview.md）。失败线被保留——这正是选择分叉而不是回退的意义——但它永远
+不可能重新进入上下文。</p>
+<p>所以这样的节点一旦<strong>离开 HEAD 链</strong>，就画成和被覆盖轮同一种灰，检查器标注
+<code>失败轮 · 已留档</code>。两种状态长得像，是因为在图唯一关心的那根轴上它们<strong>就是</strong>
+一样的：在盘上、可读、永不进下一次请求。</p>
+<p>这层灰有意覆盖图块的色调。红色 <code>!</code> 的意思是&quot;这件事现在需要你&quot;，
+留档的线不是——重试已经发生过了。<code>!</code> 字形本身保留，所以这条线为什么终止仍然
+一眼可读。</p>
+<p>判定的两半缺一不可。只看 <code>status</code> 会把你正盯着的、还没重试的错误也刷灰；只看
+离开 HEAD 会把每一条兄弟分支都刷灰。节点必须<strong>既是失败、又已被放弃</strong>。</p>
+<p><code>status</code> 是存储自己的终态标记，由轮次机制写入（取消的情形见
+<a href="/docs/reference/design/runtime/execution/control.zh.html">统一运行控制</a>，它保持 <code>cancelled</code>、沿用自己的 50%
+灰化）。图读它，从不自己判定它。</p>
+<h2 id="十一悬停单击右键双击">十一、悬停、单击、右键、双击<a class="header-anchor" href="#十一悬停单击右键双击">#</a></h2>
+<p>一个问题一个面。信息窗曾经有三个——悬停卡片、停留后的二段展开、点击弹出的检
+查器——单击因此同时干两件事：弹窗又切换线程，弹窗还正好盖在它刚触发的展开
+上面。</p>
+<p><strong>悬停 → 简略卡</strong>。快速一瞥：角色（spawn 头标题写 <code>子 agent · &lt;名字&gt;</code>——
+名字就住在这里，第十二节）、model/tokens、一段短内容预览、折叠调用数，节点在
+运行中、已取消或失败时再加一行状态（完成是默认状态，不占一行）。token
+数字在节点带实测值时用 <code>llm.output_tokens</code>，没有时用 <code>chars/4</code>；卡片明说是
+哪一种（<code>tokens</code> / <code>tokens（估）</code>），没有文字的节点不给估算。键名共用一列固定
+宽度，值因此对齐。悬停稍候出现、移开即走。展开后的卡片显示节点完整 id：派生
+id（<code>&lt;回复&gt;_t_&lt;调用&gt;</code>）前十几个字符都一样。</p>
+<p><strong>单击 → 节点自己的动作</strong>。折叠/展开它的调用线程（第十二节）。没有别的——
+没有窗口和展开抢画面。右栏 Details 仍然静默填充，用户想看随时打开。</p>
+<p><strong>右键 → 同一张卡原地展开</strong>。不是第二个窗口：就是那一个卡片元素在原地加深
+（<code>apps/web/lib/runtime-bridge/dag/interaction/node/tooltip.ts expandTooltip</code>）——所有字段、更长的预览、覆盖状态、上下文站
+位、id——动词接在卡底：checkout 到此分支 · 从此节点 fork · fork 并编辑此消
+息（仅用户轮）· 复制节点 id · 查看原始 JSON。两个状态共用一个行构建器
+（<code>renderNodeInfo</code>），不可能各说各话；覆盖行读的是节点绘制时已经戳好的 DOM
+标记（<code>data-ghost</code>、<code>data-failed</code>、<code>.out-of-context</code>），卡片和它旁边那张图
+也不可能各说各话。展开后卡片变成可交互并停驻——移开鼠标不再收卡、悬停不会
+把它刷回简版，点击别处（或执行动词）才收。原始 JSON 复用检查器壳而不是弹模
+态——模态会为了给你看图里的一个节点，把图整个拿走。</p>
+<p><strong>双击用户轮 → fork 并编辑</strong>。消息文本落进输入框，HEAD 已经退回它的分叉点。
+其他节点保持 checkout 行为——回复和工具结果没有什么可编辑的。</p>
+<h3 id="每个动作都是既有操作">每个动作都是既有操作<a class="header-anchor" href="#每个动作都是既有操作">#</a></h3>
+<p>这里没有给协议添任何新动词：</p>
+<table>
+<thead>
+<tr>
+<th>动作</th>
+<th>路由</th>
+<th>为什么这就是全部实现</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>checkout</td>
+<td><code>POST /api/chat/checkout</code></td>
+<td>纯 HEAD 移动，和会话记录里的兄弟版本导航发的是同一个</td>
+</tr>
+<tr>
+<td>从节点 fork</td>
+<td><code>POST /api/chat/checkout</code></td>
+<td>fork <strong>就是</strong> checkout 加上意图——从一个已经有子节点的 HEAD 发出的轮，定义上就是它们的兄弟，会话记录里的&quot;从此分支&quot;按钮也是这么做的</td>
+</tr>
+<tr>
+<td>fork 并编辑</td>
+<td><code>POST /api/chat/checkout</code> 到该节点的<strong>前驱</strong>，再把文本填进输入框</td>
+<td>用户改完发送；这个发送就是针对新 HEAD 的普通发送，于是分叉发生，协议不变，也不用维护&quot;从节点 X 发&quot;这个概念。选前驱做分叉点，正是因为编辑后的消息必须站在原消息<strong>旁边</strong>而不是后面——和 <code>POST /api/chat/edit</code> 产生的形状一致</td>
+</tr>
+</tbody>
+</table>
+<p>检查器与菜单用命令式方式构建（<code>apps/web/lib/runtime-bridge/dag/interaction/node/inspector.ts</code>），因为图本身就是：它们浮
+在渲染器自己拥有的 SVG 之上、锚在节点几何上，在 React 树之外。</p>
+<p><strong>图例</strong>。一张卡片，说明各形状与两种灰，由缩放竖列的图例按钮开关
+（<code>apps/web/components/chat/dag/dag-view.tsx</code>），点画布不会关掉。默认关着——这套词汇很小、可学会，所以图例
+是给最初几次会话用的，不是画布上的常驻件。</p>
+<h2 id="十二调用线程一轮干的事是一个序列折叠成一个数">十二、调用线程：一轮干的事是一个序列，折叠成一个数<a class="header-anchor" href="#十二调用线程一轮干的事是一个序列折叠成一个数">#</a></h2>
+<p>一轮干过的一切——每次函数调用、每个派出去的 agent——是一个按时间排序的事件
+序列，这一轮的<strong>线程</strong>。调用和 spawn 是同一类事件的两个尺度，所以共用一条线、
+一个顺序、一个折叠。一次回复调了 41 个函数、派了两个 agent 的会话，默认是三个
+链节点加数字 <code>43</code>；展开是 43 个真节点，按实际发生顺序排一列。</p>
+<p><strong>折叠就是折叠</strong>。唯一的标记是节点右上肩的数字：注文灰的数字，贴着字形。不是
+徽标形状、不是药丸、不是线上的小方块——任何带轮廓的东西都会被读成节点，而幻影
+节点正是折叠最不能引发的误读。没有线程线、没有条目、没有别的。</p>
+<p><strong>展开就是纯展开</strong>。点节点把线程插进布局：一根锚点分支色的实线沿锚点自己的列竖直
+向下，每个事件用一根右伸横杆挂在线上——先下后右，主干模式下探一层。每个事件
+都是线上的真节点——每次调用一个方块（锚轮 lane 色），spawn
+的 agent 也是方块——一行一个事件，从上到下按调用顺序。后面的 user / assistant
+节点按插入的行数下移，锚点列上的线程竖线在下一颗三角形之前结束。每条打开的
+线程占用自己的列。收起按规则②
+回收行。</p>
+<p><strong>头就是 agent，spawn 就是调用</strong>。spawn 根画成方块——派发 agent 就是一次
+函数调用，方块就是调用词汇。派发调用节点（<code>agent</code> / <code>send_message</code>）归并进
+它：一次 spawn 一颗字形（没开出 spawn 的派发调用保留自己的方块——那次失败值得
+一颗节点）。agent 的内部轮不上链——归并进它（第〇节），展开后回复画三角形、
+调用画方块——它自己的线程再右移一列，点方块展开。spawn 方块在屏上期间（即所属轮次
+的线程已展开——这层选择已经保证默认画布干净），它右侧贴一枚徽章药丸（与分支
+徽章同款，apps/web/lib/runtime-bridge/dag/render/labels/badges.ts），作方块的名牌；点击把 agent 链的末端
+checkout 成活动分支——接管这个 agent 的对话。徽章永不压住节点：所有可见字形
+都预置进徽章碰撞盒，会压住节点的徽章自动下移一行。模型是递归的，画面也是：每一层都按同样的两
+条规则读，折叠数在肩上、展开成一列。嵌套展开的线程把父线程后面的条目往下推；
+链上锚点的线程同样插入后面的对话轮。展开是插入，不是覆盖。</p>
+<p><strong>没有注文</strong>。agent 的名字住在 tooltip 和 inspector 里（inspector 把节点标题
+写作 <code>子 agent · &lt;名字&gt;</code>，而不是 role 字段所说的 <code>user</code>）；画布只有字形和折叠
+数。名字在线上来自 runner 戳的 label（<code>spawned_from.label</code>），没有时回落到记录
+下来的分支名。</p>
+<p><strong>没有回流线</strong>。agent 的返回触发一轮 followup 回复，而那轮回复归并进线程所属的
+同一个锚（第〇节）——派活、干活、返回从上到下读一列。旧的 attach 回流虚线只在
+两端都是链上可见节点时才画，而 agent 内部 tip 从此不可见。</p>
+<p><strong>视图状态</strong>。<code>apps/web/lib/runtime-bridge/dag/store/globals.ts</code> 的 <code>_threadOpen</code>，按锚点 id 记（链轮或 spawn
+头——同一套词汇）。从不持久化，切会话清空，和第九节完全一致。spawn 头只在它
+上方整条线程链都展开时可见；它的条目同理——可见性属于整条祖先链，不属于节点
+自己的开关。</p>
+<h2 id="十三鼠标操作说明选择与删除节点">十三、鼠标、操作说明、选择与删除节点<a class="header-anchor" href="#十三鼠标操作说明选择与删除节点">#</a></h2>
+<p>画布只有一个鼠标，没有可切换的工具。以前把浏览、框选、套索拆成三个工具，每次拖动前
+都得先想手里拿的是哪个。现在一个鼠标全包：左键选择，右键移动镜头。</p>
+<table>
+<thead>
+<tr>
+<th>手势</th>
+<th>做什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>单击节点</td>
+<td>选中它，再执行节点自己的动作（第十一、十二节）</td>
+</tr>
+<tr>
+<td>在空白处拖动</td>
+<td>画框，碰到的节点全部选中</td>
+</tr>
+<tr>
+<td>Shift/⌘ + 单击或拖动</td>
+<td>加入选择，或把节点从选择中去掉</td>
+</tr>
+<tr>
+<td>单击空白处</td>
+<td>清空选择</td>
+</tr>
+<tr>
+<td>右键拖动</td>
+<td>平移，在图上任何地方都行（鼠标中键也平移）</td>
+</tr>
+<tr>
+<td>右键单击节点</td>
+<td>它的菜单（第十一节）</td>
+</tr>
+<tr>
+<td>滚轮或捏合</td>
+<td>以光标为中心缩放</td>
+</tr>
+<tr>
+<td>触控板双指滑动</td>
+<td>平移</td>
+</tr>
+<tr>
+<td>双击节点</td>
+<td>fork 并编辑（第十一节）</td>
+</tr>
+</tbody>
+</table>
+<p>鼠标滚轮像地图一样缩放；触控板双指滑动平移；捏合用自己的、更快的速率缩放。macOS 在右键按下时
+就触发菜单事件，那时还不知道会不会拖动，所以画布先拦下它，松开时指针没动才打开菜单。
+这些是设计定死的，不是设置项：碰到即选（没有&quot;必须全包住&quot;模式）（<code>apps/web/lib/runtime-bridge/dag/interaction/view/gestures.ts</code>、
+<code>interaction/node/nodes.ts</code>、<code>interaction/selection/selection.ts</code>）。</p>
+<p>画布上的控件都是应用按钮材质的凸起条（输入框底色加 composer 阴影，鼠标放上去阴影变深，和输入框那些按钮一样）：缩放竖列、操作条、小地图和窗格右上角的按钮。画布左缘没有竖条。
+<strong>找到正在工作的 agent</strong>（F，在缩放竖列里）保持缩放，把视图平滑移到正在工作的 agent 站着的图块；再按
+换到下一个正在工作的 agent，没人工作时移到 HEAD（<code>interaction/view/canvas.ts</code> 的
+<code>focusAgent</code>）。缩放在右缘的缩放竖列里（见“画布是无限的”）。竖列最后一个按钮（notes 图标——面板里一半是鼠标手势，不只是按键）打开<strong>操作说明面板</strong>：画布认的所有手势和按键，按鼠标、
+镜头、选择分组，显示在竖列左边、从顶部展开的面板里（<code>components/chat/dag/dag-key-sheet.tsx</code>）。按 <code>?</code>
+也能打开。它和图例一样是指南，行为也一样：一直开着，直到再点它的按钮、再按 <code>?</code>，或者打开图例把位置换掉；点画布、按 Esc 都不会关掉它。Esc 一次只退一层：先取消选择，再退出全屏。视图快捷键沿用设计工具的习惯：Shift+1
+缩放到全图，Shift+0 回到 100%，+ / − 按一档放大缩小，和缩放竖列的按钮同一步长
+（<code>interaction/selection/keys.ts</code>）。</p>
+<p><strong>选择。</strong> 选择是当前会话画布的视图状态。被选节点原地亮起（<code>is-selected</code>）：色块填满自己的颜色，图标变成画布色，像按下的按钮。外面不画任何东西——虚线圈、套在方块外的圈、图块后面的灰色亮盘都试过，都让边缘更难看清。框选的选择框是强调色描边加 8% 的强调色底。
+每次重绘后重新套用，并裁剪到画布仍画着的节点，所以被删除或被折叠掉的节点会自动离开
+选择；切会话时清空。在画布上做选择会把键盘焦点从输入框拿走，于是 Delete 和 Esc 作用
+于选择，不作用于草稿。</p>
+<p><strong>操作条。</strong> 有选择时，画布左上角出现一条操作条：<code>已选 N | ⌖ · 复制 ID · 删除 · ✕</code>，
+&quot;删除&quot;用危险色。⌖ 把视图缩放到正好装下所选节点，和设计工具的 Shift+2 一样（<code>interaction/view/canvas.ts</code> 的 <code>frameSelection</code>）。删除后几秒内它显示 <code>已删除 N 个节点 | 撤销</code>。它在左上角，
+不放右上角——那里是窗格的视角切换按钮。操作条和竖列是同一种凸起材质。</p>
+<p><strong>删除。</strong> Delete 或 ⌫ 立即删除选择，不弹确认，⌘Z 撤销。store
+（<code>openprogram/state/store/session/session_store/node_deletion.py</code>）按以下规则执行：</p>
+<ul>
+<li>只删被选节点，以及它们经 <code>caller</code> 拥有的东西：回复的工具调用、调用的子调用、调用
+派生的 agent 分支。只是在对话里排在后面的节点保留。前驱被删的存活节点改指向最近的
+存活前驱，所以删一个节点会把缺口接上，就像在流程图里删一个方框。</li>
+<li>一个字形代表它显示的所有行。归并进锚点的 followup 回复（第十二节）随锚点一起删；
+选中 spawn 方块删的是派生它的调度调用，agent 分支随之一起删。</li>
+<li>结构节点不能删：根节点、单独的 spawn 分支根、压缩摘要、attach/merge 机制节点。
+画布不把它们放进请求，store 也会拒绝。</li>
+<li>HEAD 被删时移到最近的存活前驱。被删分支尖上的分支名也随之移过去。</li>
+<li>不直接删除文件。节点文件移到 <code>&lt;sessions 根&gt;/.deleted-nodes/&lt;session&gt;/&lt;op_id&gt;/</code>
+（在会话 git 仓库之外），同时写一份日志，记下每条边、HEAD 和分支名的变化。超过
+24 小时的回收内容在下次删除时清理。</li>
+<li>撤销按日志倒放。此后被别的操作改动过的边或 HEAD 保留新值。</li>
+<li>有轮次在运行时两个动作都拒绝执行：正在跑的轮次可能正往要删的节点下面写。</li>
+</ul>
+<p>线上格式：<code>delete_nodes {session_id, node_ids}</code> → <code>nodes_deleted {ok, op_id, deleted, error}</code>；<code>restore_deleted_nodes {session_id, op_id}</code> →
+<code>nodes_restored</code>（<code>openprogram/interfaces/server/ws_actions/dag_nodes.py</code>）。
+成功时还会广播 <code>session_reload</code>，聊天记录和图一起重绘。撤销栈按会话分开，页面存在期间
+一直有效。</p>
+<h3 id="小地图">小地图<a class="header-anchor" href="#小地图">#</a></h3>
+<p>长会话会超出屏幕，所以画布有一张小地图，放在画布右上角、缩放竖列左边，材质与竖列相同。每个
+节点是一个其色调的点，点下面画着图里原有的连线（细、淡、用分支颜色，主干和分支一眼可辨），屏幕上看到的部分是一个强调色的框。在地图上按下或拖动，镜头就以当前
+缩放移到那里。地图框住的是整张图加上当前视野，所以视野框不会被裁掉；拖动期间地图保持不动。HEAD 画成带强调色描边的大点，就是地图上的&quot;你在这里&quot;；在地图上滚动滚轮，画布以视野中心缩放。默认隐藏，点竖列里的小地图按钮或按 M 显示、再按一次隐藏，选择保存在浏览器里。显示之后它一直在屏幕上：以前整张图装得下时地图会淡出，
+随着缩放时有时无，看起来像出错
+（<code>apps/web/lib/runtime-bridge/dag/interaction/view/minimap.ts</code>，随视图每帧重绘一次；点、线和
+颜色每张图只读一次）。</p>
+<h2 id="附录实现状态">附录：实现状态<a class="header-anchor" href="#附录实现状态">#</a></h2>
+<p>本规范已全部实现。各部分的落点：</p>
+<table>
+<thead>
+<tr>
+<th>规范条目</th>
+<th>实现</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>无限画布（平移 / 缩放 / fit / 点阵）</td>
+<td><code>apps/web/lib/runtime-bridge/dag/interaction/view/canvas.ts</code> 与 <code>apps/web/app/styles/dag/graph/canvas.css</code> 的 <code>.history-body</code>；视角状态在 <code>apps/web/lib/runtime-bridge/dag/store/globals.ts</code>；缩放竖列在 <code>apps/web/components/chat/dag/dag-view.tsx</code></td>
+</tr>
+<tr>
+<td>第一节 lane / tier / depth 布局</td>
+<td><code>apps/web/lib/runtime-bridge/dag/layout/geometry.ts::computeGeometry</code>（链 lane 按 tier 打包并 lane 内归零、前序分行、场景3分叉行+间隔列、线程递归安放并下移后续链行、占用线程列）；格点性、无重叠、线程列行、分叉几何均由 <code>apps/web/tests/dag/dag-subagent-thread.test.mjs</code> 真实执行并断言</td>
+</tr>
+<tr>
+<td>第二节 规则③ 字形占格</td>
+<td>没有任何形状按文字定尺寸；注文只占空格子，不挤动布局（<code>render/labels/captions.ts</code>）</td>
+</tr>
+<tr>
+<td>第四节 HEAD 呼吸光晕</td>
+<td><code>apps/web/lib/runtime-bridge/dag/render/nodes.ts</code> 戳 <code>data-head</code> 并把分支色写进 <code>color</code>；<code>dag-head-glow</code> 关键帧在 <code>apps/web/app/styles/dag/graph/nodes.css</code>（reduced-motion → 恒定光）；所有字形保持空心（<code>apps/web/lib/runtime-bridge/dag/render/shapes.ts</code>）；HEAD 指向已归并回复时落到锚上（<code>apps/web/lib/runtime-bridge/dag/pipeline.ts</code> 经 <code>threadModel.anchorOf</code>）</td>
+</tr>
+<tr>
+<td>第〇节/第十二节 调用线程聚合</td>
+<td><code>apps/web/lib/runtime-bridge/dag/passes/thread.ts</code>（<code>buildThreadModel</code>：锚归并、事件归属、递归可见性）；<code>apps/web/lib/runtime-bridge/dag/render/nodes.ts</code> 画肩上折叠数（<code>history-thread-count</code>）；<code>apps/web/lib/runtime-bridge/dag/store/globals.ts</code> 的 <code>_threadOpen</code></td>
+</tr>
+<tr>
+<td>规则②推论（不画占位框）</td>
+<td><code>apps/web/lib/runtime-bridge/dag/render/shapes.ts</code>：无 <code>square_outline</code>；task 渲染为普通方块</td>
+</tr>
+<tr>
+<td>第四节 状态画在描边上</td>
+<td><code>graph_builder</code> 下发 status；<code>nodes.ts</code> 把它设成图块的 CSS 状态（running 呼吸 / error 红色 ! / cancelled 灰化）</td>
+</tr>
+<tr>
+<td>第五节 badge 锚定</td>
+<td><code>apps/web/lib/runtime-bridge/dag/render/labels/badges.ts</code>：名字放在本分支可见末节点那一行、图块右侧、实测像素盒碰撞下移一行</td>
+</tr>
+<tr>
+<td>场景 8 merge 形状与连线</td>
+<td><code>apps/web/lib/runtime-bridge/dag/render/shapes.ts</code> <code>merge_dot</code>（◉）；<code>edges.ts</code> 汇入线 peer 色 2.4px 实线</td>
+</tr>
+<tr>
+<td>场景 8/10 attach 指针</td>
+<td>后端 display=runtime 过滤 + <code>graph_builder</code> 把 ref 戳到嵌入位置（<code>attach_returns</code>），<code>edges.ts</code> 画回流长虚线</td>
+</tr>
+<tr>
+<td>第四节 跨会话 ↗</td>
+<td><code>graph_builder</code> 根据目标根 provenance 打 <code>spawn_remote</code>，根据源 attach 的目标 session 打 <code>spawn_out</code>；<code>nodes.ts</code> 在两侧画 ↗。跨会话徽标点击跳转尚未实现</td>
+</tr>
+<tr>
+<td>第一节 spawn 根 tier</td>
+<td><code>graph_layout</code>：tier=1 / depth 同行 / lane 开新分支；<code>job_followup</code> / <code>process_exit</code> 回复挂回接收轮（<code>filter.py</code> 兜底）</td>
+</tr>
+<tr>
+<td>两个视角共用输入框</td>
+<td><code>apps/web/app/styles/chat/pane/center-pane.css</code> 隐藏 <code>#chatArea</code> 而非 <code>#chatView</code>；由 <code>apps/web/tests/tabs/center-perspective.test.mjs</code> 断言</td>
+</tr>
+<tr>
+<td>图内分支标签（checkout 按钮）</td>
+<td><code>apps/web/lib/runtime-bridge/dag/render/labels/badges.ts</code>；hover 样式在 <code>apps/web/app/styles/dag/graph/badges.css</code> 的 <code>.history-branch-tag</code></td>
+</tr>
+<tr>
+<td>第八节 覆盖查询</td>
+<td><code>routes/tree.py::_coverage_nodes</code> 填 <code>/context-range</code> 的 <code>nodes</code>；测试见 <code>tests/unit/context/test_context_range_coverage.py</code></td>
+</tr>
+<tr>
+<td>第八节 aged / spilled 绘制</td>
+<td><code>apps/web/lib/runtime-bridge/dag/render/nodes.ts</code>（淡一档的色块 + <code>▤</code>），数据来自 <code>apps/web/lib/runtime-bridge/dag/store/globals.ts</code> 的 <code>_coverageSet</code></td>
+</tr>
+<tr>
+<td>第九节 <code>covers_ids</code> 下发</td>
+<td><code>openprogram/state/store/session/graph/builder.py</code> 把 <code>metadata.covers</code> 解析成 id；测试见 <code>tests/unit/dag/test_graph_builder_covers.py</code></td>
+</tr>
+<tr>
+<td>第九节 胶囊形状</td>
+<td><code>apps/web/lib/runtime-bridge/dag/render/shapes.ts</code> 的 <code>capsule</code>（按 <code>covers_ids</code> 判定，打 <code>data-shape</code> 标让 <code>_applyShapeSize</code> 别改它的几何）</td>
+</tr>
+<tr>
+<td>第九节 折叠 / 褶皱 / 幽灵</td>
+<td><code>apps/web/lib/runtime-bridge/dag/passes/fold-summaries.ts</code>（折叠）、<code>apps/web/lib/runtime-bridge/dag/render/nodes.ts</code>（褶皱、<code>已压缩 · N 轮</code> 注记、幽灵描边）、<code>apps/web/lib/runtime-bridge/dag/render/edges.ts</code>（幽灵虚线边）、<code>apps/web/lib/runtime-bridge/dag/store/globals.ts</code> 的 <code>_summaryExpanded</code>；由 <code>apps/web/tests/dag/fold-summaries.test.mjs</code> 实跑</td>
+</tr>
+<tr>
+<td>第十节 失败留档</td>
+<td><code>apps/web/lib/runtime-bridge/dag/render/nodes.ts::_isArchivedFailure</code>——<code>status=error</code> <strong>且</strong>离开 HEAD 链；灰覆盖色调，<code>!</code> 保留</td>
+</tr>
+<tr>
+<td>第十一节 一张卡两个状态 / fork 并编辑</td>
+<td><code>apps/web/lib/runtime-bridge/dag/interaction/node/tooltip.ts</code>：<code>renderNodeInfo</code> 喂两个状态，<code>expandTooltip</code> 原地加深；<code>apps/web/lib/runtime-bridge/dag/interaction/node/inspector.ts</code> 只构建动词列表（+ 原始 JSON 层），<code>apps/web/lib/runtime-bridge/dag/interaction/node/nodes.ts</code> 接线；动作走 <code>POST /api/chat/checkout</code></td>
+</tr>
+<tr>
+<td>第十一节 图例</td>
+<td><code>apps/web/components/chat/dag/dag-view.tsx</code> 的 <code>DagLegend</code>（挂在缩放竖列里），<code>apps/web/app/styles/dag/panels/legend.css</code> 的 <code>.dag-legend</code></td>
+</tr>
+<tr>
+<td>第十二节 调用线程 + agent spawn</td>
+<td><code>apps/web/lib/runtime-bridge/dag/render/shapes.ts</code>（spawn → 方块）、<code>apps/web/lib/runtime-bridge/dag/passes/thread.ts</code>（模型）、<code>apps/web/lib/runtime-bridge/dag/layout/geometry.ts</code>（递归安放）、<code>apps/web/lib/runtime-bridge/dag/render/edges.ts</code>（线程点线、中心连线、场景3横桥）、<code>apps/web/lib/runtime-bridge/dag/render/nodes.ts</code>（<code>data-thread*</code>、肩上折叠数）、<code>apps/web/lib/runtime-bridge/dag/interaction/node/nodes.ts</code>（<code>toggleThreadOpen</code>）；由 <code>apps/web/tests/dag/dag-subagent-thread.test.mjs</code> 实跑</td>
+</tr>
+<tr>
+<td>第十二节 名字上线</td>
+<td><code>task/runner.py::_update_attach_card</code> 从 task 戳出 <code>attach.label</code>；<code>ws_actions/session/transcript.py::_annotate_spawn_origin</code> 把它带到 spawn 根的 <code>spawned_from.label</code>；测试见 <code>tests/unit/test_task_attach_integration.py</code></td>
+</tr>
+<tr>
+<td>第十三节 鼠标、操作说明、选择、删除 / 撤销</td>
+<td>选择状态、命中判定和选择框在 <code>apps/web/lib/runtime-bridge/dag/interaction/selection/selection.ts</code>；拖动在 <code>gestures.ts</code>，单击在 <code>nodes.ts</code>，快捷键在 <code>keys.ts</code>；扩展选择与撤销栈在 <code>node-delete.ts</code>；操作条在 <code>apps/web/components/chat/dag/dag-tools.tsx</code>，缩放竖列在 <code>dag-view.tsx</code>，操作说明面板在 <code>dag-key-sheet.tsx</code>，小地图在 <code>interaction/view/minimap.ts</code>，+ <code>apps/web/app/styles/dag/panels/tools.css</code>；store 拼接与日志在 <code>openprogram/state/store/session/session_store/node_deletion.py</code>；测试见 <code>tests/component/store/test_node_deletion.py</code> 与 <code>apps/web/tests/dag/dag-selection.test.mjs</code></td>
+</tr>
+</tbody>
+</table>
+<div class="page-updated"><span data-i18n="updated">Last updated</span> · 2026-11-06</div><div class="prevnext"><a class="pn-link pn-prev" href="/docs/reference/design/runtime/dag/persistence-observability.html" data-href-en="/docs/reference/design/runtime/dag/persistence-observability.html" data-href-zh="/docs/reference/design/runtime/dag/persistence-observability.zh.html"><span class="pn-dir" data-i18n="prev">Previous</span><span class="pn-title" data-title-zh="Agent 图所有权">Agent DAG ownership</span></a><a class="pn-link pn-next" href="/docs/reference/design/runtime/operations/branch-naming.html" data-href-en="/docs/reference/design/runtime/operations/branch-naming.html" data-href-zh="/docs/reference/design/runtime/operations/branch-naming.zh.html"><span class="pn-dir" data-i18n="next">Next</span><span class="pn-title" data-title-zh="分支命名">Branch naming</span></a></div></article></main>
+  <aside class="toc"><div class="toc-title" data-i18n="on_this_page">On this page</div>
+<ul class="toc-list">
+<li>
+<details class="toc-disclosure" open=""><summary>
+<a class="lvl-2" href="#图在哪中央的一个视角">图在哪：中央的一个视角</a>
+</summary>
+<ul class="toc-list">
+<li>
+<a class="lvl-3" href="#画布是无限的">画布是无限的</a>
+</li>
+<li>
+<a class="lvl-3" href="#输入框属于面板不属于会话记录">输入框属于面板，不属于会话记录</a>
+</li>
+<li>
+<a class="lvl-3" href="#分支切换在图里">分支切换在图里</a>
+</li>
+</ul>
+</details>
+</li>
+<li>
+<a class="lvl-2" href="#〇先回答画什么两层粒度默认只画对话层">〇、先回答"画什么"：两层粒度，默认只画对话层</a>
+</li>
+<li>
+<details class="toc-disclosure" open=""><summary>
+<a class="lvl-2" href="#一一个节点的位置-列-行">一、一个节点的位置 = (列, 行)</a>
+</summary>
+<ul class="toc-list">
+<li>
+<a class="lvl-3" href="#lane-属于第几条分支">lane —— 属于第几条分支</a>
+</li>
+<li>
+<a class="lvl-3" href="#tier-分支内往右缩进几格">tier —— 分支内往右缩进几格</a>
+</li>
+<li>
+<a class="lvl-3" href="#depth-第几行">depth —— 第几行</a>
+</li>
+</ul>
+</details>
+</li>
+<li>
+<a class="lvl-2" href="#二三条全局排版规则">二、三条全局排版规则</a>
+</li>
+<li>
+<a class="lvl-2" href="#三连线颜色-分支线型-类型正交">三、连线：颜色 = 分支，线型 = 类型（正交）</a>
+</li>
+<li>
+<a class="lvl-2" href="#四节点图例图标图块-角色色调-种类状态-css">四、节点图例：图标图块 = 角色，色调 = 种类，状态 = CSS</a>
+</li>
+<li>
+<a class="lvl-2" href="#五分支名-badge">五、分支名 badge</a>
+</li>
+<li>
+<a class="lvl-2" href="#六场景svg-权威在-spechtml共-13-个">六、场景（SVG 权威在 spec.html，共 13 个）</a>
+</li>
+<li>
+<a class="lvl-2" href="#七渲染管线代码地图">七、渲染管线（代码地图）</a>
+</li>
+<li>
+<details class="toc-disclosure" open=""><summary>
+<a class="lvl-2" href="#八填充-上下文覆盖">八、填充 = 上下文覆盖</a>
+</summary>
+<ul class="toc-list">
+<li>
+<a class="lvl-3" href="#覆盖数据形状">覆盖数据形状</a>
+</li>
+<li>
+<a class="lvl-3" href="#两级衰减怎么画">两级衰减怎么画</a>
+</li>
+</ul>
+</details>
+</li>
+<li>
+<details class="toc-disclosure" open=""><summary>
+<a class="lvl-2" href="#九压缩读作一个胶囊不是十四个变暗的轮次">九、压缩读作一个胶囊，不是十四个变暗的轮次</a>
+</summary>
+<ul class="toc-list">
+<li>
+<a class="lvl-3" href="#覆盖从哪来">覆盖从哪来</a>
+</li>
+</ul>
+</details>
+</li>
+<li>
+<a class="lvl-2" href="#十失败轮以留档存在不以警报存在">十、失败轮以留档存在，不以警报存在</a>
+</li>
+<li>
+<details class="toc-disclosure" open=""><summary>
+<a class="lvl-2" href="#十一悬停单击右键双击">十一、悬停、单击、右键、双击</a>
+</summary>
+<ul class="toc-list">
+<li>
+<a class="lvl-3" href="#每个动作都是既有操作">每个动作都是既有操作</a>
+</li>
+</ul>
+</details>
+</li>
+<li>
+<a class="lvl-2" href="#十二调用线程一轮干的事是一个序列折叠成一个数">十二、调用线程：一轮干的事是一个序列，折叠成一个数</a>
+</li>
+<li>
+<details class="toc-disclosure" open=""><summary>
+<a class="lvl-2" href="#十三鼠标操作说明选择与删除节点">十三、鼠标、操作说明、选择与删除节点</a>
+</summary>
+<ul class="toc-list">
+<li>
+<a class="lvl-3" href="#小地图">小地图</a>
+</li>
+</ul>
+</details>
+</li>
+<li>
+<a class="lvl-2" href="#附录实现状态">附录：实现状态</a>
+</li>
+</ul></aside>
+</div>
+
+<div class="search-overlay">
+  <div class="search-box">
+    <input type="text" data-i18n-ph="search_ph" placeholder="Search titles or text…" autocomplete="off" spellcheck="false">
+    <div class="search-results"></div>
+  </div>
+</div>
+
+<script src="/docs/assets/site.js?v=6520ba46"></script>
+</body>
+</html>

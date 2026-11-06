@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en" data-base="/docs/" data-page-lang="en" data-build="1793956776" data-alt-lang-url="/docs/reference/config-keys.zh.html">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Config keys · OpenProgram Docs</title>
+<meta name="description" content="Every user-editable setting, from the single schema that the setup CLI, openprogram config , the TUI settings screen, and the web Settings pages all render">
+<link rel="canonical" href="https://openprogram.io/docs/reference/config-keys.html">
+<link rel="alternate" type="text/markdown" href="https://openprogram.io/docs/reference/config-keys.html.md">
+<link rel="describedby" href="https://openprogram.io/llms.txt">
+<link rel="alternate" hreflang="en" href="https://openprogram.io/docs/reference/config-keys.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://openprogram.io/docs/reference/config-keys.zh.html">
+<link rel="alternate" hreflang="x-default" href="https://openprogram.io/docs/reference/config-keys.html">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"OpenProgram Docs","item":"https://openprogram.io/docs/"},{"@type":"ListItem","position":2,"name":"Config keys"}]}</script>
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="OpenProgram">
+<meta property="og:url" content="https://openprogram.io/docs/reference/config-keys.html">
+<meta property="og:title" content="Config keys · OpenProgram Docs">
+<meta property="og:description" content="Every user-editable setting, from the single schema that the setup CLI, openprogram config , the TUI settings screen, and the web Settings pages all render">
+<meta property="og:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:secure_url" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Config keys · OpenProgram Docs">
+<meta name="twitter:description" content="Every user-editable setting, from the single schema that the setup CLI, openprogram config , the TUI settings screen, and the web Settings pages all render">
+<meta name="twitter:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta name="twitter:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/docs/assets/mark.svg">
+<link rel="stylesheet" href="/docs/assets/site.css?v=6520ba46">
+<link rel="stylesheet" href="/docs/assets/pygments-light.css" media="(prefers-color-scheme: light)" id="pyg-light">
+<link rel="stylesheet" href="/docs/assets/pygments-dark.css" media="(prefers-color-scheme: dark)" id="pyg-dark">
+<script src="/docs/assets/theme.js?v=6520ba46"></script>
+
+</head>
+<body>
+<header class="topbar">
+  <button class="icon hamburger" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2.5 4.5h11M2.5 8h11M2.5 11.5h11"/></svg></button>
+  <a class="brand" href="/docs/index.html"><img class="mark" src="/docs/assets/mark.svg" alt="">OpenProgram Docs</a>
+  <div class="spacer"></div>
+  <button class="search-trigger" aria-label="Search">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14"/></svg><span class="label" data-i18n="search">Search docs</span><kbd>⌘K</kbd>
+  </button>
+  <div class="lang-wrap">
+    <button class="icon lang-trigger" id="lang-toggle" aria-haspopup="true" aria-expanded="false" aria-label="Language">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="6.2"/><path d="M1.8 8h12.4" stroke-linecap="round"/><ellipse cx="8" cy="8" rx="2.8" ry="6.2"/></svg><span class="lang-label">EN</span><svg class="chev" width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+    </button>
+    <div class="lang-menu" id="lang-menu" role="menu">
+      <button class="lang-opt" data-lang="en" role="menuitem"><span>English</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="lang-opt" data-lang="zh" role="menuitem"><span>简体中文</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+  <div class="theme-wrap">
+    <button class="icon" id="theme-toggle" aria-label="Theme" aria-haspopup="menu" aria-controls="theme-menu" aria-expanded="false"><svg class="ic-system" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="2.5" width="13" height="9" rx="1.5"/><path d="M8 11.5V14M5.5 14h5"/></svg><svg class="ic-moon" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M13.5 9.5A6 6 0 1 1 6.5 2.5a5 5 0 0 0 7 7z"/></svg><svg class="ic-sun" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="3.2"/><path d="M8 1.2v1.8M8 13v1.8M1.2 8H3M13 8h1.8M3.2 3.2l1.3 1.3M11.5 11.5l1.3 1.3M12.8 3.2l-1.3 1.3M4.5 11.5l-1.3 1.3"/></svg></button>
+    <div class="theme-menu" id="theme-menu" role="menu" aria-labelledby="theme-toggle">
+      <button class="theme-opt" data-theme-choice="system" role="menuitemradio" aria-checked="true"><span>Follow system</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="light" role="menuitemradio" aria-checked="false"><span>Light</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="dark" role="menuitemradio" aria-checked="false"><span>Dark</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+</header>
+<nav class="tabbar"><a class="tablink" href="/docs/README.html" data-title-zh="开始使用" data-href-en="/docs/README.html" data-href-zh="/docs/README.zh.html">Get started</a><a class="tablink" href="/docs/install/install.html" data-title-zh="安装" data-href-en="/docs/install/install.html" data-href-zh="/docs/install/install.zh.html">Install</a><a class="tablink" href="/docs/capabilities/README.html" data-title-zh="能力" data-href-en="/docs/capabilities/README.html" data-href-zh="/docs/capabilities/README.zh.html">Capabilities</a><a class="tablink" href="/docs/interfaces/README.html" data-title-zh="界面" data-href-en="/docs/interfaces/README.html" data-href-zh="/docs/interfaces/README.zh.html">Interfaces</a><a class="tablink" href="/docs/models/README.html" data-title-zh="模型" data-href-en="/docs/models/README.html" data-href-zh="/docs/models/README.zh.html">Models</a><a class="tablink" href="/docs/integrations/anthropic.html" data-title-zh="集成" data-href-en="/docs/integrations/anthropic.html" data-href-zh="/docs/integrations/anthropic.zh.html">Integrations</a><a class="tablink" href="/docs/server/README.html" data-title-zh="服务与运维" data-href-en="/docs/server/README.html" data-href-zh="/docs/server/README.zh.html">Server &amp; Ops</a><a class="tablink active" href="/docs/reference/README.html" data-title-zh="参考" data-href-en="/docs/reference/README.html" data-href-zh="/docs/reference/README.zh.html">Reference</a><a class="tablink" href="/docs/reference/design/README.html" data-title-zh="设计" data-href-en="/docs/reference/design/README.html" data-href-zh="/docs/reference/design/README.zh.html">Design</a></nav>
+
+<div class="scrim"></div>
+<div class="layout">
+  <nav class="sidebar" aria-label="Documentation">
+    <input class="nav-filter" type="text" data-i18n-ph="nav_filter"
+           aria-label="Filter docs" placeholder="Filter docs…" autocomplete="off" spellcheck="false">
+    <div class="nav-tree"><div class="nav-sec"><div class="nav-sec-title" data-title-zh="概览">Overview</div><a class="navlink" href="/docs/reference/README.html" data-title-zh="概览" data-href-en="/docs/reference/README.html" data-href-zh="/docs/reference/README.zh.html">Overview</a></div>
+<div class="nav-sec"><div class="nav-sec-title">API</div><a class="navlink" href="/docs/reference/API.html" data-title-zh="API 参考" data-href-en="/docs/reference/API.html" data-href-zh="/docs/reference/API.zh.html">API reference</a>
+<a class="navlink" href="/docs/reference/api/runtime.html" data-title-zh="运行时 API" data-href-en="/docs/reference/api/runtime.html" data-href-zh="/docs/reference/api/runtime.zh.html">Runtime API</a>
+<a class="navlink" href="/docs/reference/api/providers.html" data-title-zh="模型服务 API" data-href-en="/docs/reference/api/providers.html" data-href-zh="/docs/reference/api/providers.zh.html">Provider API</a>
+<a class="navlink" href="/docs/reference/api/agent.html" data-title-zh="函数 API" data-href-en="/docs/reference/api/agent.html" data-href-zh="/docs/reference/api/agent.zh.html">Function API</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="CLI 与配置">CLI and configuration</div><a class="navlink" href="/docs/reference/cli.html" data-title-zh="CLI 参考" data-href-en="/docs/reference/cli.html" data-href-zh="/docs/reference/cli.zh.html">CLI reference</a>
+<a class="navlink" href="/docs/reference/config.html" data-title-zh="配置项参考" data-href-en="/docs/reference/config.html" data-href-zh="/docs/reference/config.zh.html">Configuration reference</a>
+<a class="navlink" href="/docs/reference/diagnostics.html" data-title-zh="诊断" data-href-en="/docs/reference/diagnostics.html" data-href-zh="/docs/reference/diagnostics.zh.html">Diagnostics</a>
+<a class="navlink" href="/docs/reference/session-export.html" data-title-zh="会话导出" data-href-en="/docs/reference/session-export.html" data-href-zh="/docs/reference/session-export.zh.html">Session export</a>
+<a class="navlink" href="/docs/reference/output-styles.html" data-title-zh="输出风格" data-href-en="/docs/reference/output-styles.html" data-href-zh="/docs/reference/output-styles.zh.html">Output styles</a>
+<a class="navlink active" href="/docs/reference/config-keys.html" data-title-zh="配置键" data-href-en="/docs/reference/config-keys.html" data-href-zh="/docs/reference/config-keys.zh.html">Config keys</a>
+<a class="navlink" href="/docs/reference/provider-registry.html" data-title-zh="模型服务清单" data-href-en="/docs/reference/provider-registry.html" data-href-zh="/docs/reference/provider-registry.zh.html">Provider registry</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="对比">Comparisons</div><a class="navlink" href="/docs/reference/comparisons/ai-agent-frameworks.html" data-title-zh="框架对比" data-href-en="/docs/reference/comparisons/ai-agent-frameworks.html" data-href-zh="/docs/reference/comparisons/ai-agent-frameworks.zh.html">Framework comparison</a>
+<a class="navlink" href="/docs/reference/comparisons/related-projects.html" data-title-zh="相关项目" data-href-en="/docs/reference/comparisons/related-projects.html" data-href-zh="/docs/reference/comparisons/related-projects.zh.html">Related projects</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="CLI 命令">CLI commands</div><a class="navlink" href="/docs/reference/cli/README.html" data-title-zh="全局参数" data-href-en="/docs/reference/cli/README.html" data-href-zh="/docs/reference/cli/README.zh.html">Global flags</a>
+<a class="navlink" href="/docs/reference/cli/acp.html" data-title-zh="编辑器协议" data-href-en="/docs/reference/cli/acp.html" data-href-zh="/docs/reference/cli/acp.zh.html">acp</a>
+<a class="navlink" href="/docs/reference/cli/agents.html" data-title-zh="Agent 管理" data-href-en="/docs/reference/cli/agents.html" data-href-zh="/docs/reference/cli/agents.zh.html">agents</a>
+<a class="navlink" href="/docs/reference/cli/backup.html" data-title-zh="备份" data-href-en="/docs/reference/cli/backup.html" data-href-zh="/docs/reference/cli/backup.zh.html">backup</a>
+<a class="navlink" href="/docs/reference/cli/browser.html" data-title-zh="浏览器" data-href-en="/docs/reference/cli/browser.html" data-href-zh="/docs/reference/cli/browser.zh.html">browser</a>
+<a class="navlink" href="/docs/reference/cli/channels.html" data-title-zh="渠道" data-href-en="/docs/reference/cli/channels.html" data-href-zh="/docs/reference/cli/channels.zh.html">channels</a>
+<a class="navlink" href="/docs/reference/cli/chat.html" data-title-zh="聊天" data-href-en="/docs/reference/cli/chat.html" data-href-zh="/docs/reference/cli/chat.zh.html">chat</a>
+<a class="navlink" href="/docs/reference/cli/completion.html" data-title-zh="命令补全" data-href-en="/docs/reference/cli/completion.html" data-href-zh="/docs/reference/cli/completion.zh.html">completion</a>
+<a class="navlink" href="/docs/reference/cli/config.html" data-title-zh="设置" data-href-en="/docs/reference/cli/config.html" data-href-zh="/docs/reference/cli/config.zh.html">config</a>
+<a class="navlink" href="/docs/reference/cli/cron-worker.html" data-title-zh="定时任务" data-href-en="/docs/reference/cli/cron-worker.html" data-href-zh="/docs/reference/cli/cron-worker.zh.html">cron-worker</a>
+<a class="navlink" href="/docs/reference/cli/dev.html" data-title-zh="开发版" data-href-en="/docs/reference/cli/dev.html" data-href-zh="/docs/reference/cli/dev.zh.html">dev</a>
+<a class="navlink" href="/docs/reference/cli/diagnostics.html" data-title-zh="诊断包" data-href-en="/docs/reference/cli/diagnostics.html" data-href-zh="/docs/reference/cli/diagnostics.zh.html">diagnostics</a>
+<a class="navlink" href="/docs/reference/cli/doctor.html" data-title-zh="环境诊断" data-href-en="/docs/reference/cli/doctor.html" data-href-zh="/docs/reference/cli/doctor.zh.html">doctor</a>
+<a class="navlink" href="/docs/reference/cli/environments.html" data-title-zh="运行环境" data-href-en="/docs/reference/cli/environments.html" data-href-zh="/docs/reference/cli/environments.zh.html">environments</a>
+<a class="navlink" href="/docs/reference/cli/execution.html" data-title-zh="执行控制" data-href-en="/docs/reference/cli/execution.html" data-href-zh="/docs/reference/cli/execution.zh.html">execution</a>
+<a class="navlink" href="/docs/reference/cli/jobs.html" data-title-zh="后台任务" data-href-en="/docs/reference/cli/jobs.html" data-href-zh="/docs/reference/cli/jobs.zh.html">jobs</a>
+<a class="navlink" href="/docs/reference/cli/logs.html" data-title-zh="日志" data-href-en="/docs/reference/cli/logs.html" data-href-zh="/docs/reference/cli/logs.zh.html">logs</a>
+<a class="navlink" href="/docs/reference/cli/mcp.html" data-title-zh="MCP 服务器" data-href-en="/docs/reference/cli/mcp.html" data-href-zh="/docs/reference/cli/mcp.zh.html">mcp</a>
+<a class="navlink" href="/docs/reference/cli/memory.html" data-title-zh="记忆" data-href-en="/docs/reference/cli/memory.html" data-href-zh="/docs/reference/cli/memory.zh.html">memory</a>
+<a class="navlink" href="/docs/reference/cli/permissions.html" data-title-zh="CLI：权限规则" data-href-en="/docs/reference/cli/permissions.html" data-href-zh="/docs/reference/cli/permissions.zh.html">permissions</a>
+<a class="navlink" href="/docs/reference/cli/plugins.html" data-title-zh="插件" data-href-en="/docs/reference/cli/plugins.html" data-href-zh="/docs/reference/cli/plugins.zh.html">plugins</a>
+<a class="navlink" href="/docs/reference/cli/ports.html" data-title-zh="端口" data-href-en="/docs/reference/cli/ports.html" data-href-zh="/docs/reference/cli/ports.zh.html">ports</a>
+<a class="navlink" href="/docs/reference/cli/programs.html" data-title-zh="程序" data-href-en="/docs/reference/cli/programs.html" data-href-zh="/docs/reference/cli/programs.zh.html">programs</a>
+<a class="navlink" href="/docs/reference/cli/providers.html" data-title-zh="模型服务" data-href-en="/docs/reference/cli/providers.html" data-href-zh="/docs/reference/cli/providers.zh.html">providers</a>
+<a class="navlink" href="/docs/reference/cli/recordings.html" data-title-zh="录制" data-href-en="/docs/reference/cli/recordings.html" data-href-zh="/docs/reference/cli/recordings.zh.html">recordings</a>
+<a class="navlink" href="/docs/reference/cli/rescue.html" data-title-zh="恢复" data-href-en="/docs/reference/cli/rescue.html" data-href-zh="/docs/reference/cli/rescue.zh.html">rescue</a>
+<a class="navlink" href="/docs/reference/cli/restart.html" data-title-zh="重启" data-href-en="/docs/reference/cli/restart.html" data-href-zh="/docs/reference/cli/restart.zh.html">restart</a>
+<a class="navlink" href="/docs/reference/cli/scheduler-worker.html" data-title-zh="任务调度" data-href-en="/docs/reference/cli/scheduler-worker.html" data-href-zh="/docs/reference/cli/scheduler-worker.zh.html">scheduler-worker</a>
+<a class="navlink" href="/docs/reference/cli/secrets.html" data-title-zh="凭据" data-href-en="/docs/reference/cli/secrets.html" data-href-zh="/docs/reference/cli/secrets.zh.html">secrets</a>
+<a class="navlink" href="/docs/reference/cli/self-update.html" data-title-zh="应用更新" data-href-en="/docs/reference/cli/self-update.html" data-href-zh="/docs/reference/cli/self-update.zh.html">self-update</a>
+<a class="navlink" href="/docs/reference/cli/sessions.html" data-title-zh="会话" data-href-en="/docs/reference/cli/sessions.html" data-href-zh="/docs/reference/cli/sessions.zh.html">sessions</a>
+<a class="navlink" href="/docs/reference/cli/setup.html" data-title-zh="初始设置" data-href-en="/docs/reference/cli/setup.html" data-href-zh="/docs/reference/cli/setup.zh.html">setup</a>
+<a class="navlink" href="/docs/reference/cli/skills.html" data-title-zh="技能" data-href-en="/docs/reference/cli/skills.html" data-href-zh="/docs/reference/cli/skills.zh.html">skills</a>
+<a class="navlink" href="/docs/reference/cli/status.html" data-title-zh="运行状态" data-href-en="/docs/reference/cli/status.html" data-href-zh="/docs/reference/cli/status.zh.html">status</a>
+<a class="navlink" href="/docs/reference/cli/stop.html" data-title-zh="停止" data-href-en="/docs/reference/cli/stop.html" data-href-zh="/docs/reference/cli/stop.zh.html">stop</a>
+<a class="navlink" href="/docs/reference/cli/subagent.html" data-title-zh="子 Agent" data-href-en="/docs/reference/cli/subagent.html" data-href-zh="/docs/reference/cli/subagent.zh.html">subagent</a>
+<a class="navlink" href="/docs/reference/cli/trash.html" data-title-zh="删除恢复" data-href-en="/docs/reference/cli/trash.html" data-href-zh="/docs/reference/cli/trash.zh.html">trash</a>
+<a class="navlink" href="/docs/reference/cli/tui.html" data-title-zh="终端界面" data-href-en="/docs/reference/cli/tui.html" data-href-zh="/docs/reference/cli/tui.zh.html">tui</a>
+<a class="navlink" href="/docs/reference/cli/update.html" data-title-zh="更新检查" data-href-en="/docs/reference/cli/update.html" data-href-zh="/docs/reference/cli/update.zh.html">update</a>
+<a class="navlink" href="/docs/reference/cli/upgrade.html" data-title-zh="版本升级" data-href-en="/docs/reference/cli/upgrade.html" data-href-zh="/docs/reference/cli/upgrade.zh.html">upgrade</a>
+<a class="navlink" href="/docs/reference/cli/web.html" data-title-zh="网页界面" data-href-en="/docs/reference/cli/web.html" data-href-zh="/docs/reference/cli/web.zh.html">web</a>
+<a class="navlink" href="/docs/reference/cli/worker.html" data-title-zh="后台服务" data-href-en="/docs/reference/cli/worker.html" data-href-zh="/docs/reference/cli/worker.zh.html">worker</a></div></div>
+  </nav>
+  <main class="content"><button class="fs-toggle" aria-label="Fullscreen" title="Fullscreen (Esc to exit)"><svg class="ic-expand" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.2 2H2v4.2M9.8 2H14v4.2M6.2 14H2V9.8M9.8 14H14V9.8"/></svg><svg class="ic-collapse" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6.2h4.2V2M14 6.2H9.8V2M2 9.8h4.2V14M14 9.8H9.8V14"/></svg></button><article><nav class="breadcrumb"><span class="bc-seg" data-title-zh="参考">Reference</span> <span class='bc-sep'>›</span> <span class="bc-seg" data-title-zh="CLI 与配置">CLI and configuration</span> <span class='bc-sep'>›</span> <span class="bc-seg bc-current" data-title-zh="配置键">Config keys</span></nav><!-- GENERATED FILE — do not edit. Rebuilt by scripts/docs_site/generate_reference.py from openprogram/state/settings.py. -->
+<h1 id="config-keys">Config keys<a class="header-anchor" href="#config-keys">#</a></h1>
+<p>Every user-editable setting, from the single schema that the <code>setup</code> CLI, <code>openprogram config</code>, the TUI settings screen, and the web Settings pages all render from. <code>apply</code> says when a change takes effect: <code>live</code> = immediately, <code>next_start</code> = on the next worker/web start.</p>
+<h2 id="execution">Execution<a class="header-anchor" href="#execution">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Default</th>
+<th>Apply</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>execution.prevent_idle_sleep</code></td>
+<td><code>False</code></td>
+<td><code>live</code></td>
+<td>On macOS, prevent idle system sleep during active agent execution. Disabled by default. Read at the next execution; display sleep and explicit sleep remain available.</td>
+</tr>
+<tr>
+<td><code>execution.instant_steer</code></td>
+<td><code>True</code></td>
+<td><code>live</code></td>
+<td>On by default. A message sent while the agent is replying stops the response being generated (text, reasoning or a tool call still being written) and continues with your message. Tools that already started still finish first. Off: the message waits until the current response ends.</td>
+</tr>
+<tr>
+<td><code>execution.code_change_policy</code></td>
+<td><code>keep_original</code></td>
+<td><code>live</code></td>
+<td>Durable functions keep their original code by default. use_latest resumes with current code and saved step results. Incompatible progress requires explicit recovery. An individual Continue command can override this choice.</td>
+</tr>
+<tr>
+<td><code>execution.auto_resume_window_seconds</code></td>
+<td><code>-1</code></td>
+<td><code>live</code></td>
+<td>Automatically continue restart-owned checkpoints after interruption. Default: -1 (no time limit). Zero disables automatic restart; positive values set a deadline in seconds. Existing deadlines never extend; user pauses, cancellation and unconfirmed external operations require explicit recovery.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="ports">Ports<a class="header-anchor" href="#ports">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Default</th>
+<th>Apply</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ui.web_port</code></td>
+<td><code>18100</code></td>
+<td><code>next_start</code></td>
+<td>The port the web UI itself is served on — the address you open in the browser. Must differ from the backend port.</td>
+</tr>
+<tr>
+<td><code>ui.open_browser</code></td>
+<td><code>True</code></td>
+<td><code>next_start</code></td>
+<td>When you run <code>openprogram web</code>, also pop open a browser window pointed at the UI. Turn off to start the server only and open the address yourself (e.g. on a headless server).</td>
+</tr>
+<tr>
+<td><code>web.host</code></td>
+<td><code>127.0.0.1</code></td>
+<td><code>next_start</code></td>
+<td>Network interface the server listens on. The default only accepts connections from this machine. Setting 0.0.0.0 exposes the authenticated UI to other interfaces and requires at least one exact web.allowed_origins entry. Prefer HTTPS through a same-host reverse proxy for any untrusted network.</td>
+</tr>
+<tr>
+<td><code>web.allowed_origins</code></td>
+<td><code>[]</code></td>
+<td><code>next_start</code></td>
+<td>Exact browser Origins allowed to address this OpenProgram instance. Each value is scheme://host[:port], such as https://agent.example.com. This is a request-Origin and Host allowlist, not a CORS list for cross-origin frontends.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="mcp-server">MCP server<a class="header-anchor" href="#mcp-server">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Default</th>
+<th>Apply</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>mcp_server.exposed_tools</code></td>
+<td><code>[]</code></td>
+<td><code>next_start</code></td>
+<td>Runtime tools available to authenticated MCP clients. Empty by default; changes apply on the next server start.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="security">Security<a class="header-anchor" href="#security">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Default</th>
+<th>Apply</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>security.outbound_url</code></td>
+<td><code>{'exceptions': []}</code></td>
+<td><code>live</code></td>
+<td>Owner-only exact Origin or CIDR exceptions for declared configured-service consumers, plus an optional policy proxy that explicitly asserts target-policy enforcement.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="voice">Voice<a class="header-anchor" href="#voice">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Default</th>
+<th>Apply</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>voice.engine</code></td>
+<td><code>auto</code></td>
+<td><code>live</code></td>
+<td>Turns the composer microphone's recording into text. <code>auto</code> uses local whisper.cpp when its model is downloaded, then OpenAI, then Groq. <code>local</code> keeps audio on this computer (needs <code>brew install whisper-cpp</code>).</td>
+</tr>
+<tr>
+<td><code>voice.language</code></td>
+<td><code>auto</code></td>
+<td><code>live</code></td>
+<td><code>auto</code> lets the engine detect the language of each phrase.</td>
+</tr>
+<tr>
+<td><code>voice.model</code></td>
+<td>``</td>
+<td><code>live</code></td>
+<td>Empty uses the engine's default: gpt-4o-mini-transcribe (OpenAI), whisper-large-v3-turbo (Groq), large-v3-turbo-q5_0 (local). Applies only when an engine is chosen.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="computer-use">Computer use<a class="header-anchor" href="#computer-use">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Default</th>
+<th>Apply</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>computer_use.vm_url</code></td>
+<td>``</td>
+<td><code>live</code></td>
+<td>Base URL of an OSWorld-compatible server (GET /screenshot, POST /execute), e.g. http://192.168.64.2:5000. Set it to give computer_use_agent its vm target; empty turns it off.</td>
+</tr>
+<tr>
+<td><code>computer_use.chrome_extension_token</code></td>
+<td><em>(secret)</em></td>
+<td><code>live</code></td>
+<td>The token shown by the Playwright Extension in your Chrome or Edge. With it, computer_use_agent's browser target connects to your own browser without asking which tab to share; empty asks each time.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="search">Search<a class="header-anchor" href="#search">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Default</th>
+<th>Apply</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>search.default_provider</code></td>
+<td><code>auto</code></td>
+<td><code>live</code></td>
+<td><code>auto</code> picks the highest-priority configured provider.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="memory">Memory<a class="header-anchor" href="#memory">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Default</th>
+<th>Apply</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>memory.backend</code></td>
+<td><code>local</code></td>
+<td><code>next_start</code></td>
+<td><code>local</code> = on-disk memory tool; <code>none</code> = disabled.</td>
+</tr>
+<tr>
+<td><code>memory.writer.model</code></td>
+<td>``</td>
+<td><code>live</code></td>
+<td>Empty uses the default Agent's model, or the last used model when that Agent has none. Set provider/model to choose the model for background memory writing and organizing.</td>
+</tr>
+<tr>
+<td><code>memory.writer.enabled</code></td>
+<td><code>True</code></td>
+<td><code>live</code></td>
+<td>Turn completed conversations into Topic records in the background.</td>
+</tr>
+<tr>
+<td><code>memory.writer.verify</code></td>
+<td><code>False</code></td>
+<td><code>live</code></td>
+<td>After a background write, ask a question about one fact it recorded, search Memory for the answer, and repair the Topics when the answer cannot be found. Costs several extra model calls per write.</td>
+</tr>
+<tr>
+<td><code>memory.writer.trigger_tokens</code></td>
+<td><code>16000</code></td>
+<td><code>live</code></td>
+<td>Conversation tokens accumulated before a background write.</td>
+</tr>
+<tr>
+<td><code>memory.retrieval.method</code></td>
+<td><code>bm25</code></td>
+<td><code>live</code></td>
+<td>Retrieval used for automatic recall and Memory search.</td>
+</tr>
+<tr>
+<td><code>memory.retrieval.hybrid.weighting</code></td>
+<td><code>auto</code></td>
+<td><code>live</code></td>
+<td>How hybrid recall weighs keywords against meaning. <code>auto</code> favours keywords for queries with a date, a quoted phrase or a name, and balances them otherwise.</td>
+</tr>
+<tr>
+<td><code>memory.retrieval.hybrid.file_boost</code></td>
+<td><code>True</code></td>
+<td><code>live</code></td>
+<td>In hybrid recall, raise the best paragraph of a Topic that several matches come from.</td>
+</tr>
+<tr>
+<td><code>memory.retrieval.top_k</code></td>
+<td><code>5</code></td>
+<td><code>live</code></td>
+<td>Maximum matching records added automatically to a turn.</td>
+</tr>
+<tr>
+<td><code>memory.layers.project</code></td>
+<td><code>True</code></td>
+<td><code>live</code></td>
+<td>A conversation in a project also reads that project's own Memory, kept in ~/.openprogram/projects/&lt;project&gt;/memory.</td>
+</tr>
+<tr>
+<td><code>memory.layers.project_writes</code></td>
+<td><code>True</code></td>
+<td><code>live</code></td>
+<td>With Project memory on, write what a project's conversations record into that project's Memory instead of the personal one.</td>
+</tr>
+<tr>
+<td><code>memory.core.inject</code></td>
+<td><code>True</code></td>
+<td><code>live</code></td>
+<td>Inject the compact Core view into each system prompt.</td>
+</tr>
+<tr>
+<td><code>memory.recent.limit</code></td>
+<td><code>50</code></td>
+<td><code>live</code></td>
+<td>Latest records retained in the Recent derived view.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="recordings">Recordings<a class="header-anchor" href="#recordings">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Default</th>
+<th>Apply</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>record_replay.mode</code></td>
+<td><code>off</code></td>
+<td><code>next_start</code></td>
+<td>Record or strictly replay all LLM provider calls on the next process start.</td>
+</tr>
+<tr>
+<td><code>record_replay.file</code></td>
+<td>``</td>
+<td><code>next_start</code></td>
+<td>Managed recording ID or an explicit replay file path; record mode accepts IDs only.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="models">Models<a class="header-anchor" href="#models">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Default</th>
+<th>Apply</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>model_fallback.mode</code></td>
+<td><code>off</code></td>
+<td><code>live</code></td>
+<td>When a reply fails before any text arrives because the model is rate limited, overloaded, down or unreachable, try another model. <code>same-provider</code> tries up to two other enabled models of the same provider; <code>list</code> tries the Fallback model list in order. <code>off</code> shows the error instead.</td>
+</tr>
+<tr>
+<td><code>model_fallback.models</code></td>
+<td><code>[]</code></td>
+<td><code>live</code></td>
+<td>Used when Fallback models is <code>list</code>: &quot;provider/model&quot; ids tried in order, for example [&quot;anthropic/claude-sonnet-5-5&quot;].</td>
+</tr>
+<tr>
+<td><code>privacy.redact_requests</code></td>
+<td><code>False</code></td>
+<td><code>live</code></td>
+<td>Before a request goes to the model provider, replace API keys, tokens, passwords, private keys and email addresses with placeholders such as [[SECRET_1]], and put the real values back into the reply and the tool calls it makes. The provider never sees them.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="agent">Agent<a class="header-anchor" href="#agent">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Default</th>
+<th>Apply</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>agent.output_style</code></td>
+<td><code>default</code></td>
+<td><code>live</code></td>
+<td>Appends a block of guidance to the system prompt describing how replies should be written. <code>default</code> appends nothing. Drop a <code>&lt;name&gt;.md</code> file in <code>~/.openprogram/output-styles/</code> or <code>./output-styles/</code> to add your own.</td>
+</tr>
+<tr>
+<td><code>agent.max_spawn_depth</code></td>
+<td><code>1</code></td>
+<td><code>live</code></td>
+<td>How many generations of NEW agents one chain may create. 1 (default) = you spawn workers and a worker does the work itself; 2 lets a worker spawn its own worker. 0 = no limit. Only creating an agent counts, so an agent that reads a worker's result can still create the next wave. A spawn past the limit is refused with a message telling the agent to do the work itself.</td>
+</tr>
+<tr>
+<td><code>agent.max_messages</code></td>
+<td><code>8</code></td>
+<td><code>live</code></td>
+<td>How many messages one collaboration chain may pass in total — spawns, send_message deliveries, and agent(to=…) dispatches all count, and a reply coming back counts too, so A↔B ping-pong stops at the ceiling. 8 by default, 0 = no limit.</td>
+</tr>
+<tr>
+<td><code>agent.max_spawn_fanout</code></td>
+<td><code>8</code></td>
+<td><code>live</code></td>
+<td>How many agents ONE turn may create, counted per (session, turn). The chain budgets bound how deep and how far a chain goes, not how wide one turn opens it. 8 by default = two widths of the task pool, so a turn can fill the pool and keep one wave queued; the next spawn is refused and points the agent at the ones it already has. 0 = no limit. Raise OPENPROGRAM_JOB_WORKERS with it or the extra agents only queue longer.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="agent-resources">Agent resources<a class="header-anchor" href="#agent-resources">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Default</th>
+<th>Apply</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>agent.resource_limits.max_live_per_session</code></td>
+<td>—</td>
+<td><code>live</code></td>
+<td>Empty means inherit or unlimited; non-empty values must be positive.</td>
+</tr>
+<tr>
+<td><code>agent.resource_limits.max_queued_per_session</code></td>
+<td>—</td>
+<td><code>live</code></td>
+<td>Empty means inherit or unlimited; non-empty values must be positive.</td>
+</tr>
+<tr>
+<td><code>agent.resource_limits.max_jobs_per_session</code></td>
+<td>—</td>
+<td><code>live</code></td>
+<td>Empty means inherit or unlimited; non-empty values must be positive.</td>
+</tr>
+<tr>
+<td><code>agent.resource_limits.max_total_tokens</code></td>
+<td>—</td>
+<td><code>live</code></td>
+<td>Empty means inherit or unlimited; non-empty values must be positive.</td>
+</tr>
+<tr>
+<td><code>agent.resource_limits.max_cost_usd</code></td>
+<td>—</td>
+<td><code>live</code></td>
+<td>Empty means inherit or unlimited; non-empty values must be positive.</td>
+</tr>
+<tr>
+<td><code>agent.resource_limits.max_runtime_seconds</code></td>
+<td>—</td>
+<td><code>live</code></td>
+<td>Empty means inherit or unlimited; non-empty values must be positive.</td>
+</tr>
+<tr>
+<td><code>agent.resource_limits.idle_timeout_seconds</code></td>
+<td>—</td>
+<td><code>live</code></td>
+<td>Empty means inherit or unlimited; non-empty values must be positive.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="hooks">Hooks<a class="header-anchor" href="#hooks">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Default</th>
+<th>Apply</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>hooks</code></td>
+<td><code>{}</code></td>
+<td><code>next_start</code></td>
+<td>Shell commands subscribed to bus events, as {&quot;&lt;event&gt;&quot;: [{&quot;command&quot;: &quot;...&quot;, &quot;timeout&quot;: 60}]}. The event arrives as JSON on the command's stdin. Gate events (tool.before, turn.stop) follow the Claude Code hooks exit-code protocol: exit 0 allows, exit 2 denies with stderr as the reason, any other exit code is ignored (fail-open). Notify events (turn.start, turn.end, session.start, goal.update) run the command in the background and ignore the exit code. Timeout defaults to 60 seconds per command. Read once at worker start — restart to apply.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="sandbox">Sandbox<a class="header-anchor" href="#sandbox">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Default</th>
+<th>Apply</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sandbox.mode</code></td>
+<td><code>off</code></td>
+<td><code>live</code></td>
+<td><code>off</code> (the default) runs local commands without a sandbox unless a conversation turns Sandbox on in its composer menu, which then uses the backend when it is available. <code>auto</code> uses the sandbox in every conversation when its backend is available and otherwise keeps local commands usable without one. <code>danger-full-access</code> runs local model-driven commands with your full user authority. <code>workspace-write</code> applies the host-native sandbox (macOS sandbox-exec, Linux bubblewrap, or bubblewrap delegated to the default WSL2 distribution on Windows), restricts writes to the working directory and configured roots, blocks the paths listed under Blocked read paths, and disables network. Read per command, so a change applies to the next command everywhere — including background threads and spawned subprocesses.</td>
+</tr>
+<tr>
+<td><code>sandbox.writable_roots</code></td>
+<td><code>[]</code></td>
+<td><code>live</code></td>
+<td>Directories a sandboxed command may write besides the working directory, as a JSON list. <code>~</code> is expanded.</td>
+</tr>
+<tr>
+<td><code>sandbox.deny_read</code></td>
+<td><code>['~/.ssh/**', '~/.aws/**', '~/.gnupg/**', '~/.openprogram/auth/**', '~/.claude.json', '~/.claude/.credentials.json', '~/.config/gh/**', '~/.netrc', '~/Library/Keychains/**', '**/.env']</code></td>
+<td><code>live</code></td>
+<td>Globs a sandboxed command cannot read, as a JSON list. Ships loaded with the credential paths, because a command that reads a key can still deliver it without any network: the memory writer's output returns to a later session's context. <code>**</code> matches any depth; on Linux a pattern containing a wildcard in the middle has no equivalent and is skipped, since bubblewrap masks paths rather than matching them. Protect sensitive Linux content with an exact path or a directory-level deny whose prefix is concrete, such as <code>/absolute/path/to/secrets/**</code>; do not rely on <code>**/.env</code> there.</td>
+</tr>
+<tr>
+<td><code>sandbox.allow_read</code></td>
+<td><code>[]</code></td>
+<td><code>live</code></td>
+<td>Concrete paths re-opened inside a wider sandbox.deny_read entry. Narrower path wins; an equally-specific deny still blocks. Cannot open ~/.openprogram/auth or the agentics directory.</td>
+</tr>
+<tr>
+<td><code>sandbox.deny_write</code></td>
+<td><code>[]</code></td>
+<td><code>live</code></td>
+<td>Globs a sandboxed command cannot write even inside the working directory, as a JSON list — the paths that arrange for code to run later outside the sandbox. The directory the function watcher auto-imports is always blocked and is not listed here, because a <code>.py</code> dropped there executes in the agent process within seconds. Empty otherwise: adding <code>**/.git/hooks/**</code> closes the next escape of that shape and also makes <code>git init</code> and <code>git clone</code> fail, since both write that directory.</td>
+</tr>
+<tr>
+<td><code>sandbox.network</code></td>
+<td><code>False</code></td>
+<td><code>live</code></td>
+<td>Off means a sandboxed command has no network at all, which is what stops anything it read from leaving the machine. Turn it on and sandboxed package downloads work again, along with every other outbound connection.</td>
+</tr>
+<tr>
+<td><code>sandbox.network_domains</code></td>
+<td>—</td>
+<td><code>live</code></td>
+<td>Optional macOS-only domain map, for example {&quot;example.com&quot;: &quot;allow&quot;, &quot;*.example.org&quot;: &quot;deny&quot;}. Requires network enabled. Null preserves ordinary network mode; an empty map denies all. Deny wins. Only public HTTP port 80 and HTTPS CONNECT port 443 are supported. Commands cannot bypass the managed proxy; unsupported platforms fail closed.</td>
+</tr>
+<tr>
+<td><code>sandbox.pass_env</code></td>
+<td><code>[]</code></td>
+<td><code>live</code></td>
+<td>A sandboxed command inherits only PATH, HOME, SHELL, USER, LOGNAME, TERM, TMPDIR, TZ, PWD, LANG and LC_*, so API keys in your environment do not reach it. Name any additional variables here.</td>
+</tr>
+<tr>
+<td><code>sandbox.unavailable_policy</code></td>
+<td><code>refuse</code></td>
+<td><code>live</code></td>
+<td>What happens when the mode is on but the platform backend is missing or cannot create its required isolation. <code>refuse</code> fails the command and says why. <code>warn</code> runs it unsandboxed and logs a warning — convenient, and the reason a security setting can end up doing nothing without anyone noticing.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="git">Git<a class="header-anchor" href="#git">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Default</th>
+<th>Apply</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>git.co_author</code></td>
+<td><code>True</code></td>
+<td><code>live</code></td>
+<td>Add the trailer <code>Co-Authored-By: &lt;model&gt; &lt;noreply@openprogram.dev&gt;</code> to commits OpenProgram writes, so the AI contribution is visible in <code>git log</code>. The model's display name is used when known, otherwise <code>OpenProgram</code>. Turning this off stops OpenProgram adding any attribution trailer.</td>
+</tr>
+<tr>
+<td><code>git.allow_remote_write</code></td>
+<td><code>False</code></td>
+<td><code>live</code></td>
+<td>Let the <code>commit-push-pr</code> flow run <code>git push</code> and <code>gh pr create</code>. Off by default: branching, staging, and committing are local and reversible, but a push and a pull request are visible to other people and cannot be undone by resetting the local tree. Leave it off to keep the flow stopping at the commit, and use <code>git push --dry-run</code> to see what a push would send.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="updates">Updates<a class="header-anchor" href="#updates">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Default</th>
+<th>Apply</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>update.channel</code></td>
+<td><code>stable</code></td>
+<td><code>live</code></td>
+<td>Which line of releases <code>openprogram upgrade</code> follows. Managed installs use the latest stable GitHub Release; source checkouts use origin/main.</td>
+</tr>
+</tbody>
+</table>
+<div class="prevnext"><a class="pn-link pn-prev" href="/docs/reference/output-styles.html" data-href-en="/docs/reference/output-styles.html" data-href-zh="/docs/reference/output-styles.zh.html"><span class="pn-dir" data-i18n="prev">Previous</span><span class="pn-title" data-title-zh="输出风格">Output styles</span></a><a class="pn-link pn-next" href="/docs/reference/provider-registry.html" data-href-en="/docs/reference/provider-registry.html" data-href-zh="/docs/reference/provider-registry.zh.html"><span class="pn-dir" data-i18n="next">Next</span><span class="pn-title" data-title-zh="模型服务清单">Provider registry</span></a></div></article></main>
+  <aside class="toc"><div class="toc-title" data-i18n="on_this_page">On this page</div>
+<ul class="toc-list">
+<li>
+<a class="lvl-2" href="#execution">Execution</a>
+</li>
+<li>
+<a class="lvl-2" href="#ports">Ports</a>
+</li>
+<li>
+<a class="lvl-2" href="#mcp-server">MCP server</a>
+</li>
+<li>
+<a class="lvl-2" href="#security">Security</a>
+</li>
+<li>
+<a class="lvl-2" href="#voice">Voice</a>
+</li>
+<li>
+<a class="lvl-2" href="#computer-use">Computer use</a>
+</li>
+<li>
+<a class="lvl-2" href="#search">Search</a>
+</li>
+<li>
+<a class="lvl-2" href="#memory">Memory</a>
+</li>
+<li>
+<a class="lvl-2" href="#recordings">Recordings</a>
+</li>
+<li>
+<a class="lvl-2" href="#models">Models</a>
+</li>
+<li>
+<a class="lvl-2" href="#agent">Agent</a>
+</li>
+<li>
+<a class="lvl-2" href="#agent-resources">Agent resources</a>
+</li>
+<li>
+<a class="lvl-2" href="#hooks">Hooks</a>
+</li>
+<li>
+<a class="lvl-2" href="#sandbox">Sandbox</a>
+</li>
+<li>
+<a class="lvl-2" href="#git">Git</a>
+</li>
+<li>
+<a class="lvl-2" href="#updates">Updates</a>
+</li>
+</ul></aside>
+</div>
+
+<div class="search-overlay">
+  <div class="search-box">
+    <input type="text" data-i18n-ph="search_ph" placeholder="Search titles or text…" autocomplete="off" spellcheck="false">
+    <div class="search-results"></div>
+  </div>
+</div>
+
+<script src="/docs/assets/site.js?v=6520ba46"></script>
+</body>
+</html>

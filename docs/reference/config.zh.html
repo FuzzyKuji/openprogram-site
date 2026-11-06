@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="zh" data-base="/docs/" data-page-lang="zh" data-build="1793956776" data-alt-lang-url="/docs/reference/config.html">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>配置项参考 · OpenProgram Docs</title>
+<meta name="description" content="~/.openprogram/config.json 的键、 openprogram config 能读写什么、以及环境变量汇总。日常改设置的入口见 配置与数据目录 。 openprogram config 能读写什么 # openprogram config list # 全部设置：值、分组、生效方式">
+<link rel="canonical" href="https://openprogram.io/docs/reference/config.zh.html">
+<link rel="alternate" type="text/markdown" href="https://openprogram.io/docs/reference/config.zh.html.md">
+<link rel="describedby" href="https://openprogram.io/llms.txt">
+<link rel="alternate" hreflang="en" href="https://openprogram.io/docs/reference/config.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://openprogram.io/docs/reference/config.zh.html">
+<link rel="alternate" hreflang="x-default" href="https://openprogram.io/docs/reference/config.html">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"OpenProgram Docs","item":"https://openprogram.io/docs/"},{"@type":"ListItem","position":2,"name":"配置项参考"}]}</script>
+<meta property="og:type" content="article">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:site_name" content="OpenProgram">
+<meta property="og:url" content="https://openprogram.io/docs/reference/config.zh.html">
+<meta property="og:title" content="配置项参考 · OpenProgram Docs">
+<meta property="og:description" content="~/.openprogram/config.json 的键、 openprogram config 能读写什么、以及环境变量汇总。日常改设置的入口见 配置与数据目录 。 openprogram config 能读写什么 # openprogram config list # 全部设置：值、分组、生效方式">
+<meta property="og:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:secure_url" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="配置项参考 · OpenProgram Docs">
+<meta name="twitter:description" content="~/.openprogram/config.json 的键、 openprogram config 能读写什么、以及环境变量汇总。日常改设置的入口见 配置与数据目录 。 openprogram config 能读写什么 # openprogram config list # 全部设置：值、分组、生效方式">
+<meta name="twitter:image" content="https://openprogram.io/docs/images/openprogram-social-card.png">
+<meta name="twitter:image:alt" content="OpenProgram: Self-Programming AI Agent Framework">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/docs/assets/mark.svg">
+<link rel="stylesheet" href="/docs/assets/site.css?v=6520ba46">
+<link rel="stylesheet" href="/docs/assets/pygments-light.css" media="(prefers-color-scheme: light)" id="pyg-light">
+<link rel="stylesheet" href="/docs/assets/pygments-dark.css" media="(prefers-color-scheme: dark)" id="pyg-dark">
+<script src="/docs/assets/theme.js?v=6520ba46"></script>
+
+</head>
+<body>
+<header class="topbar">
+  <button class="icon hamburger" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2.5 4.5h11M2.5 8h11M2.5 11.5h11"/></svg></button>
+  <a class="brand" href="/docs/index.html"><img class="mark" src="/docs/assets/mark.svg" alt="">OpenProgram Docs</a>
+  <div class="spacer"></div>
+  <button class="search-trigger" aria-label="Search">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14"/></svg><span class="label" data-i18n="search">Search docs</span><kbd>⌘K</kbd>
+  </button>
+  <div class="lang-wrap">
+    <button class="icon lang-trigger" id="lang-toggle" aria-haspopup="true" aria-expanded="false" aria-label="Language">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="6.2"/><path d="M1.8 8h12.4" stroke-linecap="round"/><ellipse cx="8" cy="8" rx="2.8" ry="6.2"/></svg><span class="lang-label">EN</span><svg class="chev" width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+    </button>
+    <div class="lang-menu" id="lang-menu" role="menu">
+      <button class="lang-opt" data-lang="en" role="menuitem"><span>English</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="lang-opt" data-lang="zh" role="menuitem"><span>简体中文</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+  <div class="theme-wrap">
+    <button class="icon" id="theme-toggle" aria-label="Theme" aria-haspopup="menu" aria-controls="theme-menu" aria-expanded="false"><svg class="ic-system" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="2.5" width="13" height="9" rx="1.5"/><path d="M8 11.5V14M5.5 14h5"/></svg><svg class="ic-moon" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M13.5 9.5A6 6 0 1 1 6.5 2.5a5 5 0 0 0 7 7z"/></svg><svg class="ic-sun" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="3.2"/><path d="M8 1.2v1.8M8 13v1.8M1.2 8H3M13 8h1.8M3.2 3.2l1.3 1.3M11.5 11.5l1.3 1.3M12.8 3.2l-1.3 1.3M4.5 11.5l-1.3 1.3"/></svg></button>
+    <div class="theme-menu" id="theme-menu" role="menu" aria-labelledby="theme-toggle">
+      <button class="theme-opt" data-theme-choice="system" role="menuitemradio" aria-checked="true"><span>Follow system</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="light" role="menuitemradio" aria-checked="false"><span>Light</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+      <button class="theme-opt" data-theme-choice="dark" role="menuitemradio" aria-checked="false"><span>Dark</span><svg class="check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 5"/></svg></button>
+    </div>
+  </div>
+</header>
+<nav class="tabbar"><a class="tablink" href="/docs/README.html" data-title-zh="开始使用" data-href-en="/docs/README.html" data-href-zh="/docs/README.zh.html">Get started</a><a class="tablink" href="/docs/install/install.html" data-title-zh="安装" data-href-en="/docs/install/install.html" data-href-zh="/docs/install/install.zh.html">Install</a><a class="tablink" href="/docs/capabilities/README.html" data-title-zh="能力" data-href-en="/docs/capabilities/README.html" data-href-zh="/docs/capabilities/README.zh.html">Capabilities</a><a class="tablink" href="/docs/interfaces/README.html" data-title-zh="界面" data-href-en="/docs/interfaces/README.html" data-href-zh="/docs/interfaces/README.zh.html">Interfaces</a><a class="tablink" href="/docs/models/README.html" data-title-zh="模型" data-href-en="/docs/models/README.html" data-href-zh="/docs/models/README.zh.html">Models</a><a class="tablink" href="/docs/integrations/anthropic.html" data-title-zh="集成" data-href-en="/docs/integrations/anthropic.html" data-href-zh="/docs/integrations/anthropic.zh.html">Integrations</a><a class="tablink" href="/docs/server/README.html" data-title-zh="服务与运维" data-href-en="/docs/server/README.html" data-href-zh="/docs/server/README.zh.html">Server &amp; Ops</a><a class="tablink active" href="/docs/reference/README.html" data-title-zh="参考" data-href-en="/docs/reference/README.html" data-href-zh="/docs/reference/README.zh.html">Reference</a><a class="tablink" href="/docs/reference/design/README.html" data-title-zh="设计" data-href-en="/docs/reference/design/README.html" data-href-zh="/docs/reference/design/README.zh.html">Design</a></nav>
+
+<div class="scrim"></div>
+<div class="layout">
+  <nav class="sidebar" aria-label="Documentation">
+    <input class="nav-filter" type="text" data-i18n-ph="nav_filter"
+           aria-label="Filter docs" placeholder="Filter docs…" autocomplete="off" spellcheck="false">
+    <div class="nav-tree"><div class="nav-sec"><div class="nav-sec-title" data-title-zh="概览">Overview</div><a class="navlink" href="/docs/reference/README.html" data-title-zh="概览" data-href-en="/docs/reference/README.html" data-href-zh="/docs/reference/README.zh.html">Overview</a></div>
+<div class="nav-sec"><div class="nav-sec-title">API</div><a class="navlink" href="/docs/reference/API.html" data-title-zh="API 参考" data-href-en="/docs/reference/API.html" data-href-zh="/docs/reference/API.zh.html">API reference</a>
+<a class="navlink" href="/docs/reference/api/runtime.html" data-title-zh="运行时 API" data-href-en="/docs/reference/api/runtime.html" data-href-zh="/docs/reference/api/runtime.zh.html">Runtime API</a>
+<a class="navlink" href="/docs/reference/api/providers.html" data-title-zh="模型服务 API" data-href-en="/docs/reference/api/providers.html" data-href-zh="/docs/reference/api/providers.zh.html">Provider API</a>
+<a class="navlink" href="/docs/reference/api/agent.html" data-title-zh="函数 API" data-href-en="/docs/reference/api/agent.html" data-href-zh="/docs/reference/api/agent.zh.html">Function API</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="CLI 与配置">CLI and configuration</div><a class="navlink" href="/docs/reference/cli.html" data-title-zh="CLI 参考" data-href-en="/docs/reference/cli.html" data-href-zh="/docs/reference/cli.zh.html">CLI reference</a>
+<a class="navlink active" href="/docs/reference/config.html" data-title-zh="配置项参考" data-href-en="/docs/reference/config.html" data-href-zh="/docs/reference/config.zh.html">Configuration reference</a>
+<a class="navlink" href="/docs/reference/diagnostics.html" data-title-zh="诊断" data-href-en="/docs/reference/diagnostics.html" data-href-zh="/docs/reference/diagnostics.zh.html">Diagnostics</a>
+<a class="navlink" href="/docs/reference/session-export.html" data-title-zh="会话导出" data-href-en="/docs/reference/session-export.html" data-href-zh="/docs/reference/session-export.zh.html">Session export</a>
+<a class="navlink" href="/docs/reference/output-styles.html" data-title-zh="输出风格" data-href-en="/docs/reference/output-styles.html" data-href-zh="/docs/reference/output-styles.zh.html">Output styles</a>
+<a class="navlink" href="/docs/reference/config-keys.html" data-title-zh="配置键" data-href-en="/docs/reference/config-keys.html" data-href-zh="/docs/reference/config-keys.zh.html">Config keys</a>
+<a class="navlink" href="/docs/reference/provider-registry.html" data-title-zh="模型服务清单" data-href-en="/docs/reference/provider-registry.html" data-href-zh="/docs/reference/provider-registry.zh.html">Provider registry</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="对比">Comparisons</div><a class="navlink" href="/docs/reference/comparisons/ai-agent-frameworks.html" data-title-zh="框架对比" data-href-en="/docs/reference/comparisons/ai-agent-frameworks.html" data-href-zh="/docs/reference/comparisons/ai-agent-frameworks.zh.html">Framework comparison</a>
+<a class="navlink" href="/docs/reference/comparisons/related-projects.html" data-title-zh="相关项目" data-href-en="/docs/reference/comparisons/related-projects.html" data-href-zh="/docs/reference/comparisons/related-projects.zh.html">Related projects</a></div>
+<div class="nav-sec"><div class="nav-sec-title" data-title-zh="CLI 命令">CLI commands</div><a class="navlink" href="/docs/reference/cli/README.html" data-title-zh="全局参数" data-href-en="/docs/reference/cli/README.html" data-href-zh="/docs/reference/cli/README.zh.html">Global flags</a>
+<a class="navlink" href="/docs/reference/cli/acp.html" data-title-zh="编辑器协议" data-href-en="/docs/reference/cli/acp.html" data-href-zh="/docs/reference/cli/acp.zh.html">acp</a>
+<a class="navlink" href="/docs/reference/cli/agents.html" data-title-zh="Agent 管理" data-href-en="/docs/reference/cli/agents.html" data-href-zh="/docs/reference/cli/agents.zh.html">agents</a>
+<a class="navlink" href="/docs/reference/cli/backup.html" data-title-zh="备份" data-href-en="/docs/reference/cli/backup.html" data-href-zh="/docs/reference/cli/backup.zh.html">backup</a>
+<a class="navlink" href="/docs/reference/cli/browser.html" data-title-zh="浏览器" data-href-en="/docs/reference/cli/browser.html" data-href-zh="/docs/reference/cli/browser.zh.html">browser</a>
+<a class="navlink" href="/docs/reference/cli/channels.html" data-title-zh="渠道" data-href-en="/docs/reference/cli/channels.html" data-href-zh="/docs/reference/cli/channels.zh.html">channels</a>
+<a class="navlink" href="/docs/reference/cli/chat.html" data-title-zh="聊天" data-href-en="/docs/reference/cli/chat.html" data-href-zh="/docs/reference/cli/chat.zh.html">chat</a>
+<a class="navlink" href="/docs/reference/cli/completion.html" data-title-zh="命令补全" data-href-en="/docs/reference/cli/completion.html" data-href-zh="/docs/reference/cli/completion.zh.html">completion</a>
+<a class="navlink" href="/docs/reference/cli/config.html" data-title-zh="设置" data-href-en="/docs/reference/cli/config.html" data-href-zh="/docs/reference/cli/config.zh.html">config</a>
+<a class="navlink" href="/docs/reference/cli/cron-worker.html" data-title-zh="定时任务" data-href-en="/docs/reference/cli/cron-worker.html" data-href-zh="/docs/reference/cli/cron-worker.zh.html">cron-worker</a>
+<a class="navlink" href="/docs/reference/cli/dev.html" data-title-zh="开发版" data-href-en="/docs/reference/cli/dev.html" data-href-zh="/docs/reference/cli/dev.zh.html">dev</a>
+<a class="navlink" href="/docs/reference/cli/diagnostics.html" data-title-zh="诊断包" data-href-en="/docs/reference/cli/diagnostics.html" data-href-zh="/docs/reference/cli/diagnostics.zh.html">diagnostics</a>
+<a class="navlink" href="/docs/reference/cli/doctor.html" data-title-zh="环境诊断" data-href-en="/docs/reference/cli/doctor.html" data-href-zh="/docs/reference/cli/doctor.zh.html">doctor</a>
+<a class="navlink" href="/docs/reference/cli/environments.html" data-title-zh="运行环境" data-href-en="/docs/reference/cli/environments.html" data-href-zh="/docs/reference/cli/environments.zh.html">environments</a>
+<a class="navlink" href="/docs/reference/cli/execution.html" data-title-zh="执行控制" data-href-en="/docs/reference/cli/execution.html" data-href-zh="/docs/reference/cli/execution.zh.html">execution</a>
+<a class="navlink" href="/docs/reference/cli/jobs.html" data-title-zh="后台任务" data-href-en="/docs/reference/cli/jobs.html" data-href-zh="/docs/reference/cli/jobs.zh.html">jobs</a>
+<a class="navlink" href="/docs/reference/cli/logs.html" data-title-zh="日志" data-href-en="/docs/reference/cli/logs.html" data-href-zh="/docs/reference/cli/logs.zh.html">logs</a>
+<a class="navlink" href="/docs/reference/cli/mcp.html" data-title-zh="MCP 服务器" data-href-en="/docs/reference/cli/mcp.html" data-href-zh="/docs/reference/cli/mcp.zh.html">mcp</a>
+<a class="navlink" href="/docs/reference/cli/memory.html" data-title-zh="记忆" data-href-en="/docs/reference/cli/memory.html" data-href-zh="/docs/reference/cli/memory.zh.html">memory</a>
+<a class="navlink" href="/docs/reference/cli/permissions.html" data-title-zh="CLI：权限规则" data-href-en="/docs/reference/cli/permissions.html" data-href-zh="/docs/reference/cli/permissions.zh.html">permissions</a>
+<a class="navlink" href="/docs/reference/cli/plugins.html" data-title-zh="插件" data-href-en="/docs/reference/cli/plugins.html" data-href-zh="/docs/reference/cli/plugins.zh.html">plugins</a>
+<a class="navlink" href="/docs/reference/cli/ports.html" data-title-zh="端口" data-href-en="/docs/reference/cli/ports.html" data-href-zh="/docs/reference/cli/ports.zh.html">ports</a>
+<a class="navlink" href="/docs/reference/cli/programs.html" data-title-zh="程序" data-href-en="/docs/reference/cli/programs.html" data-href-zh="/docs/reference/cli/programs.zh.html">programs</a>
+<a class="navlink" href="/docs/reference/cli/providers.html" data-title-zh="模型服务" data-href-en="/docs/reference/cli/providers.html" data-href-zh="/docs/reference/cli/providers.zh.html">providers</a>
+<a class="navlink" href="/docs/reference/cli/recordings.html" data-title-zh="录制" data-href-en="/docs/reference/cli/recordings.html" data-href-zh="/docs/reference/cli/recordings.zh.html">recordings</a>
+<a class="navlink" href="/docs/reference/cli/rescue.html" data-title-zh="恢复" data-href-en="/docs/reference/cli/rescue.html" data-href-zh="/docs/reference/cli/rescue.zh.html">rescue</a>
+<a class="navlink" href="/docs/reference/cli/restart.html" data-title-zh="重启" data-href-en="/docs/reference/cli/restart.html" data-href-zh="/docs/reference/cli/restart.zh.html">restart</a>
+<a class="navlink" href="/docs/reference/cli/scheduler-worker.html" data-title-zh="任务调度" data-href-en="/docs/reference/cli/scheduler-worker.html" data-href-zh="/docs/reference/cli/scheduler-worker.zh.html">scheduler-worker</a>
+<a class="navlink" href="/docs/reference/cli/secrets.html" data-title-zh="凭据" data-href-en="/docs/reference/cli/secrets.html" data-href-zh="/docs/reference/cli/secrets.zh.html">secrets</a>
+<a class="navlink" href="/docs/reference/cli/self-update.html" data-title-zh="应用更新" data-href-en="/docs/reference/cli/self-update.html" data-href-zh="/docs/reference/cli/self-update.zh.html">self-update</a>
+<a class="navlink" href="/docs/reference/cli/sessions.html" data-title-zh="会话" data-href-en="/docs/reference/cli/sessions.html" data-href-zh="/docs/reference/cli/sessions.zh.html">sessions</a>
+<a class="navlink" href="/docs/reference/cli/setup.html" data-title-zh="初始设置" data-href-en="/docs/reference/cli/setup.html" data-href-zh="/docs/reference/cli/setup.zh.html">setup</a>
+<a class="navlink" href="/docs/reference/cli/skills.html" data-title-zh="技能" data-href-en="/docs/reference/cli/skills.html" data-href-zh="/docs/reference/cli/skills.zh.html">skills</a>
+<a class="navlink" href="/docs/reference/cli/status.html" data-title-zh="运行状态" data-href-en="/docs/reference/cli/status.html" data-href-zh="/docs/reference/cli/status.zh.html">status</a>
+<a class="navlink" href="/docs/reference/cli/stop.html" data-title-zh="停止" data-href-en="/docs/reference/cli/stop.html" data-href-zh="/docs/reference/cli/stop.zh.html">stop</a>
+<a class="navlink" href="/docs/reference/cli/subagent.html" data-title-zh="子 Agent" data-href-en="/docs/reference/cli/subagent.html" data-href-zh="/docs/reference/cli/subagent.zh.html">subagent</a>
+<a class="navlink" href="/docs/reference/cli/trash.html" data-title-zh="删除恢复" data-href-en="/docs/reference/cli/trash.html" data-href-zh="/docs/reference/cli/trash.zh.html">trash</a>
+<a class="navlink" href="/docs/reference/cli/tui.html" data-title-zh="终端界面" data-href-en="/docs/reference/cli/tui.html" data-href-zh="/docs/reference/cli/tui.zh.html">tui</a>
+<a class="navlink" href="/docs/reference/cli/update.html" data-title-zh="更新检查" data-href-en="/docs/reference/cli/update.html" data-href-zh="/docs/reference/cli/update.zh.html">update</a>
+<a class="navlink" href="/docs/reference/cli/upgrade.html" data-title-zh="版本升级" data-href-en="/docs/reference/cli/upgrade.html" data-href-zh="/docs/reference/cli/upgrade.zh.html">upgrade</a>
+<a class="navlink" href="/docs/reference/cli/web.html" data-title-zh="网页界面" data-href-en="/docs/reference/cli/web.html" data-href-zh="/docs/reference/cli/web.zh.html">web</a>
+<a class="navlink" href="/docs/reference/cli/worker.html" data-title-zh="后台服务" data-href-en="/docs/reference/cli/worker.html" data-href-zh="/docs/reference/cli/worker.zh.html">worker</a></div></div>
+  </nav>
+  <main class="content"><button class="fs-toggle" aria-label="Fullscreen" title="Fullscreen (Esc to exit)"><svg class="ic-expand" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.2 2H2v4.2M9.8 2H14v4.2M6.2 14H2V9.8M9.8 14H14V9.8"/></svg><svg class="ic-collapse" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6.2h4.2V2M14 6.2H9.8V2M2 9.8h4.2V14M14 9.8H9.8V14"/></svg></button><article><nav class="breadcrumb"><span class="bc-seg" data-title-zh="参考">Reference</span> <span class='bc-sep'>›</span> <span class="bc-seg" data-title-zh="CLI 与配置">CLI and configuration</span> <span class='bc-sep'>›</span> <span class="bc-seg bc-current" data-title-zh="配置项参考">Configuration reference</span></nav><p><span id="配置"></span></p>
+<h1 id="配置项参考">配置项参考<a class="header-anchor" href="#配置项参考">#</a></h1>
+<p><code>~/.openprogram/config.json</code> 的键、<code>openprogram config</code> 能读写什么、以及环境变量汇总。日常改设置的入口见<a href="/docs/server/configuration.zh.html">配置与数据目录</a>。</p>
+<h2 id="openprogram-config-能读写什么">openprogram config 能读写什么<a class="header-anchor" href="#openprogram-config-能读写什么">#</a></h2>
+<pre><code class="language-bash">openprogram<span class="w"> </span>config<span class="w"> </span>list<span class="w">              </span><span class="c1"># 全部设置：值、分组、生效方式</span>
+openprogram<span class="w"> </span>config<span class="w"> </span>get<span class="w"> </span>ui.web_port
+openprogram<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>ui.web_port<span class="w"> </span><span class="m">8101</span>
+</code></pre>
+<p>设置注册表定义在 <code>openprogram/state/settings.py</code>（单一事实来源，setup 向导、TUI 设置页、Web 设置页都从它渲染）。每个设置标注生效方式：<code>live</code> 立即生效，<code>next_start</code> 下次启动 worker 生效。</p>
+<table>
+<thead>
+<tr>
+<th>key</th>
+<th>分组</th>
+<th>含义</th>
+<th>默认</th>
+<th>生效</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ui.web_port</code></td>
+<td>Ports</td>
+<td>API、WebSocket 和 Web UI 共用的 worker 单端口</td>
+<td>18100</td>
+<td>next start</td>
+</tr>
+<tr>
+<td><code>ui.open_browser</code></td>
+<td>Ports</td>
+<td><code>openprogram web</code> 是否自动开浏览器</td>
+<td>true</td>
+<td>next start</td>
+</tr>
+<tr>
+<td><code>search.default_provider</code></td>
+<td>Search</td>
+<td>默认 web 搜索 provider，<code>auto</code> 选优先级最高的已配置项</td>
+<td>auto</td>
+<td>live</td>
+</tr>
+<tr>
+<td><code>memory.backend</code></td>
+<td>Memory</td>
+<td><code>local</code>（磁盘记忆）或 <code>none</code>（不注入记忆、不召回、不自动写入、不整理，也不启动记忆线程）</td>
+<td>local</td>
+<td>next start</td>
+</tr>
+<tr>
+<td><code>memory.writer.model</code></td>
+<td>Memory</td>
+<td>后台写入使用的可选 <code>provider/model</code>；留空时沿用默认聊天 agent 的 provider、模型和凭据</td>
+<td>空</td>
+<td>live</td>
+</tr>
+<tr>
+<td><code>sandbox.mode</code></td>
+<td>Sandbox</td>
+<td><code>danger-full-access</code>，或<code>workspace-write</code>：对本地模型驱动命令使用宿主原生沙箱，写入限制在工作目录/已配置根，deny-read路径不可读，网络禁用</td>
+<td>workspace-write</td>
+<td>live</td>
+</tr>
+<tr>
+<td><code>sandbox.writable_roots</code></td>
+<td>Sandbox</td>
+<td>沙箱内额外可写的目录，JSON列表</td>
+<td>[]</td>
+<td>live</td>
+</tr>
+<tr>
+<td><code>sandbox.deny_read</code></td>
+<td>Sandbox</td>
+<td>沙箱内不可读的glob，默认包含凭证路径。Linux不能强制<code>**/.env</code>这类中段通配；敏感内容要使用精确路径，或<code>/absolute/path/to/secrets/**</code>这类具有确定前缀的目录级deny</td>
+<td>见<code>openprogram config get sandbox.deny_read</code></td>
+<td>live</td>
+</tr>
+<tr>
+<td><code>sandbox.deny_write</code></td>
+<td>Sandbox</td>
+<td>沙箱内不可写的glob，函数watcher自动导入的目录始终禁写、不在此列</td>
+<td>[]</td>
+<td>live</td>
+</tr>
+<tr>
+<td><code>sandbox.network</code></td>
+<td>Sandbox</td>
+<td>沙箱内是否有网络</td>
+<td>false</td>
+<td>live</td>
+</tr>
+<tr>
+<td><code>sandbox.pass_env</code></td>
+<td>Sandbox</td>
+<td>内置白名单之外还要透传的环境变量名</td>
+<td>[]</td>
+<td>live</td>
+</tr>
+<tr>
+<td><code>sandbox.unavailable_policy</code></td>
+<td>Sandbox</td>
+<td>平台后端缺失或无法创建所需隔离时，<code>refuse</code>让命令失败，<code>warn</code>允许命令在没有沙箱的情况下执行</td>
+<td>refuse</td>
+<td>live</td>
+</tr>
+<tr>
+<td><code>tools.disabled.&lt;name&gt;</code></td>
+<td>Tools</td>
+<td>逐工具开关；写入的是 <code>tools.disabled</code> 列表的成员</td>
+<td>全部启用</td>
+<td>live</td>
+</tr>
+<tr>
+<td><code>agent.output_style</code></td>
+<td>Agent</td>
+<td>回复怎么写，往系统提示追加一段文字。见<a href="/docs/reference/output-styles.zh.html">输出风格</a></td>
+<td>default</td>
+<td>live</td>
+</tr>
+<tr>
+<td><code>providers.&lt;name&gt;</code></td>
+<td>Providers</td>
+<td>只读状态行（是否已配置）；用 <code>openprogram providers login</code> 或 Web UI 配置</td>
+<td>—</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>本地沙箱在 macOS 使用 Seatbelt，在 Linux 使用 bubblewrap，在 Windows 则把 bubblewrap 委托给默认 WSL2 发行版。该后端不可用时，沙箱开启状态下默认拒绝命令；只有 owner 显式设置不安全的 <code>sandbox.unavailable_policy=warn</code> 或 <code>sandbox.mode=danger-full-access</code> 才会改变该行为。Docker 不是自动回退后端。</p>
+<h2 id="configjson-顶层键">config.json 顶层键<a class="header-anchor" href="#configjson-顶层键">#</a></h2>
+<p>实际写入 <code>~/.openprogram/config.json</code> 的顶层键（不要手改，走 <code>openprogram config set</code> / setup 向导 / Web UI）：</p>
+<table>
+<thead>
+<tr>
+<th>键</th>
+<th>含义</th>
+<th>代码</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ui</code></td>
+<td><code>{web_port, open_browser}</code>，见上表</td>
+<td><code>openprogram/state/settings.py</code></td>
+</tr>
+<tr>
+<td><code>search</code></td>
+<td><code>{default_provider}</code></td>
+<td><code>openprogram/state/preferences.py</code></td>
+</tr>
+<tr>
+<td><code>memory</code></td>
+<td><code>{backend, writer: {model}}</code>，见上表</td>
+<td><code>openprogram/state/settings.py</code>、<code>openprogram/state/memory/</code></td>
+</tr>
+<tr>
+<td><code>tools</code></td>
+<td><code>{disabled: [工具名, ...]}</code></td>
+<td><code>openprogram/operations/setup.py</code>、<code>openprogram/state/settings.py</code></td>
+</tr>
+<tr>
+<td><code>sandbox</code></td>
+<td><code>{mode, writable_roots, deny_read, deny_write, network, pass_env, unavailable_policy}</code>，见上表</td>
+<td><code>openprogram/host/sandbox/__init__.py</code>、<code>openprogram/state/settings.py</code></td>
+</tr>
+<tr>
+<td><code>last_used_model</code></td>
+<td><code>{provider, model}</code>，新会话使用的模型：上一次选择或发送消息时用的模型。全新安装时为空</td>
+<td><code>openprogram/models/providers/catalog/last_used.py</code></td>
+</tr>
+<tr>
+<td><code>default_workdir</code></td>
+<td>agent 的默认工作目录</td>
+<td><code>openprogram/state/paths.py</code></td>
+</tr>
+<tr>
+<td><code>providers</code></td>
+<td>每个 provider 的设置子树（启用的模型、自定义模型等），由 Web UI 模型列表管理</td>
+<td><code>openprogram/models/providers/settings/config_read.py</code>、<code>openprogram/models/providers/settings/storage.py</code></td>
+</tr>
+<tr>
+<td><code>api_keys</code></td>
+<td>环境变量名 → API key 的映射，setup 向导写入，worker 启动时导出到环境。用于 web 搜索 / TTS 的 key；LLM provider 的 key 存在凭据库（<code>openprogram providers login</code>），不在这里</td>
+<td><code>openprogram/interfaces/cli/setup_sections/sections.py</code>、<code>openprogram/interfaces/server/server.py</code></td>
+</tr>
+<tr>
+<td><code>spec_migration_version</code></td>
+<td>模型 spec 迁移的一次性标记，含义见代码</td>
+<td><code>openprogram/models/providers/settings/storage.py</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="环境变量">环境变量<a class="header-anchor" href="#环境变量">#</a></h2>
+<p>在启动 <code>openprogram</code>（或 worker）的 shell 里设置。全部逐个在代码里核实过；每行给出定义处。</p>
+<h3 id="路径与实例">路径与实例<a class="header-anchor" href="#路径与实例">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>变量</th>
+<th>用途</th>
+<th>代码</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>OPENPROGRAM_PROFILE</code></td>
+<td>状态目录 profile，等价 <code>--profile</code>，改道到 <code>~/.openprogram-&lt;name&gt;/</code></td>
+<td><code>openprogram/state/paths.py</code></td>
+</tr>
+<tr>
+<td><code>OPENPROGRAM_HOME</code></td>
+<td>auth 账号的替代基目录</td>
+<td><code>openprogram/models/auth/account/accounts.py</code></td>
+</tr>
+<tr>
+<td><code>OPENPROGRAM_WORKDIR</code></td>
+<td>agent 默认工作目录（优先于 config 的 <code>default_workdir</code>）</td>
+<td><code>openprogram/state/paths.py</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="端口与-web">端口与 web<a class="header-anchor" href="#端口与-web">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>变量</th>
+<th>用途</th>
+<th>代码</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>OPENPROGRAM_WEB_PORT</code></td>
+<td>worker 单端口（默认 18100）；优先级低于显式参数、高于持久化偏好</td>
+<td><code>openprogram/operations/worker/lifecycle.py</code>、<code>openprogram/interfaces/cli/commands/web.py</code></td>
+</tr>
+<tr>
+<td><code>OPENPROGRAM_NO_WEB</code></td>
+<td><code>1</code> = worker 跳过前端构建检查，不提供 web UI</td>
+<td><code>openprogram/operations/worker/runner.py</code></td>
+</tr>
+<tr>
+<td><code>OPENPROGRAM_WEB_NO_FRONTEND</code></td>
+<td><code>1</code> = <code>openprogram web</code> 跳过前端只起 backend</td>
+<td><code>openprogram/interfaces/cli/commands/web.py</code></td>
+</tr>
+<tr>
+<td><code>OPENPROGRAM_DOCS_BASE</code></td>
+<td>文档站的挂载路径（默认 <code>/docs/</code>，须以 <code>/</code> 开头和结尾）</td>
+<td><code>scripts/docs_site/build.py</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="行为开关">行为开关<a class="header-anchor" href="#行为开关">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>变量</th>
+<th>用途</th>
+<th>代码</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>OPENPROGRAM_NO_AUTO_WORKER</code></td>
+<td><code>1</code> = TUI 不自动拉起 worker，只连已有的</td>
+<td><code>openprogram/interfaces/cli/ink.py</code></td>
+</tr>
+<tr>
+<td><code>OPENPROGRAM_NO_SLEEP</code></td>
+<td><code>1</code> = 禁用记忆的 sleep 整理调度器</td>
+<td><code>openprogram/state/memory/scheduler.py</code></td>
+</tr>
+<tr>
+<td><code>OPENPROGRAM_NO_PROGRAMS_WATCH</code></td>
+<td><code>1</code> = 禁用 programs 目录的文件监听</td>
+<td><code>openprogram/programs/_host/watcher.py</code></td>
+</tr>
+<tr>
+<td><code>OPENPROGRAM_PROJECT_AUTOCOMMIT</code></td>
+<td><code>0</code> = 关闭项目自动 commit</td>
+<td><code>openprogram/state/store/project/project_commit.py</code></td>
+</tr>
+<tr>
+<td><code>OPENPROGRAM_WEBSEARCH_DISABLE</code></td>
+<td>按名禁用某个 web 搜索 provider（如 <code>ollama</code>）</td>
+<td><code>openprogram/programs/tools/web/web_search/providers/ollama.py</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="llm-调用">LLM 调用<a class="header-anchor" href="#llm-调用">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>变量</th>
+<th>用途</th>
+<th>代码</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AGENTIC_PROVIDER</code> / <code>AGENTIC_MODEL</code></td>
+<td><code>detect_provider()</code>（进而 <code>create_runtime()</code>）最先选用的 provider / 模型，优先于配置文件和 CLI 检测</td>
+<td><code>openprogram/models/providers/catalog/registry.py</code></td>
+</tr>
+<tr>
+<td><code>OPENPROGRAM_MAX_RETRIES</code></td>
+<td>Runtime 的 API 瞬态故障重试次数（默认 6）</td>
+<td><code>openprogram/runtime/agent/runtime.py</code></td>
+</tr>
+<tr>
+<td><code>OPENPROGRAM_RETRY_BACKOFF_BASE</code></td>
+<td>指数重试退避的基数秒数（默认 1.5）</td>
+<td><code>openprogram/runtime/agent/runtime.py</code></td>
+</tr>
+<tr>
+<td><code>OPENPROGRAM_EXEC_TIMEOUT_S</code></td>
+<td>调用方没传 <code>timeout_s</code> 时每次 <code>runtime.exec</code> 的默认墙钟预算（秒；没设或为 <code>0</code> = 不限时）</td>
+<td><code>openprogram/runtime/agent/runtime.py</code></td>
+</tr>
+<tr>
+<td><code>OPENPROGRAM_FALLBACK_MODELS</code></td>
+<td>主模型在产生输出前失败时使用的候选链。不设置＝同一 provider 下启用的其他模型（最多 2 个）；设成逗号分隔的 <code>provider/model</code> 列表可覆盖它并允许跨 provider；设成 <code>off</code> 关闭故障转移</td>
+<td><code>openprogram/models/providers/utils/failover.py</code></td>
+</tr>
+<tr>
+<td><code>OPENPROGRAM_PROVIDER_STREAM_RETRIES</code></td>
+<td>每个流式请求的尝试次数，含第一次（默认 5）。连接重试另有独立额度（此值减一），不占用输出修复的额度</td>
+<td><code>openprogram/models/providers/utils/stream_retry.py</code></td>
+</tr>
+<tr>
+<td><code>OPENPROGRAM_NETWORK_WAIT_MAX_S</code></td>
+<td>请求连不上服务端（断网、DNS 失败、本地代理停了）且重试用完后，继续等待网络恢复的最长时间（秒），期间每 5 到 30 秒再试一次，超时才让本轮失败（默认 1800；<code>0</code> = 立即失败）。取消本轮会结束等待</td>
+<td><code>openprogram/models/providers/utils/stream_retry.py</code></td>
+</tr>
+<tr>
+<td><code>OPENPROGRAM_STRICT_TOOLS</code></td>
+<td><code>0</code> = 关闭严格工具 schema（默认开）</td>
+<td><code>openprogram/models/providers/schema/__init__.py</code></td>
+</tr>
+<tr>
+<td><code>OPENPROGRAM_FORCE_IPV4</code></td>
+<td><code>1</code> = 强制 IPv4 源地址（IPv6 网络异常时用）</td>
+<td><code>openprogram/models/providers/utils/http_client.py</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="调试">调试<a class="header-anchor" href="#调试">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>变量</th>
+<th>用途</th>
+<th>代码</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>OPENPROGRAM_LOG_LEVEL</code></td>
+<td>进程的日志级别（<code>DEBUG</code>、<code>INFO</code>、<code>WARNING</code>、<code>ERROR</code>，大小写不限）。覆盖默认值：worker、scheduler 和前台 Server 为 <code>INFO</code>，CLI 为 <code>WARNING</code>。无效值被忽略</td>
+<td><code>openprogram/host/process_logging.py</code></td>
+</tr>
+<tr>
+<td><code>OPENPROGRAM_DEBUG_RUNTIME</code></td>
+<td><code>1</code> = runtime 日志镜像到 stderr</td>
+<td><code>openprogram/interfaces/server/server.py</code></td>
+</tr>
+<tr>
+<td><code>OPENPROGRAM_DEBUG_REGISTRY</code></td>
+<td><code>1</code> = 函数注册表的导入失败附带 traceback</td>
+<td><code>openprogram/programs/_host/registry.py</code></td>
+</tr>
+<tr>
+<td><code>OPENPROGRAM_DEBUG_DISPATCHER</code></td>
+<td><code>1</code> = dispatcher 调试日志（<code>INFO</code> 级，写进 worker 日志）</td>
+<td><code>openprogram/runtime/conversation/turn_runtime/runtime_attach.py</code></td>
+</tr>
+<tr>
+<td><code>OPENPROGRAM_DEBUG_PROVIDER</code></td>
+<td><code>1</code> = provider 层调试日志（<code>INFO</code> 级，写进 worker 日志）</td>
+<td><code>openprogram/models/providers/adapters/openai_codex/openai_codex.py</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="其他">其他<a class="header-anchor" href="#其他">#</a></h3>
+<p>代码里还有一批更内部的变量（HTTP/SSE 超时细调 <code>OPENPROGRAM_HTTPX_*</code> / <code>OPENPROGRAM_SSE_*</code>、TCP keepalive <code>OPENPROGRAM_TCP_*</code>、各 provider 单独的重试次数 <code>OPENPROGRAM_&lt;PROVIDER&gt;_MAX_RETRIES</code>、<code>OPENPROGRAM_JOB_WORKERS</code>、<code>OPENPROGRAM_IMAGE_DIR</code>、<code>OPENPROGRAM_BROWSER_CDP_URL</code> 等）。用 <code>grep -rn &quot;OPENPROGRAM_&quot; openprogram/</code> 可以列出全集；每个变量在定义处都有注释。</p>
+<div class="page-updated"><span data-i18n="updated">Last updated</span> · 2026-11-05</div><div class="prevnext"><a class="pn-link pn-prev" href="/docs/reference/cli.html" data-href-en="/docs/reference/cli.html" data-href-zh="/docs/reference/cli.zh.html"><span class="pn-dir" data-i18n="prev">Previous</span><span class="pn-title" data-title-zh="CLI 参考">CLI reference</span></a><a class="pn-link pn-next" href="/docs/reference/diagnostics.html" data-href-en="/docs/reference/diagnostics.html" data-href-zh="/docs/reference/diagnostics.zh.html"><span class="pn-dir" data-i18n="next">Next</span><span class="pn-title" data-title-zh="诊断">Diagnostics</span></a></div></article></main>
+  <aside class="toc"><div class="toc-title" data-i18n="on_this_page">On this page</div>
+<ul class="toc-list">
+<li>
+<a class="lvl-2" href="#openprogram-config-能读写什么">openprogram config 能读写什么</a>
+</li>
+<li>
+<a class="lvl-2" href="#configjson-顶层键">config.json 顶层键</a>
+</li>
+<li>
+<details class="toc-disclosure" open=""><summary>
+<a class="lvl-2" href="#环境变量">环境变量</a>
+</summary>
+<ul class="toc-list">
+<li>
+<a class="lvl-3" href="#路径与实例">路径与实例</a>
+</li>
+<li>
+<a class="lvl-3" href="#端口与-web">端口与 web</a>
+</li>
+<li>
+<a class="lvl-3" href="#行为开关">行为开关</a>
+</li>
+<li>
+<a class="lvl-3" href="#llm-调用">LLM 调用</a>
+</li>
+<li>
+<a class="lvl-3" href="#调试">调试</a>
+</li>
+<li>
+<a class="lvl-3" href="#其他">其他</a>
+</li>
+</ul>
+</details>
+</li>
+</ul></aside>
+</div>
+
+<div class="search-overlay">
+  <div class="search-box">
+    <input type="text" data-i18n-ph="search_ph" placeholder="Search titles or text…" autocomplete="off" spellcheck="false">
+    <div class="search-results"></div>
+  </div>
+</div>
+
+<script src="/docs/assets/site.js?v=6520ba46"></script>
+</body>
+</html>
